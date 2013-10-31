@@ -108,7 +108,7 @@ class StepController extends InstallAppController {
                         $defaultSettings['theme'] = json_encode(array(
                                                             'logo' => '/img/logo.png',
                                                             'bgcolor' => '#444444',
-                                                            'bgimage' => 'img/bg.png',
+                                                            'bgimage' => '/img/bg.png',
                                                             'bgrepeat' => 'repeat'
                                                         ));
                         $defaultSettings['css'] = '';

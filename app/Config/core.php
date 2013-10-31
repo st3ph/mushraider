@@ -37,7 +37,7 @@
 // TODO : generate config.salt.php
 
 
-	Configure::write('debug', 2);
+	Configure::write('debug', 0);
 
 /**
  * Configure the Error handler used to handle errors for your application. By default

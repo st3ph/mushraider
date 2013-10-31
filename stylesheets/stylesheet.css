@@ -339,6 +339,10 @@ footer a:hover {
 * html .clearfix {height: 1%;}
 .clearfix {display: block;}
 
+/* Gallery */
+.fancybox {display:inline-block;width:290px;margin:5px 10px 5px auto;}
+.fancybox img {border:2px solid #000;vertical-align:middle}
+
 /* #Media Queries
 ================================================== */
 

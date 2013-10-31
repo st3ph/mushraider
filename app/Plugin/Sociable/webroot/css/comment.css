@@ -1,0 +1,35 @@
+#commentaires h4 {margin:15px 0 5px 0;font-size:18px;color:#bf4d28;text-shadow:0px 2px 3px #CCC;}
+#commentaires h4.second {margin-top:55px;}
+#commentaires textarea {border:1px solid #DFDFDF;margin-bottom:5px;width:98%;height:50px}
+#commentaires form {margin-bottom:5px;}
+#commentaires form div.compteur {color:#666666}
+#commentaires form div.error-message {color:red;margin:0}
+#commentaires form div.submit input {}
+#commentaires form div.submit img.chargement {display:block;float:right;margin-right:5px}
+#commentaires div.messageInfo {padding:10px 0 10px 10px}
+#commentaires div.messageInfo a {text-decoration:underline;color:#0075FF}
+#commentaires ul li {margin-bottom:10px;padding:5px;border:1px solid #DFDFDF;overflow:hidden;background:#F8F8F8;min-height:45px;height:auto!important;height:45px}
+#commentaires ul li img {width:64px;float:left;padding:0 8px 0 0}
+#commentaires ul li div.auteur {color:#999;margin-bottom:4px;border-bottom:1px dashed #eee;}
+#commentaires ul li div.auteur a {color:#006699}
+#commentaires ul li div.auteur a:hover {text-decoration:underline}
+#commentaires ul li div.auteur span {color:#a10000;font-weight:bold;}
+#commentaires ul li div.texte {color:#666}
+#commentaires ul li textarea {color:#666;width:85%;height:100px;}
+#commentaires ul li.nouveau {}
+#commentaires ul.listeCommentaires {padding-left:0;}
+#commentaires ul.listeCommentaires li {position:relative;background:#fff;}
+#commentaires ul li .signaler_abus {display:none;position:absolute;top:0;right:0;padding:5px;margin-right:0}
+#commentaires ul li .signaler_abus i {cursor:pointer;}
+#commentaires ul li .signaler_abus a {color:#006699}
+#commentaires ul li .signaler_abus a.signaler {border:none}
+#commentaires ul li .signaler_abus span {display:none}
+#commentaires ul li .signaler_abus span a.signaler_non {text-decoration:none;color:#DF0000}
+#commentaires ul li .signaler_abus span a.signaler_non:hover {text-decoration:underline}
+#commentaires ul li .edit_comment {display:none;position:absolute;top:0;right:25px;padding:5px;margin-right:0}
+#commentaires ul li .edit_comment i {cursor:pointer;}
+#commentaires ul li .edit_comment a {color:#008000}
+#commentaires ul li .edit_comment a.save {border:none}
+#commentaires ul li .edit_comment span {display:none}
+#commentaires ul li .edit_comment span a.cancel {text-decoration:none;color:#DF0000}
+#commentaires ul li .edit_comment span a.cancel:hover {text-decoration:underline}

@@ -1,0 +1,1502 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Mushraider\n"
+"POT-Creation-Date: 2013-10-08 16:01+0100\n"
+"PO-Revision-Date: 2013-10-08 16:26+0100\n"
+"Last-Translator: Mush <contact@mushnet.fr>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: C:\\wamp\\www\\me\\mushraider\\raider\\app\n"
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/AccountController.php:9
+#: C:\wamp\www\me\mushraider\raider\app/Controller/AccountController.php:13
+msgid "My MushRaider account"
+msgstr "Mon compte MushRaider"
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/AccountController.php:17
+msgid "All the fields are mandatory"
+msgstr "Tous les champs sont obligatoires"
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/AccountController.php:19
+msgid ""
+"The new password isn't the same than his confirmation, is it that difficult ?"
+msgstr ""
+"Le nouveau mot de passe n'est pas le même que sa confirmation, est-ce si "
+"difficile ?"
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/AccountController.php:27
+msgid "Wrong current password, try again"
+msgstr "Mauvais mot de passe, veuillez réessayer"
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/AccountController.php:33
+msgid "Your password has been updated"
+msgstr "Votre mot de passe a été mis à jour"
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/AccountController.php:37
+#: C:\wamp\www\me\mushraider\raider\app/Controller/AccountController.php:70
+#: C:\wamp\www\me\mushraider\raider\app/Controller/AccountController.php:122
+#: C:\wamp\www\me\mushraider\raider\app/Controller/AuthController.php:85
+#: C:\wamp\www\me\mushraider\raider\app/Controller/AuthController.php:128
+#: C:\wamp\www\me\mushraider\raider\app/Controller/EventsController.php:104
+#: C:\wamp\www\me\mushraider\raider\app/Controller/EventsController.php:164
+msgid "Something wrong happen, please fix the errors below"
+msgstr ""
+"Quelque chose de mal c'est produit, veuillez corriger les erreurs ci-dessous"
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/AccountController.php:46
+#: C:\wamp\www\me\mushraider\raider\app/Controller/AccountController.php:53
+#: C:\wamp\www\me\mushraider\raider\app/Controller/AccountController.php:137
+msgid "My MushRaider characters"
+msgstr "Mes personnages MushRaider"
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/AccountController.php:65
+#: C:\wamp\www\me\mushraider\raider\app/Controller/AccountController.php:117
+#, php-format
+msgid "%s has been added to your character list"
+msgstr "%s a été ajouté à la liste de vos personnages"
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/AccountController.php:87
+msgid "Edit a character"
+msgstr "Modifier un personnage"
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/AccountController.php:97
+msgid "MushRaider  can't find this character oO"
+msgstr "MushRaider ne trouve pas ce personnage oO"
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/AjaxController.php:48
+msgid "MushRaider can't find this event"
+msgstr "MushRaider ne trouve pas cet évènement oO"
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/AjaxController.php:60
+#, php-format
+msgid "Your character mush be above the level %s"
+msgstr "Votre personnage doit être au dessus du niveau %s"
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/AjaxController.php:76
+msgid "Error while adding your character"
+msgstr "Erreur pendant l'ajout de votre personnage"
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/AppController.php:58
+msgid "MushRaider is ready for install, what about you ?"
+msgstr "MushRaider est prêt pour l'installation, et vous ?"
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/AuthController.php:20
+msgid "Login to MushRaider"
+msgstr "Connexion à MushRaider"
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/AuthController.php:48
+#, php-format
+msgid "Congratulation %s, you are now logged in"
+msgstr "Félicitations %s, vous êtes maintenant connecté"
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/AuthController.php:60
+msgid ""
+"You have to wait until an admin activate your account, go farm while "
+"waiting !"
+msgstr ""
+"Vous devez attendre qu'un admin active votre compte, vous pouvez retourner "
+"farm en attendant !"
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/AuthController.php:62
+msgid "MushRaider can't find your account, maybe you need some sleep ?"
+msgstr ""
+"MushRaider ne trouve pas ce compte, peut être avez-vous besoin d'un peu de "
+"repos ?"
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/AuthController.php:70
+msgid "Signup to MushRaider"
+msgstr "Inscription à MushRaider"
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/AuthController.php:81
+msgid ""
+"Yeah, your account has been created, but now you need to wait until your "
+"account as been validated by an admin to access the raid planner (security "
+"stuff)."
+msgstr ""
+"Yeah, votre compte a été créé, cependant vous devez attendre qu'un admin "
+"valide votre compte pour accéder au raid planner (question de sécurité)."
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/AuthController.php:90
+#: C:\wamp\www\me\mushraider\raider\app/Controller/AuthController.php:106
+msgid "Password Recovery"
+msgstr "Retrouver son mot de passe"
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/AuthController.php:96
+msgid "An email has been sent to you with the recovery instructions."
+msgstr ""
+"Un email vous a été envoyé avec les instructions pour retrouver votre mot de "
+"passe."
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/AuthController.php:109
+#: C:\wamp\www\me\mushraider\raider\app/Controller/AuthController.php:130
+msgid "This link is no longer available."
+msgstr "Ce lien n'est plus valable."
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/AuthController.php:125
+msgid "Your password has been updated."
+msgstr "Votre mot de passe a été mis à jour."
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/EventsController.php:9
+#: C:\wamp\www\me\mushraider\raider\app/Controller/EventsController.php:13
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Dashboard/index.ctp:30
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/index.ctp:19
+#: C:\wamp\www\me\mushraider\raider\app/View/Elements/header.ctp:33
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/index.ctp:2
+msgid "Events"
+msgstr "Evènements"
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/EventsController.php:37
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/view.ctp:9
+msgid "View event"
+msgstr "Détails d'un évènement"
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/EventsController.php:48
+#: C:\wamp\www\me\mushraider\raider\app/Controller/EventsController.php:173
+msgid "MushRaider can't find this event oO"
+msgstr "MushRaider ne peut pas trouver cet évènement oO"
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/EventsController.php:64
+#: C:\wamp\www\me\mushraider\raider\app/Controller/EventsController.php:65
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/add.ctp:2
+msgid "Add event"
+msgstr "Ajouter un évènement"
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/EventsController.php:68
+#: C:\wamp\www\me\mushraider\raider\app/Controller/EventsController.php:119
+#: C:\wamp\www\me\mushraider\raider\app/Controller/EventsController.php:189
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/AdminAppController.php:19
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/AdminAppController.php:25
+msgid "You don't have permission to access this page."
+msgstr "Vous n'avez pas les permissions pour accéder à cette page."
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/EventsController.php:99
+msgid "The event has been created."
+msgstr "L'évènement a bien été créé."
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/EventsController.php:116
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/edit.ctp:2
+msgid "Edit event"
+msgstr "Modifier un évènement"
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/EventsController.php:159
+msgid "The event has been updated."
+msgstr "L'évènement a bien été mis à jour."
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/EventsController.php:201
+msgid "The event has been deleted."
+msgstr "L'évènement a bien été supprimé."
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/EventsController.php:203
+msgid "MushRaider can't delete this event."
+msgstr "MushRaider ne peut pas supprimer cet évènement."
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/Component/EmailingComponent.php:17
+msgid "Welcome to MushRaider"
+msgstr "Bienvenue sur le MushRaider"
+
+#: C:\wamp\www\me\mushraider\raider\app/Controller/Component/EmailingComponent.php:28
+msgid "[MushRaider] Recover your password"
+msgstr "[MushRaider] Retrouvez votre mot de passe"
+
+#: C:\wamp\www\me\mushraider\raider\app/Model/Classe.php:53
+msgid "This class already exist for this game."
+msgstr "Cette classe existe déjà pour ce jeu."
+
+#: C:\wamp\www\me\mushraider\raider\app/Model/Dungeon.php:48
+msgid "This dungeon already exist for this game."
+msgstr "Ce donjon existe déjà pour ce jeu."
+
+#: C:\wamp\www\me\mushraider\raider\app/Model/Race.php:36
+msgid "This race already exist for this game."
+msgstr "Cette race existe déjà pour ce jeu."
+
+#: C:\wamp\www\me\mushraider\raider\app/Model/User.php:87
+msgid "Passwords do not match. Please, try again."
+msgstr "Les mots de passe ne correspondent pas. Veuillez réessayer."
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/AdminAppController.php:13
+msgid "You must login to access this page."
+msgstr "Vous devez être connecté pour accéder à cette page."
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/AdminAppController.php:29
+msgid "MushRaider Admin"
+msgstr "Admin MushRaider"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/ClassesController.php:42
+#, php-format
+msgid "%s has been added to your classes list"
+msgstr "%s a bien été ajouté à la liste des classes"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/ClassesController.php:74
+msgid "MushRaider is unable to find this class oO"
+msgstr "MushRaider ne trouve pas cette classe oO"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/ClassesController.php:86
+#, php-format
+msgid "Class %s has been updated"
+msgstr "La classe %s a bien été mise à jour"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/ClassesController.php:90
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/ClassesController.php:117
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/DungeonsController.php:96
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/DungeonsController.php:122
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/GamesController.php:68
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/GamesController.php:143
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/RacesController.php:86
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/RacesController.php:109
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/UsersController.php:63
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/UsersController.php:96
+msgid "Something goes wrong"
+msgstr "Quelque chose de mal s'est produit"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/ClassesController.php:113
+msgid "This class is linked to a game, you can't delete it."
+msgstr "Cette classe est liée à un jeu, vous ne pouvez donc pas la supprimer."
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/ClassesController.php:115
+msgid "The class has been deleted"
+msgstr "La classe a bien été supprimée"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/DungeonsController.php:44
+#, php-format
+msgid "%s has been added to your dungeons list"
+msgstr "%s a été ajouté à la liste des donjons"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/DungeonsController.php:75
+msgid "MushRaider is unable to find this dungeon oO"
+msgstr "MushRaider ne trouve pas ce donjon oO"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/DungeonsController.php:92
+#, php-format
+msgid "Dungeon %s has been updated"
+msgstr "Le donjon %s a été mis à jour"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/DungeonsController.php:118
+msgid "This dungeon is linked to a game, you can't delete it."
+msgstr "Ce donjon est lié à un jeu, vous ne pouvez donc pas le supprimer."
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/DungeonsController.php:120
+msgid "The dungeon has been deleted"
+msgstr "Le donjon a bien été supprimé;"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/GamesController.php:65
+#, php-format
+msgid "%s has been added to your games list"
+msgstr "%s a été ajouté à la liste des jeux"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/GamesController.php:96
+msgid "MushRaider is unable to find this game oO"
+msgstr "MushRaider ne trouve pas ce jeu oO"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/GamesController.php:140
+#, php-format
+msgid "The game %s has been updated"
+msgstr "Le jeu %s a été mis à jour"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/GamesController.php:173
+msgid "Logo is too big"
+msgstr "Le logo est trop gros"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/GamesController.php:176
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/SettingsController.php:78
+msgid "An error occur while uploading"
+msgstr "Une erreur est survenue pendant l'upload"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/RacesController.php:41
+#, php-format
+msgid "%s has been added to your races list"
+msgstr "%s a été ajouté à la liste des races"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/RacesController.php:70
+msgid "MushRaider is unable to find this race oO"
+msgstr "MushRaider ne trouve pas cette race oO"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/RacesController.php:82
+#, php-format
+msgid "Race %s has been updated"
+msgstr "La race %s a été mise à jour"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/RacesController.php:105
+msgid "This race is linked to a game, you can't delete it."
+msgstr "Cette race est liée à un jeu, vous ne pouvez donc pas la supprimer."
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/RacesController.php:107
+msgid "The race has been deleted"
+msgstr "La race a bien été supprimée"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/SettingsController.php:51
+msgid "Settings have been updated"
+msgstr "La configuration a été mise à jour"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/SettingsController.php:75
+msgid "Image is too big"
+msgstr "L'image est trop grosse"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/UsersController.php:46
+msgid "MushRaider is unable to find this user oO"
+msgstr "MushRaider ne trouve pas cet utilisateur oO"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/UsersController.php:59
+#, php-format
+msgid "User %s has been updated"
+msgstr "L'utilisateur %s a été mis à jour"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/UsersController.php:89
+msgid "This user is still active, you have to disable him before deleting."
+msgstr ""
+"Cet utilisateur est encore actif, vous devez le désactiver avant de le "
+"supprimer."
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/Controller/UsersController.php:94
+msgid "The user has been deleted"
+msgstr "L'utilisateur a bien été supprimé;"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Install/Controller/InstallAppController.php:18
+msgid "MushRaider can see the database config, why do you want to install ?"
+msgstr ""
+"MushRaider a détecté une configuration de base de donnée déjà existante, "
+"pourquoi vouloir réinstaller ?"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Install/Controller/InstallAppController.php:23
+msgid "MushRaider Installer"
+msgstr "Installer MushRaider"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Install/Controller/StepController.php:39
+msgid "MushRaider successfully connect to your database, one more step to go !"
+msgstr ""
+"MushRaider s'est connecté à la base de donnée avec succès, plus qu'une "
+"étape !"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Install/Controller/StepController.php:44
+msgid "MushRaider can't connect to your database, please verify the settings."
+msgstr ""
+"MushRaider ne peut pas se connecter à votre base de donnée, veuillez "
+"vérifier les paramètres."
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Install/Controller/StepController.php:57
+msgid ""
+"MushRaider can't find your database settings, please complete this form to "
+"proceed to next step"
+msgstr ""
+"MushRaider ne trouve pas les paramètres de connexion à la base de donnée, "
+"veuillez compléter le formulaire avant de continuer"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Install/Controller/StepController.php:126
+msgid "MushRaider successfully install !"
+msgstr "MushRaider s'est installé avec succès !"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Install/Controller/StepController.php:129
+msgid "MushRaider can't create admin user, please try again."
+msgstr "MushRaider ne peut pas créer l'utilisateur admin, veuillez réessayer."
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Install/Controller/StepController.php:137
+msgid ""
+"MushRaider can't verify the settings, please be sure to fill all the fields "
+"to continue."
+msgstr ""
+"MushRaider ne trouve pas les paramètres, assurez-vous de renseigner tous les "
+"champs avant de continuer."
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:17
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:16
+msgid "Dimanche"
+msgstr "Mot de passe actuel"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:17
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:16
+msgid "Lundi"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:17
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:16
+msgid "Mardi"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:17
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:16
+msgid "Mercredi"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:17
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:16
+msgid "Jeudi"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:17
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:16
+msgid "Vendredi"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:17
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:16
+msgid "Samedi"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:18
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:17
+msgid "Dim"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:18
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:17
+msgid "Lun"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:18
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:17
+msgid "Mar"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:18
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:17
+msgid "Mer"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:18
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:17
+msgid "Jeu"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:18
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:17
+msgid "Ven"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:18
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:17
+msgid "Sam"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:19
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:18
+msgid "JAN"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:19
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:18
+msgid "FEV"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:19
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:18
+msgid "MAR"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:19
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:18
+msgid "AVR"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:19
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:18
+msgid "MAI"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:19
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:18
+msgid "JUN"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:19
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:18
+msgid "JUI"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:19
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:18
+msgid "AOU"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:19
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:18
+msgid "SEP"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:19
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:18
+msgid "OCT"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:19
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:18
+msgid "NOV"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:19
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:18
+msgid "DEC"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:20
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:19
+msgid "janvier"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:20
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:19
+msgid "février"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:20
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:19
+msgid "mars"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:20
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:19
+msgid "avril"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:20
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:19
+msgid "mai"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:20
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:19
+msgid "juin"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:20
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:19
+msgid "juillet"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:20
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:19
+msgid "août"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:20
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:19
+msgid "septembre"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:20
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:19
+msgid "octobre"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:20
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:19
+msgid "novembre"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:20
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:19
+msgid "décembre"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:38
+msgid "at"
+msgstr "à"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:88
+msgid "Previous"
+msgstr "Précédent"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/FormerHelper.php:90
+msgid "Next"
+msgstr "Suivant"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:36
+msgid "Aujourd'hui à"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:39
+msgid "Hier à"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:106
+msgid "Pr&eacute;c&eacute;dente"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Helper/ToolsHelper.php:108
+msgid "Suivante"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Classes/add.ctp:5
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Races/add.ctp:5
+msgid "Add Class"
+msgstr "Ajouter une classe"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Classes/edit.ctp:4
+msgid "Edit Class"
+msgstr "Modifier une classe"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Classes/edit.ctp:9
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Classes/index.ctp:30
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Dungeons/edit.ctp:9
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Dungeons/index.ctp:30
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Elements/addClasse.ctp:4
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Elements/addDungeon.ctp:5
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Elements/addRace.ctp:4
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/add.ctp:10
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/edit.ctp:10
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/index.ctp:15
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Races/edit.ctp:9
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Races/index.ctp:30
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/view.ctp:70
+msgid "Title"
+msgstr "Titre"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Classes/edit.ctp:12
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Dungeons/edit.ctp:12
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Elements/addClasse.ctp:8
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Elements/addDungeon.ctp:9
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Elements/addRace.ctp:8
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Races/edit.ctp:12
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Stats/index.ctp:10
+#: C:\wamp\www\me\mushraider\raider\app/View/Account/characters.ctp:12
+#: C:\wamp\www\me\mushraider\raider\app/View/Account/characters.ctp:28
+#: C:\wamp\www\me\mushraider\raider\app/View/Account/characters_edit.ctp:10
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/add.ctp:13
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/edit.ctp:13
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/view.ctp:80
+msgid "Game"
+msgstr "Jeu"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Classes/edit.ctp:15
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Elements/addClasse.ctp:12
+msgid "Color"
+msgstr "Couleur"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Classes/edit.ctp:19
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Dungeons/edit.ctp:21
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Elements/addClasse.ctp:15
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Elements/addDungeon.ctp:21
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Elements/addRace.ctp:12
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/add.ctp:47
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/edit.ctp:73
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Races/edit.ctp:16
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Settings/index.ctp:37
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Users/edit.ctp:33
+#: C:\wamp\www\me\mushraider\raider\app/View/Account/index.ctp:20
+msgid "Save"
+msgstr "Sauvegarder"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Classes/index.ctp:4
+msgid "Classes list"
+msgstr "Liste des classes"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Classes/index.ctp:7
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Elements/menu.ctp:54
+msgid "Add class"
+msgstr "Ajouter une classe"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Classes/index.ctp:23
+msgid "Classes without game"
+msgstr "Classes non liées à un jeu"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Classes/index.ctp:31
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Dungeons/index.ctp:32
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/index.ctp:21
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Races/index.ctp:31
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Users/index.ctp:16
+#: C:\wamp\www\me\mushraider\raider\app/View/Account/characters.ctp:33
+msgid "Actions"
+msgstr "Actions"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Classes/index.ctp:43
+#, php-format
+msgid "Are you sure you want to completely delete the class %s ?"
+msgstr "Êtes-vous sûr de vouloir supprimer la classe %s ?"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Classes/index.ctp:54
+msgid "You don't have any classe yet"
+msgstr "Vous n'avez pas encore de classe"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Dashboard/index.ctp:2
+msgid "Welcome to the MushRaider admin panel"
+msgstr "Bienvenue sur l'admin MushRaider"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Dashboard/index.ctp:4
+msgid ""
+"Use the left menu to set your raid planner as you wish, like adding the "
+"games you play, the list of dungeons, classes etc..."
+msgstr ""
+"Utilisez le menu de gauche pour configurer le raid planner, comme ajouter "
+"des jeux, des donjons, classes etc..."
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Dashboard/index.ctp:10
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Elements/menu.ctp:26
+msgid "Users"
+msgstr "Utilisateurs"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Dashboard/index.ctp:15
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Users/index.ctp:14
+#: C:\wamp\www\me\mushraider\raider\app/View/Elements/header.ctp:15
+msgid "Characters"
+msgstr "Personnages"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Dashboard/index.ctp:20
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Elements/menu.ctp:36
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/add.ctp:19
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/edit.ctp:20
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/index.ctp:16
+msgid "Dungeons"
+msgstr "Donjons"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Dashboard/index.ctp:25
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Elements/menu.ctp:47
+msgid "Games"
+msgstr "Jeux"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Dungeons/add.ctp:5
+msgid "Add Dungeon"
+msgstr "Ajouter un donjon"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Dungeons/edit.ctp:4
+msgid "Edit Dungeon"
+msgstr "Modifier un donjon"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Dungeons/edit.ctp:15
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Elements/addDungeon.ctp:13
+msgid "Number of players"
+msgstr "Nombre de joueurs"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Dungeons/edit.ctp:16
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Elements/addDungeon.ctp:14
+msgid "or add custom number"
+msgstr "ou ajouter un nombre personnalisé"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Dungeons/index.ctp:4
+msgid "Dungeons list"
+msgstr "Liste des donjons"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Dungeons/index.ctp:7
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Elements/menu.ctp:40
+msgid "Add dungeon"
+msgstr "Ajouter un donjon"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Dungeons/index.ctp:23
+msgid "Dungeons without game"
+msgstr "Donjons non lié à un jeu"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Dungeons/index.ctp:31
+msgid "Players Size"
+msgstr "Nombre de joueurs"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Dungeons/index.ctp:45
+#, php-format
+msgid "Are you sure you want to completely delete the dungeon %s ?"
+msgstr "Êtes-vous sûr de vouloir supprimer le donjon %s ?"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Dungeons/index.ctp:56
+msgid "You don't have any dungeon yet"
+msgstr "Vous n'avez pas encore de donjon"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Elements/addClasse.ctp:1
+msgid "Add new class"
+msgstr "Ajouter une classe"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Elements/addDungeon.ctp:1
+msgid "Add new dungeon"
+msgstr "Ajouter un donjon"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Elements/addRace.ctp:1
+msgid "Add new race"
+msgstr "Ajouter une race"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Elements/header.ctp:22
+msgid "VOTRE NAVIGATEUR NE SUPPORTE PAS JAVASCRIPT"
+msgstr ""
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Elements/menu.ctp:13
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Elements/menu.ctp:17
+msgid "Settings"
+msgstr "Paramètres"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Elements/menu.ctp:21
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Stats/index.ctp:5
+msgid "Stats"
+msgstr "Statistiques"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Elements/menu.ctp:29
+msgid "Manage users"
+msgstr "Gérer les utilisateurs"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Elements/menu.ctp:30
+msgid "Waiting users"
+msgstr "Utilisateurs en attente"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Elements/menu.ctp:39
+msgid "Manage dungeons"
+msgstr "Gérer les donjons"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Elements/menu.ctp:50
+msgid "Manage games"
+msgstr "Gérer les jeux"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Elements/menu.ctp:51
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/add.ctp:4
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/index.ctp:7
+msgid "Add game"
+msgstr "Ajouter un jeu"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Elements/menu.ctp:53
+msgid "Manage classes"
+msgstr "Gérer les classes"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Elements/menu.ctp:56
+msgid "Manage races"
+msgstr "Gérer les races"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Elements/menu.ctp:57
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Races/index.ctp:7
+msgid "Add race"
+msgstr "Ajouter une race"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/add.ctp:8
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/edit.ctp:8
+msgid "Général Informations"
+msgstr "Informations générales"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/add.ctp:13
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/edit.ctp:13
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Settings/index.ctp:15
+msgid "Logo"
+msgstr "Logo"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/add.ctp:21
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/add.ctp:30
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/add.ctp:39
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/edit.ctp:22
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/edit.ctp:39
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/edit.ctp:56
+msgid "Select existing one"
+msgstr "Choisir un existant"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/add.ctp:22
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/add.ctp:31
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/add.ctp:40
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/edit.ctp:23
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/edit.ctp:40
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/edit.ctp:57
+msgid "or create new one"
+msgstr "ou en ajouter un nouveau"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/add.ctp:28
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/edit.ctp:37
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/index.ctp:17
+msgid "Classes"
+msgstr "Classes"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/add.ctp:37
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/edit.ctp:54
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/index.ctp:18
+msgid "Races"
+msgstr "Races"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/edit.ctp:4
+msgid "Edit game"
+msgstr "Modifier un jeu"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/index.ctp:4
+msgid "Games list"
+msgstr "Liste des jeux"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Games/index.ctp:20
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/view.ctp:106
+msgid "Roster"
+msgstr "Rorster"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Races/edit.ctp:4
+msgid "Edit Race"
+msgstr "Modifier une race"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Races/index.ctp:4
+msgid "Races list"
+msgstr "Liste des races"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Races/index.ctp:23
+msgid "Races without game"
+msgstr "Races non liées à un jeu"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Races/index.ctp:43
+#, php-format
+msgid "Are you sure you want to completely delete the race %s ?"
+msgstr "Êtes-vous sûr de vouloir supprimer la race %s ?"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Races/index.ctp:54
+msgid "You don't have any race yet"
+msgstr "Vous n'avez pas encore de race"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Settings/index.ctp:4
+msgid "Configure MushRaider"
+msgstr "Configurer MushRaider"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Settings/index.ctp:8
+msgid "General settings"
+msgstr "Paramètres généraux"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Settings/index.ctp:10
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Install/View/Step/step2.ctp:4
+msgid "Site title"
+msgstr "Titre du site"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Settings/index.ctp:13
+msgid "Theming"
+msgstr "Thème"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Settings/index.ctp:22
+msgid "Background Image"
+msgstr "Image de fond"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Settings/index.ctp:23
+msgid "no background image"
+msgstr "pas d'image de fond"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Settings/index.ctp:24
+msgid "back to original background"
+msgstr "retourner au fond par défaut"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Settings/index.ctp:27
+msgid "Background Color"
+msgstr "Couleur de fond"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Settings/index.ctp:30
+msgid "Background Repeat"
+msgstr "Répétition de l'image de fond"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Settings/index.ctp:33
+msgid "Custom CSS"
+msgstr "CSS personnalisé"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Stats/index.ctp:11
+msgid "Filter"
+msgstr "Filtrer"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Stats/index.ctp:19
+msgid "Character"
+msgstr "Personnage"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Stats/index.ctp:20
+msgid "User"
+msgstr "Utilisateur"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Stats/index.ctp:21
+msgid "perc. validated"
+msgstr "% validé"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Stats/index.ctp:22
+msgid "perc. signin"
+msgstr "% inscriptions"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Stats/index.ctp:23
+msgid "perc. signout"
+msgstr "% absences"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Users/edit.ctp:4
+msgid "Edit user"
+msgstr "Modifier un utilisateur"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Users/edit.ctp:9
+msgid "Disabled"
+msgstr "Désactivé"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Users/edit.ctp:9
+msgid "Enabled"
+msgstr "Activé"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Users/edit.ctp:9
+msgid "Account status"
+msgstr "Etat du compte"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Users/edit.ctp:14
+msgid "Role & permissions"
+msgstr "Rôles et permissions"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Users/edit.ctp:17
+msgid "Roles details"
+msgstr "Détails des rôles"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Users/index.ctp:4
+msgid "Users list"
+msgstr "Liste des utilisateurs"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Users/index.ctp:10
+#: C:\wamp\www\me\mushraider\raider\app/View/Auth/signup.ctp:8
+msgid "Username"
+msgstr "Pseudo"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Users/index.ctp:11
+msgid "Email"
+msgstr "Email"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Users/index.ctp:12
+msgid "Status"
+msgstr "Etat"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Users/index.ctp:13
+msgid "Registration date"
+msgstr "Date d'enregistrement"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Users/index.ctp:15
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/view.ctp:48
+msgid "Role"
+msgstr "Rôle"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Admin/View/Users/index.ctp:38
+#, php-format
+msgid "Are you sure you want to completely delete the user %s ?"
+msgstr "Êtes-vous sûr de vouloir supprimer l'utilisateur %s ?"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Install/View/Layouts/default.ctp:33
+msgid "installer"
+msgstr "installer"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Install/View/Layouts/default.ctp:34
+msgid "Step"
+msgstr "Etape"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Install/View/Step/step1.ctp:1
+msgid "Database informations"
+msgstr "Paramètres de la base de donnée"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Install/View/Step/step1.ctp:4
+msgid "Database Type"
+msgstr "Type de base de donnée"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Install/View/Step/step1.ctp:7
+msgid "Host"
+msgstr "Hôte"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Install/View/Step/step1.ctp:10
+msgid "Database name"
+msgstr "Nom de la base de donnée"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Install/View/Step/step1.ctp:13
+msgid "Database User"
+msgstr "Utilisateur de la base de donnée"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Install/View/Step/step1.ctp:16
+msgid "Database Password"
+msgstr "Mot de passe de la base de donnée"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Install/View/Step/step1.ctp:19
+msgid "Port"
+msgstr "Port"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Install/View/Step/step1.ctp:22
+msgid "Tables prefix"
+msgstr "Préfix des tables"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Install/View/Step/step1.ctp:25
+msgid "Next &raquo;"
+msgstr "Suivant &raquo;"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Install/View/Step/step2.ctp:1
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/add.ctp:6
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/edit.ctp:6
+msgid "General informations"
+msgstr "Informations générales"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Install/View/Step/step2.ctp:8
+msgid "Site language"
+msgstr "Langue du site"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Install/View/Step/step2.ctp:12
+msgid "Admin email"
+msgstr "Email de l'admin"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Install/View/Step/step2.ctp:16
+msgid "Admin username"
+msgstr "Pseudo de l'admin"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Install/View/Step/step2.ctp:20
+msgid "Admin password"
+msgstr "Mot de passe de l'admin"
+
+#: C:\wamp\www\me\mushraider\raider\app/Plugin/Install/View/Step/step2.ctp:24
+msgid "Install MushRaider"
+msgstr "Installer MushRaider"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Account/characters.ctp:2
+msgid "My characters"
+msgstr "Mes personnages"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Account/characters.ctp:6
+msgid "add new character"
+msgstr "ajouter un personnage"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Account/characters.ctp:9
+#: C:\wamp\www\me\mushraider\raider\app/View/Account/characters_edit.ctp:7
+msgid "Character Name"
+msgstr "Nom du personnage"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Account/characters.ctp:19
+msgid "Add"
+msgstr "Ajouter"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Account/characters.ctp:29
+msgid "Name"
+msgstr "Nom"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Account/characters.ctp:30
+#: C:\wamp\www\me\mushraider\raider\app/View/Elements/char_form_elements.ctp:10
+msgid "Level"
+msgstr "Niveau"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Account/characters.ctp:31
+msgid "Class"
+msgstr "Classe"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Account/characters.ctp:32
+#: C:\wamp\www\me\mushraider\raider\app/View/Elements/char_form_elements.ctp:6
+msgid "Race"
+msgstr "Race"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Account/characters.ctp:52
+msgid "Add your first character"
+msgstr "Ajouter mon premier personnage"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Account/characters_edit.ctp:2
+msgid "Edit character"
+msgstr "Modifier un personnage"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Account/characters_edit.ctp:18
+msgid "Edit"
+msgstr "Modifier"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Account/index.ctp:2
+msgid "My Profile"
+msgstr "Mon profile"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Account/index.ctp:7
+msgid "Edit you personnal informations"
+msgstr "Modifier mes informations personnelles"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Account/index.ctp:10
+msgid "Current password"
+msgstr "Mot de passe actuel"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Account/index.ctp:13
+msgid "New password"
+msgstr "Nouveau mot de passe"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Account/index.ctp:16
+msgid "Confirm new password"
+msgstr "Confirmation du nouveau mot de passe"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Account/index.ctp:26
+msgid "Manage your characters"
+msgstr "Gérer ses personnages"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Account/index.ctp:28
+msgid "Click the button below below to manager your characters"
+msgstr "Cliquez sur le bouton ci-dessous pour gérer vos personnages"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Auth/login.ctp:2
+#: C:\wamp\www\me\mushraider\raider\app/View/Auth/login.ctp:13
+#: C:\wamp\www\me\mushraider\raider\app/View/Auth/password.ctp:17
+#: C:\wamp\www\me\mushraider\raider\app/View/Auth/recovery.ctp:14
+msgid "Login"
+msgstr "Connexion"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Auth/login.ctp:7
+msgid "Username or Email"
+msgstr "Pseudo ou Email"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Auth/login.ctp:10
+#: C:\wamp\www\me\mushraider\raider\app/View/Auth/signup.ctp:15
+msgid "Password"
+msgstr "Mot de passe"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Auth/login.ctp:17
+msgid "Password lost :("
+msgstr "Mot de passe perdu :("
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Auth/login.ctp:17
+msgid "Recover your password"
+msgstr "Retrouver mon mot de passe"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Auth/login.ctp:18
+#: C:\wamp\www\me\mushraider\raider\app/View/Auth/password.ctp:18
+#: C:\wamp\www\me\mushraider\raider\app/View/Auth/recovery.ctp:15
+#: C:\wamp\www\me\mushraider\raider\app/View/Auth/signup.ctp:2
+#: C:\wamp\www\me\mushraider\raider\app/View/Auth/signup.ctp:23
+msgid "Signup"
+msgstr "Inscription"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Auth/login.ctp:18
+#: C:\wamp\www\me\mushraider\raider\app/View/Auth/password.ctp:18
+#: C:\wamp\www\me\mushraider\raider\app/View/Auth/recovery.ctp:15
+msgid "Signup and start raiding"
+msgstr "S'inscrire et commencer les raids"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Auth/password.ctp:2
+#: C:\wamp\www\me\mushraider\raider\app/View/Auth/recovery.ctp:2
+msgid "Recovery"
+msgstr "Perdu ?"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Auth/password.ctp:7
+msgid "Enter your new password"
+msgstr "Saisissez votre nouveau mot de passe"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Auth/password.ctp:10
+msgid "Confirm your new password"
+msgstr "Confirmation du nouveau mot de passe"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Auth/password.ctp:13
+msgid "Change my password"
+msgstr "Modifier son mot de passe"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Auth/recovery.ctp:7
+msgid "Email used when signup"
+msgstr "Email utilisé à l'inscription"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Auth/recovery.ctp:10
+msgid "Recover my password"
+msgstr "Retrouver mon mot de passe"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Auth/signup.ctp:7
+msgid "Letters and numbers only, 3 to 20 chars length."
+msgstr "Lettre et chiffres uniquement, 3 à 20 caractères."
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Auth/signup.ctp:11
+msgid "Valid Email"
+msgstr "Email valide"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Auth/signup.ctp:14
+msgid "Minimum 6 chars length."
+msgstr "Au moins 6 caractères."
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Auth/signup.ctp:18
+msgid "Confirm password"
+msgstr "Confirmation du mot de passe"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Auth/signup.ctp:22
+msgid "I already have an account."
+msgstr "J'ai déjà un compte."
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Elements/char_form_elements.ctp:2
+msgid "Classe"
+msgstr "Classe"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Elements/flash_error.ctp:3
+msgid "Doh !"
+msgstr "Doh !"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Elements/flash_info.ctp:3
+msgid "Info !"
+msgstr "Info !"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Elements/flash_success.ctp:3
+msgid "GG !"
+msgstr "GG !"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Elements/flash_warning.ctp:3
+msgid "Oups !"
+msgstr "Oups !"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Elements/footer.ctp:2
+msgid "Powered by"
+msgstr "Propulsé par"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Elements/footer.ctp:3
+msgid "All Rights Reserved."
+msgstr "Tous droits réservés"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Elements/footer.ctp:4
+msgid "MushRaider is a Raid Planner mainly designed for MMORPG."
+msgstr "MushRaider est un Raid Planner destiné aux MMORPG."
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Elements/header.ctp:14
+msgid "Profile"
+msgstr "Profile"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Elements/header.ctp:17
+msgid "Logout"
+msgstr "Déconnexion"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Elements/header.ctp:23
+msgid "Admin"
+msgstr "Admin"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Elements/header.ctp:26
+msgid "LOGIN / REGISTER"
+msgstr "LOGIN / REGISTER"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Elements/header.ctp:36
+msgid "My Account"
+msgstr "Mon compte"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Emails/html/recovery.ctp:7
+#: C:\wamp\www\me\mushraider\raider\app/View/Emails/text/recovery.ctp:1
+msgid "Password recovery"
+msgstr "Retrouver son mot de passe"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Emails/html/recovery.ctp:12
+#: C:\wamp\www\me\mushraider\raider\app/View/Emails/text/recovery.ctp:3
+msgid ""
+"You receive this email because you have lost your password. If you don't, "
+"please ignore this email"
+msgstr ""
+"Vous recevez cet email car vous avez perdu votre mot de passe. Si ce n'est "
+"pas le cas veuillez ignorer cet email."
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Emails/html/recovery.ctp:13
+#: C:\wamp\www\me\mushraider\raider\app/View/Emails/text/recovery.ctp:4
+msgid ""
+"To change your password and recover your account follow the following link"
+msgstr ""
+"Pour modifier votre mot de passe et retrouver votre compte suivez le lien ci-"
+"dessous"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/add.ctp:2
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/edit.ctp:2
+msgid "the"
+msgstr "le"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/add.ctp:10
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/edit.ctp:10
+msgid "Event title"
+msgstr "Titre de l'évènement"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/add.ctp:16
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/edit.ctp:16
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/view.ctp:84
+msgid "Dungeon"
+msgstr "Donjon"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/add.ctp:16
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/edit.ctp:16
+msgid "Select a game first"
+msgstr "Commencez par choisir un jeu"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/add.ctp:21
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/edit.ctp:21
+msgid "Event description"
+msgstr "Description de l'évènement"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/add.ctp:28
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/edit.ctp:28
+msgid "Roles"
+msgstr "Rôles"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/add.ctp:32
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/edit.ctp:34
+msgid "Number of"
+msgstr "Nombre de"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/add.ctp:37
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/edit.ctp:39
+msgid "Character minimum level"
+msgstr "Niveau minimum de personnage"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/add.ctp:41
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/edit.ctp:43
+msgid "Event time"
+msgstr "Horaires de l'évènement"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/add.ctp:43
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/edit.ctp:45
+msgid "Invitations start"
+msgstr "Heure des invitations"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/add.ctp:46
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/edit.ctp:48
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/view.ctp:92
+msgid "Event start"
+msgstr "Heure de début"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/add.ctp:54
+msgid "Create event"
+msgstr "Sauvegarder"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/edit.ctp:57
+msgid "Update event"
+msgstr "Sauvegarder"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/view.ctp:16
+msgid ""
+"Are you sure you want to delete this event ?\n"
+"(this can't be undone)"
+msgstr ""
+"Êtes-vous sûr de vouloir supprimer cet évènement?\n"
+" (cela est définitif)"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/view.ctp:31
+msgid "your are registered as \"absent\""
+msgstr "vous êtes inscrit en tant qu'absent"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/view.ctp:35
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/view.ctp:45
+msgid "your are registered to this event as"
+msgstr "vous êtes inscrit en tant que"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/view.ctp:39
+msgid "your are validated to this event as"
+msgstr "vous êtes validé en tant que"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/view.ctp:45
+msgid "Choose a character"
+msgstr "Personnage"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/view.ctp:45
+msgid "please select a character and a role"
+msgstr "merci de choisir un personnage et un rôle"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/view.ctp:45
+msgid "your are not registered to this event"
+msgstr "vous n'êtes pas inscrit à cet évènement"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/view.ctp:63
+msgid "Add a comment"
+msgstr "Ajouter un commentaire"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/view.ctp:73
+msgid "Description"
+msgstr "Description"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/view.ctp:76
+msgid "Informations"
+msgstr "Informations"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/view.ctp:88
+msgid "Invitation start"
+msgstr "Heure des invitations"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/view.ctp:96
+msgid "Minimum character level"
+msgstr "Niveau minimum de personnage"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/view.ctp:100
+msgid "Created by"
+msgstr "Créé par"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/view.ctp:126
+msgid "The roster for this role is full"
+msgstr "Le roster pour ce rôle est complet"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/view.ctp:127
+msgid "Validated"
+msgstr "Validés"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/view.ctp:132
+msgid "Waiting"
+msgstr "En attente"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Events/view.ctp:137
+msgid "Rejected"
+msgstr "Absents"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Layouts/error.ctp:20
+msgid "MushRaider Error"
+msgstr "MushRaider Fail"
+
+#: C:\wamp\www\me\mushraider\raider\app/View/Layouts/Emails/html/default.ctp:19
+#: C:\wamp\www\me\mushraider\raider\app/View/Layouts/Emails/text/default.ctp:3
+msgid "This email has been sent automatically by MushRaider"
+msgstr "Cet email a été envoyé automatiquement par MushRaider"

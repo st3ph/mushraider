@@ -57,7 +57,7 @@ body {
 }
 
 a {
-  color: #d5000d;
+  color: #bf4d28;
 }
 a:hover {
   color: #c5000c;
@@ -74,6 +74,7 @@ header h1 {
   font-size: 48px;
   color: #303030;
   line-height: 1.2;
+  text-align:center;
 }
 
 header h2 {
@@ -82,6 +83,7 @@ header h2 {
   color: #aaa;
   font-weight: normal;
   line-height: 1.3;
+  text-align:center;
 }
 
 #container {
@@ -252,7 +254,7 @@ h2 {
 } 
 
 h3 {
-  color: #d5000d;
+  color: #bf4d28;
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 8px;

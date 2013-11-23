@@ -86,6 +86,7 @@ jQuery(function($) {
         var $characterField = $('#Character');
         var $roleField = $('#EventsRole');
         var $commentField = $('#Comment');
+        var $roster = $('#eventRoles');
         var $characterMessage = $characterField.prev('.message');
         var userId = $characterField.data('user');
         var eventId = $characterField.data('event');
@@ -112,6 +113,16 @@ jQuery(function($) {
                     messageText = msg.msg;
                     $characterMessage.removeClass('label-info');
                 }
+
+                // Remove character from the roster
+                $roster.find('tbody li[data-id="'+characterId+'"]').remove();
+
+                // Add character to the roster
+                if(msg.msg == 'ok' && typeof msg.html != 'undefined' && msg.html.length) {
+                    var charStatus = signInValue?'waiting':'rejected';
+                    $roster.find('tbody td[data-id="role_'+roleId+'"] .'+charStatus).append(msg.html);                    
+                }
+
                 $characterMessage.html(messageText).addClass(messageClass);
             }
         });        

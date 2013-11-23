@@ -74,7 +74,7 @@
 <?php echo $event['Event']['description'];?>
 
 <h3><?php echo __('Informations');?></h3>
-<table id="eventRoles" class="table table-striped table-bordered">
+<table id="eventInfos" class="table table-striped table-bordered">
 	<tbody>
 		<tr>
 			<td class="title"><?php echo __('Game');?> :</td>

@@ -6,6 +6,7 @@
 /app/tmp/cache/models/*
 /app/tmp/cache/persistent/*
 /app/tmp/cache/views/*
+/app/webroot/files/*
 
 # OS generated files #
 ######################

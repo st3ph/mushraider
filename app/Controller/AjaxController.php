@@ -50,11 +50,12 @@ class AjaxController extends AppController {
             }
 
             $params = array();
-            $params['fields'] = array('level');
-            $params['recursive'] = '-1';
-            $params['conditions']['id'] = $this->request->query['character'];
-            $params['conditions']['user_id'] = $this->user['User']['id'];
-            $params['conditions']['level >='] = $event['Event']['character_level'];
+            $params['fields'] = array('Character.level', 'Character.title', 'Classe.*');
+            $params['recursive'] = '1';
+            $params['contain']['Classe'] = array();
+            $params['conditions']['Character.id'] = $this->request->query['character'];
+            $params['conditions']['Character.user_id'] = $this->user['User']['id'];
+            $params['conditions']['Character.level >='] = $event['Event']['character_level'];
             if(!$character = $this->Character->find('first', $params)) {
                 $jsonMessage['type'] = 'important';
                 $jsonMessage['msg'] = __('Your character mush be above the level %s', $event['Event']['character_level']);
@@ -71,6 +72,14 @@ class AjaxController extends AppController {
             if($this->EventsCharacter->__add($toSave)) {
                 $jsonMessage['type'] = $toSave['status']?'info':'warning';
                 $jsonMessage['msg'] = 'ok';
+
+                $rosterHtml = '<li data-id="'.$toSave['character_id'].'">';
+                    $rosterHtml .= '<span class="character" style="color:'.$character['Classe']['color'].'">'.$character['Classe']['title'].' '.$character['Character']['title'].' ('.$character['Character']['level'].')</span>';
+                    if(!empty($toSave['comment'])) {
+                        $rosterHtml .= '<span class="tt" title="'.$toSave['comment'].'"><span class="icon-comments-alt"></span></span>';
+                    }
+                $rosterHtml .= '</li>';
+                $jsonMessage['html'] = $rosterHtml;
             }else {
                 $jsonMessage['type'] = 'important';
                 $jsonMessage['msg'] = __('Error while adding your character');

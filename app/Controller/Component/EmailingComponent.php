@@ -5,12 +5,13 @@ class EmailingComponent extends Component {
 
     var $email;
 
-    public function __construct() {        
-		// Default values        
-		$this->email = new CakeEmail();
-        //$this->email->config('default');
-        $this->email->from('mushraider@'.substr($_SERVER['HTTP_HOST'], strpos($_SERVER['HTTP_HOST'], '.') + 1));
-	}
+    public function __construct() {
+        // Default values
+        $this->email = new CakeEmail();
+        
+        $host = substr_count($_SERVER['HTTP_HOST'], '.') > 1?substr($_SERVER['HTTP_HOST'], strpos($_SERVER['HTTP_HOST'], '.') + 1):$_SERVER['HTTP_HOST'];
+        $this->email->from('mushraider@'.$host);
+    }
 
     function signup($dest) {
         $this->email->to($dest);

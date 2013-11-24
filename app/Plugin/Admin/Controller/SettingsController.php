@@ -67,7 +67,7 @@ class SettingsController extends AdminAppController {
         if(!$image['error']) {
             $webroot = $customWebroot?$this->request->webroot:'/';
             $imageName = $image['name'];
-            $this->Image->resize($image['tmp_name'], 'files/theme', $imageName);
+            $this->Image->resize($image['tmp_name'], 'files/theme', $imageName, null, null);
             $return['name'] = $webroot.'files/theme/'.$imageName;
         }else {            
             switch($image['error']) {

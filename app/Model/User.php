@@ -34,7 +34,7 @@ class User extends AppModel {
                 'last' => true,
             ),
             'validAlias' => array(
-                'rule' => '/^([0-9a-zA-Z]{3,20})$/',
+                'rule' => '/^([0-9a-zA-Z_\-]{3,20})$/',
                 'message' => 'Username can be composed of letters and numbers only, between 3 and 20 chars length',
                 'last' => true,
             ),

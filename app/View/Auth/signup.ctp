@@ -5,7 +5,7 @@
 <?php echo $this->Form->create('User', array('url' => '/auth/signup', 'class' => ''));?>
     <div class="row-fluid widhtHint">
         <?php $after = '<div class="hint">'.__('Letters and numbers only, 3 to 20 chars length.').'</div>';?>
-        <?php echo $this->Form->input('User.username', array('type' => 'text', 'required' => true, 'label' => false, 'placeholder' => __('Username'), 'class' => 'span12', 'pattern' => '[a-zA-Z0-9]{3,20}', 'after' => $after));?>        
+        <?php echo $this->Form->input('User.username', array('type' => 'text', 'required' => true, 'label' => false, 'placeholder' => __('Username'), 'class' => 'span12', 'pattern' => '[a-zA-Z0-9_\-]{3,20}', 'after' => $after));?>
     </div>
     <div class="row-fluid">
         <?php echo $this->Form->input('User.email', array('type' => 'email', 'required' => true, 'label' => false, 'placeholder' => __('Valid Email'), 'class' => 'span12', 'autocomplete' => 'off'));?>

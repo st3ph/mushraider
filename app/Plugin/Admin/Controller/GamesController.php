@@ -105,7 +105,9 @@ class GamesController extends AdminAppController {
             $toSave['slug'] = $this->Tools->slugMe($toSave['title']);
             $imageName = $this->logo($this->request->data['Game']['logo']);
             if(!isset($imageName['error'])) {
-                $toSave['logo'] = $imageName['name'];
+                if(!empty($imageName['name'])) {
+                    $toSave['logo'] = $imageName['name'];
+                }
                 if($this->Game->save($toSave)) {
                     // Associate each dungeons with the game
                     if(!empty($this->request->data['Game']['dungeons']['list'])) {
@@ -174,6 +176,9 @@ class GamesController extends AdminAppController {
                     break;
                 case 3:
                     $error = __('An error occur while uploading');
+                    break;
+                case 4:
+                    $return['name'] = null;
                     break;
             }
             if(!empty($error)) {

@@ -145,5 +145,17 @@
 	</table>
 <?php endif;?>
 
+<h3><?php echo __('Bad Kitties');?></h3>
+<?php if(!empty($badGuys)):?>
+	<div id="badKitties">
+		<?php foreach($badGuys as $key => $badGuy):?>
+			<?php echo $key?', ':'';?>
+			<span><?php echo $badGuy['User']['username'];?></span>
+		<?php endforeach;?>
+	</div>
+<?php else:?>
+	<h5><?php echo __('No bad kitty for this event !');?></h5>
+<?php endif;?>
+
 <h3><?php echo __('Comments');?></h3>
 <?php echo $this->Comment->show($event, 'Event', array('connected' => $user));?>

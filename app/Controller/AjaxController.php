@@ -41,7 +41,7 @@ class AjaxController extends AppController {
             // Choosed character must be in the event level range
             $params = array();
             $params['fields'] = array('character_level');
-            $params['recursive'] = '-1';
+            $params['recursive'] = -1;
             $params['conditions']['id'] = $this->request->query['e'];
             if(!$event = $this->Event->find('first', $params)) {
                 $jsonMessage['type'] = 'important';
@@ -51,7 +51,7 @@ class AjaxController extends AppController {
 
             $params = array();
             $params['fields'] = array('Character.level', 'Character.title', 'Classe.*');
-            $params['recursive'] = '1';
+            $params['recursive'] = 1;
             $params['contain']['Classe'] = array();
             $params['conditions']['Character.id'] = $this->request->query['character'];
             $params['conditions']['Character.user_id'] = $this->user['User']['id'];

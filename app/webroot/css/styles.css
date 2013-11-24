@@ -114,6 +114,8 @@ input.form-error, select.form-error, textarea.form-error {border-color:#b94a48;}
 #eventRoles td ul li span.tt span {font-size:14px;}
 #eventRoles td ul li i {cursor:pointer;margin-right:5px;}
 
+#badKitties span {}
+
 /*
 * Account
 */

@@ -53,9 +53,29 @@ class EventsController extends AppController {
         // Get user characters for this event
         $params = array();
         $params['conditions']['user_id'] = $this->user['User']['id'];
-        $params['conditions']['game_id'] = $event['Event']['game_id'];
-        $params['conditions']['level >='] = $event['Event']['game_id'];
+        $params['conditions']['game_id']=  $event['Event']['game_id'];
+        $params['conditions']['level >='] = $event['Event']['character_level'];
         $this->set('charactersList', $this->Character->find('list', $params));
+
+        // Get bad guys
+        $params = array();
+        $params['fields'] = array('User.username');
+        $params['contain']['User'] = array();
+        $params['joins'] = array(
+                array(
+                    'table' => 'events_characters',
+                    'alias' => 'EventsCharacter',
+                    'type' => 'LEFT',
+                    'conditions' => array('EventsCharacter.character_id = Character.id')
+
+                )
+            );
+        $params['conditions']['Character.game_id'] = $event['Event']['game_id'];
+        $params['conditions']['Character.level >='] = $event['Event']['character_level'];
+        $params['conditions']['OR']['EventsCharacter.event_id !='] = $eventId;
+        $params['conditions']['OR']['EventsCharacter.event_id'] = null;
+        $params['group'] = array('Character.user_id');
+        $this->set('badGuys', $this->Character->find('all', $params));
 
         $this->breadcrumb[] = array('title' => (!empty($event['Event']['title'])?$event['Event']['title']:$event['Dungeon']['title']), 'url' => '');
     }

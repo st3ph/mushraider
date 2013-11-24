@@ -16,7 +16,7 @@ class PatcherController extends AdminAppController {
     public function apply($patch = null) {
     	if(!in_array($patch, $this->availiblePatchs)) {
     		$this->Session->setFlash(__('MushRaider can\'t find this patch'), 'flash_error');
-    		$this->redirect('/admin');
+    		return $this->redirect('/admin');
     	}
 
     	if(!empty($this->request->data['Patcher'])) {
@@ -38,9 +38,9 @@ class PatcherController extends AdminAppController {
 	        	$this->Session->setFlash(__('MushRaider successfully apply the patch !'), 'flash_success');
 	        }
 
-	        $this->redirect('/admin');
+	        return $this->redirect('/admin');
 	    }
 
-	    $this->set($patch, $patch);
+	    $this->set('patch', $patch);
     }
 }

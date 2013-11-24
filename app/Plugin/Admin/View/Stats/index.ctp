@@ -22,7 +22,7 @@
                     <th><?php echo __('Role');?></th>                    
                     <th><?php echo __('% validated');?></th>
                     <th><?php echo __('% not validated');?></th>                    
-                    <th><?php echo __('% signout');?></th>
+                    <th><?php echo __('% absence');?></th>
                 </tr>
             </thead>
             <tbody>

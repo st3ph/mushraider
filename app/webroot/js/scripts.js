@@ -132,7 +132,7 @@ jQuery(function($) {
                 }
 
                 // Remove character from the roster
-                $roster.find('tbody li[data-id="'+characterId+'"]').remove();
+                $roster.find('tbody li[data-user="'+userId+'"]').remove();
 
                 // Add character to the roster
                 if(msg.msg == 'ok' && typeof msg.html != 'undefined' && msg.html.length) {
@@ -165,6 +165,7 @@ jQuery(function($) {
             // Add 'add button' to waiting list
             $waiting.find('li').each(function() {
                 $(this).find('.character').prepend('<i class="icon-plus text-success"></i>');
+                $(this).addClass('nosort');
             });
 
             // Add 'remove button' to validated list
@@ -195,6 +196,7 @@ jQuery(function($) {
 
             $waiting.find('li').each(function() {
                 $(this).find('.character  i').remove();
+                $(this).removeClass('nosort');
             });
 
             // Remove 'add button' to validated list
@@ -240,4 +242,26 @@ jQuery(function($) {
             $roleTh.find('.current').text(currentPlayers);
         }
     });
+
+    $('#eventRoles .sortWaiting').sortable({
+        connectWith: "#eventRoles .sortWaiting",
+        placeholder: "sortable-placeholder",
+        cursor: "move",
+        containment: "#eventRoles",
+        handle: '.icon-move',
+        receive: function(event, ui) {
+            console.log(ui.item);
+            var characterId = ui.item.data('id');
+            var roleId = ui.item.parents('td').data('id');
+            var eventId = ui.item.parents('table').data('id');
+            
+            $.ajax({
+                type: 'get',
+                url: site_url+'ajax/updateRosterChar',
+                data: 'c='+characterId+'&r='+roleId+'&e='+eventId,
+                success: function(msg) {
+                }
+            });
+        }
+    }).disableSelection();
 });

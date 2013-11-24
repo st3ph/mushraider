@@ -113,6 +113,11 @@ input.form-error, select.form-error, textarea.form-error {border-color:#b94a48;}
 #eventRoles td ul li span.tt {margin-left:5px;cursor:help;}
 #eventRoles td ul li span.tt span {font-size:14px;}
 #eventRoles td ul li i {cursor:pointer;margin-right:5px;}
+#eventRoles ul.validated, #eventRoles ul.waiting {min-height:50px;height:auto!important;height:50px;}
+#eventRoles .sortable-placeholder {background:#eee;border:2px dashed #ddd;height:14px;}
+#eventRoles li .icon-move {cursor:move;display:none;}
+#eventRoles .waiting li:hover .icon-move {display:block;}
+#eventRoles .waiting li.nosort:hover .icon-move {display:none;}
 
 #badKitties span {}
 

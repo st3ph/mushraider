@@ -5,7 +5,7 @@
         <h5><?php echo __('Stats');?></h5>
     </header>
     <div class="accordion-body body in collapse">
-        <?php echo $this->Form->create('Dungeon', array('url' => '/admin/stats'));?>
+        <?php echo $this->Form->create('Stats', array('url' => '/admin/stats'));?>
             <div class="form-group filter">
                 <?php echo $this->Form->input('Stats.game_id', array('type' => 'select', 'label' => __('Game'), 'options' => $gamesList, 'empty' => '', 'required' => true, 'class' => 'span5', 'div' => false));?>
                 <?php echo $this->Form->submit(__('Filter'), array('class' => 'btn btn-success', 'div' => false));?>

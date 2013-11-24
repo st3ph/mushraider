@@ -76,7 +76,7 @@ class AjaxController extends AppController {
                 $jsonMessage['type'] = $toSave['status']?'info':'warning';
                 $jsonMessage['msg'] = 'ok';
 
-                $rosterHtml = '<li data-id="'.$toSave['character_id'].'">';
+                $rosterHtml = '<li data-id="'.$toSave['character_id'].'" data-user="'.$toSave['user_id'].'">';
                     $rosterHtml .= '<span class="character" style="color:'.$character['Classe']['color'].'">'.$character['Classe']['title'].' '.$character['Character']['title'].' ('.$character['Character']['level'].')</span>';
                     if(!empty($toSave['comment'])) {
                         $rosterHtml .= '<span class="tt" title="'.$toSave['comment'].'"><span class="icon-comments-alt"></span></span>';
@@ -111,8 +111,33 @@ class AjaxController extends AppController {
                     $toSave['status'] = in_array($eventCharacter['EventsCharacter']['character_id'], $validatedList)?2:1;
                     if(!$this->EventsCharacter->save($toSave)) {
                         return 'fail';
-                        prd($this->EventsCharacter->validationErrors);
                     }
+                }
+
+                return 'ok';
+            }
+        }
+
+        return 'fail';
+    }
+
+    function updateRosterChar() {
+        if(isset($this->request->query['c']) && !empty($this->request->query['r']) && !empty($this->request->query['e'])) {
+            $eventId = $this->request->query['e'];
+            $roleId = str_replace('role_', '', $this->request->query['r']);
+            $characterId = $this->request->query['c'];
+
+            $params = array();
+            $params['fields'] = array('id');
+            $params['recursive'] = -1;
+            $params['conditions']['event_id'] = $eventId;
+            $params['conditions']['character_id'] = $characterId;
+            if($eventCharacter = $this->EventsCharacter->find('first', $params)) {
+                $toSave = array();
+                $toSave['id'] = $eventCharacter['EventsCharacter']['id'];
+                $toSave['raids_role_id'] = $roleId;
+                if(!$this->EventsCharacter->save($toSave)) {
+                    return 'fail';
                 }
 
                 return 'ok';

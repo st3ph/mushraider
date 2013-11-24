@@ -44,6 +44,7 @@ class EventsController extends AppController {
         $params['contain']['User'] = array();
         $params['contain']['EventsRole']['RaidsRole'] = array();
         $params['contain']['EventsCharacter']['Character']['Classe'] = array();        
+        $params['contain']['EventsCharacter']['Character']['User'] = array();        
         if(!$event = $this->Event->find('first', $params)) {
             $this->Session->setFlash(__('MushRaider can\'t find this event oO'), 'flash_warning');
             $this->redirect('/events');

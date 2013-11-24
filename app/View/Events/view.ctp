@@ -13,7 +13,7 @@
 		<?php if($dayTimestamp >= $todayTimestamp && ($user['User']['isOfficer'] || $user['User']['isAdmin'])):?>
 			<div class="pull-right">
 				<?php echo $this->Html->link('<i class="icon-edit"></i> ', '/events/edit/'.$event['Event']['id'], array('class' => 'btn btn-warning btn-mini', 'escape' => false));?>
-				<?php echo $this->Html->link('<i class="icon-remove"></i> ', '/events/delete/'.$event['Event']['id'], array('class' => 'btn btn-error btn-mini confirm', 'data-confirm' => __("Are you sure you want to delete this event ?\n(this can't be undone)"), 'escape' => false));?>
+				<?php echo $this->Html->link('<i class="icon-remove"></i> ', '/events/delete/'.$event['Event']['id'], array('class' => 'btn btn-danger btn-mini confirm', 'data-confirm' => __("Are you sure you want to delete this event ?\n(this can't be undone)"), 'escape' => false));?>
 			</div>
 		<?php endif;?>
 	</h1>
@@ -105,7 +105,7 @@
 
 <h3><?php echo __('Roster');?></h3>
 <?php if(!empty($eventRoles)):?>
-	<?php $eventRoles = $this->Former->charactersToRoles($eventRoles, $event['EventsCharacter']);?>
+	<?php $eventRoles = $this->Former->charactersToRoles($eventRoles, $event['EventsCharacter'], $user);?>
 	<table id="eventRoles" class="table table-striped table-bordered" data-id="<?php echo $event['Event']['id'];?>">
 		<thead>
 			<tr>
@@ -130,7 +130,7 @@
 						</ul>
 						<hr />
 						<h5><?php echo __('Waiting');?></h5>
-						<ul class="waiting">
+						<ul class="waiting sortWaiting">
 							<?php echo $eventRole['characters']['waiting'];?>
 						</ul>
 						<hr />
@@ -145,7 +145,7 @@
 	</table>
 <?php endif;?>
 
-<h3><?php echo __('Bad Kitties');?></h3>
+<h3><?php echo __('Bad Kitties');?> <small><?php echo __('no answer yet...');?></small></h3>
 <?php if(!empty($badGuys)):?>
 	<div id="badKitties">
 		<?php foreach($badGuys as $key => $badGuy):?>

@@ -170,7 +170,7 @@ class FormerHelper extends AppHelper {
 		return $matchingEvents;
 	}
 
-	function charactersToRoles($eventRoles, $characters) {		
+	function charactersToRoles($eventRoles, $characters, $user = null) {}
 		if(!empty($eventRoles) && !empty($characters)) {
 			foreach($characters as $character) {
 				switch($character['status']) {
@@ -184,10 +184,13 @@ class FormerHelper extends AppHelper {
 						$status = 'nok';
 				}
 				$eventRoles['role_'.$character['raids_role_id']]['current'] = $status == 'validated'?$eventRoles['role_'.$character['raids_role_id']]['current'] + 1:$eventRoles['role_'.$character['raids_role_id']]['current'];
-				$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '<li data-id="'.$character['Character']['id'].'">';
+				$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '<li data-id="'.$character['Character']['id'].'" data-user="'.$character['Character']['User']['id'].'">';
 					$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '<span class="character" style="color:'.$character['Character']['Classe']['color'].'">'.$character['Character']['Classe']['title'].' '.$character['Character']['title'].' ('.$character['Character']['level'].')</span>';
 					if(!empty($character['comment'])) {
 						$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '<span class="tt" title="'.$character['comment'].'"><span class="icon-comments-alt"></span></span>';
+					}
+					if($user && ($user['User']['isOfficer'] || $user['User']['isAdmin'])) {
+						$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '<span class="icon-move muted pull-right"></span>';
 					}
 				$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '</li>';				
 			}

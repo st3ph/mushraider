@@ -12,9 +12,9 @@
     <?php echo $this->Html->link($userHtml, '/admin/users', array('class' => 'quick-btn', 'escape' => false));?>
 
     <?php $charsHtml = '<i class="icon-shield icon-2x"></i>';?>
-    <?php $charsHtml .= '<span>'.__('Characters').'</span>';?>
+    <?php $charsHtml .= '<span>'.__('Roster').'</span>';?>
     <?php $charsHtml .= '<span class="label mabem-inverse">'.$totalCharacters.'</span>';?>
-    <?php echo $this->Html->link($charsHtml, '/admin/games', array('class' => 'quick-btn', 'escape' => false));?>
+    <?php echo $this->Html->link($charsHtml, '/admin/rosters', array('class' => 'quick-btn', 'escape' => false));?>
 
     <?php $dungeonsHtml = '<i class="icon-home icon-2x"></i>';?>
     <?php $dungeonsHtml .= '<span>'.__('Dungeons').'</span>';?>

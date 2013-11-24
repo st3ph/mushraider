@@ -21,6 +21,10 @@
             <?php echo $this->Html->link('<i class="icon-bar-chart icon-white"></i> '.__('Stats'), '/admin/stats', array('escape' => false));?>
         </li>
 
+        <li class="<?php echo strtolower($this->name) == 'rosters'?'active':'';?>">
+            <?php echo $this->Html->link('<i class="icon-shield icon-white"></i> '.__('Roster'), '/admin/rosters', array('escape' => false));?>
+        </li>
+
         <li class="accordion-group <?php echo strtolower($this->name) == 'users'?'active':'';?>">
             <a data-parent="#menu" data-toggle="collapse" class="accordion-toggle <?php echo strtolower($this->name) == 'users'?'':'collapsed';?>" data-target="#users-nav">
                 <i class="icon-user icon-white"></i> <?php echo __('Users');?> <i class="icon-chevron-down icon-white pull-right"></i>

@@ -170,7 +170,7 @@ class FormerHelper extends AppHelper {
 		return $matchingEvents;
 	}
 
-	function charactersToRoles($eventRoles, $characters, $user = null) {}
+	function charactersToRoles($eventRoles, $characters, $user = null) {
 		if(!empty($eventRoles) && !empty($characters)) {
 			foreach($characters as $character) {
 				switch($character['status']) {

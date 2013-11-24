@@ -33,7 +33,7 @@ class PatcherController extends AdminAppController {
 	        }
 
 	        if($error) {
-	        	$this->Session->setFlash(__('MushRaider can\'t apply the SQL patch, please try again or apply it by yourself using the following file : /app/Config/Schema/sql/mushraider_patch_'.$patch.'.sql'), 'flash_error');
+	        	$this->Session->setFlash(__('MushRaider can\'t apply the SQL patch, please try again or apply it by yourself using the following file : /app/Config/Schema/sql/mushraider_patch_%s.sql', $patch), 'flash_error');
 	        }else {
 	        	$this->Session->setFlash(__('MushRaider successfully apply the patch !'), 'flash_success');
 	        }

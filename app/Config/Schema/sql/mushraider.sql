@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS `{prefix}characters` (
   `user_id` int(11) NOT NULL,
   `classe_id` int(11) NOT NULL,
   `race_id` int(11) NOT NULL,
+  `default_role_id` int(11) NULL,
   `level` int(3) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

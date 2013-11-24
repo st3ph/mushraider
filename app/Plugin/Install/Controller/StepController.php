@@ -2,6 +2,7 @@
 App::uses('Security', 'Utility');
 
 class StepController extends InstallAppController {
+    public $components = array('Patcher');
 
     var $dbDatasources = array('Mysql');
 
@@ -76,15 +77,17 @@ class StepController extends InstallAppController {
                     $error = true;
                 }
                 // Create tables
-                $sqlReport = $this->run_sql_file($mysqlLink, '../Config/Schema/sql/mushraider.sql', $databaseConfig['prefix']);                
+                $sqlReport = $this->Patcher->run_sql_file($mysqlLink, '../Config/Schema/sql/mushraider.sql', $databaseConfig['prefix']);                
                 if($sqlReport['success'] != $sqlReport['total']) {
                     $error = true;
                 }
                 // Add datas
-                $sqlReport = $this->run_sql_file($mysqlLink, '../Config/Schema/sql/mushraider_data.sql', $databaseConfig['prefix']);
+                $sqlReport = $this->Patcher->run_sql_file($mysqlLink, '../Config/Schema/sql/mushraider_data.sql', $databaseConfig['prefix']);
                 if($sqlReport['success'] != $sqlReport['total']) {
                     $error = true;
                 }
+
+                $mysqlLink = null;
 
                 // No error, we continue by creating the admin user
                 if(!$error) {
@@ -108,7 +111,7 @@ class StepController extends InstallAppController {
                         $defaultSettings['theme'] = json_encode(array(
                                                             'logo' => '/img/logo.png',
                                                             'bgcolor' => '#444444',
-                                                            'bgimage' => '/img/bg.png',
+                                                            'bgimage' => $this->request->webroot.'img/bg.png',
                                                             'bgrepeat' => 'repeat'
                                                         ));
                         $defaultSettings['css'] = '';
@@ -136,53 +139,6 @@ class StepController extends InstallAppController {
             if(!isset($flashed)) {
                 $this->Session->setFlash(__('MushRaider can\'t verify the settings, please be sure to fill all the fields to continue.'), 'flash_error');
             }
-        }
-    }
-
-
-
-    private function run_sql_file($mysqlLink, $location, $prefix = '') {
-        //load file
-        $commands = file_get_contents($location);
-
-        //delete comments
-        $lines = explode("\n",$commands);
-        $commands = '';
-        foreach($lines as $line) {
-            $line = trim($line);
-            if( $line && !$this->startsWith($line,'--') ) {
-                $commands .= $line . "\n";
-            }
-        }
-
-        //convert to array
-        $commands = explode(";", $commands);
-
-        //run commands
-        $total = $success = 0;
-        foreach($commands as $command) {
-            if(trim($command)) {
-                $command = $this->addPrefix($command, $prefix);
-                $success += (@mysqli_query($mysqlLink, $command) == false?0:1);
-                $total += 1;
-            }
-        }
-
-        //return number of successful queries and total number of queries found
-        return array(
-            "success" => $success,
-            "total" => $total
-        );
-    }
-
-    private function startsWith($haystack, $needle) {
-        $length = strlen($needle);
-        return (substr($haystack, 0, $length) === $needle);
-    }
-
-    private function addPrefix($command = null, $prefix = '') {
-        if($command) {
-            return str_replace('{prefix}', $prefix, $command);
         }
     }
 }

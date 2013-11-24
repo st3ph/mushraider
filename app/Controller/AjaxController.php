@@ -1,6 +1,6 @@
 <?php
 class AjaxController extends AppController {
-	var $uses = array('Game', 'Dungeon', 'Classe', 'Race', 'EventsCharacter', 'Character', 'Event');
+	var $uses = array('Game', 'Dungeon', 'Classe', 'Race', 'EventsCharacter', 'Character', 'Event', 'RaidsRole');
 
     function beforeFilter() {
         parent::beforeFilter();
@@ -19,6 +19,9 @@ class AjaxController extends AppController {
 
 	        $racesList = $this->Race->find('list', array('conditions' => array('game_id' => $gameId), 'order' => 'title ASC'));
 	        $this->set('racesList', $racesList);
+
+            $rolesList = $this->RaidsRole->find('list', array('order' => 'title ASC'));
+            $this->set('rolesList', $rolesList);
 
 	    	$this->render('/Elements/char_form_elements');
     	}
@@ -118,4 +121,20 @@ class AjaxController extends AppController {
 
         return 'fail';
     }
+
+    function getDefaultRole() {
+        $jsonMessage = array();
+        $jsonMessage['role'] = '';
+        if(!empty($this->request->query['character'])) {
+            $params = array();
+            $params['fields'] = array('default_role_id');
+            $params['recursive'] = -1;
+            $params['conditions']['Character.id'] = $this->request->query['character'];
+            if($character = $this->Character->find('first', $params)) {
+                $jsonMessage['role'] = !empty($character['Character']['default_role_id'])?$character['Character']['default_role_id']:'';
+            }
+        }
+
+        return json_encode($jsonMessage);
+    }    
 }

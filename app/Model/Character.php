@@ -24,7 +24,11 @@ class Character extends AppModel {
         'Game' => array(
             'className' => 'Game',
             'foreignKey' => 'game_id'
-        )
+        ),
+        'RaidsRole' => array(
+            'className' => 'RaidsRole',
+            'foreignKey' => 'default_role_id'
+        ),
     );
 
     public $hasMany = array(

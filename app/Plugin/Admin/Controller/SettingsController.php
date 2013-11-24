@@ -32,12 +32,12 @@ class SettingsController extends AdminAppController {
                 }
                 // bgimage
                 if($this->request->data['Setting']['theme']['bgoriginal']) {
-                    $theme['bgimage'] = 'img/bg.png';
+                    $theme['bgimage'] = $this->request->webroot.'img/bg.png';
                     $theme['bgrepeat'] = 'repeat';
                     $theme['bgcolor'] = '#444444';
                 }else {
                     if(!$this->request->data['Setting']['theme']['bgnoimage']) {
-                        $imageName = $this->image($this->request->data['Setting']['theme']['bgimage']);
+                        $imageName = $this->image($this->request->data['Setting']['theme']['bgimage'], true);
                         if(!isset($imageName['error'])) {
                             $theme['bgimage'] = $imageName['name'];
                         }
@@ -62,12 +62,13 @@ class SettingsController extends AdminAppController {
         $this->request->data['Setting']['theme']['bgnoimage'] = !$theme->bgimage;
     }
 
-    private function image($image) {
+    private function image($image, $customWebroot = false) {
         $return = array();
         if(!$image['error']) {
+            $webroot = $customWebroot?$this->request->webroot:'/';
             $imageName = $image['name'];
             $this->Image->resize($image['tmp_name'], 'files/theme', $imageName);
-            $return['name'] = 'files/theme/'.$imageName;
+            $return['name'] = $webroot.'files/theme/'.$imageName;
         }else {            
             switch($image['error']) {
                 case 1:

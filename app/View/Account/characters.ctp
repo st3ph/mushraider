@@ -30,6 +30,7 @@
 				<th><?php echo __('Level');?></th>
 				<th><?php echo __('Class');?></th>
 				<th><?php echo __('Race');?></th>
+				<th><?php echo __('Default Role');?></th>
 				<th><?php echo __('Actions');?></th>
 			</tr>
 		</thead>
@@ -41,6 +42,7 @@
 					<td><?php echo $character['Character']['level'];?></td>
 					<td style="color:<?php echo $character['Classe']['color'];?>"><?php echo $character['Classe']['title'];?></td>
 					<td><?php echo $character['Race']['title'];?></td>
+					<td><?php echo $character['RaidsRole']['title'];?></td>
 					<td>
 						<?php echo $this->Html->link('<i class="icon-edit"></i>', '/account/characters/edit/c:'.$character['Character']['id'].'-'.$character['Character']['slug'], array('class' => 'btn btn-warning btn-mini', 'escape' => false));?>
 					</td>

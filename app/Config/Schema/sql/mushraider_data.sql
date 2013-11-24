@@ -3,7 +3,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- --------------------------------------------------------
 
 --
--- Dumping data for table `roles`
+-- Adding data for table `roles`
 --
 
 INSERT IGNORE INTO `{prefix}roles` (`id`, `title`, `alias`, `description`, `created`, `modified`) VALUES
@@ -14,7 +14,7 @@ INSERT IGNORE INTO `{prefix}roles` (`id`, `title`, `alias`, `description`, `crea
 -- --------------------------------------------------------
 
 --
--- Dumping data for table `raids_sizes`
+-- Adding data for table `raids_sizes`
 --
 
 INSERT IGNORE INTO `{prefix}raids_sizes` (`id`, `size`) VALUES
@@ -28,7 +28,7 @@ INSERT IGNORE INTO `{prefix}raids_sizes` (`id`, `size`) VALUES
 -- --------------------------------------------------------
 
 --
--- Dumping data for table `raids_sizes`
+-- Adding data for table `raids_roles`
 --
 
 INSERT IGNORE INTO `{prefix}raids_roles` (`id`, `title`) VALUES

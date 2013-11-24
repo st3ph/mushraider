@@ -33,8 +33,8 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-    public $components = array('Session', 'Cookie', 'Tools');   
-    var $uses = array('User', 'Role', 'Setting');
+    public $components = array('Session', 'Cookie', 'Tools', 'Patcher');
+    var $uses = array('User', 'Role', 'Setting', 'Character');
 
     var $user = null;
     var $userRequired = true;
@@ -75,6 +75,11 @@ class AppController extends Controller {
 				$this->Session->delete('User.id');
 			}
 		}
+
+        // Is a patch needed ?
+        if($this->user && $this->user['User']['isAdmin'] && strtolower($this->plugin) != 'admin' && strtolower($this->name) != 'patcher') {
+            $this->Patcher->patchNeeded();
+        }
 
         $this->pageTitle = $this->Setting->getOption('title');
 	}

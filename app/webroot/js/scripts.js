@@ -82,6 +82,23 @@ jQuery(function($) {
         loadDungeons($EventGame);
     });
 
+    $('#eventSignin').on('change', '#Character', function(e) {
+        var characterId = $(this).val();
+        if(!characterId.length) {
+            $('#EventsRole').find('option[value=""]').attr('selected', true);
+        }else {
+            $.ajax({
+                type: 'get',
+                url: site_url+'ajax/getDefaultRole',
+                data: 'character='+characterId,
+                dataType: 'json',
+                success: function(msg) {
+                    $('#EventsRole').find('option[value="'+msg.role+'"]').attr('selected', true);     
+                }
+            });
+        }
+    });
+
     $('#eventSignin').on('click', '.btn', function(e) {
         var $characterField = $('#Character');
         var $roleField = $('#EventsRole');

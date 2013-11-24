@@ -1,7 +1,7 @@
 <?php
 class AccountController extends AppController {    
     var $helpers = array();
-    var $uses = array('Game', 'Character', 'Classe', 'Race');
+    var $uses = array('Game', 'Character', 'Classe', 'Race', 'RaidsRole');
 
     public function beforeFilter() {
         parent::beforeFilter();
@@ -58,7 +58,8 @@ class AccountController extends AppController {
     		$toSave['slug'] = $this->Tools->slugMe($toSave['title']);
     		$toSave['game_id'] = $this->request->data['Character']['game_id'];
     		$toSave['classe_id'] = $this->request->data['Character']['classe_id'];
-    		$toSave['race_id'] = $this->request->data['Character']['race_id'];
+            $toSave['race_id'] = $this->request->data['Character']['race_id'];
+    		$toSave['default_role_id'] = $this->request->data['Character']['default_role_id'];
     		$toSave['level'] = $this->request->data['Character']['level'];
     		$toSave['user_id'] = $this->user['User']['id'];
     		if($this->Character->save($toSave)) {
@@ -78,6 +79,11 @@ class AccountController extends AppController {
         $params = array();
         $params['recursive'] = 1;
         $params['order'] = 'Game.title ASC, Character.title';
+        $params['contain']['Classe'] = array();
+        $params['contain']['User'] = array();
+        $params['contain']['Race'] = array();
+        $params['contain']['Game'] = array();
+        $params['contain']['RaidsRole'] = array();
         $params['conditions']['Character.user_id'] = $this->user['User']['id'];        
         $characters = $this->Character->find('all', $params);
         $this->set('characters', $characters);
@@ -110,7 +116,8 @@ class AccountController extends AppController {
     		$toSave['slug'] = $this->Tools->slugMe($toSave['title']);
     		$toSave['game_id'] = $this->request->data['Character']['game_id'];
     		$toSave['classe_id'] = $this->request->data['Character']['classe_id'];
-    		$toSave['race_id'] = $this->request->data['Character']['race_id'];
+            $toSave['race_id'] = $this->request->data['Character']['race_id'];
+    		$toSave['default_role_id'] = $this->request->data['Character']['default_role_id'];
     		$toSave['level'] = $this->request->data['Character']['level'];
     		$toSave['user_id'] = $this->user['User']['id'];
     		if($this->Character->save($toSave)) {
@@ -133,6 +140,9 @@ class AccountController extends AppController {
 
         $racesList = $this->Race->find('list', array('conditions' => array('game_id' => $this->request->data['Character']['game_id']), 'order' => 'title ASC'));
         $this->set('racesList', $racesList);
+
+        $rolesList = $this->RaidsRole->find('list', array('order' => 'title ASC'));
+        $this->set('rolesList', $rolesList);
 
         $this->breadcrumb[] = array('title' => __('My MushRaider characters'), 'url' => '/account/characters');
         $this->breadcrumb[] = array('title' => $character['Character']['title'], 'url' => '');

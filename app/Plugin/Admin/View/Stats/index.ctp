@@ -18,9 +18,11 @@
                 <tr>
                     <th><?php echo __('Character');?></th>                    
                     <th><?php echo __('User');?></th>                    
-                    <th><?php echo __('perc. validated');?></th>
-                    <th><?php echo __('perc. signin');?></th>                    
-                    <th><?php echo __('perc. signout');?></th>
+                    <th><?php echo __('Classe');?></th>                    
+                    <th><?php echo __('Role');?></th>                    
+                    <th><?php echo __('% validated');?></th>
+                    <th><?php echo __('% not validated');?></th>                    
+                    <th><?php echo __('% signout');?></th>
                 </tr>
             </thead>
             <tbody>
@@ -29,16 +31,21 @@
                         <tr>
                             <td><?php echo $character['Character']['title'];?></td>
                             <td><?php echo $character['User']['username'];?></td>
+                            <td><span style="color:<?php echo $character['Classe']['color'];?>"><?php echo $character['Classe']['title'];?></span></td>
+                            <td><?php echo $character['RaidsRole']['title'];?></td>
                             <td>
-                                <?php echo round(($character['stats']['status_2'] / $character['stats']['total']) * 100, 2);?>%
+                                <?php $stat = $character['stats']['total'] > 0?round(($character['stats']['status_2'] / $character['stats']['total']) * 100, 2):0;?>
+                                <?php echo $stat;?>%
                                 <small class="muted">(<?php echo $character['stats']['status_2'];?> / <?php echo $character['stats']['total'];?>)</small>
                             </td>
                             <td>
-                                <?php echo round(($character['stats']['status_1'] / $character['stats']['total']) * 100, 2);?>%
+                                <?php $stat = $character['stats']['total'] > 0?round(($character['stats']['status_1'] / $character['stats']['total']) * 100, 2):0;?>
+                                <?php echo $stat;?>%
                                 <small class="muted">(<?php echo $character['stats']['status_1'];?> / <?php echo $character['stats']['total'];?>)</small>
                             </td>
                             <td>
-                                <?php echo round(($character['stats']['status_0'] / $character['stats']['total']) * 100, 2);?>%
+                                <?php $stat = $character['stats']['total'] > 0?round(($character['stats']['status_0'] / $character['stats']['total']) * 100, 2):0;?>
+                                <?php echo $stat;?>%
                                 <small class="muted">(<?php echo $character['stats']['status_0'];?> / <?php echo $character['stats']['total'];?>)</small>
                             </td>
                         </tr>

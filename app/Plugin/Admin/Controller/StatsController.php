@@ -20,6 +20,10 @@ class StatsController extends AdminAppController {
             $params['contain']['User']['fields'] = array('username');
             $params['contain']['EventsCharacter'] = array();
             $params['contain']['EventsCharacter']['fields'] = array('status');
+            $params['contain']['Classe'] = array();
+            $params['contain']['Classe']['fields'] = array('title', 'color');
+            $params['contain']['RaidsRole'] = array();
+            $params['contain']['RaidsRole']['fields'] = array('title');
             $params['conditions']['Character.game_id'] = $gameId;
             if($characters = $this->Character->find('all', $params)) {
                 foreach($characters as $key => $character) {

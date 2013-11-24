@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Mushraider\n"
-"POT-Creation-Date: 2013-11-24 17:55+0100\n"
-"PO-Revision-Date: 2013-11-24 18:04+0100\n"
+"POT-Creation-Date: 2013-11-24 22:17+0100\n"
+"PO-Revision-Date: 2013-11-24 22:20+0100\n"
 "Last-Translator: Stéphane Litou <contact@mushnet.fr>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -1083,6 +1083,7 @@ msgid "Default Role"
 msgstr "Rôle par défaut"
 
 #: D:\www\wamp\www\mushraider\app/Plugin/Admin/View/Rosters/index.ctp:45
+#: D:\www\wamp\www\mushraider\app/Plugin/Admin/View/Stats/index.ctp:21
 #: D:\www\wamp\www\mushraider\app/View/Elements/char_form_elements.ctp:2
 msgid "Classe"
 msgstr "Classe"
@@ -1147,16 +1148,23 @@ msgstr "Filtrer"
 msgid "Character"
 msgstr "Personnage"
 
-#: D:\www\wamp\www\mushraider\app/Plugin/Admin/View/Stats/index.ctp:21
-msgid "perc. validated"
-msgstr "% validé"
-
 #: D:\www\wamp\www\mushraider\app/Plugin/Admin/View/Stats/index.ctp:22
-msgid "perc. signin"
-msgstr "% inscriptions"
+#: D:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/index.ctp:15
+#: D:\www\wamp\www\mushraider\app/View/Events/view.ctp:48
+msgid "Role"
+msgstr "Rôle"
 
 #: D:\www\wamp\www\mushraider\app/Plugin/Admin/View/Stats/index.ctp:23
-msgid "perc. signout"
+msgid "% validated"
+msgstr "% validé"
+
+#: D:\www\wamp\www\mushraider\app/Plugin/Admin/View/Stats/index.ctp:24
+msgid "% not validated"
+msgstr "% non validé"
+
+#: D:\www\wamp\www\mushraider\app/Plugin/Admin/View/Stats/index.ctp:25
+#, php-format
+msgid "% signout"
 msgstr "% absences"
 
 #: D:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:4
@@ -1208,11 +1216,6 @@ msgstr "Date d'enregistrement"
 #: D:\www\wamp\www\mushraider\app/View/Elements/header.ctp:15
 msgid "Characters"
 msgstr "Personnages"
-
-#: D:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/index.ctp:15
-#: D:\www\wamp\www\mushraider\app/View/Events/view.ctp:48
-msgid "Role"
-msgstr "Rôle"
 
 #: D:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/index.ctp:38
 #, php-format
@@ -1665,3 +1668,6 @@ msgstr "MushRaider Fail"
 #: D:\www\wamp\www\mushraider\app/View/Layouts/Emails/text/default.ctp:3
 msgid "This email has been sent automatically by MushRaider"
 msgstr "Cet email a été envoyé automatiquement par MushRaider"
+
+#~ msgid "perc. signin"
+#~ msgstr "% inscriptions"

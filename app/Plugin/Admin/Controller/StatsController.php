@@ -2,8 +2,6 @@
 class StatsController extends AdminAppController {
     public $uses = array('Game', 'Event', 'EventsCharacter', 'EventsRole', 'Character');
 
-    var $adminOnly = true;
-
     function beforeFilter() {
         parent::beforeFilter();
     }

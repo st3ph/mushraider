@@ -93,6 +93,7 @@ class AppController extends Controller {
         }
 
         // Theming
+        $this->set('mushraiderLinks', json_decode($this->Setting->getOption('links')));
         $this->set('mushraiderTagline', $this->Setting->getOption('title'));
         $themeOptions = json_decode($this->Setting->getOption('theme'));
         $themeOptions->css = $this->Setting->getOption('css');

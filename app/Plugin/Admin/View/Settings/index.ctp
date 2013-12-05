@@ -33,6 +33,19 @@
                 <?php echo $this->Form->input('Setting.css', array('type' => 'textarea', 'label' => __('Custom CSS'), 'class' => 'span5'));?>
             </div>
 
+            <h3><?php echo __('Custom links');?></h3>
+            <blockquote><p class="muted"><?php echo __('Custom links are display in top of the header. They are usefull to add links to your website, forums etc...');?></p></blockquote>
+            <?php for($i = 0;$i <= 3;$i++):?>
+                <div class="form-group">
+                    <div class="span3">
+                        <?php echo $this->Form->input('Setting.links.'.$i.'.title', array('type' => 'text', 'label' => __('Link title'), 'class' => 'span5z'));?>
+                    </div>
+                    <div class="span9">
+                        <?php echo $this->Form->input('Setting.links.'.$i.'.url', array('type' => 'url', 'label' => __('Url'), 'class' => 'span5'));?>
+                    </div>
+                </div>
+            <?php endfor;?>
+
             <div class="form-group">
                 <?php echo $this->Form->submit(__('Save'), array('class' => 'btn btn-success pull-right'));?>               
             </div>

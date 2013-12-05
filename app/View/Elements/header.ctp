@@ -1,9 +1,9 @@
 <header id="header">
 	<div class="row-fluid">
-		<div class="span9">
+		<div class="span7">
     		<h1><?php echo $this->Html->image($mushraiderTheme->logo, array('alt' => $mushraiderTagline.' - MushRaider'));?></h1>
     	</div>
-    	<div class="span3 menubar">
+    	<div class="span5 menubar">
             <div class="clearfix">
         		<ul class="pull-right inline">
         			<?php if($user):?>
@@ -22,6 +22,13 @@
         				<?php if($user['User']['isAdmin'] || $user['User']['isOfficer']):?>
         					<li><i class="icon-wrench"></i> <?php echo $this->Html->link(__('Admin'), '/admin');?></li>
         				<?php endif;?>
+                        <?php if(!empty($mushraiderLinks)):;?>
+                            <?php foreach($mushraiderLinks as $customLink):?>
+                                <li>
+                                    <?php echo $this->Html->link($customLink->title, $customLink->url, array('escape' => false));?>
+                                </li>                        
+                            <?php endforeach;?>
+                        <?php endif;?>
         			<?php else:?>
         				<li><i class="icon-signin"></i> <?php echo $this->Html->link(__('LOGIN / REGISTER'), '/auth/login');?></li>
         			<?php endif;?>

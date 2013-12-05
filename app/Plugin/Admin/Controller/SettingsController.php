@@ -11,7 +11,7 @@ class SettingsController extends AdminAppController {
 
     public function index() {
         $currentTheme = json_decode($this->Setting->getOption('theme'));
-        if(!empty($this->request->data['Setting'])) {            
+        if(!empty($this->request->data['Setting'])) {
             $this->Setting->setOption('title', $this->request->data['Setting']['title']);
             $this->Setting->setOption('css', $this->request->data['Setting']['css']);
             if(!empty($this->request->data['Setting']['theme'])) {
@@ -48,8 +48,20 @@ class SettingsController extends AdminAppController {
                 $this->Setting->setOption('theme', json_encode($theme));
             }
 
+            $customLinks = array();
+            if(!empty($this->request->data['Setting']['links'])) {
+                foreach($this->request->data['Setting']['links'] as $customLink) {
+                    if(!empty($customLink['title']) && !empty($customLink['url'])) {
+                        $customLink['title'] = strip_tags(trim($customLink['title']));
+                        $customLink['url'] = strip_tags(trim($customLink['url']));
+                        $customLinks[] = $customLink;
+                    }
+                }
+            }
+            $this->Setting->setOption('links', json_encode($customLinks));
+
             $this->Session->setFlash(__('Settings have been updated'), 'flash_success');
-            $this->redirect('/admin/settings');
+            return $this->redirect('/admin/settings');
         }
 
         $this->request->data['Setting']['title'] = $this->Setting->getOption('title');
@@ -60,6 +72,13 @@ class SettingsController extends AdminAppController {
         $this->request->data['Setting']['theme']['bgimage'] = $theme->bgimage;
         $this->request->data['Setting']['theme']['bgrepeat'] = $theme->bgrepeat;
         $this->request->data['Setting']['theme']['bgnoimage'] = !$theme->bgimage;
+        $customLinks = json_decode($this->Setting->getOption('links'));
+        if(!empty($customLinks)) {
+            foreach($customLinks as $customLink) {
+                $link = array('title' => $customLink->title, 'url' => $customLink->url);
+                $this->request->data['Setting']['links'][] = $link;
+            }
+        }
     }
 
     private function image($image, $customWebroot = false) {

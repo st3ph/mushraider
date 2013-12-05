@@ -13,13 +13,17 @@
             <?php echo $this->Html->link('<i class="icon-home icon-white"></i> '.__('Dashboard'), '/admin/dashboard', array('escape' => false));?>
         </li>
 
-        <li class="<?php echo strtolower($this->name) == 'settings'?'active':'';?>">
-            <?php echo $this->Html->link('<i class="icon-cog icon-white"></i> '.__('Settings'), '/admin/settings', array('escape' => false));?>
-        </li>
+        <?php if($user['User']['isAdmin']):?>
+            <li class="<?php echo strtolower($this->name) == 'settings'?'active':'';?>">
+                <?php echo $this->Html->link('<i class="icon-cog icon-white"></i> '.__('Settings'), '/admin/settings', array('escape' => false));?>
+            </li>
+        <?php endif;?>
 
-        <li class="<?php echo strtolower($this->name) == 'stats'?'active':'';?>">
-            <?php echo $this->Html->link('<i class="icon-bar-chart icon-white"></i> '.__('Stats'), '/admin/stats', array('escape' => false));?>
-        </li>
+        <?php if($user['User']['isAdmin']):?>
+            <li class="<?php echo strtolower($this->name) == 'stats'?'active':'';?>">
+                <?php echo $this->Html->link('<i class="icon-bar-chart icon-white"></i> '.__('Stats'), '/admin/stats', array('escape' => false));?>
+            </li>
+        <?php endif;?>
 
         <li class="<?php echo strtolower($this->name) == 'rosters'?'active':'';?>">
             <?php echo $this->Html->link('<i class="icon-shield icon-white"></i> '.__('Roster'), '/admin/rosters', array('escape' => false));?>

@@ -88,8 +88,9 @@ class UsersController extends AdminAppController {
             if(!$user = $this->User->find('first', $params)) {
                 $this->Session->setFlash(__('This user is still active, you have to disable him before deleting.'), 'flash_warning');
             }elseif($this->User->delete($id)) {
-                $deleteCond = array('user_id' => $id);
+                $deleteCond = array('EventsCharacter.user_id' => $id);
                 $this->EventsCharacter->deleteAll($deleteCond);
+                $deleteCond = array('Character.user_id' => $id);
                 $this->Character->deleteAll($deleteCond);
                 $this->Session->setFlash(__('The user has been deleted'), 'flash_success');
             }else {
@@ -97,6 +98,6 @@ class UsersController extends AdminAppController {
             }
         }
 
-        $this->redirect('/admin/users');
+        $this->redirect('/admin/users/waiting');
     }
 }

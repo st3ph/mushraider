@@ -1,7 +1,7 @@
 <?php
 class AccountController extends AppController {    
     var $helpers = array();
-    var $uses = array('Game', 'Character', 'Classe', 'Race', 'RaidsRole');
+    var $uses = array('Game', 'Character', 'Classe', 'Race', 'RaidsRole', 'EventsCharacter');
 
     public function beforeFilter() {
         parent::beforeFilter();
@@ -99,15 +99,16 @@ class AccountController extends AppController {
         $params = array();
         $params['recursive'] = 1;
         $params['conditions']['Character.id'] = $characterId;
+        $params['conditions']['Character.user_id'] = $this->user['User']['id'];
         if(!$character = $this->Character->find('first', $params)) {
         	$this->Session->setFlash(__('MushRaider  can\'t find this character oO'), 'flash_error');
-        	$this->redirect('/account/characters');
+        	return $this->redirect('/account/characters');
         }
 
         if(!empty($this->request->data['Character'])) {
         	// if char id in url and post id isn't the same, something is wrong so we redirect
         	if($this->request->data['Character']['id'] != $characterId || empty($this->request->data['Character']['id'])) {
-        		$this->redirect('/account/characters');
+        		return $this->redirect('/account/characters');
         	}
 
     		$toSave = array();
@@ -122,7 +123,7 @@ class AccountController extends AppController {
     		$toSave['user_id'] = $this->user['User']['id'];
     		if($this->Character->save($toSave)) {
     			$this->Session->setFlash(__('%s has been added to your character list', $toSave['title']), 'flash_success');
-    			$this->redirect('/account/characters');
+    			return $this->redirect('/account/characters');
     		}
 
     		$this->set('showForm', $showForm);
@@ -148,5 +149,31 @@ class AccountController extends AppController {
         $this->breadcrumb[] = array('title' => $character['Character']['title'], 'url' => '');
 
     	return $this->render('characters_edit');
+    }
+
+    public function characters_delete() {
+        $c = explode('-', $this->request->params['named']['c']);
+        $characterId = $c[0];
+
+        // Get the character
+        $params = array();
+        $params['recursive'] = -1;
+        $params['conditions']['id'] = $characterId;
+        $params['conditions']['user_id'] = $this->user['User']['id'];
+        if(!$character = $this->Character->find('first', $params)) {
+            $this->Session->setFlash(__('MushRaider  can\'t find this character oO'), 'flash_error');
+            return $this->redirect('/account/characters');
+        }
+
+        // Delete character        
+        if(!$this->Character->delete($characterId)) {
+            $this->Session->setFlash(__('MushRaider can\'t delete this character oO'), 'flash_success');
+        }else {
+            $deleteCond = array('EventsCharacter.character_id' => $characterId);
+            $this->EventsCharacter->deleteAll($deleteCond);
+            $this->Session->setFlash(__('The character %s has been deleted', $character['Character']['title']), 'flash_success');
+        }
+
+        return $this->redirect('/account/characters');
     }
 }

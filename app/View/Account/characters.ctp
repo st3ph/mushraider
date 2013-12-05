@@ -45,6 +45,7 @@
 					<td><?php echo $character['RaidsRole']['title'];?></td>
 					<td>
 						<?php echo $this->Html->link('<i class="icon-edit"></i>', '/account/characters/edit/c:'.$character['Character']['id'].'-'.$character['Character']['slug'], array('class' => 'btn btn-warning btn-mini', 'escape' => false));?>
+						<?php echo $this->Html->link('<i class="icon-remove"></i>', '/account/characters/delete/c:'.$character['Character']['id'].'-'.$character['Character']['slug'], array('class' => 'btn btn-danger btn-mini confirm', 'data-confirm' => __('Are you sure you want to completely delete your character %s ? (this can\'t be undone)', $character['Character']['title']), 'escape' => false))?>
 					</td>
 				</tr>
 			<?php endforeach;?>

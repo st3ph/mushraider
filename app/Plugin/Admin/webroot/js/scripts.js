@@ -87,8 +87,7 @@ jQuery(function($) {
     });
 
     $('table td.actions').on('click', '.delete', function(e) {
-        var message = $(this).data('confirm');
-        return confirm(message);
+        return confirm($(this).data('confirm'));
     });
 
     loadSpectrum('.colorpicker');

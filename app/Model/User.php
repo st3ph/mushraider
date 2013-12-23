@@ -60,10 +60,6 @@ class User extends AppModel {
         )
     );
 
-
-
-
-
     /**
      * _identical
      *

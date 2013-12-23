@@ -12,6 +12,12 @@ class PatcherComponent extends Component {
 		if(!$this->controller->Character->query($sql)) {
 			$this->controller->redirect('/admin/patcher/apply/beta-2');
 		}
+
+        // bêta 3
+        $sql = "SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE() AND COLUMN_NAME='status' AND TABLE_NAME='".Configure::read('Database.prefix')."dungeons'";
+        if(!$this->controller->User->query($sql)) {
+            $this->controller->redirect('/admin/patcher/apply/beta-3');
+        }
 	}
 
     public function run_sql_file($mysqlLink, $location, $prefix = '') {

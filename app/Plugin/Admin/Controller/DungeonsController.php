@@ -21,6 +21,13 @@ class DungeonsController extends AdminAppController {
         $this->set('dungeons', $dungeons);
     }
 
+    public function disabled() {
+        $conditions = array();
+        $conditions['Dungeon.status'] = '0';
+        $dungeons = $this->paginate('Dungeon', $conditions);
+        $this->set('dungeons', $dungeons);
+    }
+
     public function add() {
         if(!empty($this->request->data['Dungeon'])) {            
             $toSave = array();
@@ -42,7 +49,7 @@ class DungeonsController extends AdminAppController {
                     return json_encode($dungeon);
                 }else {
                     $this->Session->setFlash(__('%s has been added to your dungeons list', $toSave['title']), 'flash_success');
-                    $this->redirect('/admin/dungeons');
+                    return $this->redirect('/admin/dungeons');
                 }
             }
         }
@@ -64,7 +71,7 @@ class DungeonsController extends AdminAppController {
 
     public function edit($id = null) {
         if(!$id) {
-            $this->redirect('/admin/dungeons');
+            return $this->redirect('/admin/dungeons');
         }
 
         $params = array();
@@ -73,7 +80,7 @@ class DungeonsController extends AdminAppController {
         $params['conditions']['Dungeon.id'] = $id;
         if(!$dungeon = $this->Dungeon->find('first', $params)) {
             $this->Session->setFlash(__('MushRaider is unable to find this dungeon oO'), 'flash_error');
-            $this->redirect('/admin/dungeons');
+            return $this->redirect('/admin/dungeons');
         }
 
         if(!empty($this->request->data['Dungeon']) && $this->request->data['Dungeon']['id'] == $id) {
@@ -90,7 +97,7 @@ class DungeonsController extends AdminAppController {
 
             if($this->Dungeon->save($toSave)) {
                 $this->Session->setFlash(__('Dungeon %s has been updated', $dungeon['Dungeon']['title']), 'flash_success');
-                $this->redirect('/admin/dungeons');
+                return $this->redirect('/admin/dungeons');
             }
 
             $this->Session->setFlash(__('Something goes wrong'), 'flash_error');
@@ -123,6 +130,36 @@ class DungeonsController extends AdminAppController {
             }
         }
  
-        $this->redirect('/admin/dungeons');
+        return $this->redirect('/admin/dungeons');
+    }
+
+    public function disable($id = null) {
+        if($id) {
+            $toSave = array();
+            $toSave['id'] = $id;
+            $toSave['status'] = 0;
+            if($this->Dungeon->save($toSave)) {
+                $this->Session->setFlash(__('The dungeon has been disable'), 'flash_success');
+            }else {
+                $this->Session->setFlash(__('Something goes wrong'), 'flash_error');
+            }
+        }
+ 
+        return $this->redirect('/admin/dungeons');
+    }
+
+    public function enable($id = null) {
+        if($id) {
+            $toSave = array();
+            $toSave['id'] = $id;
+            $toSave['status'] = 1;
+            if($this->Dungeon->save($toSave)) {
+                $this->Session->setFlash(__('The dungeon has been enable'), 'flash_success');
+            }else {
+                $this->Session->setFlash(__('Something goes wrong'), 'flash_error');
+            }
+        }
+ 
+        return $this->redirect('/admin/dungeons');
     }
 }

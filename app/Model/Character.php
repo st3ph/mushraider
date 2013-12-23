@@ -42,35 +42,35 @@ class Character extends AppModel {
         'title' => array(
             'isRequired' => array(
                 'rule' => 'notEmpty',
-                'required' => true,
+                'required' => 'create',
                 'message' => 'Character name is mandatory.'
             )
         ),
         'game_id' => array(
             'isRequired' => array(
                 'rule' => 'notEmpty',
-                'required' => true,
+                'required' => 'create',
                 'message' => 'Please choose a game for this character.'
             )
         ),
         'classe_id' => array(
             'isRequired' => array(
                 'rule' => 'notEmpty',
-                'required' => true,
+                'required' => 'create',
                 'message' => 'Please choose a classe for this character.'
             )
         ),
         'race_id' => array(
             'isRequired' => array(
                 'rule' => 'notEmpty',
-                'required' => true,
+                'required' => 'create',
                 'message' => 'Please choose a race for this character.'
             )
         ),
         'level' => array(
             'isRequired' => array(
                 'rule' => 'notEmpty',
-                'required' => true,
+                'required' => 'create',
                 'message' => 'Please fill the level for this character.'
             )
         )

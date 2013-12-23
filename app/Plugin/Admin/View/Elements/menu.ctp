@@ -46,6 +46,7 @@
             <ul class="collapse <?php echo strtolower($this->name) == 'dungeons'?'in':'';?>" id="dungeons-nav">
                 <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('Manage dungeons'), '/admin/dungeons', array('escape' => false));?></li>
                 <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('Add dungeon'), '/admin/dungeons/add', array('escape' => false));?></li>
+                <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('Disabled dungeons'), '/admin/dungeons/disabled', array('escape' => false));?></li>
             </ul>
         </li>
         <?php if($user['User']['isAdmin']):?>

@@ -16,6 +16,8 @@ CREATE TABLE IF NOT EXISTS `{prefix}characters` (
   `race_id` int(11) NOT NULL,
   `default_role_id` int(11) NULL,
   `level` int(3) NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -66,6 +68,7 @@ CREATE TABLE IF NOT EXISTS `{prefix}dungeons` (
   `slug` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL, 
   `game_id` int(11) NULL DEFAULT NULL,
   `raidssize_id` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 

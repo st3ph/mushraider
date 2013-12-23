@@ -1,10 +1,10 @@
 <?php
 class PatcherController extends AdminAppController {
     public $components = array('Patcher');
-    public $uses = array();
+    public $uses = array('Character', 'EventsCharacter', 'Event');
 
     var $adminOnly = true;
-    var $availiblePatchs = array('beta-2');
+    var $availiblePatchs = array('beta-2', 'beta-3');
 
     function beforeFilter() {
         parent::beforeFilter();
@@ -20,6 +20,7 @@ class PatcherController extends AdminAppController {
     	}
 
     	if(!empty($this->request->data['Patcher'])) {
+    		$error = false;
 	    	$databaseConfig = Configure::read('Database');
 	        if(!$mysqlLink = mysqli_connect($databaseConfig['host'], $databaseConfig['login'], $databaseConfig['password'], $databaseConfig['database'], $databaseConfig['port'])) {
 	            $error = true;
@@ -35,6 +36,12 @@ class PatcherController extends AdminAppController {
 	        if($error) {
 	        	$this->Session->setFlash(__('MushRaider can\'t apply the SQL patch, please try again or apply it by yourself using the following file : /app/Config/Schema/sql/mushraider_patch_%s.sql', $patch), 'flash_error');
 	        }else {
+	        	// If there is code to execute...
+	        	$methodeName = str_replace('-', '', $patch);
+	        	if(method_exists($this, $methodeName)) {
+	        		$this->$methodeName();
+	        	}
+
 	        	$this->Session->setFlash(__('MushRaider successfully apply the patch !'), 'flash_success');
 	        }
 
@@ -42,5 +49,34 @@ class PatcherController extends AdminAppController {
 	    }
 
 	    $this->set('patch', $patch);
+    }
+
+    public function beta3() {
+    	// Update new 'created' field of each character
+    	// It will match the date of the first event the character signin
+    	// This ensure the stats to be accurate
+    	$params = array();
+    	$params['recursive'] = -1;
+    	$params['fields'] = array('id');
+    	if($characters = $this->Character->find('all', $params)) {
+    		foreach($characters as $character) {
+    			$toSaveCharacter['id'] = $character['Character']['id'];
+
+				// Get first event
+				$params = array();
+				$params['recursive'] = -1;
+				$params['fields'] = array('id', 'created');
+				$params['order'] = 'created ASC';
+				$params['conditions']['character_id'] = $character['Character']['id'];
+				if($eventCharacter = $this->EventsCharacter->find('first', $params)) {
+					$toSaveCharacter['created'] = $eventCharacter['EventsCharacter']['created'];
+				}else {
+					$toSaveCharacter['created'] = date('Y-m-d H:i:s');
+				}
+
+				$this->Character->create();
+				$this->Character->save($toSaveCharacter);
+    		}
+    	}
     }
 }

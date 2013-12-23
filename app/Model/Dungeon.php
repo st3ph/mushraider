@@ -50,4 +50,12 @@ class Dungeon extends AppModel {
         }
         return true;
     }
+
+    function beforeFind($params) {
+        if(!isset($params['conditions']['status']) && !isset($params['conditions']['Dungeon.status'])) {
+            $params['conditions']['Dungeon.status'] = 1;
+        }
+
+        return $params;
+    }
 }

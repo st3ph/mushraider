@@ -14,7 +14,7 @@ ALTER TABLE  `{prefix}dungeons` ADD  `status` TINYINT( 1 ) NOT NULL DEFAULT  '1'
 -- Alter table `characters` to add column 'modified' and 'created'
 --
 
-ALTER TABLE  `{prefix}characters` ADD  `modified` DATETIME NULL , ADD  `created` DATETIME NULL;
+ALTER TABLE  `{prefix}characters` ADD  `modified` DATETIME NOT NULL , ADD  `created` DATETIME NOT NULL;
 
 -- --------------------------------------------------------
 
@@ -22,4 +22,4 @@ ALTER TABLE  `{prefix}characters` ADD  `modified` DATETIME NULL , ADD  `created`
 -- Alter table `characters` to add column 'modified' and 'created'
 --
 
-ALTER TABLE  `{prefix}users` ADD  `notifications_cancel` TINYINT( 1 ) NOT NULL DEFAULT  '1' AFTER  `email` , ADD  `notifications_new` TINYINT( 1 ) NOT NULL DEFAULT  '1' AFTER  `notifications_cancel` , ADD  `notifications_waiting` TINYINT( 1 ) NOT NULL DEFAULT  '1' AFTER  `notifications_new` , ADD  `notifications_validate` TINYINT( 1 ) NOT NULL DEFAULT  '1' AFTER  `notifications_waiting`;
+ALTER TABLE  `{prefix}users` ADD  `notifications_cancel` TINYINT( 1 ) NOT NULL DEFAULT  '1' AFTER  `email` , ADD  `notifications_new` TINYINT( 1 ) NOT NULL DEFAULT  '1' AFTER  `notifications_cancel` , ADD  `notifications_validate` TINYINT( 1 ) NOT NULL DEFAULT  '1' AFTER  `notifications_new`;

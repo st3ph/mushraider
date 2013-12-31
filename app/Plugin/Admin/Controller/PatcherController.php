@@ -39,7 +39,7 @@ class PatcherController extends AdminAppController {
 	        	// If there is code to execute...
 	        	$methodeName = str_replace('-', '', $patch);
 	        	if(method_exists($this, $methodeName)) {
-	        		$this->$methodeName();
+	        		$this->$methodeName();	        		
 	        	}
 
 	        	$this->Session->setFlash(__('MushRaider successfully apply the patch !'), 'flash_success');
@@ -55,9 +55,14 @@ class PatcherController extends AdminAppController {
     	// Update new 'created' field of each character
     	// It will match the date of the first event the character signin
     	// This ensure the stats to be accurate
+
+    	// Generate new schema
+    	$this->Character->schemaBeta3();
+    	Cache::clear();
+
     	$params = array();
     	$params['recursive'] = -1;
-    	$params['fields'] = array('id');
+    	$params['fields'] = array('id', 'game_id');
     	if($characters = $this->Character->find('all', $params)) {
     		foreach($characters as $character) {
     			$toSaveCharacter['id'] = $character['Character']['id'];
@@ -73,8 +78,8 @@ class PatcherController extends AdminAppController {
 				}else {
 					$toSaveCharacter['created'] = date('Y-m-d H:i:s');
 				}
-
-				$this->Character->create();
+								
+				$toSaveCharacter['level'] = $character['Character']['game_id'] == 1?50:50;
 				$this->Character->save($toSaveCharacter);
     		}
     	}

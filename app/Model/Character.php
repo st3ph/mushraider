@@ -75,4 +75,10 @@ class Character extends AppModel {
             )
         )
     );
+
+    // Update schema for path beta 3
+    // Usefull to avoir schema cache errors
+    function schemaBeta3() {
+        $this->_schema = array_merge($this->_schema, array('modified' => array('type' => 'datetime'), 'created' => array('type' => 'datetime')));
+    }
 }

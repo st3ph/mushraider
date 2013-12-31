@@ -9,6 +9,7 @@
         <?php echo $title_for_layout; ?>
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <?php
     $this->Html->css('bootstrap.min.2.3.2', null, array('inline' => false));

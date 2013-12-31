@@ -1,6 +1,7 @@
 <?php
 class EventsRole extends AppModel {
 	public $useTable = 'events_roles';
+    var $actsAs = array('Containable');
 
     public $belongsTo = array(
         'Event' => array(

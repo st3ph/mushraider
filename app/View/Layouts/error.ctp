@@ -28,6 +28,7 @@ $cakeDescription = __('MushRaider Error');
 		<?php echo $title_for_layout; ?>
 	</title>
 	<link rel="icon" type="image/png" href="/favicon.png" />
+	<meta name="robots" content="noindex, nofollow" />
 	<?php
 
 		echo $this->Html->css('cake.generic');

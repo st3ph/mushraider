@@ -1,7 +1,7 @@
 <?php
 App::uses('AppModel', 'Model');
 class Ticket extends AppModel {
-    public $name = 'Ticket';        
+    public $name = 'Ticket';
 
     var $hashKey = 'V5z08!';
 

@@ -1,5 +1,6 @@
 <?php
-class EventsController extends AppController {    
+class EventsController extends AppController {
+    public $components = array('Emailing');
     var $helpers = array('Sociable.Comment');
     var $uses = array('Game', 'Dungeon', 'Event', 'RaidsRole', 'EventsRole', 'EventsCharacter', 'Character');
 
@@ -111,16 +112,38 @@ class EventsController extends AppController {
             $toSave['character_level'] = $this->request->data['Event']['character_level'];
             $toSave['time_invitation'] = date('Y-m-d H:i:s', mktime($this->request->data['Event']['time_invitation']['hour'], $this->request->data['Event']['time_invitation']['min'], 0, $dates[1], $dates[2], $dates[0]));
             $toSave['time_start'] = date('Y-m-d H:i:s', mktime($this->request->data['Event']['time_start']['hour'], $this->request->data['Event']['time_start']['min'], 0, $dates[1], $dates[2], $dates[0]));            
+
             if(!empty($this->request->data['Event']['roles'])) {
                 if($this->Event->save($toSave)) {
-                    $eventId = $this->Event->getLastInsertId();
+                    $event = $toSave;
+                    $event['id'] = $this->Event->getLastInsertId();
                     foreach($this->request->data['Event']['roles'] as $roleId => $roleNumber) {
                         $toSaveEventsRole = array();
-                        $toSaveEventsRole['event_id'] = $eventId;
+                        $toSaveEventsRole['event_id'] = $event['id'];
                         $toSaveEventsRole['raids_role_id'] = $roleId;
                         $toSaveEventsRole['count'] = $roleNumber?$roleNumber:'0';
                         $this->EventsRole->__add($toSaveEventsRole);
                     }
+
+                    // If notifications are enable, send email to validate users
+                    if($this->Setting->getOption('notifications')) {
+                        // Get all users who have a character for this event
+                        $params = array();
+                        $params['recursive'] = 1;
+                        $params['fields'] = array('id');
+                        $params['group'] = array('Character.user_id');
+                        $params['contain']['User']['fields'] = array('email', 'notifications_new');
+                        $params['conditions']['Character.game_id'] = $toSave['game_id'];
+                        $params['conditions']['Character.level >='] = !empty($toSave['character_level'])?$toSave['character_level']:1;
+                        if($users = $this->Character->find('all', $params)) {                            
+                            foreach($users as $user) {
+                                // Check if user have this notification enabled
+                                if($user['User']['notifications_new']) {
+                                    $this->Emailing->eventNew($user['User']['email'], $event);
+                                }
+                            }
+                        }
+                    }                    
 
                     $this->Session->setFlash(__('The event has been created.'), 'flash_success');
                     $this->redirect('/events');
@@ -220,7 +243,35 @@ class EventsController extends AppController {
             $this->redirect('/events');
         }
 
+        // Get event for email notifications
+        $params = array();
+        $params['recursive'] = -1;
+        $params['conditions']['id'] = $eventId;
+        if(!$event = $this->Event->find('first', $params)) {
+            $this->redirect('/events');
+        }
+
         if($this->Event->delete($eventId)) {
+            // If notifications are enable, send email to validate users
+            if($this->Setting->getOption('notifications')) {
+                // Get all users validated
+                $params = array();
+                $params['recursive'] = 1;
+                $params['fields'] = array('id');
+                $params['contain']['User']['fields'] = array('email', 'notifications_cancel');
+                $params['conditions']['EventsCharacter.event_id'] = $eventId;
+                $params['conditions']['EventsCharacter.status'] = 2;
+                if($users = $this->EventsCharacter->find('all', $params)) {
+                    foreach($users as $user) {
+                        // Check if user have this notification enabled
+                        if($user['User']['notifications_cancel']) {
+                            $this->Emailing->eventCancel($user['User']['email'], $event['Event']);
+                        }
+                    }
+                }
+            }
+
+            // Delete childs
             $conditions = array('event_id' => $eventId);
             $this->EventsRole->deleteAll($conditions);
             $this->EventsCharacter->deleteAll($conditions);

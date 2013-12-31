@@ -13,6 +13,7 @@ class SettingsController extends AdminAppController {
         $currentTheme = json_decode($this->Setting->getOption('theme'));
         if(!empty($this->request->data['Setting'])) {
             $this->Setting->setOption('title', $this->request->data['Setting']['title']);
+            $this->Setting->setOption('notifications', $this->request->data['Setting']['notifications']);
             $this->Setting->setOption('css', $this->request->data['Setting']['css']);
             if(!empty($this->request->data['Setting']['theme'])) {
                 // bgcolor
@@ -65,6 +66,7 @@ class SettingsController extends AdminAppController {
         }
 
         $this->request->data['Setting']['title'] = $this->Setting->getOption('title');
+        $this->request->data['Setting']['notifications'] = $this->Setting->getOption('notifications');
         $this->request->data['Setting']['css'] = $this->Setting->getOption('css');
         $theme = json_decode($this->Setting->getOption('theme'));
         $this->request->data['Setting']['theme']['logo'] = $theme->logo;

@@ -69,6 +69,10 @@ input.form-error, select.form-error, textarea.form-error {border-color:#b94a48;}
 #content header h1 {padding-bottom:10px;border-bottom:1px solid #ddd;margin-bottom:20px;}
 #content form label {font-weight:bold;}
 
+#content .nav-tabs.nav-stacked>li>a {background-color:#fff;}
+#content .nav-tabs.nav-stacked>li>a:hover, #content .nav-tabs.nav-stacked>li>a:focus {background-color:#eee;color:#555;text-shadow:0 1px 0 #fff;}
+#content .nav-tabs.nav-stacked>li.active>a {background-color:#bf4d28;color:#fff;text-shadow:none;}
+
 /*
 * Login
 */

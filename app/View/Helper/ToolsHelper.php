@@ -33,10 +33,10 @@ class ToolsHelper extends AppHelper {
 		$jours = explode('-', $dates[0]);
 		$heures = explode(':', $dates[1]);
 		if($dates[0] == date("Y-m-d")) {
-			$text = __('Aujourd\'hui à');
+			$text = __('Today at');
 			return $text.' '.$heures[0].'h'.$heures[1];
 		}elseif($dates[0] == date('Y-m-d', time() - 3600 * 24)) {
-			$text = __('Hier à');
+			$text = __('Yesterday at');
 			return $text.' '.$heures[0].'h'.$heures[1];
 		}else {
 			$wording = $this->jour_semaine_court[date('w', mktime(0, 0, 0, $jours[1], $jours[2], $jours[0]))].' ';

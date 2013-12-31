@@ -1,5 +1,6 @@
 <?php
 class AjaxController extends AppController {
+    public $components = array('Emailing');
 	var $uses = array('Game', 'Dungeon', 'Classe', 'Race', 'EventsCharacter', 'Character', 'Event', 'RaidsRole');
 
     function beforeFilter() {
@@ -100,17 +101,33 @@ class AjaxController extends AppController {
 
             $params = array();
             $params['fields'] = array('id', 'character_id');
-            $params['recursive'] = -1;
+            $params['recursive'] = 1;
+            $params['contain']['User']['fields'] = array('email', 'notifications_validate');
             $params['conditions']['event_id'] = $eventId;
             $params['conditions']['raids_role_id'] = $roleId;
             $params['conditions']['status >'] = 0;
             if($eventCharacters = $this->EventsCharacter->find('all', $params)) {
+                if($notificationsStatus = $this->Setting->getOption('notifications')) {
+                    // Get event for email notifications
+                    $params = array();
+                    $params['recursive'] = -1;
+                    $params['conditions']['id'] = $eventId;
+                    $event = $this->Event->find('first', $params);
+                }
+          
+
                 foreach($eventCharacters as $eventCharacter) {
                     $toSave = array();
                     $toSave['id'] = $eventCharacter['EventsCharacter']['id'];
                     $toSave['status'] = in_array($eventCharacter['EventsCharacter']['character_id'], $validatedList)?2:1;
                     if(!$this->EventsCharacter->save($toSave)) {
                         return 'fail';
+                    }
+
+
+                    // If notifications are enable, send email to validated users
+                    if($toSave['status'] == 2 && $eventCharacter['User']['notifications_validate'] && $notificationsStatus) {
+                        $this->Emailing->eventValidate($eventCharacter['User']['email'], $event['Event']);
                     }
                 }
 

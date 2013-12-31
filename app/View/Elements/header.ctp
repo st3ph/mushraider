@@ -12,7 +12,8 @@
         						<i class="icon-user"></i> <?php echo $this->Html->link($user['User']['username'].' <b class="caret"></b>', '/account', array('class' => 'dropdown-toggle', 'id' => 'userMenu', 'data-toggle' => 'dropdown', ' data-target' => '#', 'escape' => false));?>
     	    					<ul class="dropdown-menu" role="menu" aria-labelledby="userMenu">
     	    						<li><?php echo $this->Html->link('<i class="icon-unlock-alt"></i> '.__('Profile'), '/account', array('escape' => false));?></li>
-    	    						<li><?php echo $this->Html->link('<i class="icon-shield"></i> '.__('Characters'), '/account/characters', array('escape' => false));?></li>
+                                    <li><?php echo $this->Html->link('<i class="icon-shield"></i> '.__('Characters'), '/account/characters', array('escape' => false));?></li>
+    	    						<li><?php echo $this->Html->link('<i class="icon-gears"></i> '.__('Options'), '/account/settings', array('escape' => false));?></li>
     	    						<li class="divider"></li>
     	    						<li><?php echo $this->Html->link('<i class="icon-signout"></i> '.__('Logout'), '/auth/logout', array('escape' => false));?></li>
     	    					</ul>

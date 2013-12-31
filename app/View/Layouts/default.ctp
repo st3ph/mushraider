@@ -10,6 +10,7 @@
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="robots" content="noindex, nofollow" />
 
     <script language="javascript">
         <?php echo "var site_url = 'http://".$_SERVER['HTTP_HOST'].$this->webroot."';"?>

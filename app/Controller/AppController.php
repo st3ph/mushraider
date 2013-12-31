@@ -68,7 +68,12 @@ class AppController extends Controller {
         if($this->Session->check('User.id')) {
 			$userID = $this->Session->read('User.id');			
 			if(!empty($userID)) {
-				$this->user = $this->User->find('first', array('conditions' => array('User.id' => $userID), 'recursive' => 1));
+                $params = array();
+                $params['recursive'] = 1;
+                $params['contain']['Role'] = array();
+                $params['contain']['Character'] = array();
+                $params['conditions']['User.id'] = $userID;
+				$this->user = $this->User->find('first', $params);
                 $this->user['User']['isAdmin'] = $this->Role->is($this->user['User']['role_id'], 'admin');
                 $this->user['User']['isOfficer'] = $this->Role->is($this->user['User']['role_id'], 'officer');
 			}else {

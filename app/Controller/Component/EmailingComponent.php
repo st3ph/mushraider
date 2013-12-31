@@ -10,6 +10,8 @@ class EmailingComponent extends Component {
         $this->email = new CakeEmail();
         
         $host = substr_count($_SERVER['HTTP_HOST'], '.') > 1?substr($_SERVER['HTTP_HOST'], strpos($_SERVER['HTTP_HOST'], '.') + 1):$_SERVER['HTTP_HOST'];
+        $this->email->emailFormat('html');
+        $this->email->delivery = 'debug';
         $this->email->from('mushraider@'.$host);
     }
 
@@ -32,6 +34,39 @@ class EmailingComponent extends Component {
         $this->email->viewVars(array(
             'dest' => $dest,
             'token' => $hash
+        ));
+        $this->email->send();
+    }
+
+    function eventCancel($dest, $event) {
+        $this->email->to($dest);
+        $this->email->subject(__('[MushRaider] Event cancelled'));
+        $this->email->template('event_cancel', 'default');
+
+        $this->email->viewVars(array(
+            'event' => $event
+        ));
+        $this->email->send();
+    }
+
+    function eventNew($dest, $event) {
+        $this->email->to($dest);
+        $this->email->subject(__('[MushRaider] New Event has been added'));
+        $this->email->template('event_new', 'default');
+
+        $this->email->viewVars(array(            
+            'event' => $event
+        ));
+        $this->email->send();
+    }
+
+    function eventValidate($dest, $event) {
+        $this->email->to($dest);
+        $this->email->subject(__('[MushRaider] You have been validate to an event'));
+        $this->email->template('event_validate', 'default');
+
+        $this->email->viewVars(array(            
+            'event' => $event
         ));
         $this->email->send();
     }

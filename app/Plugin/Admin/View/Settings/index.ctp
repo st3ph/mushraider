@@ -9,6 +9,10 @@
             <div class="form-group">
                 <?php echo $this->Form->input('Setting.title', array('type' => 'text', 'label' => __('Site title'), 'class' => 'span5'));?>
             </div>
+            <div class="form-group">
+                <label><?php echo __('Email notifications');?></label>
+                <?php echo $this->Form->input('Setting.notifications', array('type' => 'checkbox', 'label' => __('Enable email notifications')));?>
+            </div>
 
             <h3><?php echo __('Theming');?></h3>
             <div class="form-group">

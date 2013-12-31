@@ -1,6 +1,7 @@
 <?php
 class EventsCharacter extends AppModel {
 	public $useTable = 'events_characters';
+    var $actsAs = array('Containable');
 
     public $belongsTo = array(
         'Event' => array(

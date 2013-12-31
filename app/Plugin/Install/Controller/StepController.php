@@ -115,6 +115,7 @@ class StepController extends InstallAppController {
                                                             'bgrepeat' => 'repeat'
                                                         ));
                         $defaultSettings['css'] = '';
+                        $defaultSettings['notifications'] = 1;
                         foreach($defaultSettings as $option => $value) {
                             $settingModel->create();
                             $settingModel->save(array('option' => $option, 'value' => $value));

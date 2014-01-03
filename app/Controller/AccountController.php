@@ -204,7 +204,6 @@ class AccountController extends AppController {
 
         $this->request->data['User']['notifications_cancel'] = $this->user['User']['notifications_cancel'];
         $this->request->data['User']['notifications_new'] = $this->user['User']['notifications_new'];
-        $this->request->data['User']['notifications_waiting'] = $this->user['User']['notifications_waiting'];
         $this->request->data['User']['notifications_validate'] = $this->user['User']['notifications_validate'];
     }    
 }

@@ -23,6 +23,7 @@
                     <th><?php echo __('% validated');?></th>
                     <th><?php echo __('% not validated');?></th>                    
                     <th><?php echo __('% absence');?></th>
+                    <th><?php echo __('% unregistered');?></th>
                 </tr>
             </thead>
             <tbody>
@@ -47,6 +48,11 @@
                                 <?php $stat = $character['stats']['total'] > 0?round(($character['stats']['status_0'] / $character['stats']['total']) * 100, 2):0;?>
                                 <?php echo $stat;?>%
                                 <small class="muted">(<?php echo $character['stats']['status_0'];?> / <?php echo $character['stats']['total'];?>)</small>
+                            </td>
+                            <td>
+                                <?php $stat = $character['stats']['events_total'] > 0?round(($character['stats']['events_unregistered'] / $character['stats']['events_total']) * 100, 2):0;?>
+                                <?php echo $stat;?>%
+                                <small class="muted">(<?php echo $character['stats']['events_registered'];?> / <?php echo $character['stats']['events_total'];?>)</small>
                             </td>
                         </tr>
                     <?php endforeach;?>

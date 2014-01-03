@@ -8,11 +8,13 @@ class StatsController extends AdminAppController {
 
     public function index() {
         if(!empty($this->request->data['Stats']['game_id'])) {
+            $this->Event->Behaviors->detach('Commentable');
+
             $gameId = $this->request->data['Stats']['game_id'];
 
             $params = array();
             $params['recursive'] = 1;
-            $params['fields'] = array('id', 'title');
+            $params['fields'] = array('id', 'title', 'created');
             $params['order'] = array('Character.title' => 'asc');
             $params['contain']['User'] = array();
             $params['contain']['User']['fields'] = array('username');
@@ -29,6 +31,29 @@ class StatsController extends AdminAppController {
                     $characters[$key]['stats']['total'] = count($character['EventsCharacter']);
                     for($status = 0;$status <= 2;$status++) {
                         $characters[$key]['stats']['status_'.$status] = count(Set::extract('/EventsCharacter[status='.$status.']', $character));
+                    }
+
+                    // Not signin at all
+                    $characters[$key]['stats']['events_total'] = 0;
+                    $characters[$key]['stats']['events_registered'] = 0;
+                    $characters[$key]['stats']['events_unregistered'] = 0;
+
+                    $params = array();
+                    $params['recursive'] = 1;
+                    $params['fields'] = array('id');
+                    $params['contain']['EventsCharacter'] = array();
+                    $params['contain']['EventsCharacter']['fields'] = array('user_id');
+                    $params['contain']['EventsCharacter']['conditions']['EventsCharacter.character_id'] = $character['Character']['id'];
+                    $params['conditions']['Event.time_start >='] = $character['Character']['created'];
+                    if($events = $this->Event->find('all', $params)) {
+                        $characters[$key]['stats']['events_total'] = count($events);
+                        foreach($events as $event) {
+                            if(empty($event['EventsCharacter'])) {
+                                $characters[$key]['stats']['events_unregistered']++;
+                            }else {
+                                $characters[$key]['stats']['events_registered']++;
+                            }
+                        }
                     }
                 }
             }

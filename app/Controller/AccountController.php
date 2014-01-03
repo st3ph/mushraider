@@ -195,7 +195,7 @@ class AccountController extends AppController {
             $toSave['notifications_new'] = $this->request->data['User']['notifications_new']?1:0;
             $toSave['notifications_validate'] = $this->request->data['User']['notifications_validate']?1:0;
             if($this->User->save($toSave)) {
-                $this->Session->setFlash(__('Your settings were save successfully'), 'flash_success');
+                $this->Session->setFlash(__('Your settings were saved successfully'), 'flash_success');
                 $this->redirect('/account/settings');
             }else {
                 $this->Session->setFlash(__('Something wrong happen, please fix the errors below'), 'flash_error');

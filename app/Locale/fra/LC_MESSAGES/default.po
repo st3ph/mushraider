@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Mushraider\n"
-"POT-Creation-Date: 2014-01-03 12:01+0100\n"
-"PO-Revision-Date: 2014-01-03 12:17+0100\n"
+"POT-Creation-Date: 2014-01-06 19:29+0100\n"
+"PO-Revision-Date: 2014-01-06 19:29+0100\n"
 "Last-Translator: Stéphane Litou <contact@mushnet.fr>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -1619,7 +1619,6 @@ msgid "My Account"
 msgstr "Mon compte"
 
 #: D:\www\wamp\www\mushraider\app/View/Emails/html/event_cancel.ctp:7
-#: D:\www\wamp\www\mushraider\app/View/Emails/html/event_new.ctp:7
 msgid "Event cancelled"
 msgstr "Evènement annulé"
 
@@ -1653,6 +1652,10 @@ msgstr ""
 #: D:\www\wamp\www\mushraider\app/View/Emails/html/event_validate.ctp:21
 msgid "MushRaider account"
 msgstr "Mon compte MushRaider"
+
+#: D:\www\wamp\www\mushraider\app/View/Emails/html/event_new.ctp:7
+msgid "New event"
+msgstr "Nouvel évènement"
 
 #: D:\www\wamp\www\mushraider\app/View/Emails/html/event_new.ctp:12
 msgid "You receive this email because a new event has been created"

@@ -115,11 +115,18 @@ class EventsController extends AppController {
 
             if(!empty($this->request->data['Event']['roles'])) {
                 if($this->Event->save($toSave)) {
-                    $event = $toSave;
-                    $event['id'] = $this->Event->getLastInsertId();
+                    $eventId = $this->Event->getLastInsertId();
+
+                    $paramsEvent = array();
+                    $paramsEvent['recursive'] = 1;
+                    $paramsEvent['contain']['Game']['fields'] = array('Game.title');
+                    $paramsEvent['contain']['Dungeon']['fields'] = array('Dungeon.title');
+                    $paramsEvent['conditions']['Event.id'] = $eventId;
+                    $event = $this->Event->find('first', $paramsEvent);
+
                     foreach($this->request->data['Event']['roles'] as $roleId => $roleNumber) {
                         $toSaveEventsRole = array();
-                        $toSaveEventsRole['event_id'] = $event['id'];
+                        $toSaveEventsRole['event_id'] = $eventId;
                         $toSaveEventsRole['raids_role_id'] = $roleId;
                         $toSaveEventsRole['count'] = $roleNumber?$roleNumber:'0';
                         $this->EventsRole->__add($toSaveEventsRole);

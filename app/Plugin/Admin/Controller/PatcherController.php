@@ -78,8 +78,7 @@ class PatcherController extends AdminAppController {
 				}else {
 					$toSaveCharacter['created'] = date('Y-m-d H:i:s');
 				}
-								
-				$toSaveCharacter['level'] = $character['Character']['game_id'] == 1?50:50;
+												
 				$this->Character->save($toSaveCharacter);
     		}
     	}

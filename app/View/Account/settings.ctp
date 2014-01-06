@@ -1,5 +1,5 @@
 <header>
-    <h1><i class="icon-key"></i> <?php echo __('My settings');?></h1>
+    <h1><i class="icon-gears"></i> <?php echo __('My settings');?></h1>
 </header>
 
 <div class="row">

@@ -103,9 +103,9 @@ class AjaxController extends AppController {
             $params['fields'] = array('id', 'character_id');
             $params['recursive'] = 1;
             $params['contain']['User']['fields'] = array('email', 'notifications_validate');
-            $params['conditions']['event_id'] = $eventId;
-            $params['conditions']['raids_role_id'] = $roleId;
-            $params['conditions']['status >'] = 0;
+            $params['conditions']['EventsCharacter.event_id'] = $eventId;
+            $params['conditions']['EventsCharacter.raids_role_id'] = $roleId;
+            $params['conditions']['EventsCharacter.status >'] = 0;
             if($eventCharacters = $this->EventsCharacter->find('all', $params)) {
                 if($notificationsStatus = $this->Setting->getOption('notifications')) {
                     // Get event for email notifications

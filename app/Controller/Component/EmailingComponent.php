@@ -8,8 +8,14 @@ class EmailingComponent extends Component {
     public function __construct() {
         // Default values
         $this->email = new CakeEmail();
-        
+                
         $host = substr_count($_SERVER['HTTP_HOST'], '.') > 1?substr($_SERVER['HTTP_HOST'], strpos($_SERVER['HTTP_HOST'], '.') + 1):$_SERVER['HTTP_HOST'];
+
+        // Remove port if present on unusual configurations
+        if(strpos($host, ':') !== false) {
+            $host = substr($host, 0, strpos($host, ':'));
+        }
+
         $this->email->emailFormat('html');
         $this->email->delivery = 'debug';
         $this->email->from('mushraider@'.$host);

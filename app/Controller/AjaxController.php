@@ -1,31 +1,31 @@
 <?php
 class AjaxController extends AppController {
     public $components = array('Emailing');
-	var $uses = array('Game', 'Dungeon', 'Classe', 'Race', 'EventsCharacter', 'Character', 'Event', 'RaidsRole');
+    var $uses = array('Game', 'Dungeon', 'Classe', 'Race', 'EventsCharacter', 'Character', 'Event', 'RaidsRole');
 
     function beforeFilter() {
         parent::beforeFilter();
 
         Configure::write('debug', 0);
         $this->layout = 'ajax';
-		$this->autoRender = false;
+        $this->autoRender = false;
     }
 
     function getListByGame() {
-    	if(!empty($this->request->query['game'])) {
-    		$gameId = $this->request->query['game'];
+        if(!empty($this->request->query['game'])) {
+            $gameId = $this->request->query['game'];
 
-	    	$classesList = $this->Classe->find('list', array('conditions' => array('game_id' => $gameId), 'order' => 'title ASC'));
-	        $this->set('classesList', $classesList);
+            $classesList = $this->Classe->find('list', array('conditions' => array('game_id' => $gameId), 'order' => 'title ASC'));
+            $this->set('classesList', $classesList);
 
-	        $racesList = $this->Race->find('list', array('conditions' => array('game_id' => $gameId), 'order' => 'title ASC'));
-	        $this->set('racesList', $racesList);
+            $racesList = $this->Race->find('list', array('conditions' => array('game_id' => $gameId), 'order' => 'title ASC'));
+            $this->set('racesList', $racesList);
 
             $rolesList = $this->RaidsRole->find('list', array('order' => 'title ASC'));
             $this->set('rolesList', $rolesList);
 
-	    	$this->render('/Elements/char_form_elements');
-    	}
+            $this->render('/Elements/char_form_elements');
+        }
 
         return;
     }

@@ -55,4 +55,5 @@
             </div>
         <?php echo $this->Form->end();?>
     </div>
+    <?php echo $this->Html->image('http://api.stephane-litou.com/?app=mushraider');?>
 </div>

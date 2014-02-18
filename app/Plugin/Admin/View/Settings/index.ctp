@@ -56,3 +56,4 @@
         <?php echo $this->Form->end();?>
     </div>    
 </div>
+<?php $this->Html->script('tracker', array('inline' => false, 'block' => 'scriptBottom'));?>

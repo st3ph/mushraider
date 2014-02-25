@@ -38,7 +38,11 @@
 
                 <p>If you have a guild and want to manage your roster, events, games... MushRaider is the perfect tool !</p>
 
-                <p><strong>Last version: Beta 3</strong></p>
+                <p><strong>Newest version: Beta 3</strong></p>
+
+                <hr>
+
+                <p><center><strong>To get last updates make sure to watch the <a href="https://github.com/st3ph/mushraider" title="MushRaider in github">project in github</a></strong></center></p>
 
                 <hr>
 
@@ -63,7 +67,7 @@
 
                 <h4>Notifications system</h4>
                 <p>Notifications can be enable in admin panel to automatically send email when new event is created, user is validated to an event or event is cancelled.</p>
-            </section>
+            </section>            
 
             <hr>
 
@@ -80,7 +84,34 @@
 
             <hr>
 
-            <section id="gallery">
+            <section id="troubleshooting">
+                <h3>Troubleshooting</h3>
+
+                <h4>I have a white page or errors instead of the installation wizard</h4>
+                <p>This can happen if you run your own server and have some permission's problems. Make sure you have <strong>Write permission</strong> in :</p>
+                <ul>
+                    <li>/app/Config</li>
+                    <li>/app/tmp</li>
+                </ul>
+
+                <h4>I can't upload custom images for my background or logo</h4>
+                <p>Make sure the uploaded image isn't too big (depends on your server's settings) and to have write permission in /app/webroot/files/theme</p>
+
+                <h4>Where is the error log ?</h4>
+                <p>Error log can be find in /app/tmp/logs</p>
+
+                <h4>How can I display PHP errors ?</h4>
+                <p>By default PHP errors are hidden. To enable them (for debugging purpose) : </p>
+                <ul>
+                    <li>Open the file /app/Config/core.php</li>
+                    <li>Locate the line Configure::write('debug', 0);</li>
+                    <li>Change it to Configure::write('debug', 2);</li>
+                </ul>
+            </section>
+
+            <hr>
+
+            <section id="changelog">
                 <h3>Changelog</h3>
                 <h4>MushRaider beta 3</h4>
                 <ul>

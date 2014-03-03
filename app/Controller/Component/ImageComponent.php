@@ -1,5 +1,8 @@
 <?php
-App::import('Vendor', 'PhpThumbFactory', array('file' => 'phpthumb'.DS.'ThumbLib.inc.php'));
+require APP . 'Vendor/autoload.php';
+use Imagine\Image\ImageInterface;
+use Imagine\Image\Box;
+use Imagine\Image\Point;
 
 class ImageComponent extends Component {
 	function makePath($path) {
@@ -9,9 +12,10 @@ class ImageComponent extends Component {
 	}
 
 	function resize($source, $path, $fileName, $maxWidth = 500, $maxHeight = 500) {
-		$image = PhpThumbFactory::create($source);
+		$imagine = new Imagine\Gd\Imagine($source);
+		$image = $imagine->open($source);
 		if($maxWidth || $maxHeight) {
-			$image->resize($maxWidth, $maxHeight);
+			$image->resize(new Box($maxWidth, $maxHeight));
 		}
 		$this->makePath($path);
 		$image->save($path.'/'.$fileName);

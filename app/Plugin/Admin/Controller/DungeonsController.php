@@ -61,7 +61,7 @@ class DungeonsController extends AdminAppController {
             Configure::write('debug', 0);
             $this->layout = 'ajax';
             $this->autoRender = false;
-            $this->render('elements/addDungeon');
+            $this->render('Elements/addDungeon');
             return;
         }else {
             $gamesList = $this->Game->find('list', array('order' => 'title ASC'));        

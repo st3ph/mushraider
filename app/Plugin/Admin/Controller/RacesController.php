@@ -49,7 +49,7 @@ class RacesController extends AdminAppController {
             Configure::write('debug', 0);
             $this->layout = 'ajax';
             $this->autoRender = false;
-            $this->render('elements/addRace');
+            $this->render('Elements/addRace');
             return;
         }else {
             $gamesList = $this->Game->find('list', array('order' => 'title ASC'));        

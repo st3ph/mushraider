@@ -33,7 +33,7 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-    public $components = array('Session', 'Cookie', 'Tools', 'Patcher');
+    public $components = array('Session', 'Cookie', 'Lang', 'Tools', 'Patcher');
     var $uses = array('User', 'Role', 'Setting', 'Character');
 
     var $user = null;
@@ -61,6 +61,7 @@ class AppController extends Controller {
 
         // Language
         $language = Configure::read('Settings.language');
+        $language = $this->Cookie->check('Lang')?$this->Cookie->read('Lang'):$language;
         $language = !empty($language)?$language:'eng';
         Configure::write('Config.language', $language);
 
@@ -104,6 +105,7 @@ class AppController extends Controller {
         $themeOptions->css = $this->Setting->getOption('css');
         $this->set('mushraiderTheme', $themeOptions);
 
+        // SEO
         $this->pageTitle .= !empty($this->request->params['named']['page'])?' - page '.$this->request->params['named']['page']:'';
         $this->pageDescription .= !empty($this->request->params['named']['page'])?' - page '.$this->request->params['named']['page']:'';
         
@@ -111,6 +113,7 @@ class AppController extends Controller {
         $this->set('description_for_layout', $this->pageDescription);
         $this->set('breadcrumb', $this->breadcrumb);
 
+        // You
         $this->set('user', $this->user);
 	}
 }

@@ -1,4 +1,5 @@
 <?php
+App::uses('Folder', 'Utility');
 class SettingsController extends AdminAppController {
     public $components = array('Image');
     public $uses = array('Setting');
@@ -15,6 +16,11 @@ class SettingsController extends AdminAppController {
             $this->Setting->setOption('title', $this->request->data['Setting']['title']);
             $this->Setting->setOption('notifications', $this->request->data['Setting']['notifications']);
             $this->Setting->setOption('css', $this->request->data['Setting']['css']);
+
+            Configure::write('Config.language', $this->request->data['Setting']['sitelang']);
+            Configure::write('Settings.language', $this->request->data['Setting']['sitelang']);            
+            Configure::dump('config.ini', 'configini', array('Database', 'Settings'));
+
             if(!empty($this->request->data['Setting']['theme'])) {
                 // bgcolor
                 $theme['bgcolor'] = $this->request->data['Setting']['theme']['bgcolor'];
@@ -65,8 +71,23 @@ class SettingsController extends AdminAppController {
             return $this->redirect('/admin/settings');
         }
 
+        // General
         $this->request->data['Setting']['title'] = $this->Setting->getOption('title');
         $this->request->data['Setting']['notifications'] = $this->Setting->getOption('notifications');
+
+        // Langs
+        $appLocales = array();
+        $localesFolder = new Folder(APP.'Locale');
+        $locales = $localesFolder->read(true);
+        if(!empty($locales) && !empty($locales[0])) {
+            foreach($locales[0] as $locale) {
+                $appLocales[$locale] = $locale;
+            }
+        }
+        $this->set('appLocales', $appLocales);
+        $this->request->data['Setting']['sitelang'] = Configure::read('Config.language');
+
+        // Theming
         $this->request->data['Setting']['css'] = $this->Setting->getOption('css');
         $theme = json_decode($this->Setting->getOption('theme'));
         $this->request->data['Setting']['theme']['logo'] = $theme->logo;
@@ -74,6 +95,8 @@ class SettingsController extends AdminAppController {
         $this->request->data['Setting']['theme']['bgimage'] = $theme->bgimage;
         $this->request->data['Setting']['theme']['bgrepeat'] = $theme->bgrepeat;
         $this->request->data['Setting']['theme']['bgnoimage'] = !$theme->bgimage;
+
+        // Custom Links
         $customLinks = json_decode($this->Setting->getOption('links'));
         if(!empty($customLinks)) {
             foreach($customLinks as $customLink) {

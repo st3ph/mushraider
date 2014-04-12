@@ -33,6 +33,20 @@
         			<?php else:?>
         				<li><i class="icon-signin"></i> <?php echo $this->Html->link(__('LOGIN / REGISTER'), '/auth/login');?></li>
         			<?php endif;?>
+
+                    <?php if(!empty($appLocales)):?>
+                        <li>
+                            <div class="dropdown">
+                                <?php echo $this->Html->link('<i class="icon-flag"></i> '.Configure::read('Config.language').' <b class="caret"></b>', '/', array('class' => 'dropdown-toggle', 'id' => 'langMenu', 'data-toggle' => 'dropdown', ' data-target' => '#', 'escape' => false));?>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="langMenu">
+                                    <?php foreach($appLocales as $lang):?>
+                                        <?php $checked = Configure::read('Config.language') == $lang?'<i class="icon-check"></i>':'';?>
+                                        <li><?php echo $this->Html->link(ucwords(strtolower($lang)).' '.$checked, '/l/'.$lang, array('escape' => false));?></li>
+                                    <?php endforeach;?>
+                                </ul>
+                            </div>
+                        </li>
+                    <?php endif;?>
         		</ul>
             </div>
             <div class="navbar">

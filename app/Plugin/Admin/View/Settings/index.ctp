@@ -13,6 +13,9 @@
                 <label><?php echo __('Email notifications');?></label>
                 <?php echo $this->Form->input('Setting.notifications', array('type' => 'checkbox', 'label' => __('Enable email notifications')));?>
             </div>
+            <div class="form-group">
+                <?php echo $this->Form->input('Setting.sitelang', array('type' => 'select', 'options' => $appLocales, 'required' => true, 'class' => 'span2', 'label' => __('Default language')));?>
+            </div>
 
             <h3><?php echo __('Theming');?></h3>
             <div class="form-group">

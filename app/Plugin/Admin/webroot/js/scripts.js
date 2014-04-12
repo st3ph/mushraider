@@ -25,9 +25,10 @@ var loadSpectrum = function(element) {
             color: color,
             showPalette: true,
             showSelectionPalette: true,
+            showInput: true,
             localStorageKey: 'mushraider',
             preferredFormat: 'hex6'
-        });
+        });        
     }
 }
 

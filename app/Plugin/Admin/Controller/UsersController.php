@@ -100,4 +100,34 @@ class UsersController extends AdminAppController {
 
         $this->redirect('/admin/users/waiting');
     }
+
+    public function disable($id = null) {
+        if($id) {
+            $toSave = array();
+            $toSave['id'] = $id;
+            $toSave['status'] = 0;
+            if($this->User->save($toSave)) {
+                $this->Session->setFlash(__('The user has been disabled'), 'flash_success');
+            }else {
+                $this->Session->setFlash(__('Something goes wrong'), 'flash_error');
+            }
+        }
+ 
+        return $this->redirect('/admin/users');
+    }
+
+    public function enable($id = null) {
+        if($id) {
+            $toSave = array();
+            $toSave['id'] = $id;
+            $toSave['status'] = 1;
+            if($this->User->save($toSave)) {
+                $this->Session->setFlash(__('The user has been enable'), 'flash_success');
+            }else {
+                $this->Session->setFlash(__('Something goes wrong'), 'flash_error');
+            }
+        }
+ 
+        return $this->redirect('/admin/users/waiting');
+    }
 }

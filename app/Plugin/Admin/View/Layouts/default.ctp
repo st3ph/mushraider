@@ -23,7 +23,8 @@
 
     $this->Html->css('bootstrap.min.2.3.2', null, array('inline' => false));
     $this->Html->css('bootstrap-responsive.min.2.3.2', null, array('inline' => false));
-    $this->Html->css('//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css', null, array('inline' => false));
+    //$this->Html->css('//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css', null, array('inline' => false));
+    $this->Html->css('font-awesome.min', null, array('inline' => false));
     $this->Html->css('jquery-ui-1.10.3.custom.min', null, array('inline' => false));
     $this->Html->css('Admin.spectrum', null, array('inline' => false));
     $this->Html->css('Admin.jquery.dataTables', null, array('inline' => false));

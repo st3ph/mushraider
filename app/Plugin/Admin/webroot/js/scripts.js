@@ -90,6 +90,8 @@ jQuery(function($) {
         return confirm($(this).data('confirm'));
     });
 
+    $('.tt').tooltip();
+
     loadSpectrum('.colorpicker');
 
     /*

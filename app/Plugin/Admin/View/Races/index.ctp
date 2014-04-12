@@ -38,9 +38,9 @@
                             <tr>
                                 <td><?php echo $race['Race']['title'];?></td>
                                 <td class="actions">
-                                    <?php echo $this->Html->link('<i class="icon-edit"></i>', '/admin/races/edit/'.$race['Race']['id'], array('class' => 'btn btn-warning btn-mini', 'escape' => false))?>
+                                    <?php echo $this->Html->link('<i class="icon-edit"></i>', '/admin/races/edit/'.$race['Race']['id'], array('class' => 'btn btn-info btn-mini tt', 'title' => __('Edit'), 'escape' => false))?>
                                     <?php if(!$gameId):?>
-                                        <?php echo $this->Html->link('<i class="icon-remove"></i>', '/admin/races/delete/'.$race['Race']['id'], array('class' => 'btn btn-danger btn-mini delete', 'data-confirm' => __('Are you sure you want to completely delete the race %s ?', $race['Race']['title']), 'escape' => false))?>
+                                        <?php echo $this->Html->link('<i class="icon-trash"></i>', '/admin/races/delete/'.$race['Race']['id'], array('class' => 'btn btn-danger btn-mini tt delete', 'title' => __('Delete'), 'data-confirm' => __('Are you sure you want to completely delete the race %s ?', $race['Race']['title']), 'escape' => false))?>
                                     <?php endif;?>
                                 </td>
                             </tr>                

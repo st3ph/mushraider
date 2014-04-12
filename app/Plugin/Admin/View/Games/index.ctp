@@ -55,7 +55,7 @@
                             <td><?php echo count($game['Event']);?></td>
                             <td><?php echo count($game['Character']);?></td>
                             <td class="actions">
-                                <?php echo $this->Html->link('<i class="icon-edit"></i>', '/admin/games/edit/'.$game['Game']['id'], array('class' => 'btn btn-warning btn-mini', 'escape' => false))?>
+                                <?php echo $this->Html->link('<i class="icon-edit"></i>', '/admin/games/edit/'.$game['Game']['id'], array('class' => 'btn btn-info btn-mini tt', 'title' => __('Edit'), 'escape' => false))?>
                             </td>
                         </tr>
                     <?php endforeach;?>

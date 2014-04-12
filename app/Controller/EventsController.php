@@ -140,6 +140,7 @@ class EventsController extends AppController {
                         $params['fields'] = array('id');
                         $params['group'] = array('Character.user_id');
                         $params['contain']['User']['fields'] = array('email', 'notifications_new');
+                        $params['contain']['User']['conditions']['User.status'] = 1;
                         $params['conditions']['Character.game_id'] = $toSave['game_id'];
                         $params['conditions']['Character.level >='] = !empty($toSave['character_level'])?$toSave['character_level']:1;
                         if($users = $this->Character->find('all', $params)) {                            

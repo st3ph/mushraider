@@ -38,7 +38,7 @@
                                     <?php echo $this->Html->link('<i class="icon-check"></i>', '/admin/users/enable/'.$user['User']['id'], array('class' => 'btn btn-success btn-mini tt', 'title' => __('Enable'), 'escape' => false))?>
                                     <?php echo $this->Html->link('<i class="icon-trash"></i>', '/admin/users/delete/'.$user['User']['id'], array('class' => 'btn btn-danger btn-mini tt delete', 'title' => __('Delete'), 'data-confirm' => __('Are you sure you want to completely delete the user %s ?', $user['User']['username']), 'escape' => false))?>
                                 <?php else:?>
-                                    <?php echo $this->Html->link('<i class="icon-collapse-alt"></i>', '/admin/users/disable/'.$user['User']['id'], array('class' => 'btn btn-warning btn-mini tt delete', 'title' => __('Disable'), 'data-confirm' => __('Are you sure you want to disable the user %s ?', 'escape' => false))?>
+                                    <?php echo $this->Html->link('<i class="icon-collapse-alt"></i>', '/admin/users/disable/'.$user['User']['id'], array('class' => 'btn btn-warning btn-mini tt delete', 'title' => __('Disable'), 'data-confirm' => __('Are you sure you want to disable the user %s ?', $user['User']['username']), 'escape' => false))?>
                                 <?php endif;?>
                             </td>
                         </tr>

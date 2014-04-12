@@ -81,4 +81,12 @@ class Character extends AppModel {
     function schemaBeta3() {
         $this->_schema = array_merge($this->_schema, array('modified' => array('type' => 'datetime'), 'created' => array('type' => 'datetime')));
     }
+
+    function beforeFind($params) {
+        if(!isset($params['conditions']['status']) && !isset($params['conditions']['Character.status'])) {
+            $params['conditions']['Character.status'] = 1;
+        }
+
+        return $params;
+    }
 }

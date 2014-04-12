@@ -28,9 +28,7 @@ jQuery(function($) {
         return confirm($(this).data('confirm'));
     });
 
-    $('.tt').tooltip({
-
-    });
+    $('.tt').tooltip();
 
     /*
     * Account

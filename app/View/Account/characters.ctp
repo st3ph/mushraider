@@ -49,8 +49,13 @@
 							<td><?php echo $character['Race']['title'];?></td>
 							<td><?php echo $character['RaidsRole']['title'];?></td>
 							<td>
-								<?php echo $this->Html->link('<i class="icon-edit"></i>', '/account/characters/edit/c:'.$character['Character']['id'].'-'.$character['Character']['slug'], array('class' => 'btn btn-warning btn-mini', 'escape' => false));?>
-								<?php echo $this->Html->link('<i class="icon-remove"></i>', '/account/characters/delete/c:'.$character['Character']['id'].'-'.$character['Character']['slug'], array('class' => 'btn btn-danger btn-mini confirm', 'data-confirm' => __('Are you sure you want to completely delete your character %s ? (this can\'t be undone)', $character['Character']['title']), 'escape' => false))?>
+								<?php echo $this->Html->link('<i class="icon-edit"></i>', '/account/characters/edit/c:'.$character['Character']['id'].'-'.$character['Character']['slug'], array('class' => 'btn btn-info btn-mini tt', 'title' => __('Edit'), 'escape' => false));?>
+								<?php if($character['Character']['status']):?>
+									<?php echo $this->Html->link('<i class="icon-collapse-alt"></i>', '/account/characters/disable/c:'.$character['Character']['id'].'-'.$character['Character']['slug'], array('class' => 'btn btn-warning btn-mini tt', 'title' => __('Disable'), 'escape' => false));?>
+								<?php else:?>
+									<?php echo $this->Html->link('<i class="icon-check"></i>', '/account/characters/enable/c:'.$character['Character']['id'].'-'.$character['Character']['slug'], array('class' => 'btn btn-success btn-mini tt', 'title' => __('Enable'), 'escape' => false));?>
+								<?php endif;?>
+								<?php echo $this->Html->link('<i class="icon-trash"></i>', '/account/characters/delete/c:'.$character['Character']['id'].'-'.$character['Character']['slug'], array('class' => 'btn btn-danger btn-mini tt confirm', 'title' => __('Delete'), 'data-confirm' => __('Are you sure you want to completely delete your character %s ? (this can\'t be undone)', $character['Character']['title']), 'escape' => false))?>
 							</td>
 						</tr>
 					<?php endforeach;?>

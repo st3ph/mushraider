@@ -75,7 +75,7 @@ class EventsController extends AppController {
                     'table' => 'characters',
                     'alias' => 'Character',
                     'type' => 'LEFT',
-                    'conditions' => array('Character.user_id = User.id')
+                    'conditions' => array('Character.user_id = User.id', 'Character.status > 0')
                 )
             );
         $params['conditions']['NOT'] = array('User.id' => $usersInEvent);

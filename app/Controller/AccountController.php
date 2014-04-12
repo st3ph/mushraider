@@ -50,14 +50,15 @@ class AccountController extends AppController {
         // Get all the characters
         $params = array();
         $params['recursive'] = 1;
-        $params['order'] = 'Game.title ASC, Character.title';
+        $params['order'] = 'Character.status DESC, Game.title ASC, Character.title ASC';
         $params['contain']['Classe'] = array();
         $params['contain']['User'] = array();
         $params['contain']['Race'] = array();
         $params['contain']['Game'] = array();
         $params['contain']['RaidsRole'] = array();
         $params['conditions']['Character.user_id'] = $this->user['User']['id'];        
-        $characters = $this->Character->find('all', $params);
+        $params['conditions']['Character.status'] = array(0, 1);
+        $characters = $this->Character->find('all', $params);        
         $this->set('characters', $characters);
     }
 
@@ -149,6 +150,58 @@ class AccountController extends AppController {
         return $this->redirect('/account/characters');
     }
 
+    public function characters_disable() {
+        $c = explode('-', $this->request->params['named']['c']);
+        $characterId = $c[0];
+
+        // Get the character
+        $params = array();
+        $params['recursive'] = -1;
+        $params['conditions']['id'] = $characterId;
+        $params['conditions']['user_id'] = $this->user['User']['id'];
+        if(!$character = $this->Character->find('first', $params)) {
+            $this->Session->setFlash(__('MushRaider  can\'t find this character oO'), 'flash_error');
+            return $this->redirect('/account/characters');
+        }
+
+        $toSave = array();
+        $toSave['id'] = $characterId;
+        $toSave['status'] = 0;
+        if($this->Character->save($toSave)) {
+            $this->Session->setFlash(__('The character %s has been disabled', $character['Character']['title']), 'flash_success');
+        }else {
+            $this->Session->setFlash(__('MushRaider can\'t disable this character oO'), 'flash_success');
+        }
+
+        return $this->redirect('/account/characters');
+    }
+
+    public function characters_enable() {
+        $c = explode('-', $this->request->params['named']['c']);
+        $characterId = $c[0];
+
+        // Get the character
+        $params = array();
+        $params['recursive'] = -1;
+        $params['conditions']['id'] = $characterId;
+        $params['conditions']['user_id'] = $this->user['User']['id'];
+        $params['conditions']['status'] = '0';
+        if(!$character = $this->Character->find('first', $params)) {
+            $this->Session->setFlash(__('MushRaider  can\'t find this character oO'), 'flash_error');
+            return $this->redirect('/account/characters');
+        }
+
+        $toSave = array();
+        $toSave['id'] = $characterId;
+        $toSave['status'] = 1;
+        if($this->Character->save($toSave)) {
+            $this->Session->setFlash(__('The character %s has been enabled', $character['Character']['title']), 'flash_success');
+        }else {
+            $this->Session->setFlash(__('MushRaider can\'t enable this character oO'), 'flash_success');
+        }
+
+        return $this->redirect('/account/characters');
+    }
 
     public function password() {
         $this->pageTitle = __('My MushRaider password').' - '.$this->pageTitle;

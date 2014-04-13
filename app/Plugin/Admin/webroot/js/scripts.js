@@ -4,6 +4,12 @@ var hideFlashMessage = function() {
     });
 };
 
+var hideUpdateMessage = function() {
+    $('.updateMessage').slideUp(function() {
+        $(this).remove();
+    });
+};
+
 var closeModal = function($modal) {
     $modal.dialog('close');
     //$modal.dialog('destroy');
@@ -79,12 +85,22 @@ var UpdatePreviewCanvas = function() {
 
 jQuery(function($) {
     if($('.flashMessage').length) {
+        var timer = $('.flashMessage').hasClass('alert-update')?30000:8000;        
         setTimeout('hideFlashMessage()', 8000);
     }
     
     $('.flashMessage .close').bind('click', function(e) {
         e.preventDefault();
         hideFlashMessage();
+    });
+
+    if($('.updateMessage').length) {
+        setTimeout('hideUpdateMessage()', 30000);
+    }
+
+    $('.updateMessage .close').bind('click', function(e) {
+        e.preventDefault();
+        hideUpdateMessage();
     });
 
     $('table td.actions').on('click', '.delete', function(e) {

@@ -1,3 +1,6 @@
+<?php if(!empty($updateAvailable)):?>
+    <?php echo $this->element('flash_update', array('message' => $updateAvailable));?>
+<?php endif;?>
 <div id="top">
 	<div class="navbar navbar-inverse navbar-static-top">
         <div class="navbar-inner">

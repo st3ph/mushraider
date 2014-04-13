@@ -1204,6 +1204,9 @@ input.form-error, select.form-error, textarea.form-error {border-color:#b94a48;}
 
 #wrap {margin:auto;}
 .flashMessage {border-radius:0;margin-bottom:0;}
+.updateMessage {border-radius:0;margin-bottom:0;}
+.updateMessage p {text-align:center;}
+.updateMessage p a {text-decoration:underline}
 .breadcrumb {background-color:transparent;line-height:3em}
 .breadcrumb li {text-shadow:0 1px 0 rgba(51, 47, 47, 0.6);color:#fff;}
 .breadcrumb a, .breadcrumb li.big {color:#BABABA;font-size:24.5px;text-shadow:0 1px 0 rgba(51, 47, 47, 0.6);}

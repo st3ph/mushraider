@@ -42,6 +42,10 @@ class PatcherController extends AdminAppController {
 	        		$this->$methodeName();	        		
 	        	}
 
+                // Delete cache for obvious reasons :p
+                Cache::clear('_cake_core_');
+                Cache::clear('_cake_model_');
+
 	        	$this->Session->setFlash(__('MushRaider successfully apply the patch !'), 'flash_success');
 	        }
 

@@ -13,13 +13,13 @@
 	<?php		
 	$this->Html->css('bootstrap.min.2.3.2', null, array('inline' => false));
 	$this->Html->css('bootstrap-responsive.min.2.3.2', null, array('inline' => false));
+	$this->Html->css('font-awesome.min', null, array('inline' => false));
 	$this->Html->css('jquery-ui-1.10.3.custom.min', null, array('inline' => false, 'media' => 'screen'));
 	$this->Html->css('Install.styles', null, array('inline' => false));
 
-	$this->Html->script('jquery-2.0.0.min', array('inline' => false));
+	$this->Html->script('jquery-2.1.0.min', array('inline' => false));
 	$this->Html->script('jquery-ui-1.10.3.custom.min', array('inline' => false));
-	$this->Html->script('bootstrap.min', array('inline' => false));
-	$this->Html->script('//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css', array('inline' => false));
+	$this->Html->script('bootstrap.min', array('inline' => false));	
 	$this->Html->script('Install.scripts', array('inline' => false));
 
 	echo $this->fetch('meta');

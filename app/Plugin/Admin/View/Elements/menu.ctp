@@ -29,6 +29,15 @@
             <?php echo $this->Html->link('<i class="icon-shield icon-white"></i> '.__('Roster'), '/admin/rosters', array('escape' => false));?>
         </li>
 
+        <li class="accordion-group <?php echo strtolower($this->name) == 'events'?'active':'';?>">
+            <a data-parent="#menu" data-toggle="collapse" class="accordion-toggle <?php echo strtolower($this->name) == 'events'?'':'collapsed';?>" data-target="#events-nav">
+                <i class="icon-calendar icon-white"></i> <?php echo __('Events');?> <i class="icon-chevron-down icon-white pull-right"></i>
+            </a>
+            <ul class="collapse <?php echo strtolower($this->name) == 'events'?'in':'';?>" id="events-nav">
+                <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('Manage templates'), '/admin/events/templates', array('escape' => false));?></li>
+            </ul>
+        </li>
+
         <li class="accordion-group <?php echo strtolower($this->name) == 'users'?'active':'';?>">
             <a data-parent="#menu" data-toggle="collapse" class="accordion-toggle <?php echo strtolower($this->name) == 'users'?'':'collapsed';?>" data-target="#users-nav">
                 <i class="icon-user icon-white"></i> <?php echo __('Users');?> <i class="icon-chevron-down icon-white pull-right"></i>

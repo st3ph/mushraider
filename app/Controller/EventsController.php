@@ -2,7 +2,7 @@
 class EventsController extends AppController {
     public $components = array('Emailing');
     var $helpers = array('Sociable.Comment');
-    var $uses = array('Game', 'Dungeon', 'Event', 'RaidsRole', 'EventsRole', 'EventsCharacter', 'Character');
+    var $uses = array('Game', 'Dungeon', 'Event', 'RaidsRole', 'EventsRole', 'EventsCharacter', 'Character', 'EventsTemplate', 'EventsTemplatesRole');
 
     public function beforeFilter() {
         parent::beforeFilter();
@@ -167,6 +167,22 @@ class EventsController extends AppController {
         $rolesList = $this->RaidsRole->find('list', array('order' => 'title ASC'));
         $this->set('rolesList', $rolesList);
         $this->set('eventDate', $date);
+
+        // Get templates
+        $tplList = array();
+        $params = array();
+        $params['recursive'] = 1;
+        $params['fields'] = array('id', 'title');
+        $params['order'] = array('Game.title ASC', 'EventsTemplate.title ASC');
+        $params['contain']['Game']['fields'] = array('title');
+        if($templates = $this->EventsTemplate->find('all', $params)) {
+            $currentGame = null;
+            foreach($templates as $template) {
+                $currentGame = $template['Game']['title'] == $currentGame?$currentGame:$template['Game']['title'];                
+                $tplList[$currentGame][$template['EventsTemplate']['id']] = $template['EventsTemplate']['title'];
+            }
+        }
+        $this->set('tplList', $tplList);        
     }
 
     public function edit($eventId) {

@@ -126,6 +126,13 @@ input.form-error, select.form-error, textarea.form-error {border-color:#b94a48;}
 
 #badKitties span {}
 
+#tplName {font-size:11px;display:none}
+#tplName input {font-size:11px;height:11px;}
+#tplName span {text-decoration:underline;cursor:pointer;}
+#tplName span:hover {font-weight:bold;}
+#tplList {display:none}
+#tplList .loading {margin-left:5px;}
+
 /*
 * Account
 */

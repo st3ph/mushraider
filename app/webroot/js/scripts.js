@@ -53,8 +53,9 @@ jQuery(function($) {
     * Events
     */
     var $EventGame = $('#EventGameId');
-    var loadDungeons = function($selectObject) {
+    var loadDungeons = function($selectObject, selectedObject) {
         var gameId = $selectObject.val();
+        var dungeonSelected = typeof(selectedObject) != 'undefined'?selectedObject:0;
         if(gameId.length) {
             $.ajax({
                 type: 'get',
@@ -63,8 +64,8 @@ jQuery(function($) {
                 dataType: 'json',
                 success: function(dungeons) {
                     var optionsHtml = '';
-                    $(dungeons).each(function(id, dungeon) {                        
-                        optionsHtml += '<option value="'+dungeon.Dungeon.id+'">'+dungeon.Dungeon.title+'</option>';
+                    $(dungeons).each(function(id, dungeon) {
+                        optionsHtml += '<option value="'+dungeon.Dungeon.id+'" '+(dungeonSelected == dungeon.Dungeon.id?'selected="selected"':'')+'>'+dungeon.Dungeon.title+'</option>';
                     });
                     $('#EventDungeonId').html(optionsHtml);
                 }
@@ -143,7 +144,7 @@ jQuery(function($) {
         });        
     });
 
-    var editor = $('.wysiwyg').cleditor({
+    var editorObject = $('.wysiwyg').cleditor({
         width: 'auto',
         height: 150,
         controls: "bold italic underline strikethrough | font size strikethrough style | color highlight removeformat | bullets numbering | " +
@@ -247,8 +248,7 @@ jQuery(function($) {
         cursor: "move",
         containment: "#eventRoles",
         handle: '.icon-move',
-        receive: function(event, ui) {
-            console.log(ui.item);
+        receive: function(event, ui) {            
             var characterId = ui.item.data('id');
             var roleId = ui.item.parents('td').data('id');
             var eventId = ui.item.parents('table').data('id');
@@ -262,4 +262,113 @@ jQuery(function($) {
             });
         }
     }).disableSelection();
+
+    $('#EventTimeInvitationHour, #EventTimeInvitationMin').on('change', function() {
+        var $EventTimeInvitationHour = $('#EventTimeInvitationHour');
+        var $EventTimeInvitationMin = $('#EventTimeInvitationMin');
+        var $EventTimeStartHour = $('#EventTimeStartHour');
+        var $EventTimeStartMin = $('#EventTimeStartMin');
+        var invitationHour = $EventTimeInvitationHour.val();
+        var invitationMin = $EventTimeInvitationMin.val();
+        var startHour = $EventTimeStartHour.val();
+        var startMin = $EventTimeStartMin.val();
+        if(parseInt(startHour) < parseInt(invitationHour)) {
+            $EventTimeStartHour.find('option[value="'+invitationHour+'"]').prop('selected', true);
+            if(parseInt(startMin) < parseInt(invitationMin)) {
+                $EventTimeStartMin.find('option[value="'+invitationMin+'"]').prop('selected', true);
+            }
+        }else if(parseInt(startHour) >= parseInt(invitationHour) && parseInt(startMin) < parseInt(invitationMin)) {
+            $EventTimeStartMin.find('option[value="'+invitationMin+'"]').prop('selected', true);
+        }
+    });
+
+    $('#EventTimeStartHour, #EventTimeStartMin').on('change', function() {
+        var $EventTimeInvitationHour = $('#EventTimeInvitationHour');
+        var $EventTimeInvitationMin = $('#EventTimeInvitationMin');
+        var $EventTimeStartHour = $('#EventTimeStartHour');
+        var $EventTimeStartMin = $('#EventTimeStartMin');
+        var invitationHour = $EventTimeInvitationHour.val();
+        var invitationMin = $EventTimeInvitationMin.val();
+        var startHour = $EventTimeStartHour.val();
+        var startMin = $EventTimeStartMin.val();
+        if(parseInt(startHour) < parseInt(invitationHour)) {
+            $EventTimeInvitationHour.find('option[value="'+startHour+'"]').prop('selected', true);
+            if(parseInt(invitationHour) < parseInt(startHour)) {
+                $EventTimeInvitationMin.find('option[value="'+startMin+'"]').prop('selected', true);
+            }
+        }else if(parseInt(invitationHour) >= parseInt(startHour) && parseInt(startMin) < parseInt(invitationMin)) {
+            $EventTimeInvitationMin.find('option[value="'+startMin+'"]').prop('selected', true);
+        }
+    });
+
+    // Templating
+    $('#createTemplate').on('click', function(e) {
+        e.preventDefault();
+
+        var $tpl = $('#tplName');
+        $tpl.fadeIn();
+    });
+
+    $('#tplName').on('click', '.text-error', function(e) {
+        $('#tplName').fadeOut();
+    });
+
+    $('#tplName').on('click', '.text-success', function(e) {
+        var tplName = $('#tplName input').val();
+        var eventId = $('#tplName').data('event');
+        if(tplName.length) {
+            $.ajax({
+                type: 'get',
+                url: site_url+'ajax/copyEvent',
+                data: 'e='+eventId+'&name='+tplName,
+                success: function(msg) {
+                    $('#tplName').fadeOut();
+                }
+            });            
+        }else {
+            $('#tplName input').addClass('form-error');
+        }
+    });
+    
+    $('#loadTemplate').on('click', function(e) {
+        e.preventDefault();
+
+        var $tpl = $('#tplList');
+        $tpl.fadeIn();
+    });
+
+    $('#TemplateList').on('change', function() {
+        var $tplList = $(this);
+        var $imgLoading = $(imgLoading);
+        var templateId = $(this).val();
+
+        if(templateId.length && templateId > 0) {
+            $tplList.after($imgLoading);
+            $.ajax({
+                type: 'get',
+                url: site_url+'ajax/loadTemplate',
+                data: 't='+templateId,
+                dataType: 'json',
+                success: function(json) {                    
+                    if(json.type == 'error') {
+                        $tplList.addClass('form-error');
+                        alert(json.msg);
+                    }else {
+                        $('#EventTitle').val(json.msg.EventsTemplate.event_title);
+                        $('#EventDescription').val(json.msg.EventsTemplate.event_description);
+                        editorObject[0].updateFrame();
+                        $('#EventGameId').val(json.msg.EventsTemplate.game_id);
+                        loadDungeons($EventGame, json.msg.EventsTemplate.dungeon_id);
+                        if(json.msg.EventsTemplatesRole.length > 0) {
+                            for(var i = json.msg.EventsTemplatesRole.length - 1; i >= 0; i--) {
+                                $('#EventRoles'+json.msg.EventsTemplatesRole[i].raids_role_id).val(json.msg.EventsTemplatesRole[i].count);
+                            };
+                        }
+                        $('#EventCharacterLevel').val(json.msg.EventsTemplate.character_level);
+                    }
+                    $imgLoading.remove();
+                }
+            });         
+        }
+    });
 });

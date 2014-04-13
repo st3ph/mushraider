@@ -1,7 +1,7 @@
 <?php
 class AjaxController extends AppController {
     public $components = array('Emailing');
-    var $uses = array('Game', 'Dungeon', 'Classe', 'Race', 'EventsCharacter', 'Character', 'Event', 'RaidsRole');
+    var $uses = array('Game', 'Dungeon', 'Classe', 'Race', 'EventsCharacter', 'EventsRole', 'Character', 'Event', 'RaidsRole', 'EventsTemplate', 'EventsTemplatesRole');
 
     function beforeFilter() {
         parent::beforeFilter();
@@ -178,5 +178,58 @@ class AjaxController extends AppController {
         }
 
         return json_encode($jsonMessage);
-    }    
+    }
+
+    function copyEvent() {
+        if(isset($this->request->query['e']) && !empty($this->request->query['name'])) {
+            $eventId = $this->request->query['e'];
+            $templateName = $this->request->query['name'];
+
+            // Get event infos
+            $params = array();
+            $params['recursive'] = 1;
+            $params['contain']['EventsRole'] = array();
+            $params['conditions']['id'] = $eventId;
+            if($event = $this->Event->find('first', $params)) {
+                $toSave = array();
+                $toSave['EventsTemplate']['title'] = $templateName;
+                $toSave['EventsTemplate']['event_title'] = $event['Event']['title'];
+                $toSave['EventsTemplate']['event_description'] = $event['Event']['description'];
+                $toSave['EventsTemplate']['game_id'] = $event['Event']['game_id'];
+                $toSave['EventsTemplate']['dungeon_id'] = $event['Event']['dungeon_id'];
+                $toSave['EventsTemplate']['character_level'] = $event['Event']['character_level'];
+                if(!empty($event['EventsRole'])) {
+                    foreach($event['EventsRole'] as $key => $eventRole) {
+                        $toSave['EventsTemplatesRole'][$key]['raids_role_id'] = $eventRole['raids_role_id'];
+                        $toSave['EventsTemplatesRole'][$key]['count'] = $eventRole['count'];
+                    }
+                }
+
+                if($this->EventsTemplate->saveAll($toSave)) {
+                    return 'ok';
+                }
+            }
+        }
+
+        return 'fail';
+    }
+
+    function loadTemplate() {
+        $jsonMessage = array();
+        $jsonMessage['type'] = 'error';
+        $jsonMessage['msg'] = __('Error while loading the template');
+        if(!empty($this->request->query['t'])) {
+            // Load the template
+            $params = array();
+            $params['recursive'] = 1;
+            $params['contain']['EventsTemplatesRole'] = array();
+            $params['conditions']['id'] = $this->request->query['t'];
+            if($eventTemplate = $this->EventsTemplate->find('first', $params)) {
+                $jsonMessage['type'] = 'ok';
+                $jsonMessage['msg'] = $eventTemplate;
+            }
+        }
+
+        return json_encode($jsonMessage);
+    }
 }

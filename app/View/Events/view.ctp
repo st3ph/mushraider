@@ -12,8 +12,10 @@
 		<?php endif;?>
 		<?php if($dayTimestamp >= $todayTimestamp && ($user['User']['isOfficer'] || $user['User']['isAdmin'])):?>
 			<div class="pull-right">
-				<?php echo $this->Html->link('<i class="icon-edit"></i> ', '/events/edit/'.$event['Event']['id'], array('class' => 'btn btn-warning btn-mini', 'escape' => false));?>
-				<?php echo $this->Html->link('<i class="icon-remove"></i> ', '/events/delete/'.$event['Event']['id'], array('class' => 'btn btn-danger btn-mini confirm', 'data-confirm' => __("Are you sure you want to delete this event ?\n(this can't be undone)"), 'escape' => false));?>
+				<?php echo $this->Html->link('<i class="icon-copy"></i> '.__('Copy'), '/events/view/'.$event['Event']['id'], array('id' => 'createTemplate', 'class' => 'btn btn-mini tt', 'title' => __('Create template'), 'escape' => false));?>
+				<span id="tplName" data-event="<?php echo $event['Event']['id'];?>"><input type="text" value="" placeholder="<?php echo __('template name');?>"/> <span class="text-error"><?php echo __('cancel');?></span> <span class="text-success"><?php echo __('save');?></span></span>
+				<?php echo $this->Html->link('<i class="icon-edit"></i> '.__('Edit'), '/events/edit/'.$event['Event']['id'], array('class' => 'btn btn-info btn-mini', 'escape' => false));?>
+				<?php echo $this->Html->link('<i class="icon-trash"></i> '.__('Delete'), '/events/delete/'.$event['Event']['id'], array('class' => 'btn btn-danger btn-mini confirm', 'data-confirm' => __("Are you sure you want to delete this event ?\n(this can't be undone)"), 'escape' => false));?>
 			</div>
 		<?php endif;?>
 	</h1>

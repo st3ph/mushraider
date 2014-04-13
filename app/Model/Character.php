@@ -83,8 +83,10 @@ class Character extends AppModel {
     }
 
     function beforeFind($params) {
-        if(!isset($params['conditions']['status']) && !isset($params['conditions']['Character.status'])) {
-            $params['conditions']['Character.status'] = 1;
+        if(!empty($this->_schema['status'])) { // Because of patch 1.1 to avoid errors
+            if(!isset($params['conditions']['status']) && !isset($params['conditions']['Character.status'])) {
+                $params['conditions']['Character.status'] = 1;
+            }
         }
 
         return $params;

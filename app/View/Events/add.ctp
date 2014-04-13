@@ -1,10 +1,12 @@
 <header>
 	<h1>
         <i class="icon-calendar"></i> <?php echo __('Add event');?> <?php echo __('the');?> <?php echo $this->Former->date($eventDate, 'jour');?>
-        <div class="pull-right">
-            <?php echo $this->Html->link('<i class="icon-download"></i> '.__('Load template'), '/events/add', array('id' => 'loadTemplate', 'class' => 'btn btn-mini', 'escape' => false));?>
-            <span id="tplList"><?php echo $this->Form->input('Template.list', array('type' => 'select', 'options' => $tplList, 'label' => false, 'div' => null, 'empty' => __('Choose a template')));?></span>
-        </div>        
+        <?php if(!empty($tplList)):?>
+            <div class="pull-right">
+                <?php echo $this->Html->link('<i class="icon-download"></i> '.__('Load template'), '/events/add', array('id' => 'loadTemplate', 'class' => 'btn btn-mini', 'escape' => false));?>
+                <span id="tplList"><?php echo $this->Form->input('Template.list', array('type' => 'select', 'options' => $tplList, 'label' => false, 'div' => null, 'empty' => __('Choose a template')));?></span>
+            </div>       
+        <?php endif;?> 
     </h1>
 </header>
 

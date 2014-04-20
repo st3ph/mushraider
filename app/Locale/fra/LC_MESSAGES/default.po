@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Mushraider\n"
 "POT-Creation-Date: 2014-04-13 16:25+0100\n"
-"PO-Revision-Date: 2014-04-13 18:00+0100\n"
+"PO-Revision-Date: 2014-04-20 19:10+0100\n"
 "Last-Translator: Stéphane Litou <contact@stephane-litou.com>\n"
 "Language-Team:  <contact@stephane-litou.com>\n"
 "Language: fr\n"
@@ -386,7 +386,7 @@ msgstr "Ce donjon est lié à un jeu, vous ne pouvez donc pas le supprimer."
 
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/DungeonsController.php:127
 msgid "The dungeon has been deleted"
-msgstr "Le donjon a bien été supprimé;"
+msgstr "Le donjon a bien été supprimé."
 
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/DungeonsController.php:142
 msgid "The dungeon has been disable"
@@ -490,7 +490,7 @@ msgstr ""
 
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:100
 msgid "The user has been deleted"
-msgstr "L'utilisateur a bien été supprimé;"
+msgstr "L'utilisateur a bien été supprimé."
 
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:115
 msgid "The user has been disabled"
@@ -1047,7 +1047,7 @@ msgstr "modifier"
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/index.ctp:38
 #: E:\www\wamp\www\mushraider\app/View/Account/characters.ctp:56
 msgid "Enable"
-msgstr "Activé"
+msgstr "Activer"
 
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Dungeons/disabled.ctp:44
 #, php-format
@@ -1087,7 +1087,7 @@ msgstr "Liste des donjons"
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/index.ctp:41
 #: E:\www\wamp\www\mushraider\app/View/Account/characters.ctp:54
 msgid "Disable"
-msgstr "Désactivé"
+msgstr "Désactiver"
 
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Dungeons/index.ctp:47
 #, php-format

@@ -23,13 +23,6 @@
         				<?php if($user['User']['isAdmin'] || $user['User']['isOfficer']):?>
         					<li><i class="icon-wrench"></i> <?php echo $this->Html->link(__('Admin'), '/admin');?></li>
         				<?php endif;?>
-                        <?php if(!empty($mushraiderLinks)):;?>
-                            <?php foreach($mushraiderLinks as $customLink):?>
-                                <li>
-                                    <?php echo $this->Html->link($customLink->title, $customLink->url, array('escape' => false));?>
-                                </li>                        
-                            <?php endforeach;?>
-                        <?php endif;?>
         			<?php else:?>
         				<li><i class="icon-signin"></i> <?php echo $this->Html->link(__('LOGIN / REGISTER'), '/auth/login');?></li>
         			<?php endif;?>
@@ -57,6 +50,13 @@
                     <li class="<?php echo strtolower($this->name) == 'account'?'active':'';?>">
                         <?php echo $this->Html->link(__('My Account'), '/account', array('escape' => false));?>
                     </li>
+                    <?php if(!empty($mushraiderLinks)):;?>
+                        <?php foreach($mushraiderLinks as $customLink):?>
+                            <li>
+                                <?php echo $this->Html->link($customLink->title, $customLink->url, array('escape' => false));?>
+                            </li>
+                        <?php endforeach;?>
+                    <?php endif;?>                    
                 </ul>
             </div>
     	</div>

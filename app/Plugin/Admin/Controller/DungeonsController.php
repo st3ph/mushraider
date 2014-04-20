@@ -78,6 +78,7 @@ class DungeonsController extends AdminAppController {
         $params['recursive'] = 1;
         $params['contain']['RaidsSize'] = array();     
         $params['conditions']['Dungeon.id'] = $id;
+        $params['conditions']['Dungeon.status'] = array('0', '1');
         if(!$dungeon = $this->Dungeon->find('first', $params)) {
             $this->Session->setFlash(__('MushRaider is unable to find this dungeon oO'), 'flash_error');
             return $this->redirect('/admin/dungeons');
@@ -120,7 +121,7 @@ class DungeonsController extends AdminAppController {
             $params['fields'] = array('id');
             $params['recursive'] = -1;
             $params['conditions']['id'] = $id;
-            $params['conditions']['game_id'] = null;            
+            $params['conditions']['status'] = array('0', '1');
             if(!$dungeon = $this->Dungeon->find('first', $params)) {
                 $this->Session->setFlash(__('This dungeon is linked to a game, you can\'t delete it.'), 'flash_warning');
             }elseif($this->Dungeon->delete($id)) {

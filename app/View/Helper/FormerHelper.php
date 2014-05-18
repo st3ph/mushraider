@@ -117,7 +117,7 @@ class FormerHelper extends AppHelper {
 						    		$output .= '<div class="clearfix dayNumber">';
 						    			$output .= $day;
 						    			if($dayTimestamp >= $todayTimestamp && ($options['user']['User']['isOfficer'] || $options['user']['User']['isAdmin'])) {
-						    				$output .= $this->Html->link('<i class="icon-plus-sign-alt"></i>', '/events/add/'.$formatCurrentDay, array('class' => 'pull-right', 'escape' => false));
+						    				$output .= $this->Html->link('<i class="icon-plus-sign-alt"></i>', '/events/add/'.$formatCurrentDay, array('title' => __('Add event'), 'class' => 'pull-right tt', 'escape' => false));
 						    			}
 
 						    			// Check if there is events this day

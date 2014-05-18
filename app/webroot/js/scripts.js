@@ -52,6 +52,28 @@ jQuery(function($) {
     /*
     * Events
     */
+    $("#createEvent input").datepicker({
+        defaultDate: "+1d",
+        changeMonth: true,
+        changeYear: true,
+        numberOfMonths: 1,
+        dateFormat: 'dd/mm/yy',
+        minDate: new Date()
+    });    
+
+    $("#createEvent").on('click', 'button', function(e) {
+        e.preventDefault();
+
+        var datePicked = $(this).prev('input').val();
+        if(!datePicked.length) {
+            $(this).prev('input').addClass('form-error').focus();
+        }else {
+            var dates = datePicked.split('/');
+            window.location = window.location.protocol+'//'+window.location.host+'/events/add/'+dates[2]+'-'+dates[1]+'-'+dates[0];
+        }
+    });
+
+
     var $EventGame = $('#EventGameId');
     var loadDungeons = function($selectObject, selectedObject) {
         var gameId = $selectObject.val();

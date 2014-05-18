@@ -18,6 +18,10 @@ class RaidsRole extends AppModel {
             'notEmpty' => array(
                 'rule' => 'notEmpty',
                 'message' => 'Title cannot be empty.'
+            ),
+            'unique' => array(
+                'rule' => 'isUnique',
+                'message' => 'This role already exists.'
             )
         )
     );
@@ -32,7 +36,7 @@ class RaidsRole extends AppModel {
         }
 
         $toSave = array();
-        $toSave['title'] = $size;
+        $toSave['title'] = $title;
         $this->create();
         $this->save($toSave);
         return $this->getLastInsertId();

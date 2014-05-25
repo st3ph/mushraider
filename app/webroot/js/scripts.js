@@ -69,7 +69,7 @@ jQuery(function($) {
             $(this).prev('input').addClass('form-error').focus();
         }else {
             var dates = datePicked.split('/');
-            window.location = window.location.protocol+'//'+window.location.host+'/events/add/'+dates[2]+'-'+dates[1]+'-'+dates[0];
+            window.location = site_url+'events/add/'+dates[2]+'-'+dates[1]+'-'+dates[0];
         }
     });
 
@@ -166,12 +166,14 @@ jQuery(function($) {
         });        
     });
 
-    var editorObject = $('.wysiwyg').cleditor({
-        width: 'auto',
-        height: 150,
-        controls: "bold italic underline strikethrough | font size strikethrough style | color highlight removeformat | bullets numbering | " +
-                  "outdent indent | alignleft center alignright justify | undo redo | link unlink"
-    });
+    if($('.wysiwyg').length) {
+        var editorObject = $('.wysiwyg').cleditor({
+            width: 'auto',
+            height: 150,
+            controls: "bold italic underline strikethrough | font size strikethrough style | color highlight removeformat | bullets numbering | " +
+                      "outdent indent | alignleft center alignright justify | undo redo | link unlink"
+        });
+    }
 
     // Validate roster
     $('#eventRoles th').on('click', 'i', function() {

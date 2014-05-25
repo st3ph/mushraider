@@ -7,7 +7,7 @@
     <table width="580" border="0" cellspacing="0" cellpadding="0">
         <tr>
             <td height="44" valign="bottom" align="left">
-                <img src="<?php echo 'http://'.$_SERVER['HTTP_HOST'].'/img/logo.jpg';?>" width="253" height="44" alt="MushRaider" />
+                <img src="<?php echo 'http://'.$_SERVER['HTTP_HOST'].$this->webroot.'/img/logo.jpg';?>" width="253" height="44" alt="MushRaider" />
             </td>
         </tr>
         <tr>

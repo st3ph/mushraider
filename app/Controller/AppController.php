@@ -88,6 +88,8 @@ class AppController extends Controller {
         }
 
         $this->pageTitle = $this->Setting->getOption('title');
+
+        Configure::write('Config.email', json_decode($this->Setting->getOption('email')));
 	}
 
 	public function beforeRender() {

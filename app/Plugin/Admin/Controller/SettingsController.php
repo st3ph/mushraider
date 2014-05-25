@@ -45,7 +45,16 @@ class SettingsController extends AdminAppController {
                 }else {
                     if(!$this->request->data['Setting']['theme']['bgnoimage']) {
                         $imageName = $this->image($this->request->data['Setting']['theme']['bgimage'], true);
-                        if(!isset($imageName['error'])) {
+                        if($this->request->data['Setting']['theme']['bgimage']['error'] == 4) {
+                            $themeSetting = json_decode($this->Setting->getOption('theme'));
+                            if(!empty($themeSetting->bgimage)) {
+                                $theme['bgimage'] = $themeSetting->bgimage;
+                            }else {
+                                $theme['bgimage'] = $this->request->webroot.'img/bg.png';
+                                $theme['bgrepeat'] = 'repeat';
+                                $theme['bgcolor'] = '#444444';
+                            }
+                        }elseif(!isset($imageName['error'])) {
                             $theme['bgimage'] = $imageName['name'];
                         }
                     }else {
@@ -65,6 +74,20 @@ class SettingsController extends AdminAppController {
                     }
                 }
             }
+
+            if(!empty($this->request->data['Setting']['email'])) {
+                $email = array();
+                $email['name'] = $this->request->data['Setting']['email']['name'];
+                $email['from'] = $this->request->data['Setting']['email']['from'];
+                $email['encoding'] = $this->request->data['Setting']['email']['utf8']?'utf8':'';
+                $email['transport'] = $this->request->data['Setting']['email']['transport'];
+                $email['host'] = $this->request->data['Setting']['email']['host'];
+                $email['port'] = $this->request->data['Setting']['email']['port'];
+                $email['username'] = $this->request->data['Setting']['email']['username'];
+                $email['password'] = $this->request->data['Setting']['email']['password'];
+                $this->Setting->setOption('email', json_encode($email));
+            }
+
             $this->Setting->setOption('links', json_encode($customLinks));
 
             $this->Session->setFlash(__('Settings have been updated'), 'flash_success');
@@ -104,6 +127,17 @@ class SettingsController extends AdminAppController {
                 $this->request->data['Setting']['links'][] = $link;
             }
         }
+
+        // Emails
+        $email = json_decode($this->Setting->getOption('email'));
+        $this->request->data['Setting']['email']['name'] = $email->name;
+        $this->request->data['Setting']['email']['from'] = $email->from;
+        $this->request->data['Setting']['email']['utf8'] = $email->encoding == 'utf8'?true:false;
+        $this->request->data['Setting']['email']['transport'] = $email->transport;
+        $this->request->data['Setting']['email']['host'] = $email->host;
+        $this->request->data['Setting']['email']['port'] = $email->port;
+        $this->request->data['Setting']['email']['username'] = $email->username;
+        $this->request->data['Setting']['email']['password'] = $email->password;
     }
 
     private function image($image, $customWebroot = false) {

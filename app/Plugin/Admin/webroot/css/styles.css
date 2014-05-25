@@ -1233,6 +1233,7 @@ span.formTip {font-size:11px;font-style:italic;}
 #footer p a:hover {color:#953d20;text-decoration:none;}
 .form-group .submit.pull-right input {margin-left:5px;}
 header .toolbar .nav li a {color:#bf4d28;}
+.well-white {background-color:#fdfdfd;}
 
 /* Dashboard */
 .quick-btn {min-width:90px;width:auto;padding-left:2px;padding-right:2px;}

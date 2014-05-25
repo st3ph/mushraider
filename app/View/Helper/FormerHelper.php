@@ -124,6 +124,23 @@ class FormerHelper extends AppHelper {
 						    			if($matchingEvents = $this->extractEvents($events, $formatCurrentDay)) {
 											$output .= '<ul>';
 												foreach($matchingEvents as $matchingEvent) {
+													// Tooltip
+													$playersNeeded = 0;
+													if($matchingEvent['EventsRole']) {
+														foreach($matchingEvent['EventsRole'] as $eventRoles) {
+															$playersNeeded += $eventRoles['count'];
+														}
+													}
+
+													$tooltip = '<h5>'.$matchingEvent['Event']['title'].'</h5>';
+													$tooltip .= '<div>';
+														$tooltip .= $matchingEvent['Game']['title'].'<br/>';
+														$tooltip .= $matchingEvent['Dungeon']['title'].'<br/>';
+														$tooltip .= __('Roster').' : '.count($matchingEvent['EventsCharacter']).'/'.$playersNeeded.'<br/>';
+														$tooltip .= __('Start').' : '.$this->date($matchingEvent['Event']['time_start'], 'heure');
+													$tooltip .= '<div>';
+
+
 													$output .= '<li>';
 														$output .= '<span>'.$this->date($matchingEvent['Event']['time_invitation'], 'heure').'</span>';
 														if(!empty($matchingEvent['Game']['logo'])) {
@@ -135,7 +152,7 @@ class FormerHelper extends AppHelper {
 															$registeredClass = 'registered_'.$registeredCharacter['status'];
 														}
 														$eventTitle = !empty($matchingEvent['Event']['title'])?$matchingEvent['Event']['title']:$matchingEvent['Dungeon']['title'];
-														$output .= $this->Html->link($eventTitle, '/events/view/'.$matchingEvent['Event']['id'], array('escape' => false, 'title' => $matchingEvent['Dungeon']['title'], 'class' => $registeredClass));
+														$output .= $this->Html->link($eventTitle, '/events/view/'.$matchingEvent['Event']['id'], array('escape' => false, 'title' => $tooltip, 'class' => 'tt '.$registeredClass));
 													$output .= '</li>';
 												}
 											$output .= '</ul>';

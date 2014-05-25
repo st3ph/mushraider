@@ -103,6 +103,9 @@ class StepController extends InstallAppController {
                     $toSave['activation_key'] = md5(uniqid());
                     $userModel->create();
                     if($userModel->save($toSave)) {
+                        $host = substr_count($_SERVER['HTTP_HOST'], '.') > 1?substr($_SERVER['HTTP_HOST'], strpos($_SERVER['HTTP_HOST'], '.') + 1):$_SERVER['HTTP_HOST'];                        
+                        $host = strpos($host, ':') !== false?substr($host, 0, strpos($host, ':')):$host; // Remove port if present on unusual configurations
+
                         // Add default settings
                         App::uses('Setting', 'Model');
                         $settingModel = new Setting();
@@ -116,6 +119,16 @@ class StepController extends InstallAppController {
                                                         ));
                         $defaultSettings['css'] = '';
                         $defaultSettings['notifications'] = 1;
+                        $defaultSettings['email'] = json_encode(array(
+                                                            'name' => 'MushRaider',
+                                                            'from' => 'mushraider@'.$host,
+                                                            'encoding' => '',
+                                                            'transport' => 'Mail',
+                                                            'host' => '',
+                                                            'port' => '',
+                                                            'username' => '',
+                                                            'password' => ''
+                                                        ));
                         foreach($defaultSettings as $option => $value) {
                             $settingModel->create();
                             $settingModel->save(array('option' => $option, 'value' => $value));

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Mushraider\n"
-"POT-Creation-Date: 2014-05-18 11:06+0100\n"
-"PO-Revision-Date: 2014-05-18 11:06+0100\n"
+"POT-Creation-Date: 2014-05-25 20:01+0100\n"
+"PO-Revision-Date: 2014-05-25 20:01+0100\n"
 "Last-Translator: Stéphane Litou <contact@stephane-litou.com>\n"
 "Language-Team:  <contact@stephane-litou.com>\n"
 "Language: fr\n"
@@ -43,8 +43,8 @@ msgstr "%s a été ajouté à la liste de vos personnages"
 #: E:\www\wamp\www\mushraider\app/Controller/AccountController.php:254
 #: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:85
 #: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:128
-#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:161
-#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:237
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:162
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:238
 msgid "Something wrong happen, please fix the errors below"
 msgstr ""
 "Quelque chose de mal c'est produit, veuillez corriger les erreurs ci-dessous"
@@ -221,76 +221,76 @@ msgstr "Votre mot de passe a été mis à jour."
 #: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:10
 #: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:14
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Dashboard/index.ctp:30
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:34
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:32
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Games/index.ctp:19
 #: E:\www\wamp\www\mushraider\app/View/Elements/header.ctp:48
 #: E:\www\wamp\www\mushraider\app/View/Events/index.ctp:3
 msgid "Events"
 msgstr "Evènements"
 
-#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:38
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:39
 #: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:9
 msgid "View event"
 msgstr "Détails d'un événement"
 
-#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:50
-#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:246
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:51
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:247
 msgid "MushRaider can't find this event oO"
 msgstr "MushRaider ne peut pas trouver cet événement oO"
 
-#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:91
 #: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:92
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:93
 #: E:\www\wamp\www\mushraider\app/View/Helper/FormerHelper.php:120
 #: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:3
 msgid "Add event"
 msgstr "Ajouter un événement"
 
-#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:95
-#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:192
-#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:262
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:96
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:193
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:263
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/AdminAppController.php:20
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/AdminAppController.php:26
 msgid "You don't have permission to access this page."
 msgstr "Vous n'avez pas les permissions pour accéder à cette page."
 
-#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:156
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:157
 msgid "The event has been created."
 msgstr "L'événement a bien été créé."
 
-#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:189
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:190
 #: E:\www\wamp\www\mushraider\app/View/Events/edit.ctp:2
 msgid "Edit event"
 msgstr "Modifier un événement"
 
-#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:232
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:233
 msgid "The event has been updated."
 msgstr "L'événement a bien été mis à jour."
 
-#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:302
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:303
 msgid "The event has been deleted."
 msgstr "L'événement a bien été supprimé."
 
-#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:304
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:305
 msgid "MushRaider can't delete this event."
 msgstr "MushRaider ne peut pas supprimer cet événement."
 
-#: E:\www\wamp\www\mushraider\app/Controller/Component/EmailingComponent.php:26
+#: E:\www\wamp\www\mushraider\app/Controller/Component/EmailingComponent.php:30
 msgid "Welcome to MushRaider"
 msgstr "Bienvenue sur le MushRaider"
 
-#: E:\www\wamp\www\mushraider\app/Controller/Component/EmailingComponent.php:37
+#: E:\www\wamp\www\mushraider\app/Controller/Component/EmailingComponent.php:41
 msgid "[MushRaider] Recover your password"
 msgstr "[MushRaider] Retrouvez votre mot de passe"
 
-#: E:\www\wamp\www\mushraider\app/Controller/Component/EmailingComponent.php:49
+#: E:\www\wamp\www\mushraider\app/Controller/Component/EmailingComponent.php:53
 msgid "[MushRaider] Event cancelled"
 msgstr "[MushRaider] Evénement annulé"
 
-#: E:\www\wamp\www\mushraider\app/Controller/Component/EmailingComponent.php:60
+#: E:\www\wamp\www\mushraider\app/Controller/Component/EmailingComponent.php:64
 msgid "[MushRaider] New Event has been added"
 msgstr "[MushRaider] Un nouvel événement a été créé"
 
-#: E:\www\wamp\www\mushraider\app/Controller/Component/EmailingComponent.php:71
+#: E:\www\wamp\www\mushraider\app/Controller/Component/EmailingComponent.php:75
 msgid "[MushRaider] You have been validate to an event"
 msgstr "[MushRaider] Vous avez été validé à un événement"
 
@@ -423,7 +423,7 @@ msgid "Logo is too big"
 msgstr "Le logo est trop gros"
 
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/GamesController.php:178
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/SettingsController.php:123
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/SettingsController.php:157
 msgid "An error occur while uploading"
 msgstr "Une erreur est survenue pendant l'upload"
 
@@ -492,11 +492,11 @@ msgstr "MushRaider ne trouve pas ce rôle oO"
 msgid "Role %s has been deleted and replaced with %s"
 msgstr "Le rôle %s a été supprimé et remplacé par %s"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/SettingsController.php:70
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/SettingsController.php:93
 msgid "Settings have been updated"
 msgstr "La configuration a été mise à jour"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/SettingsController.php:120
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/SettingsController.php:154
 msgid "Image is too big"
 msgstr "L'image est trop grosse"
 
@@ -557,15 +557,15 @@ msgstr ""
 "MushRaider ne trouve pas les paramètres de connexion à la base de donnée, "
 "veuillez compléter le formulaire avant de continuer"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Install/Controller/StepController.php:130
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/Controller/StepController.php:143
 msgid "MushRaider successfully install !"
 msgstr "MushRaider s'est installé avec succès !"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Install/Controller/StepController.php:133
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/Controller/StepController.php:146
 msgid "MushRaider can't create admin user, please try again."
 msgstr "MushRaider ne peut pas créer l'utilisateur admin, veuillez réessayer."
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Install/Controller/StepController.php:141
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/Controller/StepController.php:154
 msgid ""
 "MushRaider can't verify the settings, please be sure to fill all the fields "
 "to continue."
@@ -649,7 +649,7 @@ msgstr "sauvegarder"
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Races/edit.ctp:16
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Raidroles/add.ctp:13
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Raidroles/edit.ctp:14
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:57
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:95
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:33
 #: E:\www\wamp\www\mushraider\app/View/Account/password.ctp:22
 #: E:\www\wamp\www\mushraider\app/View/Account/settings.ctp:19
@@ -887,6 +887,20 @@ msgstr "Précédent"
 msgid "Next"
 msgstr "Suivant"
 
+#: E:\www\wamp\www\mushraider\app/View/Helper/FormerHelper.php:139
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Dashboard/index.ctp:15
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:27
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Games/index.ctp:20
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Rosters/index.ctp:4
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Rosters/index.ctp:38
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:108
+msgid "Roster"
+msgstr "Roster"
+
+#: E:\www\wamp\www\mushraider\app/View/Helper/FormerHelper.php:140
+msgid "Start"
+msgstr "Début"
+
 #: E:\www\wamp\www\mushraider\app/View/Helper/ToolsHelper.php:36
 msgid "Today at"
 msgstr "Aujourd'hui à"
@@ -965,7 +979,7 @@ msgid "Classes list"
 msgstr "Liste des classes"
 
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Classes/index.ctp:7
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:72
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:71
 msgid "Add class"
 msgstr "Ajouter une classe"
 
@@ -1021,21 +1035,12 @@ msgstr ""
 "des jeux, des donjons, classes etc..."
 
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Dashboard/index.ctp:10
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:43
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:41
 msgid "Users"
 msgstr "Utilisateurs"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Dashboard/index.ctp:15
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:29
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Games/index.ctp:20
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Rosters/index.ctp:4
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Rosters/index.ctp:38
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:108
-msgid "Roster"
-msgstr "Roster"
-
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Dashboard/index.ctp:20
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:53
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:51
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Games/add.ctp:19
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Games/edit.ctp:20
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Games/index.ctp:16
@@ -1043,7 +1048,7 @@ msgid "Dungeons"
 msgstr "Donjons"
 
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Dashboard/index.ctp:25
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:65
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:64
 msgid "Games"
 msgstr "Jeux"
 
@@ -1057,7 +1062,7 @@ msgstr "Liste des donjons désactivés"
 
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Dungeons/disabled.ctp:7
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Dungeons/index.ctp:7
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:57
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:55
 msgid "Add dungeon"
 msgstr "Ajouter un donjon"
 
@@ -1152,63 +1157,63 @@ msgstr "VOTRE NAVIGATEUR NE SUPPORTE PAS JAVASCRIPT"
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:24
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:23
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Stats/index.ctp:5
 msgid "Stats"
 msgstr "Statistiques"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:37
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:35
 msgid "Manage templates"
 msgstr "Gérer les templates"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:46
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:44
 msgid "Manage users"
 msgstr "Gérer les utilisateurs"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:47
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:45
 msgid "Waiting users"
 msgstr "Utilisateurs en attente"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:56
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:54
 msgid "Manage dungeons"
 msgstr "Gérer les donjons"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:58
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:56
 msgid "Disabled dungeons"
 msgstr "Donjons désactivés"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:68
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:67
 msgid "Manage games"
 msgstr "Gérer les jeux"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:69
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:68
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Games/add.ctp:4
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Games/index.ctp:7
 msgid "Add game"
 msgstr "Ajouter un jeu"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:71
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:70
 msgid "Manage classes"
 msgstr "Gérer les classes"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:74
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:73
 msgid "Manage races"
 msgstr "Gérer les races"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:75
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:74
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Races/index.ctp:7
 msgid "Add race"
 msgstr "Ajouter une race"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:81
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:82
 msgid "Player roles"
 msgstr "Rôles de joueur"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:84
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:85
 msgid "Manage roles"
 msgstr "Gérer les rôles"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:85
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:86
 msgid "Add role"
 msgstr "Ajouter un rôle"
 
@@ -1256,7 +1261,7 @@ msgstr "Informations générales"
 
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Games/add.ctp:13
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Games/edit.ctp:13
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:22
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:25
 msgid "Logo"
 msgstr "Logo"
 
@@ -1425,57 +1430,57 @@ msgstr "Configurer MushRaider"
 msgid "General settings"
 msgstr "Paramètres généraux"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:10
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:11
 #: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step2.ctp:4
 msgid "Site title"
 msgstr "Titre du site"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:13
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:14
 #: E:\www\wamp\www\mushraider\app/View/Account/settings.ctp:12
 msgid "Email notifications"
 msgstr "Notifications email"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:14
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:15
 msgid "Enable email notifications"
 msgstr "Activer les notifications par email"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:17
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:18
 msgid "Default language"
 msgstr "Langue par défaut"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:20
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:22
 msgid "Theming"
 msgstr "Thème"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:29
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:32
 msgid "Background Image"
 msgstr "Image de fond"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:30
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:33
 msgid "no background image"
 msgstr "pas d'image de fond"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:31
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:34
 msgid "back to original background"
 msgstr "retourner au fond par défaut"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:34
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:37
 msgid "Background Color"
 msgstr "Couleur de fond"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:37
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:40
 msgid "Background Repeat"
 msgstr "Répétition de l'image de fond"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:40
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:43
 msgid "Custom CSS"
 msgstr "CSS personnalisé"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:43
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:47
 msgid "Custom links"
 msgstr "Liens personnalisés"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:44
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:49
 msgid ""
 "Custom links are display in top of the header. They are usefull to add links "
 "to your website, forums etc..."
@@ -1483,13 +1488,61 @@ msgstr ""
 "Les liens personnalisés sont affiché dans l'en-tête du site. Ils sont utiles "
 "pour ajouter des liens vers votre site, forums etc..."
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:48
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:53
 msgid "Link title"
 msgstr "Titre du lien"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:51
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:56
 msgid "Url"
 msgstr "Url"
+
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:62
+msgid "Emails"
+msgstr "Emails"
+
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:64
+msgid "Sender"
+msgstr "Expéditeur"
+
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:66
+msgid "Your name"
+msgstr "Votre nom"
+
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:69
+msgid "Your email address"
+msgstr "Votre adresse email"
+
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:72
+msgid "Advanced settings"
+msgstr "Paramètres avancés"
+
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:74
+msgid "Encoding"
+msgstr "Jeu de caractères"
+
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:75
+msgid "Encode as UTF-8"
+msgstr "Encoder en UTF-8"
+
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:78
+msgid "Transport"
+msgstr "Transport"
+
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:81
+msgid "SMTP Host"
+msgstr "Hôte SMTP"
+
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:84
+msgid "SMTP Port"
+msgstr "Port SMTP"
+
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:87
+msgid "SMTP Username"
+msgstr "Nom d'utilisateur SMTP"
+
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:90
+msgid "SMTP Password"
+msgstr "Mot de passe SMTP"
 
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Stats/index.ctp:11
 msgid "Filter"

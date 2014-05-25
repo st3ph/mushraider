@@ -63,10 +63,10 @@
             <div class="well well-white">
                 <h4><?php echo __('Sender');?></h4>
                 <div class="form-group">
-                    <?php echo $this->Form->input('Setting.email.name', array('type' => 'text', 'label' => __('Name'), 'required' => true, 'class' => 'span5'));?>
+                    <?php echo $this->Form->input('Setting.email.name', array('type' => 'text', 'label' => __('Your name'), 'required' => true, 'class' => 'span5'));?>
                 </div>
                 <div class="form-group">
-                    <?php echo $this->Form->input('Setting.email.from', array('type' => 'email', 'label' => __('email address'), 'required' => true, 'class' => 'span5'));?>
+                    <?php echo $this->Form->input('Setting.email.from', array('type' => 'email', 'label' => __('Your email address'), 'required' => true, 'class' => 'span5'));?>
                 </div>
 
                 <h4><?php echo __('Advanced settings');?></h4>

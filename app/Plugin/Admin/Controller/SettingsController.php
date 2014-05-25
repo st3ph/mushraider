@@ -45,7 +45,10 @@ class SettingsController extends AdminAppController {
                 }else {
                     if(!$this->request->data['Setting']['theme']['bgnoimage']) {
                         $imageName = $this->image($this->request->data['Setting']['theme']['bgimage'], true);
-                        if(!isset($imageName['error'])) {
+                        if($this->request->data['Setting']['theme']['bgimage']['error'] == 4) {
+                            $themeSetting = json_decode($this->Setting->getOption('theme'));
+                            $theme['bgimage'] = $themeSetting->bgimage;
+                        }elseif(!isset($imageName['error'])) {
                             $theme['bgimage'] = $imageName['name'];
                         }
                     }else {
@@ -128,7 +131,7 @@ class SettingsController extends AdminAppController {
         $this->request->data['Setting']['email']['host'] = $email->host;
         $this->request->data['Setting']['email']['port'] = $email->port;
         $this->request->data['Setting']['email']['username'] = $email->username;
-        $this->request->data['Setting']['email']['password'] = '';
+        $this->request->data['Setting']['email']['password'] = $email->password;
     }
 
     private function image($image, $customWebroot = false) {

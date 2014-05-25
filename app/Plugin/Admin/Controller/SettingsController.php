@@ -46,9 +46,14 @@ class SettingsController extends AdminAppController {
                     if(!$this->request->data['Setting']['theme']['bgnoimage']) {
                         $imageName = $this->image($this->request->data['Setting']['theme']['bgimage'], true);
                         if($this->request->data['Setting']['theme']['bgimage']['error'] == 4) {
-                            $theme['bgimage'] = $this->request->webroot.'img/bg.png';
-                            $theme['bgrepeat'] = 'repeat';
-                            $theme['bgcolor'] = '#444444';
+                            $themeSetting = json_decode($this->Setting->getOption('theme'));
+                            if(!empty($themeSetting->bgimage)) {
+                                $theme['bgimage'] = $themeSetting->bgimage;
+                            }else {
+                                $theme['bgimage'] = $this->request->webroot.'img/bg.png';
+                                $theme['bgrepeat'] = 'repeat';
+                                $theme['bgcolor'] = '#444444';
+                            }
                         }elseif(!isset($imageName['error'])) {
                             $theme['bgimage'] = $imageName['name'];
                         }

@@ -130,14 +130,22 @@ class SettingsController extends AdminAppController {
 
         // Emails
         $email = json_decode($this->Setting->getOption('email'));
-        $this->request->data['Setting']['email']['name'] = $email->name;
-        $this->request->data['Setting']['email']['from'] = $email->from;
-        $this->request->data['Setting']['email']['utf8'] = $email->encoding == 'utf8'?true:false;
-        $this->request->data['Setting']['email']['transport'] = $email->transport;
-        $this->request->data['Setting']['email']['host'] = $email->host;
-        $this->request->data['Setting']['email']['port'] = $email->port;
-        $this->request->data['Setting']['email']['username'] = $email->username;
-        $this->request->data['Setting']['email']['password'] = $email->password;
+        if(!empty($email)) {
+            $this->request->data['Setting']['email']['name'] = $email->name;
+            $this->request->data['Setting']['email']['from'] = $email->from;
+            $this->request->data['Setting']['email']['utf8'] = $email->encoding == 'utf8'?true:false;
+            $this->request->data['Setting']['email']['transport'] = $email->transport;
+            $this->request->data['Setting']['email']['host'] = $email->host;
+            $this->request->data['Setting']['email']['port'] = $email->port;
+            $this->request->data['Setting']['email']['username'] = $email->username;
+            $this->request->data['Setting']['email']['password'] = $email->password;
+        }else {
+            $host = substr_count($_SERVER['HTTP_HOST'], '.') > 1?substr($_SERVER['HTTP_HOST'], strpos($_SERVER['HTTP_HOST'], '.') + 1):$_SERVER['HTTP_HOST'];                        
+            $host = strpos($host, ':') !== false?substr($host, 0, strpos($host, ':')):$host; // Remove port if present on unusual configurations
+            $this->request->data['Setting']['email']['name'] = 'MushRaider';
+            $this->request->data['Setting']['email']['from'] = 'mushraider@'.$host;
+            $this->request->data['Setting']['email']['utf8'] = false;
+        }
     }
 
     private function image($image, $customWebroot = false) {

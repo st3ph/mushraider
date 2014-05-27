@@ -9,19 +9,26 @@ class EmailingComponent extends Component {
         $emailSettings = Configure::read('Config.email');
 
         $emailConfig = null;
-        if($emailSettings->transport == 'Smtp') {
-            $emailConfig = array();
-            $emailConfig['transport'] = $emailSettings->transport;
-            $emailConfig['host'] = $emailSettings->host;
-            $emailConfig['port'] = $emailSettings->port;
-            $emailConfig['username'] = $emailSettings->username;
-            $emailConfig['password'] = $emailSettings->password;
-        }
-        $this->email = new CakeEmail($emailConfig);
-        $this->email->emailFormat('html');
-        $this->email->from(array($emailSettings->from => $emailSettings->name));
-        if($emailSettings->encoding == 'utf8') {
-            $this->email->charset($emailSettings->encoding);
+        if(!empty($emailSettings)) {
+            if($emailSettings->transport == 'Smtp') {
+                $emailConfig = array();
+                $emailConfig['transport'] = $emailSettings->transport;
+                $emailConfig['host'] = $emailSettings->host;
+                $emailConfig['port'] = $emailSettings->port;
+                $emailConfig['username'] = $emailSettings->username;
+                $emailConfig['password'] = $emailSettings->password;
+            }
+            $this->email = new CakeEmail($emailConfig);
+            $this->email->emailFormat('html');
+            $this->email->from(array($emailSettings->from => $emailSettings->name));
+            if($emailSettings->encoding == 'utf8') {
+                $this->email->charset($emailSettings->encoding);
+            }
+        }else { // No email settings, generate minimal
+            $this->email = new CakeEmail();
+            $host = substr_count($_SERVER['HTTP_HOST'], '.') > 1?substr($_SERVER['HTTP_HOST'], strpos($_SERVER['HTTP_HOST'], '.') + 1):$_SERVER['HTTP_HOST'];                        
+            $host = strpos($host, ':') !== false?substr($host, 0, strpos($host, ':')):$host; // Remove port if present on unusual configurations
+            $this->email->from(array('mushraider@'.$host => 'MushRaider'));
         }
     }
 

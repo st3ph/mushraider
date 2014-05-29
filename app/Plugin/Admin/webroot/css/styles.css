@@ -1203,7 +1203,7 @@ input.form-error, select.form-error, textarea.form-error {border-color:#b94a48;}
 }
 
 #wrap {margin:auto;}
-.flashMessage {border-radius:0;margin-bottom:0;}
+.flashMessage {border-radius:0;margin-bottom:10px;}
 .updateMessage {border-radius:0;margin-bottom:0;}
 .updateMessage p {text-align:center;}
 .updateMessage p a {text-decoration:underline}
@@ -1234,6 +1234,7 @@ span.formTip {font-size:11px;font-style:italic;}
 .form-group .submit.pull-right input {margin-left:5px;}
 header .toolbar .nav li a {color:#bf4d28;}
 .well-white {background-color:#fdfdfd;}
+form .hint {color:#3a87ad;margin-left:5px;font-size:16px;cursor:help;}
 
 /* Dashboard */
 .quick-btn {min-width:90px;width:auto;padding-left:2px;padding-right:2px;}

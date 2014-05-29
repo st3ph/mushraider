@@ -13,7 +13,9 @@
         <?php echo $this->Form->submit(__('Login'), array('class' => 'btn btn-info span12'));?>
     </div>
 <?php echo $this->Form->end();?>    
-<div class="footerLinks">
-    <?php echo $this->Html->link(__('Password lost :('), '/auth/recovery', array('class' => '', 'title' => __('Recover your password')));?>
-    <?php echo $this->Html->link(__('Signup'), '/auth/signup', array('class' => 'pull-right signup', 'title' => __('Signup and start raiding')));?>
-</div>
+<?php if(empty($bridge) || (!empty($bridge) && !$bridge->enabled)):?>
+    <div class="footerLinks">
+        <?php echo $this->Html->link(__('Password lost :('), '/auth/recovery', array('class' => '', 'title' => __('Recover your password')));?>
+        <?php echo $this->Html->link(__('Signup'), '/auth/signup', array('class' => 'pull-right signup', 'title' => __('Signup and start raiding')));?>
+    </div>
+<?php endif;?>

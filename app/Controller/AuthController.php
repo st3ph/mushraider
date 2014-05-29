@@ -1,15 +1,20 @@
 <?php
+App::uses('HttpSocket', 'Network/Http');
 class AuthController extends AppController {   
     public $components = array('Emailing'); 
     var $helpers = array();
     var $uses = array('Ticket');
 
     var $userRequired = false;
+    var $bridge = false;
 
     public function beforeFilter() {
         parent::beforeFilter();
 
         $this->layout = 'login';
+
+        $this->bridge = json_decode($this->Setting->getOption('bridge'));
+        $this->set('bridge', $this->bridge);
     }
 
     public function index() {
@@ -29,44 +34,108 @@ class AuthController extends AppController {
             }
         }
 
-        if(!empty($this->request->data['User'])) {
-            $params = array();
-            $params['fields'] = array('id', 'username', 'email', 'password');
-            $params['conditions']['or']['username'] = $this->request->data['User']['login'];
-            $params['conditions']['or']['email'] = $this->request->data['User']['login'];
-            $params['conditions']['password'] = md5($this->request->data['User']['password']);
-            if($user = $this->User->find('first', $params)) {
-                if(empty($this->request->data['User']['remember'])) {
-                    $this->Cookie->delete('User');
-                }else{
-                    $cookie = array();
-                    $cookie['username'] = $user['User']['username'];
-                    $cookie['password'] = $user['User']['password'];
-                    $this->Cookie->write('User', $cookie, true, '+2 weeks');
-                }
-                $this->Session->write('User.id', $user['User']['id']);
-                $this->Session->setFlash(__('Congratulation %s, you are now logged in', $user['User']['username']), 'flash_success');
+        if(!empty($this->request->data['User'])) {            
+            if(!empty($this->bridge) && $this->bridge->enabled && !empty($this->bridge->url) && !empty($this->bridge->secret)) {
+                $iv_size = mcrypt_get_iv_size(MCRYPT_BLOWFISH, MCRYPT_MODE_ECB);
+                $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
+                $pwd = mcrypt_encrypt(MCRYPT_BLOWFISH, $this->bridge->secret, utf8_encode($this->request->data['User']['password']), MCRYPT_MODE_ECB, $iv);
 
-                if($this->Session->check('redirectFrom')) {
-                    $redirect = $this->Session->read('redirectFrom');
-                    $this->Session->delete('redirectFrom');
-                    $this->redirect($redirect);
+                $HttpSocket = new HttpSocket();
+                $auth = $HttpSocket->post($this->bridge->url, array('login' => $this->request->data['User']['login'], 'pwd' => $pwd));
+                $auth = json_decode($auth->body);
+                if(empty($auth) || !$auth->authenticated) {
+                    $this->Session->setFlash(__('MushRaider can\'t find your account, maybe you need some sleep ?'), 'flash_warning');
+                    unset($this->request->data['User']);
                 }else {
-                    $this->redirect('/');
+                    $params = array();
+                    $params['fields'] = array('id', 'username', 'email', 'password');
+                    $params['conditions']['or']['username'] = $this->request->data['User']['login'];
+                    $params['conditions']['or']['email'] = $this->request->data['User']['login'];
+                    $params['conditions']['password'] = md5($this->request->data['User']['password']);
+                    $params['conditions']['status'] = array(1, 0);
+                    if($user = $this->User->find('first', $params)) {
+                        $toSave = array();
+                        $toSave['id'] = $user['User']['id'];
+                        $toSave['status'] = 1;
+                        $toSave['bridge'] = 1;
+                        $this->User->save($toSave);
+
+                    }else {
+                        $user = array();
+                        $user['User']['username'] = $this->request->data['User']['login'];
+                        $user['User']['email'] = $auth->email;
+                        $user['User']['password'] = md5($this->request->data['User']['password']);
+                        $user['User']['verify_password'] = md5($this->request->data['User']['password']);
+                        $user['User']['status'] = 1;
+                        $user['User']['bridge'] = 1;
+                        $user['User']['role_id'] = $this->Role->getIdByAlias('member');
+                        $this->User->save($user['User']);
+                        $user['User']['id'] = $this->User->getLastInsertId();
+                    }
+
+                    if(empty($this->request->data['User']['remember'])) {
+                        $this->Cookie->delete('User');
+                    }else{
+                        $cookie = array();
+                        $cookie['username'] = $user['User']['username'];
+                        $cookie['password'] = $user['User']['password'];
+                        $this->Cookie->write('User', $cookie, true, '+2 weeks');
+                    }
+                    $this->Session->write('User.id', $user['User']['id']);
+                    $this->Session->setFlash(__('Congratulation %s, you are now logged in', $user['User']['username']), 'flash_success');
+
+                    if($this->Session->check('redirectFrom')) {
+                        $redirect = $this->Session->read('redirectFrom');
+                        $this->Session->delete('redirectFrom');
+                        $this->redirect($redirect);
+                    }else {
+                        $this->redirect('/');
+                    }
                 }
             }else {
-                $params['conditions']['status'] = 0;
+                $params = array();
+                $params['fields'] = array('id', 'username', 'email', 'password');
+                $params['conditions']['or']['username'] = $this->request->data['User']['login'];
+                $params['conditions']['or']['email'] = $this->request->data['User']['login'];
+                $params['conditions']['password'] = md5($this->request->data['User']['password']);
                 if($user = $this->User->find('first', $params)) {
-                    $this->Session->setFlash(__('You have to wait until an admin activate your account, go farm while waiting !'), 'flash_warning');
+                    if(empty($this->request->data['User']['remember'])) {
+                        $this->Cookie->delete('User');
+                    }else{
+                        $cookie = array();
+                        $cookie['username'] = $user['User']['username'];
+                        $cookie['password'] = $user['User']['password'];
+                        $this->Cookie->write('User', $cookie, true, '+2 weeks');
+                    }
+                    $this->Session->write('User.id', $user['User']['id']);
+                    $this->Session->setFlash(__('Congratulation %s, you are now logged in', $user['User']['username']), 'flash_success');
+
+                    if($this->Session->check('redirectFrom')) {
+                        $redirect = $this->Session->read('redirectFrom');
+                        $this->Session->delete('redirectFrom');
+                        $this->redirect($redirect);
+                    }else {
+                        $this->redirect('/');
+                    }
                 }else {
-                    $this->Session->setFlash(__('MushRaider can\'t find your account, maybe you need some sleep ?'), 'flash_warning');
+                    $params['conditions']['status'] = 0;
+                    if($user = $this->User->find('first', $params)) {
+                        $this->Session->setFlash(__('You have to wait until an admin activate your account, go farm while waiting !'), 'flash_warning');
+                    }else {
+                        $this->Session->setFlash(__('MushRaider can\'t find your account, maybe you need some sleep ?'), 'flash_warning');
+                    }
+                    unset($this->request->data['User']);
                 }
-                unset($this->request->data['User']);
             }
         }
     }
 
     public function signup() {
+        if(!empty($this->bridge) && $this->bridge->enabled) {
+            $this->Session->setFlash(__('Signup are disabled because bridge system is enabled.'), 'flash_warning');
+            $this->redirect('/auth/login');
+        }
+
         $this->pageTitle = __('Signup to MushRaider').' - '.$this->pageTitle;
 
         if(!empty($this->request->data['User'])) {
@@ -87,6 +156,11 @@ class AuthController extends AppController {
     }
 
     public function recovery() {
+        if(!empty($this->bridge) && $this->bridge->enabled) {
+            $this->Session->setFlash(__('Password recovery is disabled because bridge system is enabled.'), 'flash_warning');
+            $this->redirect('/auth/login');
+        }
+
         $this->pageTitle = __('Password Recovery').' - '.$this->pageTitle;
 
         if(!empty($this->request->data['User']) && !empty($this->request->data['User']['email'])) {

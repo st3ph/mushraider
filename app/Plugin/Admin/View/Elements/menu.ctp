@@ -14,8 +14,16 @@
         </li>
 
         <?php if($user['User']['isAdmin']):?>
-            <li class="<?php echo strtolower($this->name) == 'settings'?'active':'';?>">
-                <?php echo $this->Html->link('<i class="icon-cog icon-white"></i> '.__('Settings'), '/admin/settings', array('escape' => false));?>
+
+            <li class="accordion-group <?php echo strtolower($this->name) == 'settings'?'active':'';?>">
+                <a data-parent="#menu" data-toggle="collapse" class="accordion-toggle <?php echo strtolower($this->name) == 'settings'?'':'collapsed';?>" data-target="#settings-nav">
+                    <i class="icon-cog icon-white"></i> <?php echo __('Settings');?> <i class="icon-chevron-down icon-white pull-right"></i>
+                </a>
+                <ul class="collapse <?php echo strtolower($this->name) == 'settings'?'in':'';?>" id="settings-nav">
+                    <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('General'), '/admin/settings', array('escape' => false));?></li>
+                    <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('Display'), '/admin/settings/display', array('escape' => false));?></li>
+                    <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('Integration'), '/admin/settings/bridge', array('escape' => false));?></li>
+                </ul>
             </li>
         <?php endif;?>
 

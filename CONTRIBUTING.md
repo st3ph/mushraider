@@ -1,13 +1,9 @@
 # How to contribute
 
-CakePHP loves to welcome your contributions. There are several ways to help out:
-* Create a ticket in Lighthouse, if you have found a bug
-* Write testcases for open bug tickets
-* Write patches for open bug/feature tickets, preferably with testcases included
-* Contribute to the [documentation](https://github.com/cakephp/docs)
-
-There are a few guidelines that we need contributors to follow so that we have a
-chance of keeping on top of things.
+MushRaider loves to welcome your contributions. There are several ways to help out:
+* Create a ticket in GitHub, if you have found a bug
+* Write patches for open bug/feature tickets
+* Contribute to the core system
 
 ## Getting Started
 
@@ -30,10 +26,7 @@ chance of keeping on top of things.
 * Make commits of logical units.
 * Check for unnecessary whitespace with `git diff --check` before committing.
 * Use descriptive commit messages and reference the #ticket number
-* Core testcases should continue to pass. You can run tests locally or enable
-  [travis-ci](https://travis-ci.org/) for your fork, so all tests and codesniffs
-  will be executed.
-* Your work should apply the CakePHP coding standards.
+* Your work should apply the MushRaider coding standards.
 
 ## Which branch to base the work
 
@@ -45,29 +38,11 @@ chance of keeping on top of things.
 ## Submitting Changes
 
 * Push your changes to a topic branch in your fork of the repository.
-* Submit a pull request to the repository in the cakephp organization, with the
+* Submit a pull request to the mushraider repository, with the
   correct target branch.
-
-## Testcases and codesniffer
-
-CakePHP tests requires [PHPUnit](http://www.phpunit.de/manual/current/en/installation.html)
-3.5 or higher. To run the testcases locally use the following command:
-
-    ./lib/Cake/Console/cake test core AllTests --stderr
-
-To run the sniffs for CakePHP coding standards
-
-    phpcs -p --extensions=php --standard=CakePHP ./lib/Cake
-
-Check the [cakephp-codesniffer](https://github.com/cakephp/cakephp-codesniffer)
-repository to setup the CakePHP standard. The README contains installation info
-for the sniff and phpcs.
-
 
 # Additional Resources
 
-* [CakePHP coding standards](http://book.cakephp.org/2.0/en/contributing/cakephp-coding-conventions.html)
-* [Bug tracker](https://cakephp.lighthouseapp.com/projects/42648-cakephp)
+* [MushRaider website](http://mushraider.com)
 * [General GitHub documentation](https://help.github.com/)
 * [GitHub pull request documentation](https://help.github.com/send-pull-requests/)
-* #cakephp IRC channel on freenode.org

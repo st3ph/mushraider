@@ -35,6 +35,7 @@ a:hover {color:#953d20;text-decoration:none;}
 	color: #eee;
 	background-color: #bf4d28;
 }
+#header .navbar .btn-navbar {color:#bf4d28;}
 
 footer {color:#eee;}
 footer p {margin:0;font-size:11px;}
@@ -148,3 +149,23 @@ div.tooltip-inner div {text-align:left;}
 .manageCharacters {text-align:center;}
 .manageCharacters p {color:#ccc;}
 .manageCharacters a {font-size:28px;}
+
+
+
+/* Responsive */
+/*@media (min-width:768px) and (max-width:1250px) {*/
+@media (max-width:1250px) {
+}
+
+@media (max-width: 1024px) {
+	#header .menubar {position:relative}
+}
+
+@media (max-width: 800px) {
+	#calendar tr.days {display:none;}
+	#calendar .pastDay {display:none;}
+}
+
+@media (max-width: 600px) {
+	#calendar .links td .responsive {display:none;}
+}

@@ -1238,6 +1238,7 @@ form .hint {color:#3a87ad;margin-left:5px;font-size:16px;cursor:help;}
 
 /* Dashboard */
 .quick-btn {min-width:90px;width:auto;padding-left:2px;padding-right:2px;}
+.quick-btn .waiting {position: absolute;right: -5px;bottom: -5px;top:auto;}
 
 /* Settings */
 .checkbox label {font-weight:normal;}

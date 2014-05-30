@@ -9,6 +9,9 @@
     <?php $userHtml = '<i class="icon-user icon-2x"></i>';?>
     <?php $userHtml .= '<span>'.__('Users').'</span>';?>
     <?php $userHtml .= '<span class="label mabem-inverse">'.$totalUsers.'</span>';?>
+    <?php if($waitingUsers > 0):?>
+        <?php $userHtml .= '<span class="label label-warning mabem-inverse waiting">'.$waitingUsers.'</span>';?>
+    <?php endif;?>
     <?php echo $this->Html->link($userHtml, '/admin/users', array('class' => 'quick-btn', 'escape' => false));?>
 
     <?php $charsHtml = '<i class="icon-shield icon-2x"></i>';?>

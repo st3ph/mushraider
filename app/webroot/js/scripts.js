@@ -397,4 +397,19 @@ jQuery(function($) {
             });         
         }
     });
+
+    /*
+    * Responsive    
+    */
+    if(window.innerWidth < 800) {
+        $daysList = '<ul id="calendarResponsive" class="unstyled">';
+        $calendar = $('#calendar');
+        $calendar.find('table td.day').each(function() {
+            $daysList += '<li class="calendarRow">'+$(this).html()+'</li>';
+        });
+        $daysList += '</ul>';
+
+        $calendar.find('table.dates').remove();
+        $calendar.after($daysList);
+    }
 });

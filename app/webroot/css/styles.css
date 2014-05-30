@@ -153,6 +153,12 @@ div.tooltip-inner div {text-align:left;}
 
 
 /* Responsive */
+#calendarResponsive {border-bottom:4px solid #ddd}
+#calendarResponsive li.calendarRow {border:4px solid #ddd;border-bottom:none;min-height:30px;background:#fff;padding:5px;}
+#calendarResponsive li.calendarRow:nth-child(odd) {background:#fafafa;}
+#calendarResponsive li.calendarRow span {margin-right:5px;}
+#calendarResponsive li.calendarRow img {margin-right:5px;}
+
 /*@media (min-width:768px) and (max-width:1250px) {*/
 @media (max-width:1250px) {
 }
@@ -162,8 +168,8 @@ div.tooltip-inner div {text-align:left;}
 }
 
 @media (max-width: 800px) {
-	#calendar tr.days {display:none;}
-	#calendar .pastDay {display:none;}
+	/*#calendar tr.days {display:none;}*/
+	/*#calendar .pastDay {display:none;}*/
 }
 
 @media (max-width: 600px) {

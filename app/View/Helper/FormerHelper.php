@@ -85,16 +85,16 @@ class FormerHelper extends AppHelper {
 				$output .= '<td>';
 					$output .= '<table width="100%" border="0" cellspacing="0" cellpadding="0">';
 						$output .= '<tr class="links">';
-							$output .= '<td class="prev">'.$this->Html->link('<i class="icon-chevron-left"></i> <span class="responsive">'.__('Previous').'</span>', '/events/index/m:'.$prev_month.'/y:'.$prev_year, array('escape' => false)).'</td>';
+							$output .= '<td class="prev">'.$this->Html->link('<i class="icon-chevron-left"></i> '.__('Previous'), '/events/index/m:'.$prev_month.'/y:'.$prev_year, array('escape' => false)).'</td>';
 							$output .= '<td class="month">'.$this->month[$options['month']].' '.$options['year'].'</td>';
-							$output .= '<td class="next">'.$this->Html->link('<span class="responsive">'.__('Next').'</span> <i class="icon-chevron-right"></i>', '/events/index/m:'.$next_month.'/y:'.$next_year, array('escape' => false)).'</td>';
+							$output .= '<td class="next">'.$this->Html->link(__('Next').' <i class="icon-chevron-right"></i>', '/events/index/m:'.$next_month.'/y:'.$next_year, array('escape' => false)).'</td>';
 						$output .= '</tr>';
 					$output .= '</table>';
 				$output .= '</td>';
 			$output .= '</tr>';
 			$output .= '<tr>';
 				$output .= '<td align="center">';
-					$output .= '<table width="100%" border="0" cellpadding="2" cellspacing="2">';
+					$output .= '<table width="100%" border="0" cellpadding="2" cellspacing="2" class="dates">';
 						$output .= '<tr class="days">';
 							foreach($this->jour_semaine_court as $jour) {
 								$output .= '<td>'.$jour.'</td>';

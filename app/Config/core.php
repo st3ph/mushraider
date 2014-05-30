@@ -37,7 +37,7 @@
 // TODO : generate config.salt.php
 
 
-	Configure::write('debug', 0);
+	Configure::write('debug', 2);
 	Configure::write('mushraider', array('version' => '1.2.2', 'date' => '2014-05-27'));
 
 /**

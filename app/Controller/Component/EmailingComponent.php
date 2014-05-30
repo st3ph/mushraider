@@ -26,6 +26,7 @@ class EmailingComponent extends Component {
             }
         }else { // No email settings, generate minimal
             $this->email = new CakeEmail();
+            $this->email->emailFormat('html');
             $host = substr_count($_SERVER['HTTP_HOST'], '.') > 1?substr($_SERVER['HTTP_HOST'], strpos($_SERVER['HTTP_HOST'], '.') + 1):$_SERVER['HTTP_HOST'];                        
             $host = strpos($host, ':') !== false?substr($host, 0, strpos($host, ':')):$host; // Remove port if present on unusual configurations
             $this->email->from(array('mushraider@'.$host => 'MushRaider'));

@@ -15,11 +15,68 @@ class SettingsController extends AdminAppController {
         if(!empty($this->request->data['Setting'])) {
             $this->Setting->setOption('title', $this->request->data['Setting']['title']);
             $this->Setting->setOption('notifications', $this->request->data['Setting']['notifications']);
-            $this->Setting->setOption('css', $this->request->data['Setting']['css']);
 
             Configure::write('Config.language', $this->request->data['Setting']['sitelang']);
             Configure::write('Settings.language', $this->request->data['Setting']['sitelang']);            
             Configure::dump('config.ini', 'configini', array('Database', 'Settings'));
+
+            if(!empty($this->request->data['Setting']['email'])) {
+                $email = array();
+                $email['name'] = $this->request->data['Setting']['email']['name'];
+                $email['from'] = $this->request->data['Setting']['email']['from'];
+                $email['encoding'] = $this->request->data['Setting']['email']['utf8']?'utf8':'';
+                $email['transport'] = $this->request->data['Setting']['email']['transport'];
+                $email['host'] = $this->request->data['Setting']['email']['host'];
+                $email['port'] = $this->request->data['Setting']['email']['port'];
+                $email['username'] = $this->request->data['Setting']['email']['username'];
+                $email['password'] = $this->request->data['Setting']['email']['password'];
+                $this->Setting->setOption('email', json_encode($email));
+            }
+
+            $this->Session->setFlash(__('Settings have been updated'), 'flash_success');
+            return $this->redirect('/admin/settings');
+        }
+
+        // General
+        $this->request->data['Setting']['title'] = $this->Setting->getOption('title');
+        $this->request->data['Setting']['notifications'] = $this->Setting->getOption('notifications');
+
+        // Langs
+        $appLocales = array();
+        $localesFolder = new Folder(APP.'Locale');
+        $locales = $localesFolder->read(true);
+        if(!empty($locales) && !empty($locales[0])) {
+            foreach($locales[0] as $locale) {
+                $appLocales[$locale] = $locale;
+            }
+        }
+        $this->set('appLocales', $appLocales);
+        $this->request->data['Setting']['sitelang'] = Configure::read('Config.language');
+
+        // Emails
+        $email = json_decode($this->Setting->getOption('email'));
+        if(!empty($email)) {
+            $this->request->data['Setting']['email']['name'] = $email->name;
+            $this->request->data['Setting']['email']['from'] = $email->from;
+            $this->request->data['Setting']['email']['utf8'] = $email->encoding == 'utf8'?true:false;
+            $this->request->data['Setting']['email']['transport'] = $email->transport;
+            $this->request->data['Setting']['email']['host'] = $email->host;
+            $this->request->data['Setting']['email']['port'] = $email->port;
+            $this->request->data['Setting']['email']['username'] = $email->username;
+            $this->request->data['Setting']['email']['password'] = $email->password;
+        }else {
+            $host = substr_count($_SERVER['HTTP_HOST'], '.') > 1?substr($_SERVER['HTTP_HOST'], strpos($_SERVER['HTTP_HOST'], '.') + 1):$_SERVER['HTTP_HOST'];                        
+            $host = strpos($host, ':') !== false?substr($host, 0, strpos($host, ':')):$host; // Remove port if present on unusual configurations
+            $this->request->data['Setting']['email']['name'] = 'MushRaider';
+            $this->request->data['Setting']['email']['from'] = 'mushraider@'.$host;
+            $this->request->data['Setting']['email']['utf8'] = false;
+        }
+    }
+
+    public function display() {
+        $currentTheme = json_decode($this->Setting->getOption('theme'));
+        if(!empty($this->request->data['Setting'])) {
+            $this->Setting->setOption('css', $this->request->data['Setting']['css']);
 
             if(!empty($this->request->data['Setting']['theme'])) {
                 // bgcolor
@@ -75,40 +132,11 @@ class SettingsController extends AdminAppController {
                 }
             }
 
-            if(!empty($this->request->data['Setting']['email'])) {
-                $email = array();
-                $email['name'] = $this->request->data['Setting']['email']['name'];
-                $email['from'] = $this->request->data['Setting']['email']['from'];
-                $email['encoding'] = $this->request->data['Setting']['email']['utf8']?'utf8':'';
-                $email['transport'] = $this->request->data['Setting']['email']['transport'];
-                $email['host'] = $this->request->data['Setting']['email']['host'];
-                $email['port'] = $this->request->data['Setting']['email']['port'];
-                $email['username'] = $this->request->data['Setting']['email']['username'];
-                $email['password'] = $this->request->data['Setting']['email']['password'];
-                $this->Setting->setOption('email', json_encode($email));
-            }
-
             $this->Setting->setOption('links', json_encode($customLinks));
 
             $this->Session->setFlash(__('Settings have been updated'), 'flash_success');
-            return $this->redirect('/admin/settings');
+            return $this->redirect('/admin/settings/display');
         }
-
-        // General
-        $this->request->data['Setting']['title'] = $this->Setting->getOption('title');
-        $this->request->data['Setting']['notifications'] = $this->Setting->getOption('notifications');
-
-        // Langs
-        $appLocales = array();
-        $localesFolder = new Folder(APP.'Locale');
-        $locales = $localesFolder->read(true);
-        if(!empty($locales) && !empty($locales[0])) {
-            foreach($locales[0] as $locale) {
-                $appLocales[$locale] = $locale;
-            }
-        }
-        $this->set('appLocales', $appLocales);
-        $this->request->data['Setting']['sitelang'] = Configure::read('Config.language');
 
         // Theming
         $this->request->data['Setting']['css'] = $this->Setting->getOption('css');
@@ -127,24 +155,29 @@ class SettingsController extends AdminAppController {
                 $this->request->data['Setting']['links'][] = $link;
             }
         }
+    }
 
-        // Emails
-        $email = json_decode($this->Setting->getOption('email'));
-        if(!empty($email)) {
-            $this->request->data['Setting']['email']['name'] = $email->name;
-            $this->request->data['Setting']['email']['from'] = $email->from;
-            $this->request->data['Setting']['email']['utf8'] = $email->encoding == 'utf8'?true:false;
-            $this->request->data['Setting']['email']['transport'] = $email->transport;
-            $this->request->data['Setting']['email']['host'] = $email->host;
-            $this->request->data['Setting']['email']['port'] = $email->port;
-            $this->request->data['Setting']['email']['username'] = $email->username;
-            $this->request->data['Setting']['email']['password'] = $email->password;
-        }else {
-            $host = substr_count($_SERVER['HTTP_HOST'], '.') > 1?substr($_SERVER['HTTP_HOST'], strpos($_SERVER['HTTP_HOST'], '.') + 1):$_SERVER['HTTP_HOST'];                        
-            $host = strpos($host, ':') !== false?substr($host, 0, strpos($host, ':')):$host; // Remove port if present on unusual configurations
-            $this->request->data['Setting']['email']['name'] = 'MushRaider';
-            $this->request->data['Setting']['email']['from'] = 'mushraider@'.$host;
-            $this->request->data['Setting']['email']['utf8'] = false;
+    public function bridge() {
+        $currentTheme = json_decode($this->Setting->getOption('theme'));
+        if(!empty($this->request->data['Setting'])) {
+            $bridge = array();
+            $bridge['enabled'] = $this->request->data['Setting']['enabled'];
+            $bridge['url'] = $this->request->data['Setting']['url'];
+            $bridge['secret'] = trim($this->request->data['Setting']['secret']);
+            if($bridge['enabled'] && (empty($bridge['url']) || empty($bridge['secret']))) {
+                $this->Session->setFlash(__('Third party url and secret key are mandatory'), 'flash_error');  
+            }else {
+                $this->Setting->setOption('bridge', json_encode($bridge));
+                $this->Session->setFlash(__('Settings have been updated'), 'flash_success');
+                return $this->redirect('/admin/settings/bridge');
+            }
+        }
+
+        $bridge = json_decode($this->Setting->getOption('bridge'));
+        if(!empty($bridge)) {
+            $this->request->data['Setting']['enabled'] = $bridge->enabled;
+            $this->request->data['Setting']['url'] = $bridge->url;
+            $this->request->data['Setting']['secret'] = $bridge->secret;
         }
     }
 

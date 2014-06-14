@@ -7,6 +7,9 @@ class AccountController extends AppController {
         parent::beforeFilter();
 
         $this->breadcrumb[] = array('title' => __('My MushRaider account'), 'url' => '/account');
+
+        $this->bridge = json_decode($this->Setting->getOption('bridge'));
+        $this->set('bridge', $this->bridge);
     }
 
     public function index() {
@@ -204,6 +207,11 @@ class AccountController extends AppController {
     }
 
     public function password() {
+        if(!empty($this->bridge) && $this->bridge->enabled) {
+            $this->Session->setFlash(__('Bridge system is enabled so you can\'t change your password here.'), 'flash_warning');
+            $this->redirect('/account');
+        }
+
         $this->pageTitle = __('My MushRaider password').' - '.$this->pageTitle;
         $this->breadcrumb[] = array('title' => __('Password'), 'url' => '');
 

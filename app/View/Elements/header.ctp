@@ -43,21 +43,27 @@
         		</ul>
             </div>
             <div class="navbar">
-                <ul class="nav pull-right">
-                    <li class="<?php echo strtolower($this->name) == 'events'?'active':'';?>">
-                        <?php echo $this->Html->link(__('Events'), '/events', array('escape' => false));?>
-                    </li>
-                    <li class="<?php echo strtolower($this->name) == 'account'?'active':'';?>">
-                        <?php echo $this->Html->link(__('My Account'), '/account', array('escape' => false));?>
-                    </li>
-                    <?php if(!empty($mushraiderLinks)):;?>
-                        <?php foreach($mushraiderLinks as $customLink):?>
-                            <li>
-                                <?php echo $this->Html->link($customLink->title, $customLink->url, array('escape' => false));?>
-                            </li>
-                        <?php endforeach;?>
-                    <?php endif;?>                    
-                </ul>
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-reorder"></span> <?php echo __('Menu');?>
+                </a>
+
+                <div class="nav-collapse collapse">
+                    <ul class="nav pull-right">
+                        <li class="<?php echo strtolower($this->name) == 'events'?'active':'';?>">
+                            <?php echo $this->Html->link(__('Events'), '/events', array('escape' => false));?>
+                        </li>
+                        <li class="<?php echo strtolower($this->name) == 'account'?'active':'';?>">
+                            <?php echo $this->Html->link(__('My Account'), '/account', array('escape' => false));?>
+                        </li>
+                        <?php if(!empty($mushraiderLinks)):;?>
+                            <?php foreach($mushraiderLinks as $customLink):?>
+                                <li>
+                                    <?php echo $this->Html->link($customLink->title, $customLink->url, array('escape' => false));?>
+                                </li>
+                            <?php endforeach;?>
+                        <?php endif;?>                    
+                    </ul>
+                </div>
             </div>
     	</div>
 	</div>

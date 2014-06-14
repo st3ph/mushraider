@@ -94,7 +94,7 @@ class FormerHelper extends AppHelper {
 			$output .= '</tr>';
 			$output .= '<tr>';
 				$output .= '<td align="center">';
-					$output .= '<table width="100%" border="0" cellpadding="2" cellspacing="2">';
+					$output .= '<table width="100%" border="0" cellpadding="2" cellspacing="2" class="dates">';
 						$output .= '<tr class="days">';
 							foreach($this->jour_semaine_court as $jour) {
 								$output .= '<td>'.$jour.'</td>';

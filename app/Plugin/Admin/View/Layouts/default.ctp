@@ -48,6 +48,9 @@
 
         <div id="content" class="c_<?php echo strtolower($this->name);?>">
             <div class="container-fluid outer">
+                <noscript><?php echo $this->element('flash_error', array('message' => __('VOTRE NAVIGATEUR NE SUPPORTE PAS JAVASCRIPT')));?></noscript>
+                <?php echo $this->Session->flash(); ?>
+
                 <div class="row-fluid">
                     <div class="span12 inner">
                         <?php echo $this->fetch('content'); ?>

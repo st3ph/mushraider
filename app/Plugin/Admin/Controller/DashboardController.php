@@ -25,5 +25,10 @@ class DashboardController extends AdminAppController {
 
         $totalEvents = $this->Event->find('count', $params);
         $this->set('totalEvents', $totalEvents);
+
+        // Waiting users
+        $params['conditions']['status'] = 0;
+        $waitingUsers = $this->User->find('count', $params);
+        $this->set('waitingUsers', $waitingUsers);
     }
 }

@@ -24,6 +24,12 @@ class PatcherComponent extends Component {
         if(!$this->controller->User->query($sql)) {
             $this->controller->redirect('/admin/patcher/apply/v-1.1');
         }
+
+        // v1.3
+        $sql = "SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE() AND COLUMN_NAME='bridge' AND TABLE_NAME='".Configure::read('Database.prefix')."users'";
+        if(!$this->controller->User->query($sql)) {
+            $this->controller->redirect('/admin/patcher/apply/v-1.3');
+        }
 	}
 
     public function run_sql_file($mysqlLink, $location, $prefix = '') {

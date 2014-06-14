@@ -21,6 +21,3 @@
         </div>
     </div>
 </div>
-
-<noscript><?php echo $this->element('flash_error', array('message' => __('VOTRE NAVIGATEUR NE SUPPORTE PAS JAVASCRIPT')));?></noscript>
-<?php echo $this->Session->flash(); ?>

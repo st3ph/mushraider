@@ -45,7 +45,7 @@ class AdminAppController extends AppController {
         // Check if version is different
         // Be sure the server is newer than the current app            
         if(($mushraider['version'] != $lastVersion->version && $mushraider['date'] < $lastVersion->date) || ($mushraider['version'] == $lastVersion->version && $mushraider['date'] < $lastVersion->date)) {
-            $updateMsg = __('<strong>MushRaider %s</strong> is available! <a href="http://st3ph.github.io/mushraider/" target="_blank">Please update now</a>', $lastVersion->version);
+            $updateMsg = __('<strong>MushRaider %s</strong> is available! <a href="http://mushraider.com/download" target="_blank">Please update now</a>', $lastVersion->version);
             $this->set('updateAvailable', $updateMsg);
         }
     }

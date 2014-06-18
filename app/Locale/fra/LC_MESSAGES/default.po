@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Mushraider\n"
-"POT-Creation-Date: 2014-05-30 12:36+0100\n"
-"PO-Revision-Date: 2014-05-30 12:44+0100\n"
+"POT-Creation-Date: 2014-06-17 18:38+0100\n"
+"PO-Revision-Date: 2014-06-17 18:38+0100\n"
 "Last-Translator: Stéphane Litou <contact@stephane-litou.com>\n"
 "Language-Team:  <contact@stephane-litou.com>\n"
 "Language: fr\n"
@@ -239,7 +239,7 @@ msgstr "Votre mot de passe a été mis à jour."
 
 #: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:10
 #: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:14
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Dashboard/index.ctp:30
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Dashboard/index.ctp:33
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:40
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Games/index.ctp:19
 #: E:\www\wamp\www\mushraider\app/View/Elements/header.ctp:53
@@ -719,7 +719,7 @@ msgstr "Ne pas signaler"
 #: E:\www\wamp\www\mushraider\app/View/Helper/FormerHelper.php:17
 #: E:\www\wamp\www\mushraider\app/View/Helper/ToolsHelper.php:16
 msgid "Dimanche"
-msgstr "Mot de passe actuel"
+msgstr "Dimanche"
 
 #: E:\www\wamp\www\mushraider\app/View/Helper/FormerHelper.php:17
 #: E:\www\wamp\www\mushraider\app/View/Helper/ToolsHelper.php:16
@@ -914,8 +914,8 @@ msgstr "Précédent"
 msgid "Next"
 msgstr "Suivant"
 
-#: E:\www\wamp\www\mushraider\app/View/Helper/FormerHelper.php:139
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Dashboard/index.ctp:15
+#: E:\www\wamp\www\mushraider\app/View/Helper/FormerHelper.php:140
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Dashboard/index.ctp:18
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:35
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Games/index.ctp:20
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Rosters/index.ctp:4
@@ -924,7 +924,7 @@ msgstr "Suivant"
 msgid "Roster"
 msgstr "Roster"
 
-#: E:\www\wamp\www\mushraider\app/View/Helper/FormerHelper.php:140
+#: E:\www\wamp\www\mushraider\app/View/Helper/FormerHelper.php:141
 msgid "Start"
 msgstr "Début"
 
@@ -1066,7 +1066,7 @@ msgstr ""
 msgid "Users"
 msgstr "Utilisateurs"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Dashboard/index.ctp:20
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Dashboard/index.ctp:23
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:59
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Games/add.ctp:19
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Games/edit.ctp:20
@@ -1074,7 +1074,7 @@ msgstr "Utilisateurs"
 msgid "Dungeons"
 msgstr "Donjons"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Dashboard/index.ctp:25
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Dashboard/index.ctp:28
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:72
 msgid "Games"
 msgstr "Jeux"

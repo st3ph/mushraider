@@ -1239,6 +1239,12 @@ form .hint {color:#3a87ad;margin-left:5px;font-size:16px;cursor:help;}
 /* Dashboard */
 .quick-btn {min-width:90px;width:auto;padding-left:2px;padding-right:2px;}
 .quick-btn .waiting {position: absolute;right: -5px;bottom: -5px;top:auto;}
+#mushInfos {margin-top:100px;}
+#mushInfos .lead {text-shadow:2px 2px #fff;}
+#mushInfos .social {text-align;:center;}
+#mushInfos .social iframe, #mushInfos .social div, #mushInfos .social form {display:inline-block}
+#mushInfos .social div {}
+#mushInfos .social form {vertical-align:middle}
 
 /* Settings */
 .checkbox label {font-weight:normal;}

@@ -39,6 +39,7 @@ a:hover {color:#953d20;text-decoration:none;}
 
 footer {color:#eee;}
 footer p {margin:0;font-size:11px;}
+footer .version {color:#999;}
 .dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus, .dropdown-submenu:hover>a, .dropdown-submenu:focus>a {
 	color: #fff;
 	text-decoration: none;

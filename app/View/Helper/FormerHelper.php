@@ -96,7 +96,7 @@ class FormerHelper extends AppHelper {
 				$output .= '<td align="center">';
 					$output .= '<table width="100%" border="0" cellpadding="2" cellspacing="2" class="dates">';
 						$output .= '<tr class="days">';
-							foreach($this->jour_semaine_court as $jour) {
+							foreach($this->jour_semaine as $jour) {
 								$output .= '<td>'.$jour.'</td>';
 							}
 						$output .= '</tr>';
@@ -119,46 +119,46 @@ class FormerHelper extends AppHelper {
 						    			if($dayTimestamp >= $todayTimestamp && ($options['user']['User']['isOfficer'] || $options['user']['User']['isAdmin'])) {
 						    				$output .= $this->Html->link('<i class="icon-plus-sign-alt"></i>', '/events/add/'.$formatCurrentDay, array('title' => __('Add event'), 'class' => 'pull-right tt', 'escape' => false));
 						    			}
-
-						    			// Check if there is events this day
-						    			if($matchingEvents = $this->extractEvents($events, $formatCurrentDay)) {
-											$output .= '<ul>';
-												foreach($matchingEvents as $matchingEvent) {
-													// Tooltip
-													$playersNeeded = 0;
-													if($matchingEvent['EventsRole']) {
-														foreach($matchingEvent['EventsRole'] as $eventRoles) {
-															$playersNeeded += $eventRoles['count'];
-														}
-													}
-
-													$tooltip = '<h5>'.$matchingEvent['Event']['title'].'</h5>';
-													$tooltip .= '<div>';
-														$tooltip .= $matchingEvent['Game']['title'].'<br/>';
-														$tooltip .= $matchingEvent['Dungeon']['title'].'<br/>';
-														$tooltip .= __('Roster').' : '.count($matchingEvent['EventsCharacter']).'/'.$playersNeeded.'<br/>';
-														$tooltip .= __('Start').' : '.$this->date($matchingEvent['Event']['time_start'], 'heure');
-													$tooltip .= '<div>';
-
-
-													$output .= '<li>';
-														$output .= '<span>'.$this->date($matchingEvent['Event']['time_invitation'], 'heure').'</span>';
-														if(!empty($matchingEvent['Game']['logo'])) {
-															$output .= $this->Html->image('/files/logos/'.$matchingEvent['Game']['logo'], array('class' => 'logo', 'width' => 16));
-														}
-														// Test is the user is registered for this event
-														$registeredClass = '';
-														if($registeredCharacter = $this->Tools->getRegisteredCharacter($options['user']['User']['id'], $matchingEvent['EventsCharacter'])) {
-															$registeredClass = 'registered_'.$registeredCharacter['status'];
-														}
-														$eventTitle = !empty($matchingEvent['Event']['title'])?$matchingEvent['Event']['title']:$matchingEvent['Dungeon']['title'];
-														$output .= $this->Html->link($eventTitle, '/events/view/'.$matchingEvent['Event']['id'], array('escape' => false, 'title' => $tooltip, 'class' => 'tt '.$registeredClass));
-													$output .= '</li>';
-												}
-											$output .= '</ul>';
-						    			}
-
 						    		$output .= '</div>';
+
+					    			// Check if there is events this day
+					    			if($matchingEvents = $this->extractEvents($events, $formatCurrentDay)) {
+										$output .= '<ul>';
+											foreach($matchingEvents as $matchingEvent) {
+												// Tooltip
+												$playersNeeded = 0;
+												if($matchingEvent['EventsRole']) {
+													foreach($matchingEvent['EventsRole'] as $eventRoles) {
+														$playersNeeded += $eventRoles['count'];
+													}
+												}
+
+												$tooltip = '<h5>'.$matchingEvent['Event']['title'].'</h5>';
+												$tooltip .= '<div>';
+													$tooltip .= $matchingEvent['Game']['title'].'<br/>';
+													$tooltip .= $matchingEvent['Dungeon']['title'].'<br/>';
+													$tooltip .= __('Roster').' : '.count($matchingEvent['EventsCharacter']).'/'.$playersNeeded.'<br/>';
+													$tooltip .= __('Start').' : '.$this->date($matchingEvent['Event']['time_start'], 'heure');
+												$tooltip .= '<div>';
+
+
+												$output .= '<li>';
+													$output .= '<span>'.$this->date($matchingEvent['Event']['time_invitation'], 'heure').'</span>';
+													if(!empty($matchingEvent['Game']['logo'])) {
+														$output .= $this->Html->image('/files/logos/'.$matchingEvent['Game']['logo'], array('class' => 'logo', 'width' => 16));
+													}
+													// Test is the user is registered for this event
+													$registeredClass = '';
+													if($registeredCharacter = $this->Tools->getRegisteredCharacter($options['user']['User']['id'], $matchingEvent['EventsCharacter'])) {
+														$registeredClass = 'registered_'.$registeredCharacter['status'];
+													}
+													$eventTitle = !empty($matchingEvent['Event']['title'])?$matchingEvent['Event']['title']:$matchingEvent['Dungeon']['title'];
+													$output .= $this->Html->link($eventTitle, '/events/view/'.$matchingEvent['Event']['id'], array('escape' => false, 'title' => $tooltip, 'class' => 'tt '.$registeredClass));
+												$output .= '</li>';
+											}
+										$output .= '</ul>';
+					    			}
+
 						    	$output .= '</td>';
 						    }
 						    if(($i % 7) == 6 ) {

@@ -40,13 +40,13 @@
         </p>
         <p><?php echo __('Informations et mises à jour sur');?> <?php echo $this->Html->link('http://mushraider.com', 'http://mushraider.com', array('title' => 'MushRaider website'));?></p>
         <ul class="unstyled inline social">
-            <li>
+            <li class="twitter">
                 <a href="https://twitter.com/mushraider" class="twitter-follow-button" data-show-count="false" data-size="large"><?php echo __('Follow');?> @mushraider</a>
             </li>
-            <li>
+            <li class="googleplus">
                 <div class="g-follow" data-annotation="none" data-height="24" data-href="//plus.google.com/u/0/100559562407479145342" data-rel="publisher"></div>            
             </li>
-            <li>
+            <li class="paypal">
                 <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
                     <div class="paypal-donations">
                         <input type="hidden" name="cmd" value="_donations">

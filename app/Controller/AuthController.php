@@ -47,8 +47,10 @@ class AuthController extends AppController {
                     $this->Session->setFlash(__('MushRaider can\'t find your account, maybe you need some sleep ?'), 'flash_warning');
                     unset($this->request->data['User']);
                 }else {
+                    $roleId = !empty($auth->role)?$this->Role->getIdByAlias($auth->role):null;
+
                     $params = array();
-                    $params['fields'] = array('id', 'username', 'email', 'password');
+                    $params['fields'] = array('id', 'username', 'email', 'password', 'role_id');
                     $params['conditions']['or']['username'] = $this->request->data['User']['login'];
                     $params['conditions']['or']['email'] = $this->request->data['User']['login'];
                     $params['conditions']['password'] = md5($this->request->data['User']['password']);
@@ -58,6 +60,7 @@ class AuthController extends AppController {
                         $toSave['id'] = $user['User']['id'];
                         $toSave['status'] = 1;
                         $toSave['bridge'] = 1;
+                        $toSave['role_id'] = $roleId?$roleId:$user['User']['role_id'];
                         $this->User->save($toSave);
 
                     }else {
@@ -68,7 +71,7 @@ class AuthController extends AppController {
                         $user['User']['verify_password'] = md5($this->request->data['User']['password']);
                         $user['User']['status'] = 1;
                         $user['User']['bridge'] = 1;
-                        $user['User']['role_id'] = $this->Role->getIdByAlias('member');
+                        $user['User']['role_id'] = $roleId?$roleId:$this->Role->getIdByAlias('member');
                         $this->User->save($user['User']);
                         $user['User']['id'] = $this->User->getLastInsertId();
                     }

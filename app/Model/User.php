@@ -86,11 +86,21 @@ class User extends AppModel {
         return true;
     }
 
-    function beforeFind($params) {
+    public function beforeFind($params) {
         if(!isset($params['conditions']['status']) && !isset($params['conditions']['User.status'])) {
             $params['conditions']['User.status'] = 1;
         }
 
         return $params;
+    }
+
+    public function beforeSave($options = array()) {
+        if(!isset($this->data['User']['id']) || empty($this->data['User']['id'])) {
+            if(!isset($this->data['User']['activation_key']) || empty($this->data['User']['activation_key'])) {
+                $this->data['User']['activation_key'] = md5(uniqid());
+            }
+        }
+        
+        return true;
     }
 }

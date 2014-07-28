@@ -1,10 +1,8 @@
 <?php
 /**
- * Error handler
+ * ErrorHandler class
  *
  * Provides Error Capturing for Framework errors.
- *
- * PHP 5
  *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
@@ -104,15 +102,14 @@ class ErrorHandler {
  * This will either use custom exception renderer class if configured,
  * or use the default ExceptionRenderer.
  *
- * @param Exception $exception
+ * @param Exception $exception The exception to render.
  * @return void
  * @see http://php.net/manual/en/function.set-exception-handler.php
  */
 	public static function handleException(Exception $exception) {
 		$config = Configure::read('Exception');
-		if (!empty($config['log'])) {
-			CakeLog::write(LOG_ERR, self::_getMessage($exception));
-		}
+		self::_log($exception, $config);
+
 		$renderer = isset($config['renderer']) ? $config['renderer'] : 'ExceptionRenderer';
 		if ($renderer !== 'ExceptionRenderer') {
 			list($plugin, $renderer) = pluginSplit($renderer, true);
@@ -135,6 +132,7 @@ class ErrorHandler {
 
 /**
  * Generates a formatted error message
+ *
  * @param Exception $exception Exception instance
  * @return string Formatted message
  */
@@ -157,6 +155,28 @@ class ErrorHandler {
 		}
 		$message .= "\nStack Trace:\n" . $exception->getTraceAsString();
 		return $message;
+	}
+
+/**
+ * Handles exception logging
+ *
+ * @param Exception $exception The exception to render.
+ * @param array $config An array of configuration for logging.
+ * @return boolean
+ */
+	protected static function _log(Exception $exception, $config) {
+		if (empty($config['log'])) {
+			return false;
+		}
+
+		if (!empty($config['skipLog'])) {
+			foreach ((array)$config['skipLog'] as $class) {
+				if ($exception instanceof $class) {
+					return false;
+				}
+			}
+		}
+		return CakeLog::write(LOG_ERR, self::_getMessage($exception));
 	}
 
 /**

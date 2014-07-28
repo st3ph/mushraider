@@ -2,8 +2,6 @@
 /**
  * AppTest file.
  *
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -364,6 +362,8 @@ class AppTest extends CakeTestCase {
 
 /**
  * Make sure that .svn and friends are excluded from App::objects('plugin')
+ *
+ * @return void
  */
 	public function testListObjectsIgnoreDotDirectories() {
 		$path = CAKE . 'Test' . DS . 'test_app' . DS . 'Plugin' . DS;
@@ -795,6 +795,7 @@ class AppTest extends CakeTestCase {
  * Tests that the automatic class loader will also find in "libs" folder for both
  * app and plugins if it does not find the class in other configured paths
  *
+ * @return void
  */
 	public function testLoadClassInLibs() {
 		App::build(array(

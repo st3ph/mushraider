@@ -4,8 +4,6 @@
  *
  * Automatic forms and actions generation for rapid web application development.
  *
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -30,7 +28,8 @@ App::uses('Scaffold', 'View');
  * and afford the web developer an early look at the data, and the possibility to over-ride
  * scaffolded actions with custom-made ones.
  *
- * @package       Cake.Controller
+ * @package Cake.Controller
+ * @deprecated Dynamic scaffolding will be removed and replaced in 3.0
  */
 class Scaffold {
 
@@ -329,10 +328,9 @@ class Scaffold {
 	protected function _sendMessage($message) {
 		if ($this->_validSession) {
 			$this->controller->Session->setFlash($message);
-			$this->controller->redirect($this->redirect);
-		} else {
-			$this->controller->flash($message, $this->redirect);
+			return $this->controller->redirect($this->redirect);
 		}
+		$this->controller->flash($message, $this->redirect);
 	}
 
 /**

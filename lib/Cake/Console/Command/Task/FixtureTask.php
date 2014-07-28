@@ -2,8 +2,6 @@
 /**
  * The FixtureTask handles creating and updating fixture files.
  *
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -62,13 +60,14 @@ class FixtureTask extends BakeTask {
 	}
 
 /**
- * get the option parser.
+ * Gets the option parser instance and configures it.
  *
- * @return void
+ * @return ConsoleOptionParser
  */
 	public function getOptionParser() {
 		$parser = parent::getOptionParser();
-		return $parser->description(
+
+		$parser->description(
 			__d('cake_console', 'Generate fixtures for use with the test suite. You can use `bake fixture all` to bake all fixtures.')
 		)->addArgument('name', array(
 			'help' => __d('cake_console', 'Name of the fixture to bake. Can use Plugin.name to bake plugin fixtures.')
@@ -82,12 +81,27 @@ class FixtureTask extends BakeTask {
 			'default' => 'default'
 		))->addOption('plugin', array(
 			'help' => __d('cake_console', 'CamelCased name of the plugin to bake fixtures for.'),
-			'short' => 'p',
+			'short' => 'p'
+		))->addOption('schema', array(
+			'help' => __d('cake_console', 'Importing schema for fixtures rather than hardcoding it.'),
+			'short' => 's',
+			'boolean' => true
+		))->addOption('theme', array(
+			'short' => 't',
+			'help' => __d('cake_console', 'Theme to use when baking code.')
+		))->addOption('force', array(
+			'short' => 'f',
+			'help' => __d('cake_console', 'Force overwriting existing files without prompting.')
 		))->addOption('records', array(
-			'help' => __d('cake_console', 'Used with --count and <name>/all commands to pull [n] records from the live tables, where [n] is either --count or the default of 10'),
+			'help' => __d('cake_console', 'Used with --count and <name>/all commands to pull [n] records from the live tables, ' .
+				'where [n] is either --count or the default of 10.'),
 			'short' => 'r',
 			'boolean' => true
-		))->epilog(__d('cake_console', 'Omitting all arguments and options will enter into an interactive mode.'));
+		))->epilog(
+			__d('cake_console', 'Omitting all arguments and options will enter into an interactive mode.')
+		);
+
+		return $parser;
 	}
 
 /**
@@ -124,9 +138,14 @@ class FixtureTask extends BakeTask {
 		$this->interactive = false;
 		$this->Model->interactive = false;
 		$tables = $this->Model->listAll($this->connection, false);
+
 		foreach ($tables as $table) {
 			$model = $this->_modelName($table);
-			$this->bake($model);
+			$importOptions = array();
+			if (!empty($this->params['schema'])) {
+				$importOptions['schema'] = $model;
+			}
+			$this->bake($model, false, $importOptions);
 		}
 	}
 
@@ -158,11 +177,20 @@ class FixtureTask extends BakeTask {
  */
 	public function importOptions($modelName) {
 		$options = array();
-		$doSchema = $this->in(__d('cake_console', 'Would you like to import schema for this fixture?'), array('y', 'n'), 'n');
-		if ($doSchema === 'y') {
+
+		if (!empty($this->params['schema'])) {
 			$options['schema'] = $modelName;
+		} else {
+			$doSchema = $this->in(__d('cake_console', 'Would you like to import schema for this fixture?'), array('y', 'n'), 'n');
+			if ($doSchema === 'y') {
+				$options['schema'] = $modelName;
+			}
 		}
-		$doRecords = $this->in(__d('cake_console', 'Would you like to use record importing for this fixture?'), array('y', 'n'), 'n');
+		if (!empty($this->params['records'])) {
+			$doRecords = 'y';
+		} else {
+			$doRecords = $this->in(__d('cake_console', 'Would you like to use record importing for this fixture?'), array('y', 'n'), 'n');
+		}
 		if ($doRecords === 'y') {
 			$options['records'] = true;
 		}
@@ -219,7 +247,7 @@ class FixtureTask extends BakeTask {
 		}
 
 		$tableInfo = $data['tables'][$useTable];
-		if (is_null($modelImport)) {
+		if ($modelImport === null) {
 			$schema = $this->_generateSchema($tableInfo);
 		}
 
@@ -288,7 +316,7 @@ class FixtureTask extends BakeTask {
  * Generate String representation of Records
  *
  * @param array $tableInfo Table schema array
- * @param integer $recordCount
+ * @param integer $recordCount The number of records to generate.
  * @return array Array of records to use in the fixture.
  */
 	protected function _generateRecords($tableInfo, $recordCount = 1) {

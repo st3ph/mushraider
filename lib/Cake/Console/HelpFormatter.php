@@ -2,8 +2,6 @@
 /**
  * HelpFormatter
  *
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -161,7 +159,7 @@ class HelpFormatter {
 /**
  * Iterate over a collection and find the longest named thing.
  *
- * @param array $collection
+ * @param array $collection The collection to find a max length of.
  * @return integer
  */
 	protected function _getMaxLength($collection) {

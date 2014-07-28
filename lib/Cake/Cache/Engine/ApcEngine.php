@@ -2,9 +2,6 @@
 /**
  * APC storage engine for cache.
  *
- *
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -176,6 +173,7 @@ class ApcEngine extends CacheEngine {
  * Increments the group value to simulate deletion of all keys under a group
  * old values will remain in storage until they expire.
  *
+ * @param string $group The group to clear.
  * @return boolean success
  */
 	public function clearGroup($group) {

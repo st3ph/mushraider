@@ -144,6 +144,8 @@ div.tooltip-inner div {text-align:left;}
 #tplList {display:none}
 #tplList .loading {margin-left:5px;}
 
+#content .eventTemplate label {font-weight:normal;}
+
 /*
 * Account
 */

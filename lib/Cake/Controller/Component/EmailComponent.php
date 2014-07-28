@@ -2,8 +2,6 @@
 /**
  * Email Component
  *
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -425,7 +423,7 @@ class EmailComponent extends Component {
 /**
  * Format addresses to be an array with email as key and alias as value
  *
- * @param array $addresses
+ * @param array $addresses Address to format.
  * @return array
  */
 	protected function _formatAddresses($addresses) {

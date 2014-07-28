@@ -2,9 +2,6 @@
 /**
  * The Project Task handles creating the base application
  *
- *
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -117,8 +114,8 @@ class ProjectTask extends AppShell {
 			}
 			$success = $this->corePath($path, $hardCode) === true;
 			if ($success) {
-				$this->out(__d('cake_console', ' * CAKE_CORE_INCLUDE_PATH set to %s in webroot/index.php', CAKE_CORE_INCLUDE_PATH));
-				$this->out(__d('cake_console', ' * CAKE_CORE_INCLUDE_PATH set to %s in webroot/test.php', CAKE_CORE_INCLUDE_PATH));
+				$this->out(__d('cake_console', ' * CAKE_CORE_INCLUDE_PATH set to %s in %s', CAKE_CORE_INCLUDE_PATH, 'webroot/index.php'));
+				$this->out(__d('cake_console', ' * CAKE_CORE_INCLUDE_PATH set to %s in %s', CAKE_CORE_INCLUDE_PATH, 'webroot/test.php'));
 			} else {
 				$this->err(__d('cake_console', 'Unable to set CAKE_CORE_INCLUDE_PATH, you should change it in %s', $path . 'webroot' . DS . 'index.php'));
 				$success = false;
@@ -422,23 +419,30 @@ class ProjectTask extends AppShell {
 	}
 
 /**
- * get the option parser.
+ * Gets the option parser instance and configures it.
  *
  * @return ConsoleOptionParser
  */
 	public function getOptionParser() {
 		$parser = parent::getOptionParser();
-		return $parser->description(
-				__d('cake_console', 'Generate a new CakePHP project skeleton.')
-			)->addArgument('name', array(
-				'help' => __d('cake_console', 'Application directory to make, if it starts with "/" the path is absolute.')
-			))->addOption('empty', array(
-				'boolean' => true,
-				'help' => __d('cake_console', 'Create empty files in each of the directories. Good if you are using git')
-			))->addOption('skel', array(
-				'default' => current(App::core('Console')) . 'Templates' . DS . 'skel',
-				'help' => __d('cake_console', 'The directory layout to use for the new application skeleton. Defaults to cake/Console/Templates/skel of CakePHP used to create the project.')
-			));
+
+		$parser->description(
+			__d('cake_console', 'Generate a new CakePHP project skeleton.')
+		)->addArgument('name', array(
+			'help' => __d('cake_console', 'Application directory to make, if it starts with "/" the path is absolute.')
+		))->addOption('empty', array(
+			'boolean' => true,
+			'help' => __d('cake_console', 'Create empty files in each of the directories. Good if you are using git')
+		))->addOption('theme', array(
+			'short' => 't',
+			'help' => __d('cake_console', 'Theme to use when baking code.')
+		))->addOption('skel', array(
+			'default' => current(App::core('Console')) . 'Templates' . DS . 'skel',
+			'help' => __d('cake_console', 'The directory layout to use for the new application skeleton.' .
+				' Defaults to cake/Console/Templates/skel of CakePHP used to create the project.')
+		));
+
+		return $parser;
 	}
 
 }

@@ -274,6 +274,8 @@ class DebuggerTest extends CakeTestCase {
 
 /**
  * Test method for testing addFormat with callbacks.
+ *
+ * @return void
  */
 	public function customFormat($error, $strings) {
 		return $error['error'] . ': I eated an error ' . $error['file'];
@@ -334,6 +336,8 @@ object(View) {
 	response => object(CakeResponse) {}
 	elementCache => 'default'
 	elementCacheSettings => array()
+	Html => object(HtmlHelper) {}
+	Form => object(FormHelper) {}
 	int => (int) 2
 	float => (float) 1.333
 
@@ -358,7 +362,7 @@ TEXT;
 	)
 	[protected] _scripts => array()
 	[protected] _paths => array()
-	[protected] _helpersLoaded => false
+	[protected] _pathsForPlugin => array()
 	[protected] _parents => array()
 	[protected] _current => null
 	[protected] _currentType => ''
@@ -450,21 +454,44 @@ TEXT;
 		if (file_exists(LOGS . 'debug.log')) {
 			unlink(LOGS . 'debug.log');
 		}
+		CakeLog::config('file', array('engine' => 'File', 'path' => TMP . 'logs' . DS));
 
 		Debugger::log('cool');
 		$result = file_get_contents(LOGS . 'debug.log');
-		$this->assertRegExp('/DebuggerTest\:\:testLog/i', $result);
-		$this->assertRegExp("/'cool'/", $result);
+		$this->assertContains('DebuggerTest::testLog', $result);
+		$this->assertContains("'cool'", $result);
 
 		unlink(LOGS . 'debug.log');
 
 		Debugger::log(array('whatever', 'here'));
 		$result = file_get_contents(LOGS . 'debug.log');
-		$this->assertRegExp('/DebuggerTest\:\:testLog/i', $result);
-		$this->assertRegExp('/\[main\]/', $result);
-		$this->assertRegExp('/array/', $result);
-		$this->assertRegExp("/'whatever',/", $result);
-		$this->assertRegExp("/'here'/", $result);
+		$this->assertContains('DebuggerTest::testLog', $result);
+		$this->assertContains('[main]', $result);
+		$this->assertContains('array', $result);
+		$this->assertContains("'whatever',", $result);
+		$this->assertContains("'here'", $result);
+	}
+
+/**
+ * test log() depth
+ *
+ * @return void
+ */
+	public function testLogDepth() {
+		if (file_exists(LOGS . 'debug.log')) {
+			unlink(LOGS . 'debug.log');
+		}
+		CakeLog::config('file', array('engine' => 'File', 'path' => TMP . 'logs' . DS));
+
+		$val = array(
+			'test' => array('key' => 'val')
+		);
+		Debugger::log($val, LOG_DEBUG, 0);
+		$result = file_get_contents(LOGS . 'debug.log');
+		$this->assertContains('DebuggerTest::testLog', $result);
+		$this->assertNotContains("/'val'/", $result);
+
+		unlink(LOGS . 'debug.log');
 	}
 
 /**
@@ -488,8 +515,11 @@ TEXT;
 		ob_start();
 		Debugger::dump($var);
 		$result = ob_get_clean();
+
+		$open = php_sapi_name() === 'cli' ? "\n" : '<pre>';
+		$close = php_sapi_name() === 'cli' ? "\n" : '</pre>';
 		$expected = <<<TEXT
-<pre>array(
+{$open}array(
 	'People' => array(
 		(int) 0 => array(
 			'name' => 'joeseph',
@@ -502,7 +532,22 @@ TEXT;
 			'hair' => 'black'
 		)
 	)
-)</pre>
+){$close}
+TEXT;
+		$this->assertTextEquals($expected, $result);
+
+		ob_start();
+		Debugger::dump($var, 1);
+		$result = ob_get_clean();
+
+		$open = php_sapi_name() == 'cli' ? "\n" : '<pre>';
+		$close = php_sapi_name() == 'cli' ? "\n" : '</pre>';
+		$expected = <<<TEXT
+{$open}array(
+	'People' => array(
+		[maximum depth reached]
+	)
+){$close}
 TEXT;
 		$this->assertTextEquals($expected, $result);
 	}

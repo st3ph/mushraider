@@ -1,7 +1,6 @@
 <?php
 /**
  *
- * PHP 5
  *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
@@ -21,7 +20,6 @@
 <h2><?php echo __d('cake', 'View %s', $singularHumanName); ?></h2>
 	<dl>
 <?php
-$i = 0;
 foreach ($scaffoldFields as $_field) {
 	$isKey = false;
 	if (!empty($associations['belongsTo'])) {
@@ -52,11 +50,11 @@ foreach ($scaffoldFields as $_field) {
 	<ul>
 <?php
 	echo "\t\t<li>";
-	echo $this->Html->link(__d('cake', 'Edit %s', $singularHumanName),   array('action' => 'edit', ${$singularVar}[$modelClass][$primaryKey]));
+	echo $this->Html->link(__d('cake', 'Edit %s', $singularHumanName), array('action' => 'edit', ${$singularVar}[$modelClass][$primaryKey]));
 	echo " </li>\n";
 
 	echo "\t\t<li>";
-	echo $this->Form->postLink(__d('cake', 'Delete %s', $singularHumanName), array('action' => 'delete', ${$singularVar}[$modelClass][$primaryKey]), null, __d('cake', 'Are you sure you want to delete # %s?', ${$singularVar}[$modelClass][$primaryKey]));
+	echo $this->Form->postLink(__d('cake', 'Delete %s', $singularHumanName), array('action' => 'delete', ${$singularVar}[$modelClass][$primaryKey]), array(), __d('cake', 'Are you sure you want to delete # %s?', ${$singularVar}[$modelClass][$primaryKey]));
 	echo " </li>\n";
 
 	echo "\t\t<li>";
@@ -98,7 +96,6 @@ foreach ($associations['hasOne'] as $_alias => $_details): ?>
 <?php if (!empty(${$singularVar}[$_alias])): ?>
 	<dl>
 <?php
-		$i = 0;
 		$otherFields = array_keys(${$singularVar}[$_alias]);
 		foreach ($otherFields as $_field) {
 			echo "\t\t<dt>" . Inflector::humanize($_field) . "</dt>\n";
@@ -177,7 +174,7 @@ $otherSingularVar = Inflector::variable($_alias);
 			echo $this->Form->postLink(
 				__d('cake', 'Delete'),
 				array('plugin' => $_details['plugin'], 'controller' => $_details['controller'], 'action' => 'delete', ${$otherSingularVar}[$_details['primaryKey']]),
-				null,
+				array(),
 				__d('cake', 'Are you sure you want to delete # %s?', ${$otherSingularVar}[$_details['primaryKey']])
 			);
 			echo "\n";

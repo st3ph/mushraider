@@ -2,8 +2,6 @@
 /**
  * SessionComponentTest file
  *
- * PHP 5
- *
  * CakePHP(tm) Tests <http://book.cakephp.org/2.0/en/development/testing.html>
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -137,10 +135,6 @@ class SessionComponentTest extends CakeTestCase {
  * @return void
  */
 	public function testSessionIdConsistentAcrossRequestAction() {
-		$Session = new SessionComponent($this->ComponentCollection);
-		$Session->check('Test');
-		$this->assertTrue(isset($_SESSION));
-
 		$Object = new Object();
 		$Session = new SessionComponent($this->ComponentCollection);
 		$expected = $Session->id();
@@ -177,6 +171,7 @@ class SessionComponentTest extends CakeTestCase {
  * @return void
  */
 	public function testSessionError() {
+		CakeSession::$lastError = null;
 		$Session = new SessionComponent($this->ComponentCollection);
 		$this->assertFalse($Session->error());
 	}
@@ -275,7 +270,7 @@ class SessionComponentTest extends CakeTestCase {
 	public function testSessionId() {
 		unset($_SESSION);
 		$Session = new SessionComponent($this->ComponentCollection);
-		$Session->check('test');
+		CakeSession::start();
 		$this->assertEquals(session_id(), $Session->id());
 	}
 

@@ -4,8 +4,6 @@
  *
  * Test Case for CakeTestCase class
  *
- * PHP 5
- *
  * CakePHP : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -37,6 +35,11 @@ class CakeTestCaseTest extends CakeTestCase {
  */
 	public $fixtures = array('core.post', 'core.author', 'core.test_plugin_comment');
 
+/**
+ * CakeTestCaseTest::setUpBeforeClass()
+ *
+ * @return void
+ */
 	public static function setUpBeforeClass() {
 		require_once CAKE . 'Test' . DS . 'Fixture' . DS . 'AssertTagsTestCase.php';
 		require_once CAKE . 'Test' . DS . 'Fixture' . DS . 'FixturizedTestCase.php';
@@ -64,24 +67,31 @@ class CakeTestCaseTest extends CakeTestCase {
 	}
 
 /**
- * testAssertGoodTags
+ * testAssertTags
  *
  * @return void
  */
-	public function testAssertTagsQuotes() {
+	public function testAssertTagsBasic() {
 		$test = new AssertTagsTestCase('testAssertTagsQuotes');
 		$result = $test->run();
 		$this->assertEquals(0, $result->errorCount());
 		$this->assertTrue($result->wasSuccessful());
 		$this->assertEquals(0, $result->failureCount());
+	}
 
+/**
+ * test assertTags works with single and double quotes
+ *
+ * @return void
+ */
+	public function testAssertTagsQuoting() {
 		$input = '<a href="/test.html" class="active">My link</a>';
 		$pattern = array(
 			'a' => array('href' => '/test.html', 'class' => 'active'),
 			'My link',
 			'/a'
 		);
-		$this->assertTrue($test->assertTags($input, $pattern), 'Double quoted attributes %s');
+		$this->assertTags($input, $pattern);
 
 		$input = "<a href='/test.html' class='active'>My link</a>";
 		$pattern = array(
@@ -89,7 +99,7 @@ class CakeTestCaseTest extends CakeTestCase {
 			'My link',
 			'/a'
 		);
-		$this->assertTrue($test->assertTags($input, $pattern), 'Single quoted attributes %s');
+		$this->assertTags($input, $pattern);
 
 		$input = "<a href='/test.html' class='active'>My link</a>";
 		$pattern = array(
@@ -97,7 +107,7 @@ class CakeTestCaseTest extends CakeTestCase {
 			'My link',
 			'/a'
 		);
-		$this->assertTrue($test->assertTags($input, $pattern), 'Single quoted attributes %s');
+		$this->assertTags($input, $pattern);
 
 		$input = "<span><strong>Text</strong></span>";
 		$pattern = array(
@@ -107,7 +117,7 @@ class CakeTestCaseTest extends CakeTestCase {
 			'/strong',
 			'/span'
 		);
-		$this->assertTrue($test->assertTags($input, $pattern), 'Tags with no attributes');
+		$this->assertTags($input, $pattern);
 
 		$input = "<span class='active'><strong>Text</strong></span>";
 		$pattern = array(
@@ -117,7 +127,34 @@ class CakeTestCaseTest extends CakeTestCase {
 			'/strong',
 			'/span'
 		);
-		$this->assertTrue($test->assertTags($input, $pattern), 'Test attribute presence');
+		$this->assertTags($input, $pattern);
+	}
+
+/**
+ * Test that assertTags runs quickly.
+ *
+ * @return void
+ */
+	public function testAssertTagsRuntimeComplexity() {
+		$pattern = array(
+			'div' => array(
+				'attr1' => 'val1',
+				'attr2' => 'val2',
+				'attr3' => 'val3',
+				'attr4' => 'val4',
+				'attr5' => 'val5',
+				'attr6' => 'val6',
+				'attr7' => 'val7',
+				'attr8' => 'val8',
+			),
+			'My div',
+			'/div'
+		);
+		$input = '<div attr8="val8" attr6="val6" attr4="val4" attr2="val2"' .
+			' attr1="val1" attr3="val3" attr5="val5" attr7="val7" />' .
+			'My div' .
+			'</div>';
+		$this->assertTags($input, $pattern);
 	}
 
 /**
@@ -353,6 +390,11 @@ class CakeTestCaseTest extends CakeTestCase {
  * @return void
  */
 	public function testGetMockForModel() {
+		App::build(array(
+				'Model' => array(
+					CAKE . 'Test' . DS . 'test_app' . DS . 'Model' . DS
+				)
+		), App::RESET);
 		$Post = $this->getMockForModel('Post');
 
 		$this->assertInstanceOf('Post', $Post);
@@ -372,6 +414,13 @@ class CakeTestCaseTest extends CakeTestCase {
  * @return void
  */
 	public function testGetMockForModelWithPlugin() {
+		App::build(array(
+				'Plugin' => array(
+					CAKE . 'Test' . DS . 'test_app' . DS . 'Plugin' . DS
+				)
+		), App::RESET);
+		CakePlugin::load('TestPlugin');
+		$this->getMockForModel('TestPlugin.TestPluginAppModel');
 		$TestPluginComment = $this->getMockForModel('TestPlugin.TestPluginComment');
 
 		$result = ClassRegistry::init('TestPlugin.TestPluginComment');
@@ -388,5 +437,38 @@ class CakeTestCaseTest extends CakeTestCase {
 			->will($this->returnValue(false));
 		$this->assertTrue($TestPluginComment->save(array()));
 		$this->assertFalse($TestPluginComment->save(array()));
+	}
+
+/**
+ * testGetMockForModelModel
+ *
+ * @return void
+ */
+	public function testGetMockForModelModel() {
+		$Mock = $this->getMockForModel('Model', array('save'), array('name' => 'Comment'));
+
+		$result = ClassRegistry::init('Comment');
+		$this->assertInstanceOf('Model', $result);
+
+		$Mock->expects($this->at(0))
+			->method('save')
+			->will($this->returnValue(true));
+		$Mock->expects($this->at(1))
+			->method('save')
+			->will($this->returnValue(false));
+
+		$this->assertTrue($Mock->save(array()));
+		$this->assertFalse($Mock->save(array()));
+	}
+
+/**
+ * testGetMockForModelDoesNotExist
+ *
+ * @expectedException MissingModelException
+ * @expectedExceptionMessage Model IDoNotExist could not be found
+ * @return void
+ */
+	public function testGetMockForModelDoesNotExist() {
+		$this->getMockForModel('IDoNotExist');
 	}
 }

@@ -2,8 +2,6 @@
 /**
  * built-in Server Shell
  *
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -28,11 +26,15 @@ class ServerShell extends AppShell {
 
 /**
  * Default ServerHost
+ *
+ * @var string
  */
 	const DEFAULT_HOST = 'localhost';
 
 /**
  * Default ListenPort
+ *
+ * @var integer
  */
 	const DEFAULT_PORT = 80;
 
@@ -90,7 +92,7 @@ class ServerShell extends AppShell {
 		}
 
 		// for windows
-		if (substr($this->_documentRoot, -1, 1) == DIRECTORY_SEPARATOR) {
+		if (substr($this->_documentRoot, -1, 1) === DIRECTORY_SEPARATOR) {
 			$this->_documentRoot = substr($this->_documentRoot, 0, strlen($this->_documentRoot) - 1);
 		}
 		if (preg_match("/^([a-z]:)[\\\]+(.+)$/i", $this->_documentRoot, $m)) {
@@ -122,7 +124,7 @@ class ServerShell extends AppShell {
  */
 	public function main() {
 		if (version_compare(PHP_VERSION, '5.4.0') < 0) {
-			$this->out(__d('cake_console', '<warning>This command is available on PHP5.4 or above</warning>'));
+			$this->out(__d('cake_console', '<warning>This command is available on %s or above</warning>', 'PHP5.4'));
 			return;
 		}
 
@@ -139,29 +141,25 @@ class ServerShell extends AppShell {
 	}
 
 /**
- * Get and configure the optionparser.
+ * Gets the option parser instance and configures it.
  *
  * @return ConsoleOptionParser
  */
 	public function getOptionParser() {
 		$parser = parent::getOptionParser();
 
-		$parser->addOption('host', array(
-			'short' => 'H',
-			'help' => __d('cake_console', 'ServerHost')
-		));
-		$parser->addOption('port', array(
-			'short' => 'p',
-			'help' => __d('cake_console', 'ListenPort')
-		));
-		$parser->addOption('document_root', array(
-			'short' => 'd',
-			'help' => __d('cake_console', 'DocumentRoot')
-		));
-
 		$parser->description(array(
 			__d('cake_console', 'PHP Built-in Server for CakePHP'),
-			__d('cake_console', '<warning>[WARN] Don\'t use this at the production environment</warning>'),
+			__d('cake_console', '<warning>[WARN] Don\'t use this at the production environment</warning>')
+		))->addOption('host', array(
+			'short' => 'H',
+			'help' => __d('cake_console', 'ServerHost')
+		))->addOption('port', array(
+			'short' => 'p',
+			'help' => __d('cake_console', 'ListenPort')
+		))->addOption('document_root', array(
+			'short' => 'd',
+			'help' => __d('cake_console', 'DocumentRoot')
 		));
 
 		return $parser;

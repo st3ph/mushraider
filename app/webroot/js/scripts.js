@@ -342,7 +342,7 @@ jQuery(function($) {
     $('#tplName').on('click', '.text-success', function(e) {
         var tplName = $('#tplName input').val();
         var eventId = $('#tplName').data('event');
-        if(tplName.length) {
+        if(tplName.length > 1) {
             $.ajax({
                 type: 'get',
                 url: site_url+'ajax/copyEvent',
@@ -391,10 +391,28 @@ jQuery(function($) {
                             };
                         }
                         $('#EventCharacterLevel').val(json.msg.EventsTemplate.character_level);
+                        var invitationTime = json.msg.EventsTemplate.time_invitation.split(' ');
+                        var invitationTimes = invitationTime[1].split(':');
+                        $('#EventTimeInvitationHour').val(invitationTimes[0]);
+                        $('#EventTimeInvitationMin').val(invitationTimes[1]);
+                        var startTime = json.msg.EventsTemplate.time_start.split(' ');
+                        var startTimes = startTime[1].split(':');
+                        $('#EventTimeStartHour').val(startTimes[0]);
+                        $('#EventTimeStartMin').val(startTimes[1]);
                     }
                     $imgLoading.remove();
                 }
             });         
+        }
+    });
+
+    $('#EventAddForm').on('submit', function(e) {
+        if($('#EventTemplate').is(':checked')) {
+            var inputVal = $(this).find('.tplName').val();
+            if(!inputVal.length) {
+                $(this).find('.tplName').addClass('form-error');
+                e.preventDefault();
+            }
         }
     });
 

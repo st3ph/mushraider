@@ -2,8 +2,6 @@
 /**
  * App class
  *
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -68,28 +66,28 @@ class App {
 /**
  * Append paths
  *
- * @constant APPEND
+ * @var string
  */
 	const APPEND = 'append';
 
 /**
  * Prepend paths
  *
- * @constant PREPEND
+ * @var string
  */
 	const PREPEND = 'prepend';
 
 /**
  * Register package
  *
- * @constant REGISTER
+ * @var string
  */
 	const REGISTER = 'register';
 
 /**
  * Reset paths instead of merging
  *
- * @constant RESET
+ * @var boolean
  */
 	const RESET = true;
 
@@ -395,7 +393,7 @@ class App {
  *
  * `App::core('Cache/Engine'); will return the full path to the cache engines package`
  *
- * @param string $type
+ * @param string $type Package type.
  * @return array full path to package
  * @link http://book.cakephp.org/2.0/en/core-utility-libraries/app.html#App::core
  */
@@ -589,19 +587,19 @@ class App {
  * Finds classes based on $name or specific file(s) to search. Calling App::import() will
  * not construct any classes contained in the files. It will only find and require() the file.
  *
- * @link          http://book.cakephp.org/2.0/en/core-utility-libraries/app.html#including-files-with-app-import
  * @param string|array $type The type of Class if passed as a string, or all params can be passed as
- *                    an single array to $type,
+ *   an single array to $type.
  * @param string $name Name of the Class or a unique name for the file
  * @param boolean|array $parent boolean true if Class Parent should be searched, accepts key => value
- *              array('parent' => $parent, 'file' => $file, 'search' => $search, 'ext' => '$ext');
- *              $ext allows setting the extension of the file name
- *              based on Inflector::underscore($name) . ".$ext";
+ *   array('parent' => $parent, 'file' => $file, 'search' => $search, 'ext' => '$ext');
+ *   $ext allows setting the extension of the file name
+ *   based on Inflector::underscore($name) . ".$ext";
  * @param array $search paths to search for files, array('path 1', 'path 2', 'path 3');
  * @param string $file full name of the file to search for including extension
  * @param boolean $return Return the loaded file, the file must have a return
- *                         statement in it to work: return $variable;
+ *   statement in it to work: return $variable;
  * @return boolean true if Class is already in memory or if file is found and loaded, false if not
+ * @link http://book.cakephp.org/2.0/en/core-utility-libraries/app.html#including-files-with-app-import
  */
 	public static function import($type = null, $name = null, $parent = true, $search = array(), $file = null, $return = false) {
 		$ext = null;
@@ -670,7 +668,7 @@ class App {
 			$type = 'Console';
 		} elseif (isset(self::$types[$originalType]['suffix'])) {
 			$suffix = self::$types[$originalType]['suffix'];
-			$name .= ($suffix == $name) ? '' : $suffix;
+			$name .= ($suffix === $name) ? '' : $suffix;
 		}
 		if ($parent && isset(self::$types[$originalType]['extends'])) {
 			$extends = self::$types[$originalType]['extends'];

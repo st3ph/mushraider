@@ -4,8 +4,6 @@
  *
  * Provides enhanced logging, stack traces, and rendering debug views
  *
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -81,8 +79,7 @@ class Debugger {
 			'traceLine' => '{:reference} - {:path}, line {:line}',
 			'trace' => "Trace:\n{:trace}\n",
 			'context' => "Context:\n{:context}\n",
-		),
-		'log' => array(),
+		)
 	);
 
 /**
@@ -151,7 +148,7 @@ class Debugger {
 /**
  * Returns a reference to the Debugger singleton object instance.
  *
- * @param string $class
+ * @param string $class Debugger class name.
  * @return object
  */
 	public static function getInstance($class = null) {
@@ -170,14 +167,14 @@ class Debugger {
 /**
  * Recursively formats and outputs the contents of the supplied variable.
  *
- *
  * @param mixed $var the variable to dump
+ * @param int $depth The depth to output to. Defaults to 3.
  * @return void
  * @see Debugger::exportVar()
  * @link http://book.cakephp.org/2.0/en/development/debugging.html#Debugger::dump
  */
-	public static function dump($var) {
-		pr(self::exportVar($var));
+	public static function dump($var, $depth = 3) {
+		pr(self::exportVar($var, $depth));
 	}
 
 /**
@@ -186,12 +183,13 @@ class Debugger {
  *
  * @param mixed $var Variable or content to log
  * @param integer $level type of log to use. Defaults to LOG_DEBUG
+ * @param int $depth The depth to output to. Defaults to 3.
  * @return void
  * @link http://book.cakephp.org/2.0/en/development/debugging.html#Debugger::log
  */
-	public static function log($var, $level = LOG_DEBUG) {
+	public static function log($var, $level = LOG_DEBUG, $depth = 3) {
 		$source = self::trace(array('start' => 1)) . "\n";
-		CakeLog::write($level, "\n" . $source . self::exportVar($var));
+		CakeLog::write($level, "\n" . $source . self::exportVar($var, $depth));
 	}
 
 /**
@@ -203,7 +201,7 @@ class Debugger {
  * @param integer $line Line that triggered the error
  * @param array $context Context
  * @return boolean true if error was handled
- * @deprecated This function is superseded by Debugger::outputError()
+ * @deprecated Will be removed in 3.0. This function is superseded by Debugger::outputError().
  */
 	public static function showError($code, $description, $file = null, $line = null, $context = null) {
 		$self = Debugger::getInstance();
@@ -539,9 +537,8 @@ class Debugger {
 		$var = $replace + $var;
 
 		$out = "array(";
-		$n = $break = $end = null;
+		$break = $end = null;
 		if (!empty($var)) {
-			$n = "\n";
 			$break = "\n" . str_repeat("\t", $indent);
 			$end = "\n" . str_repeat("\t", $indent - 1);
 		}
@@ -702,11 +699,11 @@ class Debugger {
  * @deprecated Use Debugger::outputAs() and Debugger::addFormat(). Will be removed
  *   in 3.0
  */
-	public function output($format = null, $strings = array()) {
+	public static function output($format = null, $strings = array()) {
 		$self = Debugger::getInstance();
 		$data = null;
 
-		if (is_null($format)) {
+		if ($format === null) {
 			return Debugger::outputAs();
 		}
 
@@ -726,7 +723,7 @@ class Debugger {
 /**
  * Takes a processed array of data from an error and displays it in the chosen format.
  *
- * @param string $data
+ * @param string $data Data to output.
  * @return void
  */
 	public function outputError($data) {
@@ -805,7 +802,7 @@ class Debugger {
 	}
 
 /**
- * Get the type of the given variable. Will return the classname
+ * Get the type of the given variable. Will return the class name
  * for objects.
  *
  * @param mixed $var The variable to get the type of
@@ -815,7 +812,7 @@ class Debugger {
 		if (is_object($var)) {
 			return get_class($var);
 		}
-		if (is_null($var)) {
+		if ($var === null) {
 			return 'null';
 		}
 		if (is_string($var)) {
@@ -846,11 +843,11 @@ class Debugger {
  */
 	public static function checkSecurityKeys() {
 		if (Configure::read('Security.salt') === 'DYhG93b0qyJfIxfs2guVoUubWwvniR2G0FgaC9mi') {
-			trigger_error(__d('cake_dev', 'Please change the value of \'Security.salt\' in app/Config/core.php to a salt value specific to your application'), E_USER_NOTICE);
+			trigger_error(__d('cake_dev', 'Please change the value of %s in %s to a salt value specific to your application.', '\'Security.salt\'', 'APP/Config/core.php'), E_USER_NOTICE);
 		}
 
 		if (Configure::read('Security.cipherSeed') === '76859309657453542496749683645') {
-			trigger_error(__d('cake_dev', 'Please change the value of \'Security.cipherSeed\' in app/Config/core.php to a numeric (digits only) seed value specific to your application'), E_USER_NOTICE);
+			trigger_error(__d('cake_dev', 'Please change the value of %s in %s to a numeric (digits only) seed value specific to your application.', '\'Security.cipherSeed\'', 'APP/Config/core.php'), E_USER_NOTICE);
 		}
 	}
 

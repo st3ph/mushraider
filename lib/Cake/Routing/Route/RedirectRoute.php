@@ -41,7 +41,7 @@ class RedirectRoute extends CakeRoute {
 	public $redirect;
 
 /**
- * Flag for disabling exit() when this route parses an URL.
+ * Flag for disabling exit() when this route parses a URL.
  *
  * @var boolean
  */
@@ -80,6 +80,13 @@ class RedirectRoute extends CakeRoute {
 		}
 		if (isset($this->options['persist']) && is_array($redirect)) {
 			$redirect += array('named' => $params['named'], 'pass' => $params['pass'], 'url' => array());
+			if (is_array($this->options['persist'])) {
+				foreach ($this->options['persist'] as $elem) {
+					if (isset($params[$elem])) {
+						$redirect[$elem] = $params[$elem];
+					}
+				}
+			}
 			$redirect = Router::reverse($redirect);
 		}
 		$status = 301;
@@ -106,7 +113,7 @@ class RedirectRoute extends CakeRoute {
  * Stop execution of the current script. Wraps exit() making
  * testing easier.
  *
- * @param integer|string $status see http://php.net/exit for values
+ * @param integer|string $code See http://php.net/exit for values
  * @return void
  */
 	protected function _stop($code = 0) {

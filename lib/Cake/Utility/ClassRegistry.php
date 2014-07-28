@@ -86,6 +86,7 @@ class ClassRegistry {
  *		array('class' => 'ClassName', 'alias' => 'AliasNameStoredInTheRegistry')
  * );
  * }}}
+ *
  * @param string|array $class as a string or a single key => value array instance will be created,
  *  stored in the registry and returned.
  * @param boolean $strict if set to true it will return false if the class was not found instead
@@ -119,7 +120,7 @@ class ClassRegistry {
 
 			if (is_array($settings)) {
 				$pluginPath = null;
-				$settings = array_merge($defaults, $settings);
+				$settings += $defaults;
 				$class = $settings['class'];
 
 				list($plugin, $class) = pluginSplit($class);
@@ -289,7 +290,7 @@ class ClassRegistry {
 		if (empty($param) && is_array($type)) {
 			$param = $type;
 			$type = 'Model';
-		} elseif (is_null($param)) {
+		} elseif ($param === null) {
 			unset($_this->_config[$type]);
 		} elseif (empty($param) && is_string($type)) {
 			return isset($_this->_config[$type]) ? $_this->_config[$type] : null;
@@ -303,15 +304,15 @@ class ClassRegistry {
 /**
  * Checks to see if $alias is a duplicate $class Object
  *
- * @param string $alias
- * @param string $class
+ * @param string $alias Alias to check.
+ * @param string $class Class name.
  * @return boolean
  */
 	protected function &_duplicate($alias, $class) {
 		$duplicate = false;
 		if ($this->isKeySet($alias)) {
 			$model = $this->getObject($alias);
-			if (is_object($model) && (is_a($model, $class) || $model->alias === $class)) {
+			if (is_object($model) && ($model instanceof $class || $model->alias === $class)) {
 				$duplicate = $model;
 			}
 			unset($model);

@@ -4,19 +4,18 @@
  *
  * InflectorTest is used to test cases on the Inflector class
  *
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
- * Licensed under The Open Group Test Suite License
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  * @link          http://book.cakephp.org/2.0/en/development/testing.html
  * @package       Cake.Test.Case.Utility
  * @since         CakePHP(tm) v 1.2.0.4206
- * @license       http://www.opensource.org/licenses/opengroup.php Open Group Test Suite License
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
 /**
@@ -30,6 +29,57 @@ App::uses('Inflector', 'Utility');
  * @package       Cake.Test.Case.Utility
  */
 class InflectorTest extends CakeTestCase {
+
+/**
+ * A list of chars to test transliteration.
+ *
+ * @var array
+ */
+	public static $maps = array (
+		'de' => array ( /* German */
+			'Ä' => 'Ae', 'Ö' => 'Oe', 'Ü' => 'Ue', 'ä' => 'ae', 'ö' => 'oe', 'ü' => 'ue', 'ß' => 'ss',
+			'ẞ' => 'SS'
+		),
+		'latin' => array (
+			'À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Å' => 'A', 'Ă' => 'A', 'Æ' => 'AE', 'Ç' =>
+			'C', 'È' => 'E', 'É' => 'E', 'Ê' => 'E', 'Ë' => 'E', 'Ì' => 'I', 'Í' => 'I', 'Î' => 'I',
+			'Ï' => 'I', 'Ð' => 'D', 'Ñ' => 'N', 'Ò' => 'O', 'Ó' => 'O', 'Ô' => 'O', 'Õ' => 'O', 'Ő' => 'O', 'Ø' => 'O',
+			'Ș' => 'S', 'Ț' => 'T', 'Ù' => 'U', 'Ú' => 'U', 'Û' => 'U', 'Ű' => 'U',
+			'Ý' => 'Y', 'Þ' => 'TH', 'à' => 'a', 'á' => 'a', 'â' => 'a', 'ã' => 'a',
+			'å' => 'a', 'ă' => 'a', 'æ' => 'ae', 'ç' => 'c', 'è' => 'e', 'é' => 'e', 'ê' => 'e', 'ë' => 'e',
+			'ì' => 'i', 'í' => 'i', 'î' => 'i', 'ï' => 'i', 'ð' => 'd', 'ñ' => 'n', 'ò' => 'o', 'ó' =>
+			'o', 'ô' => 'o', 'õ' => 'o', 'ő' => 'o', 'ø' => 'o', 'ș' => 's', 'ț' => 't', 'ù' => 'u', 'ú' => 'u',
+			'û' => 'u', 'ű' => 'u', 'ý' => 'y', 'þ' => 'th', 'ÿ' => 'y'
+		),
+		'tr' => array ( /* Turkish */
+			'ş' => 's', 'Ş' => 'S', 'ı' => 'i', 'İ' => 'I', 'ç' => 'c', 'Ç' => 'C', 'ğ' => 'g', 'Ğ' => 'G'
+		),
+		'uk' => array ( /* Ukrainian */
+			'Є' => 'Ye', 'І' => 'I', 'Ї' => 'Yi', 'Ґ' => 'G', 'є' => 'ye', 'і' => 'i', 'ї' => 'yi', 'ґ' => 'g'
+		),
+		'cs' => array ( /* Czech */
+			'č' => 'c', 'ď' => 'd', 'ě' => 'e', 'ň' => 'n', 'ř' => 'r', 'š' => 's', 'ť' => 't', 'ů' => 'u',
+			'ž' => 'z', 'Č' => 'C', 'Ď' => 'D', 'Ě' => 'E', 'Ň' => 'N', 'Ř' => 'R', 'Š' => 'S', 'Ť' => 'T',
+			'Ů' => 'U', 'Ž' => 'Z'
+		),
+		'pl' => array ( /* Polish */
+			'ą' => 'a', 'ć' => 'c', 'ę' => 'e', 'ł' => 'l', 'ń' => 'n', 'ó' => 'o', 'ś' => 's', 'ź' => 'z',
+			'ż' => 'z', 'Ą' => 'A', 'Ć' => 'C', 'Ł' => 'L', 'Ń' => 'N', 'Ó' => 'O', 'Ś' => 'S',
+			'Ź' => 'Z', 'Ż' => 'Z'
+		),
+		'ro' => array ( /* Romanian */
+			'ă' => 'a', 'â' => 'a', 'î' => 'i', 'ș' => 's', 'ț' => 't', 'Ţ' => 'T', 'ţ' => 't'
+		),
+		'lv' => array ( /* Latvian */
+			'ā' => 'a', 'č' => 'c', 'ē' => 'e', 'ģ' => 'g', 'ī' => 'i', 'ķ' => 'k', 'ļ' => 'l', 'ņ' => 'n',
+			'š' => 's', 'ū' => 'u', 'ž' => 'z', 'Ā' => 'A', 'Č' => 'C', 'Ē' => 'E', 'Ģ' => 'G', 'Ī' => 'I',
+			'Ķ' => 'K', 'Ļ' => 'L', 'Ņ' => 'N', 'Š' => 'S', 'Ū' => 'U', 'Ž' => 'Z'
+		),
+		'lt' => array ( /* Lithuanian */
+			'ą' => 'a', 'č' => 'c', 'ę' => 'e', 'ė' => 'e', 'į' => 'i', 'š' => 's', 'ų' => 'u', 'ū' => 'u', 'ž' => 'z',
+			'Ą' => 'A', 'Č' => 'C', 'Ę' => 'E', 'Ė' => 'E', 'Į' => 'I', 'Š' => 'S', 'Ų' => 'U', 'Ū' => 'U', 'Ž' => 'Z'
+		)
+	);
 
 /**
  * tearDown
@@ -93,6 +143,8 @@ class InflectorTest extends CakeTestCase {
 		$this->assertEquals(Inflector::singularize('faxes'), 'fax');
 		$this->assertEquals(Inflector::singularize('waxes'), 'wax');
 		$this->assertEquals(Inflector::singularize('niches'), 'niche');
+		$this->assertEquals(Inflector::singularize('caves'), 'cave');
+		$this->assertEquals(Inflector::singularize('graves'), 'grave');
 		$this->assertEquals(Inflector::singularize('waves'), 'wave');
 		$this->assertEquals(Inflector::singularize('bureaus'), 'bureau');
 		$this->assertEquals(Inflector::singularize('genetic_analyses'), 'genetic_analysis');
@@ -117,7 +169,13 @@ class InflectorTest extends CakeTestCase {
 		$this->assertEquals(Inflector::singularize('teeth'), 'tooth');
 		$this->assertEquals(Inflector::singularize('geese'), 'goose');
 		$this->assertEquals(Inflector::singularize('feet'), 'foot');
-
+		$this->assertEquals(Inflector::singularize('objectives'), 'objective');
+		$this->assertEquals(Inflector::singularize('archives'), 'archive');
+		$this->assertEquals(Inflector::singularize('briefs'), 'brief');
+		$this->assertEquals(Inflector::singularize('quotas'), 'quota');
+		$this->assertEquals(Inflector::singularize('curves'), 'curve');
+		$this->assertEquals(Inflector::singularize('body_curves'), 'body_curve');
+		$this->assertEquals(Inflector::singularize('metadata'), 'metadata');
 		$this->assertEquals(Inflector::singularize(''), '');
 	}
 
@@ -177,6 +235,12 @@ class InflectorTest extends CakeTestCase {
 		$this->assertEquals(Inflector::pluralize('tooth'), 'teeth');
 		$this->assertEquals(Inflector::pluralize('goose'), 'geese');
 		$this->assertEquals(Inflector::pluralize('foot'), 'feet');
+		$this->assertEquals(Inflector::pluralize('objective'), 'objectives');
+		$this->assertEquals(Inflector::pluralize('brief'), 'briefs');
+		$this->assertEquals(Inflector::pluralize('quota'), 'quotas');
+		$this->assertEquals(Inflector::pluralize('curve'), 'curves');
+		$this->assertEquals(Inflector::pluralize('body_curve'), 'body_curves');
+		$this->assertEquals(Inflector::pluralize('metadata'), 'metadata');
 		$this->assertEquals(Inflector::pluralize(''), '');
 	}
 
@@ -241,6 +305,23 @@ class InflectorTest extends CakeTestCase {
 		$result = Inflector::slug('posts/view/한국어/page:1/sort:asc');
 		$expected = 'posts_view_한국어_page_1_sort_asc';
 		$this->assertEquals($expected, $result);
+
+		$result = Inflector::slug("non\xc2\xa0breaking\xc2\xa0space");
+		$this->assertEquals('non_breaking_space', $result);
+	}
+
+/**
+ * Test slug() with a complete list of special chars.
+ *
+ * @return void
+ */
+	public function testInflectorSlugCharList() {
+		foreach (self::$maps as $language => $list) {
+			foreach ($list as $from => $to) {
+				$result = Inflector::slug($from);
+				$this->assertEquals($to, $result, $from . ' (' . $language . ') should be ' . $to . ' - but is ' . $result);
+			}
+		}
 	}
 
 /**

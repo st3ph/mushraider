@@ -18,7 +18,7 @@
  * Pluralize and singularize English words.
  *
  * Inflector pluralizes and singularizes English nouns.
- * Used by Cake's naming conventions throughout the framework.
+ * Used by CakePHP's naming conventions throughout the framework.
  *
  * @package       Cake.Utility
  * @link          http://book.cakephp.org/2.0/en/core-utility-libraries/inflector.html
@@ -56,11 +56,12 @@ class Inflector {
 			'/$/' => 's',
 		),
 		'uninflected' => array(
-			'.*[nrlm]ese', '.*deer', '.*fish', '.*measles', '.*ois', '.*pox', '.*sheep', 'people'
+			'.*[nrlm]ese', '.*deer', '.*fish', '.*measles', '.*ois', '.*pox', '.*sheep', 'people', 'feedback'
 		),
 		'irregular' => array(
 			'atlas' => 'atlases',
 			'beef' => 'beefs',
+			'brief' => 'briefs',
 			'brother' => 'brothers',
 			'cafe' => 'cafes',
 			'child' => 'children',
@@ -116,7 +117,7 @@ class Inflector {
 			'/(alumn|bacill|cact|foc|fung|nucle|radi|stimul|syllab|termin|viri?)i$/i' => '\1us',
 			'/([ftw]ax)es/i' => '\1',
 			'/(cris|ax|test)es$/i' => '\1is',
-			'/(shoe|slave)s$/i' => '\1',
+			'/(shoe)s$/i' => '\1',
 			'/(o)es$/i' => '\1',
 			'/ouses$/' => 'ouse',
 			'/([^a])uses$/' => '\1us',
@@ -125,11 +126,11 @@ class Inflector {
 			'/(m)ovies$/i' => '\1\2ovie',
 			'/(s)eries$/i' => '\1\2eries',
 			'/([^aeiouy]|qu)ies$/i' => '\1y',
-			'/([lre])ves$/i' => '\1f',
-			'/([^fo])ves$/i' => '\1fe',
 			'/(tive)s$/i' => '\1',
 			'/(hive)s$/i' => '\1',
 			'/(drive)s$/i' => '\1',
+			'/([le])ves$/i' => '\1f',
+			'/([^rfoa])ves$/i' => '\1fe',
 			'/(^analy)ses$/i' => '\1sis',
 			'/(analy|diagno|^ba|(p)arenthe|(p)rogno|(s)ynop|(t)he)ses$/i' => '\1\2sis',
 			'/([ti])a$/i' => '\1um',
@@ -142,12 +143,10 @@ class Inflector {
 			'/s$/i' => ''
 		),
 		'uninflected' => array(
-			'.*[nrlm]ese', '.*deer', '.*fish', '.*measles', '.*ois', '.*pox', '.*sheep', '.*ss'
+			'.*[nrlm]ese', '.*deer', '.*fish', '.*measles', '.*ois', '.*pox', '.*sheep', '.*ss', 'feedback'
 		),
 		'irregular' => array(
 			'foes' => 'foe',
-			'waves' => 'wave',
-			'curves' => 'curve'
 		)
 	);
 
@@ -163,7 +162,7 @@ class Inflector {
 		'Foochowese', 'gallows', 'Genevese', 'Genoese', 'Gilbertese', 'graffiti',
 		'headquarters', 'herpes', 'hijinks', 'Hottentotese', 'information', 'innings',
 		'jackanapes', 'Kiplingese', 'Kongoese', 'Lucchese', 'mackerel', 'Maltese', '.*?media',
-		'mews', 'moose', 'mumps', 'Nankingese', 'news', 'nexus', 'Niasese',
+		'metadata', 'mews', 'moose', 'mumps', 'Nankingese', 'news', 'nexus', 'Niasese',
 		'Pekingese', 'Piedmontese', 'pincers', 'Pistoiese', 'pliers', 'Portuguese',
 		'proceedings', 'rabies', 'rice', 'rhinoceros', 'salmon', 'Sarawakese', 'scissors',
 		'sea[- ]bass', 'series', 'Shavese', 'shears', 'siemens', 'species', 'swine', 'testes',
@@ -177,56 +176,63 @@ class Inflector {
  * @var array
  */
 	protected static $_transliteration = array(
-		'/ä|æ|ǽ/' => 'ae',
-		'/ö|œ/' => 'oe',
-		'/ü/' => 'ue',
-		'/Ä/' => 'Ae',
-		'/Ü/' => 'Ue',
-		'/Ö/' => 'Oe',
 		'/À|Á|Â|Ã|Å|Ǻ|Ā|Ă|Ą|Ǎ/' => 'A',
-		'/à|á|â|ã|å|ǻ|ā|ă|ą|ǎ|ª/' => 'a',
-		'/Ç|Ć|Ĉ|Ċ|Č/' => 'C',
-		'/ç|ć|ĉ|ċ|č/' => 'c',
-		'/Ð|Ď|Đ/' => 'D',
-		'/ð|ď|đ/' => 'd',
-		'/È|É|Ê|Ë|Ē|Ĕ|Ė|Ę|Ě/' => 'E',
-		'/è|é|ê|ë|ē|ĕ|ė|ę|ě/' => 'e',
-		'/Ĝ|Ğ|Ġ|Ģ/' => 'G',
-		'/ĝ|ğ|ġ|ģ/' => 'g',
-		'/Ĥ|Ħ/' => 'H',
-		'/ĥ|ħ/' => 'h',
-		'/Ì|Í|Î|Ï|Ĩ|Ī|Ĭ|Ǐ|Į|İ/' => 'I',
-		'/ì|í|î|ï|ĩ|ī|ĭ|ǐ|į|ı/' => 'i',
-		'/Ĵ/' => 'J',
-		'/ĵ/' => 'j',
-		'/Ķ/' => 'K',
-		'/ķ/' => 'k',
-		'/Ĺ|Ļ|Ľ|Ŀ|Ł/' => 'L',
-		'/ĺ|ļ|ľ|ŀ|ł/' => 'l',
-		'/Ñ|Ń|Ņ|Ň/' => 'N',
-		'/ñ|ń|ņ|ň|ŉ/' => 'n',
-		'/Ò|Ó|Ô|Õ|Ō|Ŏ|Ǒ|Ő|Ơ|Ø|Ǿ/' => 'O',
-		'/ò|ó|ô|õ|ō|ŏ|ǒ|ő|ơ|ø|ǿ|º/' => 'o',
-		'/Ŕ|Ŗ|Ř/' => 'R',
-		'/ŕ|ŗ|ř/' => 'r',
-		'/Ś|Ŝ|Ş|Š/' => 'S',
-		'/ś|ŝ|ş|š|ſ/' => 's',
-		'/Ţ|Ť|Ŧ/' => 'T',
-		'/ţ|ť|ŧ/' => 't',
-		'/Ù|Ú|Û|Ũ|Ū|Ŭ|Ů|Ű|Ų|Ư|Ǔ|Ǖ|Ǘ|Ǚ|Ǜ/' => 'U',
-		'/ù|ú|û|ũ|ū|ŭ|ů|ű|ų|ư|ǔ|ǖ|ǘ|ǚ|ǜ/' => 'u',
-		'/Ý|Ÿ|Ŷ/' => 'Y',
-		'/ý|ÿ|ŷ/' => 'y',
-		'/Ŵ/' => 'W',
-		'/ŵ/' => 'w',
-		'/Ź|Ż|Ž/' => 'Z',
-		'/ź|ż|ž/' => 'z',
 		'/Æ|Ǽ/' => 'AE',
-		'/ß/' => 'ss',
+		'/Ä/' => 'Ae',
+		'/Ç|Ć|Ĉ|Ċ|Č/' => 'C',
+		'/Ð|Ď|Đ/' => 'D',
+		'/È|É|Ê|Ë|Ē|Ĕ|Ė|Ę|Ě/' => 'E',
+		'/Ĝ|Ğ|Ġ|Ģ|Ґ/' => 'G',
+		'/Ĥ|Ħ/' => 'H',
+		'/Ì|Í|Î|Ï|Ĩ|Ī|Ĭ|Ǐ|Į|İ|І/' => 'I',
 		'/Ĳ/' => 'IJ',
-		'/ĳ/' => 'ij',
+		'/Ĵ/' => 'J',
+		'/Ķ/' => 'K',
+		'/Ĺ|Ļ|Ľ|Ŀ|Ł/' => 'L',
+		'/Ñ|Ń|Ņ|Ň/' => 'N',
+		'/Ò|Ó|Ô|Õ|Ō|Ŏ|Ǒ|Ő|Ơ|Ø|Ǿ/' => 'O',
 		'/Œ/' => 'OE',
-		'/ƒ/' => 'f'
+		'/Ö/' => 'Oe',
+		'/Ŕ|Ŗ|Ř/' => 'R',
+		'/Ś|Ŝ|Ş|Ș|Š/' => 'S',
+		'/ẞ/' => 'SS',
+		'/Ţ|Ț|Ť|Ŧ/' => 'T',
+		'/Þ/' => 'TH',
+		'/Ù|Ú|Û|Ũ|Ū|Ŭ|Ů|Ű|Ų|Ư|Ǔ|Ǖ|Ǘ|Ǚ|Ǜ/' => 'U',
+		'/Ü/' => 'Ue',
+		'/Ŵ/' => 'W',
+		'/Ý|Ÿ|Ŷ/' => 'Y',
+		'/Є/' => 'Ye',
+		'/Ї/' => 'Yi',
+		'/Ź|Ż|Ž/' => 'Z',
+		'/à|á|â|ã|å|ǻ|ā|ă|ą|ǎ|ª/' => 'a',
+		'/ä|æ|ǽ/' => 'ae',
+		'/ç|ć|ĉ|ċ|č/' => 'c',
+		'/ð|ď|đ/' => 'd',
+		'/è|é|ê|ë|ē|ĕ|ė|ę|ě/' => 'e',
+		'/ƒ/' => 'f',
+		'/ĝ|ğ|ġ|ģ|ґ/' => 'g',
+		'/ĥ|ħ/' => 'h',
+		'/ì|í|î|ï|ĩ|ī|ĭ|ǐ|į|ı|і/' => 'i',
+		'/ĳ/' => 'ij',
+		'/ĵ/' => 'j',
+		'/ķ/' => 'k',
+		'/ĺ|ļ|ľ|ŀ|ł/' => 'l',
+		'/ñ|ń|ņ|ň|ŉ/' => 'n',
+		'/ò|ó|ô|õ|ō|ŏ|ǒ|ő|ơ|ø|ǿ|º/' => 'o',
+		'/ö|œ/' => 'oe',
+		'/ŕ|ŗ|ř/' => 'r',
+		'/ś|ŝ|ş|ș|š|ſ/' => 's',
+		'/ß/' => 'ss',
+		'/ţ|ț|ť|ŧ/' => 't',
+		'/þ/' => 'th',
+		'/ù|ú|û|ũ|ū|ŭ|ů|ű|ų|ư|ǔ|ǖ|ǘ|ǚ|ǜ/' => 'u',
+		'/ü/' => 'ue',
+		'/ŵ/' => 'w',
+		'/ý|ÿ|ŷ/' => 'y',
+		'/є/' => 'ye',
+		'/ї/' => 'yi',
+		'/ź|ż|ž/' => 'z',
 	);
 
 /**
@@ -515,7 +521,7 @@ class Inflector {
 /**
  * Returns camelBacked version of an underscored string.
  *
- * @param string $string
+ * @param string $string String to convert.
  * @return string in variable form
  * @link http://book.cakephp.org/2.0/en/core-utility-libraries/inflector.html#Inflector::variable
  */
@@ -542,8 +548,8 @@ class Inflector {
 		$quotedReplacement = preg_quote($replacement, '/');
 
 		$merge = array(
-			'/[^\s\p{Ll}\p{Lm}\p{Lo}\p{Lt}\p{Lu}\p{Nd}]/mu' => ' ',
-			'/\\s+/' => $replacement,
+			'/[^\s\p{Zs}\p{Ll}\p{Lm}\p{Lo}\p{Lt}\p{Lu}\p{Nd}]/mu' => ' ',
+			'/[\s\p{Zs}]+/mu' => $replacement,
 			sprintf('/^[%s]+|[%s]+$/', $quotedReplacement, $quotedReplacement) => '',
 		);
 

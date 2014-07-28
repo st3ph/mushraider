@@ -62,21 +62,19 @@ class Configure {
  * - Include app/Config/bootstrap.php.
  * - Setup error/exception handlers.
  *
- * @param boolean $boot
+ * @param boolean $boot Whether to do bootstrapping.
  * @return void
  */
 	public static function bootstrap($boot = true) {
 		if ($boot) {
-			self::write('App', array(
-				'base' => false,
-				'baseUrl' => false,
-				'dir' => APP_DIR,
-				'webroot' => WEBROOT_DIR,
-				'www_root' => WWW_ROOT
-			));
+			self::_appDefaults();
 
 			if (!include APP . 'Config' . DS . 'core.php') {
-				trigger_error(__d('cake_dev', "Can't find application core file. Please create %score.php, and make sure it is readable by PHP.", APP . 'Config' . DS), E_USER_ERROR);
+				trigger_error(__d('cake_dev',
+						"Can't find application core file. Please create %s, and make sure it is readable by PHP.",
+						APP . 'Config' . DS . 'core.php'),
+					E_USER_ERROR
+				);
 			}
 			App::init();
 			App::$bootstrapping = false;
@@ -92,7 +90,11 @@ class Configure {
 			self::_setErrorHandlers($error, $exception);
 
 			if (!include APP . 'Config' . DS . 'bootstrap.php') {
-				trigger_error(__d('cake_dev', "Can't find application bootstrap file. Please create %sbootstrap.php, and make sure it is readable by PHP.", APP . 'Config' . DS), E_USER_ERROR);
+				trigger_error(__d('cake_dev',
+						"Can't find application bootstrap file. Please create %s, and make sure it is readable by PHP.",
+						APP . 'Config' . DS . 'bootstrap.php'),
+					E_USER_ERROR
+				);
 			}
 			restore_error_handler();
 
@@ -107,6 +109,21 @@ class Configure {
 				class_exists('String');
 			}
 		}
+	}
+
+/**
+ * Set app's default configs
+ *
+ * @return void
+ */
+	protected static function _appDefaults() {
+		self::write('App', (array)self::read('App') + array(
+			'base' => false,
+			'baseUrl' => false,
+			'dir' => APP_DIR,
+			'webroot' => WEBROOT_DIR,
+			'www_root' => WWW_ROOT
+		));
 	}
 
 /**
@@ -127,10 +144,11 @@ class Configure {
  * ));
  * }}}
  *
- * @link http://book.cakephp.org/2.0/en/development/configuration.html#Configure::write
- * @param array $config Name of var to write
+ * @param string|array $config The key to write, can be a dot notation value.
+ * Alternatively can be an array containing key(s) and value(s).
  * @param mixed $value Value to set for var
  * @return boolean True if write was successful
+ * @link http://book.cakephp.org/2.0/en/development/configuration.html#Configure::write
  */
 	public static function write($config, $value = null) {
 		if (!is_array($config)) {
@@ -152,7 +170,7 @@ class Configure {
 	}
 
 /**
- * Used to read information stored in Configure. Its not
+ * Used to read information stored in Configure. It's not
  * possible to store `null` values in Configure.
  *
  * Usage:
@@ -161,9 +179,9 @@ class Configure {
  * Configure::read('Name.key'); will return only the value of Configure::Name[key]
  * }}}
  *
- * @link http://book.cakephp.org/2.0/en/development/configuration.html#Configure::read
  * @param string $var Variable to obtain. Use '.' to access array elements.
  * @return mixed value stored in configure, or null.
+ * @link http://book.cakephp.org/2.0/en/development/configuration.html#Configure::read
  */
 	public static function read($var = null) {
 		if ($var === null) {
@@ -194,9 +212,9 @@ class Configure {
  * Configure::delete('Name.key'); will delete only the Configure::Name[key]
  * }}}
  *
- * @link http://book.cakephp.org/2.0/en/development/configuration.html#Configure::delete
  * @param string $var the var to be deleted
  * @return void
+ * @link http://book.cakephp.org/2.0/en/development/configuration.html#Configure::delete
  */
 	public static function delete($var = null) {
 		self::$_values = Hash::remove(self::$_values, $var);
@@ -223,7 +241,7 @@ class Configure {
 /**
  * Gets the names of the configured reader objects.
  *
- * @param string $name
+ * @param string $name Name to check. If null returns all configured reader names.
  * @return array Array of the configured reader objects.
  */
 	public static function configured($name = null) {
@@ -266,12 +284,12 @@ class Configure {
  * If using `default` config and no reader has been configured for it yet,
  * one will be automatically created using PhpReader
  *
- * @link http://book.cakephp.org/2.0/en/development/configuration.html#Configure::load
  * @param string $key name of configuration resource to load.
  * @param string $config Name of the configured reader to use to read the resource identified by $key.
  * @param boolean $merge if config files should be merged instead of simply overridden
- * @return mixed false if file not found, void if load successful.
+ * @return boolean False if file not found, true if load successful.
  * @throws ConfigureException Will throw any exceptions the reader raises.
+ * @link http://book.cakephp.org/2.0/en/development/configuration.html#Configure::load
  */
 	public static function load($key, $config = 'default', $merge = true) {
 		$reader = self::_getReader($config);
@@ -323,7 +341,7 @@ class Configure {
 			throw new ConfigureException(__d('cake_dev', 'There is no "%s" adapter.', $config));
 		}
 		if (!method_exists($reader, 'dump')) {
-			throw new ConfigureException(__d('cake_dev', 'The "%s" adapter, does not have a dump() method.', $config));
+			throw new ConfigureException(__d('cake_dev', 'The "%s" adapter, does not have a %s method.', $config, 'dump()'));
 		}
 		$values = self::$_values;
 		if (!empty($keys) && is_array($keys)) {
@@ -407,6 +425,7 @@ class Configure {
 		self::$_values = array();
 		return true;
 	}
+
 /**
  * Set the error and exception handlers.
  *
@@ -427,4 +446,5 @@ class Configure {
 			set_exception_handler($exception['handler']);
 		}
 	}
+
 }

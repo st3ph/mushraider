@@ -208,6 +208,8 @@ class AuthController extends AppController {
                 $this->redirect('/');
             }
         }
+
+        $this->set('hash', $hash);
     }
 
     public function logout() {

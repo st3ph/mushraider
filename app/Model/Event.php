@@ -77,4 +77,40 @@ class Event extends AppModel {
             )
         )
     );
+
+    public function copy($eventId, $templateName) {
+        if(isset($eventId) && !empty($templateName)) {
+            // Get event infos
+            $params = array();
+            $params['recursive'] = 1;
+            $params['contain']['EventsRole'] = array();
+            $params['conditions']['id'] = $eventId;
+            if($event = $this->find('first', $params)) {
+                $toSave = array();
+                $toSave['EventsTemplate']['title'] = $templateName;
+                $toSave['EventsTemplate']['event_title'] = $event['Event']['title'];
+                $toSave['EventsTemplate']['event_description'] = $event['Event']['description'];
+                $toSave['EventsTemplate']['game_id'] = $event['Event']['game_id'];
+                $toSave['EventsTemplate']['dungeon_id'] = $event['Event']['dungeon_id'];
+                $toSave['EventsTemplate']['time_invitation'] = $event['Event']['time_invitation'];
+                $toSave['EventsTemplate']['time_start'] = $event['Event']['time_start'];
+                $toSave['EventsTemplate']['character_level'] = $event['Event']['character_level'];
+                if(!empty($event['EventsRole'])) {
+                    foreach($event['EventsRole'] as $key => $eventRole) {
+                        $toSave['EventsTemplatesRole'][$key]['raids_role_id'] = $eventRole['raids_role_id'];
+                        $toSave['EventsTemplatesRole'][$key]['count'] = $eventRole['count'];
+                    }
+                }
+
+                App::uses('EventsTemplate', 'Model');
+                $EventsTemplate = new EventsTemplate();
+                if($EventsTemplate->saveAll($toSave)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
 }

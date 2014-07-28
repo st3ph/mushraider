@@ -105,7 +105,7 @@ class EventsController extends AppController {
             $dates = explode('-', $date);
 
             $toSave = array();
-            $toSave['title'] = strip_tags($this->request->data['Event']['title']);
+            $toSave['title'] = trim(strip_tags($this->request->data['Event']['title']));
             $toSave['description'] = nl2br($this->request->data['Event']['description']);
             $toSave['user_id'] = $this->user['User']['id'];
             $toSave['game_id'] = $this->request->data['Event']['game_id'];
@@ -152,10 +152,16 @@ class EventsController extends AppController {
                                 }
                             }
                         }
-                    }                    
+                    }
+
+                    // If we have to create a template based on this event
+                    if($this->request->data['Event']['template']) {
+                        $templateName = !empty($this->request->data['Event']['templateName'])?trim($this->request->data['Event']['templateName']):$toSave['title'];
+                        $this->Event->copy($eventId, $templateName);
+                    }
 
                     $this->Session->setFlash(__('The event has been created.'), 'flash_success');
-                    $this->redirect('/events');
+                    $this->redirect('/events/index/m:'.(int)$dates[1].'/y:'.$dates[0]);
                 }
             }
 
@@ -300,7 +306,7 @@ class EventsController extends AppController {
             $conditions = array('event_id' => $eventId);
             $this->EventsRole->deleteAll($conditions);
             $this->EventsCharacter->deleteAll($conditions);
-            $this->Session->setFlash(__('The event has been deleted.'), 'flash_warning');
+            $this->Session->setFlash(__('The event has been deleted.'), 'flash_success');
         }else {
             $this->Session->setFlash(__('MushRaider can\'t delete this event.'), 'flash_error');
         }

@@ -171,8 +171,7 @@ div.tooltip-inner div {text-align:left;}
 }
 
 @media (max-width: 800px) {
-	/*#calendar tr.days {display:none;}*/
-	/*#calendar .pastDay {display:none;}*/
+	#eventSignin .pull-right {float:none;}
 }
 
 @media (max-width: 600px) {

@@ -30,6 +30,14 @@ class PatcherComponent extends Component {
         if(!$this->controller->User->query($sql)) {
             $this->controller->redirect('/admin/patcher/apply/v-1.3');
         }
+
+        // v1.3.5
+        App::uses('EventsTemplate', 'Model');
+        $EventsTemplate = new EventsTemplate();
+        $sql = "SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE() AND COLUMN_NAME='time_invitation' AND TABLE_NAME='".Configure::read('Database.prefix')."events_templates'";        
+        if(!$EventsTemplate->query($sql)) {
+            $this->controller->redirect('/admin/patcher/apply/v-1.3.5');
+        }
 	}
 
     public function run_sql_file($mysqlLink, $location, $prefix = '') {

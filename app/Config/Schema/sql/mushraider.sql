@@ -148,6 +148,8 @@ CREATE TABLE IF NOT EXISTS `{prefix}events_templates` (
   `event_description` text COLLATE utf8_unicode_ci NULL,
   `game_id` int(11) NOT NULL,
   `dungeon_id` int(11) NOT NULL,  
+  `time_invitation` datetime DEFAULT NULL,
+  `time_start` datetime DEFAULT NULL,
   `character_level` int(3) NOT NULL,  
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,

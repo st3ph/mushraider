@@ -1,7 +1,7 @@
 <header id="header">
 	<div class="row-fluid">
 		<div class="span7">
-    		<h1><?php echo $this->Html->image($mushraiderTheme->logo, array('alt' => $mushraiderTagline.' - MushRaider'));?></h1>
+    		<h1><?php echo $this->Html->link($this->Html->image($mushraiderTheme->logo, array('alt' => $mushraiderTagline.' - MushRaider')), '/events', array('escape' => false));?></h1>
     	</div>
     	<div class="span5 menubar">
             <div class="clearfix">
@@ -52,8 +52,8 @@
                         <li class="<?php echo strtolower($this->name) == 'events'?'active':'';?>">
                             <?php echo $this->Html->link(__('Events'), '/events', array('escape' => false));?>
                         </li>
-                         <li class="<?php echo strtolower($this->name) == 'roadster'?'active':'';?>">
-                            <?php echo $this->Html->link(__('Rodster'), '/roadster', array('escape' => false));?>
+                         <li class="<?php echo strtolower($this->name) == 'roster'?'active':'';?>">
+                            <?php echo $this->Html->link(__('Roster'), '/roster', array('escape' => false));?>
                         </li>
                         <li class="<?php echo strtolower($this->name) == 'account'?'active':'';?>">
                             <?php echo $this->Html->link(__('My Account'), '/account', array('escape' => false));?>

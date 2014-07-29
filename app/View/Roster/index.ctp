@@ -1,5 +1,5 @@
 <header>
-    <h1><i class="icon-shield"></i> <?php echo __('Roadster');?></h1>
+    <h1><i class="icon-shield"></i> <?php echo __('Roster');?></h1>
 </header>
 
 <div class="row">

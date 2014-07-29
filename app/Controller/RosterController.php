@@ -1,5 +1,5 @@
 <?php
-class RoadsterController extends AppController {    
+class RosterController extends AppController {    
     var $helpers = array();
     var $uses = array('Game', 'Character', 'Classe', 'Race', 'RaidsRole', 'EventsCharacter', 'Attunement');
 
@@ -13,9 +13,9 @@ class RoadsterController extends AppController {
     }
 
     public function index() {
-      $this->pageTitle = __('MushRaider Rodster').' - '.$this->pageTitle;
+      $this->pageTitle = __('MushRaider Roster').' - '.$this->pageTitle;
 
-        $this->breadcrumb[] = array('title' => __('Roadster'), 'url' => '');
+        $this->breadcrumb[] = array('title' => __('Roster'), 'url' => '');
 
         // Get all the characters
         $params = array();

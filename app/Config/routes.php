@@ -36,7 +36,7 @@
 // Admin routes
     Router::connect('/admin', array('plugin' => 'admin', 'controller' => 'dashboard', 'action' => 'index'));
     Router::connect('/install/step/*', array('plugin' => 'install', 'controller' => 'step', 'action' => 'index'));
-
+    
 /**
  * Load all plugin routes. See the CakePlugin documentation on
  * how to customize the loading of plugin routes.

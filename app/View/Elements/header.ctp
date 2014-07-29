@@ -52,6 +52,9 @@
                         <li class="<?php echo strtolower($this->name) == 'events'?'active':'';?>">
                             <?php echo $this->Html->link(__('Events'), '/events', array('escape' => false));?>
                         </li>
+                         <li class="<?php echo strtolower($this->name) == 'roadster'?'active':'';?>">
+                            <?php echo $this->Html->link(__('Rodster'), '/roadster', array('escape' => false));?>
+                        </li>
                         <li class="<?php echo strtolower($this->name) == 'account'?'active':'';?>">
                             <?php echo $this->Html->link(__('My Account'), '/account', array('escape' => false));?>
                         </li>

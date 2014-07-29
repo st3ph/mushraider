@@ -18,3 +18,10 @@
 Icon?
 ehthumbs.db
 Thumbs.db
+
+# Eclipse Files #
+#################
+.buildpath
+.project
+.settings/
+

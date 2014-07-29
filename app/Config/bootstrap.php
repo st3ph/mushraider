@@ -104,8 +104,8 @@ Configure::write('Dispatcher.filters', array(
 	'CacheDispatcher'
 ));
 
-Configure::write('debug', 2);
-Configure::write('Cache.disable', true);
+//Configure::write('debug', 2);
+//Configure::write('Cache.disable', true);
 
 /**
  * Configures default file logging options

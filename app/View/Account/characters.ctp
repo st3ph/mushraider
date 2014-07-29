@@ -3,27 +3,42 @@
 </header>
 
 <div class="row">
-    <div class="span3">
-        <?php echo $this->element('account_menu');?>
-    </div>
     <div class="span8">
 		<div>
-			<h3 class="blockToggle"><?php echo $this->Html->link('<i class="icon-plus-sign-alt"></i> '.__('add new character'), '', array('escape' => false));?></h3>
-			<?php echo $this->Form->create('Character', array('url' => '/account/characters', 'class' => 'hide'.(isset($showForm)?' show':'')));?>
-			    <div class="form-group">
-			        <?php echo $this->Form->input('Character.title', array('type' => 'text', 'required' => true, 'label' => __('Character Name'), 'class' => 'span5'));?>
-			    </div>
-			    <div class="form-group">
-			    	<?php echo $this->Form->input('Character.game_id', array('type' => 'select', 'required' => true, 'label' => __('Game'), 'options' => $gamesList, 'empty' => '', 'class' => 'span5'));?>
-			    </div>
-
-			    <div id="objectsPlaceholder">
-			    </div>
-
-			    <div class="form-group">		    	
-			    	 <?php echo $this->Form->submit(__('Add'), array('class' => 'btn btn-success'));?>		    	
-			    </div>
-			<?php echo $this->Form->end();?>
+			<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalAddchar">
+			  <?php echo __('add new character')?>
+			</button>
+			<div class="modal fade" id="modalAddchar" tabindex="-1" role="dialog" aria-hidden="true">
+				 <div class="modal-dialog">
+    				<div class="modal-content">
+    					  <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					        <h4 class="modal-title" id="myModalLabel"><?php echo __('add new character')?></h4>
+					      </div>
+    					<div class="modal-body">
+						<?php echo $this->Form->create('Character', array('url' => '/account/characters'));?>
+						    <div class="form-group">
+						        <?php echo $this->Form->input('Character.title', array('type' => 'text', 'required' => true, 'label' => __('Character Name'), 'class' => 'form-control'));?>
+						    </div>
+						    <div class="form-group">
+						    	<?php echo $this->Form->input('Character.game_id', array('type' => 'select', 'required' => true, 'label' => __('Game'), 'options' => $gamesList, 'empty' => '', 'class' => 'form-control'));?>
+						    </div>
+			
+						    <div id="objectsPlaceholder">
+						    </div>
+			
+						    <div class="form-group">		    	
+						    	 <?php echo $this->Form->submit(__('Add'), array('class' => 'btn btn-success'));?>		    	
+						    </div>
+						     
+						<?php echo $this->Form->end();?>
+						</div>
+						<div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					      </div>
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<?php if(!empty($characters)):?>

@@ -20,8 +20,8 @@
 
     <?php
     $staticVersion = '?v='.Configure::read('mushraider.version');
-    $this->Html->css('bootstrap.min.2.3.2', null, array('inline' => false));
-    $this->Html->css('bootstrap-responsive.min.2.3.2', null, array('inline' => false));
+    $this->Html->css('bootstrap.min', null, array('inline' => false));
+   // $this->Html->css('bootstrap-theme.min', null, array('inline' => false));
     $this->Html->css('jquery-ui-1.10.3.custom.min', null, array('inline' => false, 'media' => 'screen'));
     $this->Html->css('font-awesome.min', null, array('inline' => false));
     $this->Html->css('jquery.cleditor', null, array('inline' => false));        
@@ -39,20 +39,19 @@
     ?>
 </head>
 <body>
-    <div id="container">
-        <div class="container">
-            <?php echo $this->element('header');?>
-            <div id="content">
+	<?php echo $this->element('header');?>
+    <div class="container" id="container">
+        
+        <div id="content">
 
-                <?php echo $this->Session->flash(); ?>
+            <?php echo $this->Session->flash(); ?>
 
-                <div class="well wellcontent">
-                    <?php echo $this->element('breadcrumb');?>
-                    <?php echo $this->fetch('content'); ?>
-                </div>
+            <div class="well wellcontent">
+                <?php echo $this->element('breadcrumb');?>
+                <?php echo $this->fetch('content'); ?>
             </div>
-            <?php echo $this->element('footer');?>
         </div>
+        <?php echo $this->element('footer');?>
     </div>
     <?php echo $this->fetch('script');?>
     <?php echo $this->fetch('scriptBottom');?>

@@ -1,7 +1,7 @@
 /*
 * General
 */
-body {background:#444 url("/admin/img/pattern/px_by_Gre3g.png") repeat;border-top:3px solid #bf4d28}
+body {background:#444 url("/admin/img/pattern/px_by_Gre3g.png") repeat;border-top:3px solid #bf4d28; padding-top:70px;}
 #header {
 	padding-left:10px;padding-right:10px;border: 1px solid #d4d4d4;color:#eee;position:relative;min-height:70px;
 	-webkit-box-shadow: 0 1px 10px rgba(0,0,0,0.1);
@@ -93,7 +93,7 @@ div.tooltip-inner div {text-align:left;}
 * Events
 */
 #createEvent {text-align:right;}
-#createEvent input {font-size:11px;height:13px;margin-bottom:0;}
+/*#createEvent input {font-size:11px;height:13px;margin-bottom:0;}*/
 
 #calendar {width:100%;}
 #calendar .links td {width:33%;padding:5px 10px;font-size:18px;}
@@ -118,6 +118,7 @@ div.tooltip-inner div {text-align:left;}
 #calendar .tooltip-inner div {font-size:10px;font-weight:normal;}
 .form-roles label {display:inline-block;margin-right:10px;}
 #eventSignin {overflow:hidden;}
+#eventSignin p {margin: 3px 0px;}
 #eventSignin .message {font-size:12px;}
 #eventSignin select, #eventSignin input {margin-bottom:0;}
 #eventRoles th i {cursor:pointer;}

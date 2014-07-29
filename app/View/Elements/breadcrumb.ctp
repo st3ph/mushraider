@@ -4,7 +4,6 @@
 			<li <?php !empty($crumb['url'])?'':'active';?>>
 				<?php if(!empty($crumb['url'])):?>
 					<?php echo $this->Html->link($crumb['title'], $crumb['url'], array('title' => $crumb['title'], 'escape' => false));?>
-					<span class="divider">/</span>
 				<?php else:?>
 					<?php echo $crumb['title'];?>
 				<?php endif;?>

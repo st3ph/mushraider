@@ -7,6 +7,7 @@
             background-image:none;
         <?php endif;?>
         background-repeat:<?php echo $mushraiderTheme->bgrepeat;?>;
+        background-size: cover;
     }
     <?php echo $mushraiderTheme->css;?>
 </style>

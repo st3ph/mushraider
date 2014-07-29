@@ -21,7 +21,7 @@
     <?php
     $staticVersion = '?v='.Configure::read('mushraider.version');
     $this->Html->css('bootstrap.min', null, array('inline' => false));
-   // $this->Html->css('bootstrap-theme.min', null, array('inline' => false));
+    $this->Html->css('bootstrap-theme.min', null, array('inline' => false));
     $this->Html->css('jquery-ui-1.10.3.custom.min', null, array('inline' => false, 'media' => 'screen'));
     $this->Html->css('font-awesome.min', null, array('inline' => false));
     $this->Html->css('jquery.cleditor', null, array('inline' => false));        

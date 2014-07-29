@@ -96,6 +96,7 @@ class AppController extends Controller {
 		if($this->userRequired && !$this->user) {
             if($this->name != 'CakeError') {
                 $this->Session->write('redirectFrom', $this->Tools->here());
+                $this->Session->setFlash(__('You have to be logged in to access this page.'), 'flash_warning');
                 $this->redirect('/auth/login');
             }
         }

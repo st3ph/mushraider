@@ -65,13 +65,13 @@
             </ul>
         </li>
         
-        <li class="accordion-group <?php echo strtolower($this->name) == 'attenuements'?'active':'';?>">
-            <a data-parent="#menu" data-toggle="collapse" class="accordion-toggle <?php echo strtolower($this->name) == 'attenuements'?'':'collapsed';?>" data-target="#attenuements-nav">
-                <i class="icon-home icon-white"></i> <?php echo __('Attenuements');?> <i class="icon-chevron-down icon-white pull-right"></i>
+        <li class="accordion-group <?php echo strtolower($this->name) == 'attunements'?'active':'';?>">
+            <a data-parent="#menu" data-toggle="collapse" class="accordion-toggle <?php echo strtolower($this->name) == 'attunements'?'':'collapsed';?>" data-target="#attunements-nav">
+                <i class="icon-home icon-white"></i> <?php echo __('Attunements');?> <i class="icon-chevron-down icon-white pull-right"></i>
             </a>
-            <ul class="collapse <?php echo strtolower($this->name) == 'attenuements'?'in':'';?>" id="attenuements-nav">
-                <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('Manage Attenuements'), '/admin/attenuements', array('escape' => false));?></li>
-                <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('Add Attenuement'), '/admin/attenuements/add', array('escape' => false));?></li>
+            <ul class="collapse <?php echo strtolower($this->name) == 'attunements'?'in':'';?>" id="attunements-nav">
+                <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('Manage Attunements'), '/admin/attunements', array('escape' => false));?></li>
+                <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('Add Attunement'), '/admin/attunements/add', array('escape' => false));?></li>
             </ul>
         </li>
         

@@ -1,9 +1,9 @@
 <?php
 App::uses('AppModel', 'Model');
-class Attenuement extends AppModel {
+class Attunement extends AppModel {
     var $actsAs = array('Containable');
 
-    public $name = 'Attenuement';
+    public $name = 'Attunement';
     public $displayField = 'title';
 
     public $belongsTo = array(

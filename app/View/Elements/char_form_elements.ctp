@@ -15,5 +15,5 @@
 </div>
 
 <div class="form-group">
-	<?php echo $this->Form->input('Character.attenuement_id', array('type' => 'select', 'required' => true, 'label' => __('Attenuement'), 'options' => $attenuementsList, 'empty' => '', 'class' => 'span5'));?>
+	<?php echo $this->Form->input('Character.attunement_id', array('type' => 'select', 'required' => true, 'label' => __('Attunement'), 'options' => $attunementsList, 'empty' => '', 'class' => 'span5'));?>
 </div>

@@ -1,7 +1,7 @@
 <?php
 class AccountController extends AppController {    
     var $helpers = array();
-    var $uses = array('Game', 'Character', 'Classe', 'Race', 'RaidsRole', 'EventsCharacter', 'Attenuement');
+    var $uses = array('Game', 'Character', 'Classe', 'Race', 'RaidsRole', 'EventsCharacter', 'Attunement');
 
     public function beforeFilter() {
         parent::beforeFilter();
@@ -97,7 +97,7 @@ class AccountController extends AppController {
     		$toSave['default_role_id'] = $this->request->data['Character']['default_role_id'];
     		$toSave['level'] = $this->request->data['Character']['level'];
     		$toSave['user_id'] = $this->user['User']['id'];
-            $toSave['attenuement_id'] = $this->request->data['Character']['attenuement_id'];
+            $toSave['attunement_id'] = $this->request->data['Character']['attunement_id'];
     		if($this->Character->save($toSave)) {
     			$this->Session->setFlash(__('%s has been edited successfully', $toSave['title']), 'flash_success');
     			return $this->redirect('/account/characters');
@@ -122,8 +122,8 @@ class AccountController extends AppController {
         $rolesList = $this->RaidsRole->find('list', array('order' => 'title ASC'));
         $this->set('rolesList', $rolesList);
         
-        $attenuementsList = $this->Attenuement->find('list', array('order' => 'rank ASC'));
-        $this->set('attenuementsList', $attenuementsList);
+        $attunementsList = $this->Attunement->find('list', array('order' => 'rank ASC'));
+        $this->set('attunementsList', $attunementsList);
 
         $this->breadcrumb[] = array('title' => __('Characters'), 'url' => '/account/characters');
         $this->breadcrumb[] = array('title' => $character['Character']['title'], 'url' => '');

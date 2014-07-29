@@ -11,7 +11,7 @@
 						<th><?php echo __('Name');?></th>
 						<th><?php echo __('Level');?></th>
 						<th><?php echo __('Class');?></th>
-						<th><?php echo __('Attenuement');?></th>
+						<th><?php echo __('Attunement');?></th>
 						<th><?php echo __('Default Role');?></th>
 					</tr>
 				</thead>
@@ -21,7 +21,7 @@
 							<td><?php echo $character['Character']['title'];?></td>
 							<td><?php echo $character['Character']['level'];?></td>
 							<td style="color:<?php echo $character['Classe']['color'];?>"><?php echo $character['Classe']['title'];?></td>
-							<td><?php echo $character['Attenuement']['title'];?></td>
+							<td><?php echo $character['Attunement']['title'];?></td>
 							<td><?php echo $character['RaidsRole']['title'];?></td>
 						</tr>
 					<?php endforeach;?>

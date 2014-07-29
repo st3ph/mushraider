@@ -29,9 +29,9 @@ class Character extends AppModel {
             'className' => 'RaidsRole',
             'foreignKey' => 'default_role_id'
         ),
-    	'Attenuement' => array(
-    			'className' => 'Attenuement',
-    			'foreignKey' => 'attenuement_id'
+    	'Attunement' => array(
+    			'className' => 'Attunement',
+    			'foreignKey' => 'attunement_id'
     	),
     );
 

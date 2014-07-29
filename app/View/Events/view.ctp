@@ -22,17 +22,15 @@ if($registeredCharacter) {
 ?>
 		
 <header>
-	<h1>
-		
-		<?php if($dayTimestamp >= $todayTimestamp && ($user['User']['isOfficer'] || $user['User']['isAdmin'])):?>
+	<?php if($dayTimestamp >= $todayTimestamp && ($user['User']['isOfficer'] || $user['User']['isAdmin'])):?>
 			<div class="pull-right">
 				<?php echo $this->Html->link('<i class="icon-copy"></i> '.__('Copy'), '/events/view/'.$event['Event']['id'], array('id' => 'createTemplate', 'class' => 'btn btn btn-default btn-mini tt', 'title' => __('Create template'), 'escape' => false));?>
-				<span id="tplName" data-event="<?php echo $event['Event']['id'];?>"><input type="text" class="input-small" value="" placeholder="<?php echo __('template name');?>"/> <span class="text-error"><i class="icon-remove"></i></span> <span class="text-success"><i class="icon-save"></i></span></span>
+				<span id="tplName" class="form-inline" data-event="<?php echo $event['Event']['id'];?>"><input type="text" class="input-small form-control" value="" placeholder="<?php echo __('template name');?>"/> <span class="btn btn-danger"><i class="icon-remove"></i></span> <span class="btn btn-success"><i class="icon-save"></i></span></span>
 				<?php echo $this->Html->link('<i class="icon-edit"></i> '.__('Edit'), '/events/edit/'.$event['Event']['id'], array('class' => 'btn btn-info btn-mini', 'escape' => false));?>
 				<?php echo $this->Html->link('<i class="icon-trash"></i> '.__('Delete'), '/events/delete/'.$event['Event']['id'], array('class' => 'btn btn-danger btn-mini confirm', 'data-confirm' => __("Are you sure you want to delete this event ?\n(this can't be undone)"), 'escape' => false));?>
 			</div>
 		<?php endif;?>
-		
+	<h1>
 		<i class="<?php echo $icon?>"></i>
 		<?php echo $event['Event']['title'];?>
 		
@@ -80,7 +78,7 @@ if($registeredCharacter) {
 </div>
 
 <h3><?php echo __('Description');?></h3>
-<p class="well"><?php echo $event['Event']['description'];?><p/>
+<article class="well"><?php echo $event['Event']['description'];?></article>
 
 <h3><?php echo __('Informations');?></h3>
 <table id="eventInfos" class="table table-striped table-bordered">

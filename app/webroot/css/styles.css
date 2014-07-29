@@ -137,8 +137,8 @@ div.tooltip-inner div {text-align:left;}
 
 #badKitties span {}
 
-#tplName {font-size:18px;display:none;margin:0 15px 0 0;}
-#tplName input {font-size:11px;height:11px;}
+#tplName {font-size:18px;display:none;margin:1px 15px 0 0;}
+/*#tplName input {font-size:11px;height:11px;}*/
 #tplName span {text-decoration:none;cursor:pointer;}
 #tplList {display:none}
 #tplList .loading {margin-left:5px;}

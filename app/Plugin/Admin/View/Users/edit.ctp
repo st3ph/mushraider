@@ -33,6 +33,13 @@
                 </div>
             <?php endif;?>
 
+            <?php if($user['User']['isAdmin'] || ($user['User']['isOfficer'] && !$this->data['User']['isAdmin'])):?>
+                <br />
+                <div class="form-group">
+                    <?php echo $this->Form->input('User.private_infos', array('type' => 'textarea', 'label' => __('Private player note'), 'class' => 'span5 wysiwyg'));?>
+                </div>
+            <?php endif;?>
+
             <?php if($displaySaveButton):?>
                 <div class="form-group">
                     <?php echo $this->Form->input('User.id', array('type' => 'hidden'));?>

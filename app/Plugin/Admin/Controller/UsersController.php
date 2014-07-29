@@ -60,6 +60,7 @@ class UsersController extends AdminAppController {
             $toSave['id'] = $this->request->data['User']['id'];
             if($this->user['User']['isAdmin'] || ($this->user['User']['isOfficer'] && !$user['User']['isAdmin'])) {
                 $toSave['status'] = $this->request->data['User']['status'];
+                $toSave['private_infos'] = nl2br($this->request->data['User']['private_infos']);
             }
             if($this->user['User']['isAdmin']) {
                 $toSave['role_id'] = $this->request->data['User']['role_id'];            

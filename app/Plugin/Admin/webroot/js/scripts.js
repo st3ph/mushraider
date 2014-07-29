@@ -223,4 +223,16 @@ jQuery(function($) {
     if($('#datatable').length) {
         $('#datatable').dataTable();
     }
+
+    /*
+    * Users
+    */
+    if($('.wysiwyg').length) {
+        var editorObject = $('.wysiwyg').cleditor({
+            width: 'auto',
+            height: 250,
+            controls: "bold italic underline strikethrough | font size strikethrough style | color highlight removeformat | bullets numbering | " +
+                      "outdent indent | alignleft center alignright justify | undo redo | link unlink"
+        });
+    }
 });

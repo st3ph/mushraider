@@ -284,6 +284,7 @@ CREATE TABLE IF NOT EXISTS `{prefix}users` (
   `username` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `private_infos` text COLLATE utf8_unicode_ci NULL,
   `notifications_cancel` TINYINT( 1 ) NOT NULL DEFAULT  '1',
   `notifications_new` TINYINT( 1 ) NOT NULL DEFAULT  '1',
   `notifications_validate` TINYINT( 1 ) NOT NULL DEFAULT  '1',

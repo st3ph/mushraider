@@ -95,6 +95,7 @@ div.tooltip-inner div {text-align:left;}
 */
 #createEvent {text-align:right;}
 #createEvent input {font-size:11px;height:13px;margin-bottom:0;}
+#filterEvents select {font-size:11px;height:24px;margin-bottom:0;}
 
 #calendar {width:100%;}
 #calendar .links td {width:33%;padding:5px 10px;font-size:18px;}

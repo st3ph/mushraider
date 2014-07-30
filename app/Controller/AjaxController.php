@@ -208,4 +208,13 @@ class AjaxController extends AppController {
 
         return json_encode($jsonMessage);
     }
+
+    function filterEvents() {
+        if(isset($this->request->query['game'])) {
+            $gameId = $this->request->query['game'];
+            $this->Cookie->write('filterEvents', $gameId, true, '+2 weeks');
+        }
+
+        return;
+    }
 }

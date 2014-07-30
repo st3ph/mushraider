@@ -75,6 +75,22 @@ jQuery(function($) {
         }
     });
 
+    $('#filterEvents').on('change', 'select', function(e) {
+        $imgLoading = $(imgLoading);
+        $(this).after($imgLoading);
+        var gameId = $(this).val();
+        $.ajax({
+            type: 'get',
+            url: site_url+'ajax/filterEvents',
+            data: 'game='+gameId,
+            success: function() {
+                window.location = site_url+'events';
+            }
+        });
+
+        $imgLoading.remove();
+    });
+
 
     var $EventGame = $('#EventGameId');
     var loadDungeons = function($selectObject, selectedObject) {

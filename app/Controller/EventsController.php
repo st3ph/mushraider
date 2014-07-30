@@ -18,6 +18,9 @@ class EventsController extends AppController {
         $calendarOptions['year'] = !empty($this->request->params['named']['y'])?$this->request->params['named']['y']:date('Y');
         $calendarOptions['user'] = $this->user;
 
+        // Filter events ?
+        $filterEventsGameId = $this->Cookie->read('filterEvents');
+
         // Get events
         $params = array();
         $params['fields'] = array('Event.id', 'Event.title', 'Event.game_id', 'Event.dungeon_id', 'Event.time_invitation', 'Event.time_start', 'Game.title', 'Game.logo', 'Dungeon.title');
@@ -30,10 +33,19 @@ class EventsController extends AppController {
         $params['contain']['Report']['fields'] = array('id');
         $params['conditions']['Event.time_invitation >='] = $calendarOptions['year'] .'-'.$calendarOptions['month'].'-01';
         $params['conditions']['Event.time_invitation <='] = $calendarOptions['year'] .'-'.$calendarOptions['month'].'-31 23:59:59';
+        if($filterEventsGameId != 0) {
+            $params['conditions']['Event.game_id'] = $filterEventsGameId;
+        }
         $events = $this->Event->find('all', $params);
+
+        $gamesList = $this->Game->find('list', array('order' => 'title ASC'));
+        $gamesList['0'] = __('-- All games');
+        asort($gamesList);
+        $this->set('gamesList', $gamesList);
         
         $this->set('events', $events);
         $this->set('calendarOptions', $calendarOptions);
+        $this->set('filterEventsGameId', $filterEventsGameId);
     }
 
     public function view($eventId) {

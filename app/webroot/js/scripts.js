@@ -177,6 +177,15 @@ jQuery(function($) {
         });
     }
 
+    if($('.wysiwyg-tall').length) {
+        var editorObject = $('.wysiwyg-tall').cleditor({
+            width: 'auto',
+            height: 500,
+            controls: "bold italic underline strikethrough | font size strikethrough style | color highlight removeformat | bullets numbering | " +
+                      "outdent indent | alignleft center alignright justify | undo redo | link unlink"
+        });
+    }
+
     // Validate roster
     $('#eventRoles th').on('click', 'i', function() {
         var $editButton = $(this);
@@ -360,7 +369,9 @@ jQuery(function($) {
         e.preventDefault();
 
         var $tpl = $('#tplList');
-        $tpl.fadeIn();
+        $(this).fadeOut(function() {
+            $tpl.fadeIn();
+        });
     });
 
     $('#TemplateList').on('change', function() {
@@ -391,14 +402,16 @@ jQuery(function($) {
                             };
                         }
                         $('#EventCharacterLevel').val(json.msg.EventsTemplate.character_level);
-                        var invitationTime = json.msg.EventsTemplate.time_invitation.split(' ');
-                        var invitationTimes = invitationTime[1].split(':');
-                        $('#EventTimeInvitationHour').val(invitationTimes[0]);
-                        $('#EventTimeInvitationMin').val(invitationTimes[1]);
-                        var startTime = json.msg.EventsTemplate.time_start.split(' ');
-                        var startTimes = startTime[1].split(':');
-                        $('#EventTimeStartHour').val(startTimes[0]);
-                        $('#EventTimeStartMin').val(startTimes[1]);
+                        if(json.msg.EventsTemplate.time_invitation != null) {
+                            var invitationTime = json.msg.EventsTemplate.time_invitation.split(' ');
+                            var invitationTimes = invitationTime[1].split(':');
+                            $('#EventTimeInvitationHour').val(invitationTimes[0]);
+                            $('#EventTimeInvitationMin').val(invitationTimes[1]);
+                            var startTime = json.msg.EventsTemplate.time_start.split(' ');
+                            var startTimes = startTime[1].split(':');
+                            $('#EventTimeStartHour').val(startTimes[0]);
+                            $('#EventTimeStartMin').val(startTimes[1]);
+                        }
                     }
                     $imgLoading.remove();
                 }

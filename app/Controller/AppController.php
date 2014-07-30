@@ -65,6 +65,10 @@ class AppController extends Controller {
         $language = !empty($language)?$language:'eng';
         Configure::write('Config.language', $language);
 
+        // Some usefull infos
+        Configure::write('Config.maxFileSize', ini_get('upload_max_filesize'));
+        Configure::write('Config.maxPostSize', ini_get('post_max_size'));
+
         // Log in user
         if($this->Session->check('User.id')) {
 			$userID = $this->Session->read('User.id');			

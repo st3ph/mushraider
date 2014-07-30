@@ -20,6 +20,38 @@ class StepController extends InstallAppController {
 
     private function step1() {
         $this->Session->delete('Settings');
+
+        $systemCheckPassed = true;
+        $systemCheck = array();
+
+        $systemCheck['php']['passed'] = PHP_VERSION_ID > 50300?true:false;
+        $systemCheck['php']['version'] = phpversion();
+        $systemCheckPassed = $systemCheck['php']['passed']?$systemCheckPassed:false;
+
+        $phpExtensions = get_loaded_extensions();
+        $systemCheck['mysql']['passed'] = (in_array('mysql', $phpExtensions) || in_array('mysqli', $phpExtensions) || in_array('pdo_mysql', $phpExtensions))?true:false;
+        $systemCheckPassed = $systemCheck['mysql']['passed']?$systemCheckPassed:false;
+
+        if(function_exists('apache_get_modules')) {
+            $systemCheck['rewrite']['passed'] = in_array('mod_rewrite', apache_get_modules())?true:false;
+        }else {
+            $systemCheck['rewrite']['passed'] = false;
+            $systemCheck['rewrite']['warning'] = true;
+        }
+
+        $systemCheck['config']['passed'] = is_writable('../Config')?true:false;
+        $systemCheckPassed = $systemCheck['config']['passed']?$systemCheckPassed:false;
+        $systemCheck['tmp']['passed'] = is_writable('../tmp')?true:false;
+        $systemCheckPassed = $systemCheck['tmp']['passed']?$systemCheckPassed:false;
+        $systemCheck['files']['passed'] = is_writable('../webroot/files')?true:false;
+        $systemCheckPassed = $systemCheck['files']['passed']?$systemCheckPassed:false;
+
+        $this->set('systemCheckPassed', $systemCheckPassed);
+        $this->set('systemCheck', $systemCheck);
+    }
+
+    private function step2() {
+        $this->Session->delete('Settings');
         
         if(!empty($this->request->data['Config'])) {
             $dataSource = !empty($this->request->data['Config']['datasource']) && !empty($this->dbDatasources[$this->request->data['Config']['datasource']])?$this->dbDatasources[$this->request->data['Config']['datasource']]:'Mysql';
@@ -38,7 +70,7 @@ class StepController extends InstallAppController {
                 Configure::dump('config.ini', 'configini', array('Database'));
 
                 $this->Session->setFlash(__('MushRaider successfully connect to your database, one more step to go !'), 'flash_success');
-                $this->redirect('/install/step/2');
+                $this->redirect('/install/step/3');
             }
 
             // Error
@@ -49,14 +81,14 @@ class StepController extends InstallAppController {
         $this->set('dbDatasources', $this->dbDatasources);
     }
 
-    private function step2() {
+    private function step3() {
         $missingDatabase = false;
         if(!$databaseConfig = Configure::read('Database')) {
             $missingDatabase = true;
         }
         if($missingDatabase) {
             $this->Session->setFlash(__('MushRaider can\'t find your database settings, please complete this form to proceed to next step'), 'flash_error');
-            $this->redirect('/install/step/1');
+            $this->redirect('/install/step/2');
         }
 
         if(!empty($this->request->data['Config'])) {

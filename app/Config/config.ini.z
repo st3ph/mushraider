@@ -1,0 +1,14 @@
+[Database]
+datasource = Database/Mysql
+host = localhost
+database = mushraider
+login = root
+password = false
+port = 3306
+prefix = mr_
+
+[Settings]
+language = eng
+salt = fe1c78a7501518fe8cbba8bb832777566a2a23ef
+cipherSeed = 3941048841570649921
+installed = true

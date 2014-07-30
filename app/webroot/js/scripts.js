@@ -448,61 +448,43 @@ jQuery(function($) {
     * Lightbox
     */
     // ACTIVITY INDICATOR
-    var activityIndicatorOn = function()
-    {
+    var activityIndicatorOn = function() {
         $( '<div id="imagelightbox-loading"><div></div></div>' ).appendTo( 'body' );
     },
-    activityIndicatorOff = function()
-    {
+    activityIndicatorOff = function() {
         $( '#imagelightbox-loading' ).remove();
     },
 
-
     // OVERLAY
-
-    overlayOn = function()
-    {
+    overlayOn = function() {
         $( '<div id="imagelightbox-overlay"></div>' ).appendTo( 'body' );
     },
-    overlayOff = function()
-    {
+    overlayOff = function() {
         $( '#imagelightbox-overlay' ).remove();
     },
 
-
     // CLOSE BUTTON
-
-    closeButtonOn = function( instance )
-    {
+    closeButtonOn = function( instance ) {
         $( '<button type="button" id="imagelightbox-close" title="Close"></button>' ).appendTo( 'body' ).on( 'click touchend', function(){ $( this ).remove(); instance.quitImageLightbox(); return false; });
     },
-    closeButtonOff = function()
-    {
+    closeButtonOff = function() {
         $( '#imagelightbox-close' ).remove();
     },
 
-
     // CAPTION
-
-    captionOn = function()
-    {
+    captionOn = function() {
         var description = $( 'a[href="' + $( '#imagelightbox' ).attr( 'src' ) + '"] img' ).attr( 'alt' );
         if( description.length > 0 )
             $( '<div id="imagelightbox-caption">' + description + '</div>' ).appendTo( 'body' );
     },
-    captionOff = function()
-    {
+    captionOff = function() {
         $( '#imagelightbox-caption' ).remove();
     },
 
-
     // NAVIGATION
-
-    navigationOn = function( instance, selector )
-    {
+    navigationOn = function( instance, selector ) {
         var images = $( selector );
-        if( images.length )
-        {
+        if( images.length ) {
             var nav = $( '<div id="imagelightbox-nav"></div>' );
             for( var i = 0; i < images.length; i++ )
                 nav.append( '<button type="button"></button>' );
@@ -511,8 +493,7 @@ jQuery(function($) {
             nav.on( 'click touchend', function(){ return false; });
 
             var navItems = nav.find( 'button' );
-            navItems.on( 'click touchend', function()
-            {
+            navItems.on( 'click touchend', function() {
                 var $this = $( this );
                 if( images.eq( $this.index() ).attr( 'href' ) != $( '#imagelightbox' ).attr( 'src' ) )
                     instance.switchImageLightbox( $this.index() );
@@ -525,42 +506,31 @@ jQuery(function($) {
             .on( 'touchend', function(){ return false; });
         }
     },
-    navigationUpdate = function( selector )
-    {
+    navigationUpdate = function( selector ) {
         var items = $( '#imagelightbox-nav button' );
         items.removeClass( 'active' );
         items.eq( $( selector ).filter( '[href="' + $( '#imagelightbox' ).attr( 'src' ) + '"]' ).index( selector ) ).addClass( 'active' );
     },
-    navigationOff = function()
-    {
+    navigationOff = function() {
         $( '#imagelightbox-nav' ).remove();
     },
 
-
     // ARROWS
-
-    arrowsOn = function( instance, selector )
-    {
+    arrowsOn = function( instance, selector ) {
         var $arrows = $( '<button type="button" class="imagelightbox-arrow imagelightbox-arrow-left"></button><button type="button" class="imagelightbox-arrow imagelightbox-arrow-right"></button>' );
-
         $arrows.appendTo( 'body' );
-
-        $arrows.on( 'click touchend', function( e )
-        {
+        $arrows.on( 'click touchend', function( e ) {
             e.preventDefault();
 
             var $this   = $( this ),
                 $target = $( selector + '[href="' + $( '#imagelightbox' ).attr( 'src' ) + '"]' ),
                 index   = $target.index( selector );
 
-            if( $this.hasClass( 'imagelightbox-arrow-left' ) )
-            {
+            if( $this.hasClass( 'imagelightbox-arrow-left' ) ) {
                 index = index - 1;
                 if( !$( selector ).eq( index ).length )
                     index = $( selector ).length;
-            }
-            else
-            {
+            }else {
                 index = index + 1;
                 if( !$( selector ).eq( index ).length )
                     index = 0;
@@ -570,8 +540,7 @@ jQuery(function($) {
             return false;
         });
     },
-    arrowsOff = function()
-    {
+    arrowsOff = function(){
         $( '.imagelightbox-arrow' ).remove();
     };    
 

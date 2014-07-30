@@ -1,4 +1,4 @@
-<?php $registeredCharacter = $this->Tools->getRegisteredCharacter($user['User']['id'], $event['EventsCharacter']);?>
+ <?php $registeredCharacter = $this->Tools->getRegisteredCharacter($user['User']['id'], $event['EventsCharacter']);?>
 <?php $registeredCharacterId = $registeredCharacter?$registeredCharacter['id']:0;?>
 <?php $registeredCharacterComment = $registeredCharacter?$registeredCharacter['comment']:'';?>
 <?php $eventRoles = array();?>
@@ -11,7 +11,6 @@ if($registeredCharacter) {
 			$icon = 'icon-remove';
 			break;
 		case 1:
-			
 			$icon = 'icon-time';		
 			break;
 		case 2:

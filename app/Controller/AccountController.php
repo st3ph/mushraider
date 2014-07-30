@@ -49,7 +49,7 @@ class AccountController extends AppController {
     	// Games list for the form
     	$gamesList = $this->Game->find('list', array('order' => 'title ASC'));
         $this->set('gamesList', $gamesList);
-
+        
         // Get all the characters
         $params = array();
         $params['recursive'] = 1;
@@ -96,8 +96,10 @@ class AccountController extends AppController {
             $toSave['race_id'] = $this->request->data['Character']['race_id'];
     		$toSave['default_role_id'] = $this->request->data['Character']['default_role_id'];
     		$toSave['level'] = $this->request->data['Character']['level'];
+//     		$toSave['build_link'] = $this->request->data['Character']['build_link'];
     		$toSave['user_id'] = $this->user['User']['id'];
             $toSave['attunement_id'] = $this->request->data['Character']['attunement_id'];
+            
     		if($this->Character->save($toSave)) {
     			$this->Session->setFlash(__('%s has been edited successfully', $toSave['title']), 'flash_success');
     			return $this->redirect('/account/characters');

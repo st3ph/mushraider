@@ -77,7 +77,7 @@ class Character extends AppModel {
                 'required' => 'create',
                 'message' => 'Please fill the level for this character.'
             )
-        )
+        ),
     );
 
     // Update schema for path beta 3

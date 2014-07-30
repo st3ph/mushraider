@@ -1,7 +1,7 @@
 <?php
 class AjaxController extends AppController {
     public $components = array('Emailing');
-    var $uses = array('Game', 'Dungeon', 'Classe', 'Race', 'EventsCharacter', 'EventsRole', 'Character', 'Event', 'RaidsRole', 'EventsTemplate', 'EventsTemplatesRole');
+    var $uses = array('Game', 'Dungeon', 'Classe', 'Race', 'EventsCharacter', 'EventsRole', 'Character', 'Event', 'RaidsRole', 'EventsTemplate', 'EventsTemplatesRole', 'Attunement');
 
     function beforeFilter() {
         parent::beforeFilter();
@@ -23,6 +23,9 @@ class AjaxController extends AppController {
 
             $rolesList = $this->RaidsRole->find('list', array('order' => 'title ASC'));
             $this->set('rolesList', $rolesList);
+            
+            $attunementsList = $this->Attunement->find('list', array('order' => 'rank ASC'));
+            $this->set('attunementsList', $attunementsList);
 
             $this->render('/Elements/char_form_elements');
         }

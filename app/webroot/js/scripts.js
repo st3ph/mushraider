@@ -335,11 +335,11 @@ jQuery(function($) {
         $tpl.fadeIn();
     });
 
-    $('#tplName').on('click', '.text-error', function(e) {
+    $('#tplName').on('click', '.btn-danger', function(e) {
         $('#tplName').fadeOut();
     });
 
-    $('#tplName').on('click', '.text-success', function(e) {
+    $('#tplName').on('click', '.btn-success', function(e) {
         var tplName = $('#tplName input').val();
         var eventId = $('#tplName').data('event');
         if(tplName.length) {

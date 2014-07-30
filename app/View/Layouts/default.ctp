@@ -31,6 +31,7 @@
     $this->Html->script('jquery-ui-1.10.3.custom.min', array('inline' => false));
     $this->Html->script('bootstrap.min', array('inline' => false));
     $this->Html->script('jquery.cleditor', array('inline' => false));
+    $this->Html->script('imagelightbox.min', array('inline' => false));
     $this->Html->script('scripts.js'.$staticVersion, array('inline' => false));
 
     echo $this->fetch('meta');

@@ -8,18 +8,26 @@
 	<h1>
 		<div class="row">
 			<?php $displayAdminButtons = ($dayTimestamp >= $todayTimestamp && ($user['User']['isOfficer'] || $user['User']['isAdmin']))?true:false?>
-			<div class="span<?php echo $displayAdminButtons?8:11?>">
+			<?php $displayCloseButton = ($dayTimestamp < $todayTimestamp && ($user['User']['isOfficer'] || $user['User']['isAdmin']))?true:false?>
+			<?php $displayReportButton = !empty($event['Report']['id'])?true:false?>
+			<div class="span<?php echo ($displayAdminButtons || $displayCloseButton || $displayReportButton)?8:11?>">
 				<i class="icon-calendar-empty"></i> <?php echo __('View event');?>
 				<?php if(!empty($event['Game']['logo'])):?>
 					<?php echo $this->Html->image('/files/logos/'.$event['Game']['logo'], array('class' => 'logo', 'width' => 32));?>
 				<?php endif;?>
 			</div>
-			<?php if($displayAdminButtons):?>
-				<div class="pull-right span3">
-					<?php echo $this->Html->link('<i class="icon-copy"></i> '.__('Copy'), '/events/view/'.$event['Event']['id'], array('id' => 'createTemplate', 'class' => 'btn btn-mini tt', 'title' => __('Create template'), 'escape' => false));?>
-					<span id="tplName" data-event="<?php echo $event['Event']['id'];?>"><input type="text" class="input-small" value="" placeholder="<?php echo __('template name');?>"/> <span class="text-error"><i class="icon-remove"></i></span> <span class="text-success"><i class="icon-save"></i></span></span>
-					<?php echo $this->Html->link('<i class="icon-edit"></i> '.__('Edit'), '/events/edit/'.$event['Event']['id'], array('class' => 'btn btn-info btn-mini', 'escape' => false));?>
-					<?php echo $this->Html->link('<i class="icon-trash"></i> '.__('Delete'), '/events/delete/'.$event['Event']['id'], array('class' => 'btn btn-danger btn-mini confirm', 'data-confirm' => __("Are you sure you want to delete this event ?\n(this can't be undone)"), 'escape' => false));?>
+			<?php if($displayAdminButtons || $displayCloseButton || $displayReportButton):?>
+				<div class="pull-right text-right span3">
+					<?php if($displayAdminButtons):?>
+						<?php echo $this->Html->link('<i class="icon-copy"></i> '.__('Copy'), '/events/view/'.$event['Event']['id'], array('id' => 'createTemplate', 'class' => 'btn btn-mini tt', 'title' => __('Create template'), 'escape' => false));?>
+						<span id="tplName" data-event="<?php echo $event['Event']['id'];?>"><input type="text" class="input-small" value="" placeholder="<?php echo __('template name');?>"/> <span class="text-error"><i class="icon-remove"></i></span> <span class="text-success"><i class="icon-save"></i></span></span>
+						<?php echo $this->Html->link('<i class="icon-edit"></i> '.__('Edit'), '/events/edit/'.$event['Event']['id'], array('class' => 'btn btn-warning btn-mini', 'escape' => false));?>
+						<?php echo $this->Html->link('<i class="icon-trash"></i> '.__('Delete'), '/events/delete/'.$event['Event']['id'], array('class' => 'btn btn-danger btn-mini confirm', 'data-confirm' => __("Are you sure you want to delete this event ?\n(this can't be undone)"), 'escape' => false));?>
+					<?php elseif($displayReportButton):?>
+						<?php echo $this->Html->link(__('View report'), '/events/report/'.$event['Event']['id'], array('class' => 'btn btn-inverse btn-mini', 'escape' => false));?>
+					<?php elseif($displayCloseButton):?>
+						<?php echo $this->Html->link('<i class="icon-lock"></i> '.__('Close & create a report'), '/events/close/'.$event['Event']['id'], array('class' => 'btn btn-success btn-mini', 'escape' => false));?>
+					<?php endif;?>
 				</div>
 			<?php endif;?>
 		</div>

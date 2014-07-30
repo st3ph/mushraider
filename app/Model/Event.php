@@ -22,6 +22,7 @@ class Event extends AppModel {
             'foreignKey' => 'user_id'
         )
     );
+
     public $hasMany = array(
         'EventsRole' => array(
             'className' => 'EventsRole',
@@ -30,6 +31,14 @@ class Event extends AppModel {
         'EventsCharacter' => array(
             'className' => 'EventsCharacter',
             'foreignKey' => 'event_id'
+        )
+    );
+
+    public $hasOne = array(
+        'Report' => array(
+            'className' => 'Report',
+            'foreignKey' => 'event_id',
+            'dependent' => true
         )
     );
 

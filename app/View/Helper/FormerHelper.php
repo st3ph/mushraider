@@ -154,6 +154,9 @@ class FormerHelper extends AppHelper {
 													}
 													$eventTitle = !empty($matchingEvent['Event']['title'])?$matchingEvent['Event']['title']:$matchingEvent['Dungeon']['title'];
 													$output .= $this->Html->link($eventTitle, '/events/view/'.$matchingEvent['Event']['id'], array('escape' => false, 'title' => $tooltip, 'class' => 'tt '.$registeredClass));
+													if(!empty($matchingEvent['Report']['id'])) {
+														$output .= ' <i class="icon-lock"></i>';
+													}
 												$output .= '</li>';
 											}
 										$output .= '</ul>';

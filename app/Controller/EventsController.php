@@ -1,8 +1,8 @@
 <?php
 class EventsController extends AppController {
-    public $components = array('Emailing');
+    public $components = array('Emailing', 'Image');
     var $helpers = array('Sociable.Comment');
-    var $uses = array('Game', 'Dungeon', 'Event', 'RaidsRole', 'EventsRole', 'EventsCharacter', 'Character', 'EventsTemplate', 'EventsTemplatesRole');
+    var $uses = array('Game', 'Dungeon', 'Event', 'RaidsRole', 'EventsRole', 'EventsCharacter', 'Character', 'EventsTemplate', 'EventsTemplatesRole', 'Report');
 
     public function beforeFilter() {
         parent::beforeFilter();
@@ -27,6 +27,7 @@ class EventsController extends AppController {
         $params['contain']['Dungeon'] = array();
         $params['contain']['EventsRole']['RaidsRole'] = array();
         $params['contain']['EventsCharacter']['Character'] = array();
+        $params['contain']['Report']['fields'] = array('id');
         $params['conditions']['Event.time_invitation >='] = $calendarOptions['year'] .'-'.$calendarOptions['month'].'-01';
         $params['conditions']['Event.time_invitation <='] = $calendarOptions['year'] .'-'.$calendarOptions['month'].'-31 23:59:59';
         $events = $this->Event->find('all', $params);
@@ -47,6 +48,7 @@ class EventsController extends AppController {
         $params['contain']['EventsRole']['RaidsRole'] = array();
         $params['contain']['EventsCharacter']['Character']['Classe'] = array();        
         $params['contain']['EventsCharacter']['Character']['User'] = array();        
+        $params['contain']['Report'] = array();        
         if(!$event = $this->Event->find('first', $params)) {
             $this->Session->setFlash(__('MushRaider can\'t find this event oO'), 'flash_warning');
             $this->redirect('/events');
@@ -264,6 +266,93 @@ class EventsController extends AppController {
         $this->breadcrumb[] = array('title' => (!empty($event['Event']['title'])?$event['Event']['title']:$event['Dungeon']['title']), 'url' => '');
     }
 
+    public function close($eventId) {
+        if(!$this->user['User']['isOfficer'] && !$this->user['User']['isAdmin']) {
+            $this->Session->setFlash(__('You don\'t have permission to access this page.'), 'flash_error');
+            $this->redirect('/events/view/'.$eventId);
+        }
+
+        if(!$eventId) {
+            $this->redirect('/events');
+        }
+
+        $this->pageTitle = __('Close event').' - '.$this->pageTitle;
+
+        // Get event
+        $params = array();
+        $params['recursive'] = 1;
+        $params['conditions']['Event.id'] = $eventId;
+        $params['contain']['Report'] = array();
+        $params['contain']['Dungeon'] = array();
+        if(!$event = $this->Event->find('first', $params)) {
+            $this->redirect('/events');
+        }
+
+        if(!empty($this->request->data['Report'])) {
+            $screenshotError = false;
+            $toSave = array();
+            if(!empty($event['Report']['id'])) {
+                $toSave['id'] = $event['Report']['id'];
+            }
+            $toSave['event_id'] = $eventId;
+            $toSave['description'] = nl2br($this->request->data['Report']['description']);
+            for($i = 1;$i <= 4;$i++) {
+                $imageName = $this->screenshot($this->request->data['Report']['screenshot_'.$i], 'screenshot_'.$i, $eventId);
+                $screenshotError = isset($imageName['error'])?true:$screenshotError;
+                $toSave['screenshot_'.$i] = !empty($imageName['name'])?$imageName['name']:$event['Report']['screenshot_'.$i];
+            }
+
+            if(!$screenshotError) {
+                if($this->Report->save($toSave)) {
+                    $this->Session->setFlash(__('The event has been closed and the report created.'), 'flash_success');
+                    $this->redirect('/events/report/'.$eventId);
+                }else {
+                    $this->Session->setFlash(__('Something wrong happen, please fix the errors below'), 'flash_error');
+                }
+            }
+        }        
+
+        $this->set('event', $event);
+        $this->request->data = array_merge($event, $this->request->data); 
+
+        $this->breadcrumb[] = array('title' => (!empty($event['Event']['title'])?$event['Event']['title']:$event['Dungeon']['title']), 'url' => '/events/view/'.$eventId);
+        $this->breadcrumb[] = array('title' => __('Close & create a report'));
+    }
+
+    public function report($eventId) {
+        if(!$eventId) {
+            $this->redirect('/events');
+        }
+
+        $this->pageTitle = __('View event report').' - '.$this->pageTitle;
+
+        // Get event
+        $params = array();
+        $params['recursive'] = 2;
+        $params['conditions']['Event.id'] = $eventId;
+        $params['contain']['Report']['fields'] = array('id');
+        $params['contain']['Dungeon'] = array();
+        if(!$event = $this->Event->find('first', $params)) {
+            $this->Session->setFlash(__('MushRaider can\'t find this event oO'), 'flash_warning');
+            $this->redirect('/events');
+        }
+
+        // Get report (separated from event because of the comments behavior)
+        $params = array();
+        $params['recursive'] = 1;
+        $params['conditions']['Report.id'] = $event['Report']['id'];
+        if(!$report = $this->Report->find('first', $params)) {
+            $this->Session->setFlash(__('MushRaider can\'t find this report oO'), 'flash_warning');
+            $this->redirect('/events/view/'.$event['Event']['id']);
+        }
+
+        $this->set('event', $event);
+        $this->set('report', $report);
+
+        $this->breadcrumb[] = array('title' => (!empty($event['Event']['title'])?$event['Event']['title']:$event['Dungeon']['title']), 'url' => '/events/view/'.$eventId);
+        $this->breadcrumb[] = array('title' => __('Report'));
+    }
+
     public function delete($eventId) {
         if(!$this->user['User']['isOfficer'] && !$this->user['User']['isAdmin']) {
             $this->Session->setFlash(__('You don\'t have permission to access this page.'), 'flash_error');
@@ -311,5 +400,35 @@ class EventsController extends AppController {
             $this->Session->setFlash(__('MushRaider can\'t delete this event.'), 'flash_error');
         }
         $this->redirect('/events');
+    }
+
+    private function screenshot($image, $name, $eventId) {
+        $return = array();
+        if(!$image['error']) {
+            $imageName = 'report_'.$eventId.'_'.$name;
+            $this->Image->resize($image['tmp_name'], 'files/reports', $imageName.'_t.png', 250, null);
+            $this->Image->resize($image['tmp_name'], 'files/reports', $imageName.'_m.png', 600, null);
+            $this->Image->resize($image['tmp_name'], 'files/reports', $imageName.'_o.png', null, null);
+            $return['name'] = $imageName;
+        }else {            
+            switch($image['error']) {
+                case 1:
+                case 2:
+                    $error = __('At least one of the screenshots is too big');
+                    break;
+                case 3:
+                    $error = __('An error occur while uploading');
+                    break;
+                case 4:
+                    $return['name'] = null;
+                    break;
+            }
+            if(!empty($error)) {
+                $this->Session->setFlash($error, 'flash_error');  
+                $return['error'] = true;
+            }
+        }
+
+        return $return;
     }
 }

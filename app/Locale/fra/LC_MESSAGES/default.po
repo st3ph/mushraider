@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Mushraider\n"
-"POT-Creation-Date: 2014-06-17 18:38+0100\n"
-"PO-Revision-Date: 2014-06-17 18:38+0100\n"
+"POT-Creation-Date: 2014-07-31 15:48+0100\n"
+"PO-Revision-Date: 2014-07-31 15:59+0100\n"
 "Last-Translator: Stéphane Litou <contact@stephane-litou.com>\n"
 "Language-Team:  <contact@stephane-litou.com>\n"
 "Language: fr\n"
@@ -25,7 +25,7 @@ msgstr "Mes personnages MushRaider"
 
 #: E:\www\wamp\www\mushraider\app/Controller/AccountController.php:28
 #: E:\www\wamp\www\mushraider\app/Controller/AccountController.php:124
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:37
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:51
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/index.ctp:14
 #: E:\www\wamp\www\mushraider\app/View/Elements/account_menu.ctp:3
 #: E:\www\wamp\www\mushraider\app/View/Elements/header.ctp:15
@@ -41,10 +41,11 @@ msgstr "%s a été ajouté à la liste de vos personnages"
 #: E:\www\wamp\www\mushraider\app/Controller/AccountController.php:106
 #: E:\www\wamp\www\mushraider\app/Controller/AccountController.php:240
 #: E:\www\wamp\www\mushraider\app/Controller/AccountController.php:262
-#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:154
-#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:202
-#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:162
-#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:238
+#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:135
+#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:183
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:182
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:258
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:322
 msgid "Something wrong happen, please fix the errors below"
 msgstr ""
 "Quelque chose de mal c'est produit, veuillez corriger les erreurs ci-dessous"
@@ -57,8 +58,8 @@ msgstr "Modifier un personnage"
 #: E:\www\wamp\www\mushraider\app/Controller/AccountController.php:140
 #: E:\www\wamp\www\mushraider\app/Controller/AccountController.php:166
 #: E:\www\wamp\www\mushraider\app/Controller/AccountController.php:193
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:146
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:170
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:182
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:206
 msgid "MushRaider  can't find this character oO"
 msgstr "MushRaider ne trouve pas ce personnage oO"
 
@@ -77,19 +78,19 @@ msgid "The character %s has been deleted"
 msgstr "Le personnage %s a bien été supprimé"
 
 #: E:\www\wamp\www\mushraider\app/Controller/AccountController.php:174
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:154
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:190
 #, php-format
 msgid "The character %s has been disabled"
 msgstr "Le personnage %s a bien été désactivé"
 
 #: E:\www\wamp\www\mushraider\app/Controller/AccountController.php:176
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:156
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:180
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:192
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:216
 msgid "MushRaider can't disable this character oO"
 msgstr "MushRaider ne peut pas désactiver ce personnage oO"
 
 #: E:\www\wamp\www\mushraider\app/Controller/AccountController.php:201
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:178
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:214
 #, php-format
 msgid "The character %s has been enabled"
 msgstr "Le personnage %s a bien été activé"
@@ -160,7 +161,7 @@ msgstr "Votre personnage doit être au dessus du niveau %s"
 msgid "Error while adding your character"
 msgstr "Erreur pendant l'ajout de votre personnage"
 
-#: E:\www\wamp\www\mushraider\app/Controller/AjaxController.php:220
+#: E:\www\wamp\www\mushraider\app/Controller/AjaxController.php:196
 msgid "Error while loading the template"
 msgstr "Erreur pendant le chargement du template"
 
@@ -168,24 +169,23 @@ msgstr "Erreur pendant le chargement du template"
 msgid "MushRaider is ready for install, what about you ?"
 msgstr "MushRaider est prêt pour l'installation, et vous ?"
 
+#: E:\www\wamp\www\mushraider\app/Controller/AppController.php:103
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/AdminAppController.php:15
+msgid "You have to be logged in to access this page."
+msgstr "Vous devez être connecté pour accéder à cette page."
+
 #: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:25
 msgid "Login to MushRaider"
 msgstr "Connexion à MushRaider"
 
-#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:47
-#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:125
+#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:51
+#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:106
 msgid "MushRaider can't find your account, maybe you need some sleep ?"
 msgstr ""
 "MushRaider ne trouve pas ce compte, peut être avez-vous besoin d'un peu de "
 "repos ?"
 
-#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:85
-#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:111
-#, php-format
-msgid "Congratulation %s, you are now logged in"
-msgstr "Félicitations %s, vous êtes maintenant connecté"
-
-#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:123
+#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:104
 msgid ""
 "You have to wait until an admin activate your account, go farm while "
 "waiting !"
@@ -193,16 +193,16 @@ msgstr ""
 "Vous devez attendre qu'un admin active votre compte, vous pouvez retourner "
 "farm en attendant !"
 
-#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:135
+#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:116
 msgid "Signup are disabled because bridge system is enabled."
 msgstr ""
 "Les inscriptions sont fermées car le système d'intégration a été activé."
 
-#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:139
+#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:120
 msgid "Signup to MushRaider"
 msgstr "Inscription à MushRaider"
 
-#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:150
+#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:131
 msgid ""
 "Yeah, your account has been created, but now you need to wait until your "
 "account as been validated by an admin to access the raid planner (security "
@@ -211,31 +211,36 @@ msgstr ""
 "Yeah, votre compte a été créé, cependant vous devez attendre qu'un admin "
 "valide votre compte pour accéder au raid planner (question de sécurité)."
 
-#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:160
+#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:141
 msgid "Password recovery is disabled because bridge system is enabled."
 msgstr ""
 "La récupération de mot de passe est désactivée car le système d'intégration "
 "a été activé."
 
-#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:164
-#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:180
+#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:145
+#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:161
 msgid "Password Recovery"
 msgstr "Retrouver son mot de passe"
 
-#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:170
+#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:151
 msgid "An email has been sent to you with the recovery instructions."
 msgstr ""
 "Un email vous a été envoyé avec les instructions pour retrouver votre mot de "
 "passe."
 
-#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:183
-#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:204
+#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:164
+#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:185
 msgid "This link is no longer available."
 msgstr "Ce lien n'est plus valable."
 
-#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:199
+#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:180
 msgid "Your password has been updated."
 msgstr "Votre mot de passe a été mis à jour."
+
+#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:211
+#, php-format
+msgid "Congratulation %s, you are now logged in"
+msgstr "Félicitations %s, vous êtes maintenant connecté"
 
 #: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:10
 #: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:14
@@ -247,51 +252,93 @@ msgstr "Votre mot de passe a été mis à jour."
 msgid "Events"
 msgstr "Evènements"
 
-#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:39
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:9
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:42
+msgid "-- All games"
+msgstr "-- Tous les jeux"
+
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:52
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:14
 msgid "View event"
 msgstr "Détails d'un événement"
 
-#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:51
-#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:247
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:65
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:267
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:348
 msgid "MushRaider can't find this event oO"
 msgstr "MushRaider ne peut pas trouver cet événement oO"
 
-#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:92
-#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:93
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:106
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:107
 #: E:\www\wamp\www\mushraider\app/View/Helper/FormerHelper.php:120
-#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:3
+#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:5
 msgid "Add event"
 msgstr "Ajouter un événement"
 
-#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:96
-#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:193
-#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:263
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/AdminAppController.php:20
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/AdminAppController.php:26
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:110
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:213
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:283
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:370
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/AdminAppController.php:21
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/AdminAppController.php:27
 msgid "You don't have permission to access this page."
 msgstr "Vous n'avez pas les permissions pour accéder à cette page."
 
-#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:157
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:177
 msgid "The event has been created."
 msgstr "L'événement a bien été créé."
 
-#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:190
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:210
 #: E:\www\wamp\www\mushraider\app/View/Events/edit.ctp:2
 msgid "Edit event"
 msgstr "Modifier un événement"
 
-#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:233
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:253
 msgid "The event has been updated."
 msgstr "L'événement a bien été mis à jour."
 
-#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:303
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:291
+msgid "Close event"
+msgstr "Clôturer l'événement"
+
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:319
+msgid "The event has been closed and the report created."
+msgstr "L'événement a été clôturé et le compte rendu créé."
+
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:331
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:29
+msgid "Close & create a report"
+msgstr "Fermer et créer un compte rendu"
+
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:339
+msgid "View event report"
+msgstr "Voir le compte rendu"
+
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:357
+msgid "MushRaider can't find this report oO"
+msgstr "MushRaider ne peut pas trouver ce compte rendu oO"
+
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:365
+#: E:\www\wamp\www\mushraider\app/View/Events/report.ctp:7
+msgid "Report"
+msgstr "Compte rendu"
+
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:410
 msgid "The event has been deleted."
 msgstr "L'événement a bien été supprimé."
 
-#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:305
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:412
 msgid "MushRaider can't delete this event."
 msgstr "MushRaider ne peut pas supprimer cet événement."
+
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:429
+msgid "At least one of the screenshots is too big"
+msgstr "Au moins un des screenshots est trop lourd"
+
+#: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:432
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/GamesController.php:178
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/SettingsController.php:203
+msgid "An error occur while uploading"
+msgstr "Une erreur est survenue pendant l'upload"
 
 #: E:\www\wamp\www\mushraider\app/Controller/Component/EmailingComponent.php:38
 msgid "Welcome to MushRaider"
@@ -329,15 +376,11 @@ msgstr "Cette race existe déjà pour ce jeu."
 msgid "Passwords do not match. Please, try again."
 msgstr "Les mots de passe ne correspondent pas. Veuillez réessayer."
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/AdminAppController.php:14
-msgid "You must login to access this page."
-msgstr "Vous devez être connecté pour accéder à cette page."
-
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/AdminAppController.php:32
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/AdminAppController.php:33
 msgid "MushRaider Admin"
 msgstr "Admin MushRaider"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/AdminAppController.php:48
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/AdminAppController.php:49
 #, php-format
 msgid ""
 "<strong>MushRaider %s</strong> is available! <a href=\"http://mushraider.com/"
@@ -373,10 +416,10 @@ msgstr "La classe %s a bien été mise à jour"
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/RacesController.php:109
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/RaidrolesController.php:54
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/RaidrolesController.php:75
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:67
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:102
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:117
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:132
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:74
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:113
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:139
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:165
 msgid "Something goes wrong"
 msgstr "Quelque chose de mal s'est produit"
 
@@ -440,11 +483,6 @@ msgstr "Le jeu %s a été mis à jour"
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/GamesController.php:175
 msgid "Logo is too big"
 msgstr "Le logo est trop gros"
-
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/GamesController.php:178
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/SettingsController.php:198
-msgid "An error occur while uploading"
-msgstr "Une erreur est survenue pendant l'upload"
 
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/PatcherController.php:18
 msgid "MushRaider can't find this patch"
@@ -511,17 +549,17 @@ msgstr "MushRaider ne trouve pas ce rôle oO"
 msgid "Role %s has been deleted and replaced with %s"
 msgstr "Le rôle %s a été supprimé et remplacé par %s"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/SettingsController.php:36
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/SettingsController.php:137
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/SettingsController.php:171
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/SettingsController.php:41
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/SettingsController.php:142
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/SettingsController.php:176
 msgid "Settings have been updated"
 msgstr "La configuration a été mise à jour"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/SettingsController.php:168
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/SettingsController.php:173
 msgid "Third party url and secret key are mandatory"
 msgstr "L'adresse du site/forum et la clef secrète sont obligatoires."
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/SettingsController.php:195
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/SettingsController.php:200
 msgid "Image is too big"
 msgstr "L'image est trop grosse"
 
@@ -529,26 +567,32 @@ msgstr "L'image est trop grosse"
 msgid "MushRaider is unable to find this user oO"
 msgstr "MushRaider ne trouve pas cet utilisateur oO"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:63
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:70
 #, php-format
 msgid "User %s has been updated"
 msgstr "L'utilisateur %s a été mis à jour"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:94
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:105
 msgid "This user is still active, you have to disable him before deleting."
 msgstr ""
 "Cet utilisateur est encore actif, vous devez le désactiver avant de le "
 "supprimer."
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:100
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:111
 msgid "The user has been deleted"
 msgstr "L'utilisateur a bien été supprimé."
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:115
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:116
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:142
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:168
+msgid "You don't have permission to do this"
+msgstr "Vous n'avez pas les permissions pour effectuer cette action."
+
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:137
 msgid "The user has been disabled"
 msgstr "L'utilisateur a bien été désactivé"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:130
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/UsersController.php:163
 msgid "The user has been enable"
 msgstr "L'utilisateur a bien été activé"
 
@@ -562,19 +606,19 @@ msgstr ""
 msgid "MushRaider Installer"
 msgstr "Installer MushRaider"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Install/Controller/StepController.php:40
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/Controller/StepController.php:72
 msgid "MushRaider successfully connect to your database, one more step to go !"
 msgstr ""
 "MushRaider s'est connecté à la base de donnée avec succès, plus qu'une "
 "étape !"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Install/Controller/StepController.php:45
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/Controller/StepController.php:77
 msgid "MushRaider can't connect to your database, please verify the settings."
 msgstr ""
 "MushRaider ne peut pas se connecter à votre base de donnée, veuillez "
 "vérifier les paramètres."
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Install/Controller/StepController.php:58
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/Controller/StepController.php:90
 msgid ""
 "MushRaider can't find your database settings, please complete this form to "
 "proceed to next step"
@@ -582,15 +626,15 @@ msgstr ""
 "MushRaider ne trouve pas les paramètres de connexion à la base de donnée, "
 "veuillez compléter le formulaire avant de continuer"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Install/Controller/StepController.php:143
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/Controller/StepController.php:176
 msgid "MushRaider successfully install !"
 msgstr "MushRaider s'est installé avec succès !"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Install/Controller/StepController.php:146
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/Controller/StepController.php:179
 msgid "MushRaider can't create admin user, please try again."
 msgstr "MushRaider ne peut pas créer l'utilisateur admin, veuillez réessayer."
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Install/Controller/StepController.php:154
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/Controller/StepController.php:187
 msgid ""
 "MushRaider can't verify the settings, please be sure to fill all the fields "
 "to continue."
@@ -651,7 +695,8 @@ msgstr "par"
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/index.ctp:36
 #: E:\www\wamp\www\mushraider\app/View/Account/characters.ctp:52
 #: E:\www\wamp\www\mushraider\app/View/Account/characters_edit.ctp:23
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:17
+#: E:\www\wamp\www\mushraider\app/View/Events/report.ctp:12
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:24
 msgid "Edit"
 msgstr "Modifier"
 
@@ -677,7 +722,7 @@ msgstr "sauvegarder"
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/bridge.ctp:34
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/display.ctp:49
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:55
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:33
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:46
 #: E:\www\wamp\www\mushraider\app/View/Account/password.ctp:22
 #: E:\www\wamp\www\mushraider\app/View/Account/settings.ctp:19
 msgid "Save"
@@ -920,7 +965,7 @@ msgstr "Suivant"
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Games/index.ctp:20
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Rosters/index.ctp:4
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Rosters/index.ctp:38
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:108
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:121
 msgid "Roster"
 msgstr "Roster"
 
@@ -971,10 +1016,10 @@ msgstr "Modifier une classe"
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Raidroles/edit.ctp:9
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Raidroles/index.ctp:15
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Rosters/index.ctp:42
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:41
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:55
 #: E:\www\wamp\www\mushraider\app/View/Emails/html/event_new.ctp:13
 #: E:\www\wamp\www\mushraider\app/View/Emails/html/event_validate.ctp:13
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:72
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:85
 msgid "Title"
 msgstr "Titre"
 
@@ -985,14 +1030,14 @@ msgstr "Titre"
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Elements/addRace.ctp:8
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Races/edit.ctp:12
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Stats/index.ctp:10
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:42
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:56
 #: E:\www\wamp\www\mushraider\app/View/Account/characters.ctp:17
 #: E:\www\wamp\www\mushraider\app/View/Account/characters.ctp:33
 #: E:\www\wamp\www\mushraider\app/View/Account/characters_edit.ctp:15
 #: E:\www\wamp\www\mushraider\app/View/Emails/html/event_new.ctp:15
-#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:21
+#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:27
 #: E:\www\wamp\www\mushraider\app/View/Events/edit.ctp:13
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:82
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:95
 msgid "Game"
 msgstr "Jeu"
 
@@ -1021,7 +1066,7 @@ msgstr "Classes non liées à un jeu"
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Games/index.ctp:21
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Races/index.ctp:31
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Raidroles/index.ctp:16
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:47
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:61
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/index.ctp:16
 #: E:\www\wamp\www\mushraider\app/View/Account/characters.ctp:39
 msgid "Actions"
@@ -1036,7 +1081,7 @@ msgstr "Actions"
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Raidroles/index.ctp:26
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/index.ctp:39
 #: E:\www\wamp\www\mushraider\app/View/Account/characters.ctp:58
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:18
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:25
 msgid "Delete"
 msgstr "Supprimer"
 
@@ -1079,6 +1124,14 @@ msgstr "Donjons"
 msgid "Games"
 msgstr "Jeux"
 
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Dashboard/index.ctp:41
+msgid "Informations and updates on"
+msgstr "Informations et mises à jour sur"
+
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Dashboard/index.ctp:44
+msgid "Follow"
+msgstr "Suivre"
+
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Dungeons/add.ctp:5
 msgid "Add Dungeon"
 msgstr "Ajouter un donjon"
@@ -1109,7 +1162,7 @@ msgid "edit"
 msgstr "modifier"
 
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Dungeons/disabled.ctp:44
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:62
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:76
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/index.ctp:38
 #: E:\www\wamp\www\mushraider\app/View/Account/characters.ctp:56
 msgid "Enable"
@@ -1149,7 +1202,7 @@ msgid "Dungeons list"
 msgstr "Liste des donjons"
 
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Dungeons/index.ctp:47
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:64
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:78
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/index.ctp:41
 #: E:\www\wamp\www\mushraider\app/View/Account/characters.ctp:54
 msgid "Disable"
@@ -1259,16 +1312,16 @@ msgid "Templates list"
 msgstr "Liste des templates"
 
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Events/templates.ctp:26
-#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:18
+#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:24
 #: E:\www\wamp\www\mushraider\app/View/Events/edit.ctp:10
 msgid "Event title"
 msgstr "Titre de l'événement"
 
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Events/templates.ctp:27
 #: E:\www\wamp\www\mushraider\app/View/Emails/html/event_new.ctp:16
-#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:24
+#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:30
 #: E:\www\wamp\www\mushraider\app/View/Events/edit.ctp:16
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:86
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:99
 msgid "Dungeon"
 msgstr "Donjon"
 
@@ -1277,7 +1330,7 @@ msgid "Mininum level"
 msgstr "Niveau minimum"
 
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Events/templates.ctp:29
-#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:36
+#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:42
 #: E:\www\wamp\www\mushraider\app/View/Events/edit.ctp:28
 msgid "Roles"
 msgstr "Rôles"
@@ -1340,7 +1393,7 @@ msgstr "Modifier un jeu"
 msgid "Games list"
 msgstr "Liste des jeux"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Layouts/default.ctp:51
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Layouts/default.ctp:53
 msgid "VOTRE NAVIGATEUR NE SUPPORTE PAS JAVASCRIPT"
 msgstr "VOTRE NAVIGATEUR NE SUPPORTE PAS JAVASCRIPT"
 
@@ -1432,7 +1485,7 @@ msgid "Summary"
 msgstr "Résumé"
 
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Rosters/index.ctp:43
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:46
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:60
 #: E:\www\wamp\www\mushraider\app/View/Account/characters.ctp:35
 #: E:\www\wamp\www\mushraider\app/View/Elements/char_form_elements.ctp:14
 msgid "Level"
@@ -1446,13 +1499,13 @@ msgstr "Rôle par défaut"
 
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Rosters/index.ctp:45
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Stats/index.ctp:21
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:43
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:57
 #: E:\www\wamp\www\mushraider\app/View/Elements/char_form_elements.ctp:2
 msgid "Classe"
 msgstr "Classe"
 
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Rosters/index.ctp:46
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:44
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:58
 #: E:\www\wamp\www\mushraider\app/View/Account/characters.ctp:37
 #: E:\www\wamp\www\mushraider\app/View/Elements/char_form_elements.ctp:6
 msgid "Race"
@@ -1574,7 +1627,7 @@ msgid "General settings"
 msgstr "Paramètres généraux"
 
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Settings/index.ctp:11
-#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step2.ctp:4
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step3.ctp:4
 msgid "Site title"
 msgstr "Titre du site"
 
@@ -1648,9 +1701,9 @@ msgid "Character"
 msgstr "Personnage"
 
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Stats/index.ctp:22
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:45
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:59
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/index.ctp:15
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:50
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:63
 msgid "Role"
 msgstr "Rôle"
 
@@ -1675,27 +1728,31 @@ msgstr ""
 msgid "Edit user"
 msgstr "Modifier un utilisateur"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:9
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:11
 msgid "Disabled"
 msgstr "Désactivé"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:9
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:11
 msgid "Enabled"
 msgstr "Activé"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:9
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:11
 msgid "Account status"
 msgstr "Etat du compte"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:14
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:18
 msgid "Role & permissions"
 msgstr "Rôles et permissions"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:17
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:21
 msgid "Roles details"
 msgstr "Détails des rôles"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:64
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:39
+msgid "Private player note"
+msgstr "Note privée sur le joueur"
+
+#: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Users/edit.ctp:78
 #, php-format
 msgid "Are you sure you want to disable the character %s ?"
 msgstr "Êtes-vous sûr de vouloir désactiver le personnage %s ?"
@@ -1740,64 +1797,127 @@ msgid "Step"
 msgstr "Etape"
 
 #: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step1.ctp:1
-msgid "Database informations"
-msgstr "Paramètres de la base de donnée"
+msgid "System check"
+msgstr "Vérification du serveur"
+
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step1.ctp:3
+msgid ""
+"MushRaider have a minimum system requirement to work correctly like PHP 5.3, "
+"a MySQL database and write permission on some directories."
+msgstr ""
+"MushRaider a une configuration minimum requise du serveur pour fonctionner "
+"correctement comme PHP 5.3, une base de donnée MySQL et les droits "
+"d'écriture sur certains répertoires."
 
 #: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step1.ctp:4
-msgid "Database Type"
-msgstr "Type de base de donnée"
+msgid ""
+"Below is a list of automatic check to ensure that your installation will "
+"works correctly."
+msgstr ""
+"Retrouvez la liste ci-dessous des tests automatiques effectués pour "
+"s'assurer que votre installation fonctionnera correctement."
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step1.ctp:7
-msgid "Host"
-msgstr "Hôte"
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step1.ctp:11
+msgid "PHP 5.3 or greater"
+msgstr "PHP 5.3 ou supérieur"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step1.ctp:10
-msgid "Database name"
-msgstr "Nom de la base de donnée"
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step1.ctp:12
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step1.ctp:18
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step1.ctp:27
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step1.ctp:34
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step1.ctp:40
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step1.ctp:46
+msgid "passed"
+msgstr "ok"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step1.ctp:13
-msgid "Database User"
-msgstr "Utilisateur de la base de donnée"
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step1.ctp:12
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step1.ctp:18
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step1.ctp:27
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step1.ctp:34
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step1.ctp:40
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step1.ctp:46
+msgid "failed"
+msgstr "échec"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step1.ctp:16
-msgid "Database Password"
-msgstr "Mot de passe de la base de donnée"
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step1.ctp:17
+msgid "MySQL driver"
+msgstr "Driver MySQL"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step1.ctp:19
-msgid "Port"
-msgstr "Port"
-
-#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step1.ctp:22
-msgid "Tables prefix"
-msgstr "Préfix des tables"
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step1.ctp:23
+msgid "Apache mod_rewrite"
+msgstr "Apache mod_rewrite"
 
 #: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step1.ctp:25
+msgid "???"
+msgstr "???"
+
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step1.ctp:33
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step1.ctp:39
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step1.ctp:45
+msgid "writable"
+msgstr "inscriptible"
+
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step1.ctp:52
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step1.ctp:54
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step2.ctp:25
 msgid "Next &raquo;"
 msgstr "Suivant &raquo;"
 
 #: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step2.ctp:1
-#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:14
+msgid "Database informations"
+msgstr "Paramètres de la base de donnée"
+
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step2.ctp:4
+msgid "Database Type"
+msgstr "Type de base de donnée"
+
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step2.ctp:7
+msgid "Host"
+msgstr "Hôte"
+
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step2.ctp:10
+msgid "Database name"
+msgstr "Nom de la base de donnée"
+
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step2.ctp:13
+msgid "Database User"
+msgstr "Utilisateur de la base de donnée"
+
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step2.ctp:16
+msgid "Database Password"
+msgstr "Mot de passe de la base de donnée"
+
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step2.ctp:19
+msgid "Port"
+msgstr "Port"
+
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step2.ctp:22
+msgid "Tables prefix"
+msgstr "Préfix des tables"
+
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step3.ctp:1
+#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:20
 #: E:\www\wamp\www\mushraider\app/View/Events/edit.ctp:6
 msgid "General informations"
 msgstr "Informations générales"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step2.ctp:8
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step3.ctp:8
 msgid "Site language"
 msgstr "Langue du site"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step2.ctp:12
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step3.ctp:12
 msgid "Admin email"
 msgstr "Email de l'admin"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step2.ctp:16
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step3.ctp:16
 msgid "Admin username"
 msgstr "Pseudo de l'admin"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step2.ctp:20
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step3.ctp:20
 msgid "Admin password"
 msgstr "Mot de passe de l'admin"
 
-#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step2.ctp:24
+#: E:\www\wamp\www\mushraider\app/Plugin/Install/View/Step/step3.ctp:24
 msgid "Install MushRaider"
 msgstr "Installer MushRaider"
 
@@ -1886,15 +2006,19 @@ msgstr "Connexion"
 msgid "Username or Email"
 msgstr "Pseudo ou Email"
 
-#: E:\www\wamp\www\mushraider\app/View/Auth/login.ctp:18
+#: E:\www\wamp\www\mushraider\app/View/Auth/login.ctp:16
+msgid "Stay signed in"
+msgstr "Rester connecté"
+
+#: E:\www\wamp\www\mushraider\app/View/Auth/login.ctp:21
 msgid "Password lost :("
 msgstr "Mot de passe perdu :("
 
-#: E:\www\wamp\www\mushraider\app/View/Auth/login.ctp:18
+#: E:\www\wamp\www\mushraider\app/View/Auth/login.ctp:21
 msgid "Recover your password"
 msgstr "Retrouver mon mot de passe"
 
-#: E:\www\wamp\www\mushraider\app/View/Auth/login.ctp:19
+#: E:\www\wamp\www\mushraider\app/View/Auth/login.ctp:22
 #: E:\www\wamp\www\mushraider\app/View/Auth/password.ctp:18
 #: E:\www\wamp\www\mushraider\app/View/Auth/recovery.ctp:15
 #: E:\www\wamp\www\mushraider\app/View/Auth/signup.ctp:2
@@ -1902,7 +2026,7 @@ msgstr "Retrouver mon mot de passe"
 msgid "Signup"
 msgstr "Inscription"
 
-#: E:\www\wamp\www\mushraider\app/View/Auth/login.ctp:19
+#: E:\www\wamp\www\mushraider\app/View/Auth/login.ctp:22
 #: E:\www\wamp\www\mushraider\app/View/Auth/password.ctp:18
 #: E:\www\wamp\www\mushraider\app/View/Auth/recovery.ctp:15
 msgid "Signup and start raiding"
@@ -2055,7 +2179,9 @@ msgstr "Vous recevez cet email car un nouvel événement a été créé"
 
 #: E:\www\wamp\www\mushraider\app/View/Emails/html/event_new.ctp:14
 #: E:\www\wamp\www\mushraider\app/View/Emails/html/event_validate.ctp:14
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:75
+#: E:\www\wamp\www\mushraider\app/View/Events/close.ctp:10
+#: E:\www\wamp\www\mushraider\app/View/Events/report.ctp:19
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:88
 msgid "Description"
 msgstr "Description"
 
@@ -2066,9 +2192,9 @@ msgstr "Heure des invitations"
 
 #: E:\www\wamp\www\mushraider\app/View/Emails/html/event_new.ctp:18
 #: E:\www\wamp\www\mushraider\app/View/Emails/html/event_validate.ctp:16
-#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:54
+#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:60
 #: E:\www\wamp\www\mushraider\app/View/Events/edit.ctp:48
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:94
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:107
 msgid "Event start"
 msgstr "Heure de début"
 
@@ -2111,74 +2237,136 @@ msgstr ""
 "Pour modifier votre mot de passe et retrouver votre compte suivez le lien ci-"
 "dessous"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:3
+#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:5
 #: E:\www\wamp\www\mushraider\app/View/Events/edit.ctp:2
 msgid "the"
 msgstr "le"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:6
+#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:10
 msgid "Load template"
 msgstr "Charger un template"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:7
+#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:11
 msgid "Choose a template"
 msgstr "Choisissez un template"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:24
+#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:30
 #: E:\www\wamp\www\mushraider\app/View/Events/edit.ctp:16
 msgid "Select a game first"
 msgstr "Commencez par choisir un jeu"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:29
+#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:35
 #: E:\www\wamp\www\mushraider\app/View/Events/edit.ctp:21
 msgid "Event description"
 msgstr "Description de l'événement"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:40
+#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:46
 #: E:\www\wamp\www\mushraider\app/View/Events/edit.ctp:34
 msgid "Number of"
 msgstr "Nombre de"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:45
+#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:51
 #: E:\www\wamp\www\mushraider\app/View/Events/edit.ctp:39
 msgid "Character minimum level"
 msgstr "Niveau minimum de personnage"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:49
+#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:55
 #: E:\www\wamp\www\mushraider\app/View/Events/edit.ctp:43
 msgid "Event time"
 msgstr "Horaires de l'événement"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:51
+#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:57
 #: E:\www\wamp\www\mushraider\app/View/Events/edit.ctp:45
 msgid "Invitations start"
 msgstr "Heure des invitations"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:62
+#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:70
 msgid "Create event"
 msgstr "Sauvegarder"
+
+#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:74
+msgid "create a template based on this event"
+msgstr "créer un template basé sur cet événement"
+
+#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:75
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:23
+msgid "template name"
+msgstr "Nom du template"
+
+#: E:\www\wamp\www\mushraider\app/View/Events/close.ctp:3
+msgid "Close event & create a report"
+msgstr "Clôturer et créer un compte rendu"
+
+#: E:\www\wamp\www\mushraider\app/View/Events/close.ctp:8
+msgid "Event report"
+msgstr "Compte rendu"
+
+#: E:\www\wamp\www\mushraider\app/View/Events/close.ctp:15
+msgid "Screenshot 1"
+msgstr "Screenshot 1"
+
+#: E:\www\wamp\www\mushraider\app/View/Events/close.ctp:16
+msgid "Screenshot 2"
+msgstr "Screenshot 2"
+
+#: E:\www\wamp\www\mushraider\app/View/Events/close.ctp:17
+msgid "Screenshot 3"
+msgstr "Screenshot 3"
+
+#: E:\www\wamp\www\mushraider\app/View/Events/close.ctp:18
+msgid "Screenshot 4"
+msgstr "Screenshot 4"
+
+#: E:\www\wamp\www\mushraider\app/View/Events/close.ctp:20
+msgid "Total max size for all files (based on you php settings)"
+msgstr "Poids total pour tous les fichiers (basé sur votre configuration php)"
+
+#: E:\www\wamp\www\mushraider\app/View/Events/close.ctp:26
+msgid "Save  & close"
+msgstr "Sauvegarder et clôturer"
 
 #: E:\www\wamp\www\mushraider\app/View/Events/edit.ctp:57
 msgid "Update event"
 msgstr "Sauvegarder"
 
+#: E:\www\wamp\www\mushraider\app/View/Events/index.ctp:6
+msgid "date"
+msgstr "date"
+
 #: E:\www\wamp\www\mushraider\app/View/Events/index.ctp:7
 msgid "create"
 msgstr "créer"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:15
+#: E:\www\wamp\www\mushraider\app/View/Events/index.ctp:11
+msgid "Filter by game"
+msgstr "Filtrer par jeu"
+
+#: E:\www\wamp\www\mushraider\app/View/Events/report.ctp:24
+msgid "Screenshots"
+msgstr "Screenshots"
+
+#: E:\www\wamp\www\mushraider\app/View/Events/report.ctp:31
+msgid "view original"
+msgstr "voir l'original"
+
+#: E:\www\wamp\www\mushraider\app/View/Events/report.ctp:38
+msgid "There is no screenshot attached to this report"
+msgstr "Il n'y a aucun screenshot dans ce compte rendu"
+
+#: E:\www\wamp\www\mushraider\app/View/Events/report.ctp:41
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:175
+msgid "Comments"
+msgstr "Commentaires"
+
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:22
 msgid "Copy"
 msgstr "Copier"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:15
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:22
 msgid "Create template"
 msgstr "Créer un template"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:16
-msgid "template name"
-msgstr "Nom du template"
-
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:18
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:25
 msgid ""
 "Are you sure you want to delete this event ?\n"
 "(this can't be undone)"
@@ -2186,82 +2374,82 @@ msgstr ""
 "Êtes-vous sûr de vouloir supprimer cet événement?\n"
 " (cela est définitif)"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:33
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:27
+msgid "View report"
+msgstr "Voir le compte rendu"
+
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:46
 msgid "your are registered as \"absent\""
 msgstr "vous êtes inscrit en tant qu'absent"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:37
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:47
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:50
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:60
 msgid "your are registered to this event as"
 msgstr "vous êtes inscrit en tant que"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:41
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:54
 msgid "your are validated to this event as"
 msgstr "vous êtes validé en tant que"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:47
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:60
 msgid "Choose a character"
 msgstr "Personnage"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:47
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:60
 msgid "please select a character and a role"
 msgstr "merci de choisir un personnage et un rôle"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:47
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:60
 msgid "your are not registered to this event"
 msgstr "vous n'êtes pas inscrit à cet événement"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:65
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:78
 msgid "Add a comment"
 msgstr "Ajouter un commentaire"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:78
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:91
 msgid "Informations"
 msgstr "Informations"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:90
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:103
 msgid "Invitation start"
 msgstr "Heure des invitations"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:98
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:111
 msgid "Minimum character level"
 msgstr "Niveau minimum de personnage"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:102
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:115
 msgid "Created by"
 msgstr "Créé par"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:128
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:141
 msgid "The roster for this role is full"
 msgstr "Le roster pour ce rôle est complet"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:129
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:142
 msgid "Validated"
 msgstr "Validés"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:134
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:147
 msgid "Waiting"
 msgstr "En attente"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:139
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:152
 msgid "Rejected"
 msgstr "Absents"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:150
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:163
 msgid "Bad Kitties"
 msgstr "Mauvais élèves"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:150
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:163
 msgid "no answer yet..."
 msgstr "pas encore de réponse..."
 
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:159
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:172
 msgid "No bad kitty for this event !"
 msgstr "Tout le monde a répondu !"
-
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:162
-msgid "Comments"
-msgstr "Commentaires"
 
 #: E:\www\wamp\www\mushraider\app/View/Layouts/error.ctp:20
 msgid "MushRaider Error"

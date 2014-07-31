@@ -18,7 +18,11 @@ class SettingsController extends AdminAppController {
 
             $this->Cookie->write('Lang', $this->request->data['Setting']['sitelang'], true, '+4 weeks');
 
-            Configure::write('Settings.language', '"'.$this->request->data['Setting']['sitelang'].'"'); // Site lang
+            $databaseConfig = Configure::read('Database');
+            $settingsConfig = Configure::read('Settings');
+            $settingsConfig['language'] = $this->request->data['Setting']['sitelang']; // Site lang
+            Configure::write('Database', $this->Tools->quoteArray($databaseConfig));
+            Configure::write('Settings', $this->Tools->quoteArray($settingsConfig));
             Configure::dump('config.ini', 'configini', array('Database', 'Settings'));
 
             if(!empty($this->request->data['Setting']['email'])) {

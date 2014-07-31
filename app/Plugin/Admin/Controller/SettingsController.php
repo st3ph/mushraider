@@ -16,8 +16,9 @@ class SettingsController extends AdminAppController {
             $this->Setting->setOption('title', $this->request->data['Setting']['title']);
             $this->Setting->setOption('notifications', $this->request->data['Setting']['notifications']);
 
-            Configure::write('Config.language', $this->request->data['Setting']['sitelang']);
-            Configure::write('Settings.language', $this->request->data['Setting']['sitelang']);            
+            $this->Cookie->write('Lang', $this->request->data['Setting']['sitelang'], true, '+4 weeks');
+
+            Configure::write('Settings.language', $this->request->data['Setting']['sitelang']); // Site lang
             Configure::dump('config.ini', 'configini', array('Database', 'Settings'));
 
             if(!empty($this->request->data['Setting']['email'])) {
@@ -51,7 +52,7 @@ class SettingsController extends AdminAppController {
             }
         }
         $this->set('appLocales', $appLocales);
-        $this->request->data['Setting']['sitelang'] = Configure::read('Config.language');
+        $this->request->data['Setting']['sitelang'] = Configure::read('Settings.language');
 
         // Emails
         $email = json_decode($this->Setting->getOption('email'));

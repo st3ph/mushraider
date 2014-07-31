@@ -45,6 +45,7 @@ class StatsController extends AdminAppController {
                     $params['contain']['EventsCharacter']['fields'] = array('user_id');
                     $params['contain']['EventsCharacter']['conditions']['EventsCharacter.character_id'] = $character['Character']['id'];
                     $params['conditions']['Event.time_start >='] = $character['Character']['created'];
+                    $params['conditions']['Event.game_id'] = $gameId;
                     if($events = $this->Event->find('all', $params)) {
                         $characters[$key]['stats']['events_total'] = count($events);
                         foreach($events as $event) {

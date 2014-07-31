@@ -125,7 +125,6 @@ div.tooltip-inner div {text-align:left;}
 #eventSignin .message {font-size:12px;}
 #eventSignin select, #eventSignin input {margin-bottom:0;}
 #eventRoles th i {cursor:pointer;}
-#eventRoles td {width:25%;}
 #eventRoles td hr {border-top:1px solid #dedede;}
 #eventRoles td ul {list-style:none;margin:0;padding:0}
 #eventRoles td ul li {margin-bottom:5px;font-size:12px}

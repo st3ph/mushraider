@@ -137,8 +137,9 @@
 		</thead>
 		<tbody>
 			<tr>
+				<?php $colWidth = floor(100 / count($eventRoles));?>
 				<?php foreach($eventRoles as $roleId => $eventRole):?>
-					<td data-id="<?php echo $roleId;?>" data-full="<?php echo __('The roster for this role is full');?>">
+					<td data-id="<?php echo $roleId;?>" data-full="<?php echo __('The roster for this role is full');?>" style="width:<?php echo $colWidth;?>%">
 						<h5><?php echo __('Validated');?></h5>
 						<ul class="validated">
 							<?php echo $eventRole['characters']['validated'];?>

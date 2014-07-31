@@ -106,7 +106,7 @@ class AccountController extends AppController {
 //             $toSave['stat_capture'] = $this->image($this->request->data['Character']['stat_capture'], true);
             
             $imageName = $this->image($this->request->data['Character']['stat_capture'], true);
-            if(!isset($imageName['error'])) {
+            if(!isset($imageName['error']) && !empty($imageName['name'])) {
             	$toSave['stat_capture'] = $imageName['name'];
             }
             

@@ -1,6 +1,7 @@
 <?php
 class AccountController extends AppController {    
     var $helpers = array();
+    public $components = array('Image');
     var $uses = array('Game', 'Character', 'Classe', 'Race', 'RaidsRole', 'EventsCharacter', 'Attunement');
 
     public function beforeFilter() {
@@ -96,9 +97,18 @@ class AccountController extends AppController {
             $toSave['race_id'] = $this->request->data['Character']['race_id'];
     		$toSave['default_role_id'] = $this->request->data['Character']['default_role_id'];
     		$toSave['level'] = $this->request->data['Character']['level'];
-//     		$toSave['build_link'] = $this->request->data['Character']['build_link'];
+    		$toSave['build_url'] = $this->request->data['Character']['build_url'];
     		$toSave['user_id'] = $this->user['User']['id'];
             $toSave['attunement_id'] = $this->request->data['Character']['attunement_id'];
+            
+            
+           	// die($this->request->data['Character']['stat_capture']);
+//             $toSave['stat_capture'] = $this->image($this->request->data['Character']['stat_capture'], true);
+            
+            $imageName = $this->image($this->request->data['Character']['stat_capture'], true);
+            if(!isset($imageName['error'])) {
+            	$toSave['stat_capture'] = $imageName['name'];
+            }
             
     		if($this->Character->save($toSave)) {
     			$this->Session->setFlash(__('%s has been edited successfully', $toSave['title']), 'flash_success');
@@ -272,5 +282,40 @@ class AccountController extends AppController {
         $this->request->data['User']['notifications_cancel'] = $this->user['User']['notifications_cancel'];
         $this->request->data['User']['notifications_new'] = $this->user['User']['notifications_new'];
         $this->request->data['User']['notifications_validate'] = $this->user['User']['notifications_validate'];
-    }    
+    }   
+    
+    
+    /**
+     * gestion de l'image du build
+     * 
+     * @param unknown $image
+     * @param string $customWebroot
+     * @return multitype:string boolean
+     */
+    private function image($image, $customWebroot = false) {
+    	
+    	$return = array();
+    	if(!$image['error']) {
+    		$webroot = $customWebroot?$this->request->webroot:'/';
+    		$imageName = $image['name'];
+    		$this->Image->resize($image['tmp_name'], 'files/character', $imageName, null, null);
+    		$return['name'] = $webroot.'files/character/'.$imageName;
+    	}else {
+    		switch($image['error']) {
+    			case 1:
+    			case 2:
+    				$error = __('Image is too big');
+    				break;
+    			case 3:
+    				$error = __('An error occur while uploading');
+    				break;
+    		}
+    		if(!empty($error)) {
+    			$this->Session->setFlash($error, 'flash_error');
+    			$return['error'] = true;
+    		}
+    	}
+    
+    	return $return;
+    }
 }

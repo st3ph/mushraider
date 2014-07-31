@@ -13,12 +13,16 @@
 <div class="form-group">
 	<?php echo $this->Form->input('Character.level', array('type' => 'text', 'required' => true, 'label' => __('Level'), 'class' => 'form-control', 'pattern' => '[0-9]{1,3}'));?>
 </div>
-<!--
+
 <div class="form-group">
-	<?php echo $this->Form->input('Character.build_link', array('type' => 'text', 'required' => false, 'label' => __('Ws-base link'), 'empty' => '', 'class' => 'form-control'));?>
+	<?php echo $this->Form->input('Character.build_url', array('type' => 'text', 'required' => false, 'label' => __('Ws-base link'), 'empty' => '', 'class' => 'form-control'));?>
 </div>
--->
+
+<div class="form-group">
+	<?php echo $this->Form->input('Character.stat_capture', array('type' => 'file', 'label' => __('Statistic Image'), 'class' => 'form-control'));?>
+</div>
 
 <div class="form-group">
 	<?php echo $this->Form->input('Character.attunement_id', array('type' => 'select',  'label' => __('Attunement'), 'options' => $attunementsList, 'empty' => '', 'class' => 'form-control'));?>
 </div>
+

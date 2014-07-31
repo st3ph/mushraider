@@ -16,7 +16,7 @@
 					        <h4 class="modal-title" id="myModalLabel"><?php echo __('add new character')?></h4>
 					      </div>
     					<div class="modal-body">
-						<?php echo $this->Form->create('Character', array('url' => '/account/characters'));?>
+						<?php echo $this->Form->create('Character', array('url' => '/account/characters', 'enctype' => 'multipart/form-data'));?>
 						    <div class="form-group">
 						        <?php echo $this->Form->input('Character.title', array('type' => 'text', 'required' => true, 'label' => __('Character Name'), 'class' => 'form-control'));?>
 						    </div>

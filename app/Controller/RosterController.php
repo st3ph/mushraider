@@ -1,6 +1,5 @@
 <?php
 class RosterController extends AppController {    
-    var $helpers = array();
     var $uses = array('Game', 'Character', 'Classe', 'Race', 'RaidsRole', 'EventsCharacter', 'Attunement');
 
     public function beforeFilter() {

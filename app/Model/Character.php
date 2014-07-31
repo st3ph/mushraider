@@ -78,6 +78,17 @@ class Character extends AppModel {
                 'message' => 'Please fill the level for this character.'
             )
         ),
+    	'build_url' => array(
+            'isValidUrl' => array(
+                'rule' => 'url',
+                'message' => 'Please fill the build url with a valid url'
+            ),
+    			
+    		'isWsBaseUrl' => array(
+    				'rule' => ['custom','#http://ws-base\.com/builds/\d+\-.*#'],
+    				'message' => 'Please fill the build url with a valid Ws-base url'
+    		),
+        ),
     );
 
     // Update schema for path beta 3

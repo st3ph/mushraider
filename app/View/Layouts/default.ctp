@@ -32,11 +32,16 @@
     $this->Html->script('bootstrap.min', array('inline' => false));
     $this->Html->script('jquery.cleditor', array('inline' => false));
     $this->Html->script('scripts.js'.$staticVersion, array('inline' => false));
-
+    
+    
     echo $this->fetch('meta');
     echo $this->fetch('css');
     echo $this->element('theme', array($mushraiderTheme));
     ?>
+    
+     <!-- Add fancyBox -->
+	<link rel="stylesheet" href="/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+	
 </head>
 <body>
 	<?php echo $this->element('header');?>
@@ -54,7 +59,14 @@
         <?php echo $this->element('footer');?>
     </div>
     <?php echo $this->fetch('script');?>
+    <script type="text/javascript" src="/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
     <?php echo $this->fetch('scriptBottom');?>
     <?php echo $this->element('sql_dump'); ?>
+    
+    <script>
+    	$(document).ready(function() {
+        $('.fancybox').fancybox();
+    });
+    </script>
 </body>
 </html>

@@ -13,6 +13,8 @@
 						<th><?php echo __('Class');?></th>
 						<th><?php echo __('Attunement');?></th>
 						<th><?php echo __('Default Role');?></th>
+						<th><?php echo __('Ws-base');?></th>
+						<th><?php echo __('Stats');?></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -23,6 +25,18 @@
 							<td style="color:<?php echo $character['Classe']['color'];?>"><?php echo $character['Classe']['title'];?></td>
 							<td><?php echo $character['Attunement']['title'];?></td>
 							<td><?php echo $character['RaidsRole']['title'];?></td>
+							<td>
+								<?php if (!empty($character['Character']['build_url'])) : ?>
+								<a target="_blank" href="<?php echo $character['Character']['build_url'];?>" class="btn btn-primary"><?php echo __('WS-base');?><a/>
+								<?php endif; ?>
+							</td>
+							<td>
+								<?php if (!empty($character['Character']['stat_capture'])) : ?>
+								<a class="btn btn-success fancybox" href="<?php echo $character['Character']['stat_capture'];?>">
+									<?php echo __('Stats');?>
+								</a>
+								<?php endif; ?>
+							</td>
 						</tr>
 					<?php endforeach;?>
 				</tbody>

@@ -2,7 +2,7 @@
     <h1><i class="icon-edit"></i> <?php echo __('Edit character');?></h1>
 </header>
 
-<?php echo $this->Form->create('Character', array('url' => '/account/characters/edit/c:'.$this->request->params['named']['c']));?>
+<?php echo $this->Form->create('Character', array('url' => '/account/characters/edit/c:'.$this->request->params['named']['c'], 'enctype' => 'multipart/form-data'));?>
     <div class="form-group">
         <?php echo $this->Form->input('Character.title', array('type' => 'text', 'required' => true, 'label' => __('Character Name'), 'class' => 'form-control'));?>
     </div>

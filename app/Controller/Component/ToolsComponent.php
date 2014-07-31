@@ -179,4 +179,19 @@ class ToolsComponent extends Component {
     function here() {
         return str_replace($this->controller->request->webroot, '/', $this->controller->request->here);
     }
+
+    /*
+    * @name quoteArray
+    * @desc return array with all the values quoted
+    * @param array $a
+    * @return string
+    */
+    function quoteArray($a) {
+        if(!empty($a)) {
+            foreach($a as $key => $value) {
+                $a[$key] = '"'.$value.'"';
+            }
+        }
+        return $a;
+    }
 }

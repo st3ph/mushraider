@@ -2,7 +2,7 @@
 App::uses('Security', 'Utility');
 
 class StepController extends InstallAppController {
-    public $components = array('Patcher');
+    public $components = array('Patcher', 'Tools');
 
     var $dbDatasources = array('Mysql');
 
@@ -66,7 +66,7 @@ class StepController extends InstallAppController {
             $databaseConfig['prefix'] = trim($this->request->data['Config']['prefix']);
 
             if($link = @mysqli_connect($databaseConfig['host'], $databaseConfig['login'], $databaseConfig['password'], $databaseConfig['database'], $databaseConfig['port'])) {
-                Configure::write('Database', $databaseConfig);
+                Configure::write('Database', $this->Tools->quoteArray($databaseConfig));
                 Configure::dump('config.ini', 'configini', array('Database'));
 
                 $this->Session->setFlash(__('MushRaider successfully connect to your database, one more step to go !'), 'flash_success');
@@ -168,7 +168,8 @@ class StepController extends InstallAppController {
 
 
                     	$settingsConfig['installed'] = true;
-                        Configure::write('Settings', $settingsConfig);
+                        Configure::write('Database', $this->Tools->quoteArray($databaseConfig));
+                        Configure::write('Settings', $this->Tools->quoteArray($settingsConfig));
                         Configure::dump('config.ini', 'configini', array('Database', 'Settings'));
 
                         $this->Session->delete('Settings');

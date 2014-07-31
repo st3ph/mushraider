@@ -8,9 +8,12 @@
     </div>
     <div class="row-fluid">
         <?php echo $this->Form->input('User.password', array('type' => 'password', 'required' => true, 'label' => false, 'placeholder' => __('Password'), 'class' => 'span12'));?>
-    </div>            
+    </div>
     <div class="row-fluid">
         <?php echo $this->Form->submit(__('Login'), array('class' => 'btn btn-info span12'));?>
+    </div>
+    <div class="row-fluid">
+        <?php echo $this->Form->input('User.remember', array('type' => 'checkbox', 'required' => false, 'label' => __('Stay signed in')));?>
     </div>
 <?php echo $this->Form->end();?>    
 <?php if(empty($bridge) || (!empty($bridge) && !$bridge->enabled)):?>

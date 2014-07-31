@@ -561,10 +561,12 @@ jQuery(function($) {
     };    
 
     var selectorF = '.lb';
-    var instanceF = $( selectorF ).imageLightbox({
-        onStart:        function() { overlayOn(); closeButtonOn( instanceF ); arrowsOn( instanceF, selectorF ); },
-        onEnd:          function() { overlayOff(); captionOff(); closeButtonOff(); arrowsOff(); activityIndicatorOff(); },
-        onLoadStart:    function() { captionOff(); activityIndicatorOn(); },
-        onLoadEnd:      function() { captionOn(); activityIndicatorOff(); $( '.imagelightbox-arrow' ).css( 'display', 'block' ); }
-    });
+    if($( selectorF ).length) {
+        var instanceF = $( selectorF ).imageLightbox({
+            onStart:        function() { overlayOn(); closeButtonOn( instanceF ); arrowsOn( instanceF, selectorF ); },
+            onEnd:          function() { overlayOff(); captionOff(); closeButtonOff(); arrowsOff(); activityIndicatorOff(); },
+            onLoadStart:    function() { captionOff(); activityIndicatorOn(); },
+            onLoadEnd:      function() { captionOn(); activityIndicatorOff(); $( '.imagelightbox-arrow' ).css( 'display', 'block' ); }
+        });
+    }
 });

@@ -87,6 +87,7 @@ div.tooltip-inner div {text-align:left;}
 #containerLogin {width:300px;}
 #containerLogin h1 {text-align:center}
 #containerLogin h1 img {max-width:278px;}
+#containerLogin .checkbox label {font-weight:normal;font-size:12px;}
 #containerLogin .footerLinks .signup {font-weight:bold;text-decoration:underline}
 
 

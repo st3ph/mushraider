@@ -81,13 +81,15 @@ class Character extends AppModel {
     	'build_url' => array(
             'isValidUrl' => array(
                 'rule' => 'url',
-                'message' => 'Please fill the build url with a valid url'
+                'message' => 'Please fill the build url with a valid url',
+            	'allowEmpty' => true,
             ),
     			
     		'isWsBaseUrl' => array(
     				'rule' => ['custom','#http://ws-base\.com/builds/\d+\-.*#'],
     				'message' => 'Please fill the build url with a valid Ws-base url'
     		),
+    		
         ),
     );
 

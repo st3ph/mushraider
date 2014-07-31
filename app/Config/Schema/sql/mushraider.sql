@@ -310,6 +310,7 @@ CREATE TABLE IF NOT EXISTS `{prefix}users` (
   `notifications_validate` TINYINT( 1 ) NOT NULL DEFAULT  '1',
   `activation_key` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0',
+  `bridge` tinyint(1) NOT NULL DEFAULT  '0',
   `modified` datetime NOT NULL,
   `created` datetime NOT NULL,
   PRIMARY KEY (`id`)

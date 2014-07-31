@@ -23,8 +23,8 @@
 App::uses('IniReader', 'Configure');
 App::uses('Controller', 'Controller');
 
-/**
- * Application Controller
+/*
+* * Application Controller
  *
  * Add your application-wide methods in the class below, your controllers
  * will inherit them.

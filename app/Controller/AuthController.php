@@ -67,8 +67,17 @@ class AuthController extends AppController {
                         $toSave['role_id'] = $roleId?$roleId:$user['User']['role_id'];
                         $this->User->save($toSave);
                     }else {
+                        // handle weird login on some CMS (hello drupal)
+                        $userLogin = $this->request->data['User']['login'];
+                        if(preg_match('/^([0-9a-zA-Z_-]{3,20})$/', $userLogin) == 0) { // Logon don't match MushRaider logins
+                            $userLogin = $this->Tools->slugMe($userLogin);
+                            if(strlen($userLogin) > 20) { // Login is too big, we truncate it
+                                $userLogin = substr($userLogin, 0, 20);
+                            }
+                        }
+
                         $user = array();
-                        $user['User']['username'] = $this->request->data['User']['login'];
+                        $user['User']['username'] = $userLogin;
                         $user['User']['email'] = $auth->email;
                         $user['User']['password'] = md5($this->request->data['User']['password']);
                         $user['User']['verify_password'] = md5($this->request->data['User']['password']);

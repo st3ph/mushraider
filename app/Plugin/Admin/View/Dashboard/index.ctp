@@ -38,7 +38,7 @@
         <p class="lead">
             MushRaider v<?php echo Configure::read('mushraider.version');?>
         </p>
-        <p><?php echo __('Informations et mises à jour sur');?> <?php echo $this->Html->link('http://mushraider.com', 'http://mushraider.com', array('title' => 'MushRaider website'));?></p>
+        <p><?php echo __('Informations and updates on');?> <?php echo $this->Html->link('http://mushraider.com', 'http://mushraider.com', array('title' => 'MushRaider website'));?></p>
         <ul class="unstyled inline social">
             <li class="twitter">
                 <a href="https://twitter.com/mushraider" class="twitter-follow-button" data-show-count="false" data-size="large"><?php echo __('Follow');?> @mushraider</a>

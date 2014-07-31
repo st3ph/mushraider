@@ -17,7 +17,7 @@
 </header>
 
 <h3><?php echo __('Description');?></h3>
-<?php echo $report['Report']['description'];?>
+<div class="well wellWhite"><?php echo $report['Report']['description'];?></div>
 
 <hr />
 

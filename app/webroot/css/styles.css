@@ -70,6 +70,7 @@ input.form-error, select.form-error, textarea.form-error {border-color:#b94a48;}
 .breadcrumb {padding:0;}
 .breadcrumb>li {color:#666;}
 #content .wellcontent {border-top-right-radius:2px;min-height:500px;}
+#content .wellWhite {background-color:#fff;}
 #content header h1 {padding-bottom:10px;border-bottom:1px solid #ddd;margin-bottom:20px;}
 #content form label {font-weight:bold;}
 #langMenu i, #langMenu:focus i, #langMenu:visited i {color:white;text-decoration:none}

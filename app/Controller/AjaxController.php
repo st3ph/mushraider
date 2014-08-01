@@ -182,32 +182,8 @@ class AjaxController extends AppController {
 
     function copyEvent() {
         if(isset($this->request->query['e']) && !empty($this->request->query['name'])) {
-            $eventId = $this->request->query['e'];
-            $templateName = $this->request->query['name'];
-
-            // Get event infos
-            $params = array();
-            $params['recursive'] = 1;
-            $params['contain']['EventsRole'] = array();
-            $params['conditions']['id'] = $eventId;
-            if($event = $this->Event->find('first', $params)) {
-                $toSave = array();
-                $toSave['EventsTemplate']['title'] = $templateName;
-                $toSave['EventsTemplate']['event_title'] = $event['Event']['title'];
-                $toSave['EventsTemplate']['event_description'] = $event['Event']['description'];
-                $toSave['EventsTemplate']['game_id'] = $event['Event']['game_id'];
-                $toSave['EventsTemplate']['dungeon_id'] = $event['Event']['dungeon_id'];
-                $toSave['EventsTemplate']['character_level'] = $event['Event']['character_level'];
-                if(!empty($event['EventsRole'])) {
-                    foreach($event['EventsRole'] as $key => $eventRole) {
-                        $toSave['EventsTemplatesRole'][$key]['raids_role_id'] = $eventRole['raids_role_id'];
-                        $toSave['EventsTemplatesRole'][$key]['count'] = $eventRole['count'];
-                    }
-                }
-
-                if($this->EventsTemplate->saveAll($toSave)) {
-                    return 'ok';
-                }
+            if($this->Event->copy($this->request->query['e'], $this->request->query['name'])) {
+                return 'ok';
             }
         }
 
@@ -231,5 +207,14 @@ class AjaxController extends AppController {
         }
 
         return json_encode($jsonMessage);
+    }
+
+    function filterEvents() {
+        if(isset($this->request->query['game'])) {
+            $gameId = $this->request->query['game'];
+            $this->Cookie->write('filterEvents', $gameId, true, '+2 weeks');
+        }
+
+        return;
     }
 }

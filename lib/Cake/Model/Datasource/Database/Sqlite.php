@@ -2,8 +2,6 @@
 /**
  * SQLite layer for DBO
  *
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -58,7 +56,8 @@ class Sqlite extends DboSource {
  */
 	protected $_baseConfig = array(
 		'persistent' => false,
-		'database' => null
+		'database' => null,
+		'flags' => array()
 	);
 
 /**
@@ -73,6 +72,7 @@ class Sqlite extends DboSource {
 		'integer' => array('name' => 'integer', 'limit' => null, 'formatter' => 'intval'),
 		'biginteger' => array('name' => 'bigint', 'limit' => 20),
 		'float' => array('name' => 'float', 'formatter' => 'floatval'),
+		'decimal' => array('name' => 'decimal', 'formatter' => 'floatval'),
 		'datetime' => array('name' => 'datetime', 'format' => 'Y-m-d H:i:s', 'formatter' => 'date'),
 		'timestamp' => array('name' => 'timestamp', 'format' => 'Y-m-d H:i:s', 'formatter' => 'date'),
 		'time' => array('name' => 'time', 'format' => 'H:i:s', 'formatter' => 'date'),
@@ -107,7 +107,7 @@ class Sqlite extends DboSource {
  */
 	public function connect() {
 		$config = $this->config;
-		$flags = array(
+		$flags = $config['flags'] + array(
 			PDO::ATTR_PERSISTENT => $config['persistent'],
 			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
 		);
@@ -230,7 +230,9 @@ class Sqlite extends DboSource {
  * @return boolean SQL TRUNCATE TABLE statement, false if not applicable.
  */
 	public function truncate($table) {
-		$this->_execute('DELETE FROM sqlite_sequence where name=' . $this->startQuote . $this->fullTableName($table, false, false) . $this->endQuote);
+		if (in_array('sqlite_sequence', $this->listSources())) {
+			$this->_execute('DELETE FROM sqlite_sequence where name=' . $this->startQuote . $this->fullTableName($table, false, false) . $this->endQuote);
+		}
 		return $this->execute('DELETE FROM ' . $this->fullTableName($table));
 	}
 
@@ -250,9 +252,8 @@ class Sqlite extends DboSource {
 		}
 
 		$col = strtolower(str_replace(')', '', $real));
-		$limit = null;
 		if (strpos($col, '(') !== false) {
-			list($col, $limit) = explode('(', $col);
+			list($col) = explode('(', $col);
 		}
 
 		$standard = array(
@@ -278,7 +279,7 @@ class Sqlite extends DboSource {
 			return 'binary';
 		}
 		if (strpos($col, 'numeric') !== false || strpos($col, 'decimal') !== false) {
-			return 'float';
+			return 'decimal';
 		}
 		return 'text';
 	}
@@ -357,7 +358,7 @@ class Sqlite extends DboSource {
 			foreach ($this->map as $col => $meta) {
 				list($table, $column, $type) = $meta;
 				$resultRow[$table][$column] = $row[$col];
-				if ($type === 'boolean' && !is_null($row[$col])) {
+				if ($type === 'boolean' && $row[$col] !== null) {
 					$resultRow[$table][$column] = $this->boolean($resultRow[$table][$column]);
 				}
 			}
@@ -394,7 +395,7 @@ class Sqlite extends DboSource {
  */
 	public function buildColumn($column) {
 		$name = $type = null;
-		$column = array_merge(array('null' => true), $column);
+		$column += array('null' => true);
 		extract($column);
 
 		if (empty($name) || empty($type)) {
@@ -407,10 +408,19 @@ class Sqlite extends DboSource {
 			return null;
 		}
 
-		if (isset($column['key']) && $column['key'] === 'primary' && $type === 'integer') {
+		$isPrimary = (isset($column['key']) && $column['key'] === 'primary');
+		if ($isPrimary && $type === 'integer') {
 			return $this->name($name) . ' ' . $this->columns['primary_key']['name'];
 		}
-		return parent::buildColumn($column);
+		$out = parent::buildColumn($column);
+		if ($isPrimary && $type === 'biginteger') {
+			$replacement = 'PRIMARY KEY';
+			if ($column['null'] === false) {
+				$replacement = 'NOT NULL ' . $replacement;
+			}
+			return str_replace($this->columns['primary_key']['name'], $replacement, $out);
+		}
+		return $out;
 	}
 
 /**

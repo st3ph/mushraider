@@ -51,10 +51,17 @@ class UsersController extends AdminAppController {
             $this->redirect('/admin/users');
         }
 
+        // User role
+        $user['User']['isAdmin'] = $this->Role->is($user['User']['role_id'], 'admin');
+        $user['User']['isOfficer'] = $this->Role->is($user['User']['role_id'], 'officer');
+
         if(!empty($this->request->data['User']) && $this->request->data['User']['id'] == $id) {
             $toSave = array();
-            $toSave['id'] = $this->request->data['User']['id'];            
-            $toSave['status'] = $this->request->data['User']['status'];
+            $toSave['id'] = $this->request->data['User']['id'];
+            if($this->user['User']['isAdmin'] || ($this->user['User']['isOfficer'] && !$user['User']['isAdmin'])) {
+                $toSave['status'] = $this->request->data['User']['status'];
+                $toSave['private_infos'] = nl2br($this->request->data['User']['private_infos']);
+            }
             if($this->user['User']['isAdmin']) {
                 $toSave['role_id'] = $this->request->data['User']['role_id'];            
             }
@@ -86,20 +93,27 @@ class UsersController extends AdminAppController {
     public function delete($id = null) {
         if($id) {
             $params = array();
-            $params['fields'] = array('id');
+            $params['fields'] = array('id', 'role_id');
             $params['recursive'] = -1;
             $params['conditions']['id'] = $id;
             $params['conditions']['status'] = 0;
-            if(!$user = $this->User->find('first', $params)) {
-                $this->Session->setFlash(__('This user is still active, you have to disable him before deleting.'), 'flash_warning');
-            }elseif($this->User->delete($id)) {
-                $deleteCond = array('EventsCharacter.user_id' => $id);
-                $this->EventsCharacter->deleteAll($deleteCond);
-                $deleteCond = array('Character.user_id' => $id);
-                $this->Character->deleteAll($deleteCond);
-                $this->Session->setFlash(__('The user has been deleted'), 'flash_success');
+            $user = $this->User->find('first', $params);
+            $user['User']['isAdmin'] = $this->Role->is($user['User']['role_id'], 'admin');
+            $user['User']['isOfficer'] = $this->Role->is($user['User']['role_id'], 'officer');
+            if($this->user['User']['isAdmin'] || ($this->user['User']['isOfficer'] && !$user['User']['isAdmin'])) {
+                if(!$user) {
+                    $this->Session->setFlash(__('This user is still active, you have to disable him before deleting.'), 'flash_warning');
+                }elseif($this->User->delete($id)) {
+                    $deleteCond = array('EventsCharacter.user_id' => $id);
+                    $this->EventsCharacter->deleteAll($deleteCond);
+                    $deleteCond = array('Character.user_id' => $id);
+                    $this->Character->deleteAll($deleteCond);
+                    $this->Session->setFlash(__('The user has been deleted'), 'flash_success');
+                }else {
+                    $this->Session->setFlash(__('Something goes wrong'), 'flash_error');
+                }
             }else {
-                $this->Session->setFlash(__('Something goes wrong'), 'flash_error');
+                $this->Session->setFlash(__('You don\'t have permission to do this'), 'flash_warning');
             }
         }
 
@@ -108,13 +122,24 @@ class UsersController extends AdminAppController {
 
     public function disable($id = null) {
         if($id) {
-            $toSave = array();
-            $toSave['id'] = $id;
-            $toSave['status'] = 0;
-            if($this->User->save($toSave)) {
-                $this->Session->setFlash(__('The user has been disabled'), 'flash_success');
+            $params = array();
+            $params['recursive'] = -1;
+            $params['conditions']['User.id'] = $id;
+            $params['conditions']['User.status'] = array(0, 1);
+            $user = $this->User->find('first', $params);
+            $user['User']['isAdmin'] = $this->Role->is($user['User']['role_id'], 'admin');
+            $user['User']['isOfficer'] = $this->Role->is($user['User']['role_id'], 'officer');
+            if($this->user['User']['isAdmin'] || ($this->user['User']['isOfficer'] && !$user['User']['isAdmin'])) {
+                $toSave = array();
+                $toSave['id'] = $id;
+                $toSave['status'] = 0;
+                if($this->User->save($toSave)) {
+                    $this->Session->setFlash(__('The user has been disabled'), 'flash_success');
+                }else {
+                    $this->Session->setFlash(__('Something goes wrong'), 'flash_error');
+                }
             }else {
-                $this->Session->setFlash(__('Something goes wrong'), 'flash_error');
+                $this->Session->setFlash(__('You don\'t have permission to do this'), 'flash_warning');
             }
         }
  
@@ -123,13 +148,24 @@ class UsersController extends AdminAppController {
 
     public function enable($id = null) {
         if($id) {
-            $toSave = array();
-            $toSave['id'] = $id;
-            $toSave['status'] = 1;
-            if($this->User->save($toSave)) {
-                $this->Session->setFlash(__('The user has been enable'), 'flash_success');
+            $params = array();
+            $params['recursive'] = -1;
+            $params['conditions']['User.id'] = $id;
+            $params['conditions']['User.status'] = array(0, 1);
+            $user = $this->User->find('first', $params);
+            $user['User']['isAdmin'] = $this->Role->is($user['User']['role_id'], 'admin');
+            $user['User']['isOfficer'] = $this->Role->is($user['User']['role_id'], 'officer');
+            if($this->user['User']['isAdmin'] || ($this->user['User']['isOfficer'] && !$user['User']['isAdmin'])) {
+                $toSave = array();
+                $toSave['id'] = $id;
+                $toSave['status'] = 1;
+                if($this->User->save($toSave)) {
+                    $this->Session->setFlash(__('The user has been enable'), 'flash_success');
+                }else {
+                    $this->Session->setFlash(__('Something goes wrong'), 'flash_error');
+                }
             }else {
-                $this->Session->setFlash(__('Something goes wrong'), 'flash_error');
+                $this->Session->setFlash(__('You don\'t have permission to do this'), 'flash_warning');
             }
         }
  

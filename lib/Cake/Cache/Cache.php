@@ -52,6 +52,13 @@ class Cache {
 	protected static $_config = array();
 
 /**
+ * Group to Config mapping
+ *
+ * @var array
+ */
+	protected static $_groups = array();
+
+/**
  * Whether to reset the settings with the next call to Cache::set();
  *
  * @var array
@@ -106,11 +113,11 @@ class Cache {
  * - `user` Used by Xcache. Username for XCache
  * - `password` Used by Xcache/Redis. Password for XCache/Redis
  *
- * @see app/Config/core.php for configuration settings
  * @param string $name Name of the configuration
  * @param array $settings Optional associative array of settings passed to the engine
  * @return array array(engine, settings) on success, false on failure
  * @throws CacheException
+ * @see app/Config/core.php for configuration settings
  */
 	public static function config($name = null, $settings = array()) {
 		if (is_array($name)) {
@@ -123,11 +130,19 @@ class Cache {
 		}
 
 		if (!empty($settings)) {
-			self::$_config[$name] = array_merge($current, $settings);
+			self::$_config[$name] = $settings + $current;
 		}
 
 		if (empty(self::$_config[$name]['engine'])) {
 			return false;
+		}
+
+		if (!empty(self::$_config[$name]['groups'])) {
+			foreach (self::$_config[$name]['groups'] as $group) {
+				self::$_groups[$group][] = $name;
+				sort(self::$_groups[$group]);
+				self::$_groups[$group] = array_unique(self::$_groups[$group]);
+			}
 		}
 
 		$engine = self::$_config[$name]['engine'];
@@ -159,7 +174,7 @@ class Cache {
 		}
 		$cacheClass = $class . 'Engine';
 		if (!is_subclass_of($cacheClass, 'CacheEngine')) {
-			throw new CacheException(__d('cake_dev', 'Cache engines must use CacheEngine as a base class.'));
+			throw new CacheException(__d('cake_dev', 'Cache engines must use %s as a base class.', 'CacheEngine'));
 		}
 		self::$_engines[$name] = new $cacheClass();
 		if (!self::$_engines[$name]->init($config)) {
@@ -238,7 +253,7 @@ class Cache {
 				if (is_string($settings) && $value !== null) {
 					$settings = array($settings => $value);
 				}
-				$settings = array_merge(self::$_config[$config], $settings);
+				$settings += self::$_config[$config];
 				if (isset($settings['duration']) && !is_numeric($settings['duration'])) {
 					$settings['duration'] = strtotime($settings['duration']) - time();
 				}
@@ -262,9 +277,7 @@ class Cache {
 	}
 
 /**
- * Write data for key into cache. Will automatically use the currently
- * active cache configuration. To set the currently active configuration use
- * Cache::config()
+ * Write data for key into a cache engine.
  *
  * ### Usage:
  *
@@ -313,9 +326,7 @@ class Cache {
 	}
 
 /**
- * Read a key from the cache. Will automatically use the currently
- * active cache configuration. To set the currently active configuration use
- * Cache::config()
+ * Read a key from a cache config.
  *
  * ### Usage:
  *
@@ -496,6 +507,70 @@ class Cache {
 			return self::$_engines[$name]->settings();
 		}
 		return array();
+	}
+
+/**
+ * Retrieve group names to config mapping.
+ *
+ * {{{
+ *	Cache::config('daily', array(
+ *		'duration' => '1 day', 'groups' => array('posts')
+ *	));
+ *	Cache::config('weekly', array(
+ *		'duration' => '1 week', 'groups' => array('posts', 'archive')
+ *	));
+ *	$configs = Cache::groupConfigs('posts');
+ * }}}
+ *
+ * $config will equal to `array('posts' => array('daily', 'weekly'))`
+ *
+ * @param string $group group name or null to retrieve all group mappings
+ * @return array map of group and all configuration that has the same group
+ * @throws CacheException
+ */
+	public static function groupConfigs($group = null) {
+		if ($group === null) {
+			return self::$_groups;
+		}
+		if (isset(self::$_groups[$group])) {
+			return array($group => self::$_groups[$group]);
+		}
+		throw new CacheException(__d('cake_dev', 'Invalid cache group %s', $group));
+	}
+
+/**
+ * Provides the ability to easily do read-through caching.
+ *
+ * When called if the $key is not set in $config, the $callable function
+ * will be invoked. The results will then be stored into the cache config
+ * at key.
+ *
+ * Examples:
+ *
+ * Using a Closure to provide data, assume $this is a Model:
+ *
+ * {{{
+ * $model = $this;
+ * $results = Cache::remember('all_articles', function() use ($model) {
+ *      return $model->find('all');
+ * });
+ * }}}
+ *
+ * @param string $key The cache key to read/store data at.
+ * @param callable $callable The callable that provides data in the case when
+ *   the cache key is empty. Can be any callable type supported by your PHP.
+ * @param string $config The cache configuration to use for this operation.
+ *   Defaults to default.
+ * @return mixed The results of the callable or unserialized results.
+ */
+	public static function remember($key, $callable, $config = 'default') {
+		$existing = self::read($key, $config);
+		if ($existing !== false) {
+			return $existing;
+		}
+		$results = call_user_func($callable);
+		self::write($key, $results, $config);
+		return $results;
 	}
 
 }

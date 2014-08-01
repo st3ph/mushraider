@@ -30,7 +30,7 @@ jQuery(function($) {
 
     $('.tt').tooltip({
         'html':true
-    });
+    });    
 
     /*
     * Account
@@ -73,6 +73,22 @@ jQuery(function($) {
             var dates = datePicked.split('/');
             window.location = site_url+'events/add/'+dates[2]+'-'+dates[1]+'-'+dates[0];
         }
+    });
+
+    $('#filterEvents').on('change', 'select', function(e) {
+        $imgLoading = $(imgLoading);
+        $(this).after($imgLoading);
+        var gameId = $(this).val();
+        $.ajax({
+            type: 'get',
+            url: site_url+'ajax/filterEvents',
+            data: 'game='+gameId,
+            success: function() {
+                window.location = site_url+'events';
+            }
+        });
+
+        $imgLoading.remove();
     });
 
 
@@ -172,6 +188,15 @@ jQuery(function($) {
         var editorObject = $('.wysiwyg').cleditor({
             width: 'auto',
             height: 150,
+            controls: "bold italic underline strikethrough | font size strikethrough style | color highlight removeformat | bullets numbering | " +
+                      "outdent indent | alignleft center alignright justify | undo redo | link unlink"
+        });
+    }
+
+    if($('.wysiwyg-tall').length) {
+        var editorObject = $('.wysiwyg-tall').cleditor({
+            width: 'auto',
+            height: 500,
             controls: "bold italic underline strikethrough | font size strikethrough style | color highlight removeformat | bullets numbering | " +
                       "outdent indent | alignleft center alignright justify | undo redo | link unlink"
         });
@@ -342,7 +367,7 @@ jQuery(function($) {
     $('#tplName').on('click', '.text-success', function(e) {
         var tplName = $('#tplName input').val();
         var eventId = $('#tplName').data('event');
-        if(tplName.length) {
+        if(tplName.length > 1) {
             $.ajax({
                 type: 'get',
                 url: site_url+'ajax/copyEvent',
@@ -360,7 +385,9 @@ jQuery(function($) {
         e.preventDefault();
 
         var $tpl = $('#tplList');
-        $tpl.fadeIn();
+        $(this).fadeOut(function() {
+            $tpl.fadeIn();
+        });
     });
 
     $('#TemplateList').on('change', function() {
@@ -391,10 +418,30 @@ jQuery(function($) {
                             };
                         }
                         $('#EventCharacterLevel').val(json.msg.EventsTemplate.character_level);
+                        if(json.msg.EventsTemplate.time_invitation != null) {
+                            var invitationTime = json.msg.EventsTemplate.time_invitation.split(' ');
+                            var invitationTimes = invitationTime[1].split(':');
+                            $('#EventTimeInvitationHour').val(invitationTimes[0]);
+                            $('#EventTimeInvitationMin').val(invitationTimes[1]);
+                            var startTime = json.msg.EventsTemplate.time_start.split(' ');
+                            var startTimes = startTime[1].split(':');
+                            $('#EventTimeStartHour').val(startTimes[0]);
+                            $('#EventTimeStartMin').val(startTimes[1]);
+                        }
                     }
                     $imgLoading.remove();
                 }
             });         
+        }
+    });
+
+    $('#EventAddForm').on('submit', function(e) {
+        if($('#EventTemplate').is(':checked')) {
+            var inputVal = $(this).find('.tplName').val();
+            if(!inputVal.length) {
+                $(this).find('.tplName').addClass('form-error');
+                e.preventDefault();
+            }
         }
     });
 
@@ -411,5 +458,115 @@ jQuery(function($) {
 
         $calendar.find('table.dates').remove();
         $calendar.after($daysList);
+    }
+
+    /*
+    * Lightbox
+    */
+    // ACTIVITY INDICATOR
+    var activityIndicatorOn = function() {
+        $( '<div id="imagelightbox-loading"><div></div></div>' ).appendTo( 'body' );
+    },
+    activityIndicatorOff = function() {
+        $( '#imagelightbox-loading' ).remove();
+    },
+
+    // OVERLAY
+    overlayOn = function() {
+        $( '<div id="imagelightbox-overlay"></div>' ).appendTo( 'body' );
+    },
+    overlayOff = function() {
+        $( '#imagelightbox-overlay' ).remove();
+    },
+
+    // CLOSE BUTTON
+    closeButtonOn = function( instance ) {
+        $( '<button type="button" id="imagelightbox-close" title="Close"></button>' ).appendTo( 'body' ).on( 'click touchend', function(){ $( this ).remove(); instance.quitImageLightbox(); return false; });
+    },
+    closeButtonOff = function() {
+        $( '#imagelightbox-close' ).remove();
+    },
+
+    // CAPTION
+    captionOn = function() {
+        var description = $( 'a[href="' + $( '#imagelightbox' ).attr( 'src' ) + '"] img' ).attr( 'alt' );
+        if( description.length > 0 )
+            $( '<div id="imagelightbox-caption">' + description + '</div>' ).appendTo( 'body' );
+    },
+    captionOff = function() {
+        $( '#imagelightbox-caption' ).remove();
+    },
+
+    // NAVIGATION
+    navigationOn = function( instance, selector ) {
+        var images = $( selector );
+        if( images.length ) {
+            var nav = $( '<div id="imagelightbox-nav"></div>' );
+            for( var i = 0; i < images.length; i++ )
+                nav.append( '<button type="button"></button>' );
+
+            nav.appendTo( 'body' );
+            nav.on( 'click touchend', function(){ return false; });
+
+            var navItems = nav.find( 'button' );
+            navItems.on( 'click touchend', function() {
+                var $this = $( this );
+                if( images.eq( $this.index() ).attr( 'href' ) != $( '#imagelightbox' ).attr( 'src' ) )
+                    instance.switchImageLightbox( $this.index() );
+
+                navItems.removeClass( 'active' );
+                navItems.eq( $this.index() ).addClass( 'active' );
+
+                return false;
+            })
+            .on( 'touchend', function(){ return false; });
+        }
+    },
+    navigationUpdate = function( selector ) {
+        var items = $( '#imagelightbox-nav button' );
+        items.removeClass( 'active' );
+        items.eq( $( selector ).filter( '[href="' + $( '#imagelightbox' ).attr( 'src' ) + '"]' ).index( selector ) ).addClass( 'active' );
+    },
+    navigationOff = function() {
+        $( '#imagelightbox-nav' ).remove();
+    },
+
+    // ARROWS
+    arrowsOn = function( instance, selector ) {
+        var $arrows = $( '<button type="button" class="imagelightbox-arrow imagelightbox-arrow-left"></button><button type="button" class="imagelightbox-arrow imagelightbox-arrow-right"></button>' );
+        $arrows.appendTo( 'body' );
+        $arrows.on( 'click touchend', function( e ) {
+            e.preventDefault();
+
+            var $this   = $( this ),
+                $target = $( selector + '[href="' + $( '#imagelightbox' ).attr( 'src' ) + '"]' ),
+                index   = $target.index( selector );
+
+            if( $this.hasClass( 'imagelightbox-arrow-left' ) ) {
+                index = index - 1;
+                if( !$( selector ).eq( index ).length )
+                    index = $( selector ).length;
+            }else {
+                index = index + 1;
+                if( !$( selector ).eq( index ).length )
+                    index = 0;
+            }
+
+            instance.switchImageLightbox( index );
+            return false;
+        });
+    },
+    arrowsOff = function(){
+        $( '.imagelightbox-arrow' ).remove();
+    };    
+
+    var selectorF = '.lb';
+    if($( selectorF ).length) {
+        var instanceF = $( selectorF ).imageLightbox({
+            onStart:        function() { overlayOn(); closeButtonOn( instanceF ); arrowsOn( instanceF, selectorF ); },
+            onEnd:          function() { overlayOff(); captionOff(); closeButtonOff(); arrowsOff(); activityIndicatorOff(); },
+            onLoadStart:    function() { captionOff(); activityIndicatorOn(); },
+            onLoadEnd:      function() { captionOn(); activityIndicatorOff(); $( '.imagelightbox-arrow' ).css( 'display', 'block' ); }
+        });
     }
 });

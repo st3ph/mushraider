@@ -1,12 +1,18 @@
 <header>
 	<h1>
-        <i class="icon-calendar"></i> <?php echo __('Add event');?> <?php echo __('the');?> <?php echo $this->Former->date($eventDate, 'jour');?>
-        <?php if(!empty($tplList)):?>
-            <div class="pull-right">
-                <?php echo $this->Html->link('<i class="icon-download"></i> '.__('Load template'), '/events/add', array('id' => 'loadTemplate', 'class' => 'btn btn-mini', 'escape' => false));?>
-                <span id="tplList"><?php echo $this->Form->input('Template.list', array('type' => 'select', 'options' => $tplList, 'label' => false, 'div' => null, 'empty' => __('Choose a template')));?></span>
-            </div>       
-        <?php endif;?> 
+        <div class="row">
+            <div class="span8">
+                <i class="icon-calendar"></i> <?php echo __('Add event');?> <?php echo __('the');?> <?php echo $this->Former->date($eventDate, 'jour');?>
+            </div>
+            <div class="pull-right text-right  span3">
+                <?php if(!empty($tplList)):?>
+                    <div class="pull-right">
+                        <?php echo $this->Html->link('<i class="icon-download"></i> '.__('Load template'), '/events/add', array('id' => 'loadTemplate', 'class' => 'btn btn-mini', 'escape' => false));?>
+                        <span id="tplList"><?php echo $this->Form->input(false, array('type' => 'select', 'options' => $tplList, 'id' => 'TemplateList', 'label' => false, 'div' => null, 'empty' => __('Choose a template')));?></span>
+                    </div>       
+                <?php endif;?> 
+            </div>
+        </div>
     </h1>
 </header>
 
@@ -58,8 +64,16 @@
 
     <hr />
 
-    <div class="form-group">		    	
-    	 <?php echo $this->Form->submit(__('Create event'), array('class' => 'btn btn-success btn-large pull-right'));?>
+    <div class="row">
+        <div class="span3 pull-right">
+            <div class="form-group">
+            	<?php echo $this->Form->submit(__('Create event'), array('class' => 'btn btn-success btn-large pull-right'));?>
+            </div>
+        </div>
+        <div class="span3 pull-right eventTemplate">
+            <?php echo $this->Form->input('Event.template', array('type' => 'checkbox', 'label' => __('create a template based on this event'), 'class' => 'zspan2'));?>
+            <?php echo $this->Form->input('Event.templateName', array('type' => 'text', 'label' => false, 'div' => false, 'class' => 'tplName', 'placeholder' => __('template name')));?>
+        </div>
     </div>
     <div class="clearfix"></div>
 <?php echo $this->Form->end();?>

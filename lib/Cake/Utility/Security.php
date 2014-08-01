@@ -2,8 +2,6 @@
 /**
  * Core Security
  *
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -87,7 +85,7 @@ class Security {
  * you ensuring that each hashed password will have a *unique* salt.
  * - Comparing Hashes: Simply pass the originally hashed password as the salt.
  * The salt is prepended to the hash and php handles the parsing automagically.
- * For convenience the BlowfishAuthenticate adapter is available for use with
+ * For convenience the `BlowfishPasswordHasher` class is available for use with
  * the AuthComponent.
  * - Do NOT use a constant salt for blowfish!
  *
@@ -99,10 +97,11 @@ class Security {
  *
  * @param string $string String to hash
  * @param string $type Method to use (sha1/sha256/md5/blowfish)
- * @param mixed $salt If true, automatically appends the application's salt
+ * @param mixed $salt If true, automatically prepends the application's salt
  *     value to $string (Security.salt). If you are using blowfish the salt
  *     must be false or a previously generated salt.
  * @return string Hash
+ * @link http://book.cakephp.org/2.0/en/core-utility-libraries/security.html#Security::hash
  */
 	public static function hash($string, $type = null, $salt = false) {
 		if (empty($type)) {
@@ -180,11 +179,11 @@ class Security {
  * @param string $text Encrypted string to decrypt, normal string to encrypt
  * @param string $key Key to use
  * @return string Encrypted/Decrypted string
- * @deprecated This method will be removed in 3.x
+ * @deprecated Will be removed in 3.0.
  */
 	public static function cipher($text, $key) {
 		if (empty($key)) {
-			trigger_error(__d('cake_dev', 'You cannot use an empty key for Security::cipher()'), E_USER_WARNING);
+			trigger_error(__d('cake_dev', 'You cannot use an empty key for %s', 'Security::cipher()'), E_USER_WARNING);
 			return '';
 		}
 
@@ -217,7 +216,7 @@ class Security {
  */
 	public static function rijndael($text, $key, $operation) {
 		if (empty($key)) {
-			trigger_error(__d('cake_dev', 'You cannot use an empty key for Security::rijndael()'), E_USER_WARNING);
+			trigger_error(__d('cake_dev', 'You cannot use an empty key for %s', 'Security::rijndael()'), E_USER_WARNING);
 			return '';
 		}
 		if (empty($operation) || !in_array($operation, array('encrypt', 'decrypt'))) {
@@ -278,7 +277,12 @@ class Security {
 			$salt = vsprintf('$2a$%02d$%s', array(self::$hashCost, $salt));
 		}
 
-		if ($salt === true || strpos($salt, '$2a$') !== 0 || strlen($salt) < 29) {
+		$invalidCipher = (
+			strpos($salt, '$2y$') !== 0 &&
+			strpos($salt, '$2x$') !== 0 &&
+			strpos($salt, '$2a$') !== 0
+		);
+		if ($salt === true || $invalidCipher || strlen($salt) < 29) {
 			trigger_error(__d(
 				'cake_dev',
 				'Invalid salt: %s for %s Please visit http://www.php.net/crypt and read the appropriate section for building %s salts.',
@@ -287,6 +291,94 @@ class Security {
 			return '';
 		}
 		return crypt($password, $salt);
+	}
+
+/**
+ * Encrypt a value using AES-256.
+ *
+ * *Caveat* You cannot properly encrypt/decrypt data with trailing null bytes.
+ * Any trailing null bytes will be removed on decryption due to how PHP pads messages
+ * with nulls prior to encryption.
+ *
+ * @param string $plain The value to encrypt.
+ * @param string $key The 256 bit/32 byte key to use as a cipher key.
+ * @param string $hmacSalt The salt to use for the HMAC process. Leave null to use Security.salt.
+ * @return string Encrypted data.
+ * @throws CakeException On invalid data or key.
+ */
+	public static function encrypt($plain, $key, $hmacSalt = null) {
+		self::_checkKey($key, 'encrypt()');
+
+		if ($hmacSalt === null) {
+			$hmacSalt = Configure::read('Security.salt');
+		}
+
+		// Generate the encryption and hmac key.
+		$key = substr(hash('sha256', $key . $hmacSalt), 0, 32);
+
+		$algorithm = MCRYPT_RIJNDAEL_128;
+		$mode = MCRYPT_MODE_CBC;
+
+		$ivSize = mcrypt_get_iv_size($algorithm, $mode);
+		$iv = mcrypt_create_iv($ivSize, MCRYPT_DEV_URANDOM);
+		$ciphertext = $iv . mcrypt_encrypt($algorithm, $key, $plain, $mode, $iv);
+		$hmac = hash_hmac('sha256', $ciphertext, $key);
+		return $hmac . $ciphertext;
+	}
+
+/**
+ * Check the encryption key for proper length.
+ *
+ * @param string $key Key to check.
+ * @param string $method The method the key is being checked for.
+ * @return void
+ * @throws CakeException When key length is not 256 bit/32 bytes
+ */
+	protected static function _checkKey($key, $method) {
+		if (strlen($key) < 32) {
+			throw new CakeException(__d('cake_dev', 'Invalid key for %s, key must be at least 256 bits (32 bytes) long.', $method));
+		}
+	}
+
+/**
+ * Decrypt a value using AES-256.
+ *
+ * @param string $cipher The ciphertext to decrypt.
+ * @param string $key The 256 bit/32 byte key to use as a cipher key.
+ * @param string $hmacSalt The salt to use for the HMAC process. Leave null to use Security.salt.
+ * @return string Decrypted data. Any trailing null bytes will be removed.
+ * @throws CakeException On invalid data or key.
+ */
+	public static function decrypt($cipher, $key, $hmacSalt = null) {
+		self::_checkKey($key, 'decrypt()');
+		if (empty($cipher)) {
+			throw new CakeException(__d('cake_dev', 'The data to decrypt cannot be empty.'));
+		}
+		if ($hmacSalt === null) {
+			$hmacSalt = Configure::read('Security.salt');
+		}
+
+		// Generate the encryption and hmac key.
+		$key = substr(hash('sha256', $key . $hmacSalt), 0, 32);
+
+		// Split out hmac for comparison
+		$macSize = 64;
+		$hmac = substr($cipher, 0, $macSize);
+		$cipher = substr($cipher, $macSize);
+
+		$compareHmac = hash_hmac('sha256', $cipher, $key);
+		if ($hmac !== $compareHmac) {
+			return false;
+		}
+
+		$algorithm = MCRYPT_RIJNDAEL_128;
+		$mode = MCRYPT_MODE_CBC;
+		$ivSize = mcrypt_get_iv_size($algorithm, $mode);
+
+		$iv = substr($cipher, 0, $ivSize);
+		$cipher = substr($cipher, $ivSize);
+		$plain = mcrypt_decrypt($algorithm, $key, $cipher, $mode, $iv);
+		return rtrim($plain, "\0");
 	}
 
 }

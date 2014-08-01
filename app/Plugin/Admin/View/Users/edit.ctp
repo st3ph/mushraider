@@ -5,9 +5,13 @@
     </header>
     <div class="accordion-body body in collapse">
         <?php echo $this->Form->create('User', array('url' => '/admin/users/edit/'.$this->data['User']['id'], 'class' => 'span12'));?>
-            <div class="form-group">
-                <?php echo $this->Form->input('User.status', array('type' => 'select', 'options' => array(0  => __('Disabled'), 1 => __('Enabled')), 'label' => __('Account status'), 'class' => 'span5'));?>
-            </div>
+            <?php $displaySaveButton = false;?>
+            <?php if($user['User']['isAdmin'] || ($user['User']['isOfficer'] && !$this->data['User']['isAdmin'])):?>
+                <div class="form-group">
+                    <?php echo $this->Form->input('User.status', array('type' => 'select', 'options' => array(0  => __('Disabled'), 1 => __('Enabled')), 'label' => __('Account status'), 'class' => 'span5'));?>
+                </div>
+                <?php $displaySaveButton = true;?>
+            <?php endif;?>
             
             <?php if($user['User']['isAdmin']):?>
                 <div class="form-group">
@@ -24,14 +28,24 @@
                                 <?php endforeach;?>
                             </ul>
                         </div>
+                        <?php $displaySaveButton = true;?>
                     <?php endif;?>
                 </div>
             <?php endif;?>
 
-            <div class="form-group">
-                <?php echo $this->Form->input('User.id', array('type' => 'hidden'));?>
-                <?php echo $this->Form->submit(__('Save'), array('class' => 'btn btn-success pull-right'));?>               
-            </div>
+            <?php if($user['User']['isAdmin'] || ($user['User']['isOfficer'] && !$this->data['User']['isAdmin'])):?>
+                <br />
+                <div class="form-group">
+                    <?php echo $this->Form->input('User.private_infos', array('type' => 'textarea', 'label' => __('Private player note'), 'class' => 'span5 wysiwyg'));?>
+                </div>
+            <?php endif;?>
+
+            <?php if($displaySaveButton):?>
+                <div class="form-group">
+                    <?php echo $this->Form->input('User.id', array('type' => 'hidden'));?>
+                    <?php echo $this->Form->submit(__('Save'), array('class' => 'btn btn-success pull-right'));?>               
+                </div>
+            <?php endif?>
         <?php echo $this->Form->end();?>
 
         <h3><?php echo __('Characters');?></h3>

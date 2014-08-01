@@ -4,7 +4,7 @@
 
 <?php echo $this->Form->create('User', array('url' => '/auth/password', 'class' => ''));?>
     <div class="row-fluid">
-        <?php echo $this->Form->input('User.password', array('type' => 'password', 'required' => true, 'label' => false, 'placeholder' => __('Enter your new password'), 'class' => 'span12', 'autocomplete' => 'off'));?>
+        <?php echo $this->Form->input('User.password', array('type' => 'password/'.$hash, 'required' => true, 'label' => false, 'placeholder' => __('Enter your new password'), 'class' => 'span12', 'autocomplete' => 'off'));?>
     </div>
     <div class="row-fluid">
         <?php echo $this->Form->input('User.verify_password', array('type' => 'password', 'required' => true, 'label' => false, 'placeholder' => __('Confirm your new password'), 'class' => 'span12', 'autocomplete' => 'off'));?>

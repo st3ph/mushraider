@@ -1180,6 +1180,7 @@ body.fixed .pattern-switcher {
 /* --------------- END Component Styles -------------------- */
 
 
+body {background:#444 url(/img/bg.png) repeat;}
 .error-message {color:#b94a48;}
 .error .error-message {margin-bottom:10px;}
 input.form-error, select.form-error, textarea.form-error {border-color:#b94a48;}
@@ -1202,7 +1203,7 @@ input.form-error, select.form-error, textarea.form-error {border-color:#b94a48;}
   transition: height 0.4s ease-out 0s;
 }
 
-#wrap {margin:auto;}
+#wrap {margin:auto;background:none;}
 .flashMessage {border-radius:0;margin-bottom:10px;}
 .updateMessage {border-radius:0;margin-bottom:0;}
 .updateMessage p {text-align:center;}
@@ -1239,6 +1240,11 @@ form .hint {color:#3a87ad;margin-left:5px;font-size:16px;cursor:help;}
 /* Dashboard */
 .quick-btn {min-width:90px;width:auto;padding-left:2px;padding-right:2px;}
 .quick-btn .waiting {position: absolute;right: -5px;bottom: -5px;top:auto;}
+#mushInfos {margin-top:100px;}
+#mushInfos .lead {text-shadow:2px 2px #fff;}
+#mushInfos .social {text-align;:center;}
+#mushInfos .social li {vertical-align:top}
+#mushInfos .social li.googleplus {padding-top:2px;}
 
 /* Settings */
 .checkbox label {font-weight:normal;}

@@ -4,8 +4,6 @@
  *
  * Text manipulations: Highlight, excerpt, truncate, strip of links, convert email addresses to mailto: links...
  *
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -83,6 +81,10 @@ class TextHelper extends AppHelper {
 
 /**
  * Call methods from String utility class
+ *
+ * @param string $method Method to call.
+ * @param array $params Parameters to pass to method.
+ * @return mixed Whatever is returned by called method, or false on failure
  */
 	public function __call($method, $params) {
 		return call_user_func_array(array($this->_engine, $method), $params);
@@ -105,7 +107,7 @@ class TextHelper extends AppHelper {
 		$this->_placeholders = array();
 		$options += array('escape' => true);
 
-		$pattern = '#(?<!href="|src="|">)((?:https?|ftp|nntp)://[a-z0-9.\-:]+(?:[/?][^\s<]*)?)#i';
+		$pattern = '#(?<!href="|src="|">)((?:https?|ftp|nntp)://[\p{L}0-9.\-_:]+(?:[/?][^\s<]*)?)#ui';
 		$text = preg_replace_callback(
 			$pattern,
 			array(&$this, '_insertPlaceHolder'),
@@ -186,9 +188,9 @@ class TextHelper extends AppHelper {
 		$options += array('escape' => true);
 		$this->_placeholders = array();
 
-		$atom = '[a-z0-9!#$%&\'*+\/=?^_`{|}~-]';
+		$atom = '[\p{L}0-9!#$%&\'*+\/=?^_`{|}~-]';
 		$text = preg_replace_callback(
-			'/(' . $atom . '+(?:\.' . $atom . '+)*@[a-z0-9-]+(?:\.[a-z0-9-]+)+)/i',
+			'/(?<=\s|^|\()(' . $atom . '*(?:\.' . $atom . '+)*@[\p{L}0-9-]+(?:\.[\p{L}0-9-]+)+)/ui',
 			array(&$this, '_insertPlaceholder'),
 			$text
 		);
@@ -216,12 +218,14 @@ class TextHelper extends AppHelper {
 	}
 
 /**
- * @see String::highlight()
+ * Highlights a given phrase in a text. You can specify any expression in highlighter that
+ * may include the \1 expression to include the $phrase found.
  *
  * @param string $text Text to search the phrase in
  * @param string $phrase The phrase that will be searched
  * @param array $options An array of html attributes and options.
  * @return string The highlighted text
+ * @see String::highlight()
  * @link http://book.cakephp.org/2.0/en/core-libraries/helpers/text.html#TextHelper::highlight
  */
 	public function highlight($text, $phrase, $options = array()) {
@@ -229,10 +233,34 @@ class TextHelper extends AppHelper {
 	}
 
 /**
- * @see String::stripLinks()
+ * Formats paragraphs around given text for all line breaks
+ *  <br /> added for single line return
+ *  <p> added for double line return
+ *
+ * @param string $text Text
+ * @return string The text with proper <p> and <br /> tags
+ * @link http://book.cakephp.org/2.0/en/core-libraries/helpers/text.html#TextHelper::autoParagraph
+ */
+	public function autoParagraph($text) {
+		if (trim($text) !== '') {
+			$text = preg_replace('|<br[^>]*>\s*<br[^>]*>|i', "\n\n", $text . "\n");
+			$text = preg_replace("/\n\n+/", "\n\n", str_replace(array("\r\n", "\r"), "\n", $text));
+			$texts = preg_split('/\n\s*\n/', $text, -1, PREG_SPLIT_NO_EMPTY);
+			$text = '';
+			foreach ($texts as $txt) {
+				$text .= '<p>' . nl2br(trim($txt, "\n")) . "</p>\n";
+			}
+			$text = preg_replace('|<p>\s*</p>|', '', $text);
+		}
+		return $text;
+	}
+
+/**
+ * Strips given text of all links (<a href=....)
  *
  * @param string $text Text
  * @return string The text without links
+ * @see String::stripLinks()
  * @link http://book.cakephp.org/2.0/en/core-libraries/helpers/text.html#TextHelper::stripLinks
  */
 	public function stripLinks($text) {
@@ -240,12 +268,22 @@ class TextHelper extends AppHelper {
 	}
 
 /**
- * @see String::truncate()
+ * Truncates text.
+ *
+ * Cuts a string to the length of $length and replaces the last characters
+ * with the ellipsis if the text is longer than length.
+ *
+ * ### Options:
+ *
+ * - `ellipsis` Will be used as Ending and appended to the trimmed string (`ending` is deprecated)
+ * - `exact` If false, $text will not be cut mid-word
+ * - `html` If true, HTML tags would be handled correctly
  *
  * @param string $text String to truncate.
  * @param integer $length Length of returned string, including ellipsis.
  * @param array $options An array of html attributes and options.
  * @return string Trimmed string.
+ * @see String::truncate()
  * @link http://book.cakephp.org/2.0/en/core-libraries/helpers/text.html#TextHelper::truncate
  */
 	public function truncate($text, $length = 100, $options = array()) {
@@ -253,13 +291,37 @@ class TextHelper extends AppHelper {
 	}
 
 /**
- * @see String::excerpt()
+ * Truncates text starting from the end.
+ *
+ * Cuts a string to the length of $length and replaces the first characters
+ * with the ellipsis if the text is longer than length.
+ *
+ * ### Options:
+ *
+ * - `ellipsis` Will be used as Beginning and prepended to the trimmed string
+ * - `exact` If false, $text will not be cut mid-word
+ *
+ * @param string $text String to truncate.
+ * @param integer $length Length of returned string, including ellipsis.
+ * @param array $options An array of html attributes and options.
+ * @return string Trimmed string.
+ * @see String::tail()
+ * @link http://book.cakephp.org/2.0/en/core-libraries/helpers/text.html#TextHelper::tail
+ */
+	public function tail($text, $length = 100, $options = array()) {
+		return $this->_engine->tail($text, $length, $options);
+	}
+
+/**
+ * Extracts an excerpt from the text surrounding the phrase with a number of characters on each side
+ * determined by radius.
  *
  * @param string $text String to search the phrase in
  * @param string $phrase Phrase that will be searched for
  * @param integer $radius The amount of characters that will be returned on each side of the founded phrase
  * @param string $ending Ending that will be appended
  * @return string Modified string
+ * @see String::excerpt()
  * @link http://book.cakephp.org/2.0/en/core-libraries/helpers/text.html#TextHelper::excerpt
  */
 	public function excerpt($text, $phrase, $radius = 100, $ending = '...') {
@@ -267,12 +329,13 @@ class TextHelper extends AppHelper {
 	}
 
 /**
- * @see String::toList()
+ * Creates a comma separated list where the last two items are joined with 'and', forming natural English
  *
  * @param array $list The list to be joined
  * @param string $and The word used to join the last and second last items together with. Defaults to 'and'
  * @param string $separator The separator used to join all the other items together. Defaults to ', '
  * @return string The glued together string.
+ * @see String::toList()
  * @link http://book.cakephp.org/2.0/en/core-libraries/helpers/text.html#TextHelper::toList
  */
 	public function toList($list, $and = 'and', $separator = ', ') {

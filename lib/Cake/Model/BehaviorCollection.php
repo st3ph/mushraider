@@ -4,8 +4,6 @@
  *
  * Provides management and interface for interacting with collections of behaviors.
  *
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -56,8 +54,8 @@ class BehaviorCollection extends ObjectCollection implements CakeEventListener {
 /**
  * Attaches a model object and loads a list of behaviors
  *
- * @param string $modelName
- * @param array $behaviors
+ * @param string $modelName Model name.
+ * @param array $behaviors Behaviors list.
  * @return void
  */
 	public function init($modelName, $behaviors = array()) {
@@ -73,10 +71,10 @@ class BehaviorCollection extends ObjectCollection implements CakeEventListener {
 /**
  * Backwards compatible alias for load()
  *
- * @param string $behavior
- * @param array $config
+ * @param string $behavior Behavior name.
+ * @param array $config Configuration options.
  * @return void
- * @deprecated Replaced with load()
+ * @deprecated Will be removed in 3.0. Replaced with load().
  */
 	public function attach($behavior, $config = array()) {
 		return $this->load($behavior, $config);
@@ -103,7 +101,7 @@ class BehaviorCollection extends ObjectCollection implements CakeEventListener {
  * @throws MissingBehaviorException when a behavior could not be found.
  */
 	public function load($behavior, $config = array()) {
-		if (is_array($config) && isset($config['className'])) {
+		if (isset($config['className'])) {
 			$alias = $behavior;
 			$behavior = $config['className'];
 		}
@@ -132,9 +130,6 @@ class BehaviorCollection extends ObjectCollection implements CakeEventListener {
 			} else {
 				$this->_loaded[$alias] = new $class();
 				ClassRegistry::addObject($class, $this->_loaded[$alias]);
-				if (!empty($plugin)) {
-					ClassRegistry::addObject($plugin . '.' . $class, $this->_loaded[$alias]);
-				}
 			}
 		} elseif (isset($this->_loaded[$alias]->settings) && isset($this->_loaded[$alias]->settings[$this->modelName])) {
 			if ($config !== null && $config !== false) {
@@ -195,7 +190,7 @@ class BehaviorCollection extends ObjectCollection implements CakeEventListener {
 			parent::unload($name);
 		}
 		foreach ($this->_methods as $m => $callback) {
-			if (is_array($callback) && $callback[0] == $name) {
+			if (is_array($callback) && $callback[0] === $name) {
 				unset($this->_methods[$m]);
 			}
 		}
@@ -206,7 +201,7 @@ class BehaviorCollection extends ObjectCollection implements CakeEventListener {
  *
  * @param string $name Name of behavior
  * @return void
- * @deprecated Use unload instead.
+ * @deprecated Will be removed in 3.0. Use unload instead.
  */
 	public function detach($name) {
 		return $this->unload($name);
@@ -228,7 +223,7 @@ class BehaviorCollection extends ObjectCollection implements CakeEventListener {
 		$method = $this->hasMethod($method, true);
 
 		if ($strict && empty($method)) {
-			trigger_error(__d('cake_dev', "BehaviorCollection::dispatchMethod() - Method %s not found in any attached behavior", $method), E_USER_WARNING);
+			trigger_error(__d('cake_dev', '%s - Method %s not found in any attached behavior', 'BehaviorCollection::dispatchMethod()', $method), E_USER_WARNING);
 			return null;
 		}
 		if (empty($method)) {

@@ -2,8 +2,6 @@
 /**
  * Security Component
  *
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -226,13 +224,13 @@ class SecurityComponent extends Component {
 		$this->_secureRequired($controller);
 		$this->_authRequired($controller);
 
-		$isPost = ($this->request->is('post') || $this->request->is('put'));
+		$isPost = $this->request->is(array('post', 'put'));
 		$isNotRequestAction = (
 			!isset($controller->request->params['requested']) ||
 			$controller->request->params['requested'] != 1
 		);
 
-		if ($this->_action == $this->blackHoleCallback) {
+		if ($this->_action === $this->blackHoleCallback) {
 			return $this->blackHole($controller, 'auth');
 		}
 
@@ -350,7 +348,7 @@ class SecurityComponent extends Component {
 		if (isset($actions[0]) && is_array($actions[0])) {
 			$actions = $actions[0];
 		}
-		$this->{'require' . $method} = (empty($actions)) ? array('*'): $actions;
+		$this->{'require' . $method} = (empty($actions)) ? array('*') : $actions;
 	}
 
 /**
@@ -364,7 +362,7 @@ class SecurityComponent extends Component {
 			$property = 'require' . $method;
 			if (is_array($this->$property) && !empty($this->$property)) {
 				$require = $this->$property;
-				if (in_array($this->_action, $require) || $this->$property == array('*')) {
+				if (in_array($this->_action, $require) || $this->$property === array('*')) {
 					if (!$this->request->is($method)) {
 						if (!$this->blackHole($controller, $method)) {
 							return null;
@@ -386,7 +384,7 @@ class SecurityComponent extends Component {
 		if (is_array($this->requireSecure) && !empty($this->requireSecure)) {
 			$requireSecure = $this->requireSecure;
 
-			if (in_array($this->_action, $requireSecure) || $this->requireSecure == array('*')) {
+			if (in_array($this->_action, $requireSecure) || $this->requireSecure === array('*')) {
 				if (!$this->request->is('ssl')) {
 					if (!$this->blackHole($controller, 'secure')) {
 						return null;
@@ -407,7 +405,7 @@ class SecurityComponent extends Component {
 		if (is_array($this->requireAuth) && !empty($this->requireAuth) && !empty($this->request->data)) {
 			$requireAuth = $this->requireAuth;
 
-			if (in_array($this->request->params['action'], $requireAuth) || $this->requireAuth == array('*')) {
+			if (in_array($this->request->params['action'], $requireAuth) || $this->requireAuth === array('*')) {
 				if (!isset($controller->request->data['_Token'])) {
 					if (!$this->blackHole($controller, 'auth')) {
 						return null;
@@ -512,7 +510,13 @@ class SecurityComponent extends Component {
 
 		$fieldList += $lockedFields;
 		$unlocked = implode('|', $unlocked);
-		$check = Security::hash(serialize($fieldList) . $unlocked . Configure::read('Security.salt'), 'sha1');
+		$hashParts = array(
+			$this->request->here(),
+			serialize($fieldList),
+			$unlocked,
+			Configure::read('Security.salt')
+		);
+		$check = Security::hash(implode('', $hashParts), 'sha1');
 		return ($token === $check);
 	}
 

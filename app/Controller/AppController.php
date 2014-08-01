@@ -23,8 +23,8 @@
 App::uses('IniReader', 'Configure');
 App::uses('Controller', 'Controller');
 
-/**
- * Application Controller
+/*
+* * Application Controller
  *
  * Add your application-wide methods in the class below, your controllers
  * will inherit them.
@@ -65,6 +65,10 @@ class AppController extends Controller {
         $language = !empty($language)?$language:'eng';
         Configure::write('Config.language', $language);
 
+        // Some usefull infos
+        Configure::write('Config.maxFileSize', ini_get('upload_max_filesize'));
+        Configure::write('Config.maxPostSize', ini_get('post_max_size'));
+
         // Log in user
         if($this->Session->check('User.id')) {
 			$userID = $this->Session->read('User.id');			
@@ -96,6 +100,7 @@ class AppController extends Controller {
 		if($this->userRequired && !$this->user) {
             if($this->name != 'CakeError') {
                 $this->Session->write('redirectFrom', $this->Tools->here());
+                $this->Session->setFlash(__('You have to be logged in to access this page.'), 'flash_warning');
                 $this->redirect('/auth/login');
             }
         }

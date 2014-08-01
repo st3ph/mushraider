@@ -1,26 +1,27 @@
-<h3><?php echo __('General informations');?></h3>
+<h3><?php echo __('Database informations');?></h3>
 <?php echo $this->Form->create('ConfigDatabase', array('url' => '/install/step/2', 'class' => ''));?>
     <div class="row-fluid">
-        <?php echo $this->Form->input('Config.sitetitle', array('type' => 'text', 'required' => true, 'label' => __('Site title'), 'class' => 'span12'));?>
+        <?php echo $this->Form->input('Config.datasource', array('type' => 'select', 'options' => $dbDatasources, 'required' => true, 'label' => __('Database Type'), 'class' => 'span12'));?>
     </div>
-
     <div class="row-fluid">
-        <?php echo $this->Form->input('Config.sitelang', array('type' => 'select', 'options' => $languages, 'required' => true, 'label' => __('Site language'), 'class' => 'span6'));?>
+        <?php echo $this->Form->input('Config.host', array('type' => 'text', 'required' => false, 'label' => __('Host'), 'placeholder' => 'default : locahost', 'class' => 'span12'));?>
     </div>
-
     <div class="row-fluid">
-        <?php echo $this->Form->input('Config.adminemail', array('type' => 'text', 'required' => true, 'label' => __('Admin email'), 'class' => 'span12'));?>
+        <?php echo $this->Form->input('Config.database', array('type' => 'text', 'required' => true, 'label' => __('Database name'), 'class' => 'span12'));?>
     </div>
-
     <div class="row-fluid">
-        <?php echo $this->Form->input('Config.adminlogin', array('type' => 'text', 'required' => true, 'label' => __('Admin username'), 'class' => 'span12'));?>
+        <?php echo $this->Form->input('Config.login', array('type' => 'text', 'required' => true, 'label' => __('Database User'), 'class' => 'span12'));?>
     </div>
-
     <div class="row-fluid">
-        <?php echo $this->Form->input('Config.adminpassword', array('type' => 'password', 'required' => true, 'label' => __('Admin password'), 'class' => 'span12', 'pattern' => '.{6,}'));?>
+        <?php echo $this->Form->input('Config.password', array('type' => 'password', 'label' => __('Database Password'), 'class' => 'span12'));?>
     </div>
-
     <div class="row-fluid">
-        <?php echo $this->Form->submit(__('Install MushRaider'), array('class' => 'btn btn-primary pull-right'));?>
+        <?php echo $this->Form->input('Config.port', array('type' => 'text', 'label' => __('Port'), 'class' => 'span2'));?>
+    </div>
+    <div class="row-fluid">
+        <?php echo $this->Form->input('Config.prefix', array('type' => 'text', 'default' => 'mr_', 'label' => __('Tables prefix'), 'class' => 'span2'));?>
+    </div>
+    <div class="row-fluid">
+        <?php echo $this->Form->submit(__('Next &raquo;'), array('escape' => false, 'class' => 'btn btn-primary pull-right'));?>
     </div>
 <?php echo $this->Form->end();?>

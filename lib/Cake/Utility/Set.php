@@ -2,8 +2,6 @@
 /**
  * Library of array functions for Cake.
  *
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -25,6 +23,7 @@ App::uses('Hash', 'Utility');
  * Class used for manipulation of arrays.
  *
  * @package       Cake.Utility
+ * @deprecated Will be removed in 3.0. Use Hash instead.
  */
 class Set {
 
@@ -121,7 +120,7 @@ class Set {
  * returned object (recursively). If $key is numeric will maintain array
  * structure
  *
- * @param array $array Array to map
+ * @param array &$array Array to map
  * @param string $class Class name
  * @param boolean $primary whether to assign first array key as the _name_
  * @return mixed Mapped object
@@ -309,7 +308,7 @@ class Set {
  * @param string $path An absolute XPath 2.0 path
  * @param array $data An array of data to extract from
  * @param array $options Currently only supports 'flatten' which can be disabled for higher XPath-ness
- * @return array An array of matched items
+ * @return mixed An array of matched items or the content of a single selected item or null in any of these cases: $path or $data are null, no items found.
  * @link http://book.cakephp.org/2.0/en/core-utility-libraries/set.html#Set::extract
  */
 	public static function extract($path, $data = null, $options = array()) {
@@ -328,7 +327,7 @@ class Set {
 			return $data;
 		}
 		$contexts = $data;
-		$options = array_merge(array('flatten' => true), $options);
+		$options += array('flatten' => true);
 		if (!isset($contexts[0])) {
 			$current = current($data);
 			if ((is_array($current) && count($data) < 1) || !is_array($current) || !Set::numeric(array_keys($data))) {
@@ -459,7 +458,7 @@ class Set {
  * @param string|array $conditions An array of condition strings or an XPath expression
  * @param array $data An array of data to execute the match on
  * @param integer $i Optional: The 'nth'-number of the item being matched.
- * @param integer $length
+ * @param integer $length Length.
  * @return boolean
  * @link http://book.cakephp.org/2.0/en/core-utility-libraries/set.html#Set::matches
  */
@@ -534,7 +533,7 @@ class Set {
  *
  * @param array $data Array from where to extract
  * @param string|array $path As an array, or as a dot-separated string.
- * @return array|null Extracted data or null when $data or $path are empty.
+ * @return mixed An array of matched items or the content of a single selected item or null in any of these cases: $path or $data are null, no items found.
  * @link http://book.cakephp.org/2.0/en/core-utility-libraries/set.html#Set::classicExtract
  */
 	public static function classicExtract($data, $path = null) {
@@ -591,7 +590,7 @@ class Set {
 					}
 				}
 				return $tmp;
-			} elseif (false !== strpos($key, '{') && false !== strpos($key, '}')) {
+			} elseif (strpos($key, '{') !== false && strpos($key, '}') !== false) {
 				$pattern = substr($key, 1, -1);
 
 				foreach ($data as $j => $val) {
@@ -736,7 +735,7 @@ class Set {
  * @return integer The number of dimensions in $array
  * @link http://book.cakephp.org/2.0/en/core-utility-libraries/set.html#Set::countDim
  */
-	public static function countDim($array = null, $all = false, $count = 0) {
+	public static function countDim($array, $all = false, $count = 0) {
 		if ($all) {
 			$depth = array($count);
 			if (is_array($array) && reset($array) !== false) {
@@ -852,6 +851,7 @@ class Set {
 
 /**
  * Converts an object into an array.
+ *
  * @param object $object Object to reverse
  * @return array Array representation of given object
  * @link http://book.cakephp.org/2.0/en/core-utility-libraries/set.html#Set::reverse
@@ -927,15 +927,15 @@ class Set {
 /**
  * Flattens an array for sorting
  *
- * @param array $results
- * @param string $key
+ * @param array $results Array to flatten.
+ * @param string $key Key.
  * @return array
  */
 	protected static function _flatten($results, $key = null) {
 		$stack = array();
 		foreach ($results as $k => $r) {
 			$id = $k;
-			if (!is_null($key)) {
+			if ($key !== null) {
 				$id = $key;
 			}
 			if (is_array($r) && !empty($r)) {
@@ -1011,7 +1011,7 @@ class Set {
  */
 	public static function apply($path, $data, $callback, $options = array()) {
 		$defaults = array('type' => 'pass');
-		$options = array_merge($defaults, $options);
+		$options += $defaults;
 		$extracted = Set::extract($path, $data);
 
 		if ($options['type'] === 'map') {
@@ -1027,7 +1027,7 @@ class Set {
 /**
  * Takes in a flat array and returns a nested array
  *
- * @param mixed $data
+ * @param mixed $data Data
  * @param array $options Options are:
  *      children   - the key name to use in the resultset for children
  *      idPath     - the path to a key that identifies each entry

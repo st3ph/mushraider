@@ -4,8 +4,6 @@
  *
  * Log messages to text files.
  *
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -34,7 +32,7 @@ App::uses('LogEngineCollection', 'Log');
  * A sample configuration would look like:
  *
  * {{{
- * CakeLog::config('my_log', array('engine' => 'FileLog'));
+ * CakeLog::config('my_log', array('engine' => 'File'));
  * }}}
  *
  * See the documentation on CakeLog::config() for more detail.
@@ -133,7 +131,7 @@ class CakeLog {
  *
  * {{{
  * CakeLog::config('second_file', array(
- *     'engine' => 'FileLog',
+ *     'engine' => 'File',
  *     'path' => '/var/logs/my_app/'
  * ));
  * }}}
@@ -169,6 +167,7 @@ class CakeLog {
  * {{{
  * CakeLog::config('payments', array(
  *     'engine' => 'File',
+ *     'types' => array('info', 'error', 'warning'),
  *     'scopes' => array('payment', 'order')
  * ));
  * }}}
@@ -191,7 +190,7 @@ class CakeLog {
 			throw new CakeLogException(__d('cake_dev', 'Invalid key name'));
 		}
 		if (empty($config['engine'])) {
-			throw new CakeLogException(__d('cake_dev', 'Missing logger classname'));
+			throw new CakeLogException(__d('cake_dev', 'Missing logger class name'));
 		}
 		if (empty(self::$_Collection)) {
 			self::_init();
@@ -357,9 +356,9 @@ class CakeLog {
 /**
  * Gets the logging engine from the active streams.
  *
- * @see BaseLog
  * @param string $streamName Key name of a configured stream to get.
  * @return mixed instance of BaseLog or false if not found
+ * @see BaseLog
  */
 	public static function stream($streamName) {
 		if (empty(self::$_Collection)) {
@@ -369,18 +368,6 @@ class CakeLog {
 			return self::$_Collection->{$streamName};
 		}
 		return false;
-	}
-
-/**
- * Configures the automatic/default stream a FileLog.
- *
- * @return void
- */
-	protected static function _autoConfig() {
-		self::$_Collection->load('default', array(
-			'engine' => 'FileLog',
-			'path' => LOGS,
-		));
 	}
 
 /**
@@ -454,11 +441,7 @@ class CakeLog {
 				$logged = true;
 			}
 		}
-		if (!$logged) {
-			self::_autoConfig();
-			self::stream('default')->write($type, $message);
-		}
-		return true;
+		return $logged;
 	}
 
 /**

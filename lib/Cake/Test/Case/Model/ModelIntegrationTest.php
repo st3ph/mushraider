@@ -2,8 +2,6 @@
 /**
  * ModelIntegrationTest file
  *
- * PHP 5
- *
  * CakePHP(tm) Tests <http://book.cakephp.org/2.0/en/development/testing.html>
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -19,6 +17,7 @@
  */
 
 require_once dirname(__FILE__) . DS . 'ModelTestBase.php';
+
 App::uses('DboSource', 'Model/Datasource');
 App::uses('DboMock', 'Model/Datasource');
 
@@ -30,6 +29,8 @@ class DboMock extends DboSource {
 
 /**
  * Returns the $field without modifications
+ *
+ * @return string
  */
 	public function name($field) {
 		return $field;
@@ -37,6 +38,8 @@ class DboMock extends DboSource {
 
 /**
  * Returns true to fake a database connection
+ *
+ * @return boolean true
  */
 	public function connect() {
 		return true;
@@ -157,17 +160,17 @@ class ModelIntegrationTest extends BaseModelTest {
 	}
 
 /**
- * Tests that $cacheSources can only be disabled in the db using model settings, not enabled
+ * Tests that $cacheSources is restored despite the settings on the model.
  *
  * @return void
  */
-	public function testCacheSourcesDisabling() {
+	public function testCacheSourcesRestored() {
 		$this->loadFixtures('JoinA', 'JoinB', 'JoinAB', 'JoinC', 'JoinAC');
 		$this->db->cacheSources = true;
 		$TestModel = new JoinA();
 		$TestModel->cacheSources = false;
 		$TestModel->setSource('join_as');
-		$this->assertFalse($this->db->cacheSources);
+		$this->assertTrue($this->db->cacheSources);
 
 		$this->db->cacheSources = false;
 		$TestModel = new JoinA();
@@ -212,7 +215,7 @@ class ModelIntegrationTest extends BaseModelTest {
 		$TestModel = new Apple();
 		$this->assertEquals(array(), $TestModel->Behaviors->loaded());
 
-		$TestModel->Behaviors->attach('Tree', array('left' => 'left_field', 'right' => 'right_field'));
+		$TestModel->Behaviors->load('Tree', array('left' => 'left_field', 'right' => 'right_field'));
 		$this->assertTrue(is_object($TestModel->Behaviors->Tree));
 		$this->assertEquals(array('Tree'), $TestModel->Behaviors->loaded());
 
@@ -227,11 +230,11 @@ class ModelIntegrationTest extends BaseModelTest {
 		);
 		$this->assertEquals($expected, $TestModel->Behaviors->Tree->settings['Apple']);
 
-		$TestModel->Behaviors->attach('Tree', array('enabled' => false));
+		$TestModel->Behaviors->load('Tree', array('enabled' => false));
 		$this->assertEquals($expected, $TestModel->Behaviors->Tree->settings['Apple']);
 		$this->assertEquals(array('Tree'), $TestModel->Behaviors->loaded());
 
-		$TestModel->Behaviors->detach('Tree');
+		$TestModel->Behaviors->unload('Tree');
 		$this->assertEquals(array(), $TestModel->Behaviors->loaded());
 		$this->assertFalse(isset($TestModel->Behaviors->Tree));
 	}
@@ -278,6 +281,8 @@ class ModelIntegrationTest extends BaseModelTest {
  * Tests cross database joins. Requires $test and $test2 to both be set in DATABASE_CONFIG
  * NOTE: When testing on MySQL, you must set 'persistent' => false on *both* database connections,
  * or one connection will step on the other.
+ *
+ * @return void
  */
 	public function testCrossDatabaseJoins() {
 		$config = ConnectionManager::enumConnectionObjects();
@@ -1491,7 +1496,7 @@ class ModelIntegrationTest extends BaseModelTest {
 				'dynamicWith' => true,
 				'associationForeignKey' => 'join_b_id',
 				'conditions' => '', 'fields' => '', 'order' => '', 'limit' => '', 'offset' => '',
-				'finderQuery' => '', 'deleteQuery' => '', 'insertQuery' => ''
+				'finderQuery' => ''
 		));
 		$this->assertEquals($expected, $result);
 
@@ -1508,8 +1513,8 @@ class ModelIntegrationTest extends BaseModelTest {
 				'conditions' => '', 'fields' => '', 'order' => '', 'counterCache' => ''
 			)
 		);
-		$this->assertSame($TestModel->belongsTo, $expected);
-		$this->assertSame($TestFakeModel->belongsTo, $expected);
+		$this->assertSame($expected, $TestModel->belongsTo);
+		$this->assertSame($expected, $TestFakeModel->belongsTo);
 
 		$this->assertEquals('User', $TestModel->User->name);
 		$this->assertEquals('User', $TestFakeModel->User->name);
@@ -1526,8 +1531,8 @@ class ModelIntegrationTest extends BaseModelTest {
 				'dependent' => ''
 		));
 
-		$this->assertSame($TestModel->hasOne, $expected);
-		$this->assertSame($TestFakeModel->hasOne, $expected);
+		$this->assertSame($expected, $TestModel->hasOne);
+		$this->assertSame($expected, $TestFakeModel->hasOne);
 
 		$this->assertEquals('Featured', $TestModel->Featured->name);
 		$this->assertEquals('Featured', $TestFakeModel->Featured->name);
@@ -1547,8 +1552,8 @@ class ModelIntegrationTest extends BaseModelTest {
 				'counterQuery' => ''
 		));
 
-		$this->assertSame($TestModel->hasMany, $expected);
-		$this->assertSame($TestFakeModel->hasMany, $expected);
+		$this->assertSame($expected, $TestModel->hasMany);
+		$this->assertSame($expected, $TestFakeModel->hasMany);
 
 		$this->assertEquals('Comment', $TestModel->Comment->name);
 		$this->assertEquals('Comment', $TestFakeModel->Comment->name);
@@ -1568,12 +1573,10 @@ class ModelIntegrationTest extends BaseModelTest {
 				'offset' => '',
 				'unique' => true,
 				'finderQuery' => '',
-				'deleteQuery' => '',
-				'insertQuery' => ''
 		));
 
-		$this->assertSame($TestModel->hasAndBelongsToMany, $expected);
-		$this->assertSame($TestFakeModel->hasAndBelongsToMany, $expected);
+		$this->assertSame($expected, $TestModel->hasAndBelongsToMany);
+		$this->assertSame($expected, $TestFakeModel->hasAndBelongsToMany);
 
 		$this->assertEquals('Tag', $TestModel->Tag->name);
 		$this->assertEquals('Tag', $TestFakeModel->Tag->name);
@@ -1708,7 +1711,8 @@ class ModelIntegrationTest extends BaseModelTest {
 					'body' => 'First Post Body',
 					'published' => 'Y',
 					'created' => '2007-03-18 10:39:23',
-					'updated' => '2007-03-18 10:41:31'
+					'updated' => '2007-03-18 10:41:31',
+					'afterFind' => 'Successfully added by AfterFind'
 				),
 				'Something' => array(
 					array(
@@ -1724,7 +1728,8 @@ class ModelIntegrationTest extends BaseModelTest {
 							'something_else_id' => '1',
 							'doomed' => true,
 							'created' => '2007-03-18 10:43:23',
-							'updated' => '2007-03-18 10:45:31'
+							'updated' => '2007-03-18 10:45:31',
+							'afterFind' => 'Successfully added by AfterFind'
 			)))),
 			array(
 				'SomethingElse' => array(
@@ -1733,7 +1738,8 @@ class ModelIntegrationTest extends BaseModelTest {
 					'body' => 'Second Post Body',
 					'published' => 'Y',
 					'created' => '2007-03-18 10:41:23',
-					'updated' => '2007-03-18 10:43:31'
+					'updated' => '2007-03-18 10:43:31',
+					'afterFind' => 'Successfully added by AfterFind'
 				),
 				'Something' => array(
 					array(
@@ -1749,7 +1755,8 @@ class ModelIntegrationTest extends BaseModelTest {
 							'something_else_id' => '2',
 							'doomed' => true,
 							'created' => '2007-03-18 10:39:23',
-							'updated' => '2007-03-18 10:41:31'
+							'updated' => '2007-03-18 10:41:31',
+							'afterFind' => 'Successfully added by AfterFind'
 			)))),
 			array(
 				'SomethingElse' => array(
@@ -1758,7 +1765,8 @@ class ModelIntegrationTest extends BaseModelTest {
 					'body' => 'Third Post Body',
 					'published' => 'Y',
 					'created' => '2007-03-18 10:43:23',
-					'updated' => '2007-03-18 10:45:31'
+					'updated' => '2007-03-18 10:45:31',
+					'afterFind' => 'Successfully added by AfterFind'
 				),
 				'Something' => array(
 					array(
@@ -1774,7 +1782,8 @@ class ModelIntegrationTest extends BaseModelTest {
 							'something_else_id' => '3',
 							'doomed' => false,
 							'created' => '2007-03-18 10:41:23',
-							'updated' => '2007-03-18 10:43:31'
+							'updated' => '2007-03-18 10:43:31',
+							'afterFind' => 'Successfully added by AfterFind'
 		)))));
 		$this->assertEquals($expected, $result);
 
@@ -1800,8 +1809,11 @@ class ModelIntegrationTest extends BaseModelTest {
 						'JoinThing' => array(
 							'doomed' => true,
 							'something_id' => '1',
-							'something_else_id' => '2'
-			)))),
+							'something_else_id' => '2',
+							'afterFind' => 'Successfully added by AfterFind'
+						),
+						'afterFind' => 'Successfully added by AfterFind'
+					))),
 			array(
 				'Something' => array(
 					'id' => '2',
@@ -1822,8 +1834,11 @@ class ModelIntegrationTest extends BaseModelTest {
 						'JoinThing' => array(
 							'doomed' => false,
 							'something_id' => '2',
-							'something_else_id' => '3'
-			)))),
+							'something_else_id' => '3',
+							'afterFind' => 'Successfully added by AfterFind'
+						),
+						'afterFind' => 'Successfully added by AfterFind'
+					))),
 			array(
 				'Something' => array(
 					'id' => '3',
@@ -1844,8 +1859,11 @@ class ModelIntegrationTest extends BaseModelTest {
 						'JoinThing' => array(
 							'doomed' => true,
 							'something_id' => '3',
-							'something_else_id' => '1'
-		)))));
+							'something_else_id' => '1',
+							'afterFind' => 'Successfully added by AfterFind'
+						),
+						'afterFind' => 'Successfully added by AfterFind'
+		))));
 		$this->assertEquals($expected, $result);
 
 		$result = $TestModel->findById(1);
@@ -1869,8 +1887,11 @@ class ModelIntegrationTest extends BaseModelTest {
 					'JoinThing' => array(
 						'doomed' => true,
 						'something_id' => '1',
-						'something_else_id' => '2'
-		))));
+						'something_else_id' => '2',
+						'afterFind' => 'Successfully added by AfterFind'
+					),
+					'afterFind' => 'Successfully added by AfterFind'
+		)));
 		$this->assertEquals($expected, $result);
 
 		$expected = $TestModel->findById(1);
@@ -1910,8 +1931,10 @@ class ModelIntegrationTest extends BaseModelTest {
 					'JoinThing' => array(
 						'doomed' => true,
 						'something_id' => '1',
-						'something_else_id' => '1'
-				)
+						'something_else_id' => '1',
+						'afterFind' => 'Successfully added by AfterFind'
+					),
+					'afterFind' => 'Successfully added by AfterFind'
 			),
 				array(
 					'id' => '2',
@@ -1923,8 +1946,10 @@ class ModelIntegrationTest extends BaseModelTest {
 					'JoinThing' => array(
 						'doomed' => true,
 						'something_id' => '1',
-						'something_else_id' => '2'
-				)
+						'something_else_id' => '2',
+						'afterFind' => 'Successfully added by AfterFind'
+					),
+					'afterFind' => 'Successfully added by AfterFind'
 			),
 				array(
 					'id' => '3',
@@ -1936,10 +1961,12 @@ class ModelIntegrationTest extends BaseModelTest {
 					'JoinThing' => array(
 						'doomed' => false,
 						'something_id' => '1',
-						'something_else_id' => '3')
-					)
+						'something_else_id' => '3',
+						'afterFind' => 'Successfully added by AfterFind'
+					),
+					'afterFind' => 'Successfully added by AfterFind'
 				)
-			);
+			));
 		$this->assertEquals(self::date(), $result['Something']['updated']);
 		unset($result['Something']['updated']);
 		$this->assertEquals($expected, $result);
@@ -2182,7 +2209,7 @@ class ModelIntegrationTest extends BaseModelTest {
 		} else {
 			$intLength = 11;
 		}
-		foreach (array('collate', 'charset', 'comment') as $type) {
+		foreach (array('collate', 'charset', 'comment', 'unsigned') as $type) {
 			foreach ($result as $i => $r) {
 				unset($result[$i][$type]);
 			}

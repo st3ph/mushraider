@@ -2,8 +2,6 @@
 /**
  * CakePlugin class
  *
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -110,24 +108,24 @@ class CakePlugin {
  * {{{
  * 	CakePlugin::loadAll(array(
  *		array('bootstrap' => true),
- * 		'DebugKit' => array('routes' => true),
+ * 		'DebugKit' => array('routes' => true, 'bootstrap' => false),
  * 	))
  * }}}
  *
- * The above example will load the bootstrap file for all plugins, but for DebugKit it will only load the routes file
- * and will not look for any bootstrap script.
+ * The above example will load the bootstrap file for all plugins, but for DebugKit it will only load
+ * the routes file and will not look for any bootstrap script.
  *
- * @param array $options
+ * @param array $options Options list. See CakePlugin::load() for valid options.
  * @return void
  */
 	public static function loadAll($options = array()) {
 		$plugins = App::objects('plugins');
 		foreach ($plugins as $p) {
-			$opts = isset($options[$p]) ? $options[$p] : null;
-			if ($opts === null && isset($options[0])) {
-				$opts = $options[0];
+			$opts = isset($options[$p]) ? (array)$options[$p] : array();
+			if (isset($options[0])) {
+				$opts += $options[0];
 			}
-			self::load($p, (array)$opts);
+			self::load($p, $opts);
 		}
 	}
 
@@ -208,7 +206,7 @@ class CakePlugin {
  * Returns true if the plugin $plugin is already loaded
  * If plugin is null, it will return a list of all loaded plugins
  *
- * @param string $plugin
+ * @param string $plugin Plugin name to check.
  * @return mixed boolean true if $plugin is already loaded.
  * If $plugin is null, returns a list of plugins that have been loaded
  */
@@ -228,7 +226,7 @@ class CakePlugin {
  * @return void
  */
 	public static function unload($plugin = null) {
-		if (is_null($plugin)) {
+		if ($plugin === null) {
 			self::$_plugins = array();
 		} else {
 			unset(self::$_plugins[$plugin]);

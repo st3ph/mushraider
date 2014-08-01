@@ -1,10 +1,8 @@
 <?php
 /**
- * Basic Cake functionality.
+ * Basic CakePHP functionality.
  *
  * Handles loading of core files needed on every request
- *
- * PHP 5
  *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
@@ -141,6 +139,15 @@ require CAKE . 'basics.php';
 require CAKE . 'Core' . DS . 'App.php';
 require CAKE . 'Error' . DS . 'exceptions.php';
 
+spl_autoload_register(array('App', 'load'));
+
+App::uses('ErrorHandler', 'Error');
+App::uses('Configure', 'Core');
+App::uses('CakePlugin', 'Core');
+App::uses('Cache', 'Cache');
+App::uses('Object', 'Core');
+App::uses('Multibyte', 'I18n');
+
 /**
  * Full URL prefix
  */
@@ -154,18 +161,15 @@ if (!defined('FULL_BASE_URL')) {
 
 	if (isset($httpHost)) {
 		define('FULL_BASE_URL', 'http' . $s . '://' . $httpHost);
+		Configure::write('App.fullBaseUrl', FULL_BASE_URL);
 	}
 	unset($httpHost, $s);
 }
 
-spl_autoload_register(array('App', 'load'));
+Configure::write('App.imageBaseUrl', IMAGES_URL);
+Configure::write('App.cssBaseUrl', CSS_URL);
+Configure::write('App.jsBaseUrl', JS_URL);
 
-App::uses('ErrorHandler', 'Error');
-App::uses('Configure', 'Core');
-App::uses('CakePlugin', 'Core');
-App::uses('Cache', 'Cache');
-App::uses('Object', 'Core');
-App::uses('Multibyte', 'I18n');
 App::$bootstrapping = true;
 
 Configure::bootstrap(isset($boot) ? $boot : true);
@@ -420,7 +424,7 @@ if (!function_exists('mb_encode_mimeheader')) {
  * @param string $str The string being encoded
  * @param string $charset specifies the name of the character set in which str is represented in.
  *    The default value is determined by the current NLS setting (mbstring.language).
- * @param string $transfer_encoding specifies the scheme of MIME encoding.
+ * @param string $transferEncoding specifies the scheme of MIME encoding.
  *    It should be either "B" (Base64) or "Q" (Quoted-Printable). Falls back to "B" if not given.
  * @param string $linefeed specifies the EOL (end-of-line) marker with which
  *    mb_encode_mimeheader() performs line-folding

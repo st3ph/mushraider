@@ -32,7 +32,7 @@ class CakeTestFixture {
 	public $name = null;
 
 /**
- * Cake's DBO driver (e.g: DboMysql).
+ * CakePHP's DBO driver (e.g: DboMysql).
  *
  * @var object
  */
@@ -80,6 +80,15 @@ class CakeTestFixture {
  * @var string
  */
 	public $primaryKey = null;
+
+/**
+ * Fixture data can be stored in memory by default.
+ * When table is created for a fixture the MEMORY engine is used
+ * where possible. Set $canUseMemory to false if you don't want this.
+ *
+ * @var boolean
+ */
+	public $canUseMemory = true;
 
 /**
  * Instantiate the fixture.
@@ -199,7 +208,7 @@ class CakeTestFixture {
 		}
 
 		if (empty($this->fields['tableParameters']['engine'])) {
-			$canUseMemory = true;
+			$canUseMemory = $this->canUseMemory;
 			foreach ($this->fields as $args) {
 
 				if (is_string($args)) {
@@ -265,6 +274,7 @@ class CakeTestFixture {
  *
  * @param DboSource $db An instance of the database into which the records will be inserted
  * @return boolean on success or if there are no records to insert, or false on failure
+ * @throws CakeException if counts of values and fields do not match.
  */
 	public function insert($db) {
 		if (!isset($this->_insert)) {
@@ -277,7 +287,11 @@ class CakeTestFixture {
 				$fields = array_unique($fields);
 				$default = array_fill_keys($fields, null);
 				foreach ($this->records as $record) {
-					$values[] = array_values(array_merge($default, $record));
+					$merge = array_values(array_merge($default, $record));
+					if (count($fields) !== count($merge)) {
+						throw new CakeException('Fixture invalid: Count of fields does not match count of values');
+					}
+					$values[] = $merge;
 				}
 				$nested = $db->useNestedTransactions;
 				$db->useNestedTransactions = false;

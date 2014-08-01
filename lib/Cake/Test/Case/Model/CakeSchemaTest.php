@@ -2,9 +2,6 @@
 /**
  * Test for Schema database management
  *
- *
- * PHP 5
- *
  * CakePHP(tm) Tests <http://book.cakephp.org/2.0/en/development/testing.html>
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -174,6 +171,7 @@ class TestAppSchema extends CakeSchema {
 	public $datatypes = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => 0, 'key' => 'primary'),
 		'float_field' => array('type' => 'float', 'null' => false, 'length' => '5,2', 'default' => ''),
+		'decimal_field' => array('type' => 'decimal', 'length' => '6,3', 'default' => '0.000'),
 		'huge_int' => array('type' => 'biginteger'),
 		'bool' => array('type' => 'boolean', 'null' => false, 'default' => false),
 		'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => true)),
@@ -703,7 +701,7 @@ class CakeSchemaTest extends CakeTestCase {
 		);
 		$result = $this->Schema->generateTable('fields', $posts);
 		$this->assertRegExp('/public \$fields/', $result);
-		$this->assertPattern('/\'type\' \=\> \'fulltext\'/', $result);
+		$this->assertRegExp('/\'type\' \=\> \'fulltext\'/', $result);
 	}
 
 /**
@@ -790,13 +788,13 @@ class CakeSchemaTest extends CakeTestCase {
 		$compare = $New->compare($this->Schema, $tables);
 		$expected = array(
 			'ratings' => array(
-				'add' => array(
+				'create' => array(
 					'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'key' => 'primary'),
-					'foreign_key' => array('type' => 'integer', 'null' => false, 'default' => null, 'after' => 'id'),
-					'model' => array('type' => 'varchar', 'null' => false, 'default' => null, 'after' => 'foreign_key'),
-					'value' => array('type' => 'float', 'null' => false, 'length' => '5,2', 'default' => null, 'after' => 'model'),
-					'created' => array('type' => 'datetime', 'null' => false, 'default' => null, 'after' => 'value'),
-					'modified' => array('type' => 'datetime', 'null' => false, 'default' => null, 'after' => 'created'),
+					'foreign_key' => array('type' => 'integer', 'null' => false, 'default' => null),
+					'model' => array('type' => 'varchar', 'null' => false, 'default' => null),
+					'value' => array('type' => 'float', 'null' => false, 'length' => '5,2', 'default' => null),
+					'created' => array('type' => 'datetime', 'null' => false, 'default' => null),
+					'modified' => array('type' => 'datetime', 'null' => false, 'default' => null),
 					'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1)),
 					'tableParameters' => array('charset' => 'latin1', 'collate' => 'latin1_swedish_ci', 'engine' => 'MyISAM')
 				)

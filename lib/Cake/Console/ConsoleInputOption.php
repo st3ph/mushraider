@@ -2,8 +2,6 @@
 /**
  * ConsoleInputOption file
  *
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -179,7 +177,7 @@ class ConsoleInputOption {
 /**
  * Check that a value is a valid choice for this option.
  *
- * @param string $value
+ * @param string $value The choice to validate.
  * @return boolean
  * @throws ConsoleException
  */

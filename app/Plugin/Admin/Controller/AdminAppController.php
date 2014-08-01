@@ -11,7 +11,8 @@ class AdminAppController extends AppController {
 
         // Login required
         if(!$this->user) {
-            $this->Session->setFlash(__('You must login to access this page.'), 'flash_error');
+            $this->Session->write('redirectFrom', $this->Tools->here());
+            $this->Session->setFlash(__('You have to be logged in to access this page.'), 'flash_warning');
             $this->redirect('/auth/login');
         }
 

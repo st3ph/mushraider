@@ -27,15 +27,15 @@
     $this->Html->css('font-awesome.min', null, array('inline' => false));
     $this->Html->css('jquery-ui-1.10.3.custom.min', null, array('inline' => false));
     $this->Html->css('jquery.cleditor', null, array('inline' => false));    
-    $this->Html->css('Admin.spectrum', null, array('inline' => false));
+    $this->Html->css('Admin.spectrum.min', null, array('inline' => false));
     $this->Html->css('Admin.jquery.dataTables', null, array('inline' => false));
     $this->Html->css('Admin.styles.css'.$staticVersion, null, array('inline' => false));
 
     $this->Html->script('jquery-2.1.0.min', array('inline' => false));
     $this->Html->script('jquery-ui-1.10.3.custom.min', array('inline' => false));
     $this->Html->script('bootstrap.min', array('inline' => false));
-    $this->Html->script('jquery.cleditor', array('inline' => false));
-    $this->Html->script('Admin.spectrum', array('inline' => false));
+    $this->Html->script('jquery.cleditor.min', array('inline' => false));
+    $this->Html->script('Admin.spectrum.min', array('inline' => false));
     $this->Html->script('Admin.jquery.dataTables.min', array('inline' => false));
     $this->Html->script('Admin.scripts.js'.$staticVersion, array('inline' => false));
 

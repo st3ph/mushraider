@@ -176,8 +176,13 @@ jQuery(function($) {
                 // Add character to the roster
                 if(msg.msg == 'ok' && typeof msg.html != 'undefined' && msg.html.length) {
                     var charStatus = signInValue?'waiting':'rejected';
-                    $roster.find('tbody td[data-id="role_'+roleId+'"] .'+charStatus).append(msg.html);                    
+                    $roster.find('tbody td[data-id="role_'+roleId+'"] .'+charStatus).append(msg.html);
                 }
+
+                // Remove user from "bad kitties"
+                $('#badKitties').find('span[data-user="'+userId+'"]').fadeOut(function() {
+                    $(this).remove();
+                });
 
                 $characterMessage.html(messageText).addClass(messageClass);
             }

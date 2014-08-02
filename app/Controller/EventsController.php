@@ -84,7 +84,7 @@ class EventsController extends AppController {
 
         $params = array();
         $params['recursive'] = -1;
-        $params['fields'] = array('User.username');
+        $params['fields'] = array('User.id', 'User.username');
         $params['joins'] = array(
                 array(
                     'table' => 'characters',

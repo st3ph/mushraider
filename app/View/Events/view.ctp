@@ -166,7 +166,7 @@
 	<div id="badKitties">
 		<?php foreach($badGuys as $key => $badGuy):?>
 			<?php echo $key?', ':'';?>
-			<span><?php echo $badGuy['User']['username'];?></span>
+			<span data-user="<?php echo $badGuy['User']['id'];?>"><?php echo $badGuy['User']['username'];?></span>
 		<?php endforeach;?>
 	</div>
 <?php else:?>

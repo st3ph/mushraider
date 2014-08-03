@@ -83,6 +83,15 @@ var UpdatePreviewCanvas = function() {
     context.drawImage(img, x, y, UseWidth, UseHeight);
 }
 
+var randomString = function(length) {
+    var chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var result = '';
+    for(var i = length; i > 0; --i) {
+        result += chars[Math.round(Math.random() * (chars.length - 1))];
+    }
+    return result;
+}
+
 jQuery(function($) {
     if($('.flashMessage').length) {
         var timer = $('.flashMessage').hasClass('alert-update')?30000:8000;        
@@ -235,4 +244,15 @@ jQuery(function($) {
                       "outdent indent | alignleft center alignright justify | undo redo | link unlink"
         });
     }
+
+    /*
+    * Settings
+    */
+    $('#apiPrivateKey').on('click', '.refresh', function(e) {
+        e.preventDefault();
+
+        var privateKey = randomString(32);
+        $('#apiPrivateKey').find('.privateKey').text(privateKey);
+        $('#SettingPrivateKey').val(privateKey);
+    });
 });

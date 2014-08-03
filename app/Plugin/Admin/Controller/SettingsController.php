@@ -163,7 +163,6 @@ class SettingsController extends AdminAppController {
     }
 
     public function bridge() {
-        $currentTheme = json_decode($this->Setting->getOption('theme'));
         if(!empty($this->request->data['Setting'])) {
             $bridge = array();
             $bridge['enabled'] = $this->request->data['Setting']['enabled'];
@@ -183,6 +182,28 @@ class SettingsController extends AdminAppController {
             $this->request->data['Setting']['enabled'] = $bridge->enabled;
             $this->request->data['Setting']['url'] = $bridge->url;
             $this->request->data['Setting']['secret'] = $bridge->secret;
+        }
+    }
+
+    public function api() {
+        if(!empty($this->request->data['Setting'])) {
+            $api = array();
+            $api['enabled'] = $this->request->data['Setting']['enabled'];
+            $api['privateKey'] = trim($this->request->data['Setting']['privateKey']);
+            if($api['enabled'] && empty($api['privateKey'])) {
+                $this->request->data['Setting']['enabled'] = 0;
+                $this->Session->setFlash(__('Private key is mandatory'), 'flash_error');  
+            }else {
+                $this->Setting->setOption('api', json_encode($api));
+                $this->Session->setFlash(__('Settings have been updated'), 'flash_success');
+                return $this->redirect('/admin/settings/api');
+            }
+        }
+
+        $api = json_decode($this->Setting->getOption('api'));
+        if(!empty($api)) {
+            $this->request->data['Setting']['enabled'] = $api->enabled;
+            $this->request->data['Setting']['privateKey'] = $api->privateKey;
         }
     }
 

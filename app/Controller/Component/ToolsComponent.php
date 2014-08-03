@@ -194,4 +194,19 @@ class ToolsComponent extends Component {
         }
         return $a;
     }
+
+    /*
+    * @name paramsToUrl
+    * @desc return params string
+    * @param array $params
+    * @return string
+    */
+    function paramsToUrl($params) {
+        $url = '';
+        foreach($params as $key => $value) {
+            $url .= '/'.$key.':'.$value;
+        }
+
+        return $url;
+    }
 }

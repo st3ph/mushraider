@@ -23,6 +23,7 @@
                     <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('General'), '/admin/settings', array('escape' => false));?></li>
                     <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('Display'), '/admin/settings/display', array('escape' => false));?></li>
                     <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('Integration'), '/admin/settings/bridge', array('escape' => false));?></li>
+                    <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('API'), '/admin/settings/api', array('escape' => false));?></li>
                 </ul>
             </li>
         <?php endif;?>

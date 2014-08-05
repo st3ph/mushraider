@@ -53,29 +53,33 @@ class AuthController extends AppController {
                 }else {
                     $roleId = !empty($auth->role)?$this->Role->getIdByAlias($auth->role):null;
 
+                    // handle weird login on some CMS (hello drupal)
+                    $userLogin = $this->request->data['User']['login'];
+                    if(preg_match('/^([0-9a-zA-Z_-]{3,20})$/', $userLogin) == 0) { // Logon don't match MushRaider logins
+                        $userLogin = $this->Tools->slugMe($userLogin);
+                        if(strlen($userLogin) > 20) { // Login is too big, we truncate it
+                            $userLogin = substr($userLogin, 0, 20);
+                        }
+                    }
+
                     $params = array();
                     $params['fields'] = array('id', 'username', 'email', 'password', 'role_id');
-                    $params['conditions']['or']['username'] = $this->request->data['User']['login'];
-                    $params['conditions']['or']['email'] = $this->request->data['User']['login'];
+                    $params['conditions']['or']['username'] = $userLogin;
+                    $params['conditions']['or']['email'] = $auth->email;
                     $params['conditions']['status'] = array(1, 0);
                     if($user = $this->User->find('first', $params)) { // User already exist
+                        // Update some params to match the bridge DB
                         $toSave = array();
                         $toSave['id'] = $user['User']['id'];
                         $toSave['password'] = md5($this->request->data['User']['password']);
                         $toSave['status'] = 1;
                         $toSave['bridge'] = 1;
                         $toSave['role_id'] = $roleId?$roleId:$user['User']['role_id'];
-                        $this->User->save($toSave);
-                    }else {
-                        // handle weird login on some CMS (hello drupal)
-                        $userLogin = $this->request->data['User']['login'];
-                        if(preg_match('/^([0-9a-zA-Z_-]{3,20})$/', $userLogin) == 0) { // Logon don't match MushRaider logins
-                            $userLogin = $this->Tools->slugMe($userLogin);
-                            if(strlen($userLogin) > 20) { // Login is too big, we truncate it
-                                $userLogin = substr($userLogin, 0, 20);
-                            }
+                        if(!$this->User->save($toSave)) {
+                            $this->Session->setFlash(__('MushRaider can\'t update your account oO'), 'flash_warning');
+                            return;
                         }
-
+                    }else { // Create new user from bridge DB
                         $user = array();
                         $user['User']['username'] = $userLogin;
                         $user['User']['email'] = $auth->email;
@@ -84,7 +88,10 @@ class AuthController extends AppController {
                         $user['User']['status'] = 1;
                         $user['User']['bridge'] = 1;
                         $user['User']['role_id'] = $roleId?$roleId:$this->Role->getIdByAlias('member');
-                        $this->User->save($user['User']);
+                        if(!$this->User->save($user['User'])) {
+                            $this->Session->setFlash(__('MushRaider can\'t update your account oO'), 'flash_warning');
+                            return;
+                        }
                         $user['User']['id'] = $this->User->getLastInsertId();
                     }
 
@@ -199,24 +206,29 @@ class AuthController extends AppController {
     }
 
     private function goLogin($user, $cookieName, $remember) {
-        if(empty($remember)) {
-            $this->Cookie->delete($cookieName);
-        }else{
-            $cookie = array();
-            $cookie['username'] = $user['User']['username'];
-            $cookie['password'] = $user['User']['password'];
-            $this->Cookie->write($cookieName, $cookie, true, '+2 weeks');
-        }
-        $this->Session->write('User.id', $user['User']['id']);
-        $this->Session->setFlash(__('Congratulation %s, you are now logged in', $user['User']['username']), 'flash_success');
+        if(!empty($user) && !empty($user['User']['id'])) {
+            if(empty($remember)) {
+                $this->Cookie->delete($cookieName);
+            }else{
+                $cookie = array();
+                $cookie['username'] = $user['User']['username'];
+                $cookie['password'] = $user['User']['password'];
+                $this->Cookie->write($cookieName, $cookie, true, '+2 weeks');
+            }
+            $this->Session->write('User.id', $user['User']['id']);
+            $this->Session->setFlash(__('Congratulation %s, you are now logged in', $user['User']['username']), 'flash_success');
 
-        $redirect = '/';
-        if($this->Session->check('redirectFrom')) {
-            $redirect = $this->Session->read('redirectFrom');
-            $this->Session->delete('redirectFrom');
+            $redirect = '/';
+            if($this->Session->check('redirectFrom')) {
+                $redirect = $this->Session->read('redirectFrom');
+                $this->Session->delete('redirectFrom');
+            }
+
+            return $this->redirect($redirect);
         }
         
-        return $this->redirect($redirect);
+        $this->Session->setFlash(__('MushRaider can\'t find your account, maybe you need some sleep ?'), 'flash_warning');
+        unset($this->request->data['User']);
     }
 
     private function cookieLogin($user, $cookieName) {

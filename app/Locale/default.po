@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Mushraider\n"
-"POT-Creation-Date: 2014-07-31 15:48+0100\n"
-"PO-Revision-Date: 2014-07-31 15:59+0100\n"
+"POT-Creation-Date: 2014-08-05 21:23+0100\n"
+"PO-Revision-Date: 2014-08-05 21:24+0100\n"
 "Last-Translator: Stéphane Litou <contact@stephane-litou.com>\n"
 "Language-Team:  <contact@stephane-litou.com>\n"
 "Language: fr\n"
@@ -41,8 +41,8 @@ msgstr "%s a été ajouté à la liste de vos personnages"
 #: E:\www\wamp\www\mushraider\app/Controller/AccountController.php:106
 #: E:\www\wamp\www\mushraider\app/Controller/AccountController.php:240
 #: E:\www\wamp\www\mushraider\app/Controller/AccountController.php:262
-#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:135
-#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:183
+#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:142
+#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:190
 #: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:182
 #: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:258
 #: E:\www\wamp\www\mushraider\app/Controller/EventsController.php:322
@@ -179,13 +179,19 @@ msgid "Login to MushRaider"
 msgstr "Connexion à MushRaider"
 
 #: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:51
-#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:106
+#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:113
+#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:230
 msgid "MushRaider can't find your account, maybe you need some sleep ?"
 msgstr ""
 "MushRaider ne trouve pas ce compte, peut être avez-vous besoin d'un peu de "
 "repos ?"
 
-#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:104
+#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:79
+#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:92
+msgid "MushRaider can't update your account oO"
+msgstr "MushRaider ne peut pas mettre à jour votre compte oO"
+
+#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:111
 msgid ""
 "You have to wait until an admin activate your account, go farm while "
 "waiting !"
@@ -193,16 +199,16 @@ msgstr ""
 "Vous devez attendre qu'un admin active votre compte, vous pouvez retourner "
 "farm en attendant !"
 
-#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:116
+#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:123
 msgid "Signup are disabled because bridge system is enabled."
 msgstr ""
 "Les inscriptions sont fermées car le système d'intégration a été activé."
 
-#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:120
+#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:127
 msgid "Signup to MushRaider"
 msgstr "Inscription à MushRaider"
 
-#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:131
+#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:138
 msgid ""
 "Yeah, your account has been created, but now you need to wait until your "
 "account as been validated by an admin to access the raid planner (security "
@@ -211,33 +217,33 @@ msgstr ""
 "Yeah, votre compte a été créé, cependant vous devez attendre qu'un admin "
 "valide votre compte pour accéder au raid planner (question de sécurité)."
 
-#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:141
+#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:148
 msgid "Password recovery is disabled because bridge system is enabled."
 msgstr ""
 "La récupération de mot de passe est désactivée car le système d'intégration "
 "a été activé."
 
-#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:145
-#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:161
+#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:152
+#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:168
 msgid "Password Recovery"
 msgstr "Retrouver son mot de passe"
 
-#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:151
+#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:158
 msgid "An email has been sent to you with the recovery instructions."
 msgstr ""
 "Un email vous a été envoyé avec les instructions pour retrouver votre mot de "
 "passe."
 
-#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:164
-#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:185
+#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:171
+#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:192
 msgid "This link is no longer available."
 msgstr "Ce lien n'est plus valable."
 
-#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:180
+#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:187
 msgid "Your password has been updated."
 msgstr "Votre mot de passe a été mis à jour."
 
-#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:211
+#: E:\www\wamp\www\mushraider\app/Controller/AuthController.php:219
 #, php-format
 msgid "Congratulation %s, you are now logged in"
 msgstr "Félicitations %s, vous êtes maintenant connecté"
@@ -2354,7 +2360,7 @@ msgid "There is no screenshot attached to this report"
 msgstr "Il n'y a aucun screenshot dans ce compte rendu"
 
 #: E:\www\wamp\www\mushraider\app/View/Events/report.ctp:41
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:175
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:176
 msgid "Comments"
 msgstr "Commentaires"
 
@@ -2423,31 +2429,31 @@ msgstr "Niveau minimum de personnage"
 msgid "Created by"
 msgstr "Créé par"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:141
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:142
 msgid "The roster for this role is full"
 msgstr "Le roster pour ce rôle est complet"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:142
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:143
 msgid "Validated"
 msgstr "Validés"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:147
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:148
 msgid "Waiting"
 msgstr "En attente"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:152
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:153
 msgid "Rejected"
 msgstr "Absents"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:163
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:164
 msgid "Bad Kitties"
 msgstr "Mauvais élèves"
 
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:163
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:164
 msgid "no answer yet..."
 msgstr "pas encore de réponse..."
 
-#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:172
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:173
 msgid "No bad kitty for this event !"
 msgstr "Tout le monde a répondu !"
 

@@ -82,6 +82,8 @@ div.tooltip-inner div {text-align:left;}
 #content .nav-tabs.nav-stacked>li>a:hover, #content .nav-tabs.nav-stacked>li>a:focus {background-color:#eee;color:#555;text-shadow:0 1px 0 #fff;}
 #content .nav-tabs.nav-stacked>li.active>a {background-color:#bf4d28;color:#fff;text-shadow:none;}
 
+form .select .loading {margin:0 0 5px 5px;}
+
 /*
 * Login
 */

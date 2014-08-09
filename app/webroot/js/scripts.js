@@ -36,16 +36,37 @@ jQuery(function($) {
     * Account
     */
     $('#CharacterGameId').on('change', function(e) {
-        var gameId = $(this).val();
+        $imgLoading = $(imgLoading);        
+
+        var $inputObj = $(this);
+        var $submitObj = $inputObj.parents('form').find('input[type="submit"]');
+        var gameId = $inputObj.val();
         if(gameId.length) {
+            $inputObj.after($imgLoading);
+            $submitObj.prop('disabled', true);
+
             $.ajax({
                 type: 'get',
                 url: site_url+'ajax/getListByGame',
                 data: 'game='+gameId,
+                dataType: 'html',
                 success: function(resHtml) {
                     $('#objectsPlaceholder').html(resHtml);
+                    $submitObj.prop('disabled', false);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    var errorStr = $inputObj.data('error');
+                    if(textStatus != null) {
+                        errorStr += ' : '+textStatus;
+                    }
+                    if(errorThrown != null) {
+                        errorStr += ' ('+textStatus+')';
+                    }
+                    $inputObj.after('<div class="text-error">'+errorStr+'</div>');
                 }
             });
+
+            $imgLoading.remove();
         }else {
             $('#objectsPlaceholder').html('');
         }
@@ -94,9 +115,12 @@ jQuery(function($) {
 
     var $EventGame = $('#EventGameId');
     var loadDungeons = function($selectObject, selectedObject) {
+        var $imgLoading = $(imgLoading);        
         var gameId = $selectObject.val();
         var dungeonSelected = typeof(selectedObject) != 'undefined'?selectedObject:0;
         if(gameId.length) {
+            $selectObject.after($imgLoading);
+
             $.ajax({
                 type: 'get',
                 url: site_url+'ajax/getDungeonsByGame',
@@ -108,8 +132,20 @@ jQuery(function($) {
                         optionsHtml += '<option value="'+dungeon.Dungeon.id+'" '+(dungeonSelected == dungeon.Dungeon.id?'selected="selected"':'')+'>'+dungeon.Dungeon.title+'</option>';
                     });
                     $('#EventDungeonId').html(optionsHtml);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    var errorStr = $selectObject.data('error');
+                    if(textStatus != null) {
+                        errorStr += ' : '+textStatus;
+                    }
+                    if(errorThrown != null) {
+                        errorStr += ' ('+textStatus+')';
+                    }
+                    $selectObject.after('<div class="text-error">'+errorStr+'</div>');
                 }
             });
+
+            $imgLoading.remove();
         }else {
             $('#EventDungeonId').html('');
         }

@@ -30,7 +30,15 @@ class CharactersController extends ApiAppController {
         ));
     }
 
-    public function view($id) {
+    public function view() {
+        if(empty($this->request->params['named']['character'])) {
+            $this->set(array(
+                'character' => array(),
+                '_serialize' => array('character')
+            ));
+            return;
+        }
+
         $params = array();
         $params['recursive'] = 1;
         $params['fields'] = array('Character.id', 'Character.title', 'Character.level');
@@ -39,7 +47,7 @@ class CharactersController extends ApiAppController {
         $params['contain']['Classe']['fields'] = array('title', 'color');
         $params['contain']['Race']['fields'] = array('title');
         $params['contain']['User']['fields'] = array('username', 'status');
-        $params['conditions']['User.id'] = $id;
+        $params['conditions']['User.id'] = $this->request->params['named']['character'];
         $character = $this->Character->find('first', $params);
         $this->set(array(
             'character' => $character,

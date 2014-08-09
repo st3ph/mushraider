@@ -30,7 +30,15 @@ class RosterController extends ApiAppController {
         ));
     }
 
-    public function view($id) {
+    public function view() {
+        if(empty($this->request->params['named']['user'])) {
+            $this->set(array(
+                'user' => array(),
+                '_serialize' => array('user')
+            ));
+            return;
+        }
+
         $params = array();
         $params['recursive'] = 2;
         $params['fields'] = array('User.id', 'User.username');
@@ -39,7 +47,7 @@ class RosterController extends ApiAppController {
         $params['contain']['Character']['Game']['fields'] = array('title');
         $params['contain']['Character']['Classe']['fields'] = array('title');
         $params['contain']['Character']['Race']['fields'] = array('title');
-        $params['conditions']['User.id'] = $id;
+        $params['conditions']['User.id'] = $this->request->params['named']['user'];
         $user = $this->User->find('first', $params);
         $this->set(array(
             'user' => $user,

@@ -32,20 +32,29 @@ class EventsController extends ApiAppController {
         )); 
     }
 
-    public function view($id) {
+    public function view() {
+        if(empty($this->request->params['named']['event'])) {
+            $this->set(array(
+                'event' => array(),
+                '_serialize' => array('event')
+            ));
+            return;
+        }
+
         $params = array();
         $params['recursive'] = 2;
-        $params['fields'] = array('User.id', 'User.username');
-        $params['contain']['Role']['fields'] = array('title');
-        $params['contain']['Character']['fields'] = array('id', 'title', 'level', 'status');
-        $params['contain']['Character']['Game']['fields'] = array('title');
-        $params['contain']['Character']['Classe']['fields'] = array('title');
-        $params['contain']['Character']['Race']['fields'] = array('title');
-        $params['conditions']['User.id'] = $id;
-        $user = $this->User->find('first', $params);
+        $params['fields'] = array('Event.id', 'Event.title', 'Event.game_id', 'Event.dungeon_id', 'Event.time_invitation', 'Event.time_start');
+        $params['contain']['Game']['fields'] = array('title');
+        $params['contain']['Dungeon']['fields'] = array('title');
+        $params['contain']['User']['fields'] = array('username');
+        $params['contain']['EventsRole']['RaidsRole']['fields'] = array('title');
+        $params['contain']['EventsCharacter']['Character']['Classe']['fields'] = array('title');      
+        $params['contain']['EventsCharacter']['Character']['User']['fields'] = array('username');
+        $params['conditions']['Event.id'] = $this->request->params['named']['event'];
+        $event = $this->Event->find('first', $params);
         $this->set(array(
-            'user' => $user,
-            '_serialize' => array('user')
+            'event' => $event,
+            '_serialize' => array('event')
         ));   
     }
 }

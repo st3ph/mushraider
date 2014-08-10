@@ -165,25 +165,38 @@ jQuery(function($) {
                 modalView = $('<div>');
                 modalView.html(resHtml);
 
+                var $dungeonSizeInputs = modalView.find('.dungeonSizeInputs');
+
                 // Add event to catch form submit
                 modalView.find('form').on('submit', function(e) {
                     e.preventDefault();
 
-                    // Add loading
-                    $(this).find('.submit').prepend(imgLoading);
-                    $(this).find('.submit input').attr('disabled', true);                    
-                    
-                    var datastring = $(this).serialize();
-                    $.ajax({
-                        type: 'post',
-                        url: site_url+'admin/'+controllerName+'/add',
-                        data: datastring,
-                        dataType: "json",
-                        success: function(objectInfos) {
-                            closeModal(modalView);                        
-                            addInList(objectInfos.id, objectInfos.title, '#'+listName, fieldName);
-                        }
-                    });
+                    if($dungeonSizeInputs.length && $dungeonSizeInputs.find('#DungeonRaidssizeId').val() == '' && $dungeonSizeInputs.find('#DungeonCustomraidssize').val() == '') {
+                        $dungeonSizeInputs.find('#DungeonRaidssizeId').addClass('form-error');
+                        $dungeonSizeInputs.find('#DungeonCustomraidssize').addClass('form-error');
+                        $dungeonSizeInputs.append('<div class="text-error">'+$dungeonSizeInputs.data('error')+'</div>');
+                    }else {
+                        // Remove dungeon size check errors
+                        $dungeonSizeInputs.find('#DungeonRaidssizeId').removeClass('form-error');
+                        $dungeonSizeInputs.find('#DungeonCustomraidssize').removeClass('form-error');
+                        $dungeonSizeInputs.find('.text-error').remove();
+
+                        // Add loading
+                        $(this).find('.submit').prepend(imgLoading);
+                        $(this).find('.submit input').attr('disabled', true);                    
+                        
+                        var datastring = $(this).serialize();
+                        $.ajax({
+                            type: 'post',
+                            url: site_url+'admin/'+controllerName+'/add',
+                            data: datastring,
+                            dataType: "json",
+                            success: function(objectInfos) {
+                                closeModal(modalView);                        
+                                addInList(objectInfos.id, objectInfos.title, '#'+listName, fieldName);
+                            }
+                        });
+                    }
                 });
 
                 modalView.dialog({
@@ -255,4 +268,25 @@ jQuery(function($) {
         $('#apiPrivateKey').find('.privateKey').text(privateKey);
         $('#SettingPrivateKey').val(privateKey);
     });
+
+    /*
+    * Dungeons
+    */
+    if($('.dungeonSizeInputs').length) {
+        var $dungeonSizeInputs = $('.dungeonSizeInputs');
+        var $dungeonSizeFrom = $dungeonSizeInputs.parents('form');
+
+        $dungeonSizeFrom.on('submit', function(e) {
+            if($dungeonSizeInputs.find('#DungeonRaidssizeId').val() == '' && $dungeonSizeInputs.find('#DungeonCustomraidssize').val() == '') {
+                e.preventDefault();
+                $dungeonSizeInputs.find('#DungeonRaidssizeId').addClass('form-error');
+                $dungeonSizeInputs.find('#DungeonCustomraidssize').addClass('form-error');
+                $dungeonSizeInputs.append('<div class="text-error">'+$dungeonSizeInputs.data('error')+'</div>');
+            }else {
+                $dungeonSizeInputs.find('#DungeonRaidssizeId').removeClass('form-error');
+                $dungeonSizeInputs.find('#DungeonCustomraidssize').removeClass('form-error');
+                $dungeonSizeInputs.find('.text-error').remove();
+            }
+        });  
+    }
 });

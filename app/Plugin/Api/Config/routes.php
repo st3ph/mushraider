@@ -4,7 +4,7 @@
  * REST API
  */
     Router::mapResources(array('roster', 'events', 'characters'));
-    Router::parseExtensions();
+    Router::parseExtensions('json', 'xml');
 
 /**
  * Load the CakePHP default routes. Only remove this if you do not want to use

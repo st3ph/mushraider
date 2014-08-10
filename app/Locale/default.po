@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Mushraider\n"
 "POT-Creation-Date: 2014-07-31 15:48+0100\n"
-"PO-Revision-Date: 2014-07-31 15:59+0100\n"
+"PO-Revision-Date: 2014-08-10 16:53+0100\n"
 "Last-Translator: Stéphane Litou <contact@stephane-litou.com>\n"
 "Language-Team:  <contact@stephane-litou.com>\n"
 "Language: fr\n"
@@ -486,7 +486,7 @@ msgstr "Le logo est trop gros"
 
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/PatcherController.php:18
 msgid "MushRaider can't find this patch"
-msgstr "MushRaider ne trouve pas cet événement oO"
+msgstr "MushRaider ne trouve pas ce patch oO"
 
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/Controller/PatcherController.php:37
 #, php-format

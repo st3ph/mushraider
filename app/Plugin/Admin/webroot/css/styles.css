@@ -1237,6 +1237,11 @@ header .toolbar .nav li a {color:#bf4d28;}
 .well-white {background-color:#fdfdfd;}
 form .hint {color:#3a87ad;margin-left:5px;font-size:16px;cursor:help;}
 form .refresh {color:#e9322d;margin-left:5px;font-size:14px;cursor:pointer;}
+table td .icon-move {cursor:move;}
+table.table-striped tbody.ui-sortable>tr:nth-child(even)>td {background:#fff;}
+table.table-striped tbody.ui-sortable tr.sortable-placeholder td {background:#999;border-top:2px dashed #ddd;border-bottom:2px dashed #ddd}
+table.table-striped tbody.ui-sortable tr.sortable-placeholder td:first-child {border-left:2px dashed #ddd}
+table.table-striped tbody.ui-sortable tr.sortable-placeholder td:last-child {border-right:2px dashed #ddd}
 
 /* Dashboard */
 .quick-btn {min-width:90px;width:auto;padding-left:2px;padding-right:2px;}

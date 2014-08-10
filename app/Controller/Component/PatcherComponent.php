@@ -38,6 +38,14 @@ class PatcherComponent extends Component {
         if(!$EventsTemplate->query($sql)) {
             $this->controller->redirect('/admin/patcher/apply/v-1.3.5');
         }
+
+        // v1.4
+        App::uses('RaidsRole', 'Model');
+        $RaidsRole = new RaidsRole();
+        $sql = "SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE() AND COLUMN_NAME='order' AND TABLE_NAME='".Configure::read('Database.prefix')."raids_roles'";
+        if(!$RaidsRole->query($sql)) {
+            $this->controller->redirect('/admin/patcher/apply/v-1.4');
+        }
 	}
 
     public function run_sql_file($mysqlLink, $location, $prefix = '') {

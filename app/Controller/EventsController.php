@@ -48,6 +48,20 @@ class EventsController extends AppController {
         $this->set('filterEventsGameId', $filterEventsGameId);
     }
 
+    private function orderRoles($a, $b) {
+        if(!empty($a['RaidsRole']) && !empty($b['RaidsRole'])) {
+            if($a['RaidsRole']['order'] < $b['RaidsRole']['order']) {
+                return -1;
+            }elseif($a['RaidsRole']['order'] > $b['RaidsRole']['order']) {
+                return 1;
+            }else {
+                return 0;
+            }
+        }
+
+        return 0;
+    }
+
     public function view($eventId) {
         $this->pageTitle = __('View event').' - '.$this->pageTitle;        
 
@@ -65,6 +79,10 @@ class EventsController extends AppController {
             $this->Session->setFlash(__('MushRaider can\'t find this event oO'), 'flash_warning');
             $this->redirect('/events');
         }
+        
+        // Reorder raids roles
+        usort($event['EventsRole'], array($this, 'orderRoles'));
+
         $this->set('event', $event);
 
         // Get user characters for this event

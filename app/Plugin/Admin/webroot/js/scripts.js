@@ -95,7 +95,7 @@ var randomString = function(length) {
 jQuery(function($) {
     if($('.flashMessage').length) {
         var timer = $('.flashMessage').hasClass('alert-update')?30000:8000;        
-        setTimeout('hideFlashMessage()', 8000);
+        setTimeout('hideFlashMessage()', timer);
     }
     
     $('.flashMessage .close').bind('click', function(e) {
@@ -119,6 +119,45 @@ jQuery(function($) {
     $('.tt').tooltip();
 
     loadSpectrum('.colorpicker');
+
+    $('.sortableTbody').sortable({
+        placeholder: "sortable-placeholder",
+        cursor: "move",
+        containment: ".sortableTbody",
+        handle: '.icon-move',
+        helper: function(e, tr) {
+            var $originals = tr.children();
+            var $helper = tr.clone();
+            $helper.children().each(function(index) {
+                $(this).width($originals.eq(index).width());
+            });
+            return $helper;
+        },
+        stop: function(event, ui) {   
+            var $thisTable = $(this).parents('table');
+            var $imgLoading = $(imgLoading);
+            var $jsonMsg = $thisTable.next('.jsonMsg');
+            var model = $(this).data('model');
+            var sorted = $(this).sortable('serialize');
+
+            $jsonMsg.html($imgLoading);
+
+            $.ajax({
+                type: 'get',
+                url: site_url+'admin/ajax/updateOrder',
+                data: 'm='+model+'&'+sorted,
+                dataType: 'json',
+                success: function(json) {
+                    $jsonMsg.html('<span class="text-'+json.type+'">'+json.msg+'</span>');
+                    setTimeout(
+                        function() {
+                            $jsonMsg.html('');
+                        }, 5000
+                    );
+                }
+            });
+        }
+    }).disableSelection();
 
     /*
     * Games

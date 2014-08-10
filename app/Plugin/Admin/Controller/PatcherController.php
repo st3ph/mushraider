@@ -4,7 +4,7 @@ class PatcherController extends AdminAppController {
     public $uses = array('Character', 'EventsCharacter', 'Event');
 
     var $adminOnly = true;
-    var $availiblePatchs = array('beta-2', 'beta-3', 'v-1.1', 'v-1.3', 'v-1.3.5');
+    var $availablePatchs = array('beta-2', 'beta-3', 'v-1.1', 'v-1.3', 'v-1.3.5', 'v-1.4');
 
     function beforeFilter() {
         parent::beforeFilter();
@@ -14,7 +14,7 @@ class PatcherController extends AdminAppController {
     }
 
     public function apply($patch = null) {
-    	if(!in_array($patch, $this->availiblePatchs)) {
+        if(!in_array($patch, $this->availablePatchs)) {
     		$this->Session->setFlash(__('MushRaider can\'t find this patch'), 'flash_error');
     		return $this->redirect('/admin');
     	}

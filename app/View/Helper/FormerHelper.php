@@ -200,6 +200,9 @@ class FormerHelper extends AppHelper {
 					case 2:
 						$status = 'validated';
 						break;
+					case 3:
+						$status = 'refused';
+						break;
 					default:
 						$status = 'nok';
 				}

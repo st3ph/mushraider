@@ -53,6 +53,10 @@
 					$messageClass = 'label label-success';
 					$messageText = __('your are validated to this event as');				
 					break;
+				case 3:
+					$messageClass = 'label label-important';
+					$messageText = __('your are refused for this event');
+					break;
 			}
 		}
 		?>
@@ -71,6 +75,7 @@
 					$eventRoles['role_'.$eventRole['RaidsRole']['id']]['characters']['validated'] = '';
 					$eventRoles['role_'.$eventRole['RaidsRole']['id']]['characters']['waiting'] = '';
 					$eventRoles['role_'.$eventRole['RaidsRole']['id']]['characters']['nok'] = '';
+					$eventRoles['role_'.$eventRole['RaidsRole']['id']]['characters']['refused'] = '';
 					?>
 				<?php endforeach;?>
 			</select>
@@ -129,7 +134,7 @@
 						<?php echo $eventRole['title'];?>
 						<span class="current"><?php echo $eventRole['current'];?></span> / <span class="max"><?php echo $eventRole['max'];?></span>
 						<?php if($user['User']['isOfficer'] || $user['User']['isAdmin']):?>
-							<i class="icon-edit pull-right text-warning"></i>
+							<span class="badge badge-warning pull-right"><i class="icon-edit"></i></span>
 						<?php endif;?>
 					</th>
 				<?php endforeach;?>
@@ -140,17 +145,22 @@
 				<?php $colWidth = floor(100 / count($eventRoles));?>
 				<?php foreach($eventRoles as $roleId => $eventRole):?>
 					<td data-id="<?php echo $roleId;?>" data-full="<?php echo __('The roster for this role is full');?>" style="width:<?php echo $colWidth;?>%">
-						<h5><?php echo __('Validated');?></h5>
+						<h5 class="text-success"><?php echo __('Validated');?></h5>
 						<ul class="validated">
 							<?php echo $eventRole['characters']['validated'];?>
 						</ul>
 						<hr />
-						<h5><?php echo __('Waiting');?></h5>
+						<h5 class="text-info"><?php echo __('Waiting');?></h5>
 						<ul class="waiting sortWaiting">
 							<?php echo $eventRole['characters']['waiting'];?>
 						</ul>
 						<hr />
-						<h5><?php echo __('Rejected');?></h5>
+						<h5 class="text-error"><?php echo __('Refused');?></h5>
+						<ul class="refused">
+							<?php echo $eventRole['characters']['refused'];?>
+						</ul>
+						<hr />
+						<h5 class="text-warning"><?php echo __('Rejected');?></h5>
 						<ul class="rejected">
 							<?php echo $eventRole['characters']['nok'];?>
 						</ul>

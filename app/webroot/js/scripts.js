@@ -244,17 +244,26 @@ jQuery(function($) {
     }
 
     // Validate roster
-    $('#eventRoles th').on('click', 'i', function() {
+    $('#eventRoles th').on('click', '.badge', function() {
         var $editButton = $(this);
+        var $editButtonI = $(this).find('i');
         var $table = $editButton.parents('table');
         var $roleTd = $table.find("td[data-id='"+$editButton.parents('th').data('id')+"']");
         var $waiting = $roleTd.find('.waiting');
         var $validated = $roleTd.find('.validated');
-        if($editButton.hasClass('icon-edit')) { // Go Edit mode
-            $editButton.removeClass('icon-edit').addClass('icon-save');
-            $editButton.removeClass('text-warning').addClass('text-success');
-            // Add 'add button' to waiting list
+        var $refused = $roleTd.find('.refused');
+        if($editButtonI.hasClass('icon-edit')) { // Go Edit mode
+            $editButton.removeClass('badge-warning').addClass('badge-success');
+            $editButtonI.removeClass('icon-edit').addClass('icon-save');
+            // Add 'add button' and 'refused button' to waiting list
             $waiting.find('li').each(function() {
+                $(this).find('.character').prepend('<i class="icon-plus text-success"></i>');
+                $(this).find('.character').prepend('<i class="icon-minus-sign text-error"></i>');
+                $(this).addClass('nosort');
+            });
+
+            // Add 'add button' to refused list
+            $refused.find('li').each(function() {
                 $(this).find('.character').prepend('<i class="icon-plus text-success"></i>');
                 $(this).addClass('nosort');
             });
@@ -262,6 +271,7 @@ jQuery(function($) {
             // Add 'remove button' to validated list
             $validated.find('li').each(function() {
                 $(this).find('.character').prepend('<i class="icon-minus text-error"></i>');
+                $(this).addClass('nosort');
             });
         }else { // Save
             $imgLoading = $(imgLoading);
@@ -273,15 +283,20 @@ jQuery(function($) {
                 validatedList += $(this).data('id')+',';
             });
 
+            var refusedList = '';
+            $refused.find('li').each(function() {
+                refusedList += $(this).data('id')+',';
+            });
+
             $.ajax({
                 type: 'get',
                 url: site_url+'ajax/roster',
-                data: 'v='+validatedList+'&r='+$roleTd.data('id')+'&e='+$table.data('id'),
+                data: 'v='+validatedList+'&refused='+refusedList+'&r='+$roleTd.data('id')+'&e='+$table.data('id'),
                 success: function(msg) {                
                     $editButton.next('img').remove();
 
-                    $editButton.removeClass('icon-save').addClass('icon-edit');
-                    $editButton.removeClass('text-success').addClass('text-warning');
+                    $editButton.removeClass('badge-success').addClass('badge-warning');
+                    $editButtonI.removeClass('icon-save').addClass('icon-edit');
                 }
             }); 
 
@@ -293,6 +308,13 @@ jQuery(function($) {
             // Remove 'add button' to validated list
             $validated.find('li').each(function() {
                 $(this).find('.character  i').remove();
+                $(this).removeClass('nosort');
+            });
+
+            // Remove 'add button' to refused list
+            $refused.find('li').each(function() {
+                $(this).find('.character  i').remove();
+                $(this).removeClass('nosort');
             });
         }
     });
@@ -304,6 +326,7 @@ jQuery(function($) {
         var $roleTd = $button.parents('td');
         var $waiting = $roleTd.find('.waiting');
         var $validated = $roleTd.find('.validated');
+        var $refused = $roleTd.find('.refused');
 
         if($button.hasClass('icon-plus')) { // Add player to roster
             // Check if there is a room left for this role
@@ -320,12 +343,24 @@ jQuery(function($) {
             }else {
                 alert($roleTd.data('full'));
             }
-        }else { // Remove player from roster
+        }else if($button.hasClass('icon-minus')) { // Remove player from roster
             $player = $(this).parents('li');
             var $newPlayer = $player.clone();
             $newPlayer.find('i').remove();
             $newPlayer.find('.character').prepend('<i class="icon-plus text-success"></i>');
+            $newPlayer.find('.character').prepend('<i class="icon-minus-sign text-error"></i>');
             $waiting.append($newPlayer);
+            $player.remove();
+
+            var currentPlayers = parseInt($roleTh.find('.current').text());
+            currentPlayers = currentPlayers > 0?currentPlayers - 1:0;
+            $roleTh.find('.current').text(currentPlayers);
+        }else if($button.hasClass('icon-minus-sign')) { // Refused player from roster
+            $player = $(this).parents('li');
+            var $newPlayer = $player.clone();
+            $newPlayer.find('i').remove();
+            $newPlayer.find('.character').prepend('<i class="icon-plus text-success"></i>');
+            $refused.append($newPlayer);
             $player.remove();
 
             var currentPlayers = parseInt($roleTh.find('.current').text());

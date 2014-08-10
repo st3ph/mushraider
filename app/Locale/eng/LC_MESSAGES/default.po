@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Mushraider\n"
 "POT-Creation-Date: 2014-07-31 16:00+0100\n"
-"PO-Revision-Date: 2014-07-31 16:02+0100\n"
+"PO-Revision-Date: 2014-08-10 14:20+0100\n"
 "Last-Translator: Stéphane Litou <contact@stephane-litou.com>\n"
 "Language-Team:  <contact@stephane-litou.com>\n"
 "Language: en\n"
@@ -2410,7 +2410,7 @@ msgstr "Waiting"
 
 #: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:152
 msgid "Rejected"
-msgstr "Rejected"
+msgstr "Absent"
 
 #: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:163
 msgid "Bad Kitties"

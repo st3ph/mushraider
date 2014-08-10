@@ -4,7 +4,7 @@
             <table cellspacing="0" cellpadding="4" bgcolor="#313131" style="color:#ffffff;">
                 <tr>
                     <td>
-                        <h2><?php echo __('You are validated to an event');?></h2>
+                        <h2><?php echo __('You are validated to an event =)');?></h2>
                     </td>
                 </tr>
             </table>

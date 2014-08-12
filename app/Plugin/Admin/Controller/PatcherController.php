@@ -37,9 +37,10 @@ class PatcherController extends AdminAppController {
 	        	$this->Session->setFlash(__('MushRaider can\'t apply the SQL patch, please try again or apply it by yourself using the following file : /app/Config/Schema/sql/mushraider_patch_%s.sql', $patch), 'flash_error');
 	        }else {
 	        	// If there is code to execute...
-	        	$methodeName = str_replace('-', '', $patch);
-	        	if(method_exists($this, $methodeName)) {
-	        		$this->$methodeName();	        		
+                $methodName = str_replace('-', '', $patch);
+	        	$methodName = str_replace('.', '', $patch);
+	        	if(method_exists($this, $methodName)) {
+	        		$this->$methodName();	        		
 	        	}
 
                 // Delete cache for obvious reasons :p
@@ -86,5 +87,16 @@ class PatcherController extends AdminAppController {
 				$this->Character->save($toSaveCharacter);
     		}
     	}
+    }
+
+    public function v14() {
+        // Copy bridge secret key to API private key
+        $bridge = json_decode($this->Setting->getOption('bridge'));
+        if(!empty($bridge) && $bridge->enabled && !empty($bridge->secret)) {
+            $api = array();
+            $api['enabled'] = 1;
+            $api['privateKey'] = $bridge->secret;
+            $this->Setting->setOption('api', json_encode($api));
+        }
     }
 }

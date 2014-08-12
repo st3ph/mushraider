@@ -6,6 +6,7 @@ class AuthController extends AppController {
     var $uses = array('Ticket');
 
     var $userRequired = false;
+    var $api = false;
     var $bridge = false;
 
     public function beforeFilter() {
@@ -13,6 +14,7 @@ class AuthController extends AppController {
 
         $this->layout = 'login';
 
+        $this->api = json_decode($this->Setting->getOption('api'));
         $this->bridge = json_decode($this->Setting->getOption('bridge'));
         $this->set('bridge', $this->bridge);
     }
@@ -29,7 +31,7 @@ class AuthController extends AppController {
         }
 
         $cookieName = 'User';
-        if(!empty($this->bridge) && $this->bridge->enabled && !empty($this->bridge->url) && !empty($this->bridge->secret)) {
+        if(!empty($this->bridge) && $this->bridge->enabled && !empty($this->bridge->url) && !empty($this->api->secret)) {
             $cookieName = 'UserBridge';
         }
         if(!$this->Session->check('User.id')) {
@@ -39,10 +41,10 @@ class AuthController extends AppController {
         }
 
         if(!empty($this->request->data['User'])) {            
-            if(!empty($this->bridge) && $this->bridge->enabled && !empty($this->bridge->url) && !empty($this->bridge->secret)) {
+            if(!empty($this->bridge) && $this->bridge->enabled && !empty($this->bridge->url) && !empty($this->api->privateKey)) {
                 $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_ECB);
                 $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
-                $pwd = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $this->bridge->secret, utf8_encode($this->request->data['User']['password']), MCRYPT_MODE_ECB, $iv);
+                $pwd = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $this->api->privateKey, utf8_encode($this->request->data['User']['password']), MCRYPT_MODE_ECB, $iv);
 
                 $HttpSocket = new HttpSocket();
                 $auth = $HttpSocket->post($this->bridge->url, array('login' => $this->request->data['User']['login'], 'pwd' => $pwd));

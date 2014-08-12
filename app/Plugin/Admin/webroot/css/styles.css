@@ -1212,6 +1212,8 @@ input.form-error, select.form-error, textarea.form-error {border-color:#b94a48;}
 .breadcrumb li {text-shadow:0 1px 0 rgba(51, 47, 47, 0.6);color:#fff;}
 .breadcrumb a, .breadcrumb li.big {color:#BABABA;font-size:24.5px;text-shadow:0 1px 0 rgba(51, 47, 47, 0.6);}
 .row-fluid div.submit {margin-top:20px;}
+.alert a {text-decoration:underline;}
+.label-info a {color:#fff;text-decoration:underline}
 th.actions, td.actions {width:15%;}
 td.actions {text-align:right;}
 td.actions a {display:inline-block;margin-right:10px}
@@ -1254,6 +1256,8 @@ table.table-striped tbody.ui-sortable tr.sortable-placeholder td:last-child {bor
 
 /* Settings */
 .checkbox label {font-weight:normal;}
+#apiModules {margin:50px 0 0 50px;padding-left:20px;border-left:5px solid #ddd;}
+#apiModules.hide {display:none;}
 
 /* Games */
 .addObjectToGame {}

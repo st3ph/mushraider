@@ -300,6 +300,14 @@ jQuery(function($) {
     /*
     * Settings
     */
+    $('#SettingEnabled').on('change', function(e) {
+        if($(this).is(':checked')) {
+            $('#apiModules').show();
+        }else {
+            $('#apiModules').hide();
+        }
+    });
+
     $('#apiPrivateKey').on('click', '.refresh', function(e) {
         e.preventDefault();
 

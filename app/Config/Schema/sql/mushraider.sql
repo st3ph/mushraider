@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS `{prefix}classes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `slug` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL, 
+  `icon` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `color` varchar(20) COLLATE utf8_unicode_ci DEFAULT '666666', 
   `game_id` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -67,6 +68,7 @@ CREATE TABLE IF NOT EXISTS `{prefix}dungeons` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `slug` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL, 
+  `icon` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `game_id` int(11) NULL DEFAULT NULL,
   `raidssize_id` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1',
@@ -223,6 +225,7 @@ CREATE TABLE IF NOT EXISTS `{prefix}raids_sizes` (
 CREATE TABLE IF NOT EXISTS `{prefix}raids_roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `order` int(2) DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 

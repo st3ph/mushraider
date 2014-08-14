@@ -1,6 +1,5 @@
 <?php
-class GamesController extends AdminAppController {
-    public $components = array('Image');
+class GamesController extends AdminAppController {    
     public $uses = array('Game', 'Dungeon', 'Classe', 'Race');
 
     var $paginate = array(
@@ -27,7 +26,7 @@ class GamesController extends AdminAppController {
             $toSave['title'] = $this->request->data['Game']['title'];
             $toSave['slug'] = $this->Tools->slugMe($toSave['title']);
 
-            $imageName = $this->logo($this->request->data['Game']['logo']);
+            $imageName = $this->Image->__add($this->request->data['Game']['logo'], 'files/logos', 'game_', 64, 64);
             if(!isset($imageName['error'])) {
                 $toSave['logo'] = $imageName['name'];
                 if($this->Game->save($toSave)) {
@@ -67,6 +66,8 @@ class GamesController extends AdminAppController {
                 }else {
                     $this->Session->setFlash(__('Something goes wrong'), 'flash_error');
                 }
+            }else {
+                $this->Session->setFlash($imageName['error'], 'flash_error'); 
             }
         }
 
@@ -103,7 +104,7 @@ class GamesController extends AdminAppController {
             $toSave['id'] = $gameId;
             $toSave['title'] = $this->request->data['Game']['title'];
             $toSave['slug'] = $this->Tools->slugMe($toSave['title']);
-            $imageName = $this->logo($this->request->data['Game']['logo']);
+            $imageName = $this->Image->__add($this->request->data['Game']['logo'], 'files/logos', 'game_', 64, 64);
             if(!isset($imageName['error'])) {
                 if(!empty($imageName['name'])) {
                     $toSave['logo'] = $imageName['name'];
@@ -144,6 +145,8 @@ class GamesController extends AdminAppController {
                 }else {
                     $this->Session->setFlash(__('Something goes wrong'), 'flash_error');
                 }
+            }else {
+                $this->Session->setFlash($imageName['error'], 'flash_error'); 
             }
 
             $game['Game'] = array_merge($game['Game'], $this->request->data['Game']);
@@ -160,33 +163,5 @@ class GamesController extends AdminAppController {
 
 
         $this->request->data = array_merge($game, $this->request->data);        
-    }
-
-    private function logo($image) {
-        $return = array();
-        if(!$image['error']) {
-            $imageName = 'game_'.$image['name'];
-            $this->Image->resize($image['tmp_name'], 'files/logos', $imageName, 64, 64);
-            $return['name'] = $imageName;
-        }else {            
-            switch($image['error']) {
-                case 1:
-                case 2:
-                    $error = __('Logo is too big');
-                    break;
-                case 3:
-                    $error = __('An error occur while uploading');
-                    break;
-                case 4:
-                    $return['name'] = null;
-                    break;
-            }
-            if(!empty($error)) {
-                $this->Session->setFlash($error, 'flash_error');  
-                $return['error'] = true;
-            }
-        }
-
-        return $return;
     }
 }

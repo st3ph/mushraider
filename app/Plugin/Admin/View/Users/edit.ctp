@@ -67,7 +67,14 @@
                         <tr>
                             <td><?php echo $character['title'];?></td>
                             <td><?php echo $character['Game']['title'];?></td>
-                            <td><span style="color:<?php echo $character['Classe']['color'];?>"><?php echo $character['Classe']['title'];?></span></td>
+                            <td>
+                                <span style="color:<?php echo $character['Classe']['color'];?>">
+                                    <?php if(!empty($character['Classe']['icon'])):?>
+                                        <?php echo $this->Html->image($character['Classe']['icon'], array('width' => 24));?>
+                                    <?php endif;?>
+                                    <?php echo $character['Classe']['title'];?>
+                                </span>
+                            </td>
                             <td><?php echo $character['Race']['title'];?></td>
                             <td><?php echo $character['RaidsRole']['title'];?></td>
                             <td><?php echo $character['level'];?></td>

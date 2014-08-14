@@ -78,7 +78,14 @@ class AjaxController extends AppController {
                 $jsonMessage['msg'] = 'ok';
 
                 $rosterHtml = '<li data-id="'.$toSave['character_id'].'" data-user="'.$toSave['user_id'].'">';
-                    $rosterHtml .= '<span class="character" style="color:'.$character['Classe']['color'].'">'.$character['Classe']['title'].' '.$character['Character']['title'].' ('.$character['Character']['level'].')</span>';
+                    $rosterHtml .= '<span class="character" style="color:'.$character['Classe']['color'].'">';
+                        if(!empty($character['Classe']['icon'])) {
+                            $rosterHtml .= '<img src="'.$character['Classe']['icon'].'" class="tt" title="'.$character['Classe']['title'].'" width="16" />';
+                        }else {
+                            $rosterHtml .= $character['Classe']['title'];
+                        }
+                        $rosterHtml .= ' '.$character['Character']['title'].' ('.$character['Character']['level'].')';
+                    $rosterHtml .= '</span>';
                     if(!empty($toSave['comment'])) {
                         $rosterHtml .= '<span class="tt" title="'.$toSave['comment'].'"><span class="icon-comments-alt"></span></span>';
                     }

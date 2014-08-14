@@ -36,7 +36,12 @@
                     <?php $tableOpen = true;?>
                 <?php endif;?>
                             <tr>
-                                <td style="color:<?php echo $classe['Classe']['color'];?>"><?php echo $classe['Classe']['title'];?></td>
+                                <td style="color:<?php echo $classe['Classe']['color'];?>">
+                                    <?php if(!empty($classe['Classe']['icon'])):?>
+                                        <?php echo $this->Html->image($classe['Classe']['icon'], array('width' => 32));?>
+                                    <?php endif;?>
+                                    <?php echo $classe['Classe']['title'];?>
+                                </td>
                                 <td class="actions">
                                     <?php echo $this->Html->link('<i class="icon-edit"></i>', '/admin/classes/edit/'.$classe['Classe']['id'], array('class' => 'btn btn-info btn-mini tt', 'title' => __('Edit'), 'escape' => false))?>
                                     <?php if(!$gameId):?>

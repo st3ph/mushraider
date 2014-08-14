@@ -45,7 +45,12 @@
 							<td><?php echo $character['Game']['title'];?></td>
 							<td><?php echo $character['Character']['title'];?></td>
 							<td><?php echo $character['Character']['level'];?></td>
-							<td style="color:<?php echo $character['Classe']['color'];?>"><?php echo $character['Classe']['title'];?></td>
+							<td style="color:<?php echo $character['Classe']['color'];?>">
+								<?php if(!empty($character['Classe']['icon'])):?>
+									<?php echo $this->Html->image($character['Classe']['icon'], array('width' => 24));?>
+								<?php endif;?>
+								<?php echo $character['Classe']['title'];?>
+							</td>
 							<td><?php echo $character['Race']['title'];?></td>
 							<td><?php echo $character['RaidsRole']['title'];?></td>
 							<td>

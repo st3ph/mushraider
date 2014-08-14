@@ -27,7 +27,7 @@
                         <tr>
                             <td>
                                 <?php if(!empty($game['Game']['logo'])):?>
-                                    <?php echo $this->Html->image('/files/logos/'.$game['Game']['logo'], array('width' => 32));?>
+                                    <?php echo $this->Html->image($game['Game']['logo'], array('width' => 32));?>
                                 <?php endif;?>
                                 <?php echo $game['Game']['title'];?>
                             </td>

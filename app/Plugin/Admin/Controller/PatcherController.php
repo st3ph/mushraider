@@ -38,7 +38,7 @@ class PatcherController extends AdminAppController {
 	        }else {
 	        	// If there is code to execute...
                 $methodName = str_replace('-', '', $patch);
-	        	$methodName = str_replace('.', '', $patch);
+	        	$methodName = str_replace('.', '', $methodName);
 	        	if(method_exists($this, $methodName)) {
 	        		$this->$methodName();	        		
 	        	}
@@ -97,6 +97,24 @@ class PatcherController extends AdminAppController {
             $api['enabled'] = 1;
             $api['privateKey'] = $bridge->secret;
             $this->Setting->setOption('api', json_encode($api));
+        }
+
+        // Add absolute path to games's logo field to prepare import functionallity
+        App::uses('Game', 'Model');
+        $GameModel = new Game();
+        $params = array();
+        $params['recursive'] = -1;
+        $params['fields'] = array('id', 'logo');
+        if($games = $GameModel->find('all', $params)) {
+            foreach($games as $game) {
+                if(!empty($game['Game']['logo']) && strpos($game['Game']['logo'], '/files/') === false) {
+                    $toUpdate = array();
+                    $toUpdate['id'] = $game['Game']['id'];
+                    $toUpdate['logo'] = '/files/logos/'.$game['Game']['logo'];
+                    $GameModel->create();
+                    $GameModel->save($toUpdate);
+                }
+            }
         }
     }
 }

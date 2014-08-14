@@ -145,7 +145,7 @@ class FormerHelper extends AppHelper {
 												$output .= '<li>';
 													$output .= '<span>'.$this->date($matchingEvent['Event']['time_invitation'], 'heure').'</span>';
 													if(!empty($matchingEvent['Game']['logo'])) {
-														$output .= $this->Html->image('/files/logos/'.$matchingEvent['Game']['logo'], array('class' => 'logo', 'width' => 16));
+														$output .= $this->Html->image($matchingEvent['Game']['logo'], array('class' => 'logo', 'width' => 16));
 													}
 													// Test is the user is registered for this event
 													$registeredClass = '';
@@ -208,7 +208,14 @@ class FormerHelper extends AppHelper {
 				}
 				$eventRoles['role_'.$character['raids_role_id']]['current'] = $status == 'validated'?$eventRoles['role_'.$character['raids_role_id']]['current'] + 1:$eventRoles['role_'.$character['raids_role_id']]['current'];
 				$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '<li data-id="'.$character['Character']['id'].'" data-user="'.$character['Character']['User']['id'].'">';
-					$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '<span class="character" style="color:'.$character['Character']['Classe']['color'].'">'.$character['Character']['Classe']['title'].' '.$character['Character']['title'].' ('.$character['Character']['level'].')</span>';
+					$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '<span class="character" style="color:'.$character['Character']['Classe']['color'].'">';
+						if(!empty($character['Character']['Classe']['icon'])) {
+							$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= $this->Html->image($character['Character']['Classe']['icon'], array('class' => 'tt', 'title' => $character['Character']['Classe']['title'], 'width' => '16'));
+						}else {
+							$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= $character['Character']['Classe']['title'];
+						}
+						$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= ' '.$character['Character']['title'].' ('.$character['Character']['level'].')';							
+					$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '</span>';
 					if(!empty($character['comment'])) {
 						$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '<span class="tt" title="'.$character['comment'].'"><span class="icon-comments-alt"></span></span>';
 					}

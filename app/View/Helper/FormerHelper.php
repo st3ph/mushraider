@@ -143,9 +143,12 @@ class FormerHelper extends AppHelper {
 
 
 												$output .= '<li>';
-													$output .= '<span>'.$this->date($matchingEvent['Event']['time_invitation'], 'heure').'</span>';
+													$output .= '<span class="time">'.$this->date($matchingEvent['Event']['time_invitation'], 'heure').'</span>';
 													if(!empty($matchingEvent['Game']['logo'])) {
 														$output .= $this->Html->image($matchingEvent['Game']['logo'], array('class' => 'logo', 'width' => 16));
+													}
+													if(!empty($matchingEvent['Dungeon']['icon'])) {
+														$output .= $this->Html->image($matchingEvent['Dungeon']['icon'], array('class' => 'logo', 'width' => 16));
 													}
 													// Test is the user is registered for this event
 													$registeredClass = '';

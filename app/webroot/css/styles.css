@@ -109,7 +109,7 @@ form .select .loading {margin:0 0 5px 5px;}
 #calendar .days td {text-align:center;padding:5px 0;}
 #calendar .day {border:4px solid #ddd;height:100px;position:relative;background-color:#fff;background-clip:padding-box;padding:5px;width:110px;}
 #calendar .day ul {margin:0;padding:0;list-style:none}
-#calendar .day ul li {font-size:12px;}
+#calendar .day ul li {font-size:11px;}
 #calendar .day ul a {margin-left:5px}
 #calendar .day ul a.registered_0 {color:#999999;}
 #calendar .day ul a.registered_1 {color:#3a87ad;}

@@ -14,15 +14,20 @@
             <table class="table table-bordered table-striped responsive">
                 <thead>
                     <tr>
-                        <th><?php echo __('Title');?></th>                    
-                        <th><?php echo __('Players Size');?></th>
-                        <th class="actions"><?php echo __('Actions');?></th>
+                        <th class="span8"><?php echo __('Title');?></th>                    
+                        <th class="span2"><?php echo __('Players Size');?></th>
+                        <th class="actions span2"><?php echo __('Actions');?></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach($dungeonsWithoutGame as $dungeon):?>
                         <tr>
-                            <td><?php echo $dungeon['Dungeon']['title'];?></td>
+                            <td>
+                                <?php echo $dungeon['Dungeon']['title'];?>
+                                <?php if(!empty($dungeon['Dungeon']['icon'])):?>
+                                    <?php echo $this->Html->image($dungeon['Dungeon']['icon'], array('width' => 24));?>
+                                <?php endif;?>
+                            </td>
                             <td><?php echo $dungeon['RaidsSize']['size'];?></td>
                             <td class="actions">
                                 <?php echo $this->Html->link('<i class="icon-edit"></i>', '/admin/dungeons/edit/'.$dungeon['Dungeon']['id'], array('class' => 'btn btn-info btn-mini tt', 'title' => __('edit'), 'escape' => false))?>
@@ -53,9 +58,9 @@
                     <table class="table table-bordered table-striped responsive">
                         <thead>
                             <tr>
-                                <th><?php echo __('Title');?></th>                    
-                                <th><?php echo __('Players Size');?></th>
-                                <th class="actions"><?php echo __('Actions');?></th>
+                                <th class="span8"><?php echo __('Title');?></th>                    
+                                <th class="span2"><?php echo __('Players Size');?></th>
+                                <th class="actions span2"><?php echo __('Actions');?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -63,7 +68,12 @@
                     <?php $tableOpen = true;?>
                 <?php endif;?>
                             <tr>
-                                <td><?php echo $dungeon['Dungeon']['title'];?></td>
+                                <td>
+                                    <?php echo $dungeon['Dungeon']['title'];?>
+                                    <?php if(!empty($dungeon['Dungeon']['icon'])):?>
+                                        <?php echo $this->Html->image($dungeon['Dungeon']['icon'], array('width' => 24));?>
+                                    <?php endif;?>
+                                </td>
                                 <td><?php echo $dungeon['RaidsSize']['size'];?></td>
                                 <td class="actions">
                                     <?php echo $this->Html->link('<i class="icon-edit"></i>', '/admin/dungeons/edit/'.$dungeon['Dungeon']['id'], array('class' => 'btn btn-info btn-mini tt', 'title' => __('edit'), 'escape' => false))?>

@@ -34,14 +34,28 @@
                             <td class="listing">
                                 <?php if(!empty($game['Dungeon'])):?>
                                     <?php foreach($game['Dungeon'] as $key => $dungeon):?>
-                                        <span><?php echo $key?', ':'';?><?php echo $dungeon['title'];?></span>                                      
+                                        <span>
+                                            <?php echo $key?', ':'';?>
+                                            <?php if(!empty($dungeon['icon'])):?>
+                                                <?php echo $this->Html->image($dungeon['icon'], array('width' => 16));?>
+                                            <?php endif;?>
+                                            <?php echo $dungeon['title'];?>
+                                        </span>
                                     <?php endforeach;?>
                                 <?php endif;?>
                             </td>
                             <td class="listing">
                                 <?php if(!empty($game['Classe'])):?>
                                     <?php foreach($game['Classe'] as $key => $classe):?>
-                                        <span><?php echo $key?', ':'';?><span style="color:<?php echo $classe['color'];?>"><?php echo $classe['title'];?></span></span>
+                                        <span>
+                                            <?php echo $key?', ':'';?>
+                                            <span style="color:<?php echo $classe['color'];?>">
+                                                <?php if(!empty($classe['icon'])):?>
+                                                    <?php echo $this->Html->image($classe['icon'], array('width' => 16));?>
+                                                <?php endif;?>
+                                                <?php echo $classe['title'];?>
+                                            </span>
+                                        </span>
                                     <?php endforeach;?>
                                 <?php endif;?>                                
                             </td>

@@ -21,10 +21,10 @@ class RostersController extends AdminAppController {
             $this->set('characters', $characters);    
         }
 
-        $gamesList = $this->Game->find('list', array('order' => 'title ASC'));        
+        $gamesList = $this->Game->find('list', array('order' => array('title ASC')));
         $this->set('gamesList', $gamesList);
 
-        $rolesList = $this->RaidsRole->find('list', array('order' => 'title ASC'));        
+        $rolesList = $this->RaidsRole->find('list', array('order' => array('order ASC', 'title ASC')));
         $this->set('rolesList', $rolesList);
     }
 }

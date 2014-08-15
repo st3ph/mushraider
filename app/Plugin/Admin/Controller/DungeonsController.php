@@ -1,5 +1,6 @@
 <?php
 class DungeonsController extends AdminAppController {
+    public $components = array('Image');
     public $uses = array('Game', 'Dungeon', 'RaidsSize');
 
     function beforeFilter() {

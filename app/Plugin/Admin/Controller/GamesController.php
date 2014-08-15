@@ -1,5 +1,6 @@
 <?php
-class GamesController extends AdminAppController {    
+class GamesController extends AdminAppController {
+    public $components = array('Image');
     public $uses = array('Game', 'Dungeon', 'Classe', 'Race');
 
     var $paginate = array(

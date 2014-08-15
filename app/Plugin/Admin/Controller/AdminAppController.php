@@ -1,7 +1,6 @@
 <?php
 App::uses('HttpSocket', 'Network/Http');
 class AdminAppController extends AppController {  
-    public $components = array('Image');
     public $uses = array();
     public $helpers = array('Admin.Admin');
 

@@ -12,13 +12,13 @@
         <table class="table table-bordered table-striped responsive">
             <thead>
                 <tr>
-                    <th><?php echo __('Title');?></th>                    
-                    <th><?php echo __('Dungeons');?></th>                    
-                    <th><?php echo __('Classes');?></th>                    
-                    <th><?php echo __('Races');?></th>                    
-                    <th><?php echo __('Events');?></th>                    
-                    <th><?php echo __('Roster');?></th>
-                    <th class="actions"><?php echo __('Actions');?></th>
+                    <th class="span2"><?php echo __('Title');?></th>                    
+                    <th class="span3"><?php echo __('Dungeons');?></th>                    
+                    <th class="span2"><?php echo __('Classes');?></th>                    
+                    <th class="span2"><?php echo __('Races');?></th>                    
+                    <th class="span1"><?php echo __('Events');?></th>                    
+                    <th class="span1"><?php echo __('Roster');?></th>
+                    <th class="actions span1"><?php echo __('Actions');?></th>
                 </tr>
             </thead>
             <tbody>

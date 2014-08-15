@@ -27,8 +27,8 @@
                     <table class="table table-bordered table-striped responsive">
                         <thead>
                             <tr>
-                                <th><?php echo __('Title');?></th>
-                                <th class="actions"><?php echo __('Actions');?></th>
+                                <th class="span11"><?php echo __('Title');?></th>
+                                <th class="actions span1"><?php echo __('Actions');?></th>
                             </tr>
                         </thead>
                         <tbody>

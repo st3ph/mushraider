@@ -12,9 +12,9 @@
         <table class="table table-bordered table-striped responsive">
             <thead>
                 <tr>
-                    <th><?php echo __('Title');?></th>
-                    <th><?php echo __('Display order');?></th>
-                    <th class="actions"><?php echo __('Actions');?></th>
+                    <th class="span10"><?php echo __('Title');?></th>
+                    <th class="span1"><?php echo __('Display order');?></th>
+                    <th class="actions span1"><?php echo __('Actions');?></th>
                 </tr>
             </thead>
             <tbody class="sortableTbody" data-model="RaidsRole">

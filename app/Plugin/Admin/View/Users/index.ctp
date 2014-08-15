@@ -7,13 +7,13 @@
         <table class="table table-bordered table-striped responsive">
             <thead>
                 <tr>
-                    <th><?php echo __('Username');?></th>                    
-                    <th><?php echo __('Email');?></th>                    
-                    <th><?php echo __('Status');?></th>                    
-                    <th><?php echo __('Registration date');?></th>                    
-                    <th><?php echo __('Characters');?></th>
-                    <th><?php echo __('Role');?></th>
-                    <th class="actions"><?php echo __('Actions');?></th>
+                    <th class="span2"><?php echo __('Username');?></th>                    
+                    <th class="span3"><?php echo __('Email');?></th>                    
+                    <th class="span1"><?php echo __('Status');?></th>                    
+                    <th class="span3"><?php echo __('Registration date');?></th>                    
+                    <th class="span1"><?php echo __('Characters');?></th>
+                    <th class="span1"><?php echo __('Role');?></th>
+                    <th class="actions span1"><?php echo __('Actions');?></th>
                 </tr>
             </thead>
             <tbody>

@@ -22,12 +22,12 @@
                     <table class="table table-bordered table-striped responsive">
                         <thead>
                             <tr>
-                                <th><?php echo __('Title');?></th>                    
-                                <th><?php echo __('Event title');?></th>
-                                <th><?php echo __('Dungeon');?></th>
-                                <th><?php echo __('Mininum level');?></th>
-                                <th><?php echo __('Roles');?></th>
-                                <th class="actions"><?php echo __('Actions');?></th>
+                                <th class="span3"><?php echo __('Title');?></th>                    
+                                <th class="span3"><?php echo __('Event title');?></th>
+                                <th class="span2"><?php echo __('Dungeon');?></th>
+                                <th class="span1"><?php echo __('Mininum level');?></th>
+                                <th class="span2"><?php echo __('Roles');?></th>
+                                <th class="actions span1"><?php echo __('Actions');?></th>
                             </tr>
                         </thead>
                         <tbody>

@@ -117,7 +117,13 @@ jQuery(function($) {
     var loadDungeons = function($selectObject, selectedObject) {
         var $imgLoading = $(imgLoading);        
         var gameId = $selectObject.val();
+        var $dungeonObj = $('#EventDungeonId');
         var dungeonSelected = typeof(selectedObject) != 'undefined'?selectedObject:0;
+
+        if(!dungeonSelected) {
+            dungeonSelected = $dungeonObj.data('selected');
+        }
+
         if(gameId.length) {
             $selectObject.after($imgLoading);
 
@@ -131,7 +137,7 @@ jQuery(function($) {
                     $(dungeons).each(function(id, dungeon) {
                         optionsHtml += '<option value="'+dungeon.Dungeon.id+'" '+(dungeonSelected == dungeon.Dungeon.id?'selected="selected"':'')+'>'+dungeon.Dungeon.title+'</option>';
                     });
-                    $('#EventDungeonId').html(optionsHtml);
+                    $dungeonObj.html(optionsHtml);
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     var errorStr = $selectObject.data('error');
@@ -147,13 +153,13 @@ jQuery(function($) {
 
             $imgLoading.remove();
         }else {
-            $('#EventDungeonId').html('');
+            $dungeonObj.html('');
         }
     }
     if($EventGame.length) {
         loadDungeons($EventGame);
     }
-    $('#EventGameId').on('change', function(e) {
+    $EventGame.on('change', function(e) {
         loadDungeons($EventGame);
     });
 

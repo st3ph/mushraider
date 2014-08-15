@@ -79,15 +79,14 @@ class AppController extends Controller {
                 $params['contain']['Character'] = array();
                 $params['conditions']['User.id'] = $userID;
 				$this->user = $this->User->find('first', $params);
-                $this->user['User']['isAdmin'] = $this->Role->is($this->user['User']['role_id'], 'admin');
-                $this->user['User']['isOfficer'] = $this->Role->is($this->user['User']['role_id'], 'officer');
+                $this->user['User']['can'] = $this->Role->getPermissions($this->user['User']['role_id']);
 			}else {
 				$this->Session->delete('User.id');
 			}
 		}
 
         // Is a patch needed ?
-        if($this->user && $this->user['User']['isAdmin'] && strtolower($this->plugin) != 'admin' && strtolower($this->name) != 'patcher') {
+        if($this->user && $this->user['User']['can']['full_permissions'] && strtolower($this->plugin) != 'admin' && strtolower($this->name) != 'patcher') {
             $this->Patcher->patchNeeded();
         }
 

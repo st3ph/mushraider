@@ -20,7 +20,7 @@
     	    				</div>
         				</li>
 
-        				<?php if($user['User']['isAdmin'] || $user['User']['isOfficer']):?>
+        				<?php if($user['User']['can']['full_permissions'] || $user['User']['can']['limited_admin']):?>
         					<li><i class="icon-wrench"></i> <?php echo $this->Html->link(__('Admin'), '/admin');?></li>
         				<?php endif;?>
         			<?php else:?>

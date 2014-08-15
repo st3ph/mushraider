@@ -199,9 +199,11 @@ class AjaxController extends AppController {
     }
 
     function copyEvent() {
-        if(isset($this->request->query['e']) && !empty($this->request->query['name'])) {
-            if($this->Event->copy($this->request->query['e'], $this->request->query['name'])) {
-                return 'ok';
+        if($this->user['User']['can']['create_templates'] || $this->user['User']['can']['full_permissions']) {
+            if(isset($this->request->query['e']) && !empty($this->request->query['name'])) {
+                if($this->Event->copy($this->request->query['e'], $this->request->query['name'])) {
+                    return 'ok';
+                }
             }
         }
 

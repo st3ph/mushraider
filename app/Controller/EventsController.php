@@ -124,7 +124,7 @@ class EventsController extends AppController {
         $this->pageTitle = __('Add event').' - '.$this->pageTitle;
         $this->breadcrumb[] = array('title' => __('Add event'), 'url' => '');
 
-        if(!$this->user['User']['isOfficer'] && !$this->user['User']['isAdmin']) {
+        if(!$this->user['User']['can']['manage_events'] && !$this->user['User']['can']['full_permissions']) {
             $this->Session->setFlash(__('You don\'t have permission to access this page.'), 'flash_error');
             $this->redirect('/events');
         }
@@ -187,9 +187,11 @@ class EventsController extends AppController {
                     }
 
                     // If we have to create a template based on this event
-                    if($this->request->data['Event']['template']) {
-                        $templateName = !empty($this->request->data['Event']['templateName'])?trim($this->request->data['Event']['templateName']):$toSave['title'];
-                        $this->Event->copy($eventId, $templateName);
+                    if($this->user['User']['can']['create_templates'] || $this->user['User']['can']['full_permissions']) {
+                        if($this->request->data['Event']['template']) {
+                            $templateName = !empty($this->request->data['Event']['templateName'])?trim($this->request->data['Event']['templateName']):$toSave['title'];
+                            $this->Event->copy($eventId, $templateName);
+                        }
                     }
 
                     $this->Session->setFlash(__('The event has been created.'), 'flash_success');
@@ -227,7 +229,7 @@ class EventsController extends AppController {
     public function edit($eventId) {
         $this->pageTitle = __('Edit event').' - '.$this->pageTitle;
 
-        if(!$this->user['User']['isOfficer'] && !$this->user['User']['isAdmin']) {
+        if(!$this->user['User']['can']['manage_events'] && !$this->user['User']['can']['full_permissions']) {
             $this->Session->setFlash(__('You don\'t have permission to access this page.'), 'flash_error');
             $this->redirect('/events');
         }
@@ -297,7 +299,7 @@ class EventsController extends AppController {
     }
 
     public function close($eventId) {
-        if(!$this->user['User']['isOfficer'] && !$this->user['User']['isAdmin']) {
+        if(!$this->user['User']['can']['create_reports'] && !$this->user['User']['can']['full_permissions']) {
             $this->Session->setFlash(__('You don\'t have permission to access this page.'), 'flash_error');
             $this->redirect('/events/view/'.$eventId);
         }
@@ -384,7 +386,7 @@ class EventsController extends AppController {
     }
 
     public function delete($eventId) {
-        if(!$this->user['User']['isOfficer'] && !$this->user['User']['isAdmin']) {
+        if(!$this->user['User']['can']['manage_events'] && !$this->user['User']['can']['full_permissions']) {
             $this->Session->setFlash(__('You don\'t have permission to access this page.'), 'flash_error');
             $this->redirect('/events');
         }

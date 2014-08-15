@@ -76,6 +76,7 @@ class FormerHelper extends AppHelper {
 		$maxday = date("t", $timestamp);
 		$thismonth = getdate($timestamp);
 		$startday = $thismonth['wday'];
+		$monthIn2Digits = str_pad($options['month'], 2, "0", STR_PAD_LEFT);
 
 
 
@@ -86,7 +87,7 @@ class FormerHelper extends AppHelper {
 					$output .= '<table width="100%" border="0" cellspacing="0" cellpadding="0">';
 						$output .= '<tr class="links">';
 							$output .= '<td class="prev">'.$this->Html->link('<i class="icon-chevron-left"></i> '.__('Previous'), '/events/index/m:'.$prev_month.'/y:'.$prev_year, array('escape' => false)).'</td>';
-							$output .= '<td class="month">'.$this->month[$options['month']].' '.$options['year'].'</td>';
+							$output .= '<td class="month">'.ucfirst($this->mois[$monthIn2Digits]).' '.$options['year'].'</td>';
 							$output .= '<td class="next">'.$this->Html->link(__('Next').' <i class="icon-chevron-right"></i>', '/events/index/m:'.$next_month.'/y:'.$next_year, array('escape' => false)).'</td>';
 						$output .= '</tr>';
 					$output .= '</table>';
@@ -116,7 +117,7 @@ class FormerHelper extends AppHelper {
 						    	$output .= '<td valign="top" class="day '.$dayClass.'">';
 						    		$output .= '<div class="clearfix dayNumber">';
 						    			$output .= $day;
-						    			if($dayTimestamp >= $todayTimestamp && ($options['user']['User']['isOfficer'] || $options['user']['User']['isAdmin'])) {
+						    			if($dayTimestamp >= $todayTimestamp && ($options['user']['User']['can']['manage_events'] || $options['user']['User']['can']['full_permissions'])) {
 						    				$output .= $this->Html->link('<i class="icon-plus-sign-alt"></i>', '/events/add/'.$formatCurrentDay, array('title' => __('Add event'), 'class' => 'pull-right tt', 'escape' => false));
 						    			}
 						    		$output .= '</div>';
@@ -222,7 +223,7 @@ class FormerHelper extends AppHelper {
 					if(!empty($character['comment'])) {
 						$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '<span class="tt" title="'.$character['comment'].'"><span class="icon-comments-alt"></span></span>';
 					}
-					if($user && ($user['User']['isOfficer'] || $user['User']['isAdmin'])) {
+					if($user && ($user['User']['can']['manage_events'] || $user['User']['can']['full_permissions'])) {
 						$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '<span class="icon-move muted pull-right"></span>';
 					}
 				$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '</li>';				

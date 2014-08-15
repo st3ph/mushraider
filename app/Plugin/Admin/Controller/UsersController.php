@@ -52,17 +52,16 @@ class UsersController extends AdminAppController {
         }
 
         // User role
-        $user['User']['isAdmin'] = $this->Role->is($user['User']['role_id'], 'admin');
-        $user['User']['isOfficer'] = $this->Role->is($user['User']['role_id'], 'officer');
+        $user['User']['can'] = $this->Role->getPermissions($user['User']['role_id']);
 
         if(!empty($this->request->data['User']) && $this->request->data['User']['id'] == $id) {
             $toSave = array();
             $toSave['id'] = $this->request->data['User']['id'];
-            if($this->user['User']['isAdmin'] || ($this->user['User']['isOfficer'] && !$user['User']['isAdmin'])) {
+            if($this->user['User']['can']['full_permissions'] || ($this->user['User']['can']['limited_admin'] && !$user['User']['can']['full_permissions'])) {
                 $toSave['status'] = $this->request->data['User']['status'];
                 $toSave['private_infos'] = nl2br($this->request->data['User']['private_infos']);
             }
-            if($this->user['User']['isAdmin']) {
+            if($this->user['User']['can']['full_permissions']) {
                 $toSave['role_id'] = $this->request->data['User']['role_id'];            
             }
 
@@ -98,9 +97,8 @@ class UsersController extends AdminAppController {
             $params['conditions']['id'] = $id;
             $params['conditions']['status'] = 0;
             $user = $this->User->find('first', $params);
-            $user['User']['isAdmin'] = $this->Role->is($user['User']['role_id'], 'admin');
-            $user['User']['isOfficer'] = $this->Role->is($user['User']['role_id'], 'officer');
-            if($this->user['User']['isAdmin'] || ($this->user['User']['isOfficer'] && !$user['User']['isAdmin'])) {
+            $user['User']['can'] = $this->Role->getPermissions($user['User']['role_id']);
+            if($this->user['User']['can']['full_permissions'] || ($this->user['User']['can']['limited_admin'] && !$user['User']['can']['full_permissions'])) {
                 if(!$user) {
                     $this->Session->setFlash(__('This user is still active, you have to disable him before deleting.'), 'flash_warning');
                 }elseif($this->User->delete($id)) {
@@ -127,9 +125,8 @@ class UsersController extends AdminAppController {
             $params['conditions']['User.id'] = $id;
             $params['conditions']['User.status'] = array(0, 1);
             $user = $this->User->find('first', $params);
-            $user['User']['isAdmin'] = $this->Role->is($user['User']['role_id'], 'admin');
-            $user['User']['isOfficer'] = $this->Role->is($user['User']['role_id'], 'officer');
-            if($this->user['User']['isAdmin'] || ($this->user['User']['isOfficer'] && !$user['User']['isAdmin'])) {
+            $user['User']['can'] = $this->Role->getPermissions($user['User']['role_id']);
+            if($this->user['User']['can']['full_permissions'] || ($this->user['User']['can']['limited_admin'] && !$user['User']['can']['full_permissions'])) {
                 $toSave = array();
                 $toSave['id'] = $id;
                 $toSave['status'] = 0;
@@ -153,9 +150,8 @@ class UsersController extends AdminAppController {
             $params['conditions']['User.id'] = $id;
             $params['conditions']['User.status'] = array(0, 1);
             $user = $this->User->find('first', $params);
-            $user['User']['isAdmin'] = $this->Role->is($user['User']['role_id'], 'admin');
-            $user['User']['isOfficer'] = $this->Role->is($user['User']['role_id'], 'officer');
-            if($this->user['User']['isAdmin'] || ($this->user['User']['isOfficer'] && !$user['User']['isAdmin'])) {
+            $user['User']['can'] = $this->Role->getPermissions($user['User']['role_id']);
+            if($this->user['User']['can']['full_permissions'] || ($this->user['User']['can']['limited_admin'] && !$user['User']['can']['full_permissions'])) {
                 $toSave = array();
                 $toSave['id'] = $id;
                 $toSave['status'] = 1;
@@ -217,5 +213,13 @@ class UsersController extends AdminAppController {
         }
 
         return $this->redirect('/admin/users/edit/'.$userId);
+    }
+
+    public function roles() {
+        $params = array();
+        $params['recursive'] = -1;
+        $params['order'] = array('id', 'title');
+        $roles = $this->Role->find('all', $params);
+        $this->set('roles', $roles);
     }
 }

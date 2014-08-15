@@ -70,10 +70,12 @@
             	<?php echo $this->Form->submit(__('Create event'), array('class' => 'btn btn-success btn-large pull-right'));?>
             </div>
         </div>
-        <div class="span3 pull-right eventTemplate">
-            <?php echo $this->Form->input('Event.template', array('type' => 'checkbox', 'label' => __('create a template based on this event'), 'class' => 'zspan2'));?>
-            <?php echo $this->Form->input('Event.templateName', array('type' => 'text', 'label' => false, 'div' => false, 'class' => 'tplName', 'placeholder' => __('template name')));?>
-        </div>
+        <?php if($user['User']['can']['create_templates'] || $user['User']['can']['full_permissions']):?>
+            <div class="span3 pull-right eventTemplate">
+                <?php echo $this->Form->input('Event.template', array('type' => 'checkbox', 'label' => __('create a template based on this event'), 'class' => 'zspan2'));?>
+                <?php echo $this->Form->input('Event.templateName', array('type' => 'text', 'label' => false, 'div' => false, 'class' => 'tplName', 'placeholder' => __('template name')));?>
+            </div>
+        <?php endif;?>
     </div>
     <div class="clearfix"></div>
 <?php echo $this->Form->end();?>

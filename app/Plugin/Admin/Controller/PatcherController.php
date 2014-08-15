@@ -91,6 +91,9 @@ class PatcherController extends AdminAppController {
     }
 
     public function v14() {
+        // Regenerate cache
+        Cache::clear();
+
         // Copy bridge secret key to API private key
         $bridge = json_decode($this->Setting->getOption('bridge'));
         if(!empty($bridge) && $bridge->enabled && !empty($bridge->secret)) {

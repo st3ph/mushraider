@@ -94,6 +94,9 @@ class PatcherController extends AdminAppController {
         // Regenerate cache
         Cache::clear();
 
+        /*
+        * API
+        */
         // Copy bridge secret key to API private key
         $bridge = json_decode($this->Setting->getOption('bridge'));
         if(!empty($bridge) && $bridge->enabled && !empty($bridge->secret)) {
@@ -103,6 +106,9 @@ class PatcherController extends AdminAppController {
             $this->Setting->setOption('api', json_encode($api));
         }
 
+        /*
+        * Import
+        */
         // Add absolute path to games's logo field to prepare import functionallity
         App::uses('Game', 'Model');
         $GameModel = new Game();
@@ -121,6 +127,9 @@ class PatcherController extends AdminAppController {
             }
         }
 
+        /*
+        * Roles permissions
+        */
         // Add roles permissions
         $rolesPermissions = array(
             array('title' => __('Full permissions'), 'alias' => 'full_permissions', 'description' => __('Like Chuck Norris, he can do anything. This overwrite every permissions')),

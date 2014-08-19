@@ -24,9 +24,9 @@
                             <td><?php echo $user['User']['email'];?></td>
                             <td>
                                 <?php if($user['User']['status']):?>
-                                    <i class="icon-ok"></i>
+                                    <i class="text-success icon-ok"></i>
                                 <?php else:?>
-                                    <i class="icon-warning-sign"></i>
+                                    <i class="text-warning icon-warning-sign"></i>
                                 <?php endif;?>
                             </td>
                             <td><?php echo $this->Former->date($user['User']['created']);?></td>

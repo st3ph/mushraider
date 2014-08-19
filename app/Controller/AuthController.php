@@ -242,8 +242,14 @@ class AuthController extends AppController {
         if(!$user = $this->User->find('first', $params)) {
             $this->Cookie->delete($cookieName);
         }else{
+            $redirect = '/';
+            if($this->Session->check('redirectFrom')) {
+                $redirect = $this->Session->read('redirectFrom');
+                $this->Session->delete('redirectFrom');
+            }
+            $this->Session->delete('Message.flash');
             $this->Session->write('User.id', $user['User']['id']);
-            return $this->redirect($this->request->here);
+            return $this->redirect($redirect);
         }
     }
 }

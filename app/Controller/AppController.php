@@ -68,6 +68,7 @@ class AppController extends Controller {
         // Some usefull infos
         Configure::write('Config.maxFileSize', ini_get('upload_max_filesize'));
         Configure::write('Config.maxPostSize', ini_get('post_max_size'));
+        Configure::write('Config.appUrl', rtrim('http://'.$_SERVER['HTTP_HOST'].$this->webroot, '/'));
 
         // Log in user
         if($this->Session->check('User.id')) {

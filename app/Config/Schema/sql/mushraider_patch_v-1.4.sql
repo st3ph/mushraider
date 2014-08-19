@@ -61,3 +61,21 @@ CREATE TABLE IF NOT EXISTS `{prefix}role_permission_roles` (
   `role_permission_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `widgets`
+--
+
+CREATE TABLE IF NOT EXISTS `{prefix}widgets` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `controller` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
+  `action` varchar(25) COLLATE utf8_unicode_ci NOT NULL,  
+  `title` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `params` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

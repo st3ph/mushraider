@@ -107,5 +107,15 @@
                 </ul>
             </li>
         <?php endif;?>
+
+        <li class="accordion-group <?php echo strtolower($this->name) == 'widgets'?'active':'';?>">
+            <a data-parent="#menu" data-toggle="collapse" class="accordion-toggle <?php echo strtolower($this->name) == 'widgets'?'':'collapsed';?>" data-target="#widgets-nav">
+                <i class="icon-puzzle-piece icon-white"></i> <?php echo __('Widgets');?> <i class="icon-chevron-down icon-white pull-right"></i>
+            </a>
+            <ul class="collapse <?php echo strtolower($this->name) == 'widgets'?'in':'';?>" id="widgets-nav">
+                <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('Manage widgets'), '/admin/widgets', array('escape' => false));?></li>
+                <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('Add widget'), '/admin/widgets/add', array('escape' => false));?></li>
+            </ul>
+        </li>
     </ul>
 </div>

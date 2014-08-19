@@ -1275,3 +1275,6 @@ table.table-striped tbody.ui-sortable tr.sortable-placeholder td:last-child {bor
 
 /* Roster */
 #summary {margin-bottom:50px;}
+
+/* Widget */
+.integrationCode textarea {width:90%;}

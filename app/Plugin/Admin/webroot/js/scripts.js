@@ -26,15 +26,17 @@ var addInList = function(id, title, element, field) {
 
 var loadSpectrum = function(element) {
     if($(element).length) {
-        var color = $(element).val().replace('#', '');
-        $(element).spectrum({
-            color: color,
-            showPalette: true,
-            showSelectionPalette: true,
-            showInput: true,
-            localStorageKey: 'mushraider',
-            preferredFormat: 'hex6'
-        });        
+        $(element).each(function() {
+            var color = $(this).val().replace('#', '');
+            $(this).spectrum({
+                color: color,
+                showPalette: true,
+                showSelectionPalette: true,
+                showInput: true,
+                localStorageKey: 'mushraider',
+                preferredFormat: 'hex6'
+            });
+        });
     }
 }
 
@@ -336,4 +338,11 @@ jQuery(function($) {
             }
         });  
     }
+
+    /*
+    * Widgets
+    */
+    $('#WidgetType').on('change', function() {
+        $(this).parents('form').submit();
+    });
 });

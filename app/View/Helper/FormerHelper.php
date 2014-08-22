@@ -215,10 +215,9 @@ class FormerHelper extends AppHelper {
 					$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '<span class="character" style="color:'.$character['Character']['Classe']['color'].'">';
 						if(!empty($character['Character']['Classe']['icon'])) {
 							$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= $this->Html->image($character['Character']['Classe']['icon'], array('class' => 'tt', 'title' => $character['Character']['Classe']['title'], 'width' => '16'));
-						}else {
-							$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= $character['Character']['Classe']['title'];
 						}
-						$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= ' '.$character['Character']['title'].' ('.$character['Character']['level'].')';							
+						$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= ' '.$character['Character']['title'];
+						$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= ' ('.(empty($character['Character']['Classe']['icon'])?$character['Character']['Classe']['title'].' ':'').$character['Character']['level'].')';
 					$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '</span>';
 					if(!empty($character['comment'])) {
 						$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '<span class="tt" title="'.$character['comment'].'"><span class="icon-comments-alt"></span></span>';

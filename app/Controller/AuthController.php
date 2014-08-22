@@ -199,11 +199,14 @@ class AuthController extends AppController {
         $this->set('hash', $hash);
     }
 
-    public function logout() {
+    public function logout($flashType = 'info', $flash = null) {
         $this->Session->delete('User');
         $this->Session->destroy();
         $this->Cookie->delete('User');
         $this->Cookie->delete('UserBridge');
+        if($flash) {
+            $this->Session->setFlash($flash, 'flash_'.$flashType);
+        }
         return $this->redirect('/auth/login');
     }
 

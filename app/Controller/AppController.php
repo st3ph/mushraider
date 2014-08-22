@@ -87,7 +87,7 @@ class AppController extends Controller {
 		}
 
         // Is a patch needed ?
-        if($this->user && $this->user['User']['can']['full_permissions'] && strtolower($this->plugin) != 'admin' && strtolower($this->name) != 'patcher') {
+        if($this->user && $this->user['User']['can']['full_permissions'] && strtolower($this->plugin) != 'admin' && strtolower($this->name) != 'patcher' && strtolower($this->name) != 'auth') {
             $this->Patcher->patchNeeded();
         }
 

@@ -4,13 +4,14 @@
         <h5><?php echo __('Games list');?></h5>
         <div class="toolbar">
             <ul class="nav">
+                <li><?php echo $this->Html->link('<i class="icon-refresh"></i> '.__('Check for updates'), '', array('id' => 'checkUpdates', 'escape' => false));?></li>
                 <li><?php echo $this->Html->link('<i class="icon-cloud-download"></i> '.__('Import game'), '/admin/games/import', array('escape' => false));?></li>
                 <li><?php echo $this->Html->link('<i class="icon-plus"></i> '.__('Add game'), '/admin/games/add', array('escape' => false));?></li>
             </ul>
         </div>
     </header>
     <div class="accordion-body body in collapse">
-        <table class="table table-bordered table-striped responsive">
+        <table class="table table-bordered table-striped responsive gamesList">
             <thead>
                 <tr>
                     <th class="span2"><?php echo __('Title');?></th>                    
@@ -70,6 +71,9 @@
                             <td><?php echo count($game['Event']);?></td>
                             <td><?php echo count($game['Character']);?></td>
                             <td class="actions">
+                                <?php if(!empty($game['Game']['import_slug'])):?>
+                                    <?php echo $this->Html->link('<i class="icon-cloud-download"></i>', '', array('class' => 'btn btn-mini tt updateGame', 'title' => __('Update'), 'data-slug' => $game['Game']['import_slug'], 'escape' => false))?>
+                                <?php endif;?>
                                 <?php echo $this->Html->link('<i class="icon-edit"></i>', '/admin/games/edit/'.$game['Game']['id'], array('class' => 'btn btn-info btn-mini tt', 'title' => __('Edit'), 'escape' => false))?>
                             </td>
                         </tr>

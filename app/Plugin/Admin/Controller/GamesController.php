@@ -17,7 +17,7 @@ class GamesController extends AdminAppController {
         parent::beforeFilter();
     }
 
-    public function index() {        
+    public function index() {
         $this->set('games', $this->paginate('Game'));
     }
 

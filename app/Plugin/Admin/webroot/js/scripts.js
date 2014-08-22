@@ -305,6 +305,52 @@ jQuery(function($) {
         }
     });
 
+    $('.updateGame').on('click', function(e) {
+        e.preventDefault();
+
+        var $button = $(this);
+        var gameSlug = $(this).data('slug');
+        var $imgLoading = $(imgLoading);
+        $button.before($imgLoading);
+        $.ajax({
+            type: 'get',
+            url: site_url+'admin/ajax/importGame',
+            data: 'slug='+gameSlug,
+            dataType: "json",
+            success: function(json) {
+                $imgLoading.remove();
+                var $msg = $('<div class="text-'+json.type+'">'+json.msg+'</div>');
+                $button.parent('td').append($msg);
+                setTimeout(
+                    function() {
+                        $msg.remove();
+                        window.location = site_url+'admin/games';
+                    }, 5000
+                );
+            }
+        });
+    });
+
+    $('#checkUpdates').on('click', function(e) {
+        e.preventDefault();
+
+        var $button = $(this);
+        var $gamesList = $('.gamesList');
+        $button.find('i').addClass('loadingAnimation');
+        $.ajax({
+            type: 'get',
+            url: site_url+'admin/ajax/checkUpdates',
+            data: '',
+            dataType: "json",
+            success: function(json) {
+                $.each(json, function(i, item) {
+                    $gamesList.find('.actions a[data-slug="'+item+'"]').addClass('btn-success');
+                });
+                $button.find('i').removeClass('loadingAnimation');
+            }
+        });
+    });
+
     $('.imageupload').on('change', function() {
         if(!( window.File && window.FileReader && window.FileList && window.Blob)) {
             console.log('The File APIs are not fully supported in this browser.');

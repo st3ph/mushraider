@@ -1273,6 +1273,13 @@ table.table-striped tbody.ui-sortable tr.sortable-placeholder td:last-child {bor
 #progressBar .progress {position:relative;margin-bottom:30px;}
 #progressBar .progress span {position:absolute;right:1%;top:1%;color:#333;font-weight:bold;}
 
+@-webkit-keyframes loading-animation{from{-webkit-transform:rotate(0deg)}to{-webkit-transform:rotate(180deg)}}
+@-moz-keyframes loading-animation{from{-webkit-transform:rotate(0deg)}to{-webkit-transform:rotate(180deg)}}
+@-ms-keyframes loading-animation{from{-webkit-transform:rotate(0deg)}to{-webkit-transform:rotate(180deg)}}
+@-o-keyframes loading-animation{from{-webkit-transform:rotate(180deg)}to{-webkit-transform:rotate(0deg)}}
+@keyframes loading-animation{from{-webkit-transform:rotate(0deg)}to{-webkit-transform:rotate(180deg)}}
+.loadingAnimation:before{-webkit-animation:loading-animation 1s linear infinite;-moz-animation:loading-animation 1s linear infinite;-ms-animation:loading-animation 1s linear infinite;-o-animation:loading-animation 1s linear infinite;animation:loading-animation 1s linear infinite}
+
 /* Stats */
 .filter select {margin-bottom:0;}
 

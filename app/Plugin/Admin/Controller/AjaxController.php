@@ -47,23 +47,9 @@ class AjaxController extends AdminAppController {
             $slug = $this->request->query['slug'];
             $this->Session->write('ajaxProgress', 10);
 
-            // Maybe the game already exist ?
-            $params = array();
-            $params['recursive'] = -1;
-            $params['fields'] = array('id', 'title');
-            $params['conditions']['slug'] = $slug;
-            if($game = $GameModel->find('first', $params)) {
-                $jsonMessage['type'] = 'warning';
-                $jsonMessage['msg'] = __('Import failed : The game %s already exists in your installation', $game['Game']['title']);
-                return json_encode($jsonMessage);
-            }
-
-            $this->Session->write('ajaxProgress', 20);
-
             App::uses('RaidheadSource', 'Model/Datasource');
             $RaidHead = new RaidheadSource();
             $game = $RaidHead->get($slug);
-            prd($game);
 
             // Check API error
             if($game['error']) {
@@ -86,12 +72,11 @@ class AjaxController extends AdminAppController {
             $toSave['logo'] = $game['game']['icon_64'];
             $toSave['import_slug'] = $game['game']['short'];
             $toSave['import_modified'] = $game['lastupdate'];
-            if(!$GameModel->save($toSave)) {
+            if(!$gameId = $GameModel->__add($toSave)) {
                 $jsonMessage['type'] = 'important';
                 $jsonMessage['msg'] = __('Save failed : An error occur while saving the game');
                 return json_encode($jsonMessage);
             }
-            $gameId = $GameModel->getLastInsertId();
 
             $this->Session->write('ajaxProgress', 50);
 
@@ -108,8 +93,7 @@ class AjaxController extends AdminAppController {
                     $toSaveDungeons['title'] = $dungeon['title'];
                     $toSaveDungeons['slug'] = $dungeonSlug;
                     $toSaveDungeons['raidssize_id'] = $RaidsSizeModel->__add($dungeon['max_players']);
-                    $DungeonModel->create();
-                    $DungeonModel->save($toSaveDungeons);
+                    $DungeonModel->__add($toSaveDungeons, array('game_id' => $gameId));
                 }
             }
 
@@ -125,8 +109,7 @@ class AjaxController extends AdminAppController {
                     $toSaveRaces['game_id'] = $gameId;
                     $toSaveRaces['title'] = $race['title'];
                     $toSaveRaces['slug'] = $raceSlug;
-                    $RaceModel->create();
-                    $RaceModel->save($toSaveRaces);
+                    $RaceModel->__add($toSaveRaces, array('game_id' => $gameId));
                 }
             }
 
@@ -141,15 +124,16 @@ class AjaxController extends AdminAppController {
                     $toSaveClasses['game_id'] = $gameId;
                     $toSaveClasses['title'] = $classe['title'];
                     $toSaveClasses['slug'] = $classeSlug;
-                    $toSaveClasses['icon'] = $classe['icon_64'];
+                    if(!empty($classe['icon_64'])) {
+                        $toSaveClasses['icon'] = $classe['icon_64'];
+                    }
 
                     $defaultColor = '#000000';
                     $color = !empty($classe['color'])?$classe['color']:$defaultColor;
                     $color = strlen($color) < 6?$defaultColor:$color;
 
                     $toSaveClasses['color'] = $color;
-                    $ClasseModel->create();
-                    $ClasseModel->save($toSaveClasses);
+                    $ClasseModel->__add($toSaveClasses, array('game_id' => $gameId));
                 }
             }
             
@@ -172,5 +156,32 @@ class AjaxController extends AdminAppController {
         }
 
         return $progress;
+    }
+
+    function checkUpdates() {
+        $jsonList = array();
+
+        App::uses('Game', 'Model');
+        $GameModel = new Game();
+
+        App::uses('RaidheadSource', 'Model/Datasource');
+        $RaidHead = new RaidheadSource();
+        $apiGames = $RaidHead->gets();
+
+        $params = array();        
+        $params['recursive'] = -1;
+        $params['fields'] = array('import_slug', 'import_modified');
+        $params['conditions']['import_slug !='] = null;
+        if($games = $GameModel->find('all', $params)) {
+            foreach($games as $game) {
+                if(!empty($apiGames[$game['Game']['import_slug']])) {
+                    if($apiGames[$game['Game']['import_slug']]['lastupdate'] > $game['Game']['import_modified']) {
+                        $jsonList[] = $game['Game']['import_slug'];
+                    }
+                }
+            }
+        }
+
+        return json_encode($jsonList);
     }
 }

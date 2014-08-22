@@ -184,7 +184,7 @@ CREATE TABLE IF NOT EXISTS `{prefix}games` (
   `slug` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL, 
   `logo` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL, 
   `import_slug` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL, 
-  `import_modified` datetime DEFAULT NULL, 
+  `import_modified` int(10) DEFAULT 0, 
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)

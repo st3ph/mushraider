@@ -141,6 +141,7 @@ class AjaxController extends AdminAppController {
                     $toSaveClasses['game_id'] = $gameId;
                     $toSaveClasses['title'] = $classe['title'];
                     $toSaveClasses['slug'] = $classeSlug;
+                    $toSaveClasses['icon'] = $classe['icon_64'];
 
                     $defaultColor = '#000000';
                     $color = !empty($classe['color'])?$classe['color']:$defaultColor;

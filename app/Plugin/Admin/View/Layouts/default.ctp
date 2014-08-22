@@ -52,6 +52,7 @@
             <div class="container-fluid outer">
                 <noscript><?php echo $this->element('flash_error', array('message' => __('VOTRE NAVIGATEUR NE SUPPORTE PAS JAVASCRIPT')));?></noscript>
                 <?php echo $this->Session->flash(); ?>
+                <?php echo $this->Session->flash('important'); ?>
 
                 <div class="row-fluid">
                     <div class="span12 inner">

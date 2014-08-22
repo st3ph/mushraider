@@ -114,8 +114,10 @@ var getAjaxProgress = function() {
 
 jQuery(function($) {
     if($('.flashMessage').length) {
-        var timer = $('.flashMessage').hasClass('alert-update')?30000:8000;        
-        setTimeout('hideFlashMessage()', timer);
+        if(!$('.flashMessage').hasClass('alert-important')) {
+            var timer = $('.flashMessage').hasClass('alert-update')?30000:8000;        
+            setTimeout('hideFlashMessage()', timer);
+        }
     }
     
     $('.flashMessage .close').bind('click', function(e) {

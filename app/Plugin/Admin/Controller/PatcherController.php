@@ -101,9 +101,17 @@ class PatcherController extends AdminAppController {
         $bridge = json_decode($this->Setting->getOption('bridge'));
         if(!empty($bridge) && $bridge->enabled && !empty($bridge->secret)) {
             $api = array();
-            $api['enabled'] = 1;
+            $api['enabled'] = 0;
             $api['privateKey'] = $bridge->secret;
             $this->Setting->setOption('api', json_encode($api));
+
+            // Disable bridge to make use users update their bridge plugin
+            $bridgeSettings = array();
+            $bridgeSettings['enabled'] = 0;
+            $bridgeSettings['url'] = $bridge->url;
+            $this->Setting->setOption('bridge', json_encode($bridgeSettings));
+
+            $this->Session->setFlash(__('Bridge has been disabled ! Be sure to use an updated version of your bridge plugin for MushRaider 1.4. If you don\'t you\'re gonna have a bad time !'), 'flash_important', array(), 'important');
         }
 
         /*

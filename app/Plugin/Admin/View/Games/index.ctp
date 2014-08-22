@@ -4,6 +4,7 @@
         <h5><?php echo __('Games list');?></h5>
         <div class="toolbar">
             <ul class="nav">
+                <li><?php echo $this->Html->link('<i class="icon-cloud-download"></i> '.__('Import game'), '/admin/games/import', array('escape' => false));?></li>
                 <li><?php echo $this->Html->link('<i class="icon-plus"></i> '.__('Add game'), '/admin/games/add', array('escape' => false));?></li>
             </ul>
         </div>

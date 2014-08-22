@@ -165,4 +165,10 @@ class GamesController extends AdminAppController {
 
         $this->request->data = array_merge($game, $this->request->data);        
     }
+
+    public function import() {
+        App::uses('RaidheadSource', 'Model/Datasource');
+        $RaidHead = new RaidheadSource();
+        $this->set('gamesList', $RaidHead->gets('list'));
+    }
 }

@@ -38,7 +38,7 @@ var loadSpectrum = function(element) {
             });
         });
     }
-}
+};
 
 var UpdatePreviewCanvas = function() {
     var img = this;
@@ -83,7 +83,7 @@ var UpdatePreviewCanvas = function() {
 
     $('#previewcanvascontainer').find('.currentLogo').hide();
     context.drawImage(img, x, y, UseWidth, UseHeight);
-}
+};
 
 var randomString = function(length) {
     var chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -92,7 +92,25 @@ var randomString = function(length) {
         result += chars[Math.round(Math.random() * (chars.length - 1))];
     }
     return result;
-}
+};
+
+var getAjaxProgress = function() {
+    console.log('progress ?');
+
+    $.ajax({
+        type: 'get',
+        url: site_url+'admin/ajax/ajaxProgress',
+        data: '',
+        success: function(progress) {
+            console.log('progress : '+progress);
+            var $progressBar = $('#progressBar');
+            $progressBar.find('span').text(progress+'%');
+            $progressBar.find('.bar').css('width', progress+'%');
+
+            setTimeout('getAjaxProgress()', 1000);
+        }
+    });
+};
 
 jQuery(function($) {
     if($('.flashMessage').length) {
@@ -251,6 +269,40 @@ jQuery(function($) {
                 });
             }
         });
+    });
+
+    $('#importGame').on('click', function(e) {
+        e.preventDefault();
+
+        var $gameSlug = $('#GameSlug');
+        var gameSlug = $('#GameSlug').val();
+        var $progressBar = $('#progressBar');
+        if(!gameSlug.length) {
+            $gameSlug.addClass('form-error');
+        }else {
+            $gameSlug.parents('.importForm').fadeOut(function() {
+                $progressBar.find('span').text('1%');
+                $progressBar.find('.bar').css('width', '1%');
+                $progressBar.fadeIn();
+                $(this).remove();
+
+                $.ajax({
+                    type: 'get',
+                    url: site_url+'admin/ajax/importGame',
+                    data: 'slug='+gameSlug,
+                    dataType: "json",
+                    success: function(json) {
+                        $progressBar.html('<span class="text-'+json.type+'">'+json.msg+'</span>');
+                        if(json.type == 'success') {
+                            window.location = site_url+'admin/games';
+                        }
+                    }
+                });
+
+                // Second ajax call every second to check the script progress
+                setTimeout('getAjaxProgress()', 100);
+            });
+        }
     });
 
     $('.imageupload').on('change', function() {

@@ -30,7 +30,7 @@ ALTER TABLE  `{prefix}dungeons` ADD `icon` varchar(255) COLLATE utf8_unicode_ci 
 -- Alter table `games` to change column 'logo' type to varchar(255)
 --
 
-ALTER TABLE  `{prefix}games` MODIFY `logo` varchar(255);
+ALTER TABLE  `{prefix}games` MODIFY `logo` varchar(255), ADD `import_slug` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL AFTER  `logo`, ADD `import_modified` datetime DEFAULT NULL AFTER  `import_slug`;
 
 -- --------------------------------------------------------
 

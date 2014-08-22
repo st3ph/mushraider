@@ -1269,6 +1269,9 @@ table.table-striped tbody.ui-sortable tr.sortable-placeholder td:last-child {bor
 #previewcanvas {display:none;}
 #previewcanvas.w64 {width:64px;height:64px;}
 #previewcanvas.w250 {width:250px;height:250px;}
+#progressBar {display:none;width:50%;}
+#progressBar .progress {position:relative;margin-bottom:30px;}
+#progressBar .progress span {position:absolute;right:1%;top:1%;color:#333;font-weight:bold;}
 
 /* Stats */
 .filter select {margin-bottom:0;}

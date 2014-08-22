@@ -81,6 +81,20 @@ class Role extends AppModel {
             return null;
         }
 
+        // Check if the table exists (patch not installed yet)
+        $db = ConnectionManager::getDataSource('default');
+        $tables = $db->listSources();
+
+        if(!in_array($this->tablePrefix.'role_permission_roles', $tables)) {
+            $permissions['full_permissions'] = $roleId == 1;
+            $permissions['limited_admin'] = false;
+            $permissions['manage_events'] = false;
+            $permissions['create_templates'] = false;
+            $permissions['create_reports'] = false;
+
+            return $permissions;
+        }
+
         $permissions = array();
 
         App::uses('RolePermissionRole', 'Model');

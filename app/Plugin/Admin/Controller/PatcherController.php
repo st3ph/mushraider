@@ -20,6 +20,9 @@ class PatcherController extends AdminAppController {
     	}
 
     	if(!empty($this->request->data['Patcher'])) {
+            $db = ConnectionManager::getDataSource('default');
+            $db->cacheSources = false;
+            
     		$error = false;
 	    	$databaseConfig = Configure::read('Database');
 	        if(!$mysqlLink = mysqli_connect($databaseConfig['host'], $databaseConfig['login'], $databaseConfig['password'], $databaseConfig['database'], $databaseConfig['port'])) {

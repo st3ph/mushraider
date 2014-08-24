@@ -11,7 +11,7 @@
     <div class="accordion-body body in collapse">
         <?php if(!empty($widgets)):?>
             <div class="alert alert-info">
-                <h4><i class="icon-info-sign"></i> <?php echo __('How to display add widget to my website ?');?></h4>
+                <h4><i class="icon-info-sign"></i> <?php echo __('How to display widget to my website ?');?></h4>
                 <p><?php echo __('Simply copy the "integration code" in any html page and the widget will display in place.');?></p>
                 <p><?php echo __('Be aware if you enable the domain restriction the widget will appears only in pages under the selected domain.');?></p>
             </div>

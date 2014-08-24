@@ -35,7 +35,7 @@
                 <?php echo $title_for_layout;?>
             </header>
             <div class="widget-content">
-                <div id="iframeDomainRestriction" data-domain="<?php echo $widget['Widget']['params']->domain;?>" data-msg="<?php echo __('Your domain don\'t have permission to display this widget !');?>"></div>
+                <div id="iframeDomainRestriction" data-domain="<?php echo $widget['Widget']['params']->domain;?>" data-msg="<?php echo __('Your domain does not have permission to display this widget !');?>"></div>
                 <p class="text-center"><?php echo __('You have to be logged in to view this content');?></p>
                 <p class="text-center"><?php echo $this->Html->link(__('Log in'), Configure::read('Config.appUrl').'/auth/login', array('target' => '_blank', 'escape' => false));?></p>
             </div>

@@ -135,7 +135,7 @@ class StepController extends InstallAppController {
                     $toSave['activation_key'] = md5(uniqid());
                     $userModel->create();
                     if($userModel->save($toSave)) {
-                        $this->postInstallData();
+                        $this->postInstallData($siteTitle);
 
                     	$settingsConfig['installed'] = true;
                         Configure::write('Database', $this->Tools->quoteArray($databaseConfig));

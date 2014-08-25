@@ -14,7 +14,6 @@
         </li>
 
         <?php if($user['User']['can']['full_permissions']):?>
-
             <li class="accordion-group <?php echo strtolower($this->name) == 'settings'?'active':'';?>">
                 <a data-parent="#menu" data-toggle="collapse" class="accordion-toggle <?php echo strtolower($this->name) == 'settings'?'':'collapsed';?>" data-target="#settings-nav">
                     <i class="icon-cog icon-white"></i> <?php echo __('Settings');?> <i class="icon-chevron-down icon-white pull-right"></i>
@@ -98,10 +97,10 @@
 
         <?php if($user['User']['can']['full_permissions']):?>
             <li class="accordion-group <?php echo strtolower($this->name) == 'raidroles'?'active':'';?>">
-                <a data-parent="#menu" data-toggle="collapse" class="accordion-toggle <?php echo strtolower($this->name) == 'raidroles'?'':'collapsed';?>" data-target="#roles-nav">
+                <a data-parent="#menu" data-toggle="collapse" class="accordion-toggle <?php echo strtolower($this->name) == 'raidroles'?'':'collapsed';?>" data-target="#raidroles-nav">
                     <i class="icon-group icon-white"></i> <?php echo __('Player roles');?> <i class="icon-chevron-down icon-white pull-right"></i>
                 </a>
-                <ul class="collapse <?php echo strtolower($this->name) == 'raidroles'?'in':'';?>" id="roles-nav">
+                <ul class="collapse <?php echo strtolower($this->name) == 'raidroles'?'in':'';?>" id="raidroles-nav">
                     <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('Manage roles'), '/admin/raidroles', array('escape' => false));?></li>
                     <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('Add role'), '/admin/raidroles/add', array('escape' => false));?></li>
                 </ul>

@@ -28,9 +28,6 @@ class ApiAppController extends Controller {
         $theirSecurityKey = $this->request->params['named']['key'];
         unset($this->request->params['named']['key']);
 
-        // Make sure named params are in alphabetical order
-        asort($this->request->params['named']);
-
         // generate the security key
         $paramsUrl = '/'.$this->request->params['controller'].'/'.$this->request->params['action'];
         $paramsUrl .= $this->Tools->paramsToUrl($this->request->params['named']);

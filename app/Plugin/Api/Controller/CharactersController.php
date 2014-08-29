@@ -14,7 +14,7 @@ class CharactersController extends ApiAppController {
                 'User' => array('fields' => array('username', 'status'))
             ),
             'order' => array('title' => 'asc'),
-            'fields' => array('Character.title', 'Character.level')
+            'fields' => array('Character.id', 'Character.title', 'Character.level')
         )
     );
 
@@ -47,7 +47,7 @@ class CharactersController extends ApiAppController {
         $params['contain']['Classe']['fields'] = array('title', 'color');
         $params['contain']['Race']['fields'] = array('title');
         $params['contain']['User']['fields'] = array('username', 'status');
-        $params['conditions']['User.id'] = $this->request->params['named']['character'];
+        $params['conditions']['Character.id'] = $this->request->params['named']['character'];
         $character = $this->Character->find('first', $params);
         $this->set(array(
             'character' => $character,

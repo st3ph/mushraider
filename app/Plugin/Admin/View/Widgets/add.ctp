@@ -7,7 +7,7 @@
         <?php echo $this->Form->create('Widget', array('url' => '/admin/widgets/add', 'class' => 'span12', 'id' => 'addWidget'));?>
             <h3>1. <?php echo __('Choose widget type');?></h3>
             <div class="form-group">
-                <?php echo $this->Form->input('Widget.type', array('type' => 'select', 'label' => __('Widget'), 'options' => $availableWidgets, 'class' => 'span5'));?>
+                <?php echo $this->Form->input('Widget.type', array('type' => 'select', 'label' => __('Widget'), 'empty' => '', 'options' => $availableWidgets, 'class' => 'span5'));?>
             </div>
             <?php if($selectedWidget):?>
                 <h3>2. <?php echo __('Widgets options');?></h3>

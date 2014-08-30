@@ -209,4 +209,24 @@ class ToolsComponent extends Component {
 
         return $url;
     }
+
+    /*
+    * @name extractIds
+    * @desc return list of ids with id field as key
+    * @param array $arValues
+    * @return string
+    */
+    function extractIds($arValues) {
+        $ids = array();
+
+        if(!empty($arValues)) {
+            foreach($arValues as $arValue) {
+                if(isset($arValue['id'])) {
+                    $ids[$arValue['id']] = true;
+                }
+            }
+        }
+
+        return $ids;
+    }
 }

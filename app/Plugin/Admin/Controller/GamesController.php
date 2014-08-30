@@ -112,8 +112,11 @@ class GamesController extends AdminAppController {
                 }
                 if($this->Game->save($toSave)) {
                     // Associate each dungeons with the game
+                    $dungeonIds = $this->Tools->extractIds($game['Dungeon']);
                     if(!empty($this->request->data['Game']['dungeons']['list'])) {
                         foreach($this->request->data['Game']['dungeons']['list'] as $dungeonId) {
+                            unset($dungeonIds[$dungeonId]);
+
                             $toSaveDungeons = array();
                             $toSaveDungeons['id'] = $dungeonId;
                             $toSaveDungeons['game_id'] = $gameId;
@@ -121,9 +124,22 @@ class GamesController extends AdminAppController {
                         }
                     }
 
+                    // Clean dungeons
+                    if(!empty($dungeonIds)) {
+                        foreach($dungeonIds as $dungeonId => $s) {
+                            $toSaveDungeons = array();
+                            $toSaveDungeons['id'] = $dungeonId;
+                            $toSaveDungeons['game_id'] = null;
+                            $this->Dungeon->save($toSaveDungeons);
+                        }
+                    }
+
                     // Associate each classes with the game
+                    $classeIds = $this->Tools->extractIds($game['Classe']);
                     if(!empty($this->request->data['Game']['classes']['list'])) {
                         foreach($this->request->data['Game']['classes']['list'] as $classeId) {
+                            unset($classeIds[$classeId]);
+
                             $toSaveClasses = array();
                             $toSaveClasses['id'] = $classeId;
                             $toSaveClasses['game_id'] = $gameId;
@@ -131,12 +147,35 @@ class GamesController extends AdminAppController {
                         }
                     }
 
+                    // Clean classes
+                    if(!empty($classeIds)) {
+                        foreach($classeIds as $classeId => $s) {
+                            $toSaveClasses = array();
+                            $toSaveClasses['id'] = $classeId;
+                            $toSaveClasses['game_id'] = null;
+                            $this->Classe->save($toSaveClasses);
+                        }
+                    }
+
                     // Associate each races with the game
+                    $raceIds = $this->Tools->extractIds($game['Race']);
                     if(!empty($this->request->data['Game']['races']['list'])) {
-                        foreach($this->request->data['Game']['races']['list'] as $classeId) {
+                        foreach($this->request->data['Game']['races']['list'] as $raceId) {
+                            unset($raceIds[$raceId]);
+
                             $toSaveRaces = array();
-                            $toSaveRaces['id'] = $classeId;
+                            $toSaveRaces['id'] = $raceId;
                             $toSaveRaces['game_id'] = $gameId;
+                            $this->Race->save($toSaveRaces);
+                        }
+                    }
+
+                    // Clean races
+                    if(!empty($raceIds)) {
+                        foreach($raceIds as $raceId => $s) {
+                            $toSaveRaces = array();
+                            $toSaveRaces['id'] = $raceId;
+                            $toSaveRaces['game_id'] = null;
                             $this->Race->save($toSaveRaces);
                         }
                     }

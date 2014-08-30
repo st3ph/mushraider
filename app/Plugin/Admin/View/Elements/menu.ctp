@@ -64,27 +64,20 @@
                 <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('Manage templates'), '/admin/events/templates', array('escape' => false));?></li>
             </ul>
         </li>
-
-        <li class="accordion-group <?php echo strtolower($this->name) == 'dungeons'?'active':'';?>">
-            <a data-parent="#menu" data-toggle="collapse" class="accordion-toggle <?php echo strtolower($this->name) == 'dungeons'?'':'collapsed';?>" data-target="#dungeons-nav">
-                <i class="icon-home icon-white"></i> <?php echo __('Dungeons');?> <i class="icon-chevron-down icon-white pull-right"></i>
-            </a>
-            <ul class="collapse <?php echo strtolower($this->name) == 'dungeons'?'in':'';?>" id="dungeons-nav">
-                <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('Manage dungeons'), '/admin/dungeons', array('escape' => false));?></li>
-                <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('Add dungeon'), '/admin/dungeons/add', array('escape' => false));?></li>
-                <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('Disabled dungeons'), '/admin/dungeons/disabled', array('escape' => false));?></li>
-            </ul>
-        </li>
         
         <?php if($user['User']['can']['full_permissions']):?>
-            <li class="accordion-group <?php echo strtolower($this->name) == 'games'?'active':'';?>">
-                <?php $toggleControllers = array('games', 'races', 'classes');?>
+            <?php $toggleControllers = array('games', 'dungeons', 'races', 'classes');?>
+            <li class="accordion-group <?php echo in_array(strtolower($this->name), $toggleControllers)?'active':'';?>">
                 <a data-parent="#menu" data-toggle="collapse" class="accordion-toggle <?php echo in_array(strtolower($this->name), $toggleControllers)?'':'collapsed';?>" data-target="#games-nav">
                     <i class="icon-gamepad icon-white"></i> <?php echo __('Games');?> <i class="icon-chevron-down icon-white pull-right"></i>
                 </a>
                 <ul class="collapse <?php echo in_array(strtolower($this->name), $toggleControllers)?'in':'';?>" id="games-nav">
                     <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('Manage games'), '/admin/games', array('escape' => false));?></li>
                     <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('Add game'), '/admin/games/add', array('escape' => false));?></li>
+                    <li class="divider"></li>
+                    <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('Manage dungeons'), '/admin/dungeons', array('escape' => false));?></li>
+                    <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('Add dungeon'), '/admin/dungeons/add', array('escape' => false));?></li>
+                    <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('Disabled dungeons'), '/admin/dungeons/disabled', array('escape' => false));?></li>
                     <li class="divider"></li>
                     <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('Manage classes'), '/admin/classes', array('escape' => false));?></li>
                     <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('Add class'), '/admin/classes/add', array('escape' => false));?></li>

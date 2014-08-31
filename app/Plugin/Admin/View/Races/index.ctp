@@ -9,6 +9,29 @@
         </div>
     </header>
     <div class="accordion-body body in collapse">
+        <?php if(!empty($racesWithoutGame)):?>
+            <h4><?php echo __('Races without game');?></h4>
+            <table class="table table-bordered table-striped responsive">
+                <thead>
+                    <tr>
+                        <th class="span11"><?php echo __('Title');?></th>
+                        <th class="actions span1"><?php echo __('Actions');?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($racesWithoutGame as $race):?>
+                        <tr>
+                            <td><?php echo $race['Race']['title'];?></td>
+                            <td class="actions">
+                                <?php echo $this->Html->link('<i class="icon-edit"></i>', '/admin/races/edit/'.$race['Race']['id'], array('class' => 'btn btn-info btn-mini tt', 'title' => __('Edit'), 'escape' => false))?>
+                                <?php echo $this->Html->link('<i class="icon-trash"></i>', '/admin/races/delete/'.$race['Race']['id'], array('class' => 'btn btn-danger btn-mini tt delete', 'title' => __('Delete'), 'data-confirm' => __('Are you sure you want to completely delete the race %s ?', $race['Race']['title']), 'escape' => false))?>
+                            </td>
+                        </tr>                 
+                    <?php endforeach;?>
+                </tbody>
+            </table>
+        <?php endif;?>
+
         <?php if(!empty($races)):?>
             <?php $currentGame = null;?>
             <?php $tableOpen = false;?>
@@ -19,11 +42,8 @@
                             </tbody>
                         </table>
                     <?php endif;?>
-                    <?php if(!$currentGame && !$gameId):?>
-                        <h4><?php echo __('Races without game');?></h4>
-                    <?php else:?>
-                        <h4><?php echo $race['Game']['title'];?></h4>
-                    <?php endif;?>
+                    
+                    <h4><?php echo $race['Game']['title'];?></h4>
                     <table class="table table-bordered table-striped responsive">
                         <thead>
                             <tr>
@@ -39,17 +59,13 @@
                                 <td><?php echo $race['Race']['title'];?></td>
                                 <td class="actions">
                                     <?php echo $this->Html->link('<i class="icon-edit"></i>', '/admin/races/edit/'.$race['Race']['id'], array('class' => 'btn btn-info btn-mini tt', 'title' => __('Edit'), 'escape' => false))?>
-                                    <?php if(!$gameId):?>
-                                        <?php echo $this->Html->link('<i class="icon-trash"></i>', '/admin/races/delete/'.$race['Race']['id'], array('class' => 'btn btn-danger btn-mini tt delete', 'title' => __('Delete'), 'data-confirm' => __('Are you sure you want to completely delete the race %s ?', $race['Race']['title']), 'escape' => false))?>
-                                    <?php endif;?>
                                 </td>
-                            </tr>                
+                            </tr>               
             <?php endforeach;?>
                     <?php if($tableOpen):?>
                             </tbody>
                         </table>
                     <?php endif;?>
-            <?php echo $this->Tools->pagination('Race');?>
         <?php else:?>
             <h3 class="muted"><?php echo __('You don\'t have any race yet');?></h3>
         <?php endif;?>

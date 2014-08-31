@@ -3,15 +3,6 @@ class ClassesController extends AdminAppController {
     public $components = array('Image');
     public $uses = array('Game', 'Classe');
 
-    var $paginate = array(
-        'Classe' => array(
-            'limit' => 20,
-            'recursive' => 1,
-            'contain' => array('Game'),
-            'order' => array('Classe.game_id' => 'asc', 'Classe.title' => 'asc')
-        )
-    );
-
     var $adminOnly = true;
 
     function beforeFilter() {
@@ -19,9 +10,16 @@ class ClassesController extends AdminAppController {
     }
 
     public function index() {
-        $conditions = array();
-        $classes = $this->paginate('Classe', $conditions);        
-        $this->set('classes', $classes);
+        $params = array();
+        $params['recursive'] = 1;
+        $params['order'] = array('Classe.game_id' => 'asc', 'Classe.title' => 'asc');
+        $params['contain']['Game'] = array();
+        $params['conditions']['game_id'] = null;
+        $this->set('classesWithoutGame', $this->Classe->find('all', $params));
+
+        unset($params['conditions']['game_id']);
+        $params['conditions']['game_id !='] = null;
+        $this->set('classes', $this->Classe->find('all', $params));
     }
 
     public function add() {

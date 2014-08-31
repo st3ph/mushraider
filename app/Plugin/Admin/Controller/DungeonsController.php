@@ -3,13 +3,14 @@ class DungeonsController extends AdminAppController {
     public $components = array('Image');
     public $uses = array('Game', 'Dungeon', 'RaidsSize');
 
+    var $adminOnly = true;
+
     function beforeFilter() {
         parent::beforeFilter();
     }
 
     public function index() {
         $params = array();
-        $params['limit'] = 20;
         $params['recursive'] = 1;
         $params['order'] = array('Dungeon.game_id' => 'asc', 'Dungeon.title' => 'asc');
         $params['contain']['Game'] = array();

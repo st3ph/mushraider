@@ -49,11 +49,8 @@
                             </tbody>
                         </table>
                     <?php endif;?>
-                    <?php if(!$currentGame && !$gameId):?>
-                        <h4><?php echo __('Dungeons without game');?></h4>
-                    <?php else:?>
-                        <h4><?php echo $dungeon['Game']['title'];?></h4>
-                    <?php endif;?>
+                    
+                    <h4><?php echo $dungeon['Game']['title'];?></h4>
                     <table class="table table-bordered table-striped responsive">
                         <thead>
                             <tr>
@@ -76,11 +73,7 @@
                                 <td><?php echo $dungeon['RaidsSize']['size'];?></td>
                                 <td class="actions">
                                     <?php echo $this->Html->link('<i class="icon-edit"></i>', '/admin/dungeons/edit/'.$dungeon['Dungeon']['id'], array('class' => 'btn btn-info btn-mini tt', 'title' => __('Edit'), 'escape' => false))?>
-                                    <?php if(!$gameId):?>
-                                        <?php echo $this->Html->link('<i class="icon-trash"></i>', '/admin/dungeons/delete/'.$dungeon['Dungeon']['id'], array('class' => 'btn btn-danger btn-mini tt delete', 'title' => __('Delete'), 'data-confirm' => __('Are you sure you want to completely delete the dungeon %s ?', $dungeon['Dungeon']['title']), 'escape' => false))?>
-                                    <?php else:?>
-                                        <?php echo $this->Html->link('<i class="icon-collapse-alt"></i>', '/admin/dungeons/disable/'.$dungeon['Dungeon']['id'], array('class' => 'btn btn-warning btn-mini tt delete', 'title' => __('Disable'), 'data-confirm' => __('Are you sure you want to disable the dungeon %s ?', $dungeon['Dungeon']['title']), 'escape' => false))?>
-                                    <?php endif;?>
+                                    <?php echo $this->Html->link('<i class="icon-collapse-alt"></i>', '/admin/dungeons/disable/'.$dungeon['Dungeon']['id'], array('class' => 'btn btn-warning btn-mini tt delete', 'title' => __('Disable'), 'data-confirm' => __('Are you sure you want to disable the dungeon %s ?', $dungeon['Dungeon']['title']), 'escape' => false))?>
                                 </td>
                             </tr>                
             <?php endforeach;?>

@@ -27,7 +27,6 @@ class LangComponent extends Component {
             }   
         }
 
-
-        $this->controller->Cookie->write('Lang', $lang, true, '+4 weeks');
+        $this->controller->Cookie->write('Lang', $lang, false, '+4 weeks');
     }
 }

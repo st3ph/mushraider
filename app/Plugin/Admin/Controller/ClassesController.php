@@ -87,7 +87,9 @@ class ClassesController extends AdminAppController {
             $toSave['color'] = $this->request->data['Classe']['color'];
             $toSave['game_id'] = $this->request->data['Classe']['game_id'];
             $imageName = $this->Image->__add($this->request->data['Classe']['icon'], 'files/icons/classes', 'classe_', 64, 64);
-            $toSave['icon'] = $imageName['name'];
+            if(!empty($imageName['name'])) {
+                $toSave['icon'] = $imageName['name'];
+            }
             if($this->Classe->save($toSave)) {
                 $this->Session->setFlash(__('Class %s has been updated', $classe['Classe']['title']), 'flash_success');
                 $this->redirect('/admin/classes');

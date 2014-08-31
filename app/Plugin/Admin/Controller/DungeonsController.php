@@ -112,7 +112,9 @@ class DungeonsController extends AdminAppController {
                 $toSave['raidssize_id'] = $this->request->data['Dungeon']['raidssize_id'];
             }
             $imageName = $this->Image->__add($this->request->data['Dungeon']['icon'], 'files/icons/dungeons', 'dungeon_', 64, 64);
-            $toSave['icon'] = $imageName['name'];
+            if(!empty($imageName['name'])) {
+                $toSave['icon'] = $imageName['name'];
+            }
 
             if($this->Dungeon->save($toSave)) {
                 $this->Session->setFlash(__('Dungeon %s has been updated', $dungeon['Dungeon']['title']), 'flash_success');

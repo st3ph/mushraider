@@ -32,4 +32,34 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class AppModel extends Model {
+    function __add($data = array(), $cond = array()) {
+        if(empty($data)) {
+            return false;
+        }
+
+        $params = array();
+        $params['recursive'] = -1;
+        $params['fields'] = array('id');
+        if(!empty($data['slug'])) {
+            $params['conditions']['slug'] = $data['slug'];
+        }
+        $params['conditions'] = array_merge($params['conditions'], $cond);
+
+        if($result = $this->find('first', $params)) {
+            if(!empty($data['import_modified'])) {
+                $toSave = array();
+                $toSave['id'] = $result[$this->alias]['id'];
+                $toSave['import_modified'] = $data['import_modified'];
+                $this->save($toSave);
+            }
+
+            return $result[$this->alias]['id'];
+        }
+        $this->create();
+        if($this->save($data)) {
+            return $this->getLastInsertId();
+        }
+
+        return false;
+    }
 }

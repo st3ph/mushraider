@@ -1,31 +1,42 @@
 <?php
 class DungeonsController extends AdminAppController {
+    public $components = array('Image');
     public $uses = array('Game', 'Dungeon', 'RaidsSize');
 
-    var $paginate = array(
-        'Dungeon' => array(
-            'limit' => 20,
-            'recursive' => 1,
-            'contain' => array('Game', 'RaidsSize'),
-            'order' => array('Dungeon.game_id' => 'asc', 'Dungeon.title' => 'asc')
-        )
-    );
+    var $adminOnly = true;
 
     function beforeFilter() {
         parent::beforeFilter();
     }
 
     public function index() {
-        $conditions = array();
-        $dungeons = $this->paginate('Dungeon', $conditions);                
-        $this->set('dungeons', $dungeons);
+        $params = array();
+        $params['recursive'] = 1;
+        $params['order'] = array('Dungeon.game_id' => 'asc', 'Dungeon.title' => 'asc');
+        $params['contain']['Game'] = array();
+        $params['contain']['RaidsSize'] = array();
+        $params['conditions']['game_id'] = null;
+        $this->set('dungeonsWithoutGame', $this->Dungeon->find('all', $params));
+
+        unset($params['conditions']['game_id']);
+        $params['conditions']['game_id !='] = null;
+        $this->set('dungeons', $this->Dungeon->find('all', $params));
     }
 
     public function disabled() {
-        $conditions = array();
-        $conditions['Dungeon.status'] = '0';
-        $dungeons = $this->paginate('Dungeon', $conditions);
-        $this->set('dungeons', $dungeons);
+        $params = array();
+        $params['limit'] = 20;
+        $params['recursive'] = 1;
+        $params['order'] = array('Dungeon.game_id' => 'asc', 'Dungeon.title' => 'asc');
+        $params['contain']['Game'] = array();
+        $params['contain']['RaidsSize'] = array();
+        $params['conditions']['Dungeon.status'] = '0';
+        $params['conditions']['game_id'] = null;
+        $this->set('dungeonsWithoutGame', $this->Dungeon->find('all', $params));
+
+        unset($params['conditions']['game_id']);
+        $params['conditions']['game_id !='] = null;
+        $this->set('dungeons', $this->Dungeon->find('all', $params));
     }
 
     public function add() {
@@ -38,6 +49,11 @@ class DungeonsController extends AdminAppController {
                 $toSave['raidssize_id'] = $this->RaidsSize->__add($this->request->data['Dungeon']['customraidssize']);
             }elseif(!empty($this->request->data['Dungeon']['raidssize_id'])) {
                 $toSave['raidssize_id'] = $this->request->data['Dungeon']['raidssize_id'];
+            }
+
+            if(!empty($this->request->data['Dungeon']['icon'])) {
+                $imageName = $this->Image->__add($this->request->data['Dungeon']['icon'], 'files/icons/dungeons', 'dungeon_', 64, 64);
+                $toSave['icon'] = $imageName['name'];
             }
 
             if($this->Dungeon->save($toSave)) {
@@ -94,6 +110,10 @@ class DungeonsController extends AdminAppController {
                 $toSave['raidssize_id'] = $this->RaidsSize->__add($this->request->data['Dungeon']['customraidssize']);
             }elseif(!empty($this->request->data['Dungeon']['raidssize_id'])) {
                 $toSave['raidssize_id'] = $this->request->data['Dungeon']['raidssize_id'];
+            }
+            $imageName = $this->Image->__add($this->request->data['Dungeon']['icon'], 'files/icons/dungeons', 'dungeon_', 64, 64);
+            if(!empty($imageName['name'])) {
+                $toSave['icon'] = $imageName['name'];
             }
 
             if($this->Dungeon->save($toSave)) {

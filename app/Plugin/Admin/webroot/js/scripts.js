@@ -26,17 +26,19 @@ var addInList = function(id, title, element, field) {
 
 var loadSpectrum = function(element) {
     if($(element).length) {
-        var color = $(element).val().replace('#', '');
-        $(element).spectrum({
-            color: color,
-            showPalette: true,
-            showSelectionPalette: true,
-            showInput: true,
-            localStorageKey: 'mushraider',
-            preferredFormat: 'hex6'
-        });        
+        $(element).each(function() {
+            var color = $(this).val().replace('#', '');
+            $(this).spectrum({
+                color: color,
+                showPalette: true,
+                showSelectionPalette: true,
+                showInput: true,
+                localStorageKey: 'mushraider',
+                preferredFormat: 'hex6'
+            });
+        });
     }
-}
+};
 
 var UpdatePreviewCanvas = function() {
     var img = this;
@@ -81,12 +83,41 @@ var UpdatePreviewCanvas = function() {
 
     $('#previewcanvascontainer').find('.currentLogo').hide();
     context.drawImage(img, x, y, UseWidth, UseHeight);
-}
+};
+
+var randomString = function(length) {
+    var chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var result = '';
+    for(var i = length; i > 0; --i) {
+        result += chars[Math.round(Math.random() * (chars.length - 1))];
+    }
+    return result;
+};
+
+var getAjaxProgress = function() {
+    console.log('progress ?');
+
+    $.ajax({
+        type: 'get',
+        url: site_url+'admin/ajax/ajaxProgress',
+        data: '',
+        success: function(progress) {
+            console.log('progress : '+progress);
+            var $progressBar = $('#progressBar');
+            $progressBar.find('span').text(progress+'%');
+            $progressBar.find('.bar').css('width', progress+'%');
+
+            setTimeout('getAjaxProgress()', 1000);
+        }
+    });
+};
 
 jQuery(function($) {
     if($('.flashMessage').length) {
-        var timer = $('.flashMessage').hasClass('alert-update')?30000:8000;        
-        setTimeout('hideFlashMessage()', 8000);
+        if(!$('.flashMessage').hasClass('alert-important')) {
+            var timer = $('.flashMessage').hasClass('alert-update')?30000:8000;        
+            setTimeout('hideFlashMessage()', timer);
+        }
     }
     
     $('.flashMessage .close').bind('click', function(e) {
@@ -110,6 +141,45 @@ jQuery(function($) {
     $('.tt').tooltip();
 
     loadSpectrum('.colorpicker');
+
+    $('.sortableTbody').sortable({
+        placeholder: "sortable-placeholder",
+        cursor: "move",
+        containment: ".sortableTbody",
+        handle: '.icon-move',
+        helper: function(e, tr) {
+            var $originals = tr.children();
+            var $helper = tr.clone();
+            $helper.children().each(function(index) {
+                $(this).width($originals.eq(index).width());
+            });
+            return $helper;
+        },
+        stop: function(event, ui) {   
+            var $thisTable = $(this).parents('table');
+            var $imgLoading = $(imgLoading);
+            var $jsonMsg = $thisTable.next('.jsonMsg');
+            var model = $(this).data('model');
+            var sorted = $(this).sortable('serialize');
+
+            $jsonMsg.html($imgLoading);
+
+            $.ajax({
+                type: 'get',
+                url: site_url+'admin/ajax/updateOrder',
+                data: 'm='+model+'&'+sorted,
+                dataType: 'json',
+                success: function(json) {
+                    $jsonMsg.html('<span class="text-'+json.type+'">'+json.msg+'</span>');
+                    setTimeout(
+                        function() {
+                            $jsonMsg.html('');
+                        }, 5000
+                    );
+                }
+            });
+        }
+    }).disableSelection();
 
     /*
     * Games
@@ -156,25 +226,38 @@ jQuery(function($) {
                 modalView = $('<div>');
                 modalView.html(resHtml);
 
+                var $dungeonSizeInputs = modalView.find('.dungeonSizeInputs');
+
                 // Add event to catch form submit
                 modalView.find('form').on('submit', function(e) {
                     e.preventDefault();
 
-                    // Add loading
-                    $(this).find('.submit').prepend(imgLoading);
-                    $(this).find('.submit input').attr('disabled', true);                    
-                    
-                    var datastring = $(this).serialize();
-                    $.ajax({
-                        type: 'post',
-                        url: site_url+'admin/'+controllerName+'/add',
-                        data: datastring,
-                        dataType: "json",
-                        success: function(objectInfos) {
-                            closeModal(modalView);                        
-                            addInList(objectInfos.id, objectInfos.title, '#'+listName, fieldName);
-                        }
-                    });
+                    if($dungeonSizeInputs.length && $dungeonSizeInputs.find('#DungeonRaidssizeId').val() == '' && $dungeonSizeInputs.find('#DungeonCustomraidssize').val() == '') {
+                        $dungeonSizeInputs.find('#DungeonRaidssizeId').addClass('form-error');
+                        $dungeonSizeInputs.find('#DungeonCustomraidssize').addClass('form-error');
+                        $dungeonSizeInputs.append('<div class="text-error">'+$dungeonSizeInputs.data('error')+'</div>');
+                    }else {
+                        // Remove dungeon size check errors
+                        $dungeonSizeInputs.find('#DungeonRaidssizeId').removeClass('form-error');
+                        $dungeonSizeInputs.find('#DungeonCustomraidssize').removeClass('form-error');
+                        $dungeonSizeInputs.find('.text-error').remove();
+
+                        // Add loading
+                        $(this).find('.submit').prepend(imgLoading);
+                        $(this).find('.submit input').attr('disabled', true);                    
+                        
+                        var datastring = $(this).serialize();
+                        $.ajax({
+                            type: 'post',
+                            url: site_url+'admin/'+controllerName+'/add',
+                            data: datastring,
+                            dataType: "json",
+                            success: function(objectInfos) {
+                                closeModal(modalView);                        
+                                addInList(objectInfos.id, objectInfos.title, '#'+listName, fieldName);
+                            }
+                        });
+                    }
                 });
 
                 modalView.dialog({
@@ -186,6 +269,86 @@ jQuery(function($) {
                         loadSpectrum('.colorpicker');
                     }
                 });
+            }
+        });
+    });
+
+    $('#importGame').on('click', function(e) {
+        e.preventDefault();
+
+        var $gameSlug = $('#GameSlug');
+        var gameSlug = $('#GameSlug').val();
+        var $progressBar = $('#progressBar');
+        if(!gameSlug.length) {
+            $gameSlug.addClass('form-error');
+        }else {
+            $gameSlug.parents('.importForm').fadeOut(function() {
+                $progressBar.find('span').text('1%');
+                $progressBar.find('.bar').css('width', '1%');
+                $progressBar.fadeIn();
+                $(this).remove();
+
+                $.ajax({
+                    type: 'get',
+                    url: site_url+'admin/ajax/importGame',
+                    data: 'slug='+gameSlug,
+                    dataType: "json",
+                    success: function(json) {
+                        $progressBar.html('<span class="text-'+json.type+'">'+json.msg+'</span>');
+                        if(json.type == 'success') {
+                            window.location = site_url+'admin/games';
+                        }
+                    }
+                });
+
+                // Second ajax call every second to check the script progress
+                setTimeout('getAjaxProgress()', 100);
+            });
+        }
+    });
+
+    $('.updateGame').on('click', function(e) {
+        e.preventDefault();
+
+        var $button = $(this);
+        var gameSlug = $(this).data('slug');
+        var $imgLoading = $(imgLoading);
+        $button.before($imgLoading);
+        $.ajax({
+            type: 'get',
+            url: site_url+'admin/ajax/importGame',
+            data: 'slug='+gameSlug,
+            dataType: "json",
+            success: function(json) {
+                $imgLoading.remove();
+                var $msg = $('<div class="text-'+json.type+'">'+json.msg+'</div>');
+                $button.parent('td').append($msg);
+                setTimeout(
+                    function() {
+                        $msg.remove();
+                        window.location = site_url+'admin/games';
+                    }, 5000
+                );
+            }
+        });
+    });
+
+    $('#checkUpdates').on('click', function(e) {
+        e.preventDefault();
+
+        var $button = $(this);
+        var $gamesList = $('.gamesList');
+        $button.find('i').addClass('loadingAnimation');
+        $.ajax({
+            type: 'get',
+            url: site_url+'admin/ajax/checkUpdates',
+            data: '',
+            dataType: "json",
+            success: function(json) {
+                $.each(json, function(i, item) {
+                    $gamesList.find('.actions a[data-slug="'+item+'"]').addClass('btn-success');
+                });
+                $button.find('i').removeClass('loadingAnimation');
             }
         });
     });
@@ -235,4 +398,51 @@ jQuery(function($) {
                       "outdent indent | alignleft center alignright justify | undo redo | link unlink"
         });
     }
+
+    /*
+    * Settings
+    */
+    $('#SettingEnabled').on('change', function(e) {
+        if($(this).is(':checked')) {
+            $('#apiModules').show();
+        }else {
+            $('#apiModules').hide();
+        }
+    });
+
+    $('#apiPrivateKey').on('click', '.refresh', function(e) {
+        e.preventDefault();
+
+        var privateKey = randomString(32);
+        $('#apiPrivateKey').find('.privateKey').text(privateKey);
+        $('#SettingPrivateKey').val(privateKey);
+    });
+
+    /*
+    * Dungeons
+    */
+    if($('.dungeonSizeInputs').length) {
+        var $dungeonSizeInputs = $('.dungeonSizeInputs');
+        var $dungeonSizeFrom = $dungeonSizeInputs.parents('form');
+
+        $dungeonSizeFrom.on('submit', function(e) {
+            if($dungeonSizeInputs.find('#DungeonRaidssizeId').val() == '' && $dungeonSizeInputs.find('#DungeonCustomraidssize').val() == '') {
+                e.preventDefault();
+                $dungeonSizeInputs.find('#DungeonRaidssizeId').addClass('form-error');
+                $dungeonSizeInputs.find('#DungeonCustomraidssize').addClass('form-error');
+                $dungeonSizeInputs.append('<div class="text-error">'+$dungeonSizeInputs.data('error')+'</div>');
+            }else {
+                $dungeonSizeInputs.find('#DungeonRaidssizeId').removeClass('form-error');
+                $dungeonSizeInputs.find('#DungeonCustomraidssize').removeClass('form-error');
+                $dungeonSizeInputs.find('.text-error').remove();
+            }
+        });  
+    }
+
+    /*
+    * Widgets
+    */
+    $('#WidgetType').on('change', function() {
+        $(this).parents('form').submit();
+    });
 });

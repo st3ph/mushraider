@@ -14,7 +14,7 @@
 			        <?php echo $this->Form->input('Character.title', array('type' => 'text', 'required' => true, 'label' => __('Character Name'), 'class' => 'span5'));?>
 			    </div>
 			    <div class="form-group">
-			    	<?php echo $this->Form->input('Character.game_id', array('type' => 'select', 'required' => true, 'label' => __('Game'), 'options' => $gamesList, 'empty' => '', 'class' => 'span5'));?>
+			    	<?php echo $this->Form->input('Character.game_id', array('type' => 'select', 'required' => true, 'label' => __('Game'), 'options' => $gamesList, 'data-error' => __('An error occur while loading'), 'empty' => '', 'class' => 'span5'));?>
 			    </div>
 
 			    <div id="objectsPlaceholder">
@@ -45,7 +45,12 @@
 							<td><?php echo $character['Game']['title'];?></td>
 							<td><?php echo $character['Character']['title'];?></td>
 							<td><?php echo $character['Character']['level'];?></td>
-							<td style="color:<?php echo $character['Classe']['color'];?>"><?php echo $character['Classe']['title'];?></td>
+							<td style="color:<?php echo $character['Classe']['color'];?>">
+								<?php if(!empty($character['Classe']['icon'])):?>
+									<?php echo $this->Html->image($character['Classe']['icon'], array('width' => 24));?>
+								<?php endif;?>
+								<?php echo $character['Classe']['title'];?>
+							</td>
 							<td><?php echo $character['Race']['title'];?></td>
 							<td><?php echo $character['RaidsRole']['title'];?></td>
 							<td>

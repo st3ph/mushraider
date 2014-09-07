@@ -9,6 +9,7 @@ It supports multi gaming and can be fully customize.
 For more information please visit the [official page](http://mushraider.com)
 * [Demo](http://mushraider.com/essayer-mushraider/)
 * [Download](http://mushraider.com/download/)
+* [Forum](http://forum.raidhead.com/)
 * [Bridge](http://mushraider.com/bridge/)
 * [Support](http://mushraider.com/support/)
 

@@ -1,7 +1,7 @@
 <header>
     <h1>
         <div class="row">
-            <?php $displayAdminButtons = ($user['User']['isOfficer'] || $user['User']['isAdmin'])?true:false?>
+            <?php $displayAdminButtons = ($user['User']['can']['create_reports'] || $user['User']['can']['full_permissions'])?true:false?>
             <div class="span<?php echo $displayAdminButtons?8:11?>">
                 <?php echo $this->Html->link('<i class="icon-chevron-left"></i>', '/events/view/'.$event['Event']['id'], array('escape' => false));?>
                 <?php echo __('Report');?> : <?php echo $event['Event']['title'];?>

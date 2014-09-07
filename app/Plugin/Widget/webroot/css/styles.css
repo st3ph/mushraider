@@ -1,0 +1,11 @@
+body.widget {padding:0;}
+.widget a, .preview .widget a {color:#bf4d28;}
+.widget a:hover, .preview .widget a:hover {text-decoration:underline;}
+.widget .container-fluid {padding:0;}
+.widget .widget-content, .preview .widget .widget-content {padding-right:1em;padding-left:1em;}
+.widget .widget-content .row-fluid [class*="span"]:first-child {margin-left: 0;}
+.widget .widget-content .row-fluid [class*="span"] {display:block;float: left;width: 100%;min-height: 30px;margin-left: 2.564102564102564%;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
+.widget .widget-content .row-fluid .span1 {width:5.982905982905983%}
+.widget .widget-content .row-fluid .span11 {width:90.48936170212765%}
+.widget .widget-header, .preview .widget .widget-header {background:#bf4d28;color:#fff;font-weight:bold;padding-left:1em;border-bottom:1px solid #666;margin-bottom:5px;}
+.widget .widget-footer, .preview .widget .widget-footer {text-align:right;padding-right:1em;}

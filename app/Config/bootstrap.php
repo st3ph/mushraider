@@ -76,7 +76,9 @@ Cache::config('default', array('engine' => 'File'));
 
 CakePlugin::load('Install');
 CakePlugin::load('Admin');
+CakePlugin::load('Widget');
 CakePlugin::load('Sociable');
+CakePlugin::load(array('Api' => array('routes' => true)));
 
 function prd($var) {
 	pr($var);

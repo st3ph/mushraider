@@ -7,25 +7,30 @@
 <header>
 	<h1>
 		<div class="row">
-			<?php $displayAdminButtons = ($dayTimestamp >= $todayTimestamp && ($user['User']['isOfficer'] || $user['User']['isAdmin']))?true:false?>
-			<?php $displayCloseButton = ($dayTimestamp < $todayTimestamp && ($user['User']['isOfficer'] || $user['User']['isAdmin']))?true:false?>
+			<?php $displayAdminButtons = ($dayTimestamp >= $todayTimestamp && ($user['User']['can']['manage_events'] || $user['User']['can']['full_permissions']))?true:false?>
+			<?php $displayTplButtons = ($dayTimestamp >= $todayTimestamp && ($user['User']['can']['create_templates'] || $user['User']['can']['full_permissions']))?true:false?>
+			<?php $displayCloseButton = ($dayTimestamp < $todayTimestamp && ($user['User']['can']['create_reports'] || $user['User']['can']['full_permissions']))?true:false?>
 			<?php $displayReportButton = !empty($event['Report']['id'])?true:false?>
-			<div class="span<?php echo ($displayAdminButtons || $displayCloseButton || $displayReportButton)?8:11?>">
+			<div class="span<?php echo ($displayAdminButtons || $displayCloseButton || $displayReportButton || $displayTplButtons)?7:11?>">
 				<i class="icon-calendar-empty"></i> <?php echo __('View event');?>
 				<?php if(!empty($event['Game']['logo'])):?>
-					<?php echo $this->Html->image('/files/logos/'.$event['Game']['logo'], array('class' => 'logo', 'width' => 32));?>
+					<?php echo $this->Html->image($event['Game']['logo'], array('class' => 'logo', 'width' => 32));?>
 				<?php endif;?>
 			</div>
-			<?php if($displayAdminButtons || $displayCloseButton || $displayReportButton):?>
-				<div class="pull-right text-right span3">
-					<?php if($displayAdminButtons):?>
+			<?php if($displayAdminButtons || $displayCloseButton || $displayReportButton || $displayTplButtons):?>
+				<div class="pull-right text-right span4">
+					<?php if($displayTplButtons):?>
 						<?php echo $this->Html->link('<i class="icon-copy"></i> '.__('Copy'), '/events/view/'.$event['Event']['id'], array('id' => 'createTemplate', 'class' => 'btn btn-mini tt', 'title' => __('Create template'), 'escape' => false));?>
 						<span id="tplName" data-event="<?php echo $event['Event']['id'];?>"><input type="text" class="input-small" value="" placeholder="<?php echo __('template name');?>"/> <span class="text-error"><i class="icon-remove"></i></span> <span class="text-success"><i class="icon-save"></i></span></span>
+					<?php endif;?>
+					<?php if($displayAdminButtons):?>
 						<?php echo $this->Html->link('<i class="icon-edit"></i> '.__('Edit'), '/events/edit/'.$event['Event']['id'], array('class' => 'btn btn-warning btn-mini', 'escape' => false));?>
 						<?php echo $this->Html->link('<i class="icon-trash"></i> '.__('Delete'), '/events/delete/'.$event['Event']['id'], array('class' => 'btn btn-danger btn-mini confirm', 'data-confirm' => __("Are you sure you want to delete this event ?\n(this can't be undone)"), 'escape' => false));?>
-					<?php elseif($displayReportButton):?>
+					<?php endif;?>
+					<?php if($displayReportButton):?>
 						<?php echo $this->Html->link(__('View report'), '/events/report/'.$event['Event']['id'], array('class' => 'btn btn-inverse btn-mini', 'escape' => false));?>
-					<?php elseif($displayCloseButton):?>
+					<?php endif;?>
+					<?php if($displayCloseButton):?>
 						<?php echo $this->Html->link('<i class="icon-lock"></i> '.__('Close & create a report'), '/events/close/'.$event['Event']['id'], array('class' => 'btn btn-success btn-mini', 'escape' => false));?>
 					<?php endif;?>
 				</div>
@@ -53,6 +58,10 @@
 					$messageClass = 'label label-success';
 					$messageText = __('your are validated to this event as');				
 					break;
+				case 3:
+					$messageClass = 'label label-important';
+					$messageText = __('your are refused for this event');
+					break;
 			}
 		}
 		?>
@@ -71,6 +80,7 @@
 					$eventRoles['role_'.$eventRole['RaidsRole']['id']]['characters']['validated'] = '';
 					$eventRoles['role_'.$eventRole['RaidsRole']['id']]['characters']['waiting'] = '';
 					$eventRoles['role_'.$eventRole['RaidsRole']['id']]['characters']['nok'] = '';
+					$eventRoles['role_'.$eventRole['RaidsRole']['id']]['characters']['refused'] = '';
 					?>
 				<?php endforeach;?>
 			</select>
@@ -125,36 +135,53 @@
 		<thead>
 			<tr>
 				<?php foreach($eventRoles as $roleId => $eventRole):?>
-					<th data-id="<?php echo $roleId;?>">
-						<?php echo $eventRole['title'];?>
-						<span class="current"><?php echo $eventRole['current'];?></span> / <span class="max"><?php echo $eventRole['max'];?></span>
-						<?php if($user['User']['isOfficer'] || $user['User']['isAdmin']):?>
-							<i class="icon-edit pull-right text-warning"></i>
-						<?php endif;?>
-					</th>
+					<?php if($eventRole['max'] > 0):?>
+						<th data-id="<?php echo $roleId;?>">
+							<?php echo $eventRole['title'];?>
+							<span class="current"><?php echo $eventRole['current'];?></span> / <span class="max"><?php echo $eventRole['max'];?></span>
+							<?php if($user['User']['can']['manage_events'] || $user['User']['can']['full_permissions']):?>
+								<span class="badge badge-warning pull-right"><i class="icon-edit"></i></span>
+							<?php endif;?>
+						</th>
+					<?php endif;?>
 				<?php endforeach;?>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<?php $colWidth = floor(100 / count($eventRoles));?>
+				<?php
+				$displayedRoles = 0;
+				if(!empty($eventRoles)) {
+					foreach($eventRoles as $roleId => $eventRole) {
+						$displayedRoles = $eventRole['max'] > 0?$displayedRoles + 1:$displayedRoles;
+					}
+				}
+				$colWidth = floor(100 / $displayedRoles);
+				?>
 				<?php foreach($eventRoles as $roleId => $eventRole):?>
-					<td data-id="<?php echo $roleId;?>" data-full="<?php echo __('The roster for this role is full');?>" style="width:<?php echo $colWidth;?>%">
-						<h5><?php echo __('Validated');?></h5>
-						<ul class="validated">
-							<?php echo $eventRole['characters']['validated'];?>
-						</ul>
-						<hr />
-						<h5><?php echo __('Waiting');?></h5>
-						<ul class="waiting sortWaiting">
-							<?php echo $eventRole['characters']['waiting'];?>
-						</ul>
-						<hr />
-						<h5><?php echo __('Rejected');?></h5>
-						<ul class="rejected">
-							<?php echo $eventRole['characters']['nok'];?>
-						</ul>
-					</td>
+					<?php if($eventRole['max'] > 0):?>
+						<td data-id="<?php echo $roleId;?>" data-full="<?php echo __('The roster for this role is full');?>" style="width:<?php echo $colWidth;?>%">
+							<h5 class="text-success"><?php echo __('Validated');?></h5>
+							<ul class="validated">
+								<?php echo $eventRole['characters']['validated'];?>
+							</ul>
+							<hr />
+							<h5 class="text-info"><?php echo __('Waiting');?></h5>
+							<ul class="waiting sortWaiting">
+								<?php echo $eventRole['characters']['waiting'];?>
+							</ul>
+							<hr />
+							<h5 class="text-error"><?php echo __('Refused');?></h5>
+							<ul class="refused">
+								<?php echo $eventRole['characters']['refused'];?>
+							</ul>
+							<hr />
+							<h5 class="text-warning"><?php echo __('Rejected');?></h5>
+							<ul class="rejected">
+								<?php echo $eventRole['characters']['nok'];?>
+							</ul>
+						</td>
+					<?php endif;?>
 				<?php endforeach;?>
 			</tr>
 		</tbody>

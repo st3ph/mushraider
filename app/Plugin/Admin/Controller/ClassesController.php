@@ -1,15 +1,7 @@
 <?php
 class ClassesController extends AdminAppController {
+    public $components = array('Image');
     public $uses = array('Game', 'Classe');
-
-    var $paginate = array(
-        'Classe' => array(
-            'limit' => 20,
-            'recursive' => 1,
-            'contain' => array('Game'),
-            'order' => array('Classe.game_id' => 'asc', 'Classe.title' => 'asc')
-        )
-    );
 
     var $adminOnly = true;
 
@@ -18,9 +10,16 @@ class ClassesController extends AdminAppController {
     }
 
     public function index() {
-        $conditions = array();
-        $classes = $this->paginate('Classe', $conditions);        
-        $this->set('classes', $classes);
+        $params = array();
+        $params['recursive'] = 1;
+        $params['order'] = array('Classe.game_id' => 'asc', 'Classe.title' => 'asc');
+        $params['contain']['Game'] = array();
+        $params['conditions']['game_id'] = null;
+        $this->set('classesWithoutGame', $this->Classe->find('all', $params));
+
+        unset($params['conditions']['game_id']);
+        $params['conditions']['game_id !='] = null;
+        $this->set('classes', $this->Classe->find('all', $params));
     }
 
     public function add() {
@@ -31,13 +30,18 @@ class ClassesController extends AdminAppController {
             $toSave['color'] = $this->request->data['Classe']['color'];
             $toSave['game_id'] = !empty($this->request->data['Classe']['game_id'])?$this->request->data['Classe']['game_id']:null;
 
+            if(!empty($this->request->data['Classe']['icon'])) {
+                $imageName = $this->Image->__add($this->request->data['Classe']['icon'], 'files/icons/classes', 'classe_', 64, 64);
+                $toSave['icon'] = $imageName['name'];
+            }
+
             if($this->Classe->save($toSave)) {
                 if($this->request->is('ajax')) {
                     Configure::write('debug', 0);
                     $this->layout = 'ajax';
                     $this->autoRender = false;
-                    $dungeon = array('id' => $this->Classe->getLastInsertId(), 'title' => $toSave['title']);
-                    return json_encode($dungeon);
+                    $classe = array('id' => $this->Classe->getLastInsertId(), 'title' => $toSave['title']);
+                    return json_encode($classe);
                 }else {
                     $this->Session->setFlash(__('%s has been added to your classes list', $toSave['title']), 'flash_success');
                     $this->redirect('/admin/classes');
@@ -82,6 +86,10 @@ class ClassesController extends AdminAppController {
             $toSave['slug'] = $this->Tools->slugMe($toSave['title']);
             $toSave['color'] = $this->request->data['Classe']['color'];
             $toSave['game_id'] = $this->request->data['Classe']['game_id'];
+            $imageName = $this->Image->__add($this->request->data['Classe']['icon'], 'files/icons/classes', 'classe_', 64, 64);
+            if(!empty($imageName['name'])) {
+                $toSave['icon'] = $imageName['name'];
+            }
             if($this->Classe->save($toSave)) {
                 $this->Session->setFlash(__('Class %s has been updated', $classe['Classe']['title']), 'flash_success');
                 $this->redirect('/admin/classes');

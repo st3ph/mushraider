@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS `{prefix}classes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `slug` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL, 
+  `icon` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `color` varchar(20) COLLATE utf8_unicode_ci DEFAULT '666666', 
   `game_id` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -67,6 +68,7 @@ CREATE TABLE IF NOT EXISTS `{prefix}dungeons` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `slug` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL, 
+  `icon` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `game_id` int(11) NULL DEFAULT NULL,
   `raidssize_id` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1',
@@ -181,6 +183,8 @@ CREATE TABLE IF NOT EXISTS `{prefix}games` (
   `title` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `slug` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL, 
   `logo` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL, 
+  `import_slug` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL, 
+  `import_modified` int(10) DEFAULT 0, 
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -223,6 +227,7 @@ CREATE TABLE IF NOT EXISTS `{prefix}raids_sizes` (
 CREATE TABLE IF NOT EXISTS `{prefix}raids_roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `order` int(2) DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -261,6 +266,36 @@ CREATE TABLE IF NOT EXISTS `{prefix}roles` (
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `alias` (`alias`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `role_permission`
+--
+
+CREATE TABLE IF NOT EXISTS `{prefix}role_permissions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `alias` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `alias` (`alias`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `role_permission_roles`
+--
+
+CREATE TABLE IF NOT EXISTS `{prefix}role_permission_roles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_id` int(11) NOT NULL,
+  `role_permission_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -313,5 +348,23 @@ CREATE TABLE IF NOT EXISTS `{prefix}users` (
   `bridge` tinyint(1) NOT NULL DEFAULT  '0',
   `modified` datetime NOT NULL,
   `created` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `widgets`
+--
+
+CREATE TABLE IF NOT EXISTS `{prefix}widgets` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `controller` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
+  `action` varchar(25) COLLATE utf8_unicode_ci NOT NULL,  
+  `title` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `params` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

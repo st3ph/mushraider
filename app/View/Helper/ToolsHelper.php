@@ -28,11 +28,27 @@ class ToolsHelper extends AppHelper {
 		return date($format, $timestamp);
 	}
 
-	public function niceDate($date) {
+	public function niceDate($date, $preciseDate = false) {
 		$dates = explode(' ', $date);
 		$jours = explode('-', $dates[0]);
 		$heures = explode(':', $dates[1]);
-		if($dates[0] == date("Y-m-d")) {
+
+		if($date > date('Y-m-d H:i:s')) {
+			$date_a = new DateTime(date('Y-m-d H:i:s'));
+			$date_b = new DateTime($date);
+			$interval = date_diff($date_a, $date_b);
+			$intervalFormat = explode(':', $interval->format('%d:%h:%I'));
+
+			$str = $intervalFormat[0] > 0?$intervalFormat[0].' '.__('day').($intervalFormat[0] > 1?'s':'').' ':'';
+			$str .= $intervalFormat[1] > 0?$intervalFormat[1].'h':'';
+			$str .= $intervalFormat[0] == 0 && $intervalFormat[2] > 0?$intervalFormat[2]:'';
+
+			if($preciseDate && $dates[0] == date("Y-m-d")) {
+				$str .= ' ('.__('Today at').' '.$heures[0].'h'.$heures[1].')';
+			}
+
+			return __('in').' '.$str;
+		}elseif($dates[0] == date("Y-m-d")) {
 			$text = __('Today at');
 			return $text.' '.$heures[0].'h'.$heures[1];
 		}elseif($dates[0] == date('Y-m-d', time() - 3600 * 24)) {

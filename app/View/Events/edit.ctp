@@ -7,13 +7,13 @@
     <div class="row">
         <div class="span5">
             <div class="form-group">
-                <?php echo $this->Form->input('Event.title', array('type' => 'text', 'label' => __('Event title'), 'maxlength' => 50, 'class' => 'span5'));?>
+                <?php echo $this->Form->input('Event.title', array('type' => 'text', 'label' => __('Event title'), 'maxlength' => 50, 'class' => 'span4'));?>
             </div>
             <div class="form-group">
-                <?php echo $this->Form->input('Event.game_id', array('type' => 'select', 'required' => true, 'label' => __('Game'), 'options' => $gamesList, 'empty' => '', 'class' => 'span5'));?>
+                <?php echo $this->Form->input('Event.game_id', array('type' => 'select', 'required' => true, 'label' => __('Game'), 'options' => $gamesList, 'data-error' => __('An error occur while loading'), 'empty' => '', 'class' => 'span4'));?>
             </div>
             <div class="form-group">
-                <?php echo $this->Form->input('Event.dungeon_id', array('type' => 'select', 'required' => true, 'label' => __('Dungeon'), 'empty' => __('Select a game first'), 'class' => 'span5'));?>
+                <?php echo $this->Form->input('Event.dungeon_id', array('type' => 'select', 'data-selected' => $this->data['Event']['dungeon_id'], 'required' => true, 'label' => __('Dungeon'), 'empty' => __('Select a game first'), 'class' => 'span4'));?>
             </div>
         </div>
         <div class="span6">

@@ -76,6 +76,7 @@ class FormerHelper extends AppHelper {
 		$maxday = date("t", $timestamp);
 		$thismonth = getdate($timestamp);
 		$startday = $thismonth['wday'];
+		$monthIn2Digits = str_pad($options['month'], 2, "0", STR_PAD_LEFT);
 
 
 
@@ -86,7 +87,7 @@ class FormerHelper extends AppHelper {
 					$output .= '<table width="100%" border="0" cellspacing="0" cellpadding="0">';
 						$output .= '<tr class="links">';
 							$output .= '<td class="prev">'.$this->Html->link('<i class="icon-chevron-left"></i> '.__('Previous'), '/events/index/m:'.$prev_month.'/y:'.$prev_year, array('escape' => false)).'</td>';
-							$output .= '<td class="month">'.$this->month[$options['month']].' '.$options['year'].'</td>';
+							$output .= '<td class="month">'.ucfirst($this->mois[$monthIn2Digits]).' '.$options['year'].'</td>';
 							$output .= '<td class="next">'.$this->Html->link(__('Next').' <i class="icon-chevron-right"></i>', '/events/index/m:'.$next_month.'/y:'.$next_year, array('escape' => false)).'</td>';
 						$output .= '</tr>';
 					$output .= '</table>';
@@ -116,7 +117,7 @@ class FormerHelper extends AppHelper {
 						    	$output .= '<td valign="top" class="day '.$dayClass.'">';
 						    		$output .= '<div class="clearfix dayNumber">';
 						    			$output .= $day;
-						    			if($dayTimestamp >= $todayTimestamp && ($options['user']['User']['isOfficer'] || $options['user']['User']['isAdmin'])) {
+						    			if($dayTimestamp >= $todayTimestamp && ($options['user']['User']['can']['manage_events'] || $options['user']['User']['can']['full_permissions'])) {
 						    				$output .= $this->Html->link('<i class="icon-plus-sign-alt"></i>', '/events/add/'.$formatCurrentDay, array('title' => __('Add event'), 'class' => 'pull-right tt', 'escape' => false));
 						    			}
 						    		$output .= '</div>';
@@ -137,15 +138,18 @@ class FormerHelper extends AppHelper {
 												$tooltip .= '<div>';
 													$tooltip .= $matchingEvent['Game']['title'].'<br/>';
 													$tooltip .= $matchingEvent['Dungeon']['title'].'<br/>';
-													$tooltip .= __('Roster').' : '.count($matchingEvent['EventsCharacter']).'/'.$playersNeeded.'<br/>';
+													$tooltip .= __('Roster').' : '.count($this->extractUsersWithStatus($matchingEvent['EventsCharacter'], 2)).'/'.$playersNeeded.'<br/>';
 													$tooltip .= __('Start').' : '.$this->date($matchingEvent['Event']['time_start'], 'heure');
 												$tooltip .= '<div>';
 
 
 												$output .= '<li>';
-													$output .= '<span>'.$this->date($matchingEvent['Event']['time_invitation'], 'heure').'</span>';
+													$output .= '<span class="time">'.$this->date($matchingEvent['Event']['time_invitation'], 'heure').'</span>';
 													if(!empty($matchingEvent['Game']['logo'])) {
-														$output .= $this->Html->image('/files/logos/'.$matchingEvent['Game']['logo'], array('class' => 'logo', 'width' => 16));
+														$output .= $this->Html->image($matchingEvent['Game']['logo'], array('class' => 'logo', 'width' => 16));
+													}
+													if(!empty($matchingEvent['Dungeon']['icon'])) {
+														$output .= $this->Html->image($matchingEvent['Dungeon']['icon'], array('class' => 'logo', 'width' => 16));
 													}
 													// Test is the user is registered for this event
 													$registeredClass = '';
@@ -190,6 +194,20 @@ class FormerHelper extends AppHelper {
 		return $matchingEvents;
 	}
 
+	function extractUsersWithStatus($eventCharacters, $status) {
+		$chars = array();
+
+		if(!empty($eventCharacters)) {
+			foreach($eventCharacters as $char) {
+				if($char['status'] == $status) {
+					$chars[] = $char;
+				}
+			}
+		}
+
+		return $chars;
+	}
+
 	function charactersToRoles($eventRoles, $characters, $user = null) {
 		if(!empty($eventRoles) && !empty($characters)) {
 			foreach($characters as $character) {
@@ -200,16 +218,25 @@ class FormerHelper extends AppHelper {
 					case 2:
 						$status = 'validated';
 						break;
+					case 3:
+						$status = 'refused';
+						break;
 					default:
 						$status = 'nok';
 				}
 				$eventRoles['role_'.$character['raids_role_id']]['current'] = $status == 'validated'?$eventRoles['role_'.$character['raids_role_id']]['current'] + 1:$eventRoles['role_'.$character['raids_role_id']]['current'];
 				$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '<li data-id="'.$character['Character']['id'].'" data-user="'.$character['Character']['User']['id'].'">';
-					$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '<span class="character" style="color:'.$character['Character']['Classe']['color'].'">'.$character['Character']['Classe']['title'].' '.$character['Character']['title'].' ('.$character['Character']['level'].')</span>';
+					$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '<span class="character" style="color:'.$character['Character']['Classe']['color'].'">';
+						if(!empty($character['Character']['Classe']['icon'])) {
+							$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= $this->Html->image($character['Character']['Classe']['icon'], array('class' => 'tt', 'title' => $character['Character']['Classe']['title'], 'width' => '16'));
+						}
+						$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= ' '.$character['Character']['title'];
+						$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= ' ('.(empty($character['Character']['Classe']['icon'])?$character['Character']['Classe']['title'].' ':'').$character['Character']['level'].')';
+					$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '</span>';
 					if(!empty($character['comment'])) {
 						$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '<span class="tt" title="'.$character['comment'].'"><span class="icon-comments-alt"></span></span>';
 					}
-					if($user && ($user['User']['isOfficer'] || $user['User']['isAdmin'])) {
+					if($user && ($user['User']['can']['manage_events'] || $user['User']['can']['full_permissions'])) {
 						$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '<span class="icon-move muted pull-right"></span>';
 					}
 				$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '</li>';				

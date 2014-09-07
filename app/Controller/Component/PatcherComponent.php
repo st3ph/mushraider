@@ -10,25 +10,25 @@ class PatcherComponent extends Component {
 		// bêta 2
 		$sql = "SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE() AND COLUMN_NAME='default_role_id' AND TABLE_NAME='".Configure::read('Database.prefix')."characters'";
 		if(!$this->controller->Character->query($sql)) {
-			$this->controller->redirect('/admin/patcher/apply/beta-2');
+			return $this->redirectToPatch('/admin/patcher/apply/beta-2');
 		}
 
         // bêta 3
         $sql = "SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE() AND COLUMN_NAME='status' AND TABLE_NAME='".Configure::read('Database.prefix')."dungeons'";
         if(!$this->controller->User->query($sql)) {
-            $this->controller->redirect('/admin/patcher/apply/beta-3');
+            return $this->redirectToPatch('/admin/patcher/apply/beta-3');
         }
 
         // v1.1
         $sql = "SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE() AND COLUMN_NAME='status' AND TABLE_NAME='".Configure::read('Database.prefix')."characters'";
         if(!$this->controller->User->query($sql)) {
-            $this->controller->redirect('/admin/patcher/apply/v-1.1');
+            return $this->redirectToPatch('/admin/patcher/apply/v-1.1');
         }
 
         // v1.3
         $sql = "SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE() AND COLUMN_NAME='bridge' AND TABLE_NAME='".Configure::read('Database.prefix')."users'";
         if(!$this->controller->User->query($sql)) {
-            $this->controller->redirect('/admin/patcher/apply/v-1.3');
+            return $this->redirectToPatch('/admin/patcher/apply/v-1.3');
         }
 
         // v1.3.5
@@ -36,7 +36,15 @@ class PatcherComponent extends Component {
         $EventsTemplate = new EventsTemplate();
         $sql = "SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE() AND COLUMN_NAME='time_invitation' AND TABLE_NAME='".Configure::read('Database.prefix')."events_templates'";        
         if(!$EventsTemplate->query($sql)) {
-            $this->controller->redirect('/admin/patcher/apply/v-1.3.5');
+            return $this->redirectToPatch('/admin/patcher/apply/v-1.3.5');
+        }
+
+        // v1.4
+        App::uses('RaidsRole', 'Model');
+        $RaidsRole = new RaidsRole();
+        $sql = "SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE() AND COLUMN_NAME='order' AND TABLE_NAME='".Configure::read('Database.prefix')."raids_roles'";
+        if(!$RaidsRole->query($sql)) {
+            return $this->redirectToPatch('/admin/patcher/apply/v-1.4');
         }
 	}
 
@@ -84,4 +92,14 @@ class PatcherComponent extends Component {
             return str_replace('{prefix}', $prefix, $command);
         }
     }  
+
+    private function redirectToPatch($redirect = null) {
+        if(!empty($redirect)) {
+            if(!$this->controller->user || !$this->controller->user['User']['can']['full_permissions']) {
+                $redirect = '/auth/logout/info/'.__('MushRaider is down for maintenance (patching up), please come back later !');
+            }
+
+            return $this->controller->redirect($redirect);
+        }
+    }
 }

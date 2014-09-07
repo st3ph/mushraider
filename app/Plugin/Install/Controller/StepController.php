@@ -135,37 +135,7 @@ class StepController extends InstallAppController {
                     $toSave['activation_key'] = md5(uniqid());
                     $userModel->create();
                     if($userModel->save($toSave)) {
-                        $host = substr_count($_SERVER['HTTP_HOST'], '.') > 1?substr($_SERVER['HTTP_HOST'], strpos($_SERVER['HTTP_HOST'], '.') + 1):$_SERVER['HTTP_HOST'];                        
-                        $host = strpos($host, ':') !== false?substr($host, 0, strpos($host, ':')):$host; // Remove port if present on unusual configurations
-
-                        // Add default settings
-                        App::uses('Setting', 'Model');
-                        $settingModel = new Setting();
-                        $defaultSettings = array();
-                        $defaultSettings['title'] = $siteTitle;
-                        $defaultSettings['theme'] = json_encode(array(
-                                                            'logo' => '/img/logo.png',
-                                                            'bgcolor' => '#444444',
-                                                            'bgimage' => $this->request->webroot.'img/bg.png',
-                                                            'bgrepeat' => 'repeat'
-                                                        ));
-                        $defaultSettings['css'] = '';
-                        $defaultSettings['notifications'] = 1;
-                        $defaultSettings['email'] = json_encode(array(
-                                                            'name' => 'MushRaider',
-                                                            'from' => 'mushraider@'.$host,
-                                                            'encoding' => '',
-                                                            'transport' => 'Mail',
-                                                            'host' => '',
-                                                            'port' => '',
-                                                            'username' => '',
-                                                            'password' => ''
-                                                        ));
-                        foreach($defaultSettings as $option => $value) {
-                            $settingModel->create();
-                            $settingModel->save(array('option' => $option, 'value' => $value));
-                        }
-
+                        $this->postInstallData($siteTitle);
 
                     	$settingsConfig['installed'] = true;
                         Configure::write('Database', $this->Tools->quoteArray($databaseConfig));
@@ -187,5 +157,64 @@ class StepController extends InstallAppController {
                 $this->Session->setFlash(__('MushRaider can\'t verify the settings, please be sure to fill all the fields to continue.'), 'flash_error');
             }
         }
+    }
+
+    private function postInstallData($siteTitle) {
+        // Add default settings
+        $host = substr_count($_SERVER['HTTP_HOST'], '.') > 1?substr($_SERVER['HTTP_HOST'], strpos($_SERVER['HTTP_HOST'], '.') + 1):$_SERVER['HTTP_HOST'];                        
+        $host = strpos($host, ':') !== false?substr($host, 0, strpos($host, ':')):$host; // Remove port if present on unusual configurations
+
+        App::uses('Setting', 'Model');
+        $settingModel = new Setting();
+        $defaultSettings = array();
+        $defaultSettings['title'] = $siteTitle;
+        $defaultSettings['theme'] = json_encode(array(
+                                            'logo' => '/img/logo.png',
+                                            'bgcolor' => '#444444',
+                                            'bgimage' => $this->request->webroot.'img/bg.png',
+                                            'bgrepeat' => 'repeat'
+                                        ));
+        $defaultSettings['css'] = '';
+        $defaultSettings['notifications'] = 1;
+        $defaultSettings['email'] = json_encode(array(
+                                            'name' => 'MushRaider',
+                                            'from' => 'mushraider@'.$host,
+                                            'encoding' => '',
+                                            'transport' => 'Mail',
+                                            'host' => '',
+                                            'port' => '',
+                                            'username' => '',
+                                            'password' => ''
+                                        ));
+        foreach($defaultSettings as $option => $value) {
+            $settingModel->create();
+            $settingModel->save(array('option' => $option, 'value' => $value));
+        }
+
+        // Add default roles permissions
+        $rolesPermissions = array(
+            array('title' => __('Full permissions'), 'alias' => 'full_permissions', 'description' => __('Like Chuck Norris, he can do anything. This overwrite every permissions')),
+            array('title' => __('Limited admin access'), 'alias' => 'limited_admin', 'description' => __('Like Robin, he can do some things but not all (like driving the batmobile or change user role)')),
+            array('title' => __('Can manage events'), 'alias' => 'manage_events', 'description' => __('Can create, edit and delete events. Can also manage the roster for each events')),
+            array('title' => __('Can create templates'), 'alias' => 'create_templates', 'description' => __('Can create events templates')),
+            array('title' => __('Can create reports'), 'alias' => 'create_reports', 'description' => __('Can create events reports'))
+        );
+        App::uses('RolePermission', 'Model');
+        $RolePermissionModel = new RolePermission();
+        foreach($rolesPermissions as $rolesPermission) {
+            $RolePermissionModel->create();
+            $RolePermissionModel->save($rolesPermission);
+        }
+
+        // Add new roles permissions to existing roles
+        App::uses('Role', 'Model');
+        $RoleModel = new Role();
+        App::uses('RolePermissionRole', 'Model');
+        $RolePermissionRoleModel = new RolePermissionRole();
+        $RolePermissionRoleModel->__add(array('role_id' => $RoleModel->getIdByAlias('admin'), 'role_permission_id' => $RolePermissionModel->getIdByAlias('full_permissions')));
+        $RolePermissionRoleModel->__add(array('role_id' => $RoleModel->getIdByAlias('officer'), 'role_permission_id' => $RolePermissionModel->getIdByAlias('limited_admin')));
+        $RolePermissionRoleModel->__add(array('role_id' => $RoleModel->getIdByAlias('officer'), 'role_permission_id' => $RolePermissionModel->getIdByAlias('manage_events')));
+        $RolePermissionRoleModel->__add(array('role_id' => $RoleModel->getIdByAlias('officer'), 'role_permission_id' => $RolePermissionModel->getIdByAlias('create_templates')));
+        $RolePermissionRoleModel->__add(array('role_id' => $RoleModel->getIdByAlias('officer'), 'role_permission_id' => $RolePermissionModel->getIdByAlias('create_reports')));
     }
 }

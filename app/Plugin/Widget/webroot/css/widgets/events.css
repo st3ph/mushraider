@@ -1,0 +1,4 @@
+.widgetEventsIndex {padding:5px;}
+.widgetEventsIndex li {border-bottom:1px solid #ddd;padding-bottom:5px;margin-bottom:5px;}
+.widgetEventsIndex li:last-child {border-bottom:none;padding-bottom:0;margin-bottom:0}
+.widgetEventsIndex .date {font-style:italic;font-size:11px;color:#999;}

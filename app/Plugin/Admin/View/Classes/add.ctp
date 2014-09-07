@@ -5,6 +5,6 @@
         <h5><?php echo __('Add Class');?></h5>
     </header>
     <div class="accordion-body body in collapse">
-        <?php echo $this->element('addClasse', array('gamesList' => $gamesList));?>
+        <?php echo $this->element('addClasse', array('gamesList' => $gamesList, 'isNotAjax' => true));?>
     </div>
 </div>

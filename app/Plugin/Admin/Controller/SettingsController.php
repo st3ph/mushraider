@@ -162,27 +162,45 @@ class SettingsController extends AdminAppController {
         }
     }
 
-    public function bridge() {
-        $currentTheme = json_decode($this->Setting->getOption('theme'));
+    public function api() {
         if(!empty($this->request->data['Setting'])) {
-            $bridge = array();
-            $bridge['enabled'] = $this->request->data['Setting']['enabled'];
-            $bridge['url'] = $this->request->data['Setting']['url'];
-            $bridge['secret'] = trim($this->request->data['Setting']['secret']);
-            if($bridge['enabled'] && (empty($bridge['url']) || empty($bridge['secret']))) {
-                $this->Session->setFlash(__('Third party url and secret key are mandatory'), 'flash_error');  
-            }else {
-                $this->Setting->setOption('bridge', json_encode($bridge));
-                $this->Session->setFlash(__('Settings have been updated'), 'flash_success');
-                return $this->redirect('/admin/settings/bridge');
+            $error = false;
+
+            $api = array();
+            $api['enabled'] = $this->request->data['Setting']['enabled'];
+            $api['privateKey'] = trim($this->request->data['Setting']['privateKey']);
+            if($api['enabled'] && empty($api['privateKey'])) {
+                $this->request->data['Setting']['enabled'] = 0;
+                $this->Session->setFlash(__('Private key is mandatory'), 'flash_error');  
+            }elseif(!empty($api['privateKey'])) {
+                // Is bridge enable too ?
+                $bridge = array();
+                $bridge['enabled'] = $api['enabled']?$this->request->data['Setting']['bridge']['enabled']:0;
+                $bridge['url'] = $this->request->data['Setting']['bridge']['url'];
+                if($bridge['enabled'] && empty($bridge['url'])) {
+                   $this->Session->setFlash(__('Bridge\'s third party url is mandatory'), 'flash_error');
+                   $error = true;
+                }
+
+                if(!$error) {
+                    $this->Setting->setOption('api', json_encode($api));
+                    $this->Setting->setOption('bridge', json_encode($bridge));
+                    $this->Session->setFlash(__('API settings have been updated'), 'flash_success');
+                    return $this->redirect('/admin/settings/api');
+                }
             }
+        }
+
+        $api = json_decode($this->Setting->getOption('api'));
+        if(!empty($api)) {
+            $this->request->data['Setting']['enabled'] = $api->enabled;
+            $this->request->data['Setting']['privateKey'] = $api->privateKey;
         }
 
         $bridge = json_decode($this->Setting->getOption('bridge'));
         if(!empty($bridge)) {
-            $this->request->data['Setting']['enabled'] = $bridge->enabled;
-            $this->request->data['Setting']['url'] = $bridge->url;
-            $this->request->data['Setting']['secret'] = $bridge->secret;
+            $this->request->data['Setting']['bridge']['enabled'] = $bridge->enabled;
+            $this->request->data['Setting']['bridge']['url'] = $bridge->url;
         }
     }
 

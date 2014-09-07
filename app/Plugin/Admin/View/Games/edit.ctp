@@ -13,7 +13,7 @@
                 <?php echo $this->Form->input('Game.logo', array('type' => 'file', 'label' => __('Logo').' (64px / 64px)', 'class' => 'span5 imageupload'));?>
                 <div id="previewcanvascontainer">
                     <canvas id="previewcanvas" class="w64"></canvas>
-                    <?php echo $this->Html->image('/files/logos/'.$this->data['Game']['logo'], array('class' => ''));?>
+                    <?php echo $this->Html->image($this->data['Game']['logo'], array('class' => ''));?>
                 </div>
             </div>
 

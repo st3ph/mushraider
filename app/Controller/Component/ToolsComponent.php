@@ -194,4 +194,39 @@ class ToolsComponent extends Component {
         }
         return $a;
     }
+
+    /*
+    * @name paramsToUrl
+    * @desc return params string
+    * @param array $params
+    * @return string
+    */
+    function paramsToUrl($params) {
+        $url = '';
+        foreach($params as $key => $value) {
+            $url .= '/'.$key.':'.$value;
+        }
+
+        return $url;
+    }
+
+    /*
+    * @name extractIds
+    * @desc return list of ids with id field as key
+    * @param array $arValues
+    * @return string
+    */
+    function extractIds($arValues) {
+        $ids = array();
+
+        if(!empty($arValues)) {
+            foreach($arValues as $arValue) {
+                if(isset($arValue['id'])) {
+                    $ids[$arValue['id']] = true;
+                }
+            }
+        }
+
+        return $ids;
+    }
 }

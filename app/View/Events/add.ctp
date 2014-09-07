@@ -21,13 +21,13 @@
     <div class="row">
         <div class="span5">
             <div class="form-group">
-                <?php echo $this->Form->input('Event.title', array('type' => 'text', 'label' => __('Event title'), 'maxlength' => 50, 'class' => 'span5'));?>
+                <?php echo $this->Form->input('Event.title', array('type' => 'text', 'label' => __('Event title'), 'maxlength' => 50, 'class' => 'span4'));?>
             </div>
             <div class="form-group">
-                <?php echo $this->Form->input('Event.game_id', array('type' => 'select', 'required' => true, 'label' => __('Game'), 'options' => $gamesList, 'empty' => '', 'class' => 'span5'));?>
+                <?php echo $this->Form->input('Event.game_id', array('type' => 'select', 'required' => true, 'label' => __('Game'), 'options' => $gamesList, 'data-error' => __('An error occur while loading'), 'empty' => '', 'class' => 'span4'));?>
             </div>
             <div class="form-group">
-                <?php echo $this->Form->input('Event.dungeon_id', array('type' => 'select', 'required' => true, 'label' => __('Dungeon'), 'empty' => __('Select a game first'), 'class' => 'span5'));?>
+                <?php echo $this->Form->input('Event.dungeon_id', array('type' => 'select', 'required' => true, 'label' => __('Dungeon'), 'empty' => __('Select a game first'), 'class' => 'span4'));?>
             </div>
         </div>
         <div class="span6">            
@@ -70,10 +70,12 @@
             	<?php echo $this->Form->submit(__('Create event'), array('class' => 'btn btn-success btn-large pull-right'));?>
             </div>
         </div>
-        <div class="span3 pull-right eventTemplate">
-            <?php echo $this->Form->input('Event.template', array('type' => 'checkbox', 'label' => __('create a template based on this event'), 'class' => 'zspan2'));?>
-            <?php echo $this->Form->input('Event.templateName', array('type' => 'text', 'label' => false, 'div' => false, 'class' => 'tplName', 'placeholder' => __('template name')));?>
-        </div>
+        <?php if($user['User']['can']['create_templates'] || $user['User']['can']['full_permissions']):?>
+            <div class="span3 pull-right eventTemplate">
+                <?php echo $this->Form->input('Event.template', array('type' => 'checkbox', 'label' => __('create a template based on this event'), 'class' => 'zspan2'));?>
+                <?php echo $this->Form->input('Event.templateName', array('type' => 'text', 'label' => false, 'div' => false, 'class' => 'tplName', 'placeholder' => __('template name')));?>
+            </div>
+        <?php endif;?>
     </div>
     <div class="clearfix"></div>
 <?php echo $this->Form->end();?>

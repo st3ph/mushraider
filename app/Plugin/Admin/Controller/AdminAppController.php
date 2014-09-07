@@ -17,13 +17,13 @@ class AdminAppController extends AppController {
         }
 
         // Admin or mod check
-        if(!$this->user['User']['isAdmin'] && !$this->user['User']['isOfficer']) {
+        if(!$this->user['User']['can']['full_permissions'] && !$this->user['User']['can']['limited_admin']) {
             $this->Session->setFlash(__('You don\'t have permission to access this page.'), 'flash_error');
             $this->redirect('/');
         }
 
         // Admin only
-        if($this->adminOnly && !$this->user['User']['isAdmin']) {
+        if($this->adminOnly && !$this->user['User']['can']['full_permissions']) {
             $this->Session->setFlash(__('You don\'t have permission to access this page.'), 'flash_error');
             $this->redirect('/admin');
         }

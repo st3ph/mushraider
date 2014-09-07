@@ -26,17 +26,25 @@ class RaidsRole extends AppModel {
         )
     );
 
-    function __add($title = null) {
+    function __add($title = null, $order = null) {
         if(!$title) {
             return false;
         }
 
-        if($raidsRole = $this->find('first', array('fields' => array('id'), 'conditions' => array('title' => $title)))) {
+        if($raidsRole = $this->find('first', array('recursive' => -1, 'fields' => array('id'), 'conditions' => array('title' => $title)))) {
             return $raidsRole['RaidsRole']['id'];
+        }
+
+        if($order === null) {
+            $order = 0;
+            if($maxOrder = $this->find('first', array('recursive' => -1, 'fields' => array('order'), 'order' => 'order DESC'))) {
+                $order = $maxOrder['RaidsRole']['order'] + 1;
+            }
         }
 
         $toSave = array();
         $toSave['title'] = $title;
+        $toSave['order'] = $order;
         $this->create();
         $this->save($toSave);
         return $this->getLastInsertId();

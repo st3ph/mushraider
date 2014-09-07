@@ -6,14 +6,14 @@
     <div class="accordion-body body in collapse">
         <?php echo $this->Form->create('User', array('url' => '/admin/users/edit/'.$this->data['User']['id'], 'class' => 'span12'));?>
             <?php $displaySaveButton = false;?>
-            <?php if($user['User']['isAdmin'] || ($user['User']['isOfficer'] && !$this->data['User']['isAdmin'])):?>
+            <?php if($user['User']['can']['full_permissions'] || ($user['User']['can']['limited_admin'] && !$this->data['User']['can']['full_permissions'])):?>
                 <div class="form-group">
                     <?php echo $this->Form->input('User.status', array('type' => 'select', 'options' => array(0  => __('Disabled'), 1 => __('Enabled')), 'label' => __('Account status'), 'class' => 'span5'));?>
                 </div>
                 <?php $displaySaveButton = true;?>
             <?php endif;?>
             
-            <?php if($user['User']['isAdmin']):?>
+            <?php if($user['User']['can']['full_permissions']):?>
                 <div class="form-group">
                     <?php echo $this->Form->input('User.role_id', array('type' => 'select', 'label' => __('Role & permissions'), 'options' => $rolesList, 'empty' => '', 'class' => 'span5'));?>
                     <?php if(!empty($roles)):?>
@@ -33,7 +33,7 @@
                 </div>
             <?php endif;?>
 
-            <?php if($user['User']['isAdmin'] || ($user['User']['isOfficer'] && !$this->data['User']['isAdmin'])):?>
+            <?php if($user['User']['can']['full_permissions'] || ($user['User']['can']['limited_admin'] && !$this->data['User']['can']['full_permissions'])):?>
                 <br />
                 <div class="form-group">
                     <?php echo $this->Form->input('User.private_infos', array('type' => 'textarea', 'label' => __('Private player note'), 'class' => 'span5 wysiwyg'));?>
@@ -67,7 +67,14 @@
                         <tr>
                             <td><?php echo $character['title'];?></td>
                             <td><?php echo $character['Game']['title'];?></td>
-                            <td><span style="color:<?php echo $character['Classe']['color'];?>"><?php echo $character['Classe']['title'];?></span></td>
+                            <td>
+                                <span style="color:<?php echo $character['Classe']['color'];?>">
+                                    <?php if(!empty($character['Classe']['icon'])):?>
+                                        <?php echo $this->Html->image($character['Classe']['icon'], array('width' => 24));?>
+                                    <?php endif;?>
+                                    <?php echo $character['Classe']['title'];?>
+                                </span>
+                            </td>
                             <td><?php echo $character['Race']['title'];?></td>
                             <td><?php echo $character['RaidsRole']['title'];?></td>
                             <td><?php echo $character['level'];?></td>

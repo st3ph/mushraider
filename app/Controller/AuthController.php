@@ -6,6 +6,7 @@ class AuthController extends AppController {
     var $uses = array('Ticket');
 
     var $userRequired = false;
+    var $api = false;
     var $bridge = false;
 
     public function beforeFilter() {
@@ -13,6 +14,7 @@ class AuthController extends AppController {
 
         $this->layout = 'login';
 
+        $this->api = json_decode($this->Setting->getOption('api'));
         $this->bridge = json_decode($this->Setting->getOption('bridge'));
         $this->set('bridge', $this->bridge);
     }
@@ -29,7 +31,7 @@ class AuthController extends AppController {
         }
 
         $cookieName = 'User';
-        if(!empty($this->bridge) && $this->bridge->enabled && !empty($this->bridge->url) && !empty($this->bridge->secret)) {
+        if(!empty($this->bridge) && $this->bridge->enabled && !empty($this->bridge->url) && !empty($this->api->secret)) {
             $cookieName = 'UserBridge';
         }
         if(!$this->Session->check('User.id')) {
@@ -39,16 +41,16 @@ class AuthController extends AppController {
         }
 
         if(!empty($this->request->data['User'])) {            
-            if(!empty($this->bridge) && $this->bridge->enabled && !empty($this->bridge->url) && !empty($this->bridge->secret)) {
-                $iv_size = mcrypt_get_iv_size(MCRYPT_BLOWFISH, MCRYPT_MODE_ECB);
+            if(!empty($this->bridge) && $this->bridge->enabled && !empty($this->bridge->url) && !empty($this->api->privateKey)) {
+                $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_ECB);
                 $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
-                $pwd = mcrypt_encrypt(MCRYPT_BLOWFISH, $this->bridge->secret, utf8_encode($this->request->data['User']['password']), MCRYPT_MODE_ECB, $iv);
+                $pwd = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $this->api->privateKey, utf8_encode($this->request->data['User']['password']), MCRYPT_MODE_ECB, $iv);
 
                 $HttpSocket = new HttpSocket();
                 $auth = $HttpSocket->post($this->bridge->url, array('login' => $this->request->data['User']['login'], 'pwd' => $pwd));
                 $auth = json_decode($auth->body);
                 if(empty($auth) || !$auth->authenticated) {
-                    $this->Session->setFlash(__('MushRaider can\'t find your account, maybe you need some sleep ?'), 'flash_warning');
+                    $this->Session->setFlash(__('The email or password that you entered is incorrect'), 'flash_warning');
                     unset($this->request->data['User']);
                 }else {
                     $roleId = !empty($auth->role)?$this->Role->getIdByAlias($auth->role):null;
@@ -110,7 +112,7 @@ class AuthController extends AppController {
                     if($user = $this->User->find('first', $params)) {
                         $this->Session->setFlash(__('You have to wait until an admin activate your account, go farm while waiting !'), 'flash_warning');
                     }else {
-                        $this->Session->setFlash(__('MushRaider can\'t find your account, maybe you need some sleep ?'), 'flash_warning');
+                        $this->Session->setFlash(__('The email or password that you entered is incorrect'), 'flash_warning');
                     }
                     unset($this->request->data['User']);
                 }
@@ -136,7 +138,7 @@ class AuthController extends AppController {
             $toSave['role_id'] = $this->Role->getIdByAlias('member');
             if($this->User->save($toSave)) {
                 $this->Session->setFlash(__('Yeah, your account has been created, but now you need to wait until your account as been validated by an admin to access the raid planner (security stuff).'), 'flash_success');
-                return $this->redirect('/account');
+                return $this->redirect('/auth/login');
             }
 
             $this->Session->setFlash(__('Something wrong happen, please fix the errors below'), 'flash_error');            
@@ -197,11 +199,14 @@ class AuthController extends AppController {
         $this->set('hash', $hash);
     }
 
-    public function logout() {
+    public function logout($flashType = 'info', $flash = null) {
         $this->Session->delete('User');
         $this->Session->destroy();
         $this->Cookie->delete('User');
         $this->Cookie->delete('UserBridge');
+        if($flash) {
+            $this->Session->setFlash($flash, 'flash_'.$flashType);
+        }
         return $this->redirect('/auth/login');
     }
 
@@ -240,8 +245,14 @@ class AuthController extends AppController {
         if(!$user = $this->User->find('first', $params)) {
             $this->Cookie->delete($cookieName);
         }else{
+            $redirect = '/';
+            if($this->Session->check('redirectFrom')) {
+                $redirect = $this->Session->read('redirectFrom');
+                $this->Session->delete('redirectFrom');
+            }
+            $this->Session->delete('Message.flash');
             $this->Session->write('User.id', $user['User']['id']);
-            return $this->redirect($this->request->here);
+            return $this->redirect($redirect);
         }
     }
 }

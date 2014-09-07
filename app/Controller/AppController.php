@@ -68,6 +68,7 @@ class AppController extends Controller {
         // Some usefull infos
         Configure::write('Config.maxFileSize', ini_get('upload_max_filesize'));
         Configure::write('Config.maxPostSize', ini_get('post_max_size'));
+        Configure::write('Config.appUrl', rtrim('http://'.$_SERVER['HTTP_HOST'].$this->webroot, '/'));
 
         // Log in user
         if($this->Session->check('User.id')) {
@@ -79,15 +80,14 @@ class AppController extends Controller {
                 $params['contain']['Character'] = array();
                 $params['conditions']['User.id'] = $userID;
 				$this->user = $this->User->find('first', $params);
-                $this->user['User']['isAdmin'] = $this->Role->is($this->user['User']['role_id'], 'admin');
-                $this->user['User']['isOfficer'] = $this->Role->is($this->user['User']['role_id'], 'officer');
+                $this->user['User']['can'] = $this->Role->getPermissions($this->user['User']['role_id']);
 			}else {
 				$this->Session->delete('User.id');
 			}
 		}
 
         // Is a patch needed ?
-        if($this->user && $this->user['User']['isAdmin'] && strtolower($this->plugin) != 'admin' && strtolower($this->name) != 'patcher') {
+        if($this->user && strtolower($this->name) != 'patcher' && strtolower($this->name) != 'auth') {
             $this->Patcher->patchNeeded();
         }
 

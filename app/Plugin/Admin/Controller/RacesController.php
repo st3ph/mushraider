@@ -18,9 +18,16 @@ class RacesController extends AdminAppController {
     }
 
     public function index() {
-        $conditions = array();
-        $races = $this->paginate('Race', $conditions);        
-        $this->set('races', $races);
+        $params = array();
+        $params['recursive'] = 1;
+        $params['order'] = array('Race.game_id' => 'asc', 'Race.title' => 'asc');
+        $params['contain']['Game'] = array();
+        $params['conditions']['game_id'] = null;
+        $this->set('racesWithoutGame', $this->Race->find('all', $params));
+
+        unset($params['conditions']['game_id']);
+        $params['conditions']['game_id !='] = null;
+        $this->set('races', $this->Race->find('all', $params));
     }
 
     public function add() {

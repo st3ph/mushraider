@@ -6,6 +6,13 @@ class Role extends AppModel {
 
     var $actsAs = array('Containable');
 
+    public $hasMany = array(
+        'RolePermissionRole' => array(
+            'className' => 'RolePermissionRole',
+            'foreignKey' => 'role_id'
+        )
+    );
+
     public $validate = array(
         'title' => array(
             'notEmpty' => array(
@@ -14,7 +21,7 @@ class Role extends AppModel {
                 'last' => true,
             ),
             'validName' => array(
-                'rule' => 'validName',
+                'rule' => '/^([0-9a-zA-Z_\- ]{2,50})$/',
                 'message' => 'This field must be alphanumeric',
                 'last' => true,
             ),
@@ -31,7 +38,7 @@ class Role extends AppModel {
                 'last' => true,
             ),
             'validAlias' => array(
-                'rule' => 'validAlias',
+                'rule' => '/^([0-9a-zA-Z_\-]{2,50})$/',
                 'message' => 'This field must be alphanumeric',
                 'last' => true,
             ),
@@ -44,6 +51,7 @@ class Role extends AppModel {
         }
         $params = array();
         $params['fields'] = array('id');
+        $params['recursive'] = -1;
         $params['conditions']['alias'] = $alias;        
         if($role = $this->find('first', $params)) {
             return $role['Role']['id'];
@@ -58,6 +66,7 @@ class Role extends AppModel {
         }
         $params = array();
         $params['fields'] = array('alias');
+        $params['recursive'] = -1;
         $params['conditions']['id'] = $id;        
         $params['conditions']['alias'] = $alias;
         if($role = $this->find('first', $params)) {
@@ -65,5 +74,53 @@ class Role extends AppModel {
         }
 
         return null;
+    }
+
+    public function getPermissions($roleId = null) {
+        if(!$roleId) {
+            return null;
+        }
+
+        // Check if the table exists (patch not installed yet)
+        $db = ConnectionManager::getDataSource('default');
+        $tables = $db->listSources();
+
+        if(!in_array($this->tablePrefix.'role_permission_roles', $tables)) {
+            $permissions['full_permissions'] = $roleId == 1;
+            $permissions['limited_admin'] = false;
+            $permissions['manage_events'] = false;
+            $permissions['create_templates'] = false;
+            $permissions['create_reports'] = false;
+
+            return $permissions;
+        }
+
+        $permissions = array();
+
+        App::uses('RolePermissionRole', 'Model');
+        $RolePermissionRoleModel = new RolePermissionRole();
+
+        $params = array();
+        $params['recursive'] = 1;
+        $params['fields'] = array('id', 'role_id');
+        $params['contain']['RolePermission']['fields'] = array('alias');
+        $params['conditions']['role_id'] = $roleId;
+        if($rolePermissionRoles = $RolePermissionRoleModel->find('all', $params)) {
+            foreach($rolePermissionRoles as $rolePermissionRole) {
+                $permissions[$rolePermissionRole['RolePermission']['alias']] = $rolePermissionRole['RolePermissionRole']['role_id'] == $roleId;
+            }
+        }
+
+        unset($params['conditions']['role_id']);
+
+        if($rolePermissionRoles = $RolePermissionRoleModel->find('all', $params)) {
+            foreach($rolePermissionRoles as $rolePermissionRole) {
+                if(!isset($permissions[$rolePermissionRole['RolePermission']['alias']])) {
+                    $permissions[$rolePermissionRole['RolePermission']['alias']] = false;
+                }
+            }
+        }
+
+        return $permissions;
     }
 }

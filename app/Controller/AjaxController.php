@@ -78,7 +78,14 @@ class AjaxController extends AppController {
                 $jsonMessage['msg'] = 'ok';
 
                 $rosterHtml = '<li data-id="'.$toSave['character_id'].'" data-user="'.$toSave['user_id'].'">';
-                    $rosterHtml .= '<span class="character" style="color:'.$character['Classe']['color'].'">'.$character['Classe']['title'].' '.$character['Character']['title'].' ('.$character['Character']['level'].')</span>';
+                    $rosterHtml .= '<span class="character" style="color:'.$character['Classe']['color'].'">';
+                        if(!empty($character['Classe']['icon'])) {
+                            $rosterHtml .= '<img src="'.$character['Classe']['icon'].'" class="tt" title="'.$character['Classe']['title'].'" width="16" />';
+                        }else {
+                            $rosterHtml .= $character['Classe']['title'];
+                        }
+                        $rosterHtml .= ' '.$character['Character']['title'].' ('.$character['Character']['level'].')';
+                    $rosterHtml .= '</span>';
                     if(!empty($toSave['comment'])) {
                         $rosterHtml .= '<span class="tt" title="'.$toSave['comment'].'"><span class="icon-comments-alt"></span></span>';
                     }
@@ -94,10 +101,11 @@ class AjaxController extends AppController {
     }
 
     function roster() {
-        if(isset($this->request->query['v']) && !empty($this->request->query['r']) && !empty($this->request->query['e'])) {
+        if(isset($this->request->query['v']) && isset($this->request->query['refused']) && !empty($this->request->query['r']) && !empty($this->request->query['e'])) {
             $eventId = $this->request->query['e'];
             $roleId = str_replace('role_', '', $this->request->query['r']);
             $validatedList = explode(',', $this->request->query['v']);
+            $refusedList = explode(',', $this->request->query['refused']);
 
             $params = array();
             $params['fields'] = array('id', 'character_id');
@@ -119,15 +127,25 @@ class AjaxController extends AppController {
                 foreach($eventCharacters as $eventCharacter) {
                     $toSave = array();
                     $toSave['id'] = $eventCharacter['EventsCharacter']['id'];
-                    $toSave['status'] = in_array($eventCharacter['EventsCharacter']['character_id'], $validatedList)?2:1;
+                    if(in_array($eventCharacter['EventsCharacter']['character_id'], $refusedList)) {
+                        $toSave['status'] = 3;    
+                    }elseif(in_array($eventCharacter['EventsCharacter']['character_id'], $validatedList)) {
+                        $toSave['status'] = 2;
+                    }else {
+                        $toSave['status'] = 1;
+                    }
                     if(!$this->EventsCharacter->save($toSave)) {
                         return 'fail';
                     }
 
 
-                    // If notifications are enable, send email to validated users
-                    if($toSave['status'] == 2 && $eventCharacter['User']['notifications_validate'] && $notificationsStatus) {
-                        $this->Emailing->eventValidate($eventCharacter['User']['email'], $event['Event']);
+                    // If notifications are enable, send email to validated and refused users
+                    if($eventCharacter['User']['notifications_validate'] && $notificationsStatus) {
+                        if($toSave['status'] == 2) {
+                            $this->Emailing->eventValidate($eventCharacter['User']['email'], $event['Event']);
+                        }elseif($toSave['status'] == 3) {
+                            $this->Emailing->eventRefuse($eventCharacter['User']['email'], $event['Event']);
+                        }
                     }
                 }
 
@@ -181,9 +199,11 @@ class AjaxController extends AppController {
     }
 
     function copyEvent() {
-        if(isset($this->request->query['e']) && !empty($this->request->query['name'])) {
-            if($this->Event->copy($this->request->query['e'], $this->request->query['name'])) {
-                return 'ok';
+        if($this->user['User']['can']['create_templates'] || $this->user['User']['can']['full_permissions']) {
+            if(isset($this->request->query['e']) && !empty($this->request->query['name'])) {
+                if($this->Event->copy($this->request->query['e'], $this->request->query['name'])) {
+                    return 'ok';
+                }
             }
         }
 

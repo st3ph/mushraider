@@ -58,7 +58,7 @@ class EmailingComponent extends Component {
 
     function eventCancel($dest, $event) {
         $this->email->to($dest);
-        $this->email->subject(__('[MushRaider] Event cancelled'));
+        $this->email->subject(__('[MushRaider] Event cancelled :('));
         $this->email->template('event_cancel', 'default');
 
         $this->email->viewVars(array(
@@ -80,8 +80,19 @@ class EmailingComponent extends Component {
 
     function eventValidate($dest, $event) {
         $this->email->to($dest);
-        $this->email->subject(__('[MushRaider] You have been validate to an event'));
+        $this->email->subject(__('[MushRaider] You have been validate to an event =)'));
         $this->email->template('event_validate', 'default');
+
+        $this->email->viewVars(array(            
+            'event' => $event
+        ));
+        $this->email->send();
+    }
+
+    function eventRefuse($dest, $event) {
+        $this->email->to($dest);
+        $this->email->subject(__('[MushRaider] You have been refused to an event :('));
+        $this->email->template('event_refuse', 'default');
 
         $this->email->viewVars(array(            
             'event' => $event

@@ -38,6 +38,10 @@
                         <?php echo __('To know if MushRaider support your current system please head to the <a href="http://mushraider.com/bridge">official bridge page</a>.');?>
                     </p>
 
+                    <p class="label label-important">
+                        <i class="icon-exclamation-sign"></i> <?php echo __('Before enabling bridge make sure your site/forum is set up correctly to bridge with MushRaider by installing and setting up the corresponding plugin.');?>
+                    </p>
+
                     <div class="form-group">
                         <?php echo $this->Form->input('Setting.bridge.enabled', array('type' => 'checkbox', 'label' => __('Enable MushRaider bridge with your current website/forum')));?>
                     </div>

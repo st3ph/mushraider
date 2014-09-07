@@ -50,7 +50,7 @@ class AuthController extends AppController {
                 $auth = $HttpSocket->post($this->bridge->url, array('login' => $this->request->data['User']['login'], 'pwd' => $pwd));
                 $auth = json_decode($auth->body);
                 if(empty($auth) || !$auth->authenticated) {
-                    $this->Session->setFlash(__('MushRaider can\'t find your account, maybe you need some sleep ?'), 'flash_warning');
+                    $this->Session->setFlash(__('The email or password that you entered is incorrect'), 'flash_warning');
                     unset($this->request->data['User']);
                 }else {
                     $roleId = !empty($auth->role)?$this->Role->getIdByAlias($auth->role):null;
@@ -112,7 +112,7 @@ class AuthController extends AppController {
                     if($user = $this->User->find('first', $params)) {
                         $this->Session->setFlash(__('You have to wait until an admin activate your account, go farm while waiting !'), 'flash_warning');
                     }else {
-                        $this->Session->setFlash(__('MushRaider can\'t find your account, maybe you need some sleep ?'), 'flash_warning');
+                        $this->Session->setFlash(__('The email or password that you entered is incorrect'), 'flash_warning');
                     }
                     unset($this->request->data['User']);
                 }
@@ -138,7 +138,7 @@ class AuthController extends AppController {
             $toSave['role_id'] = $this->Role->getIdByAlias('member');
             if($this->User->save($toSave)) {
                 $this->Session->setFlash(__('Yeah, your account has been created, but now you need to wait until your account as been validated by an admin to access the raid planner (security stuff).'), 'flash_success');
-                return $this->redirect('/account');
+                return $this->redirect('/auth/login');
             }
 
             $this->Session->setFlash(__('Something wrong happen, please fix the errors below'), 'flash_error');            

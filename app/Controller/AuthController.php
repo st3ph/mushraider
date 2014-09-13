@@ -218,7 +218,7 @@ class AuthController extends AppController {
                 $cookie = array();
                 $cookie['username'] = $user['User']['username'];
                 $cookie['password'] = $user['User']['password'];
-                $this->Cookie->write($cookieName, $cookie, true, '+2 weeks');
+                $this->Cookie->write($cookieName, $cookie, false, '+2 weeks');
             }
             $this->Session->write('User.id', $user['User']['id']);
             $this->Session->setFlash(__('Congratulation %s, you are now logged in', $user['User']['username']), 'flash_success');

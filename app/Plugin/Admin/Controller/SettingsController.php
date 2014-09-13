@@ -16,7 +16,7 @@ class SettingsController extends AdminAppController {
             $this->Setting->setOption('title', $this->request->data['Setting']['title']);
             $this->Setting->setOption('notifications', $this->request->data['Setting']['notifications']);
 
-            $this->Cookie->write('Lang', $this->request->data['Setting']['sitelang'], true, '+4 weeks');
+            $this->Cookie->write('Lang', $this->request->data['Setting']['sitelang'], false, '+4 weeks');
 
             $databaseConfig = Configure::read('Database');
             $settingsConfig = Configure::read('Settings');

@@ -232,7 +232,7 @@ class AjaxController extends AppController {
     function filterEvents() {
         if(isset($this->request->query['game'])) {
             $gameId = $this->request->query['game'];
-            $this->Cookie->write('filterEvents', $gameId, true, '+2 weeks');
+            $this->Cookie->write('filterEvents', $gameId, false, '+2 weeks');
         }
 
         return;

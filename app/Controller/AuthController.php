@@ -44,7 +44,7 @@ class AuthController extends AppController {
             if(!empty($this->bridge) && $this->bridge->enabled && !empty($this->bridge->url) && !empty($this->api->privateKey)) {
                 $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_ECB);
                 $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
-                $pwd = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $this->api->privateKey, utf8_encode($this->request->data['User']['password']), MCRYPT_MODE_ECB, $iv);
+                $pwd = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $this->api->privateKey, $this->request->data['User']['password'], MCRYPT_MODE_ECB, $iv);
 
                 $HttpSocket = new HttpSocket();
                 $auth = $HttpSocket->post($this->bridge->url, array('login' => $this->request->data['User']['login'], 'pwd' => $pwd));

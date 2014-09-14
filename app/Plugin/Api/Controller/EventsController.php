@@ -18,7 +18,7 @@ class EventsController extends ApiAppController {
         $params['recursive'] = 1;
         $params['order'] = 'Event.time_invitation';
         $params['fields'] = array('Event.id', 'Event.title', 'Event.game_id', 'Event.dungeon_id', 'Event.time_invitation', 'Event.time_start');
-        $params['contain']['Game']['fields'] = array('title');
+        $params['contain']['Game']['fields'] = array('title', 'logo');
         $params['contain']['Dungeon']['fields'] = array('title');
         $params['conditions']['Event.time_invitation >='] = $calStart;
         $params['conditions']['Event.time_invitation <='] = $calEnd;
@@ -44,7 +44,7 @@ class EventsController extends ApiAppController {
         $params = array();
         $params['recursive'] = 2;
         $params['fields'] = array('Event.id', 'Event.title', 'Event.game_id', 'Event.dungeon_id', 'Event.time_invitation', 'Event.time_start');
-        $params['contain']['Game']['fields'] = array('title');
+        $params['contain']['Game']['fields'] = array('title', 'logo');
         $params['contain']['Dungeon']['fields'] = array('title');
         $params['contain']['User']['fields'] = array('username');
         $params['contain']['EventsRole']['RaidsRole']['fields'] = array('title');

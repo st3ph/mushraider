@@ -71,17 +71,19 @@
 			<select name="data[EventsRole]" id="EventsRole" class="span1">
 				<option value=""><?php echo __('Role');?></option>
 				<?php foreach($event['EventsRole'] as $eventRole):?>
-					<option value="<?php echo $eventRole['RaidsRole']['id'];?>" <?php echo ($registeredCharacter && $eventRole['RaidsRole']['id'] == $registeredCharacter['raids_role_id'])?'selected="selected"':'';?>><?php echo $eventRole['RaidsRole']['title'];?></option>
-					<?php					
-					$eventRoles['role_'.$eventRole['RaidsRole']['id']]['id'] = $eventRole['RaidsRole']['id'];
-					$eventRoles['role_'.$eventRole['RaidsRole']['id']]['title'] = $eventRole['RaidsRole']['title'];
-					$eventRoles['role_'.$eventRole['RaidsRole']['id']]['max'] = $eventRole['count'];
-					$eventRoles['role_'.$eventRole['RaidsRole']['id']]['current'] = 0;
-					$eventRoles['role_'.$eventRole['RaidsRole']['id']]['characters']['validated'] = '';
-					$eventRoles['role_'.$eventRole['RaidsRole']['id']]['characters']['waiting'] = '';
-					$eventRoles['role_'.$eventRole['RaidsRole']['id']]['characters']['nok'] = '';
-					$eventRoles['role_'.$eventRole['RaidsRole']['id']]['characters']['refused'] = '';
-					?>
+					<?php if($eventRole['count'] > 0):?>
+						<option value="<?php echo $eventRole['RaidsRole']['id'];?>" <?php echo ($registeredCharacter && $eventRole['RaidsRole']['id'] == $registeredCharacter['raids_role_id'])?'selected="selected"':'';?>><?php echo $eventRole['RaidsRole']['title'];?></option>
+						<?php					
+						$eventRoles['role_'.$eventRole['RaidsRole']['id']]['id'] = $eventRole['RaidsRole']['id'];
+						$eventRoles['role_'.$eventRole['RaidsRole']['id']]['title'] = $eventRole['RaidsRole']['title'];
+						$eventRoles['role_'.$eventRole['RaidsRole']['id']]['max'] = $eventRole['count'];
+						$eventRoles['role_'.$eventRole['RaidsRole']['id']]['current'] = 0;
+						$eventRoles['role_'.$eventRole['RaidsRole']['id']]['characters']['validated'] = '';
+						$eventRoles['role_'.$eventRole['RaidsRole']['id']]['characters']['waiting'] = '';
+						$eventRoles['role_'.$eventRole['RaidsRole']['id']]['characters']['nok'] = '';
+						$eventRoles['role_'.$eventRole['RaidsRole']['id']]['characters']['refused'] = '';
+						?>
+					<?php endif;?>
 				<?php endforeach;?>
 			</select>
 		<?php endif;?>

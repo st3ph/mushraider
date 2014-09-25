@@ -7,6 +7,7 @@
 <header>
 	<h1>
 		<div class="row">
+			<?php $eventIsClosed = $dayTimestamp <= $todayTimestamp;?>
 			<?php $displayAdminButtons = ($dayTimestamp >= $todayTimestamp && ($user['User']['can']['manage_events'] || $user['User']['can']['full_permissions']))?true:false?>
 			<?php $displayTplButtons = ($dayTimestamp >= $todayTimestamp && ($user['User']['can']['create_templates'] || $user['User']['can']['full_permissions']))?true:false?>
 			<?php $displayCloseButton = ($dayTimestamp < $todayTimestamp && ($user['User']['can']['create_reports'] || $user['User']['can']['full_permissions']))?true:false?>
@@ -39,60 +40,66 @@
 	</h1>
 </header>
 
-<div id="eventSignin">
-	<div class="pull-right">
-		<?php
-		$messageClass = '';
-		$messageText = '';
-		if($registeredCharacter) {
-			switch($registeredCharacter['status']) {
-				case 0:
-					$messageClass = 'label label-warning';
-					$messageText = __('your are registered as "absent"');				
-					break;
-				case 1:
-					$messageClass = 'label label-info';
-					$messageText = __('your are registered to this event as');				
-					break;
-				case 2:
-					$messageClass = 'label label-success';
-					$messageText = __('your are validated to this event as');				
-					break;
-				case 3:
-					$messageClass = 'label label-important';
-					$messageText = __('your are refused for this event');
-					break;
+<?php 
+// Prepare roles array
+foreach($event['EventsRole'] as $eventRole) {
+	$eventRoles['role_'.$eventRole['RaidsRole']['id']]['id'] = $eventRole['RaidsRole']['id'];
+	$eventRoles['role_'.$eventRole['RaidsRole']['id']]['title'] = $eventRole['RaidsRole']['title'];
+	$eventRoles['role_'.$eventRole['RaidsRole']['id']]['max'] = $eventRole['count'];
+	$eventRoles['role_'.$eventRole['RaidsRole']['id']]['current'] = 0;
+	$eventRoles['role_'.$eventRole['RaidsRole']['id']]['characters']['validated'] = '';
+	$eventRoles['role_'.$eventRole['RaidsRole']['id']]['characters']['waiting'] = '';
+	$eventRoles['role_'.$eventRole['RaidsRole']['id']]['characters']['nok'] = '';
+	$eventRoles['role_'.$eventRole['RaidsRole']['id']]['characters']['refused'] = '';
+}
+?>
+
+<?php if(!$eventIsClosed):?>
+	<div id="eventSignin">
+		<div class="pull-right">
+			<?php
+			$messageClass = '';
+			$messageText = '';
+			if($registeredCharacter) {
+				switch($registeredCharacter['status']) {
+					case 0:
+						$messageClass = 'label label-warning';
+						$messageText = __('your are registered as "absent"');				
+						break;
+					case 1:
+						$messageClass = 'label label-info';
+						$messageText = __('your are registered to this event as');				
+						break;
+					case 2:
+						$messageClass = 'label label-success';
+						$messageText = __('your are validated to this event as');				
+						break;
+					case 3:
+						$messageClass = 'label label-important';
+						$messageText = __('your are refused for this event');
+						break;
+				}
 			}
-		}
-		?>
-		<span class="message <?php echo $messageClass;?>"><?php echo $messageText;?></span>
-		<?php echo $this->Form->input('Character', array('options' => $charactersList, 'selected' => $registeredCharacterId, 'empty' => __('Choose a character'), 'class' => 'span2', 'data-user' => $user['User']['id'], 'data-event' => $event['Event']['id'], 'data-error' => __('please select a character and a role'), 'data-signin' => __('your are registered to this event as'), 'data-signout' => __('your are not registered to this event'), 'label' => false, 'div' => false));?>
-		<?php if(!empty($event['EventsRole'])):?>
-			<select name="data[EventsRole]" id="EventsRole" class="span1">
-				<option value=""><?php echo __('Role');?></option>
-				<?php foreach($event['EventsRole'] as $eventRole):?>
-					<?php if($eventRole['count'] > 0):?>
-						<option value="<?php echo $eventRole['RaidsRole']['id'];?>" <?php echo ($registeredCharacter && $eventRole['RaidsRole']['id'] == $registeredCharacter['raids_role_id'])?'selected="selected"':'';?>><?php echo $eventRole['RaidsRole']['title'];?></option>
-						<?php					
-						$eventRoles['role_'.$eventRole['RaidsRole']['id']]['id'] = $eventRole['RaidsRole']['id'];
-						$eventRoles['role_'.$eventRole['RaidsRole']['id']]['title'] = $eventRole['RaidsRole']['title'];
-						$eventRoles['role_'.$eventRole['RaidsRole']['id']]['max'] = $eventRole['count'];
-						$eventRoles['role_'.$eventRole['RaidsRole']['id']]['current'] = 0;
-						$eventRoles['role_'.$eventRole['RaidsRole']['id']]['characters']['validated'] = '';
-						$eventRoles['role_'.$eventRole['RaidsRole']['id']]['characters']['waiting'] = '';
-						$eventRoles['role_'.$eventRole['RaidsRole']['id']]['characters']['nok'] = '';
-						$eventRoles['role_'.$eventRole['RaidsRole']['id']]['characters']['refused'] = '';
-						?>
-					<?php endif;?>
-				<?php endforeach;?>
-			</select>
-		<?php endif;?>
-		<?php echo $this->Form->input('Comment', array('type' => 'text', 'value' => $registeredCharacterComment, 'class' => 'span3', 'placeholder' => __('Add a comment'), 'label' => false, 'div' => false, 'maxlength' => 75));?>
-		<span class="btn" data-status="1"><i class="icon-thumbs-up"></i></span>
-		<span class="btn" data-status="0"><i class="icon-thumbs-down"></i></span>
+			?>
+			<span class="message <?php echo $messageClass;?>"><?php echo $messageText;?></span>
+			<?php echo $this->Form->input('Character', array('options' => $charactersList, 'selected' => $registeredCharacterId, 'empty' => __('Choose a character'), 'class' => 'span2', 'data-user' => $user['User']['id'], 'data-event' => $event['Event']['id'], 'data-error' => __('please select a character and a role'), 'data-signin' => __('your are registered to this event as'), 'data-signout' => __('your are not registered to this event'), 'label' => false, 'div' => false));?>
+			<?php if(!empty($event['EventsRole'])):?>
+				<select name="data[EventsRole]" id="EventsRole" class="span1">
+					<option value=""><?php echo __('Role');?></option>
+					<?php foreach($event['EventsRole'] as $eventRole):?>
+						<?php if($eventRole['count'] > 0):?>
+							<option value="<?php echo $eventRole['RaidsRole']['id'];?>" <?php echo ($registeredCharacter && $eventRole['RaidsRole']['id'] == $registeredCharacter['raids_role_id'])?'selected="selected"':'';?>><?php echo $eventRole['RaidsRole']['title'];?></option>
+						<?php endif;?>
+					<?php endforeach;?>
+				</select>
+			<?php endif;?>
+			<?php echo $this->Form->input('Comment', array('type' => 'text', 'value' => $registeredCharacterComment, 'class' => 'span3', 'placeholder' => __('Add a comment'), 'label' => false, 'div' => false, 'maxlength' => 75));?>
+			<span class="btn" data-status="1"><i class="icon-thumbs-up"></i></span>
+			<span class="btn" data-status="0"><i class="icon-thumbs-down"></i></span>
+		</div>
 	</div>
-</div>
-<div class="clear"></div>
+	<div class="clear"></div>
+<?php endif;?>
 
 <h3><?php echo __('Title');?></h3>
 <?php echo $event['Event']['title'];?>
@@ -141,7 +148,7 @@
 						<th data-id="<?php echo $roleId;?>">
 							<?php echo $eventRole['title'];?>
 							<span class="current"><?php echo $eventRole['current'];?></span> / <span class="max"><?php echo $eventRole['max'];?></span>
-							<?php if($user['User']['can']['manage_events'] || $user['User']['can']['full_permissions']):?>
+							<?php if(!$eventIsClosed && ($user['User']['can']['manage_events'] || $user['User']['can']['full_permissions'])):?>
 								<span class="badge badge-warning pull-right"><i class="icon-edit"></i></span>
 							<?php endif;?>
 						</th>

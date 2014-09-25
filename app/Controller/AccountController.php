@@ -206,6 +206,32 @@ class AccountController extends AppController {
         return $this->redirect('/account/characters');
     }
 
+    public function personal() {
+        if(!empty($this->bridge) && $this->bridge->enabled) {
+            $this->Session->setFlash(__('Bridge system is enabled so you can\'t change your personal informations here.'), 'flash_warning');
+            $this->redirect('/account');
+        }
+
+        $this->pageTitle = __('My MushRaider personal informations').' - '.$this->pageTitle;
+        $this->breadcrumb[] = array('title' => __('Personal informations'), 'url' => '');
+
+        if(!empty($this->request->data['User'])) {
+            $toSave = array();
+            $toSave['id'] = $this->user['User']['id'];
+            $toSave['username'] = trim($this->request->data['User']['username']);
+            $toSave['email'] = trim($this->request->data['User']['email']);
+            if($this->User->save($toSave)) {
+                $this->Session->setFlash(__('Your settings were saved successfully'), 'flash_success');
+                $this->redirect('/account/personal');
+            }else {
+                $this->Session->setFlash(__('Something wrong happen, please fix the errors below'), 'flash_error');
+            }
+        }
+
+        $this->request->data['User']['username'] = isset($this->request->data['User']['username'])?$this->request->data['User']['username']:$this->user['User']['username'];
+        $this->request->data['User']['email'] = isset($this->request->data['User']['email'])?$this->request->data['User']['email']:$this->user['User']['email'];
+    }
+
     public function password() {
         if(!empty($this->bridge) && $this->bridge->enabled) {
             $this->Session->setFlash(__('Bridge system is enabled so you can\'t change your password here.'), 'flash_warning');

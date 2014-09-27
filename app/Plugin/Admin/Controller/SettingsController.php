@@ -1,5 +1,6 @@
 <?php
 App::uses('Folder', 'Utility');
+App::uses('HttpSocket', 'Network/Http');
 class SettingsController extends AdminAppController {
     public $components = array('Image');
     public $uses = array('Setting');
@@ -180,6 +181,21 @@ class SettingsController extends AdminAppController {
                 if($bridge['enabled'] && empty($bridge['url'])) {
                    $this->Session->setFlash(__('Bridge\'s third party url is mandatory'), 'flash_error');
                    $error = true;
+                }elseif($bridge['enabled']) { // test the bridge url before enabling it
+                    $HttpSocket = new HttpSocket();
+                    $response = $HttpSocket->post($bridge['url'], array('login' => 'mushraider_bot', 'pwd' => ''));
+                    $auth = json_decode($response->body);
+                    if($response->code >= 400 && $response->code < 600) {
+                        if($response->code >= 400 && $response->code < 500) {
+                            $this->Session->setFlash(__('Bridge is disabled because the third party url does not look right (code %s)', $response->code), 'flash_error');
+                        }elseif($response->code >= 500) {
+                            $this->Session->setFlash(__('Bridge is disabled because it seems that the third party plugin have a problem (code %s)', $response->code), 'flash_error');
+                        }
+                        $error = true;
+                    }elseif(empty($auth) || (!empty($auth) && !isset($auth->authenticated))) {
+                        $this->Session->setFlash(__('Bridge is disabled because the third party url does not look right'), 'flash_error');
+                        $error = true;
+                    }
                 }
 
                 if(!$error) {

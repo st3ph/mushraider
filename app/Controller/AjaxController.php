@@ -108,7 +108,7 @@ class AjaxController extends AppController {
             $refusedList = explode(',', $this->request->query['refused']);
 
             $params = array();
-            $params['fields'] = array('id', 'character_id');
+            $params['fields'] = array('id', 'character_id', 'last_notification');
             $params['recursive'] = 1;
             $params['contain']['User']['fields'] = array('email', 'notifications_validate');
             $params['conditions']['EventsCharacter.event_id'] = $eventId;
@@ -133,19 +133,22 @@ class AjaxController extends AppController {
                         $toSave['status'] = 2;
                     }else {
                         $toSave['status'] = 1;
-                    }
-                    if(!$this->EventsCharacter->save($toSave)) {
-                        return 'fail';
-                    }
-
+                    }                    
 
                     // If notifications are enable, send email to validated and refused users
                     if($eventCharacter['User']['notifications_validate'] && $notificationsStatus) {
-                        if($toSave['status'] == 2) {
+                        if($toSave['status'] == 2 && $eventCharacter['EventsCharacter']['last_notification'] != 2) {
                             $this->Emailing->eventValidate($eventCharacter['User']['email'], $event['Event']);
-                        }elseif($toSave['status'] == 3) {
+                            $toSave['last_notification'] = 2;
+                        }elseif($toSave['status'] == 3 && $eventCharacter['EventsCharacter']['last_notification'] != 3) {
                             $this->Emailing->eventRefuse($eventCharacter['User']['email'], $event['Event']);
+                            $toSave['last_notification'] = 3;
                         }
+                    }
+
+                    // Save
+                    if(!$this->EventsCharacter->save($toSave)) {
+                        return 'fail';
                     }
                 }
 

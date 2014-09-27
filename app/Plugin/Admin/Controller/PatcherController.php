@@ -4,7 +4,7 @@ class PatcherController extends AdminAppController {
     public $uses = array('Character', 'EventsCharacter', 'Event');
 
     var $adminOnly = true;
-    var $availablePatchs = array('beta-2', 'beta-3', 'v-1.1', 'v-1.3', 'v-1.3.5', 'v-1.4');
+    var $availablePatchs = array('beta-2', 'beta-3', 'v-1.1', 'v-1.3', 'v-1.3.5', 'v-1.4', 'v-1.4.1');
 
     function beforeFilter() {
         parent::beforeFilter();

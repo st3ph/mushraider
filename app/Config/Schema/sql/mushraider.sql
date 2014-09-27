@@ -129,6 +129,7 @@ CREATE TABLE IF NOT EXISTS `{prefix}events_characters` (
   `character_id` int(11) NULL DEFAULT NULL,
   `raids_role_id` int(11) NULL DEFAULT NULL,
   `status` tinyint(3) NOT NULL,
+  `last_notification` tinyint(3) NOT NULL DEFAULT '0',
   `comment` varchar(75) COLLATE utf8_unicode_ci NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,

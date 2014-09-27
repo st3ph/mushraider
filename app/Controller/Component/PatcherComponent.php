@@ -46,6 +46,14 @@ class PatcherComponent extends Component {
         if(!$RaidsRole->query($sql)) {
             return $this->redirectToPatch('/admin/patcher/apply/v-1.4');
         }
+
+        // v1.4.1
+        App::uses('EventsCharacter', 'Model');
+        $EventsCharacter = new EventsCharacter();
+        $sql = "SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE() AND COLUMN_NAME='last_notification' AND TABLE_NAME='".Configure::read('Database.prefix')."events_characters'";
+        if(!$EventsCharacter->query($sql)) {
+            return $this->redirectToPatch('/admin/patcher/apply/v-1.4.1');
+        }
 	}
 
     public function run_sql_file($mysqlLink, $location, $prefix = '') {

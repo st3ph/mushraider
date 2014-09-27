@@ -57,45 +57,52 @@ foreach($event['EventsRole'] as $eventRole) {
 <?php if(!$eventIsClosed):?>
 	<div id="eventSignin">
 		<div class="pull-right">
-			<?php
-			$messageClass = '';
-			$messageText = '';
-			if($registeredCharacter) {
-				switch($registeredCharacter['status']) {
-					case 0:
-						$messageClass = 'label label-warning';
-						$messageText = __('your are registered as "absent"');				
-						break;
-					case 1:
-						$messageClass = 'label label-info';
-						$messageText = __('your are registered to this event as');				
-						break;
-					case 2:
-						$messageClass = 'label label-success';
-						$messageText = __('your are validated to this event as');				
-						break;
-					case 3:
-						$messageClass = 'label label-important';
-						$messageText = __('your are refused for this event');
-						break;
+			<?php if(!empty($charactersList)):?>
+				<?php
+				$messageClass = '';
+				$messageText = '';
+				if($registeredCharacter) {
+					switch($registeredCharacter['status']) {
+						case 0:
+							$messageClass = 'label label-warning';
+							$messageText = __('your are registered as "absent"');				
+							break;
+						case 1:
+							$messageClass = 'label label-info';
+							$messageText = __('your are registered to this event as');				
+							break;
+						case 2:
+							$messageClass = 'label label-success';
+							$messageText = __('your are validated to this event as');				
+							break;
+						case 3:
+							$messageClass = 'label label-important';
+							$messageText = __('your are refused for this event');
+							break;
+					}
 				}
-			}
-			?>
-			<span class="message <?php echo $messageClass;?>"><?php echo $messageText;?></span>
-			<?php echo $this->Form->input('Character', array('options' => $charactersList, 'selected' => $registeredCharacterId, 'empty' => __('Choose a character'), 'class' => 'span2', 'data-user' => $user['User']['id'], 'data-event' => $event['Event']['id'], 'data-error' => __('please select a character and a role'), 'data-signin' => __('your are registered to this event as'), 'data-signout' => __('your are not registered to this event'), 'label' => false, 'div' => false));?>
-			<?php if(!empty($event['EventsRole'])):?>
-				<select name="data[EventsRole]" id="EventsRole" class="span1">
-					<option value=""><?php echo __('Role');?></option>
-					<?php foreach($event['EventsRole'] as $eventRole):?>
-						<?php if($eventRole['count'] > 0):?>
-							<option value="<?php echo $eventRole['RaidsRole']['id'];?>" <?php echo ($registeredCharacter && $eventRole['RaidsRole']['id'] == $registeredCharacter['raids_role_id'])?'selected="selected"':'';?>><?php echo $eventRole['RaidsRole']['title'];?></option>
-						<?php endif;?>
-					<?php endforeach;?>
-				</select>
+				?>
+				<span class="message <?php echo $messageClass;?>"><?php echo $messageText;?></span>
+				<?php echo $this->Form->input('Character', array('options' => $charactersList, 'selected' => $registeredCharacterId, 'empty' => __('Choose a character'), 'class' => 'span2', 'data-user' => $user['User']['id'], 'data-event' => $event['Event']['id'], 'data-error' => __('please select a character and a role'), 'data-signin' => __('your are registered to this event as'), 'data-signout' => __('your are not registered to this event'), 'label' => false, 'div' => false));?>
+				<?php if(!empty($event['EventsRole'])):?>
+					<select name="data[EventsRole]" id="EventsRole" class="span1">
+						<option value=""><?php echo __('Role');?></option>
+						<?php foreach($event['EventsRole'] as $eventRole):?>
+							<?php if($eventRole['count'] > 0):?>
+								<option value="<?php echo $eventRole['RaidsRole']['id'];?>" <?php echo ($registeredCharacter && $eventRole['RaidsRole']['id'] == $registeredCharacter['raids_role_id'])?'selected="selected"':'';?>><?php echo $eventRole['RaidsRole']['title'];?></option>
+							<?php endif;?>
+						<?php endforeach;?>
+					</select>
+				<?php endif;?>
+				<?php echo $this->Form->input('Comment', array('type' => 'text', 'value' => $registeredCharacterComment, 'class' => 'span3', 'placeholder' => __('Add a comment'), 'label' => false, 'div' => false, 'maxlength' => 75));?>
+				<span class="btn" data-status="1"><i class="icon-thumbs-up"></i></span>
+				<span class="btn" data-status="0"><i class="icon-thumbs-down"></i></span>
+			<?php else:?>
+				<p>
+					<span class="label label-info"><?php echo __('You don\'t have any character for this game :(');?></span>
+					<?php echo $this->Html->link('<span class="icon-plus"></span> '.__('Create a character'), '/account/characters', array('class' => 'btn btn-small', 'escape' => false));?>
+				</p>
 			<?php endif;?>
-			<?php echo $this->Form->input('Comment', array('type' => 'text', 'value' => $registeredCharacterComment, 'class' => 'span3', 'placeholder' => __('Add a comment'), 'label' => false, 'div' => false, 'maxlength' => 75));?>
-			<span class="btn" data-status="1"><i class="icon-thumbs-up"></i></span>
-			<span class="btn" data-status="0"><i class="icon-thumbs-down"></i></span>
 		</div>
 	</div>
 	<div class="clear"></div>

@@ -302,6 +302,8 @@ jQuery(function($) {
                 refusedList += $(this).data('id')+',';
             });
             
+            console.log('v='+validatedList+'&refused='+refusedList+'&r='+roleId+'&e='+eventId+'&g='+groupId);
+
             $.ajax({
                 type: 'get',
                 url: site_url+'ajax/roster',

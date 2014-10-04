@@ -116,6 +116,12 @@ class AjaxController extends AppController {
             $params['conditions']['EventsCharacter.event_id'] = $eventId;
             $params['conditions']['EventsCharacter.raids_role_id'] = $roleId;
             $params['conditions']['EventsCharacter.status >'] = 0;
+
+            if($groupId !== self::DefautGroupId)
+            {
+                $params['conditions']['EventsCharacter.events_group_id'] = array(self::DefautGroupId, $groupId, 0);
+            }
+
             if($eventCharacters = $this->EventsCharacter->find('all', $params)) {
                 if($notificationsStatus = $this->Setting->getOption('notifications')) {
                     // Get event for email notifications

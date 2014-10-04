@@ -170,8 +170,8 @@ class EventsController extends AppController {
                     $nbGroups = $toSave['nb_groups'];
                     for ($i = 1; $i <= $nbGroups; $i++) { 
                         $toSaveEventGroup = array();
-                        $toSaveEventsGroup['events_group_id'] = -1;
-                        $toSaveEventsGroup['title'] = __('Group').' '.$i;
+                        $toSaveEventGroup['events_group_id'] = -1;
+                        $toSaveEventGroup['title'] = __('Group').' '.$i;
                         $toSaveEventGroup['event_id'] = $eventId;
                         $this->EventsGroup->__add($toSaveEventGroup);
                     }
@@ -470,9 +470,9 @@ class EventsController extends AppController {
             }
 
             // Delete childs
-            $conditions = array('event_id' => $eventId);
-            $this->EventsRole->deleteAll($conditions);
-            $this->EventsCharacter->deleteAll($conditions);
+            $this->EventsRole->deleteAll(array('EventsRole.event_id' => $eventId));
+            $this->EventsCharacter->deleteAll(array('EventsCharacter.event_id' => $eventId));
+            $this->EventsGroup->deleteAll(array('EventsGroup.event_id' => $eventId));
             $this->Session->setFlash(__('The event has been deleted.'), 'flash_success');
         }else {
             $this->Session->setFlash(__('MushRaider can\'t delete this event.'), 'flash_error');

@@ -1,7 +1,7 @@
 <?php $registeredCharacter = $this->Tools->getRegisteredCharacter($user['User']['id'], $event['EventsCharacter']);?>
 <?php $registeredCharacterId = $registeredCharacter?$registeredCharacter['id']:0;?>
 <?php $registeredCharacterComment = $registeredCharacter?$registeredCharacter['comment']:'';?>
-<?php $eventRoles = array();?>
+<?php $eventRoles = $this->Former->charactersToRoles($event['EventsRole'], $event['EventsCharacter'], $event['EventsGroup'], $user);?>
 <?php $dayTimestamp = $this->Tools->get_timestamp($event['Event']['time_invitation'], true);?>
 <?php $todayTimestamp = mktime(0, 0, 0, date('m'), date('d'), date('Y'));?>
 <header>
@@ -39,20 +39,6 @@
 		</div>
 	</h1>
 </header>
-
-<?php 
-// Prepare roles array
-foreach($event['EventsRole'] as $eventRole) {
-	$eventRoles['role_'.$eventRole['RaidsRole']['id']]['id'] = $eventRole['RaidsRole']['id'];
-	$eventRoles['role_'.$eventRole['RaidsRole']['id']]['title'] = $eventRole['RaidsRole']['title'];
-	$eventRoles['role_'.$eventRole['RaidsRole']['id']]['max'] = $eventRole['count'];
-	$eventRoles['role_'.$eventRole['RaidsRole']['id']]['current'] = 0;
-	$eventRoles['role_'.$eventRole['RaidsRole']['id']]['characters']['validated'] = '';
-	$eventRoles['role_'.$eventRole['RaidsRole']['id']]['characters']['waiting'] = '';
-	$eventRoles['role_'.$eventRole['RaidsRole']['id']]['characters']['nok'] = '';
-	$eventRoles['role_'.$eventRole['RaidsRole']['id']]['characters']['refused'] = '';
-}
-?>
 
 <?php if(!$eventIsClosed):?>
 	<div id="eventSignin">
@@ -145,64 +131,149 @@ foreach($event['EventsRole'] as $eventRole) {
 </table>
 
 <h3><?php echo __('Roster');?></h3>
+<h4><?php echo __('Validated');?></h4>
 <?php if(!empty($eventRoles)):?>
-	<?php $eventRoles = $this->Former->charactersToRoles($eventRoles, $event['EventsCharacter'], $user);?>
-	<table id="eventRoles" class="table table-striped table-bordered" data-id="<?php echo $event['Event']['id'];?>">
-		<thead>
-			<tr>
-				<?php foreach($eventRoles as $roleId => $eventRole):?>
-					<?php if($eventRole['max'] > 0):?>
-						<th data-id="<?php echo $roleId;?>">
-							<?php echo $eventRole['title'];?>
-							<span class="current"><?php echo $eventRole['current'];?></span> / <span class="max"><?php echo $eventRole['max'];?></span>
-							<?php if(!$eventIsClosed && ($user['User']['can']['manage_events'] || $user['User']['can']['full_permissions'])):?>
-								<span class="badge badge-warning pull-right"><i class="icon-edit"></i></span>
+	<div id="eventRoles">
+		<?php if(!empty($event['EventsGroup']) && count($event['EventsGroup']) > 1):?>
+			<?php foreach($event['EventsGroup'] as $groupId => $eventGroup):?>
+				<h5><?php echo $eventGroup['title'];?></h5>
+				<?php $groupId = $eventGroup['id'] ?>
+				<table class="table table-striped table-bordered" data-id="<?php echo $event['Event']['id'];?>" data-groupId="<?php echo $groupId;?>">
+					<thead>
+						<tr>
+							<?php foreach($eventRoles as $roleId => $eventRole):?>
+								<?php if($eventRole['max'] > 0):?>
+									<th data-id="<?php echo $roleId;?>" data-groupId="<?php echo $groupId;?>">
+										<?php echo $eventRole['title'];?>
+										<span class="current"><?php echo $eventRole['current'][$groupId];?></span> / <span class="max"><?php echo $eventRole['max'];?></span>
+										<?php if(!$eventIsClosed && ($user['User']['can']['manage_events'] || $user['User']['can']['full_permissions'])):?>
+											<span class="badge badge-warning pull-right"><i class="icon-edit"></i></span>
+										<?php endif;?>
+									</th>
+								<?php endif;?>
+							<?php endforeach;?>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<?php
+							$displayedRoles = 0;
+							if(!empty($eventRoles)) {
+								foreach($eventRoles as $roleId => $eventRole) {
+									$displayedRoles = $eventRole['max'] > 0?$displayedRoles + 1:$displayedRoles;
+								}
+							}
+							$colWidth = floor(100 / $displayedRoles);
+							?>
+							<?php foreach($eventRoles as $roleId => $eventRole):?>
+								<?php if($eventRole['max'] > 0):?>
+									<td data-id="<?php echo $roleId;?>" data-groupId="<?php echo $groupId;?>" data-full="<?php echo __('The roster for this role is full');?>" style="width:<?php echo $colWidth;?>%">
+										<h5 class="text-success"><?php echo __('Validated');?></h5>
+										<ul class="validated">
+											<?php echo $eventRole['characters']['validated'][$groupId];?>
+										</ul>
+									</td>
+								<?php endif;?>
+							<?php endforeach;?>
+						</tr>
+					</tbody>
+				</table>
+			<?php endforeach;?>
+		<?php else:?>
+			<table class="table table-striped table-bordered" data-id="<?php echo $event['Event']['id'];?>">
+				<thead>
+					<tr>
+						<?php foreach($eventRoles as $roleId => $eventRole):?>
+							<?php if($eventRole['max'] > 0):?>
+								<th data-id="<?php echo $roleId;?>">
+									<?php echo $eventRole['title'];?>
+									<span class="current"><?php echo $eventRole['current'];?></span> / <span class="max"><?php echo $eventRole['max'];?></span>
+									<?php if(!$eventIsClosed && ($user['User']['can']['manage_events'] || $user['User']['can']['full_permissions'])):?>
+										<span class="badge badge-warning pull-right"><i class="icon-edit"></i></span>
+									<?php endif;?>
+								</th>
 							<?php endif;?>
-						</th>
-					<?php endif;?>
-				<?php endforeach;?>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<?php
-				$displayedRoles = 0;
-				if(!empty($eventRoles)) {
-					foreach($eventRoles as $roleId => $eventRole) {
-						$displayedRoles = $eventRole['max'] > 0?$displayedRoles + 1:$displayedRoles;
+						<?php endforeach;?>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<?php
+						$displayedRoles = 0;
+						if(!empty($eventRoles)) {
+							foreach($eventRoles as $roleId => $eventRole) {
+								$displayedRoles = $eventRole['max'] > 0?$displayedRoles + 1:$displayedRoles;
+							}
+						}
+						$colWidth = floor(100 / $displayedRoles);
+						?>
+						<?php foreach($eventRoles as $roleId => $eventRole):?>
+							<?php if($eventRole['max'] > 0):?>
+								<td data-id="<?php echo $roleId;?>" data-full="<?php echo __('The roster for this role is full');?>" style="width:<?php echo $colWidth;?>%">
+									<h5 class="text-success"><?php echo __('Validated');?></h5>
+									<ul class="validated">
+										<?php echo $eventRole['characters']['validated'];?>
+									</ul>
+								</td>
+							<?php endif;?>
+						<?php endforeach;?>
+					</tr>
+				</tbody>
+			</table>
+		<?php endif;?>
+	<?php endif;?>
+
+	<h4><?php echo __('Not validated');?></h4>
+	<?php if(!empty($eventRoles)):?>
+		<table class="table table-striped table-bordered" data-id="<?php echo $event['Event']['id'];?>">
+			<thead>
+				<tr>
+					<?php foreach($eventRoles as $roleId => $eventRole):?>
+						<?php if($eventRole['max'] > 0):?>
+							<th data-id="<?php echo $roleId;?>">
+								<?php echo $eventRole['title'];?>
+							</th>
+						<?php endif;?>
+					<?php endforeach;?>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<?php
+					$displayedRoles = 0;
+					if(!empty($eventRoles)) {
+						foreach($eventRoles as $roleId => $eventRole) {
+							$displayedRoles = $eventRole['max'] > 0?$displayedRoles + 1:$displayedRoles;
+						}
 					}
-				}
-				$colWidth = floor(100 / $displayedRoles);
-				?>
-				<?php foreach($eventRoles as $roleId => $eventRole):?>
-					<?php if($eventRole['max'] > 0):?>
-						<td data-id="<?php echo $roleId;?>" data-full="<?php echo __('The roster for this role is full');?>" style="width:<?php echo $colWidth;?>%">
-							<h5 class="text-success"><?php echo __('Validated');?></h5>
-							<ul class="validated">
-								<?php echo $eventRole['characters']['validated'];?>
-							</ul>
-							<hr />
-							<h5 class="text-info"><?php echo __('Waiting');?></h5>
-							<ul class="waiting sortWaiting">
-								<?php echo $eventRole['characters']['waiting'];?>
-							</ul>
-							<hr />
-							<h5 class="text-error"><?php echo __('Refused');?></h5>
-							<ul class="refused">
-								<?php echo $eventRole['characters']['refused'];?>
-							</ul>
-							<hr />
-							<h5 class="text-warning"><?php echo __('Rejected');?></h5>
-							<ul class="rejected">
-								<?php echo $eventRole['characters']['nok'];?>
-							</ul>
-						</td>
-					<?php endif;?>
-				<?php endforeach;?>
-			</tr>
-		</tbody>
-	</table>
+					$colWidth = floor(100 / $displayedRoles);
+					?>
+					<?php foreach($eventRoles as $roleId => $eventRole):?>
+						<?php if($eventRole['max'] > 0):?>
+							<td data-id="<?php echo $roleId;?>" data-full="<?php echo __('The roster for this role is full');?>" style="width:<?php echo $colWidth;?>%">
+								<h5 class="text-info"><?php echo __('Waiting');?></h5>
+								<ul class="waiting sortWaiting">
+									<?php echo $eventRole['characters']['waiting'];?>
+								</ul>
+								<hr />
+								<h5 class="text-error"><?php echo __('Refused');?></h5>
+								<ul class="refused">
+									<?php echo $eventRole['characters']['refused'];?>
+								</ul>
+								<hr />
+								<h5 class="text-warning"><?php echo __('Rejected');?></h5>
+								<ul class="rejected">
+									<?php echo $eventRole['characters']['nok'];?>
+								</ul>
+							</td>
+						<?php endif;?>
+					<?php endforeach;?>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 <?php endif;?>
+
 
 <h3><?php echo __('Bad Kitties');?> <small><?php echo __('no answer yet...');?></small></h3>
 <?php if(!empty($badGuys)):?>

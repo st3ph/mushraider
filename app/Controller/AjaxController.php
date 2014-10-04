@@ -1,5 +1,6 @@
 <?php
 class AjaxController extends AppController {
+    const DefautGroupId = -1;
     public $components = array('Emailing');
     var $uses = array('Game', 'Dungeon', 'Classe', 'Race', 'EventsCharacter', 'EventsRole', 'Character', 'Event', 'RaidsRole', 'EventsTemplate', 'EventsTemplatesRole');
 
@@ -106,6 +107,7 @@ class AjaxController extends AppController {
             $roleId = str_replace('role_', '', $this->request->query['r']);
             $validatedList = explode(',', $this->request->query['v']);
             $refusedList = explode(',', $this->request->query['refused']);
+            $groupId = empty($this->request->query['g']) ? self::DefautGroupId : $this->request->query['g'];
 
             $params = array();
             $params['fields'] = array('id', 'character_id', 'last_notification');
@@ -122,17 +124,19 @@ class AjaxController extends AppController {
                     $params['conditions']['id'] = $eventId;
                     $event = $this->Event->find('first', $params);
                 }
-          
-
+                
                 foreach($eventCharacters as $eventCharacter) {
                     $toSave = array();
                     $toSave['id'] = $eventCharacter['EventsCharacter']['id'];
                     if(in_array($eventCharacter['EventsCharacter']['character_id'], $refusedList)) {
-                        $toSave['status'] = 3;    
+                        $toSave['status'] = 3;
+                        $toSave['events_group_id'] = self::DefautGroupId;
                     }elseif(in_array($eventCharacter['EventsCharacter']['character_id'], $validatedList)) {
                         $toSave['status'] = 2;
+                        $toSave['events_group_id'] = $groupId;
                     }else {
                         $toSave['status'] = 1;
+                        $toSave['events_group_id'] = self::DefautGroupId;
                     }                    
 
                     // If notifications are enable, send email to validated and refused users

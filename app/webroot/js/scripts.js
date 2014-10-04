@@ -251,14 +251,22 @@ jQuery(function($) {
 
     // Validate roster
     $('#eventRoles th').on('click', '.badge', function() {
-        var $editButton = $(this);
-        var $editButtonI = $(this).find('i');
-        var $table = $editButton.parents('table');
-        var $roleTd = $table.find("td[data-id='"+$editButton.parents('th').data('id')+"']");
-        var $waiting = $roleTd.find('.waiting');
-        var $validated = $roleTd.find('.validated');
-        var $refused = $roleTd.find('.refused');
+        var $editButton = $(this),
+            $editButtonI = $(this).find('i'),
+            $rolePanel = $('#eventRoles'),
+            $roleTh = $editButton.parents('th'),
+            $table = $editButton.parents('table'),
+            eventId = $table.data('id'),
+            roleId = $roleTh.data('id'),
+            groupId = $roleTh.data('groupid'),
+            $validated = $table.find('td[data-id="' + roleId + '"]').find('.validated'),
+            $notValidatedTd = $rolePanel.find('td[data-id="' + roleId + '"]'),
+            $waiting = $notValidatedTd.find('.waiting'),
+            $refused = $notValidatedTd.find('.refused');
+
         if($editButtonI.hasClass('icon-edit')) { // Go Edit mode
+            $rolePanel.find("th[data-id='" + roleId + "']").has('i.icon-save').find('span').trigger('click');
+
             $editButton.removeClass('badge-warning').addClass('badge-success');
             $editButtonI.removeClass('icon-edit').addClass('icon-save');
             // Add 'add button' and 'refused button' to waiting list
@@ -293,11 +301,11 @@ jQuery(function($) {
             $refused.find('li').each(function() {
                 refusedList += $(this).data('id')+',';
             });
-
+            
             $.ajax({
                 type: 'get',
                 url: site_url+'ajax/roster',
-                data: 'v='+validatedList+'&refused='+refusedList+'&r='+$roleTd.data('id')+'&e='+$table.data('id'),
+                data: 'v='+validatedList+'&refused='+refusedList+'&r='+roleId+'&e='+eventId+'&g='+groupId,
                 success: function(msg) {                
                     $editButton.next('img').remove();
 
@@ -326,13 +334,17 @@ jQuery(function($) {
     });
 
     $('#eventRoles td').on('click', 'i', function() {
-        var $button = $(this);
-        var $table = $button.parents('table');
-        var $roleTh = $table.find("th[data-id='"+$button.parents('td').data('id')+"']");
-        var $roleTd = $button.parents('td');
-        var $waiting = $roleTd.find('.waiting');
-        var $validated = $roleTd.find('.validated');
-        var $refused = $roleTd.find('.refused');
+        var $button = $(this),
+            $rolePanel = $('#eventRoles'),
+            $roleTd = $button.parents('td'),
+            roleId = $roleTd.data('id'),
+            $roleTh = $rolePanel.find("th[data-id='" + roleId + "']").has('i.icon-save'),
+            groupId = $roleTh.data('groupid'),
+            $validatedTable = $roleTh.parents('table'),
+            $validated = $validatedTable.find('td[data-id="' + roleId + '"]').find('.validated'),
+            $notValidatedTd = $rolePanel.find('td[data-id="' + roleId + '"]'),
+            $waiting = $notValidatedTd.find('.waiting'),
+            $refused = $notValidatedTd.find('.refused');
 
         if($button.hasClass('icon-plus')) { // Add player to roster
             // Check if there is a room left for this role
@@ -349,7 +361,8 @@ jQuery(function($) {
             }else {
                 alert($roleTd.data('full'));
             }
-        }else if($button.hasClass('icon-minus')) { // Remove player from roster
+        }
+        else if($button.hasClass('icon-minus')) { // Remove player from roster
             $player = $(this).parents('li');
             var $newPlayer = $player.clone();
             $newPlayer.find('i').remove();
@@ -361,7 +374,8 @@ jQuery(function($) {
             var currentPlayers = parseInt($roleTh.find('.current').text());
             currentPlayers = currentPlayers > 0?currentPlayers - 1:0;
             $roleTh.find('.current').text(currentPlayers);
-        }else if($button.hasClass('icon-minus-sign')) { // Refused player from roster
+        }
+        else if($button.hasClass('icon-minus-sign')) { // Refused player from roster
             $player = $(this).parents('li');
             var $newPlayer = $player.clone();
             $newPlayer.find('i').remove();

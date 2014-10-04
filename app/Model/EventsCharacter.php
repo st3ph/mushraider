@@ -15,6 +15,10 @@ class EventsCharacter extends AppModel {
         'User' => array(
             'className' => 'User',
             'foreignKey' => 'user_id'
+        ),
+        'EventsGroup' => array(
+            'className' => 'EventsGroup',
+            'foreignKey' => 'events_group_id'
         )
     );
 
@@ -66,5 +70,13 @@ class EventsCharacter extends AppModel {
         }
 
         return false;
+    }
+
+    function multipleUnsubscribe($toUnsubsribe){
+        if(empty($toUnsubsribe)) {
+            return false;
+        }
+
+        $this->updateAll(array('EventsCharacter.status' => 1, 'EventsCharacter.events_group_id' => -1), $toUnsubsribe);
     }
 }

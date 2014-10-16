@@ -78,6 +78,7 @@ CakePlugin::load('Install');
 CakePlugin::load('Admin');
 CakePlugin::load('Widget');
 CakePlugin::load('Sociable');
+CakePlugin::load('DebugKit');
 CakePlugin::load(array('Api' => array('routes' => true)));
 
 function prd($var) {

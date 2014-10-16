@@ -2,7 +2,7 @@
 class EventsController extends AppController {
     public $components = array('Emailing', 'Image');
     var $helpers = array('Sociable.Comment');
-    var $uses = array('Game', 'Dungeon', 'Event', 'RaidsRole', 'EventsRole', 'EventsCharacter', 'Character', 'EventsTemplate', 'EventsTemplatesRole', 'Report');
+    var $uses = array('Game', 'Dungeon', 'Event', 'RaidsRole', 'EventsRole', 'EventsGroup', 'EventsCharacter', 'Character', 'EventsTemplate', 'EventsTemplatesRole', 'Report');
 
     public function beforeFilter() {
         parent::beforeFilter();
@@ -71,6 +71,7 @@ class EventsController extends AppController {
         $params['contain']['Game'] = array();
         $params['contain']['Dungeon'] = array();
         $params['contain']['User'] = array();
+        $params['contain']['EventsGroup'] = array();
         $params['contain']['EventsRole']['RaidsRole'] = array();
         $params['contain']['EventsCharacter']['Character']['Classe'] = array();        
         $params['contain']['EventsCharacter']['Character']['User'] = array();        
@@ -79,7 +80,7 @@ class EventsController extends AppController {
             $this->Session->setFlash(__('MushRaider can\'t find this event oO'), 'flash_warning');
             $this->redirect('/events');
         }
-        
+
         // Reorder raids roles
         usort($event['EventsRole'], array($this, 'orderRoles'));
 
@@ -143,6 +144,7 @@ class EventsController extends AppController {
             $toSave['game_id'] = $this->request->data['Event']['game_id'];
             $toSave['dungeon_id'] = $this->request->data['Event']['dungeon_id'];
             $toSave['character_level'] = $this->request->data['Event']['character_level'];
+            $toSave['nb_groups'] = $this->request->data['Event']['nb_groups'];
             $toSave['time_invitation'] = date('Y-m-d H:i:s', mktime($this->request->data['Event']['time_invitation']['hour'], $this->request->data['Event']['time_invitation']['min'], 0, $dates[1], $dates[2], $dates[0]));
             $toSave['time_start'] = date('Y-m-d H:i:s', mktime($this->request->data['Event']['time_start']['hour'], $this->request->data['Event']['time_start']['min'], 0, $dates[1], $dates[2], $dates[0]));            
 
@@ -163,6 +165,15 @@ class EventsController extends AppController {
                         $toSaveEventsRole['raids_role_id'] = $roleId;
                         $toSaveEventsRole['count'] = $roleNumber?$roleNumber:'0';
                         $this->EventsRole->__add($toSaveEventsRole);
+                    }
+
+                    $nbGroups = $toSave['nb_groups'];
+                    for ($i = 1; $i <= $nbGroups; $i++) { 
+                        $toSaveEventGroup = array();
+                        $toSaveEventGroup['events_group_id'] = -1;
+                        $toSaveEventGroup['title'] = __('Group').' '.$i;
+                        $toSaveEventGroup['event_id'] = $eventId;
+                        $this->EventsGroup->__add($toSaveEventGroup);
                     }
 
                     // If notifications are enable, send email to validate users
@@ -201,7 +212,6 @@ class EventsController extends AppController {
 
             $this->Session->setFlash(__('Something wrong happen, please fix the errors below'), 'flash_error');
         }
-
 
         $gamesList = $this->Game->find('list', array('order' => 'title ASC'));
         $this->set('gamesList', $gamesList);
@@ -242,13 +252,14 @@ class EventsController extends AppController {
             // Get event date
             $params = array();        
             $params['recursive'] = -1;
-            $params['fields'] = array('time_invitation');
+            $params['fields'] = array('time_invitation', 'nb_groups');
             $params['conditions']['Event.id'] = $eventId;            
             if(!$event = $this->Event->find('first', $params)) {
                 $this->redirect('/events');
             }            
             $date = explode(' ', $event['Event']['time_invitation']);
             $dates = explode('-', $date[0]);
+            Debugger::log($event['Event']);
 
             $toSave = array();
             $toSave['id'] = $this->request->data['Event']['id'];
@@ -258,6 +269,7 @@ class EventsController extends AppController {
             $toSave['game_id'] = $this->request->data['Event']['game_id'];
             $toSave['dungeon_id'] = $this->request->data['Event']['dungeon_id'];
             $toSave['character_level'] = $this->request->data['Event']['character_level'];
+            $toSave['nb_groups'] = $this->request->data['Event']['nb_groups'];
             $toSave['time_invitation'] = date('Y-m-d H:i:s', mktime($this->request->data['Event']['time_invitation']['hour'], $this->request->data['Event']['time_invitation']['min'], 0, $dates[1], $dates[2], $dates[0]));
             $toSave['time_start'] = date('Y-m-d H:i:s', mktime($this->request->data['Event']['time_start']['hour'], $this->request->data['Event']['time_start']['min'], 0, $dates[1], $dates[2], $dates[0]));            
             if(!empty($this->request->data['Event']['roles'])) {
@@ -268,6 +280,40 @@ class EventsController extends AppController {
                         $toSaveEventsRole['raids_role_id'] = $roleId;
                         $toSaveEventsRole['count'] = $roleNumber?$roleNumber:'0';
                         $this->EventsRole->__add($toSaveEventsRole);
+                    }
+
+                    $currentGroupNb = $event['Event']['nb_groups'];
+                    $requiredGroupNb = $this->request->data['Event']['nb_groups'];
+
+                    if($currentGroupNb < $requiredGroupNb){
+                        // more groups required
+                        for($i = $currentGroupNb + 1; $i <= $requiredGroupNb; $i++){
+                            $toSaveEventsGroup = array();
+                            $toSaveEventsGroup['events_group_id'] = -1;
+                            $toSaveEventsGroup['title'] = __('Group').' '.$i;
+                            $toSaveEventsGroup['event_id'] = $eventId;
+                            $this->EventsGroup->__add($toSaveEventsGroup);
+                        }
+                    }
+                    else if ($currentGroupNb > $requiredGroupNb) {
+                        // fewer groups required
+                        $params = array();
+                        $params['recursive'] = -1;
+                        $params['fields'] = array('id');
+                        $params['conditions']['EventsGroup.event_id'] = $eventId;
+                        $params['order'] = array('EventsGroup.id');
+                        $groups = $this->EventsGroup->find('all', $params);
+                        Debugger::log($groups);
+
+                        $idsToDelete = array();
+                        for($i = $requiredGroupNb; $i < $currentGroupNb; $i++){
+                            $idsToDelete[] = $groups[$i]['EventsGroup']['id'];
+                        }
+
+                        Debugger::log($idsToDelete);
+
+                        $this->EventsGroup->__delete(array('EventsGroup.id' => $idsToDelete));
+                        $this->EventsCharacter->multipleUnsubscribe(array('EventsCharacter.events_group_id' => $idsToDelete));
                     }
 
                     $this->Session->setFlash(__('The event has been updated.'), 'flash_success');
@@ -424,9 +470,9 @@ class EventsController extends AppController {
             }
 
             // Delete childs
-            $conditions = array('event_id' => $eventId);
-            $this->EventsRole->deleteAll($conditions);
-            $this->EventsCharacter->deleteAll($conditions);
+            $this->EventsRole->deleteAll(array('EventsRole.event_id' => $eventId));
+            $this->EventsCharacter->deleteAll(array('EventsCharacter.event_id' => $eventId));
+            $this->EventsGroup->deleteAll(array('EventsGroup.event_id' => $eventId));
             $this->Session->setFlash(__('The event has been deleted.'), 'flash_success');
         }else {
             $this->Session->setFlash(__('MushRaider can\'t delete this event.'), 'flash_error');

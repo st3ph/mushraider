@@ -138,7 +138,8 @@ class FormerHelper extends AppHelper {
 												$tooltip .= '<div>';
 													$tooltip .= $matchingEvent['Game']['title'].'<br/>';
 													$tooltip .= $matchingEvent['Dungeon']['title'].'<br/>';
-													$tooltip .= __('Roster').' : '.count($this->extractUsersWithStatus($matchingEvent['EventsCharacter'], 2)).'/'.$playersNeeded.'<br/>';
+													$tooltip .= __('Waiting').' : '.count($this->extractUsersWithStatus($matchingEvent['EventsCharacter'], 1)).'<br/>';
+													$tooltip .= __('Validated').' : '.count($this->extractUsersWithStatus($matchingEvent['EventsCharacter'], 2)).'/'.$playersNeeded.'<br/>';
 													$tooltip .= __('Start').' : '.$this->date($matchingEvent['Event']['time_start'], 'heure');
 												$tooltip .= '<div>';
 
@@ -208,7 +209,53 @@ class FormerHelper extends AppHelper {
 		return $chars;
 	}
 
-	function charactersToRoles($eventRoles, $characters, $user = null) {
+	function characterToRole($character, $status, $user = null){
+		$listItem = '<li data-id="'.$character['Character']['id'].'" data-user="'.$character['Character']['User']['id'].'">';
+		$listItem .= '<span class="character" style="color:'.$character['Character']['Classe']['color'].'">';
+
+		if(!empty($character['Character']['Classe']['icon'])) {
+			$listItem .= $this->Html->image($character['Character']['Classe']['icon'], array('class' => 'tt', 'title' => $character['Character']['Classe']['title'], 'width' => '16'));
+		}
+
+		$listItem .= ' '.$character['Character']['title'];
+		$listItem .= ' ('.(empty($character['Character']['Classe']['icon'])?$character['Character']['Classe']['title'].' ':'').$character['Character']['level'].')';
+		$listItem .= '</span>';
+
+		if(!empty($character['comment'])) {
+			$listItem .= '<span class="tt" title="'.$character['comment'].'"><span class="icon-comments-alt"></span></span>';
+		}
+
+		if($user && ($user['User']['can']['manage_events'] || $user['User']['can']['full_permissions'])) {
+			$listItem .= '<span class="icon-move muted pull-right"></span>';
+		}
+
+		$listItem .= '</li>';
+
+		return $listItem;	
+	}
+
+	function charactersToRoles($roles, $characters, $groups = null, $user = null) {
+		$eventRoles= array();
+		$manyGroups = !empty($groups) && count($groups) > 1;
+
+		foreach($roles as $role) {
+			$eventRoles['role_'.$role['RaidsRole']['id']]['id'] = $role['RaidsRole']['id'];
+			$eventRoles['role_'.$role['RaidsRole']['id']]['title'] = $role['RaidsRole']['title'];
+			$eventRoles['role_'.$role['RaidsRole']['id']]['max'] = $role['count'];
+			$eventRoles['role_'.$role['RaidsRole']['id']]['current'] = $manyGroups ? array() : 0;
+			$eventRoles['role_'.$role['RaidsRole']['id']]['characters']['validated'] = $manyGroups ? array() : '';
+			$eventRoles['role_'.$role['RaidsRole']['id']]['characters']['waiting'] = '';
+			$eventRoles['role_'.$role['RaidsRole']['id']]['characters']['nok'] = '';
+			$eventRoles['role_'.$role['RaidsRole']['id']]['characters']['refused'] = '';
+
+			if($manyGroups){
+				foreach ($groups as $group) {
+					$eventRoles['role_'.$role['RaidsRole']['id']]['characters']['validated'][$group['id']] = '';
+					$eventRoles['role_'.$role['RaidsRole']['id']]['current'][$group['id']] = 0;
+				}				
+			}
+		}
+
 		if(!empty($eventRoles) && !empty($characters)) {
 			foreach($characters as $character) {
 				switch($character['status']) {
@@ -224,24 +271,30 @@ class FormerHelper extends AppHelper {
 					default:
 						$status = 'nok';
 				}
-				$eventRoles['role_'.$character['raids_role_id']]['current'] = $status == 'validated'?$eventRoles['role_'.$character['raids_role_id']]['current'] + 1:$eventRoles['role_'.$character['raids_role_id']]['current'];
-				$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '<li data-id="'.$character['Character']['id'].'" data-user="'.$character['Character']['User']['id'].'">';
-					$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '<span class="character" style="color:'.$character['Character']['Classe']['color'].'">';
-						if(!empty($character['Character']['Classe']['icon'])) {
-							$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= $this->Html->image($character['Character']['Classe']['icon'], array('class' => 'tt', 'title' => $character['Character']['Classe']['title'], 'width' => '16'));
-						}
-						$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= ' '.$character['Character']['title'];
-						$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= ' ('.(empty($character['Character']['Classe']['icon'])?$character['Character']['Classe']['title'].' ':'').$character['Character']['level'].')';
-					$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '</span>';
-					if(!empty($character['comment'])) {
-						$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '<span class="tt" title="'.$character['comment'].'"><span class="icon-comments-alt"></span></span>';
+
+				if($manyGroups){
+					$listItem = $this->characterToRole($character, $status, $user);
+
+					if($status == 'validated'){
+						$eventRoles['role_'.$character['raids_role_id']]['current'][$character['events_group_id']]++;
+						$eventRoles['role_'.$character['raids_role_id']]['characters'][$status][$character['events_group_id']] .= $listItem;
 					}
-					if($user && ($user['User']['can']['manage_events'] || $user['User']['can']['full_permissions'])) {
-						$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '<span class="icon-move muted pull-right"></span>';
+					else{
+						$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= $listItem;
+					}					
+				}
+				else{
+					$listItem = $this->characterToRole($character, $status, $user);
+
+					$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= $listItem;
+					if($status == 'validated'){
+						$eventRoles['role_'.$character['raids_role_id']]['current']++;
 					}
-				$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '</li>';				
+				}
 			}
 		}
+
+		Debugger::log($eventRoles, 7, 4);
 
 		return $eventRoles;
 	}

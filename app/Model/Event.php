@@ -31,6 +31,10 @@ class Event extends AppModel {
         'EventsCharacter' => array(
             'className' => 'EventsCharacter',
             'foreignKey' => 'event_id'
+        ),
+        'EventsGroup' => array(
+            'className' => 'EventsGroup',
+            'foreignKey' => 'event_id'
         )
     );
 
@@ -84,6 +88,18 @@ class Event extends AppModel {
                 'required' => true,
                 'message' => 'Please choose a minimum character level for this event.'
             )
+        ),
+        'nb_groups' => array(
+            'isRequired' => array(
+                'rule' => 'notEmpty',
+                'required' => true,
+                'message' => 'Please choose a number of groups for this event.'
+            ),
+            'positiveNumbers' => array(
+                'rule' => array('comparison', '>', 0),
+                'required' => true,
+                'message' => 'Please choose a number of groups between 1 and 99.'
+            )
         )
     );
 
@@ -104,6 +120,7 @@ class Event extends AppModel {
                 $toSave['EventsTemplate']['time_invitation'] = $event['Event']['time_invitation'];
                 $toSave['EventsTemplate']['time_start'] = $event['Event']['time_start'];
                 $toSave['EventsTemplate']['character_level'] = $event['Event']['character_level'];
+                $toSave['EventsTemplate']['nb_groups'] = $event['Event']['nb_groups'];
                 if(!empty($event['EventsRole'])) {
                     foreach($event['EventsRole'] as $key => $eventRole) {
                         $toSave['EventsTemplatesRole'][$key]['raids_role_id'] = $eventRole['raids_role_id'];
@@ -121,5 +138,4 @@ class Event extends AppModel {
 
         return false;
     }
-
 }

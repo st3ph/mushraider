@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Mushraider\n"
 "POT-Creation-Date: 2014-09-30 12:53+0100\n"
-"PO-Revision-Date: 2014-09-30 12:53+0100\n"
+"PO-Revision-Date: 2014-10-16 23:22+0100\n"
 "Last-Translator: Stéphane Litou <contact@stephane-litou.com>\n"
 "Language-Team:  <contact@stephane-litou.com>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.5\n"
+"X-Generator: Poedit 1.6.9\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;__\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -1631,6 +1631,14 @@ msgstr "Titre de l'événement"
 msgid "Dungeon"
 msgstr "Donjon"
 
+#: E:\www\wamp\www\mushraider\app/View/Events/add.ctp:33
+msgid "Number of groups"
+msgstr "Nombre de groupes"
+
+#: E:\www\wamp\www\mushraider\app/Controllers/EventsControllers.php:293
+msgid "Group"
+msgstr "Groupe"
+
 #: E:\www\wamp\www\mushraider\app/Plugin/Admin/View/Events/templates.ctp:28
 msgid "Mininum level"
 msgstr "Niveau minimum"
@@ -3049,9 +3057,14 @@ msgstr "Créé par"
 msgid "The roster for this role is full"
 msgstr "Le roster pour ce rôle est complet"
 
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:134
 #: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:180
 msgid "Validated"
 msgstr "Validés"
+
+#: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:226
+msgid "Not validated"
+msgstr "Non validés"
 
 #: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:185
 msgid "Waiting"
@@ -3059,7 +3072,7 @@ msgstr "En attente"
 
 #: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:190
 msgid "Refused"
-msgstr "Refusé"
+msgstr "Refusés"
 
 #: E:\www\wamp\www\mushraider\app/View/Events/view.ctp:195
 msgid "Rejected"

@@ -29,8 +29,11 @@
             <div class="form-group">
                 <?php echo $this->Form->input('Event.dungeon_id', array('type' => 'select', 'required' => true, 'label' => __('Dungeon'), 'empty' => __('Select a game first'), 'class' => 'span4'));?>
             </div>
+            <div class="form-group">
+                <?php echo $this->Form->input('Event.nb_groups', array('type' => 'text', 'required' => true, 'label' => __('Number of groups'), 'default' => 1, 'class' => 'span1', 'pattern' => '[0-9]{1,2}'));?>
+            </div>
         </div>
-        <div class="span6">            
+        <div class="span6">
             <div class="form-group">
                 <?php echo $this->Form->input('Event.description', array('type' => 'textarea', 'label' => __('Event description'), 'class' => 'span5 wysiwyg'));?>
             </div>

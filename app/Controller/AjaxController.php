@@ -1,6 +1,6 @@
 <?php
 class AjaxController extends AppController {
-    const DefautGroupId = -1;
+    const DefautGroupId = 0;
     public $components = array('Emailing');
     var $uses = array('Game', 'Dungeon', 'Classe', 'Race', 'EventsCharacter', 'EventsRole', 'Character', 'Event', 'RaidsRole', 'EventsTemplate', 'EventsTemplatesRole');
 
@@ -119,7 +119,7 @@ class AjaxController extends AppController {
 
             if($groupId !== self::DefautGroupId)
             {
-                $params['conditions']['EventsCharacter.events_group_id'] = array(self::DefautGroupId, $groupId, 0);
+                $params['conditions']['EventsCharacter.events_group_id'] = array(self::DefautGroupId, $groupId);
             }
 
             if($eventCharacters = $this->EventsCharacter->find('all', $params)) {

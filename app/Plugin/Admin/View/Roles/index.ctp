@@ -1,10 +1,10 @@
 <div class="box dark">
     <header>
         <div class="icons"><i class="icon-list icon-white"></i></div>
-        <h5><?php echo __('Roles list');?></h5>
+        <h5><?php echo __('Groups list');?></h5>
         <div class="toolbar">
             <ul class="nav">
-                <li><?php echo $this->Html->link('<i class="icon-plus"></i> '.__('Add user role'), '/admin/roles/add', array('escape' => false));?></li>
+                <li><?php echo $this->Html->link('<i class="icon-plus"></i> '.__('Add user group'), '/admin/roles/add', array('escape' => false));?></li>
             </ul>
         </div>
     </header>

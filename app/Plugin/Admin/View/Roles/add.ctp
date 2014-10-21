@@ -1,7 +1,7 @@
 <div class="box dark">
     <header>
         <div class="icons"><i class="icon-eye-open"></i></div>
-        <h5><?php echo __('Add user role');?></h5>
+        <h5><?php echo __('Add user group');?></h5>
     </header>
     <div class="accordion-body body in collapse">
         <?php echo $this->Form->create('Role', array('url' => '/admin/roles/add', 'class' => 'span12'));?>

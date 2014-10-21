@@ -32,7 +32,7 @@ class RolesController extends AdminAppController {
                         }
                     }
                 }
-                $this->Session->setFlash(__('%s has been added to your roles list', $toSave['title']), 'flash_success');
+                $this->Session->setFlash(__('%s has been added to your groups list', $toSave['title']), 'flash_success');
                 return $this->redirect('/admin/roles');
             }
 
@@ -51,7 +51,7 @@ class RolesController extends AdminAppController {
         }
 
         if($id == 1) {
-            $this->Session->setFlash(__('Sorry, you can\'t edit role "admin"'), 'flash_error');
+            $this->Session->setFlash(__('Sorry, you can\'t edit group "admin"'), 'flash_error');
             return $this->redirect('/admin/roles');
         }
 
@@ -60,7 +60,7 @@ class RolesController extends AdminAppController {
         $params['contain']['RolePermissionRole']['RolePermission'] = array();
         $params['conditions']['Role.id'] = $id;
         if(!$role = $this->Role->find('first', $params)) {
-            $this->Session->setFlash(__('MushRaider is unable to find this role oO'), 'flash_error');
+            $this->Session->setFlash(__('MushRaider is unable to find this group oO'), 'flash_error');
             return $this->redirect('/admin/roles');
         }
 
@@ -81,7 +81,7 @@ class RolesController extends AdminAppController {
                         }
                     }
                 }
-                $this->Session->setFlash(__('Role %s has been updated', $role['Role']['title']), 'flash_success');
+                $this->Session->setFlash(__('Group %s has been updated', $role['Role']['title']), 'flash_success');
                 return $this->redirect('/admin/roles');
             }
 

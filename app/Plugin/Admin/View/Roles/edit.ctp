@@ -1,7 +1,7 @@
 <div class="box dark">
     <header>
         <div class="icons"><i class="icon-eye-open"></i></div>
-        <h5><?php echo __('Edit user role');?> : <?php echo $this->data['Role']['title'];?></h5>
+        <h5><?php echo __('Edit user group');?> : <?php echo $this->data['Role']['title'];?></h5>
     </header>
     <div class="accordion-body body in collapse">
         <?php echo $this->Form->create('Role', array('url' => '/admin/roles/edit/'.$this->data['Role']['id'], 'class' => 'span12'));?>

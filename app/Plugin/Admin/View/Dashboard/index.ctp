@@ -53,7 +53,6 @@
                         <input type="hidden" name="business" value="st3phh@gmail.com">
                         <input type="hidden" name="return" value="http://mushraider.com/merci/">
                         <input type="hidden" name="item_name" value="Aider MushRaider a se developper">
-                        <input type="hidden" name="amount" value="10">
                         <input type="hidden" name="rm" value="0">
                         <input type="hidden" name="currency_code" value="EUR">
                         <input type="image" src="https://www.paypal.com/fr_FR/FR/i/btn/btn_donate_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online.">

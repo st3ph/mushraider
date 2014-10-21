@@ -50,6 +50,10 @@
                         <?php $after = '<span class="hint icon-question-sign tt" title="'.__('Adress provided in the settings of your site/forum MushRaider plugin').'"></span>'?>
                         <?php echo $this->Form->input('Setting.bridge.url', array('type' => 'text', 'label' => __('Third party url'), 'after' => $after, 'class' => 'span5'));?>
                     </div>
+
+                    <div class="form-group">
+                        <?php echo $this->Form->input('Setting.bridge.default_group', array('type' => 'select', 'label' => __('Default user group'), 'options' => $roles));?>
+                    </div>
                 </div>
             </div>
 

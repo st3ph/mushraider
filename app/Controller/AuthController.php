@@ -89,7 +89,7 @@ class AuthController extends AppController {
                         $user['User']['verify_password'] = md5($this->request->data['User']['password']);
                         $user['User']['status'] = 1;
                         $user['User']['bridge'] = 1;
-                        $user['User']['role_id'] = $roleId?$roleId:$this->Role->getIdByAlias('member');
+                        $user['User']['role_id'] = $roleId?$roleId:$this->bridge->default_group;
                         if(!$this->User->save($user['User'])) {
                             $this->Session->setFlash(__('MushRaider can\'t update your account oO'), 'flash_warning');
                             return;

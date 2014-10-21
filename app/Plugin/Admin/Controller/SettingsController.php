@@ -164,6 +164,8 @@ class SettingsController extends AdminAppController {
     }
 
     public function api() {
+        $defaultRoleId = $this->Role->getIdByAlias('member');
+
         if(!empty($this->request->data['Setting'])) {
             $error = false;
 
@@ -178,6 +180,7 @@ class SettingsController extends AdminAppController {
                 $bridge = array();
                 $bridge['enabled'] = $api['enabled']?$this->request->data['Setting']['bridge']['enabled']:0;
                 $bridge['url'] = $this->request->data['Setting']['bridge']['url'];
+                $bridge['default_group'] = $this->request->data['Setting']['bridge']['default_group'];
                 if($bridge['enabled'] && empty($bridge['url'])) {
                    $this->Session->setFlash(__('Bridge\'s third party url is mandatory'), 'flash_error');
                    $error = true;
@@ -206,7 +209,7 @@ class SettingsController extends AdminAppController {
                 }
             }
         }
-
+        
         $api = json_decode($this->Setting->getOption('api'));
         if(!empty($api)) {
             $this->request->data['Setting']['enabled'] = $api->enabled;
@@ -217,7 +220,10 @@ class SettingsController extends AdminAppController {
         if(!empty($bridge)) {
             $this->request->data['Setting']['bridge']['enabled'] = $bridge->enabled;
             $this->request->data['Setting']['bridge']['url'] = $bridge->url;
+            $this->request->data['Setting']['bridge']['default_group'] = !empty($bridge->default_group)?$bridge->default_group:$defaultRoleId;
         }
+
+        $this->set('roles', $this->Role->find('list'));
     }
 
     private function image($image, $customWebroot = false) {

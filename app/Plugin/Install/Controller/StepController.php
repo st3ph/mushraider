@@ -175,7 +175,11 @@ class StepController extends InstallAppController {
                                             'bgrepeat' => 'repeat'
                                         ));
         $defaultSettings['css'] = '';
-        $defaultSettings['notifications'] = 1;
+        $defaultSettings['notifications'] = json_encode(array(
+                                                'enabled' => 1,
+                                                'signup' => 0,
+                                                'contact' => ''
+                                            ));
         $defaultSettings['email'] = json_encode(array(
                                             'name' => 'MushRaider',
                                             'from' => 'mushraider@'.$host,

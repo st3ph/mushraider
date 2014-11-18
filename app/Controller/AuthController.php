@@ -137,6 +137,11 @@ class AuthController extends AppController {
             $toSave['status'] = 0;
             $toSave['role_id'] = $this->Role->getIdByAlias('member');
             if($this->User->save($toSave)) {
+                if(Configure::read('Config.notifications')->enabled && Configure::read('Config.notifications')->signup && !empty(Configure::read('Config.notifications')->contact)) {
+                    // Send an email to the notification's contact
+                    $this->Emailing->signupNotification(Configure::read('Config.notifications')->contact, $toSave['username'], $this->User->getLastInsertId());
+                }
+
                 $this->Session->setFlash(__('Yeah, your account has been created, but now you need to wait until your account as been validated by an admin to access the raid planner (security stuff).'), 'flash_success');
                 return $this->redirect('/auth/login');
             }

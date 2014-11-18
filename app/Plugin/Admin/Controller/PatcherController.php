@@ -4,7 +4,7 @@ class PatcherController extends AdminAppController {
     public $uses = array('Character', 'EventsCharacter', 'Event');
 
     var $adminOnly = true;
-    var $availablePatchs = array('beta-2', 'beta-3', 'v-1.1', 'v-1.3', 'v-1.3.5', 'v-1.4', 'v-1.4.1');
+    var $availablePatchs = array('beta-2', 'beta-3', 'v-1.1', 'v-1.3', 'v-1.3.5', 'v-1.4', 'v-1.4.1', 'v-1.4.5');
 
     function beforeFilter() {
         parent::beforeFilter();
@@ -166,5 +166,18 @@ class PatcherController extends AdminAppController {
         $RolePermissionRoleModel->__add(array('role_id' => $RoleModel->getIdByAlias('officer'), 'role_permission_id' => $RolePermissionModel->getIdByAlias('manage_events')));
         $RolePermissionRoleModel->__add(array('role_id' => $RoleModel->getIdByAlias('officer'), 'role_permission_id' => $RolePermissionModel->getIdByAlias('create_templates')));
         $RolePermissionRoleModel->__add(array('role_id' => $RoleModel->getIdByAlias('officer'), 'role_permission_id' => $RolePermissionModel->getIdByAlias('create_reports')));
+    }
+
+    public function v145() {
+        // Regenerate cache
+        Cache::clear();
+
+        // Notifications
+        $notifications = array(
+                            'enabled' => 1,
+                            'signup' => 0,
+                            'contact' => ''
+                        );
+        $this->Setting->setOption('notifications', json_encode($notifications));
     }
 }

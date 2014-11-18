@@ -115,7 +115,7 @@ class AjaxController extends AppController {
             $params['conditions']['EventsCharacter.raids_role_id'] = $roleId;
             $params['conditions']['EventsCharacter.status >'] = 0;
             if($eventCharacters = $this->EventsCharacter->find('all', $params)) {
-                if($notificationsStatus = $this->Setting->getOption('notifications')) {
+                if(Configure::read('Config.notifications')->enabled) {
                     // Get event for email notifications
                     $params = array();
                     $params['recursive'] = -1;
@@ -136,7 +136,7 @@ class AjaxController extends AppController {
                     }                    
 
                     // If notifications are enable, send email to validated and refused users
-                    if($eventCharacter['User']['notifications_validate'] && $notificationsStatus) {
+                    if($eventCharacter['User']['notifications_validate'] && Configure::read('Config.notifications')->enabled) {
                         if($toSave['status'] == 2 && $eventCharacter['EventsCharacter']['last_notification'] != 2) {
                             $this->Emailing->eventValidate($eventCharacter['User']['email'], $event['Event']);
                             $toSave['last_notification'] = 2;

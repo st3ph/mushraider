@@ -15,7 +15,13 @@ class SettingsController extends AdminAppController {
         $currentTheme = json_decode($this->Setting->getOption('theme'));
         if(!empty($this->request->data['Setting'])) {
             $this->Setting->setOption('title', $this->request->data['Setting']['title']);
-            $this->Setting->setOption('notifications', $this->request->data['Setting']['notifications']);
+            if(!empty($this->request->data['Setting']['notifications'])) {
+                $notifications = array();
+                $notifications['enabled'] = $this->request->data['Setting']['notifications']['enabled'];
+                $notifications['signup'] = $this->request->data['Setting']['notifications']['signup'];
+                $notifications['contact'] = $this->request->data['Setting']['notifications']['contact'];
+                $this->Setting->setOption('notifications', json_encode($notifications));
+            }
 
             $this->Cookie->write('Lang', $this->request->data['Setting']['sitelang'], false, '+4 weeks');
 
@@ -45,7 +51,12 @@ class SettingsController extends AdminAppController {
 
         // General
         $this->request->data['Setting']['title'] = $this->Setting->getOption('title');
-        $this->request->data['Setting']['notifications'] = $this->Setting->getOption('notifications');
+        $notifications = json_decode($this->Setting->getOption('notifications'));
+        if(!empty($notifications)) {
+            $this->request->data['Setting']['notifications']['enabled'] = $notifications->enabled;
+            $this->request->data['Setting']['notifications']['signup'] = $notifications->signup;
+            $this->request->data['Setting']['notifications']['contact'] = $notifications->contact;
+        }
 
         // Langs
         $appLocales = array();

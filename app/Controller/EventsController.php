@@ -166,7 +166,7 @@ class EventsController extends AppController {
                     }
 
                     // If notifications are enable, send email to validate users
-                    if($this->Setting->getOption('notifications')) {
+                    if(Configure::read('Config.notifications')->enabled) {
                         // Get all users who have a character for this event
                         $params = array();
                         $params['recursive'] = 1;
@@ -405,7 +405,7 @@ class EventsController extends AppController {
 
         if($this->Event->delete($eventId)) {
             // If notifications are enable, send email to validate users
-            if($this->Setting->getOption('notifications')) {
+            if(Configure::read('Config.notifications')->enabled) {
                 // Get all users validated
                 $params = array();
                 $params['recursive'] = 1;

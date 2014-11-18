@@ -1,6 +1,6 @@
 <?php
 class UsersController extends AdminAppController {
-    public $components = array();
+    public $components = array('Emailing');
     public $uses = array('EventsCharacter', 'Character');
 
     var $paginate = array(
@@ -157,6 +157,9 @@ class UsersController extends AdminAppController {
                 $toSave['status'] = 1;
                 if($this->User->save($toSave)) {
                     $this->Session->setFlash(__('The user has been enable'), 'flash_success');
+
+                    // Send email notification to the user
+                    $this->Emailing->userEnabled($user['User']['email'], $user['User']['username']);
                 }else {
                     $this->Session->setFlash(__('Something goes wrong'), 'flash_error');
                 }

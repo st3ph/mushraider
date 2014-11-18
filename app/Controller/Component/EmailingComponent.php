@@ -44,6 +44,31 @@ class EmailingComponent extends Component {
         $this->email->send();
     }
 
+    function signupNotification($dest, $username, $userId) {
+        $this->email->to($dest);
+        $this->email->subject(__('[MushRaider] New signup !'));
+        $this->email->template('signup_notification', 'default');
+
+        $this->email->viewVars(array(
+            'dest' => $dest,
+            'username' => $username,
+            'userId' => $userId
+        ));
+        $this->email->send();
+    }
+
+    function userEnabled($dest, $username) {
+        $this->email->to($dest);
+        $this->email->subject(__('[MushRaider] You account has been activated'));
+        $this->email->template('user_enabled', 'default');
+
+        $this->email->viewVars(array(
+            'dest' => $dest,
+            'username' => $username
+        ));
+        $this->email->send();
+    }
+
     function recovery($dest, $hash) {
         $this->email->to($dest);
         $this->email->subject(__('[MushRaider] Recover your password'));

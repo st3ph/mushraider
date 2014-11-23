@@ -20,11 +20,6 @@ class Role extends AppModel {
                 'message' => 'Alias cannot be empty.',
                 'last' => true,
             ),
-            'validName' => array(
-                'rule' => '/^([0-9a-zA-Z_\- ]{2,50})$/',
-                'message' => 'This field must be alphanumeric',
-                'last' => true,
-            ),
         ),
         'alias' => array(
             'isUnique' => array(

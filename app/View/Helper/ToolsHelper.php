@@ -349,5 +349,15 @@ class ToolsHelper extends AppHelper {
     function here() {
         return str_replace($this->webroot, '/', $this->here);
     }
+
+    /*
+    * @name getProtocol
+    * @desc return current protocol
+    * @return string
+    */
+    function getProtocol() {
+        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+	    return $protocol;
+    }
 }
 ?>

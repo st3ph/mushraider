@@ -13,7 +13,7 @@
     <meta name="robots" content="noindex, nofollow" />
 
     <script language="javascript">
-        <?php echo "var site_url = 'http://".$_SERVER['HTTP_HOST'].$this->webroot."';"?>
+        <?php echo "var site_url = '".$this->Tools->getProtocol().$_SERVER['HTTP_HOST'].$this->webroot."';"?>
         <?php echo "var controller = '".strtolower($this->name)."';"?>
         <?php echo "var imgLoading = '".$this->Html->image('/img/loading.gif', array('alt' => 'loading', 'title' => 'Loading...', 'class' => 'loading'))."';"?>
     </script>

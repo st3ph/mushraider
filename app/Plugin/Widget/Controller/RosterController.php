@@ -47,7 +47,7 @@ class RosterController extends WidgetAppController {
         $params['contain']['User']['fields'] = array('username');
         $params['contain']['RaidsRole']['fields'] = array('title');
         if(!empty($widget['Widget']['params']->game_id)) {
-            $params['conditions']['Character.game_id'] = $this->request->data['Roster']['game_id'];
+            $params['conditions']['Character.game_id'] = $widget['Widget']['params']->game_id;
         }
         $characters = $this->Character->find('all', $params);
         $this->set('characters', $characters);

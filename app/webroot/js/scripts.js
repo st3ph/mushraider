@@ -368,10 +368,6 @@ jQuery(function($) {
             $newPlayer.find('.character').prepend('<i class="icon-plus text-success"></i>');
             $refused.append($newPlayer);
             $player.remove();
-
-            var currentPlayers = parseInt($roleTh.find('.current').text());
-            currentPlayers = currentPlayers > 0?currentPlayers - 1:0;
-            $roleTh.find('.current').text(currentPlayers);
         }
     });
 

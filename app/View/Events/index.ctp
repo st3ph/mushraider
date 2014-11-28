@@ -3,14 +3,20 @@
         <i class="icon-calendar"></i> <?php echo __('Events');?>
 
         <?php if($user['User']['can']['manage_events'] || $user['User']['can']['full_permissions']):?>
-            <div class="pull-right span2" id="createEvent">
-                <input type="text" name="eventDate" value="" class="input-mini" placeholder="<?php echo __('date');?>" />
-                <button class="btn btn-mini btn-success"><?php echo __('create');?></button>
+            <div class="pull-right span3" id="createEvent">
+                <div class="input-prepend input-append">
+                    <span class="add-on"><span class="icon-calendar"></span></span>
+                    <input type="text" name="eventDate" value="" class="input-medium" placeholder="<?php echo __('Quick event creation');?>" />
+                    <button class="btn btn-success"><?php echo __('create');?></button>
+                </div>
             </div>
         <?php endif;?>
 
         <div class="pull-right span2" id="filterEvents">
-            <?php echo $this->Form->input(false, array('type' => 'select', 'options' => $gamesList, 'selected' => $filterEventsGameId, 'class' => 'input-medium', 'label' => false, 'div' => null, 'empty' => __('Filter by game')));?>
+            <div class="input-prepend input-append">
+                <span class="add-on"><span class="icon-filter"></span></span>
+                <?php echo $this->Form->input(false, array('type' => 'select', 'options' => $gamesList, 'selected' => $filterEventsGameId, 'class' => 'input-medium', 'label' => false, 'div' => null, 'default' => '0'));?>
+            </div>
         </div>
     </h1>
 </header>

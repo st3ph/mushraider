@@ -15,7 +15,7 @@
             <h3><?php echo __('Roster of');?> <?php echo $gamesList[$this->data['Roster']['game_id']];?></h3>
 
             <div id="summary">
-                <h5><?php echo __('Summary');?></h5>
+                <h4><?php echo __('Summary');?></h4>
                 <table class="table table-bordered table-striped responsive">
                     <thead>
                         <tr>
@@ -35,11 +35,11 @@
                 </table>
             </div>
 
-            <h5><?php echo __('Roster');?></h5>
+            <h4><?php echo __('Roster');?></h4>
             <table class="table table-bordered table-striped responsive" id="datatable">
                 <thead>
                     <tr>
-                        <th><?php echo __('Title');?></th>                    
+                        <th><?php echo __('Character');?></th>                    
                         <th><?php echo __('Level');?></th>                    
                         <th><?php echo __('Default Role');?></th>                    
                         <th><?php echo __('Classe');?></th>                    
@@ -73,5 +73,43 @@
                 </tbody>
             </table>
         <?php endif;?>
+
+        <br/>
+        <br/>
+        <h4><?php echo __('Incoming absences');?></h4>
+        <table class="table table-bordered table-striped responsive" id="datatable">
+            <thead>
+                <tr>
+                    <th><?php echo __('User');?></th>
+                    <th><?php echo __('Character(s)');?></th>                    
+                    <th><?php echo __('From');?></th>                    
+                    <th><?php echo __('To');?></th>                    
+                    <th><?php echo __('Comment');?></th>                    
+                </tr>
+            </thead>            
+            <tbody>
+                <?php if(!empty($absents)):?>
+                    <?php foreach($absents as $absent):?>
+                        <tr>
+                            <td><?php echo $absent['User']['username'];?></td>
+                            <td>
+                                <?php $i = 0;?>
+                                <?php foreach($absent['User']['Character'] as $character):?>
+                                    <?php echo $i?', ':'';?>
+                                    <span class="character" style="color:<?php echo $character['Classe']['color'];?>">
+                                        <?php echo $character['title'];?>
+                                        (<?php echo (empty($character['Classe']['icon'])?$character['Classe']['title'].' ':'').$character['level'];?>)
+                                    </span>
+                                    <?php $i++;?>
+                                <?php endforeach;?>
+                            </td>
+                            <td><?php echo $this->Former->date($absent['Availability']['start'], 'jour');?></td>
+                            <td><?php echo $this->Former->date($absent['Availability']['end'], 'jour');?></td>
+                            <td><?php echo $absent['Availability']['comment'];?></td>
+                        </tr>
+                    <?php endforeach;?>
+                <?php endif;?>
+            </tbody>
+        </table>
     </div>
 </div>

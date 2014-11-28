@@ -84,6 +84,15 @@ div.tooltip-inner div {text-align:left;}
 
 form .select .loading {margin:0 0 5px 5px;}
 
+#content .bg-primary {background-color: #337ab7;}
+#content .bg-success {background-color: #dff0d8;}
+#content .bg-info {background-color: #d9edf7;}
+#content .bg-warning {background-color: #fcf8e3;}
+#content .bg-danger {background-color: #f2dede;}
+
+.overlay {position:absolute;top:0;left:0;width:100%;height:100%;background-color:rgba(0, 0, 0, 0.7);}
+.overlay button {margin-top:5%;}
+
 /*
 * Login
 */

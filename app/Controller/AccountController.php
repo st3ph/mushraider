@@ -1,7 +1,7 @@
 <?php
 class AccountController extends AppController {    
     var $helpers = array();
-    var $uses = array('Game', 'Character', 'Classe', 'Race', 'RaidsRole', 'EventsCharacter');
+    var $uses = array('Game', 'Character', 'Classe', 'Race', 'RaidsRole', 'EventsCharacter', 'Availability');
 
     public function beforeFilter() {
         parent::beforeFilter();
@@ -293,4 +293,66 @@ class AccountController extends AppController {
         $this->request->data['User']['notifications_new'] = $this->user['User']['notifications_new'];
         $this->request->data['User']['notifications_validate'] = $this->user['User']['notifications_validate'];
     }    
+
+    public function availabilities($action = null, $absenceId = null) {
+        $this->pageTitle = __('Absences management').' - '.$this->pageTitle;
+
+        if($action && $absenceId) {
+            $this->setAction('availabilities_'.$action, $absenceId);
+            return;
+        }
+        
+        $this->breadcrumb[] = array('title' => __('Absences'), 'url' => '');
+
+        if(!empty($this->request->data['Availability'])) {
+            // Todo
+            // ajouter comme absent à tous les events de la période
+
+            // remove absence => only if in past
+            // edit absence => only if in the futur
+
+            $toSave = array();
+            if(!empty($this->request->data['Availability']['id'])) {
+                $toSave['id'] = $this->request->data['Availability']['id'];
+            }
+            $toSave['user_id'] = $this->user['User']['id'];
+            $toSave['start'] = $this->Tools->reverseDate($this->request->data['Availability']['start']);
+            $toSave['end'] = $this->Tools->reverseDate($this->request->data['Availability']['end']);
+            $toSave['comment'] = trim(strip_tags($this->request->data['Availability']['comment']));
+            if($this->Availability->save($toSave)) {
+                $this->Session->setFlash(__('Your absence has been added successfully'), 'flash_success');
+                $this->redirect('/account/availabilities');
+            }else {
+                $this->Session->setFlash(__('Something wrong happen, please fix the errors below'), 'flash_error');
+            }
+        }
+
+        $params = array();
+        $params['order'] = array('start ASC');
+        $params['conditions']['user_id'] = $this->user['User']['id'];
+        $availabilities = $this->Availability->find('all', $params);
+
+        $this->set('availabilities', $availabilities);
+    }
+
+    public function availabilities_delete($absenceId) {
+        // Get the absence
+        $params = array();
+        $params['recursive'] = -1;
+        $params['conditions']['id'] = $absenceId;
+        $params['conditions']['user_id'] = $this->user['User']['id'];
+        if(!$absence = $this->Availability->find('first', $params)) {
+            $this->Session->setFlash(__('MushRaider  can\'t find this absence oO'), 'flash_error');
+            return $this->redirect('/account/availabilities');
+        }
+
+        // Delete absence        
+        if(!$this->Availability->delete($absenceId)) {
+            $this->Session->setFlash(__('MushRaider can\'t delete this absence oO'), 'flash_success');
+        }else {
+            $this->Session->setFlash(__('The absence has been deleted'), 'flash_success');
+        }
+
+        return $this->redirect('/account/availabilities');
+    }
 }

@@ -1,6 +1,6 @@
 <?php
 class RostersController extends AdminAppController {
-    public $uses = array('Character', 'Game', 'Classe', 'Race', 'RaidsRole');
+    public $uses = array('Character', 'Game', 'Classe', 'Race', 'RaidsRole', 'Availability');
 
     function beforeFilter() {
         parent::beforeFilter();
@@ -18,7 +18,26 @@ class RostersController extends AdminAppController {
             $params['contain']['RaidsRole'] = array();
             $params['conditions']['Character.game_id'] = $this->request->data['Roster']['game_id'];
             $characters = $this->Character->find('all', $params);
-            $this->set('characters', $characters);    
+            $this->set('characters', $characters);
+
+            // Absents    
+            $params = array();
+            $params['recursive'] = 2;
+            $params['order'] = array('Availability.start ASC');
+            $params['contain'] = array();
+            $params['contain']['User']['Character']['conditions']['Character.game_id'] = $this->request->data['Roster']['game_id'];
+            $params['contain']['User']['Character']['Classe'] = array();
+            $params['contain']['User']['Character']['RaidsRole'] = array();
+            $params['conditions']['Availability.end >='] = date('Y-m-d');
+            if($absents = $this->Availability->find('all', $params)) {
+                // Clean up for this game id
+                foreach($absents as $key => $absent) {
+                    if(empty($absent['User']['Character'])) {
+                        unset($absents[$key]);
+                    }
+                }
+            }
+            $this->set('absents', $absents);
         }
 
         $gamesList = $this->Game->find('list', array('order' => array('title ASC')));

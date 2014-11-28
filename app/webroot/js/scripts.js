@@ -30,7 +30,31 @@ jQuery(function($) {
 
     $('.tt').tooltip({
         'html':true
-    });    
+    });
+
+
+    $('.startDate').datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        changeYear: true,
+        numberOfMonths: 1,
+        dateFormat: 'dd/mm/yy',
+        minDate: new Date(),
+        onClose: function( selectedDate ) {
+            $(this).parents('.dates').find('.endDate').datepicker( "option", "minDate", selectedDate );
+        }
+    });
+    $('.endDate').datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        changeYear: true,
+        numberOfMonths: 1,
+        dateFormat: 'dd/mm/yy',
+        onClose: function( selectedDate ) {
+            $(this).parents('.dates').find('.startDate').datepicker( "option", "maxDate", selectedDate );
+        }
+    });
+
 
     /*
     * Account
@@ -70,6 +94,38 @@ jQuery(function($) {
         }else {
             $('#objectsPlaceholder').html('');
         }
+    });
+
+    $('#absenceTab').on('click', '.edit', function(e) {
+        e.preventDefault();
+
+        $this = $(this);
+        $row = $this.parents('tr');
+        $formRow = $this.parents('tbody').find('.addForm');
+        bgColorClass = 'bg-primary';
+
+        $formRow.find('td').removeClass(bgColorClass);
+        $formRow.find('input').not(':submit').val('');
+        $row.parents('tbody').find('.overlay').remove();
+
+        // clean up
+        $formRow.find('.start').find('input').val($row.find('.start').text()).removeClass('form-error');
+        $formRow.find('.end').find('input').val($row.find('.end').text()).removeClass('form-error');
+        $formRow.find('.comment').find('input').val($row.find('.comment').text()).removeClass('form-error');
+        $formRow.find('#AvailabilityId').val($this.data('id'));
+        $formRow.find('.error-message').remove();
+        $formRow.find('td').addClass(bgColorClass);
+
+        $overlayButton = $('<button>').addClass('btn btn-danger').append('<span class="icon-remove"></span>');
+        $overlay = $('<div>').addClass('overlay text-center');
+        $row.find('td').css({position: 'relative'}).append($overlay);
+        $row.find('td:last-child').find('.overlay').append($overlayButton);
+
+        $overlayButton.on('click', function(e) {
+            $formRow.find('td').removeClass(bgColorClass);
+            $formRow.find('input').not(':submit').val('');
+            $row.find('.overlay').remove();
+        });
     });
 
     /*

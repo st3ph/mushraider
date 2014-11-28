@@ -3,7 +3,24 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `classes`
+-- Table structure for table `availabilities`
+--
+
+CREATE TABLE IF NOT EXISTS `{prefix}availabilities` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `start` date DEFAULT NULL,
+  `end` date DEFAULT NULL,
+  `comment` varchar(75) COLLATE utf8_unicode_ci NOT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `characters`
 --
 
 CREATE TABLE IF NOT EXISTS `{prefix}characters` (
@@ -43,7 +60,7 @@ ALTER TABLE  `{prefix}classes` ADD INDEX (`title`, `game_id`);
 -- --------------------------------------------------------
 
 --
--- Table structure for table `classes`
+-- Table structure for table `comments`
 --
 
 CREATE TABLE IF NOT EXISTS `{prefix}comments` (
@@ -61,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `{prefix}comments` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `raidssizes_raids`
+-- Table structure for table `dungeons`
 --
 
 CREATE TABLE IF NOT EXISTS `{prefix}dungeons` (
@@ -141,7 +158,7 @@ ALTER TABLE  `{prefix}events_characters` ADD INDEX (`user_id`, `event_id`);
 -- --------------------------------------------------------
 
 --
--- Table structure for table `events_tpl`
+-- Table structure for table `events_templates`
 --
 
 CREATE TABLE IF NOT EXISTS `{prefix}events_templates` (
@@ -162,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `{prefix}events_templates` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `events_tpl_roles`
+-- Table structure for table `events_templates_roles`
 --
 
 CREATE TABLE IF NOT EXISTS `{prefix}events_templates_roles` (

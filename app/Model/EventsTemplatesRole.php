@@ -25,7 +25,10 @@ class EventsTemplatesRole extends AppModel {
             $this->create();            
         }
 
-        $this->save($toSave);
-        return $this->getLastInsertId();
+        if($this->save($toSave)) {
+            return !empty($toSave['id'])?$toSave['id']:$this->getLastInsertId();
+        }
+
+        return false;
     }
 }

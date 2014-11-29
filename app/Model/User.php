@@ -12,11 +12,13 @@ class User extends AppModel {
     public $hasMany = array(
         'EventsCharacter' => array(
             'className' => 'EventsCharacter',
-            'foreignKey' => 'user_id'
+            'foreignKey' => 'user_id',
+            'dependent'=> true
         ),
         'Character' => array(
             'className' => 'Character',
-            'foreignKey' => 'user_id'
+            'foreignKey' => 'user_id',
+            'dependent'=> true
         )
     );
 

@@ -16,7 +16,8 @@ class Classe extends AppModel {
     public $hasMany = array(
         'Character' => array(
             'className' => 'Character',
-            'foreignKey' => 'game_id'
+            'foreignKey' => 'game_id',
+            'dependent'=> true
         )
     );
 

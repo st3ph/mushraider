@@ -456,6 +456,17 @@ jQuery(function($) {
     }
 
     /*
+    * Classes
+    */
+    $('#currentImage').on('click', '.btn', function(e) {
+        $('#ClasseDeleteIcon').val('1');
+        $('#DungeonDeleteIcon').val('1');
+        $('#currentImage').fadeOut(function() {
+            $(this).remove();
+        });
+    });
+
+    /*
     * Widgets
     */
     $('#WidgetType').on('change', function() {

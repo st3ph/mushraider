@@ -9,7 +9,8 @@ class RolePermission extends AppModel {
     public $hasMany = array(
         'RolePermissionRole' => array(
             'className' => 'RolePermissionRole',
-            'foreignKey' => 'role_permission_id'
+            'foreignKey' => 'role_permission_id',
+            'dependent'=> true
         )
     );
 

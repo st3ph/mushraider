@@ -11,7 +11,7 @@ class Character extends AppModel {
     public $belongsTo = array(
         'Classe' => array(
             'className' => 'Classe',
-            'foreignKey' => 'classe_id'
+            'foreignKey' => 'classe_id',
         ),
         'User' => array(
             'className' => 'User',
@@ -34,7 +34,8 @@ class Character extends AppModel {
     public $hasMany = array(
         'EventsCharacter' => array(
             'className' => 'EventsCharacter',
-            'foreignKey' => 'character_id'
+            'foreignKey' => 'character_id',
+            'dependent'=> true
         )
     );
 

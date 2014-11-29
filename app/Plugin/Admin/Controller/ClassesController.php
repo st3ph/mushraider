@@ -1,7 +1,7 @@
 <?php
 class ClassesController extends AdminAppController {
     public $components = array('Image');
-    public $uses = array('Game', 'Classe');
+    public $uses = array('Game', 'Classe', 'Character', 'EventsCharacter');
 
     var $adminOnly = true;
 
@@ -89,6 +89,8 @@ class ClassesController extends AdminAppController {
             $imageName = $this->Image->__add($this->request->data['Classe']['icon'], 'files/icons/classes', 'classe_', 64, 64);
             if(!empty($imageName['name'])) {
                 $toSave['icon'] = $imageName['name'];
+            }elseif($this->request->data['Classe']['deleteIcon']) {
+                $toSave['icon'] = '';
             }
             if($this->Classe->save($toSave)) {
                 $this->Session->setFlash(__('Class %s has been updated', $classe['Classe']['title']), 'flash_success');
@@ -116,10 +118,12 @@ class ClassesController extends AdminAppController {
             $params['fields'] = array('id');
             $params['recursive'] = -1;
             $params['conditions']['id'] = $id;
-            $params['conditions']['game_id'] = null;            
             if(!$classe = $this->Classe->find('first', $params)) {
-                $this->Session->setFlash(__('This class is linked to a game, you can\'t delete it.'), 'flash_warning');
-            }elseif($this->Classe->delete($id)) {
+                $this->Session->setFlash(__('MushRaider is unable to find this class oO'), 'flash_error');
+            }elseif($this->Classe->delete($id, true)) {
+                $toDelete = array();
+                $toDelete['classe_id'] = $id;  
+                $this->Character->deleteAll($toDelete, true);
                 $this->Session->setFlash(__('The class has been deleted'), 'flash_success');
             }else {
                 $this->Session->setFlash(__('Something goes wrong'), 'flash_error');

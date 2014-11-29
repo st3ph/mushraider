@@ -75,6 +75,7 @@
                                     <?php echo $this->Html->link('<i class="icon-cloud-download"></i>', '', array('class' => 'btn btn-mini tt updateGame', 'title' => __('Update'), 'data-slug' => $game['Game']['import_slug'], 'escape' => false))?>
                                 <?php endif;?>
                                 <?php echo $this->Html->link('<i class="icon-edit"></i>', '/admin/games/edit/'.$game['Game']['id'], array('class' => 'btn btn-info btn-mini tt', 'title' => __('Edit'), 'escape' => false))?>
+                                <?php echo $this->Html->link('<i class="icon-trash"></i>', '/admin/games/delete/'.$game['Game']['id'], array('class' => 'btn btn-danger btn-mini tt delete', 'title' => __('Delete'), 'data-confirm' => __('Are you sure you want to completely delete the game %s ?', $game['Game']['title']), 'escape' => false))?>
                             </td>
                         </tr>
                     <?php endforeach;?>

@@ -114,6 +114,8 @@ class DungeonsController extends AdminAppController {
             $imageName = $this->Image->__add($this->request->data['Dungeon']['icon'], 'files/icons/dungeons', 'dungeon_', 64, 64);
             if(!empty($imageName['name'])) {
                 $toSave['icon'] = $imageName['name'];
+            }elseif($this->request->data['Dungeon']['deleteIcon']) {
+                $toSave['icon'] = '';
             }
 
             if($this->Dungeon->save($toSave)) {

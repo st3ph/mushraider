@@ -17,10 +17,15 @@
             </div>
             <div class="form-group">
                 <?php echo $this->Form->input('Dungeon.icon', array('type' => 'file', 'label' => __('Icon').' (64px / 64px)', 'class' => 'span5 imageupload'));?>
+                <?php echo $this->Form->input('Dungeon.deleteIcon', array('type' => 'hidden', 'value' => '0'));?>
                 <div id="previewcanvascontainer">
                     <canvas id="previewcanvas" class="w64"></canvas>
                     <?php if(!empty($this->data['Dungeon']['icon'])):?>
-                        <?php echo $this->Html->image($this->data['Dungeon']['icon'], array('class' => ''));?>
+                        <div id="currentImage">
+                            <h6><?php echo __('Current icon');?> :</h6>
+                            <?php echo $this->Html->image($this->data['Dungeon']['icon'], array('class' => ''));?>
+                            <button class="btn btn-mini btn-danger" type="button"><i class="icon-trash"></i> <?php echo __('delete');?></button>
+                        </div>
                     <?php endif;?>
                 </div>
             </div>

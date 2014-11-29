@@ -69,6 +69,7 @@
                                 </td>
                                 <td class="actions">
                                     <?php echo $this->Html->link('<i class="icon-edit"></i>', '/admin/classes/edit/'.$classe['Classe']['id'], array('class' => 'btn btn-info btn-mini tt', 'title' => __('Edit'), 'escape' => false))?>
+                                    <?php echo $this->Html->link('<i class="icon-trash"></i>', '/admin/classes/delete/'.$classe['Classe']['id'], array('class' => 'btn btn-danger btn-mini tt delete', 'title' => __('Delete'), 'data-confirm' => __('Are you sure you want to completely delete the class %s ?', $classe['Classe']['title']), 'escape' => false))?>
                                 </td>
                             </tr>                
             <?php endforeach;?>

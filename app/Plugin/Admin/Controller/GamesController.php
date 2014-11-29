@@ -1,7 +1,7 @@
 <?php
 class GamesController extends AdminAppController {
     public $components = array('Image');
-    public $uses = array('Game', 'Dungeon', 'Classe', 'Race');
+    public $uses = array('Game', 'Dungeon', 'Classe', 'Race', 'Character', 'Event', 'EventsTemplate');
 
     var $paginate = array(
         'Game' => array(
@@ -209,5 +209,23 @@ class GamesController extends AdminAppController {
         App::uses('RaidheadSource', 'Model/Datasource');
         $RaidHead = new RaidheadSource();
         $this->set('gamesList', $RaidHead->gets('list'));
+    }
+
+    public function delete($id = null) {
+        if($id) {
+            $params = array();
+            $params['fields'] = array('id');
+            $params['recursive'] = -1;
+            $params['conditions']['id'] = $id;
+            if(!$game = $this->Game->find('first', $params)) {
+                $this->Session->setFlash(__('MushRaider is unable to find this game oO'), 'flash_error');
+            }elseif($this->Game->delete($id, true)) {
+                $this->Session->setFlash(__('The game has been deleted'), 'flash_success');
+            }else {
+                $this->Session->setFlash(__('Something goes wrong'), 'flash_error');
+            }
+        }
+ 
+        $this->redirect('/admin/games');
     }
 }

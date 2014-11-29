@@ -9,7 +9,8 @@ class RaidsRole extends AppModel {
     public $hasMany = array(
         'EventsRole' => array(
             'className' => 'EventsRole',
-            'foreignKey' => 'raids_role_id'
+            'foreignKey' => 'raids_role_id',
+            'dependent'=> true
         )
     );
 

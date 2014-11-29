@@ -99,7 +99,7 @@ foreach($event['EventsRole'] as $eventRole) {
 				<span class="btn" data-status="0"><i class="icon-thumbs-down"></i></span>
 			<?php else:?>
 				<p>
-					<span class="label label-info"><?php echo __('You don\'t have any character for this game :(');?></span>
+					<span class="text-warning"><?php echo __('You don\'t have any character for this game :(');?></span>
 					<?php echo $this->Html->link('<span class="icon-plus"></span> '.__('Create a character'), '/account/characters', array('class' => 'btn btn-small', 'escape' => false));?>
 				</p>
 			<?php endif;?>

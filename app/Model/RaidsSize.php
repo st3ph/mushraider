@@ -9,7 +9,8 @@ class RaidsSize extends AppModel {
     public $hasMany = array(
         'Dungeon' => array(
             'className' => 'Dungeon',
-            'foreignKey' => 'raidssize_id'
+            'foreignKey' => 'raidssize_id',
+            'dependent'=> true
         )
     );
 

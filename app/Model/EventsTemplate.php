@@ -21,7 +21,8 @@ class EventsTemplate extends AppModel {
     public $hasMany = array(
         'EventsTemplatesRole' => array(
             'className' => 'EventsTemplatesRole',
-            'foreignKey' => 'event_tpl_id'
+            'foreignKey' => 'event_tpl_id',
+            'dependent'=> true
         )
     );
 

@@ -9,23 +9,33 @@ class Game extends AppModel {
     public $hasMany = array(
         'Character' => array(
             'className' => 'Character',
-            'foreignKey' => 'game_id'
+            'foreignKey' => 'game_id',
+            'dependent'=> true
         ),
         'Classe' => array(
             'className' => 'Classe',
-            'foreignKey' => 'game_id'
+            'foreignKey' => 'game_id',
+            'dependent'=> true
         ),
         'Dungeon' => array(
             'className' => 'Dungeon',
-            'foreignKey' => 'game_id'
+            'foreignKey' => 'game_id',
+            'dependent'=> true
         ),
         'Event' => array(
             'className' => 'Event',
-            'foreignKey' => 'game_id'
+            'foreignKey' => 'game_id',
+            'dependent'=> true            
+        ),
+        'EventsTemplate' => array(
+            'className' => 'EventsTemplate',
+            'foreignKey' => 'game_id',
+            'dependent'=> true            
         ),
         'Race' => array(
             'className' => 'Race',
-            'foreignKey' => 'game_id'
+            'foreignKey' => 'game_id',
+            'dependent'=> true
         )
     );
 

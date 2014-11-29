@@ -24,7 +24,7 @@
     </div>
 
     <div class="row">
-        <div class="span6">
+        <div class="span5">
             <h3><?php echo __('Roles');?></h3>
             <?php if(!empty($rolesList)):?>
                 <?php foreach($rolesList as $roleId => $roleTitle):?>
@@ -39,7 +39,7 @@
                 <?php echo $this->Form->input('Event.character_level', array('type' => 'text', 'required' => true, 'label' => __('Character minimum level'), 'class' => 'span1'));?>
             </div>
         </div>
-        <div class="span5">
+        <div class="span6">
             <h3><?php echo __('Event time');?></h3>
             <div class="form-group">
                 <?php echo $this->Form->input('Event.time_invitation', array('type' => 'time', 'timeFormat' => 24, 'interval' => 15, 'required' => true, 'label' => __('Invitations start'), 'class' => 'span2'));?>
@@ -52,9 +52,18 @@
 
     <hr />
 
-    <div class="form-group">
-        <?php echo $this->Form->input('Event.id', array('type' => 'hidden'));?>
-        <?php echo $this->Form->submit(__('Update event'), array('class' => 'btn btn-warning btn-large pull-right'));?>
-    </div>
+    <div class="row">
+        <div class="span3">
+            <div class="form-group">
+                <?php echo $this->Form->input('Event.open', array('type' => 'checkbox', 'label' => __('open event')));?>
+                <div class="hint"><?php echo __('No validation is required to participate to this event');?></div>
+            </div>
+        </div>
+        <div class="span3 pull-right">
+            <div class="form-group">
+                <?php echo $this->Form->input('Event.id', array('type' => 'hidden'));?>
+                <?php echo $this->Form->submit(__('Update event'), array('class' => 'btn btn-warning btn-large pull-right'));?>
+            </div>
+        </div>
     <div class="clearfix"></div>
 <?php echo $this->Form->end();?>

@@ -261,19 +261,33 @@ jQuery(function($) {
             data: 'character='+characterId+'&signin='+signInValue+'&e='+eventId+'&u='+userId+'&role='+roleId+'&c='+$commentField.val(),
             dataType: 'json',
             success: function(msg) {
+                switch(signInValue) {
+                    case 1:
+                        var charStatus = 'waiting';
+                        var messageText = $characterField.data('signin');
+                        break;
+                    case 2:
+                        var charStatus = 'validated';
+                        var messageText = $characterField.data('validated');
+                        break;
+                    case 0:
+                    default:
+                        var charStatus = 'rejected';
+                        var messageText = $characterField.data('signout');
+                        break;
+                }
+
                 var messageClass = 'label label-'+msg.type;
-                var messageText = signInValue == 1?$characterField.data('signin'):$characterField.data('signout');
                 if(msg.type == 'important') {
                     messageText = msg.msg;
                     $characterMessage.removeClass('label-info');
+                }else {
+                    // Remove character from the roster
+                    $roster.find('tbody li[data-user="'+userId+'"]').remove();
                 }
-
-                // Remove character from the roster
-                $roster.find('tbody li[data-user="'+userId+'"]').remove();
 
                 // Add character to the roster
                 if(msg.msg == 'ok' && typeof msg.html != 'undefined' && msg.html.length) {
-                    var charStatus = signInValue?'waiting':'rejected';
                     $roster.find('tbody td[data-id="role_'+roleId+'"] .'+charStatus).append(msg.html);
                 }
 
@@ -282,7 +296,7 @@ jQuery(function($) {
                     $(this).remove();
                 });
 
-                $characterMessage.html(messageText).addClass(messageClass);
+                $characterMessage.html(messageText).removeClass('label-info label-warning label-success label-important').addClass(messageClass);
             }
         });        
     });
@@ -552,6 +566,7 @@ jQuery(function($) {
                             };
                         }
                         $('#EventCharacterLevel').val(json.msg.EventsTemplate.character_level);
+                        $('#EventOpen').prop('checked', json.msg.EventsTemplate.open);
                         if(json.msg.EventsTemplate.time_invitation != null) {
                             var invitationTime = json.msg.EventsTemplate.time_invitation.split(' ');
                             var invitationTimes = invitationTime[1].split(':');

@@ -140,6 +140,9 @@ class FormerHelper extends AppHelper {
 													$tooltip .= $matchingEvent['Dungeon']['title'].'<br/>';
 													$tooltip .= __('Roster').' : '.count($this->extractUsersWithStatus($matchingEvent['EventsCharacter'], 2)).'/'.$playersNeeded.'<br/>';
 													$tooltip .= __('Start').' : '.$this->date($matchingEvent['Event']['time_start'], 'heure');
+													if($matchingEvent['Event']['open']) {
+														$tooltip .= '<br/>'.__('open event');
+													}
 												$tooltip .= '<div>';
 
 

@@ -112,6 +112,7 @@ CREATE TABLE IF NOT EXISTS `{prefix}events` (
   `time_start` datetime NOT NULL,
   `character_level` int(3) NOT NULL,
   `nb_comments` int(5) DEFAULT 0,
+  `open` TINYINT(1) NOT NULL DEFAULT '0',
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -171,6 +172,7 @@ CREATE TABLE IF NOT EXISTS `{prefix}events_templates` (
   `time_invitation` datetime DEFAULT NULL,
   `time_start` datetime DEFAULT NULL,
   `character_level` int(3) NOT NULL,  
+  `open` TINYINT(1) NOT NULL DEFAULT '0',
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)

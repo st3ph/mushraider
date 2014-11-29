@@ -23,7 +23,7 @@ class EventsController extends AppController {
 
         // Get events
         $params = array();
-        $params['fields'] = array('Event.id', 'Event.title', 'Event.game_id', 'Event.dungeon_id', 'Event.time_invitation', 'Event.time_start', 'Game.title', 'Game.logo', 'Dungeon.title', 'Dungeon.icon');
+        $params['fields'] = array('Event.id', 'Event.title', 'Event.game_id', 'Event.dungeon_id', 'Event.time_invitation', 'Event.time_start', 'Event.open', 'Game.title', 'Game.logo', 'Dungeon.title', 'Dungeon.icon');
         $params['order'] = 'Event.time_invitation';
         $params['recursive'] = 2;
         $params['contain']['Game'] = array();
@@ -145,6 +145,7 @@ class EventsController extends AppController {
             $toSave['character_level'] = $this->request->data['Event']['character_level'];
             $toSave['time_invitation'] = date('Y-m-d H:i:s', mktime($this->request->data['Event']['time_invitation']['hour'], $this->request->data['Event']['time_invitation']['min'], 0, $dates[1], $dates[2], $dates[0]));
             $toSave['time_start'] = date('Y-m-d H:i:s', mktime($this->request->data['Event']['time_start']['hour'], $this->request->data['Event']['time_start']['min'], 0, $dates[1], $dates[2], $dates[0]));            
+            $toSave['open'] = $this->request->data['Event']['open'];            
 
             if(!empty($this->request->data['Event']['roles'])) {
                 if($this->Event->save($toSave)) {
@@ -260,6 +261,8 @@ class EventsController extends AppController {
             $toSave['character_level'] = $this->request->data['Event']['character_level'];
             $toSave['time_invitation'] = date('Y-m-d H:i:s', mktime($this->request->data['Event']['time_invitation']['hour'], $this->request->data['Event']['time_invitation']['min'], 0, $dates[1], $dates[2], $dates[0]));
             $toSave['time_start'] = date('Y-m-d H:i:s', mktime($this->request->data['Event']['time_start']['hour'], $this->request->data['Event']['time_start']['min'], 0, $dates[1], $dates[2], $dates[0]));            
+            $toSave['open'] = $this->request->data['Event']['open'];
+
             if(!empty($this->request->data['Event']['roles'])) {
                 if($this->Event->save($toSave)) {
                     foreach($this->request->data['Event']['roles'] as $roleId => $roleNumber) {

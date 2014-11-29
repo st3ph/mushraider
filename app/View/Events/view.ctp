@@ -83,7 +83,7 @@ foreach($event['EventsRole'] as $eventRole) {
 				}
 				?>
 				<span class="message <?php echo $messageClass;?>"><?php echo $messageText;?></span>
-				<?php echo $this->Form->input('Character', array('options' => $charactersList, 'selected' => $registeredCharacterId, 'empty' => __('Choose a character'), 'class' => 'span2', 'data-user' => $user['User']['id'], 'data-event' => $event['Event']['id'], 'data-error' => __('please select a character and a role'), 'data-signin' => __('your are registered to this event as'), 'data-signout' => __('your are not registered to this event'), 'label' => false, 'div' => false));?>
+				<?php echo $this->Form->input('Character', array('options' => $charactersList, 'selected' => $registeredCharacterId, 'empty' => __('Choose a character'), 'class' => 'span2', 'data-user' => $user['User']['id'], 'data-event' => $event['Event']['id'], 'data-error' => __('please select a character and a role'), 'data-signin' => __('your are registered to this event as'), 'data-signout' => __('your are not registered to this event'), 'data-validated' => __('your are validated to this event'), 'label' => false, 'div' => false));?>
 				<?php if(!empty($event['EventsRole'])):?>
 					<select name="data[EventsRole]" id="EventsRole" class="span1">
 						<option value=""><?php echo __('Role');?></option>
@@ -95,7 +95,7 @@ foreach($event['EventsRole'] as $eventRole) {
 					</select>
 				<?php endif;?>
 				<?php echo $this->Form->input('Comment', array('type' => 'text', 'value' => $registeredCharacterComment, 'class' => 'span3', 'placeholder' => __('Add a comment'), 'label' => false, 'div' => false, 'maxlength' => 75));?>
-				<span class="btn" data-status="1"><i class="icon-thumbs-up"></i></span>
+				<span class="btn" data-status="<?php echo $event['Event']['open']?'2':'1';?>"><i class="icon-thumbs-up"></i></span>
 				<span class="btn" data-status="0"><i class="icon-thumbs-down"></i></span>
 			<?php else:?>
 				<p>
@@ -106,6 +106,13 @@ foreach($event['EventsRole'] as $eventRole) {
 		</div>
 	</div>
 	<div class="clear"></div>
+	<?php if($event['Event']['open']):?>
+		<div class="row">
+			<div class="span11 pull-right text-right">
+				<span class="label label-info"><span class="icon-info-sign"></span> <?php echo __('This event is open ! You will be auto validated \o/');?></span>
+			</div>
+		</div>
+	<?php endif;?>
 <?php endif;?>
 
 <h3><?php echo __('Title');?></h3>

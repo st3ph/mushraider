@@ -104,6 +104,7 @@ class Event extends AppModel {
                 $toSave['EventsTemplate']['time_invitation'] = $event['Event']['time_invitation'];
                 $toSave['EventsTemplate']['time_start'] = $event['Event']['time_start'];
                 $toSave['EventsTemplate']['character_level'] = $event['Event']['character_level'];
+                $toSave['EventsTemplate']['open'] = $event['Event']['open'];
                 if(!empty($event['EventsRole'])) {
                     foreach($event['EventsRole'] as $key => $eventRole) {
                         $toSave['EventsTemplatesRole'][$key]['raids_role_id'] = $eventRole['raids_role_id'];

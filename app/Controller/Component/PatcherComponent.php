@@ -54,6 +54,14 @@ class PatcherComponent extends Component {
         if(!$EventsCharacter->query($sql)) {
             return $this->redirectToPatch('/admin/patcher/apply/v-1.4.1');
         }
+
+        // v1.4.5
+        App::uses('Event', 'Model');
+        $Event = new Event();
+        $sql = "SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE() AND COLUMN_NAME='open' AND TABLE_NAME='".Configure::read('Database.prefix')."events'";
+        if(!$Event->query($sql)) {
+            return $this->redirectToPatch('/admin/patcher/apply/v-1.4.5');
+        }
 	}
 
     public function run_sql_file($mysqlLink, $location, $prefix = '') {

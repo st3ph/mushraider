@@ -3,6 +3,22 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- --------------------------------------------------------
 
 --
+-- Alter table `events` to add column 'open'
+--
+
+ALTER TABLE `{prefix}events` ADD `open` TINYINT(1) NOT NULL DEFAULT '0' AFTER `nb_comments`;
+
+-- --------------------------------------------------------
+
+--
+-- Alter table `events_templates` to add column 'open'
+--
+
+ALTER TABLE `{prefix}events_templates` ADD `open` TINYINT(1) NOT NULL DEFAULT '0' AFTER `character_level`;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `availabilities`
 --
 

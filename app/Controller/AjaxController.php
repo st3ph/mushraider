@@ -44,7 +44,7 @@ class AjaxController extends AppController {
         if(!empty($this->request->query['u']) && !empty($this->request->query['e']) && isset($this->request->query['signin']) && !empty($this->request->query['character'])) {
             // Choosed character must be in the event level range
             $params = array();
-            $params['fields'] = array('character_level');
+            $params['fields'] = array('character_level', 'open');
             $params['recursive'] = -1;
             $params['conditions']['id'] = $this->request->query['e'];
             if(!$event = $this->Event->find('first', $params)) {
@@ -66,6 +66,26 @@ class AjaxController extends AppController {
                 return json_encode($jsonMessage);
             }
 
+            // If event is not open, status must be 0 or 1
+            if(!$event['Event']['open'] && $this->request->query['signin'] == 2) {
+                $this->request->query['signin'] = 1;
+            }elseif($event['Event']['open'] && $this->request->query['signin'] == 2) { // If the event is open, check if the role is full
+                // Get role count
+                $params = array();
+                $params['recursive'] = -1;
+                $params['fields'] = array('count');
+                $params['conditions']['raids_role_id'] = $this->request->query['role'];
+                $params['conditions']['event_id'] = $this->request->query['e'];
+                if($eventRole = $this->EventsRole->find('first', $params)) {
+                    $charsInRole = $this->EventsCharacter->find('count', array('recursive' => -1, 'conditions' => array('event_id' => $this->request->query['e'], 'raids_role_id' => $this->request->query['role'], 'status' => 2)));
+                    if($eventRole['EventsRole']['count'] <= $charsInRole) {
+                        $jsonMessage['type'] = 'important';
+                        $jsonMessage['msg'] = __('This role is already full');
+                        return json_encode($jsonMessage);
+                    }
+                }
+            }
+
             $toSave = array();
             $toSave['event_id'] = $this->request->query['e'];
             $toSave['user_id'] = $this->request->query['u'];
@@ -74,7 +94,18 @@ class AjaxController extends AppController {
             $toSave['comment'] = trim(strip_tags($this->request->query['c']));
             $toSave['status'] = $this->request->query['signin'];
             if($this->EventsCharacter->__add($toSave)) {
-                $jsonMessage['type'] = $toSave['status']?'info':'warning';
+                switch($toSave['status']) {
+                    case 1:
+                        $jsonMessage['type'] = 'info';
+                        break;
+                    case 2:
+                        $jsonMessage['type'] = 'success';
+                        break;
+                    case 0:
+                    default:
+                        $jsonMessage['type'] = 'warning';
+                        break;
+                }                
                 $jsonMessage['msg'] = 'ok';
 
                 $rosterHtml = '<li data-id="'.$toSave['character_id'].'" data-user="'.$toSave['user_id'].'">';

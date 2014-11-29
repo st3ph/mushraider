@@ -136,18 +136,21 @@ class Availability extends AppModel {
         $Character = new Character(); 
         $params = array();       
         $params['recursive'] = -1;
+        $params['fields'] = array('Character.id', 'Character.game_id', 'Character.level', 'Character.default_role_id');
         $params['group'] = 'game_id';
         $params['order'] = array('level DESC');
         $params['conditions']['user_id'] = $this->data['Availability']['user_id'];
         if($characters = $Character->find('all', $params)) {
             App::uses('Event', 'Model');
-            $Event = new Event(); 
+            $Event = new Event();
+            $Event->Behaviors->detach('Commentable');
             App::uses('EventsCharacter', 'Model');
             $EventsCharacter = new EventsCharacter();
             foreach($characters as $character) {
                 // Get events for this period
                 $params = array();       
                 $params['recursive'] = -1;
+                $params['fields'] = array('Event.id');
                 $params['conditions']['game_id'] = $character['Character']['game_id'];
                 $params['conditions']['character_level <='] = $character['Character']['level'];
                 $params['conditions']['time_start >='] = $this->data['Availability']['start'];

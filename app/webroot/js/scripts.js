@@ -594,6 +594,23 @@ jQuery(function($) {
         }
     });
 
+    $('#invitCommands').on('hidden', function(e) {
+        console.log('hfg');
+    });
+
+    $('#invitCommands').on('click', '.btn-group .btn', function(e) {
+        $(this).parent('div').find('.btn').removeClass('dropdown-toggle');
+        $(this).addClass('dropdown-toggle');
+        var command = $(this).text();
+        var invitsList = '';
+
+        $('#eventRoles').find('td .validated .character span').each(function() {
+            invitsList += command+' '+$(this).text()+"\n";
+        });
+
+        $('#invitCommands .commands').html('<pre>'+invitsList+'</pre>');
+    });
+
     /*
     * Responsive    
     */

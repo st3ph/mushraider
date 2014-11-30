@@ -151,7 +151,39 @@ foreach($event['EventsRole'] as $eventRole) {
 	</tbody>
 </table>
 
-<h3><?php echo __('Roster');?></h3>
+<h3>
+	<?php echo __('Roster');?>
+	<?php if($user['User']['can']['manage_events'] || $user['User']['can']['full_permissions']):?>
+		<button type="button" class="btn btn-default" data-toggle="modal" data-target="#invitCommands"><i class="icon-code"></i> <?php echo __('Invitation commands');?></button>
+	<?php endif;?>
+</h3>
+
+<?php if($user['User']['can']['manage_events'] || $user['User']['can']['full_permissions']):?>
+	<div id="invitCommands" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h3 id="myModalLabel"><?php echo __('Generate invitation\'s commands');?></h3>
+		</div>
+		<div class="modal-body">
+			<p class="text-info">
+				<i class="icon-info-sign"></i>
+				<?php echo __('Select the command corresponding to your game and copy/paste the generated commands to your chat to quick invit you roster');?>
+			</p>
+			<div class="btn-group open">
+				<button class="btn">/i</button>
+				<button class="btn">/inv</button>
+				<button class="btn">/invite</button>
+				<button class="btn">/inviter</button>
+				<button class="btn">/raid inviter</button>
+			</div>
+			<div class="commands">
+			
+			</div>
+		</div>
+	</div>
+<?php endif;?>
+
+
 <?php if(!empty($eventRoles)):?>
 	<?php $eventRoles = $this->Former->charactersToRoles($eventRoles, $event['EventsCharacter'], $user);?>
 	<table id="eventRoles" class="table table-striped table-bordered" data-id="<?php echo $event['Event']['id'];?>">

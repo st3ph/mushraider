@@ -93,6 +93,57 @@ form .select .loading {margin:0 0 5px 5px;}
 .overlay {position:absolute;top:0;left:0;width:100%;height:100%;background-color:rgba(0, 0, 0, 0.7);}
 .overlay button {margin-top:5%;}
 
+#content .niceCheckbox label, #content .radiobox label {
+	display: inline-block;
+	cursor: pointer;
+	position: relative;
+	padding:0;  
+    margin: 0;  
+}
+
+#content .niceCheckbox label:before, #content .niceRadiobox label:before {
+	content: "";
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	background-color: #fff;
+	box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
+}
+
+#content .niceCheckbox input, #content .niceRadiobox input {
+	display: none;
+}
+
+#content .niceCheckbox label:before {
+	border-radius: 3px;
+}
+
+#content .niceRadiobox label:before {
+	border-radius: 8px;
+}
+
+#content .niceCheckbox input:checked + label:before {
+	content: "\2713";
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+	font-size: 26px;
+	color: #468847;
+	text-align: center;
+    line-height: 15px;
+}
+
+
+#content .niceRadiobox input:checked + label:before {
+    content: "\2022";
+    color: #468847;
+    font-size: 30px;
+    text-align: center;
+    line-height: 18px;
+}
+
+
 /*
 * Login
 */

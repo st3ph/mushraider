@@ -19,6 +19,14 @@ ALTER TABLE `{prefix}events_templates` ADD `open` TINYINT(1) NOT NULL DEFAULT '0
 -- --------------------------------------------------------
 
 --
+-- Alter table `characters` to add column 'main'
+--
+
+ALTER TABLE `{prefix}characters` ADD `main` TINYINT(1) NOT NULL DEFAULT '0' AFTER `level`;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `availabilities`
 --
 

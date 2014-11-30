@@ -27,7 +27,7 @@
 		</div>
 
 		<?php if(!empty($characters)):?>
-			<table class="table table-striped">
+			<table class="table table-striped charactersList">
 				<thead>
 					<tr>
 						<th><?php echo __('Game');?></th>
@@ -35,12 +35,19 @@
 						<th><?php echo __('Level');?></th>
 						<th><?php echo __('Class');?></th>
 						<th><?php echo __('Race');?></th>
-						<th><?php echo __('Default Role');?></th>
+						<th><?php echo __('Role');?></th>
+						<th><?php echo __('Main');?></th>
 						<th><?php echo __('Actions');?></th>
 					</tr>
 				</thead>
 				<tbody>
+					<?php $lastGame = null;?>
 					<?php foreach($characters as $character):?>
+						<?php if($lastGame && $lastGame != $character['Game']['id']):?>
+							<tr>
+								<td colspan="8" class="bg-warning"></td>
+							</tr>
+						<?php endif;?>
 						<tr>
 							<td><?php echo $character['Game']['title'];?></td>
 							<td><?php echo $character['Character']['title'];?></td>
@@ -54,6 +61,12 @@
 							<td><?php echo $character['Race']['title'];?></td>
 							<td><?php echo $character['RaidsRole']['title'];?></td>
 							<td>
+								<div class="niceCheckbox">
+									<input type="radio" name="Character.main.<?php echo $character['Game']['id'];?>" value="<?php echo $character['Character']['id'];?>" <?php echo $character['Character']['main']?'checked="checked"':'';?>"  id="CharacterMain<?php echo $character['Game']['id'];?>_<?php echo $character['Character']['id'];?>" />
+									<label for="CharacterMain<?php echo $character['Game']['id'];?>_<?php echo $character['Character']['id'];?>">&nbsp;</label>
+								</div>
+							</td>
+							<td>
 								<?php echo $this->Html->link('<i class="icon-edit"></i>', '/account/characters/edit/c:'.$character['Character']['id'].'-'.$character['Character']['slug'], array('class' => 'btn btn-info btn-mini tt', 'title' => __('Edit'), 'escape' => false));?>
 								<?php if($character['Character']['status']):?>
 									<?php echo $this->Html->link('<i class="icon-collapse-alt"></i>', '/account/characters/disable/c:'.$character['Character']['id'].'-'.$character['Character']['slug'], array('class' => 'btn btn-warning btn-mini tt', 'title' => __('Disable'), 'escape' => false));?>
@@ -63,6 +76,7 @@
 								<?php echo $this->Html->link('<i class="icon-trash"></i>', '/account/characters/delete/c:'.$character['Character']['id'].'-'.$character['Character']['slug'], array('class' => 'btn btn-danger btn-mini tt confirm', 'title' => __('Delete'), 'data-confirm' => __('Are you sure you want to completely delete your character %s ? (this can\'t be undone)', $character['Character']['title']), 'escape' => false))?>
 							</td>
 						</tr>
+						<?php $lastGame = $character['Game']['id'];?>
 					<?php endforeach;?>
 				</tbody>
 			</table>

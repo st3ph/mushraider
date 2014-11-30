@@ -96,6 +96,17 @@ jQuery(function($) {
         }
     });
 
+    $('.charactersList').on('change', '.niceCheckbox input', function(e) {
+        if($(this).is(':checked')) {
+            var characterId = $(this).val();
+            $.ajax({
+                type: 'get',
+                url: site_url+'ajax/setMainCharacter',
+                data: 'character='+characterId
+            });
+        }
+    });
+
     $('#absenceTab').on('click', '.edit', function(e) {
         e.preventDefault();
 

@@ -33,6 +33,7 @@ CREATE TABLE IF NOT EXISTS `{prefix}characters` (
   `race_id` int(11) NOT NULL,
   `default_role_id` int(11) NULL,
   `level` int(3) NOT NULL,
+  `main` TINYINT(1) NOT NULL DEFAULT '0',
   `status` TINYINT( 1 ) NOT NULL DEFAULT  '1',
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,

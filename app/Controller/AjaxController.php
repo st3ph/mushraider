@@ -30,6 +30,30 @@ class AjaxController extends AppController {
         return;
     }
 
+    function setMainCharacter() {
+        if(!empty($this->request->query['character'])) {
+            $characterId = $this->request->query['character'];
+
+            $params = array();
+            $params['fields'] = array('Character.id', 'Character.game_id');
+            $params['recursive'] = -1;
+            $params['conditions']['Character.id'] = $this->request->query['character'];
+            $params['conditions']['Character.user_id'] = $this->user['User']['id'];
+            if(!$character = $this->Character->find('first', $params)) {
+                return;
+            }
+
+            $this->Character->updateAll(array('Character.main' => 0), array('Character.game_id' => $character['Character']['game_id']));
+
+            $toUpdate = array();
+            $toUpdate['id'] = $character['Character']['id'];
+            $toUpdate['main'] = 1;
+            $this->Character->save($toUpdate);
+        }
+
+        return;
+    }
+
     function getDungeonsByGame() {
         if(!empty($this->request->query['game'])) {
             $gameId = $this->request->query['game'];

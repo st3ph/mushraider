@@ -61,10 +61,12 @@
 							<td><?php echo $character['Race']['title'];?></td>
 							<td><?php echo $character['RaidsRole']['title'];?></td>
 							<td>
-								<div class="niceCheckbox">
-									<input type="radio" name="Character.main.<?php echo $character['Game']['id'];?>" value="<?php echo $character['Character']['id'];?>" <?php echo $character['Character']['main']?'checked="checked"':'';?>"  id="CharacterMain<?php echo $character['Game']['id'];?>_<?php echo $character['Character']['id'];?>" />
-									<label for="CharacterMain<?php echo $character['Game']['id'];?>_<?php echo $character['Character']['id'];?>">&nbsp;</label>
-								</div>
+								<?php if($character['Character']['status']):?>
+									<div class="niceCheckbox">
+										<input type="radio" name="Character.main.<?php echo $character['Game']['id'];?>" value="<?php echo $character['Character']['id'];?>" <?php echo $character['Character']['main']?'checked="checked"':'';?> id="CharacterMain<?php echo $character['Game']['id'];?>_<?php echo $character['Character']['id'];?>" />
+										<label for="CharacterMain<?php echo $character['Game']['id'];?>_<?php echo $character['Character']['id'];?>">&nbsp;</label>
+									</div>
+								<?php endif;?>
 							</td>
 							<td>
 								<?php echo $this->Html->link('<i class="icon-edit"></i>', '/account/characters/edit/c:'.$character['Character']['id'].'-'.$character['Character']['slug'], array('class' => 'btn btn-info btn-mini tt', 'title' => __('Edit'), 'escape' => false));?>

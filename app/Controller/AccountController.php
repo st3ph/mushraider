@@ -37,6 +37,18 @@ class AccountController extends AppController {
     		$toSave['default_role_id'] = $this->request->data['Character']['default_role_id'];
     		$toSave['level'] = $this->request->data['Character']['level'];
     		$toSave['user_id'] = $this->user['User']['id'];
+
+            // If it's the first character for this game, it's a main !
+            $params = array();
+            $params['recursive'] = -1;
+            $params['conditions']['Character.user_id'] = $this->user['User']['id'];        
+            $params['conditions']['Character.game_id'] = $this->request->data['Character']['game_id'];
+            $params['conditions']['Character.main'] = 1;
+            $params['conditions']['Character.status'] = array(0, 1);
+            if(!$character = $this->Character->find('first', $params)) {
+                $toSave['main'] = 1;
+            }
+
     		if($this->Character->save($toSave)) {
     			$this->Session->setFlash(__('%s has been added to your character list', $toSave['title']), 'flash_success');
     			$this->redirect('/account/characters');

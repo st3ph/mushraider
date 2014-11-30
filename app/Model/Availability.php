@@ -138,8 +138,8 @@ class Availability extends AppModel {
         $params['recursive'] = -1;
         $params['fields'] = array('Character.id', 'Character.game_id', 'Character.level', 'Character.default_role_id');
         $params['group'] = 'game_id';
-        $params['order'] = array('level DESC');
         $params['conditions']['user_id'] = $this->data['Availability']['user_id'];
+        $params['conditions']['main'] = 1;
         if($characters = $Character->find('all', $params)) {
             App::uses('Event', 'Model');
             $Event = new Event();

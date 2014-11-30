@@ -179,5 +179,47 @@ class PatcherController extends AdminAppController {
                             'contact' => ''
                         );
         $this->Setting->setOption('notifications', json_encode($notifications));
+
+        // Set main characters        
+        $sql = "SELECT t.user_id, t.game_id, t.character_id, MAX(t.used) AS nb_used
+                FROM (
+                    SELECT ec.user_id, e.game_id, ec.character_id, COUNT(ec.id) AS used
+                    FROM mr_events_characters ec 
+                    JOIN mr_users u ON ec.user_id=u.id
+                    JOIN mr_events e ON e.id=ec.event_id
+                    GROUP BY ec.character_id
+                    ORDER BY used DESC, u.id ASC, e.game_id ASC, ec.character_id
+                ) t
+                GROUP BY t.user_id, t.game_id";
+        if($eventsCharacters = $this->EventsCharacter->query($sql)) {
+            foreach($eventsCharacters as $eventsCharacter) {
+                $toUpdate = array();
+                $toUpdate['id'] = $eventsCharacter['t']['character_id'];
+                $toUpdate['main'] = 1;
+                $this->Character->save($toUpdate);
+            }
+        }
+
+        $params = array();
+        $params['recursive'] = -1;
+        $params['group'] = array('user_id', 'game_id');
+        $params['fields'] = array('id', 'user_id', 'game_id');
+        $params['order'] = array('main DESC', 'level DESC');
+        if($characters = $this->Character->find('all', $params)) {
+            foreach($characters as $character) {
+                $params = array();
+                $params['recursive'] = -1;
+                $params['fields'] = array('Character.id');
+                $params['conditions']['user_id'] = $character['Character']['user_id'];
+                $params['conditions']['game_id'] = $character['Character']['game_id'];
+                $params['conditions']['main'] = 1;
+                if(!$this->Character->find('first', $params)) {
+                    $toUpdate = array();
+                    $toUpdate['id'] = $character['Character']['id'];
+                    $toUpdate['main'] = 1;
+                    $this->Character->save($toUpdate);
+                }
+            }
+        }
     }
 }

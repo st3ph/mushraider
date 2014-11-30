@@ -317,12 +317,6 @@ class AccountController extends AppController {
         $this->breadcrumb[] = array('title' => __('Absences'), 'url' => '');
 
         if(!empty($this->request->data['Availability'])) {
-            // Todo
-            // ajouter comme absent à tous les events de la période
-
-            // remove absence => only if in past
-            // edit absence => only if in the futur
-
             $toSave = array();
             if(!empty($this->request->data['Availability']['id'])) {
                 $toSave['id'] = $this->request->data['Availability']['id'];

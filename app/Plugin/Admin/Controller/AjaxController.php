@@ -1,8 +1,8 @@
- <?php
+<?php
 class AjaxController extends AdminAppController {
     var $uses = array();
 
-    function beforeFilter() {
+    public function beforeFilter() {
         parent::beforeFilter();
 
         Configure::write('debug', 0);
@@ -10,7 +10,7 @@ class AjaxController extends AdminAppController {
         $this->autoRender = false;
     }
 
-    function updateOrder() {
+    public function updateOrder() {
         $jsonMessage = array();
 
         if(!empty($this->request->query['m']) && !empty($this->request->query['orderdata'])) {
@@ -36,7 +36,7 @@ class AjaxController extends AdminAppController {
         return json_encode($jsonMessage);
     }
 
-    function importGame() {
+    public function importGame() {
         $this->Session->delete('ajaxProgress');
         $jsonMessage = array();
 
@@ -149,7 +149,7 @@ class AjaxController extends AdminAppController {
         return json_encode($jsonMessage);
     }
 
-    function ajaxProgress() {
+    public function ajaxProgress() {
         $progress = 0;
         if($this->Session->check('ajaxProgress')) {
             $progress = $this->Session->read('ajaxProgress');            
@@ -158,7 +158,7 @@ class AjaxController extends AdminAppController {
         return $progress;
     }
 
-    function checkUpdates() {
+    public function checkUpdates() {
         $jsonList = array();
 
         App::uses('Game', 'Model');

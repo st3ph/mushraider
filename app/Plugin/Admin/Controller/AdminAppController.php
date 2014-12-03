@@ -39,7 +39,7 @@ class AdminAppController extends AppController {
             $mushraider['version'] = 0;
             $mushraider['date'] = '0000-00-00';
         }
-        $jsonUrl = 'http://st3ph.github.io/mushraider/version.json';
+        $jsonUrl = 'http://medias.mushraider.com/version.json';
         $HttpSocket = new HttpSocket();
         $json = $HttpSocket->get($jsonUrl);
         $lastVersion = json_decode($json->body);

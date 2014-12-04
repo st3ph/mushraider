@@ -44,6 +44,8 @@ class EventsController extends AppController {
         $this->set('gamesList', $gamesList);
         
         $this->set('events', $events);
+        $calendarSettings = json_decode($this->Setting->getOption('calendar'), true);
+        $calendarOptions = array_merge($calendarOptions, array('settings' => $calendarSettings));
         $this->set('calendarOptions', $calendarOptions);
         $this->set('filterEventsGameId', $filterEventsGameId);
     }

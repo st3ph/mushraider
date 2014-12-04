@@ -180,6 +180,17 @@ class PatcherController extends AdminAppController {
                         );
         $this->Setting->setOption('notifications', json_encode($notifications));
 
+        // Calendar settings
+        $calendar = array(
+                        'weekStartDay' => 0,
+                        'title' => 'event',
+                        'timeToDisplay' => 'time_invitation',
+                        'gameIcon' => 1,
+                        'dungeonIcon' => 1
+                    );
+
+        $this->Setting->setOption('calendar', json_encode($calendar));
+
         // Set main characters        
         $sql = "SELECT t.user_id, t.game_id, t.character_id, MAX(t.used) AS nb_used
                 FROM (

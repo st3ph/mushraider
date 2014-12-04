@@ -20,7 +20,8 @@
                 </a>
                 <ul class="collapse <?php echo strtolower($this->name) == 'settings'?'in':'';?>" id="settings-nav">
                     <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('General'), '/admin/settings', array('escape' => false));?></li>
-                    <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('Display'), '/admin/settings/display', array('escape' => false));?></li>
+                    <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('Apparence'), '/admin/settings/display', array('escape' => false));?></li>
+                    <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('Calendar'), '/admin/settings/calendar', array('escape' => false));?></li>
                     <li><?php echo $this->Html->link('<i class="icon-chevron-right"></i> '.__('API & Bridge'), '/admin/settings/api', array('escape' => false));?></li>
                 </ul>
             </li>

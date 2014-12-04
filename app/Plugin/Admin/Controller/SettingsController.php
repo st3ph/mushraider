@@ -12,7 +12,6 @@ class SettingsController extends AdminAppController {
     }
 
     public function index() {
-        $currentTheme = json_decode($this->Setting->getOption('theme'));
         if(!empty($this->request->data['Setting'])) {
             $this->Setting->setOption('title', $this->request->data['Setting']['title']);
             if(!empty($this->request->data['Setting']['notifications'])) {
@@ -172,6 +171,29 @@ class SettingsController extends AdminAppController {
                 $this->request->data['Setting']['links'][] = $link;
             }
         }
+    }
+
+    public function calendar() {
+        $currentSettings = json_decode($this->Setting->getOption('calendar'));
+        if(!empty($this->request->data['Setting'])) {
+            $calendar = array();
+            $calendar['weekStartDay'] = $this->request->data['Setting']['weekStartDay'];
+            $calendar['title'] = $this->request->data['Setting']['title'];
+            $calendar['timeToDisplay'] = $this->request->data['Setting']['timeToDisplay'];
+            $calendar['gameIcon'] = $this->request->data['Setting']['gameIcon'];
+            $calendar['dungeonIcon'] = $this->request->data['Setting']['dungeonIcon'];
+            $this->Setting->setOption('calendar', json_encode($calendar));
+
+            $this->Session->setFlash(__('Settings have been updated'), 'flash_success');
+            return $this->redirect('/admin/settings/calendar');
+        }
+
+        $calendar = json_decode($this->Setting->getOption('calendar'));
+        $this->request->data['Setting']['weekStartDay'] = $calendar->weekStartDay;
+        $this->request->data['Setting']['title'] = $calendar->title;
+        $this->request->data['Setting']['timeToDisplay'] = $calendar->timeToDisplay;
+        $this->request->data['Setting']['gameIcon'] = $calendar->gameIcon;
+        $this->request->data['Setting']['dungeonIcon'] = $calendar->dungeonIcon;
     }
 
     public function api() {

@@ -28,7 +28,7 @@ class AdminAppController extends AppController {
             $this->redirect('/admin');
         }
 
-        $this->checkUpdate();
+        // $this->checkUpdate();
 
         $this->set('title_for_layout', __('MushRaider Admin'));
     }

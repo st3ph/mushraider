@@ -3,7 +3,7 @@ App::uses('AppHelper', 'View/Helper');
 class FormerHelper extends AppHelper {
 	var $helpers = array ('Html', 'Tools');
 
-	var $jour_semaine = array('1'=>'Lundi','2'=>'Mardi','3'=>'Mercredi','4'=>'Jeudi','5'=>'Vendredi','6'=>'Samedi','7'=>'Dimanche');
+	var $jour_semaine = array('0'=>'Dimanche', '1'=>'Lundi','2'=>'Mardi','3'=>'Mercredi','4'=>'Jeudi','5'=>'Vendredi','6'=>'Samedi');
 	var $jour_semaine_court = array('0'=>'Dim','1'=>'Lun','2'=>'Mar','3'=>'Mer','4'=>'Jeu','5'=>'Ven','6'=>'Sam');
 	var $jour = array('0'=>'Jour', '1'=>1, '2'=>2, '3'=>3, '4'=>4, '5'=>5, '6'=>6, '7'=>7, '8'=>8, '9'=>9, '10'=>10, '11'=>11, '12'=>12, '13'=>13, '14'=>14, '15'=>15, '16'=>16, '17'=>17, '18'=>18, '19'=>19, '20'=>20, '21'=>21, '22'=>22, '23'=>23, '24'=>24, '25'=>25, '26'=>26, '27'=>27, '28'=>28, '29'=>29, '30'=>30, '31'=>31);
 	var $month = array('1'=>'JAN', '2'=>'FEV', '3'=>'MAR', '4'=>'AVR', '5'=>'MAI', '6'=>'JUN', '7'=>'JUI', '8'=>'AOU', '9'=>'SEP', '10'=>'OCT', '11'=>'NOV', '12'=>'DEC');
@@ -102,7 +102,7 @@ class FormerHelper extends AppHelper {
 							}
 						$output .= '</tr>';
 
-						for ($i=0; $i<($maxday+$startday); $i++) {
+						for($i = 0;$i < ($maxday+$startday); $i++) {
 						    if(($i % 7) == 0 ) {
 						    	$output .= '<tr>';
 						    }
@@ -147,11 +147,13 @@ class FormerHelper extends AppHelper {
 
 
 												$output .= '<li>';
-													$output .= '<span class="time">'.$this->date($matchingEvent['Event']['time_invitation'], 'heure').'</span>';
-													if(!empty($matchingEvent['Game']['logo'])) {
+													$output .= '<span class="time">';
+														$output .= $this->date($matchingEvent['Event'][$options['settings']['timeToDisplay']], 'heure');
+													$output .= '</span>';
+													if(!empty($matchingEvent['Game']['logo']) && $options['settings']['gameIcon']) {
 														$output .= $this->Html->image($matchingEvent['Game']['logo'], array('class' => 'logo', 'width' => 16));
 													}
-													if(!empty($matchingEvent['Dungeon']['icon'])) {
+													if(!empty($matchingEvent['Dungeon']['icon']) && $options['settings']['dungeonIcon']) {
 														$output .= $this->Html->image($matchingEvent['Dungeon']['icon'], array('class' => 'logo', 'width' => 16));
 													}
 													// Test is the user is registered for this event
@@ -159,7 +161,7 @@ class FormerHelper extends AppHelper {
 													if($registeredCharacter = $this->Tools->getRegisteredCharacter($options['user']['User']['id'], $matchingEvent['EventsCharacter'])) {
 														$registeredClass = 'registered_'.$registeredCharacter['status'];
 													}
-													$eventTitle = !empty($matchingEvent['Event']['title'])?$matchingEvent['Event']['title']:$matchingEvent['Dungeon']['title'];
+													$eventTitle = (!empty($matchingEvent['Event']['title']) && $options['settings']['title'] == 'event')?$matchingEvent['Event']['title']:$matchingEvent['Dungeon']['title'];
 													$output .= $this->Html->link($eventTitle, '/events/view/'.$matchingEvent['Event']['id'], array('escape' => false, 'title' => $tooltip, 'class' => 'tt '.$registeredClass));
 													if(!empty($matchingEvent['Report']['id'])) {
 														$output .= ' <i class="icon-lock"></i>';

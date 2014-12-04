@@ -45,6 +45,8 @@ class ToolsHelper extends AppHelper {
 
 			if($preciseDate && $dates[0] == date("Y-m-d")) {
 				$str .= ' ('.__('Today at').' '.$heures[0].'h'.$heures[1].')';
+			}elseif($preciseDate) {
+				$str .= ' ('.$date_b->format('d/m/Y').')';
 			}
 
 			return __('in').' '.$str;
@@ -336,6 +338,28 @@ class ToolsHelper extends AppHelper {
 					return $eventsCharacter['Character'];
 				}
 			}
+		}
+
+		return false;
+	}
+
+	/*
+	* @name getAvailableCharacter
+	* @desc return available character(s) to an event
+	* @param int $userId id user
+	* @param array $event
+	* @return mix
+	*/
+	function getAvailableCharacter($user, $event) {
+		if(!empty($user['Character']) && !empty($event)) {
+			$characters = array();
+			foreach($user['Character'] as $character) {
+				if($character['level'] >= $event['Event']['character_level'] && $character['game_id'] >= $event['Event']['game_id']) {
+					$characters[] = $character;
+				}
+			}
+
+			return $characters;
 		}
 
 		return false;

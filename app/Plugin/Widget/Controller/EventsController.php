@@ -25,9 +25,12 @@ class EventsController extends WidgetAppController {
         $params = array();
         $params['recursive'] = 1;
         $params['order'] = array('Event.time_invitation ASC');
-        $params['fields'] = array('Event.id', 'Event.title', 'Event.game_id', 'Event.dungeon_id', 'Event.time_invitation', 'Event.time_start');
+        $params['fields'] = array('Event.id', 'Event.title', 'Event.game_id', 'Event.dungeon_id', 'Event.time_invitation', 'Event.time_start', 'Event.character_level');
         $params['contain']['Game']['fields'] = array('title', 'logo');
         $params['contain']['Dungeon']['fields'] = array('title', 'icon');
+        $params['contain']['EventsRole']['RaidsRole'] = array();
+        $params['contain']['EventsCharacter']['Character']['Classe'] = array();        
+        $params['contain']['EventsCharacter']['Character']['User'] = array();
         $params['conditions']['Event.time_invitation >='] = $calStart;
         $params['conditions']['Event.time_invitation <='] = $calEnd;
         if(!empty($widget['Widget']['params']->game_id)) {

@@ -28,7 +28,9 @@ jQuery(function($) {
             var $restrictedDomain = $('#iframeDomainRestriction');
             var restrictedDomainValue = $restrictedDomain.data('domain');
             if(restrictedDomainValue.length) {
-                if(document.referrer.indexOf(restrictedDomainValue) == -1) {
+                var currentDomain = document.referrer.replace(/http(s)?\:\/\//gi, '');
+                restrictedDomainValue = restrictedDomainValue.replace(/http(s)?\:\/\//gi, '');
+                if(currentDomain.indexOf(restrictedDomainValue) > restrictedDomainValue.length) {
                     $('.widget-content').html('<p class="text-center text-error">'+$restrictedDomain.data('msg')+'</p>');
                 }
             }

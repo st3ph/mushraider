@@ -27,6 +27,14 @@ ALTER TABLE `{prefix}characters` ADD `main` TINYINT(1) NOT NULL DEFAULT '0' AFTE
 -- --------------------------------------------------------
 
 --
+-- Alter table `dungeons` to add column 'level_required'
+--
+
+ALTER TABLE  `{prefix}dungeons` ADD  `level_required` INT( 3 ) NOT NULL DEFAULT  '1' AFTER  `icon` ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `availabilities`
 --
 

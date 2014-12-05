@@ -202,9 +202,10 @@ jQuery(function($) {
                 success: function(dungeons) {
                     var optionsHtml = '';
                     $(dungeons).each(function(id, dungeon) {
-                        optionsHtml += '<option value="'+dungeon.Dungeon.id+'" '+(dungeonSelected == dungeon.Dungeon.id?'selected="selected"':'')+'>'+dungeon.Dungeon.title+'</option>';
+                        optionsHtml += '<option value="'+dungeon.Dungeon.id+'" '+(dungeonSelected == dungeon.Dungeon.id?'selected="selected"':'')+' data-reqlevel="'+dungeon.Dungeon.level_required+'">'+dungeon.Dungeon.title+'</option>';                        
                     });
                     $dungeonObj.html(optionsHtml);
+                    $('#EventCharacterLevel').val($dungeonObj.find('option:selected').data('reqlevel'));
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     var errorStr = $selectObject.data('error');
@@ -228,6 +229,10 @@ jQuery(function($) {
     }
     $EventGame.on('change', function(e) {
         loadDungeons($EventGame);
+    });
+
+    $('#EventDungeonId').on('change', function(e) {
+        $('#EventCharacterLevel').val($(this).find('option:selected').data('reqlevel'));
     });
 
     $('#eventSignin').on('change', '#Character', function(e) {

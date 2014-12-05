@@ -14,8 +14,9 @@
             <table class="table table-bordered table-striped responsive">
                 <thead>
                     <tr>
-                        <th class="span8"><?php echo __('Title');?></th>                    
+                        <th class="span6"><?php echo __('Title');?></th>                    
                         <th class="span2"><?php echo __('Players Size');?></th>
+                        <th class="span2"><?php echo __('Required level');?></th>
                         <th class="actions span2"><?php echo __('Actions');?></th>
                     </tr>
                 </thead>
@@ -29,6 +30,7 @@
                                 <?php endif;?>
                             </td>
                             <td><?php echo $dungeon['RaidsSize']['size'];?></td>
+                            <td><?php echo $dungeon['Dungeon']['level_required'];?></td>
                             <td class="actions">
                                 <?php echo $this->Html->link('<i class="icon-edit"></i>', '/admin/dungeons/edit/'.$dungeon['Dungeon']['id'], array('class' => 'btn btn-info btn-mini tt', 'title' => __('edit'), 'escape' => false))?>
                                 <?php echo $this->Html->link('<i class="icon-check"></i>', '/admin/dungeons/enable/'.$dungeon['Dungeon']['id'], array('class' => 'btn btn-success btn-mini tt delete', 'title' => __('Enable'), 'data-confirm' => __('Are you sure you want to enable the dungeon %s ?', $dungeon['Dungeon']['title']), 'escape' => false))?>                                    
@@ -58,8 +60,9 @@
                     <table class="table table-bordered table-striped responsive">
                         <thead>
                             <tr>
-                                <th class="span8"><?php echo __('Title');?></th>                    
+                                <th class="span6"><?php echo __('Title');?></th>                    
                                 <th class="span2"><?php echo __('Players Size');?></th>
+                                <th class="span2"><?php echo __('Required level');?></th>
                                 <th class="actions span2"><?php echo __('Actions');?></th>
                             </tr>
                         </thead>
@@ -75,6 +78,7 @@
                                     <?php endif;?>
                                 </td>
                                 <td><?php echo $dungeon['RaidsSize']['size'];?></td>
+                                <td><?php echo $dungeon['Dungeon']['level_required'];?></td>
                                 <td class="actions">
                                     <?php echo $this->Html->link('<i class="icon-edit"></i>', '/admin/dungeons/edit/'.$dungeon['Dungeon']['id'], array('class' => 'btn btn-info btn-mini tt', 'title' => __('edit'), 'escape' => false))?>
                                     <?php echo $this->Html->link('<i class="icon-check"></i>', '/admin/dungeons/enable/'.$dungeon['Dungeon']['id'], array('class' => 'btn btn-success btn-mini tt delete', 'title' => __('Enable'), 'data-confirm' => __('Are you sure you want to enable the dungeon %s ?', $dungeon['Dungeon']['title']), 'escape' => false))?>                                    

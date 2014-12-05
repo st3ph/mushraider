@@ -58,7 +58,7 @@ class AjaxController extends AppController {
         if(!empty($this->request->query['game'])) {
             $gameId = $this->request->query['game'];
 
-            $dungeonsList = $this->Dungeon->find('all', array('fields' => array('id', 'title'), 'recursive' => -1, 'conditions' => array('game_id' => $gameId), 'order' => 'title ASC'));
+            $dungeonsList = $this->Dungeon->find('all', array('fields' => array('id', 'title', 'level_required'), 'recursive' => -1, 'conditions' => array('game_id' => $gameId), 'order' => 'title ASC'));
             return json_encode($dungeonsList);
         }
     }

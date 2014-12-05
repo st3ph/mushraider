@@ -50,6 +50,7 @@ class DungeonsController extends AdminAppController {
             }elseif(!empty($this->request->data['Dungeon']['raidssize_id'])) {
                 $toSave['raidssize_id'] = $this->request->data['Dungeon']['raidssize_id'];
             }
+            $toSave['level_required'] = $this->request->data['Dungeon']['level_required'];
 
             if(!empty($this->request->data['Dungeon']['icon'])) {
                 $imageName = $this->Image->__add($this->request->data['Dungeon']['icon'], 'files/icons/dungeons', 'dungeon_', 64, 64);
@@ -111,6 +112,7 @@ class DungeonsController extends AdminAppController {
             }elseif(!empty($this->request->data['Dungeon']['raidssize_id'])) {
                 $toSave['raidssize_id'] = $this->request->data['Dungeon']['raidssize_id'];
             }
+            $toSave['level_required'] = $this->request->data['Dungeon']['level_required'];
             $imageName = $this->Image->__add($this->request->data['Dungeon']['icon'], 'files/icons/dungeons', 'dungeon_', 64, 64);
             if(!empty($imageName['name'])) {
                 $toSave['icon'] = $imageName['name'];

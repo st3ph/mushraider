@@ -87,6 +87,7 @@ CREATE TABLE IF NOT EXISTS `{prefix}dungeons` (
   `title` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `slug` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL, 
   `icon` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `level_required` int(3) NOT NULL DEFAULT  '1',
   `game_id` int(11) NULL DEFAULT NULL,
   `raidssize_id` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1',

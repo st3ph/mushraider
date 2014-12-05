@@ -13,6 +13,9 @@
         <?php echo $this->Form->input('Dungeon.raidssize_id', array('type' => 'select', 'label' => __('Number of players'), 'options' => $raidssizeList, 'empty' => '', 'required' => false, 'class' => 'span5'));?>
         <i class="icon-plus-sign"></i> <?php echo __('or add custom number');?> <?php echo $this->Form->input('Dungeon.customraidssize', array('type' => 'text', 'label' => false, 'div' => false, 'class' => 'span1', 'pattern' => '[0-9]{1,3}'));?>
     </div>
+    <div class="form-group">
+        <?php echo $this->Form->input('Dungeon.level_required', array('type' => 'text', 'required' => false, 'label' => __('Required level'), 'class' => 'span5', 'pattern' => '[0-9]{1,3}'));?>
+    </div>
     <?php if(isset($isNotAjax)):?>
         <div class="form-group">
             <?php echo $this->Form->input('Dungeon.icon', array('type' => 'file', 'label' => __('Icon').' (64px / 64px)', 'class' => 'span5 imageupload'));?>

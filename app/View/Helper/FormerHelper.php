@@ -117,7 +117,7 @@ class FormerHelper extends AppHelper {
 						    	$output .= '<td valign="top" class="day '.$dayClass.'">';
 						    		$output .= '<div class="clearfix dayNumber">';
 						    			$output .= $day;
-						    			if($dayTimestamp >= $todayTimestamp && ($options['user']['User']['can']['manage_events'] || $options['user']['User']['can']['full_permissions'])) {
+						    			if($dayTimestamp >= $todayTimestamp && ($options['user']['User']['can']['manage_own_events'] || $options['user']['User']['can']['manage_events'] || $options['user']['User']['can']['full_permissions'])) {
 						    				$output .= $this->Html->link('<i class="icon-plus-sign-alt"></i>', '/events/add/'.$formatCurrentDay, array('title' => __('Add event'), 'class' => 'pull-right tt', 'escape' => false));
 						    			}
 						    		$output .= '</div>';
@@ -213,7 +213,7 @@ class FormerHelper extends AppHelper {
 		return $chars;
 	}
 
-	function charactersToRoles($eventRoles, $characters, $user = null) {
+	function charactersToRoles($eventRoles, $characters, $user = null, $event = array()) {
 		if(!empty($eventRoles) && !empty($characters)) {
 			foreach($characters as $character) {
 				switch($character['status']) {
@@ -241,7 +241,7 @@ class FormerHelper extends AppHelper {
 					if(!empty($character['comment'])) {
 						$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '<span class="tt" title="'.$character['comment'].'"><span class="icon-comments-alt"></span></span>';
 					}
-					if($user && ($user['User']['can']['manage_events'] || $user['User']['can']['full_permissions'])) {
+					if($user && (($user['User']['can']['manage_own_events'] && $user['User']['id'] == $event['User']['id']) || $user['User']['can']['manage_events'] || $user['User']['can']['full_permissions'])) {
 						$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '<span class="icon-move muted pull-right"></span>';
 					}
 				$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '</li>';				

@@ -8,9 +8,9 @@
 	<h1>
 		<div class="row">
 			<?php $eventIsClosed = $dayTimestamp <= $todayTimestamp;?>
-			<?php $displayAdminButtons = ($dayTimestamp >= $todayTimestamp && ($user['User']['can']['manage_events'] || $user['User']['can']['full_permissions']))?true:false?>
+			<?php $displayAdminButtons = ($dayTimestamp >= $todayTimestamp && (($user['User']['can']['manage_own_events'] && $user['User']['id'] == $event['User']['id']) || $user['User']['can']['manage_events'] || $user['User']['can']['full_permissions']))?true:false?>
 			<?php $displayTplButtons = ($dayTimestamp >= $todayTimestamp && ($user['User']['can']['create_templates'] || $user['User']['can']['full_permissions']))?true:false?>
-			<?php $displayCloseButton = ($dayTimestamp < $todayTimestamp && ($user['User']['can']['create_reports'] || $user['User']['can']['full_permissions']))?true:false?>
+			<?php $displayCloseButton = ($dayTimestamp < $todayTimestamp && ($user['User']['can']['create_reports'] || ($user['User']['can']['manage_own_events'] && $user['User']['id'] == $event['User']['id']) || $user['User']['can']['full_permissions']))?true:false?>
 			<?php $displayReportButton = !empty($event['Report']['id'])?true:false?>
 			<div class="span<?php echo ($displayAdminButtons || $displayCloseButton || $displayReportButton || $displayTplButtons)?7:11?>">
 				<i class="icon-calendar-empty"></i> <?php echo __('View event');?>
@@ -31,7 +31,7 @@
 					<?php if($displayReportButton):?>
 						<?php echo $this->Html->link(__('View report'), '/events/report/'.$event['Event']['id'], array('class' => 'btn btn-inverse btn-mini', 'escape' => false));?>
 					<?php endif;?>
-					<?php if($displayCloseButton):?>
+					<?php if(!$displayReportButton && $displayCloseButton):?>
 						<?php echo $this->Html->link('<i class="icon-lock"></i> '.__('Close & create a report'), '/events/close/'.$event['Event']['id'], array('class' => 'btn btn-success btn-mini', 'escape' => false));?>
 					<?php endif;?>
 				</div>
@@ -153,12 +153,12 @@ foreach($event['EventsRole'] as $eventRole) {
 
 <h3>
 	<?php echo __('Roster');?>
-	<?php if($user['User']['can']['manage_events'] || $user['User']['can']['full_permissions']):?>
+	<?php if(($user['User']['can']['manage_own_events'] && $user['User']['id'] == $event['User']['id']) || $user['User']['can']['manage_events'] || $user['User']['can']['full_permissions']):?>
 		<button type="button" class="btn btn-default" data-toggle="modal" data-target="#invitCommands"><i class="icon-code"></i> <?php echo __('Invitation commands');?></button>
 	<?php endif;?>
 </h3>
 
-<?php if($user['User']['can']['manage_events'] || $user['User']['can']['full_permissions']):?>
+<?php if(($user['User']['can']['manage_own_events'] && $user['User']['id'] == $event['User']['id']) || $user['User']['can']['manage_events'] || $user['User']['can']['full_permissions']):?>
 	<div id="invitCommands" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -185,7 +185,7 @@ foreach($event['EventsRole'] as $eventRole) {
 
 
 <?php if(!empty($eventRoles)):?>
-	<?php $eventRoles = $this->Former->charactersToRoles($eventRoles, $event['EventsCharacter'], $user);?>
+	<?php $eventRoles = $this->Former->charactersToRoles($eventRoles, $event['EventsCharacter'], $user, $event);?>
 	<table id="eventRoles" class="table table-striped table-bordered" data-id="<?php echo $event['Event']['id'];?>">
 		<thead>
 			<tr>
@@ -194,7 +194,7 @@ foreach($event['EventsRole'] as $eventRole) {
 						<th data-id="<?php echo $roleId;?>">
 							<?php echo $eventRole['title'];?>
 							<span class="current"><?php echo $eventRole['current'];?></span> / <span class="max"><?php echo $eventRole['max'];?></span>
-							<?php if(!$eventIsClosed && ($user['User']['can']['manage_events'] || $user['User']['can']['full_permissions'])):?>
+							<?php if(!$eventIsClosed && (($user['User']['can']['manage_own_events'] && $user['User']['id'] == $event['User']['id']) || $user['User']['can']['manage_events'] || $user['User']['can']['full_permissions'])):?>
 								<span class="badge badge-warning pull-right"><i class="icon-edit"></i></span>
 							<?php endif;?>
 						</th>

@@ -85,6 +85,7 @@ class Role extends AppModel {
             $permissions['full_permissions'] = $roleId == 1;
             $permissions['limited_admin'] = false;
             $permissions['manage_events'] = false;
+            $permissions['manage_own_events'] = false;
             $permissions['create_templates'] = false;
             $permissions['create_reports'] = false;
 

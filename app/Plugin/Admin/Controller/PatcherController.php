@@ -232,5 +232,12 @@ class PatcherController extends AdminAppController {
                 }
             }
         }
+
+        // New role own events
+        $toSaveRole = array('title' => __('Can manage own events only'), 'alias' => 'manage_own_events', 'description' => __('Can create, edit and delete own events only. Can also manage the roster for his events'));
+        App::uses('RolePermission', 'Model');
+        $RolePermissionModel = new RolePermission();
+        $RolePermissionModel->create();
+        $RolePermissionModel->save($toSaveRole);
     }
 }

@@ -200,6 +200,7 @@ class StepController extends InstallAppController {
             array('title' => __('Full permissions'), 'alias' => 'full_permissions', 'description' => __('Like Chuck Norris, he can do anything. This overwrite every permissions')),
             array('title' => __('Limited admin access'), 'alias' => 'limited_admin', 'description' => __('Like Robin, he can do some things but not all (like driving the batmobile or change user role)')),
             array('title' => __('Can manage events'), 'alias' => 'manage_events', 'description' => __('Can create, edit and delete events. Can also manage the roster for each events')),
+            array('title' => __('Can manage own events only'), 'alias' => 'manage_own_events', 'description' => __('Can create, edit and delete own events only. Can also manage the roster for his events')),
             array('title' => __('Can create templates'), 'alias' => 'create_templates', 'description' => __('Can create events templates')),
             array('title' => __('Can create reports'), 'alias' => 'create_reports', 'description' => __('Can create events reports'))
         );

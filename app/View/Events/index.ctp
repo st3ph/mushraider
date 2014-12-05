@@ -2,7 +2,7 @@
 	<h1>
         <i class="icon-calendar"></i> <?php echo __('Events');?>
 
-        <?php if($user['User']['can']['manage_events'] || $user['User']['can']['full_permissions']):?>
+        <?php if($user['User']['can']['manage_own_events'] || $user['User']['can']['manage_events'] || $user['User']['can']['full_permissions']):?>
             <div class="pull-right span3" id="createEvent">
                 <div class="input-prepend input-append">
                     <span class="add-on"><span class="icon-calendar"></span></span>

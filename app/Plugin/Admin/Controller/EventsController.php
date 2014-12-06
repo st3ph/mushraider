@@ -42,8 +42,9 @@ class EventsController extends AdminAppController {
             $toSave = array();
             $toSave['EventsTemplate']['id'] = $EventsTemplate['EventsTemplate']['id'];
             $toSave['EventsTemplate']['title'] = $this->request->data['EventsTemplate']['title'];
+            $toSave['EventsTemplate']['game_id'] = $EventsTemplate['EventsTemplate']['game_id'];
             $toSave['EventsTemplate']['event_title'] = $this->request->data['EventsTemplate']['event_title'];
-            $toSave['EventsTemplate']['event_description'] = $this->request->data['EventsTemplate']['event_description'];
+            $toSave['EventsTemplate']['event_description'] = nl2br($this->request->data['EventsTemplate']['event_description']);
             $toSave['EventsTemplate']['dungeon_id'] = $this->request->data['EventsTemplate']['dungeon_id'];
             $toSave['EventsTemplate']['time_invitation'] = date('Y-m-d H:i:s', mktime($this->request->data['EventsTemplate']['time_invitation']['hour'], $this->request->data['EventsTemplate']['time_invitation']['min'], 0, $dates[1], $dates[2], $dates[0]));
             $toSave['EventsTemplate']['time_start'] = date('Y-m-d H:i:s', mktime($this->request->data['EventsTemplate']['time_start']['hour'], $this->request->data['EventsTemplate']['time_start']['min'], 0, $dates[1], $dates[2], $dates[0]));
@@ -62,7 +63,7 @@ class EventsController extends AdminAppController {
             }
 
             $this->Session->setFlash(__('Something goes wrong'), 'flash_error');
-            $role = array_merge($role, $this->request->data);
+            $EventsTemplate = array_merge($EventsTemplate, $this->request->data);
         }
 
         $this->request->data = $EventsTemplate;

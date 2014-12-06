@@ -49,6 +49,7 @@
                                     <?php endif;?>
                                 </td>
                                 <td class="actions">
+                                    <?php echo $this->Html->link('<i class="icon-edit"></i>', '/admin/events/template_edit/'.$template['EventsTemplate']['id'], array('class' => 'btn btn-info btn-mini tt', 'title' => __('Edit'), 'escape' => false))?>
                                     <?php echo $this->Html->link('<i class="icon-trash"></i>', '/admin/events/template_delete/'.$template['EventsTemplate']['id'], array('class' => 'btn btn-danger btn-mini tt delete', 'title' => __('Delete'), 'data-confirm' => __('Are you sure you want to completely delete the template %s ?', $template['EventsTemplate']['title']), 'escape' => false))?>
                                 </td>
                             </tr>                

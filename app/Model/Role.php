@@ -93,9 +93,12 @@ class Role extends AppModel {
         }
 
         $permissions = array();
+        $rolePermissionsAssigned = array();
 
         App::uses('RolePermissionRole', 'Model');
         $RolePermissionRoleModel = new RolePermissionRole();
+        App::uses('RolePermission', 'Model');
+        $RolePermissionModel = new RolePermission();
 
         $params = array();
         $params['recursive'] = 1;
@@ -105,15 +108,17 @@ class Role extends AppModel {
         if($rolePermissionRoles = $RolePermissionRoleModel->find('all', $params)) {
             foreach($rolePermissionRoles as $rolePermissionRole) {
                 $permissions[$rolePermissionRole['RolePermission']['alias']] = $rolePermissionRole['RolePermissionRole']['role_id'] == $roleId;
+                $rolePermissionsAssigned[] = $rolePermissionRole['RolePermission']['id'];
             }
         }
 
-        unset($params['conditions']['role_id']);
-
-        if($rolePermissionRoles = $RolePermissionRoleModel->find('all', $params)) {
-            foreach($rolePermissionRoles as $rolePermissionRole) {
-                if(!isset($permissions[$rolePermissionRole['RolePermission']['alias']])) {
-                    $permissions[$rolePermissionRole['RolePermission']['alias']] = false;
+        $params = array();
+        $params['recursive'] = -1;
+        $params['conditions']['id !='] = $rolePermissionsAssigned;
+        if($rolePermissions = $RolePermissionModel->find('all', $params)) {
+            foreach($rolePermissions as $rolePermission) {
+                if(!isset($permissions[$rolePermission['RolePermission']['alias']])) {
+                    $permissions[$rolePermission['RolePermission']['alias']] = false;
                 }
             }
         }

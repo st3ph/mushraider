@@ -46,12 +46,13 @@ class AppModel extends Model {
         $params['conditions'] = array_merge($params['conditions'], $cond);
 
         if($result = $this->find('first', $params)) {
+            $toSave = array();
+            $toSave['id'] = $result[$this->alias]['id'];
+            $toSave = array_merge($toSave, $data);
             if(!empty($data['import_modified'])) {
-                $toSave = array();
-                $toSave['id'] = $result[$this->alias]['id'];
                 $toSave['import_modified'] = $data['import_modified'];
-                $this->save($toSave);
             }
+            $this->save($toSave);
 
             return $result[$this->alias]['id'];
         }

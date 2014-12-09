@@ -232,12 +232,22 @@ class EventsController extends AppController {
     public function edit($eventId) {
         $this->pageTitle = __('Edit event').' - '.$this->pageTitle;
 
-        if(!($this->user['User']['can']['manage_own_events'] && $this->user['User']['id'] != $eventId) && !$this->user['User']['can']['manage_events'] && !$this->user['User']['can']['full_permissions']) {
-            $this->Session->setFlash(__('You don\'t have permission to access this page.'), 'flash_error');
+        if(!$eventId) {
             $this->redirect('/events');
         }
 
-        if(!$eventId) {
+        // Get event infos
+        $params = array();        
+        $params['recursive'] = 1;
+        $params['conditions']['Event.id'] = $eventId;
+        $params['contain']['EventsRole'] = array();        
+        if(!$event = $this->Event->find('first', $params)) {
+            $this->Session->setFlash(__('MushRaider can\'t find this event oO'), 'flash_warning');
+            $this->redirect('/events');
+        }
+
+        if(!($this->user['User']['can']['manage_own_events'] && $this->user['User']['id'] == $event['Event']['user_id']) && !$this->user['User']['can']['manage_events'] && !$this->user['User']['can']['full_permissions']) {
+            $this->Session->setFlash(__('You don\'t have permission to access this page.'), 'flash_error');
             $this->redirect('/events');
         }
 
@@ -283,15 +293,6 @@ class EventsController extends AppController {
             $this->Session->setFlash(__('Something wrong happen, please fix the errors below'), 'flash_error');
         }
 
-        // Get event infos
-        $params = array();        
-        $params['recursive'] = 1;
-        $params['conditions']['Event.id'] = $eventId;
-        $params['contain']['EventsRole'] = array();        
-        if(!$event = $this->Event->find('first', $params)) {
-            $this->Session->setFlash(__('MushRaider can\'t find this event oO'), 'flash_warning');
-            $this->redirect('/events');
-        }
         $this->request->data['Event'] = !empty($this->request->data['Event'])?array_merge($event['Event'], $this->request->data['Event']):$event['Event'];        
         $this->request->data['EventsRole'] = $event['EventsRole'];
 
@@ -304,11 +305,6 @@ class EventsController extends AppController {
     }
 
     public function close($eventId) {
-        if(!($this->user['User']['can']['manage_own_events'] && $this->user['User']['id'] != $eventId) && !$this->user['User']['can']['create_reports'] && !$this->user['User']['can']['full_permissions']) {
-            $this->Session->setFlash(__('You don\'t have permission to access this page.'), 'flash_error');
-            $this->redirect('/events/view/'.$eventId);
-        }
-
         if(!$eventId) {
             $this->redirect('/events');
         }
@@ -323,6 +319,11 @@ class EventsController extends AppController {
         $params['contain']['Dungeon'] = array();
         if(!$event = $this->Event->find('first', $params)) {
             $this->redirect('/events');
+        }
+
+        if(!($this->user['User']['can']['manage_own_events'] && $this->user['User']['id'] == $event['Event']['user_id']) && !$this->user['User']['can']['create_reports'] && !$this->user['User']['can']['full_permissions']) {
+            $this->Session->setFlash(__('You don\'t have permission to access this page.'), 'flash_error');
+            $this->redirect('/events/view/'.$eventId);
         }
 
         if(!empty($this->request->data['Report'])) {
@@ -392,11 +393,6 @@ class EventsController extends AppController {
     }
 
     public function delete($eventId) {
-        if(!($this->user['User']['can']['manage_own_events'] && $this->user['User']['id'] != $eventId) && !$this->user['User']['can']['manage_events'] && !$this->user['User']['can']['full_permissions']) {
-            $this->Session->setFlash(__('You don\'t have permission to access this page.'), 'flash_error');
-            $this->redirect('/events');
-        }
-
         if(!$eventId) {
             $this->redirect('/events');
         }
@@ -406,6 +402,11 @@ class EventsController extends AppController {
         $params['recursive'] = -1;
         $params['conditions']['id'] = $eventId;
         if(!$event = $this->Event->find('first', $params)) {
+            $this->redirect('/events');
+        }
+
+        if(!($this->user['User']['can']['manage_own_events'] && $this->user['User']['id'] == $event['Event']['user_id']) && !$this->user['User']['can']['manage_events'] && !$this->user['User']['can']['full_permissions']) {
+            $this->Session->setFlash(__('You don\'t have permission to access this page.'), 'flash_error');
             $this->redirect('/events');
         }
 

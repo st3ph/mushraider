@@ -2,8 +2,9 @@
 <?php $registeredCharacterId = $registeredCharacter?$registeredCharacter['id']:0;?>
 <?php $registeredCharacterComment = $registeredCharacter?$registeredCharacter['comment']:'';?>
 <?php $eventRoles = array();?>
-<?php $dayTimestamp = $this->Tools->get_timestamp($event['Event']['time_invitation'], true);?>
+<?php $dayTimestamp = $this->Tools->get_timestamp($event['Event']['time_start'], true);?>
 <?php $todayTimestamp = mktime(0, 0, 0, date('m'), date('d'), date('Y'));?>
+<?php $cantSignInTimestamp = mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y'));?>
 <header>
 	<h1>
 		<div class="row">
@@ -54,7 +55,7 @@ foreach($event['EventsRole'] as $eventRole) {
 }
 ?>
 
-<?php if(!$eventIsClosed):?>
+<?php if($dayTimestamp > $cantSignInTimestamp):?>
 	<div id="eventSignin">
 		<div class="pull-right">
 			<?php if(!empty($charactersList)):?>

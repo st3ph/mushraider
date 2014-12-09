@@ -65,15 +65,22 @@ class AjaxController extends AppController {
 
     function eventSignin() {
         $jsonMessage = array();
+
         if(!empty($this->request->query['u']) && !empty($this->request->query['e']) && isset($this->request->query['signin']) && !empty($this->request->query['character'])) {
             // Choosed character must be in the event level range
             $params = array();
-            $params['fields'] = array('character_level', 'open');
+            $params['fields'] = array('character_level', 'open', 'time_start');
             $params['recursive'] = -1;
             $params['conditions']['id'] = $this->request->query['e'];
             if(!$event = $this->Event->find('first', $params)) {
                 $jsonMessage['type'] = 'important';
                 $jsonMessage['msg'] = __('MushRaider can\'t find this event');
+                return json_encode($jsonMessage);
+            }
+
+            if($event['Event']['time_start'] < date('Y-m-d H:i:s')) {
+                $jsonMessage['type'] = 'important';
+                $jsonMessage['msg'] = __('Too late ! This event is already started');
                 return json_encode($jsonMessage);
             }
 
@@ -163,6 +170,18 @@ class AjaxController extends AppController {
             $refusedList = explode(',', $this->request->query['refused']);
 
             $params = array();
+            $params['fields'] = array('user_id');
+            $params['recursive'] = -1;
+            $params['conditions']['id'] = $eventId;
+            if(!$event = $this->Event->find('first', $params)) {
+                return 'fail';
+            }
+
+            if(!($this->user['User']['can']['manage_own_events'] && $this->user['User']['id'] == $event['Event']['user_id']) && !$this->user['User']['can']['manage_events'] && !$this->user['User']['can']['full_permissions']) {
+                return 'fail';
+            }
+
+            $params = array();
             $params['fields'] = array('id', 'character_id', 'last_notification');
             $params['recursive'] = 1;
             $params['contain']['User']['fields'] = array('email', 'notifications_validate');
@@ -170,15 +189,6 @@ class AjaxController extends AppController {
             $params['conditions']['EventsCharacter.raids_role_id'] = $roleId;
             $params['conditions']['EventsCharacter.status >'] = 0;
             if($eventCharacters = $this->EventsCharacter->find('all', $params)) {
-                if(Configure::read('Config.notifications')->enabled) {
-                    // Get event for email notifications
-                    $params = array();
-                    $params['recursive'] = -1;
-                    $params['conditions']['id'] = $eventId;
-                    $event = $this->Event->find('first', $params);
-                }
-          
-
                 foreach($eventCharacters as $eventCharacter) {
                     $toSave = array();
                     $toSave['id'] = $eventCharacter['EventsCharacter']['id'];
@@ -219,6 +229,18 @@ class AjaxController extends AppController {
             $eventId = $this->request->query['e'];
             $roleId = str_replace('role_', '', $this->request->query['r']);
             $characterId = $this->request->query['c'];
+
+            $params = array();
+            $params['fields'] = array('user_id');
+            $params['recursive'] = -1;
+            $params['conditions']['id'] = $eventId;
+            if(!$event = $this->Event->find('first', $params)) {
+                return 'fail';
+            }
+
+            if(!($this->user['User']['can']['manage_own_events'] && $this->user['User']['id'] == $event['Event']['user_id']) && !$this->user['User']['can']['manage_events'] && !$this->user['User']['can']['full_permissions']) {
+                return 'fail';
+            }
 
             $params = array();
             $params['fields'] = array('id');

@@ -13,18 +13,24 @@ App::uses('HttpSocket', 'Network/Http');
 class RaidheadSource extends DataSource {
 
     public $config = array(
-        'baseUrl' => 'http://api.raidhead.com/'
+        'baseUrl' => 'http://api.raidhead.com/',
+        'langs' => array('eng', 'fra')
     );
 
     private $http;
 
     public function __construct() {
         $this->http = new HttpSocket();
+        $lang = strtolower(Configure::read('Settings.language'));
+        if(!in_array($lang, $this->config['langs'])) {
+            $lang = $this->config['langs'][0];
+        }
+
+        $this->config['baseUrl'] .= $lang;
     }
     
     public function gets($type = 'all') {
         $list = array();
-
         $json = $this->http->get($this->config['baseUrl'].'/games/index.json');
         $games = json_decode($json, true);
         if(is_null($games)) {

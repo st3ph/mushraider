@@ -239,5 +239,8 @@ class PatcherController extends AdminAppController {
         $RolePermissionModel = new RolePermission();
         $RolePermissionModel->create();
         $RolePermissionModel->save($toSaveRole);
+
+        // Mushstats
+        $this->Setting->setOption('Mushstats', time());
     }
 }

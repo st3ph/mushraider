@@ -1,6 +1,7 @@
 <?php
 App::uses('HttpSocket', 'Network/Http');
-class AdminAppController extends AppController {  
+class AdminAppController extends AppController {
+    public $components = array('Admin.Mushstats');
     public $uses = array();
     public $helpers = array('Admin.Admin');
 

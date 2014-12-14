@@ -190,6 +190,7 @@ class StepController extends InstallAppController {
                                             'username' => '',
                                             'password' => ''
                                         ));
+        $defaultSettings['Mushstats'] = time();
         foreach($defaultSettings as $option => $value) {
             $settingModel->create();
             $settingModel->save(array('option' => $option, 'value' => $value));

@@ -3,7 +3,7 @@ class EventsController extends ApiAppController {
     var $uses = array('Event');
 
     public function index() {
-        $calStart = date('Y-m-d');
+        $calStart = date('Y-m-d H:i:s');
         $calEnd = date('Y-m-d H:i:s', mktime(23, 59, 59, date('n'), date('j') + 7, date('Y')));
 
         if(!empty($this->request->params['named']['start'])) {
@@ -20,8 +20,8 @@ class EventsController extends ApiAppController {
         $params['fields'] = array('Event.id', 'Event.title', 'Event.game_id', 'Event.dungeon_id', 'Event.time_invitation', 'Event.time_start');
         $params['contain']['Game']['fields'] = array('title', 'logo');
         $params['contain']['Dungeon']['fields'] = array('title');
-        $params['conditions']['Event.time_invitation >='] = $calStart;
-        $params['conditions']['Event.time_invitation <='] = $calEnd;
+        $params['conditions']['Event.time_start >='] = $calStart;
+        $params['conditions']['Event.time_start <='] = $calEnd;
         if(!empty($this->request->params['named']['game'])) {
             $params['conditions']['Event.game_id'] = $this->request->params['named']['game'];
         }

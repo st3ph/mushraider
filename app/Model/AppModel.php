@@ -40,6 +40,7 @@ class AppModel extends Model {
         $params = array();
         $params['recursive'] = -1;
         $params['fields'] = array('id');
+        $params['conditions'] = array();
         if(!empty($data['slug'])) {
             $params['conditions']['slug'] = $data['slug'];
         }

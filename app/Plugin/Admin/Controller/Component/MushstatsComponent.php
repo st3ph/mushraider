@@ -95,7 +95,7 @@ class MushstatsComponent extends Component {
 
         // Bridge
         $bridgeSetting = json_decode($this->SettingModel->getOption('bridge'));
-        $stats['Bridge']['enabled'] = (!empty($this->bridge) && $this->bridge->enabled)?1:0;
+        $stats['Bridge']['enabled'] = (!empty($bridgeSetting) && $bridgeSetting->enabled)?1:0;
 
         // Widgets
         App::uses('Widget', 'Model');
@@ -116,6 +116,5 @@ class MushstatsComponent extends Component {
         App::uses('HttpSocket', 'Network/Http');
         $this->http = new HttpSocket();
         $this->http->post('http://stats.mushraider.com/acquire', $stats);
-        //prd($stats);
     }
 }

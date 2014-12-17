@@ -6,14 +6,17 @@ class MushstatsComponent extends Component {
 
 	public function initialize(Controller $controller) {
 		$this->controller = &$controller;
-        $this->SettingModel = new Setting();
 
-        $Mushstats = $this->SettingModel->getOption('Mushstats');
-        $lastUpdate = new Datetime();
-        $lastUpdate->setTimestamp($Mushstats);
-        if($lastUpdate->diff(new Datetime())->d > 6) {
-            $this->sendStats();
-            $this->SettingModel->setOption('Mushstats', time());
+        if($this->controller->name != 'Patcher') {
+            $this->SettingModel = new Setting();
+
+            $Mushstats = $this->SettingModel->getOption('Mushstats');
+            $lastUpdate = new Datetime();
+            $lastUpdate->setTimestamp($Mushstats);
+            if($lastUpdate->diff(new Datetime())->d > 6) {
+                $this->sendStats();
+                $this->SettingModel->setOption('Mushstats', time());
+            }
         }
 	}
 
@@ -33,13 +36,19 @@ class MushstatsComponent extends Component {
         $params = array();
         $params['recursive'] = -1;
         $params['order'] = array('time_start ASC');
-        $firstEvent = $EventModel->find('first', $params);
-        $stats['Event']['first'] = $firstEvent['Event']['time_start'];
+        if($firstEvent = $EventModel->find('first', $params)) {
+            $stats['Event']['first'] = $firstEvent['Event']['time_start'];
+        }else {
+            $stats['Event']['first'] = null;
+        }
 
         $params['conditions']['time_start <='] = date('Y-m-d');
         $params['order'] = array('time_start DESC');
-        $lastEvent = $EventModel->find('first', $params);
-        $stats['Event']['last'] = $lastEvent['Event']['time_start'];
+        if($lastEvent = $EventModel->find('first', $params)) {
+            $stats['Event']['last'] = $lastEvent['Event']['time_start'];
+        }else {
+            $stats['Event']['last'] = null;
+        }
 
         $params = array();
         $params['recursive'] = -1;

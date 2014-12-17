@@ -87,7 +87,7 @@ class AppController extends Controller {
 		}
 
         // Is a patch needed ?
-        if($this->user && strtolower($this->name) != 'patcher' && strtolower($this->name) != 'auth') {
+        if(strtolower($this->name) != 'patcher' && strtolower($this->name) != 'auth') {
             $this->Patcher->patchNeeded();
         }
 

@@ -5,6 +5,7 @@ class PatcherController extends AdminAppController {
 
     var $adminOnly = true;
     var $availablePatchs = array('beta-2', 'beta-3', 'v-1.1', 'v-1.3', 'v-1.3.5', 'v-1.4', 'v-1.4.1', 'v-1.4.5');
+    var $dbPrefix = 'mr_';
 
     function beforeFilter() {
         parent::beforeFilter();
@@ -25,11 +26,12 @@ class PatcherController extends AdminAppController {
             
     		$error = false;
 	    	$databaseConfig = Configure::read('Database');
+            $this->dbPrefix = $databaseConfig['prefix'];
 	        if(!$mysqlLink = mysqli_connect($databaseConfig['host'], $databaseConfig['login'], $databaseConfig['password'], $databaseConfig['database'], $databaseConfig['port'])) {
 	            $error = true;
 	        }
 	    	
-	    	$sqlReport = $this->Patcher->run_sql_file($mysqlLink, '../Config/Schema/sql/mushraider_patch_'.$patch.'.sql', $databaseConfig['prefix']);    			    	
+	    	$sqlReport = $this->Patcher->run_sql_file($mysqlLink, '../Config/Schema/sql/mushraider_patch_'.$patch.'.sql', $this->dbPrefix);
 	    	$mysqlLink = null;
 
 	        if($sqlReport['success'] != $sqlReport['total']) {
@@ -195,9 +197,9 @@ class PatcherController extends AdminAppController {
         $sql = "SELECT t.user_id, t.game_id, t.character_id, MAX(t.used) AS nb_used
                 FROM (
                     SELECT ec.user_id, e.game_id, ec.character_id, COUNT(ec.id) AS used
-                    FROM mr_events_characters ec 
-                    JOIN mr_users u ON ec.user_id=u.id
-                    JOIN mr_events e ON e.id=ec.event_id
+                    FROM ".$this->dbPrefix."events_characters ec 
+                    JOIN ".$this->dbPrefix."users u ON ec.user_id=u.id
+                    JOIN ".$this->dbPrefix."events e ON e.id=ec.event_id
                     GROUP BY ec.character_id
                     ORDER BY used DESC, u.id ASC, e.game_id ASC, ec.character_id
                 ) t

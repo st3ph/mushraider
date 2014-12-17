@@ -11,7 +11,7 @@ class MushstatsComponent extends Component {
         $Mushstats = $this->SettingModel->getOption('Mushstats');
         $lastUpdate = new Datetime();
         $lastUpdate->setTimestamp($Mushstats);
-        if($lastUpdate->diff(new Datetime())->d < 6) {
+        if($lastUpdate->diff(new Datetime())->d > 6) {
             $this->sendStats();
             $this->SettingModel->setOption('Mushstats', time());
         }

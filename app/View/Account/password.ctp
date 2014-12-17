@@ -3,10 +3,10 @@
 </header>
 
 <div class="row">
-    <div class="span3">
+    <div class="span2">
         <?php echo $this->element('account_menu');?>
     </div>
-    <div class="span8">
+    <div class="span9">
         <?php echo $this->Form->create('User', array('url' => '/account/password', 'class' => ''));?>
             <div class="row-fluid">
                 <?php echo $this->Form->input('User.currentpassword', array('type' => 'password', 'required' => true, 'label' => __('Current password'), 'class' => 'span5'));?>

@@ -3,10 +3,10 @@
 </header>
 
 <div class="row">
-    <div class="span3">
+    <div class="span2">
         <?php echo $this->element('account_menu');?>
     </div>
-    <div class="span8">
+    <div class="span9">
 		<div>
 			<h3 class="blockToggle"><?php echo $this->Html->link('<i class="icon-plus-sign-alt"></i> '.__('add new character'), '', array('escape' => false));?></h3>
 			<?php echo $this->Form->create('Character', array('url' => '/account/characters', 'class' => 'hide'.(isset($showForm)?' show':'')));?>

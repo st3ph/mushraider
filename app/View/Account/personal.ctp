@@ -3,10 +3,10 @@
 </header>
 
 <div class="row">
-    <div class="span3">
+    <div class="span2">
         <?php echo $this->element('account_menu');?>
     </div>
-    <div class="span8">
+    <div class="span9">
         <?php echo $this->Form->create('User', array('url' => '/account/personal', 'class' => ''));?>
             <div class="row-fluid">
                 <?php $after = '<div class="hint">'.__('Letters and numbers only, 3 to 20 chars length.').'</div>';?>

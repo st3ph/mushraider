@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Mushraider\n"
-"POT-Creation-Date: 2014-12-17 20:41+0100\n"
-"PO-Revision-Date: 2014-12-17 20:41+0100\n"
+"POT-Creation-Date: 2014-12-17 21:01+0100\n"
+"PO-Revision-Date: 2014-12-17 21:01+0100\n"
 "Last-Translator: Stéphane \"Mush\" Litou <contact@mushraider.com>\n"
 "Language-Team:  <contact@mushraider.com>\n"
 "Language: en\n"
@@ -3104,10 +3104,10 @@ msgstr ""
 #: E:\Dev\wamp\www\mushraider\mushraider\app/View/Emails/html/user_enabled.ctp:14
 msgid ""
 "To start raiding you can now create your first character using the following "
-"link : "
+"link"
 msgstr ""
 "To start raiding you can now create your first character using the following "
-"link : "
+"link"
 
 #: E:\Dev\wamp\www\mushraider\mushraider\app/View/Errors/error500.ctp:2
 msgid "Oups, something fail but it's not me !"

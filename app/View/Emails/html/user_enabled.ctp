@@ -11,7 +11,7 @@
 
             <p><?php echo __('Hello');?> <?php echo $username;?>,</p>
             <p><?php echo __('You receive this email because your MushRaider account has been activated');?></p>
-            <p><?php echo __('To start raiding you can now create your first character using the following link : ');?> :</p>
+            <p><?php echo __('To start raiding you can now create your first character using the following link');?> :</p>
             <p><?php echo $this->Html->link('http://'.$_SERVER['HTTP_HOST'].$this->webroot.'account/characters', 'http://'.$_SERVER['HTTP_HOST'].$this->webroot.'account/characters', array('escape' => false));?></p>
             
             <br />

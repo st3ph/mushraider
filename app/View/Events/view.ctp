@@ -13,14 +13,14 @@
 			<?php $displayTplButtons = ($dayTimestamp >= $todayTimestamp && ($user['User']['can']['create_templates'] || $user['User']['can']['full_permissions']))?true:false?>
 			<?php $displayCloseButton = ($dayTimestamp < $todayTimestamp && ($user['User']['can']['create_reports'] || ($user['User']['can']['manage_own_events'] && $user['User']['id'] == $event['User']['id']) || $user['User']['can']['full_permissions']))?true:false?>
 			<?php $displayReportButton = !empty($event['Report']['id'])?true:false?>
-			<div class="span<?php echo ($displayAdminButtons || $displayCloseButton || $displayReportButton || $displayTplButtons)?7:11?>">
+			<div class="span<?php echo ($displayAdminButtons || $displayCloseButton || $displayReportButton || $displayTplButtons)?6:11?>">
 				<i class="icon-calendar-empty"></i> <?php echo __('View event');?>
 				<?php if(!empty($event['Game']['logo'])):?>
 					<?php echo $this->Html->image($event['Game']['logo'], array('class' => 'logo', 'width' => 32));?>
 				<?php endif;?>
 			</div>
 			<?php if($displayAdminButtons || $displayCloseButton || $displayReportButton || $displayTplButtons):?>
-				<div class="pull-right text-right span4">
+				<div class="pull-right text-right span5 eventAdminButtons">
 					<?php if($displayTplButtons):?>
 						<?php echo $this->Html->link('<i class="icon-copy"></i> '.__('Copy'), '/events/view/'.$event['Event']['id'], array('id' => 'createTemplate', 'class' => 'btn btn-mini tt', 'title' => __('Create template'), 'escape' => false));?>
 						<span id="tplName" data-event="<?php echo $event['Event']['id'];?>"><input type="text" class="input-small" value="" placeholder="<?php echo __('template name');?>"/> <span class="text-error"><i class="icon-remove"></i></span> <span class="text-success"><i class="icon-save"></i></span></span>
@@ -155,7 +155,7 @@ foreach($event['EventsRole'] as $eventRole) {
 <h3>
 	<?php echo __('Roster');?>
 	<?php if(($user['User']['can']['manage_own_events'] && $user['User']['id'] == $event['User']['id']) || $user['User']['can']['manage_events'] || $user['User']['can']['full_permissions']):?>
-		<button type="button" class="btn btn-default" data-toggle="modal" data-target="#invitCommands"><i class="icon-code"></i> <?php echo __('Invitation commands');?></button>
+		<button type="button" class="btn btn-default btn-mini margin-left-10" data-toggle="modal" data-target="#invitCommands"><i class="icon-code"></i> <?php echo __('Invitation commands');?></button>
 	<?php endif;?>
 </h3>
 

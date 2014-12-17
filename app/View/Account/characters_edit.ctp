@@ -3,10 +3,10 @@
 </header>
 
 <div class="row">
-    <div class="span3">
+    <div class="span2">
         <?php echo $this->element('account_menu');?>
     </div>
-    <div class="span8">
+    <div class="span9">
         <?php echo $this->Form->create('Character', array('url' => '/account/characters/edit/c:'.$this->request->params['named']['c']));?>
             <div class="form-group">
                 <?php echo $this->Form->input('Character.title', array('type' => 'text', 'required' => true, 'label' => __('Character Name'), 'class' => 'span5'));?>

@@ -143,6 +143,10 @@ form .select .loading {margin:0 0 5px 5px;}
     line-height: 18px;
 }
 
+.margin-left-10 {
+	margin-left:10px;
+}
+
 
 /*
 * Login
@@ -201,6 +205,8 @@ form .select .loading {margin:0 0 5px 5px;}
 #eventRoles .waiting li.nosort:hover .icon-move {display:none;}
 
 #badKitties span {}
+
+.eventAdminButtons a.btn-mini {margin-left:5px;}
 
 #tplName {font-size:18px;display:none;margin:0 15px 0 0;}
 #tplName input {font-size:11px;height:11px;}

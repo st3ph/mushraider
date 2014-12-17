@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Mushraider\n"
-"POT-Creation-Date: 2014-12-17 20:40+0100\n"
-"PO-Revision-Date: 2014-12-17 20:41+0100\n"
+"POT-Creation-Date: 2014-12-17 21:00+0100\n"
+"PO-Revision-Date: 2014-12-17 21:31+0100\n"
 "Last-Translator: Stéphane \"Mush\" Litou <contact@mushraider.com>\n"
 "Language-Team:  <contact@mushraider.com>\n"
 "Language: fr\n"
@@ -3141,10 +3141,10 @@ msgstr "Vous recevez cet email car votre compte MushRaider a été activé"
 #: E:\Dev\wamp\www\mushraider\mushraider\app/View/Emails/html/user_enabled.ctp:14
 msgid ""
 "To start raiding you can now create your first character using the following "
-"link : "
+"link"
 msgstr ""
 "Pour commencer à raid commences par créer ton premier personnage en "
-"utilisant le lien suivant :"
+"utilisant le lien suivant"
 
 #: E:\Dev\wamp\www\mushraider\mushraider\app/View/Errors/error500.ctp:2
 msgid "Oups, something fail but it's not me !"
@@ -3359,7 +3359,7 @@ msgid ""
 "Select the command corresponding to your game and copy/paste the generated "
 "commands to your chat to quick invit you roster"
 msgstr ""
-"Selectionnez la commande correspondant à votre jeu and copiez/collez le code "
+"Selectionnez la commande correspondant à votre jeu et copiez/collez le code "
 "généré dans le tchat du jeu pour inviter rapidement votre groupe"
 
 #: E:\Dev\wamp\www\mushraider\mushraider\app/View/Events/view.ctp:219

@@ -55,12 +55,12 @@ class PatcherComponent extends Component {
             return $this->redirectToPatch('/admin/patcher/apply/v-1.4.1');
         }
 
-        // v1.4.5
+        // v1.5
         App::uses('Event', 'Model');
         $Event = new Event();
         $sql = "SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE() AND COLUMN_NAME='open' AND TABLE_NAME='".Configure::read('Database.prefix')."events'";
         if(!$Event->query($sql)) {
-            return $this->redirectToPatch('/admin/patcher/apply/v-1.4.5');
+            return $this->redirectToPatch('/admin/patcher/apply/v-1.5');
         }
 	}
 

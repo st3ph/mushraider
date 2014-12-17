@@ -4,7 +4,7 @@ class PatcherController extends AdminAppController {
     public $uses = array('Character', 'EventsCharacter', 'Event');
 
     var $adminOnly = true;
-    var $availablePatchs = array('beta-2', 'beta-3', 'v-1.1', 'v-1.3', 'v-1.3.5', 'v-1.4', 'v-1.4.1', 'v-1.4.5');
+    var $availablePatchs = array('beta-2', 'beta-3', 'v-1.1', 'v-1.3', 'v-1.3.5', 'v-1.4', 'v-1.4.1', 'v-1.5');
     var $dbPrefix = 'mr_';
 
     function beforeFilter() {
@@ -170,7 +170,7 @@ class PatcherController extends AdminAppController {
         $RolePermissionRoleModel->__add(array('role_id' => $RoleModel->getIdByAlias('officer'), 'role_permission_id' => $RolePermissionModel->getIdByAlias('create_reports')));
     }
 
-    public function v145() {
+    public function v15() {
         // Regenerate cache
         Cache::clear();
 

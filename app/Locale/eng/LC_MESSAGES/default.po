@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Mushraider\n"
-"POT-Creation-Date: 2014-12-17 16:49+0100\n"
-"PO-Revision-Date: 2014-12-17 16:54+0100\n"
+"POT-Creation-Date: 2014-12-17 20:41+0100\n"
+"PO-Revision-Date: 2014-12-17 20:41+0100\n"
 "Last-Translator: Stéphane \"Mush\" Litou <contact@mushraider.com>\n"
 "Language-Team:  <contact@mushraider.com>\n"
 "Language: en\n"
@@ -622,11 +622,11 @@ msgstr "The game %s has been updated"
 msgid "The game has been deleted"
 msgstr "The game has been deleted"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:18
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:19
 msgid "MushRaider can't find this patch"
 msgstr "MushRaider can't find this patch"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:40
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:42
 #, php-format
 msgid ""
 "MushRaider can't apply the SQL patch, please try again or apply it by "
@@ -637,11 +637,11 @@ msgstr ""
 "yourself using the following file : /app/Config/Schema/sql/mushraider_patch_"
 "%s.sql"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:54
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:56
 msgid "MushRaider successfully apply the patch !"
 msgstr "MushRaider successfully apply the patch !"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:117
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:119
 msgid ""
 "Bridge has been disabled ! Be sure to use an updated version of your bridge "
 "plugin for MushRaider 1.4. If you don't you're gonna have a bad time !"
@@ -649,23 +649,23 @@ msgstr ""
 "Bridge has been disabled ! Be sure to use an updated version of your bridge "
 "plugin for MushRaider 1.4. If you don't you're gonna have a bad time !"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:146
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:148
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:201
 msgid "Full permissions"
 msgstr "Full permissions"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:146
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:148
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:201
 msgid "Like Chuck Norris, he can do anything. This overwrite every permissions"
 msgstr ""
 "Like Chuck Norris, he can do anything. This overwrite every permissions"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:147
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:149
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:202
 msgid "Limited admin access"
 msgstr "Limited admin access"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:147
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:149
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:202
 msgid ""
 "Like Robin, he can do some things but not all (like driving the batmobile or "
@@ -674,12 +674,12 @@ msgstr ""
 "Like Robin, he can do some things but not all (like driving the batmobile or "
 "change user role)"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:148
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:150
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:203
 msgid "Can manage events"
 msgstr "Can manage events"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:148
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:150
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:203
 msgid ""
 "Can create, edit and delete events. Can also manage the roster for each "
@@ -688,32 +688,32 @@ msgstr ""
 "Can create, edit and delete events. Can also manage the roster for each "
 "events"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:149
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:151
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:205
 msgid "Can create templates"
 msgstr "Can create templates"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:149
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:151
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:205
 msgid "Can create events templates"
 msgstr "Can create events templates"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:150
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:152
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:206
 msgid "Can create reports"
 msgstr "Can create reports"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:150
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:152
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:206
 msgid "Can create events reports"
 msgstr "Can create events reports"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:237
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:239
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:204
 msgid "Can manage own events only"
 msgstr "Can manage own events only"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:237
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:239
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:204
 msgid ""
 "Can create, edit and delete own events only. Can also manage the roster for "
@@ -2021,7 +2021,7 @@ msgstr "Select a game"
 msgid "View roster"
 msgstr "View roster"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/View/Rosters/index.ctp:15
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/View/Rosters/index.ctp:14
 msgid "Roster of"
 msgstr "Roster of"
 
@@ -2064,36 +2064,40 @@ msgid "Race"
 msgstr "Race"
 
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/View/Rosters/index.ctp:47
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/View/Rosters/index.ctp:83
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/View/Rosters/index.ctp:82
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/View/Stats/index.ctp:20
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Widget/View/Roster/index.ctp:10
 msgid "User"
 msgstr "User"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/View/Rosters/index.ctp:79
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/View/Rosters/index.ctp:78
 msgid "Incoming absences"
 msgstr "Incoming absences"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/View/Rosters/index.ctp:84
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/View/Rosters/index.ctp:83
 msgid "Character(s)"
 msgstr "Character(s)"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/View/Rosters/index.ctp:85
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/View/Rosters/index.ctp:84
 #: E:\Dev\wamp\www\mushraider\mushraider\app/View/Account/availabilities.ctp:14
 #: E:\Dev\wamp\www\mushraider\mushraider\app/View/Account/availabilities.ctp:24
 msgid "From"
 msgstr "From"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/View/Rosters/index.ctp:86
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/View/Rosters/index.ctp:85
 #: E:\Dev\wamp\www\mushraider\mushraider\app/View/Account/availabilities.ctp:15
 #: E:\Dev\wamp\www\mushraider\mushraider\app/View/Account/availabilities.ctp:31
 msgid "To"
 msgstr "To"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/View/Rosters/index.ctp:87
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/View/Rosters/index.ctp:86
 #: E:\Dev\wamp\www\mushraider\mushraider\app/View/Account/availabilities.ctp:16
 msgid "Comment"
 msgstr "Comment"
+
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/View/Rosters/index.ctp:114
+msgid "You don't have any player yet"
+msgstr "You don't have any player yet"
 
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/api.ctp:4
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/calendar.ctp:4
@@ -3104,6 +3108,14 @@ msgid ""
 msgstr ""
 "To start raiding you can now create your first character using the following "
 "link : "
+
+#: E:\Dev\wamp\www\mushraider\mushraider\app/View/Errors/error500.ctp:2
+msgid "Oups, something fail but it's not me !"
+msgstr "Oups, something fail but it's not me !"
+
+#: E:\Dev\wamp\www\mushraider\mushraider\app/View/Errors/error500.ctp:3
+msgid "or maybe yes but it's not my fault..."
+msgstr "or maybe yes but it's not my fault..."
 
 #: E:\Dev\wamp\www\mushraider\mushraider\app/View/Events/add.ctp:5
 #: E:\Dev\wamp\www\mushraider\mushraider\app/View/Events/edit.ctp:2

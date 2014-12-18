@@ -153,8 +153,8 @@ class Availability extends AppModel {
                 $params['fields'] = array('Event.id');
                 $params['conditions']['game_id'] = $character['Character']['game_id'];
                 $params['conditions']['character_level <='] = $character['Character']['level'];
-                $params['conditions']['time_start >='] = $this->data['Availability']['start'];
-                $params['conditions']['time_start <='] = $this->data['Availability']['end'];
+                $params['conditions']['time_start >='] = $this->data['Availability']['start'].' 00:00:00';
+                $params['conditions']['time_start <='] = $this->data['Availability']['end'].' 23:59:59';
                 if($events = $Event->find('all', $params)) {
                     foreach($events as $event) {
                         $toSave = array();

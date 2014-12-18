@@ -16,7 +16,7 @@
 			<div class="span<?php echo ($displayAdminButtons || $displayCloseButton || $displayReportButton || $displayTplButtons)?6:11?>">
 				<i class="icon-calendar-empty"></i> <?php echo __('View event');?>
 				<?php if(!empty($event['Game']['logo'])):?>
-					<?php echo $this->Html->image($event['Game']['logo'], array('class' => 'logo', 'width' => 32));?>
+					&nbsp;<?php echo $this->Html->image($event['Game']['logo'], array('class' => 'logo', 'width' => 32));?>
 				<?php endif;?>
 			</div>
 			<?php if($displayAdminButtons || $displayCloseButton || $displayReportButton || $displayTplButtons):?>

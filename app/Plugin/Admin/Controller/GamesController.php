@@ -7,7 +7,14 @@ class GamesController extends AdminAppController {
         'Game' => array(
             'limit' => 20,
             'recursive' => 1,
-            'order' => array('title' => 'asc')
+            'order' => array('title' => 'asc'),
+            'contain' => array(
+                'Dungeon' => array('order' => 'title ASC'),
+                'Classe' => array('order' => 'title ASC'),
+                'Race' => array('order' => 'title ASC'),
+                'Event' => array(),
+                'Character' => array(),
+            )
         )
     );
 

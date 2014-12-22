@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Mushraider\n"
 "POT-Creation-Date: 2014-12-17 21:00+0100\n"
-"PO-Revision-Date: 2014-12-17 21:31+0100\n"
+"PO-Revision-Date: 2014-12-19 12:39+0100\n"
 "Last-Translator: Stéphane \"Mush\" Litou <contact@mushraider.com>\n"
 "Language-Team:  <contact@mushraider.com>\n"
 "Language: fr\n"
@@ -1656,7 +1656,7 @@ msgstr "Général"
 
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:23
 msgid "Apparence"
-msgstr "Apparance"
+msgstr "Apparence"
 
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:24
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/calendar.ctp:8

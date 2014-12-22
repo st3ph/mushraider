@@ -41,7 +41,9 @@ class AppModel extends Model {
         $params['recursive'] = -1;
         $params['fields'] = array('id');
         $params['conditions'] = array();
-        if(!empty($data['slug'])) {
+        if(!empty($data['import_slug'])) {
+            $params['conditions']['import_slug'] = $data['import_slug'];
+        }elseif(!empty($data['slug'])) {
             $params['conditions']['slug'] = $data['slug'];
         }
         $params['conditions'] = array_merge($params['conditions'], $cond);

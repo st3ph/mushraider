@@ -12,7 +12,7 @@
                 <?php echo $this->Form->input('EventsTemplate.event_title', array('type' => 'text', 'required' => true, 'label' => __('Event title'), 'class' => 'span5'));?>
             </div>
             <div class="form-group">
-                <?php echo $this->Form->input('EventsTemplate.event_description', array('type' => 'textarea', 'required' => true, 'label' => __('Event description'), 'class' => 'span5 wysiwyg'));?>
+                <?php echo $this->Form->input('EventsTemplate.event_description', array('type' => 'textarea', 'required' => false, 'label' => __('Event description'), 'class' => 'span5 wysiwyg'));?>
             </div>
             <div class="form-group">
                 <?php echo $this->Form->input('EventsTemplate.dungeon_id', array('options' => $dungeonsList, 'required' => true, 'label' => __('Dungeon'), 'class' => 'span5'));?>

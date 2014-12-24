@@ -283,6 +283,15 @@ form .select .loading {margin:0 0 5px 5px;}
 #calendarResponsive li.calendarRow:nth-child(odd) {background:#fafafa;}
 #calendarResponsive li.calendarRow span {margin-right:5px;}
 #calendarResponsive li.calendarRow img {margin-right:5px;}
+#calendarResponsive li.calendarRow ul {list-style:none;margin:0 0 0 15px;font-size:11px;}
+#calendarResponsive li.currentDay {background:#e6e6e6}
+#calendarResponsive li.pastDay {background:transparent;color:#ccc}
+#calendarResponsive li.pastDay a {color:#ccc}
+#calendarResponsive a.registered_0 {color:#999999;}
+#calendarResponsive a.registered_1 {color:#3a87ad;}
+#calendarResponsive a.registered_2 {color:#468847;}
+#calendarResponsive .dayNumber {font-weight:bold;}
+#calendarResponsive .dayNumber a {margin-right:10px}
 
 /*@media (min-width:768px) and (max-width:1250px) {*/
 @media (max-width:1250px) {
@@ -290,6 +299,8 @@ form .select .loading {margin:0 0 5px 5px;}
 
 @media (max-width: 1024px) {
 	#header .menubar {position:relative}
+	#createEvent {float:none;text-align:left;}
+	#filterEvents {float:none;text-align:left;}
 }
 
 @media (max-width: 800px) {
@@ -298,6 +309,9 @@ form .select .loading {margin:0 0 5px 5px;}
 
 @media (max-width: 600px) {
 	#calendar .links td .responsive {display:none;}
+	#calendar .links td {width:20%;}
+	#calendar .links td.month {width:60%;}
+	#calendar .links td.prev span, #calendar .links td.next span {display:none;}
 }
 
 @media only screen and (max-width: 41.250em) {

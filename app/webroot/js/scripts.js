@@ -634,7 +634,13 @@ jQuery(function($) {
         $daysList = '<ul id="calendarResponsive" class="unstyled">';
         $calendar = $('#calendar');
         $calendar.find('table td.day').each(function() {
-            $daysList += '<li class="calendarRow">'+$(this).html()+'</li>';
+            dayClass = '';
+            if($(this).hasClass('pastDay')) {
+                dayClass = 'pastDay';
+            }else if($(this).hasClass('currentDay')) {
+                dayClass = 'currentDay';
+            }
+            $daysList += '<li class="calendarRow '+dayClass+'">'+$(this).html()+'</li>';
         });
         $daysList += '</ul>';
 

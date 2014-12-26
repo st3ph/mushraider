@@ -170,7 +170,6 @@ class AjaxController extends AppController {
             $refusedList = explode(',', $this->request->query['refused']);
 
             $params = array();
-            $params['fields'] = array('user_id');
             $params['recursive'] = -1;
             $params['conditions']['id'] = $eventId;
             if(!$event = $this->Event->find('first', $params)) {

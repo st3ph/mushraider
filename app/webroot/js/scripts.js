@@ -8,6 +8,18 @@ var trim = function(string) {
     return string.replace(/^\s+/g,'').replace(/\s+$/g,'');
 }
 
+var countRoster = function() {
+    var $eventRoles = $('#eventRoles');
+    $eventRoles.find('tbody h5').each(function() {
+        nbCharacters = $(this).next('ul').find('li').length;
+        countHtml = '';
+        if(nbCharacters) {
+            countHtml = '('+nbCharacters+')';
+        }
+        $(this).find('span').html(countHtml);
+    });
+}
+
 jQuery(function($) {
     if($('.flashMessage').length) {
         setTimeout('hideFlashMessage()', 8000);
@@ -313,6 +325,8 @@ jQuery(function($) {
                 });
 
                 $characterMessage.html(messageText).removeClass('label-info label-warning label-success label-important').addClass(messageClass);
+
+                countRoster();
             }
         });        
     });
@@ -389,6 +403,8 @@ jQuery(function($) {
 
                     $editButton.removeClass('badge-success').addClass('badge-warning');
                     $editButtonI.removeClass('icon-save').addClass('icon-edit');
+
+                    countRoster();
                 }
             }); 
 
@@ -455,6 +471,8 @@ jQuery(function($) {
             $refused.append($newPlayer);
             $player.remove();
         }
+
+        countRoster();
     });
 
     $('#eventRoles .sortWaiting').sortable({
@@ -473,10 +491,13 @@ jQuery(function($) {
                 url: site_url+'ajax/updateRosterChar',
                 data: 'c='+characterId+'&r='+roleId+'&e='+eventId,
                 success: function(msg) {
+                    countRoster();
                 }
             });
         }
     }).disableSelection();
+
+    countRoster();
 
     $('#EventTimeInvitationHour, #EventTimeInvitationMin').on('change', function() {
         var $EventTimeInvitationHour = $('#EventTimeInvitationHour');

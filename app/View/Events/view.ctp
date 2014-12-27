@@ -217,22 +217,22 @@ foreach($event['EventsRole'] as $eventRole) {
 				<?php foreach($eventRoles as $roleId => $eventRole):?>
 					<?php if($eventRole['max'] > 0):?>
 						<td data-id="<?php echo $roleId;?>" data-full="<?php echo __('The roster for this role is full');?>" style="width:<?php echo $colWidth;?>%">
-							<h5 class="text-success"><?php echo __('Validated');?></h5>
+							<h5 class="text-success"><?php echo __('Validated');?> <span class="count"></span></h5>
 							<ul class="validated">
 								<?php echo $eventRole['characters']['validated'];?>
 							</ul>
 							<hr />
-							<h5 class="text-info"><?php echo __('Waiting');?></h5>
+							<h5 class="text-info"><?php echo __('Waiting');?> <span class="count"></span></h5>
 							<ul class="waiting sortWaiting">
 								<?php echo $eventRole['characters']['waiting'];?>
 							</ul>
 							<hr />
-							<h5 class="text-error"><?php echo __('Refused');?></h5>
+							<h5 class="text-error"><?php echo __('Refused');?> <span class="count"></span></h5>
 							<ul class="refused">
 								<?php echo $eventRole['characters']['refused'];?>
 							</ul>
 							<hr />
-							<h5 class="text-warning"><?php echo __('Rejected');?></h5>
+							<h5 class="text-warning"><?php echo __('Rejected');?> <span class="count"></span></h5>
 							<ul class="rejected">
 								<?php echo $eventRole['characters']['nok'];?>
 							</ul>

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Mushraider\n"
-"POT-Creation-Date: 2014-12-17 21:01+0100\n"
-"PO-Revision-Date: 2014-12-17 21:01+0100\n"
+"POT-Creation-Date: 2014-12-27 17:20+0100\n"
+"PO-Revision-Date: 2014-12-27 17:20+0100\n"
 "Last-Translator: Stéphane \"Mush\" Litou <contact@mushraider.com>\n"
 "Language-Team:  <contact@mushraider.com>\n"
 "Language: en\n"
@@ -39,10 +39,10 @@ msgstr "%s has been added to your character list"
 
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:58
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:118
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:239
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:278
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:300
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:332
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:236
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:275
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:297
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:329
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AuthController.php:149
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AuthController.php:197
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/EventsController.php:205
@@ -100,90 +100,84 @@ msgstr "The character %s has been enabled"
 msgid "MushRaider can't enable this character oO"
 msgstr "MushRaider can't enable this character oO"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:223
-msgid ""
-"Bridge system is enabled so you can't change your personal informations here."
-msgstr ""
-"Bridge system is enabled so you can't change your personal informations here."
-
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:227
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:222
 msgid "My MushRaider personal informations"
 msgstr "My MushRaider personal informations"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:228
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:223
 #: E:\Dev\wamp\www\mushraider\mushraider\app/View/Account/personal.ctp:2
 msgid "Personal informations"
 msgstr "Personal informations"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:236
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:297
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:233
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:294
 msgid "Your settings were saved successfully"
 msgstr "Your settings were saved successfully"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:249
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:246
 msgid "Bridge system is enabled so you can't change your password here."
 msgstr "Bridge system is enabled so you can't change your password here."
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:253
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:250
 msgid "My MushRaider password"
 msgstr "My MushRaider password"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:254
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:251
 #: E:\Dev\wamp\www\mushraider\mushraider\app/View/Auth/login.ctp:10
 #: E:\Dev\wamp\www\mushraider\mushraider\app/View/Auth/signup.ctp:15
 #: E:\Dev\wamp\www\mushraider\mushraider\app/View/Elements/account_menu.ctp:13
 msgid "Password"
 msgstr "Password"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:258
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:255
 msgid "All the fields are mandatory"
 msgstr "All the fields are mandatory"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:260
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:257
 msgid ""
 "The new password isn't the same than his confirmation, is it that difficult ?"
 msgstr ""
 "The new password isn't the same than his confirmation, is it that difficult ?"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:268
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:265
 msgid "Wrong current password, try again"
 msgstr "Wrong current password, try again"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:274
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:271
 msgid "Your password has been updated"
 msgstr "Your password has been updated"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:287
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:284
 msgid "My MushRaider settings"
 msgstr "My MushRaider settings"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:288
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:285
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:19
 msgid "Settings"
 msgstr "Settings"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:310
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:307
 msgid "Absences management"
 msgstr "Absences management"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:317
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:314
 #: E:\Dev\wamp\www\mushraider\mushraider\app/View/Elements/account_menu.ctp:17
 msgid "Absences"
 msgstr "Absences"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:329
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:326
 msgid "Your absence has been added successfully"
 msgstr "Your absence has been added successfully"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:351
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:348
 msgid "MushRaider  can't find this absence oO"
 msgstr "MushRaider  can't find this absence oO"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:357
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:354
 msgid "MushRaider can't delete this absence oO"
 msgstr "MushRaider can't delete this absence oO"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:359
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AccountController.php:356
 msgid "The absence has been deleted"
 msgstr "The absence has been deleted"
 
@@ -208,7 +202,7 @@ msgstr "This role is already full"
 msgid "Error while adding your character"
 msgstr "Error while adding your character"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AjaxController.php:296
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AjaxController.php:295
 msgid "Error while loading the template"
 msgstr "Error while loading the template"
 
@@ -216,7 +210,7 @@ msgstr "Error while loading the template"
 msgid "MushRaider is ready for install, what about you ?"
 msgstr "MushRaider is ready for install, what about you ?"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AppController.php:104
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Controller/AppController.php:105
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/AdminAppController.php:16
 msgid "You have to be logged in to access this page."
 msgstr "You have to be logged in to access this page."
@@ -534,9 +528,9 @@ msgstr "Class %s has been updated"
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/DungeonsController.php:184
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/EventsController.php:65
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/EventsController.php:90
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/GamesController.php:68
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/GamesController.php:186
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/GamesController.php:225
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/GamesController.php:75
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/GamesController.php:193
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/GamesController.php:232
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/RacesController.php:93
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/RacesController.php:116
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/RaidrolesController.php:52
@@ -603,22 +597,22 @@ msgstr "Event template %s has been updated"
 msgid "The template %s has been deleted"
 msgstr "The template %s has been deleted"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/GamesController.php:65
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/GamesController.php:72
 #, php-format
 msgid "%s has been added to your games list"
 msgstr "%s has been added to your games list"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/GamesController.php:98
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/GamesController.php:221
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/GamesController.php:105
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/GamesController.php:228
 msgid "MushRaider is unable to find this game oO"
 msgstr "MushRaider is unable to find this game oO"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/GamesController.php:183
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/GamesController.php:190
 #, php-format
 msgid "The game %s has been updated"
 msgstr "The game %s has been updated"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/GamesController.php:223
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/GamesController.php:230
 msgid "The game has been deleted"
 msgstr "The game has been deleted"
 
@@ -637,11 +631,11 @@ msgstr ""
 "yourself using the following file : /app/Config/Schema/sql/mushraider_patch_"
 "%s.sql"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:56
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:61
 msgid "MushRaider successfully apply the patch !"
 msgstr "MushRaider successfully apply the patch !"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:119
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:124
 msgid ""
 "Bridge has been disabled ! Be sure to use an updated version of your bridge "
 "plugin for MushRaider 1.4. If you don't you're gonna have a bad time !"
@@ -649,23 +643,23 @@ msgstr ""
 "Bridge has been disabled ! Be sure to use an updated version of your bridge "
 "plugin for MushRaider 1.4. If you don't you're gonna have a bad time !"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:148
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:153
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:201
 msgid "Full permissions"
 msgstr "Full permissions"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:148
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:153
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:201
 msgid "Like Chuck Norris, he can do anything. This overwrite every permissions"
 msgstr ""
 "Like Chuck Norris, he can do anything. This overwrite every permissions"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:149
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:154
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:202
 msgid "Limited admin access"
 msgstr "Limited admin access"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:149
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:154
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:202
 msgid ""
 "Like Robin, he can do some things but not all (like driving the batmobile or "
@@ -674,12 +668,12 @@ msgstr ""
 "Like Robin, he can do some things but not all (like driving the batmobile or "
 "change user role)"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:150
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:155
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:203
 msgid "Can manage events"
 msgstr "Can manage events"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:150
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:155
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:203
 msgid ""
 "Can create, edit and delete events. Can also manage the roster for each "
@@ -688,32 +682,32 @@ msgstr ""
 "Can create, edit and delete events. Can also manage the roster for each "
 "events"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:151
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:156
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:205
 msgid "Can create templates"
 msgstr "Can create templates"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:151
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:156
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:205
 msgid "Can create events templates"
 msgstr "Can create events templates"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:152
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:157
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:206
 msgid "Can create reports"
 msgstr "Can create reports"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:152
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:157
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:206
 msgid "Can create events reports"
 msgstr "Can create events reports"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:239
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:244
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:204
 msgid "Can manage own events only"
 msgstr "Can manage own events only"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:239
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:244
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:204
 msgid ""
 "Can create, edit and delete own events only. Can also manage the roster for "
@@ -1032,7 +1026,7 @@ msgstr "save"
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/View/Widgets/edit.ctp:48
 #: E:\Dev\wamp\www\mushraider\mushraider\app/View/Account/availabilities.ctp:40
 #: E:\Dev\wamp\www\mushraider\mushraider\app/View/Account/password.ctp:22
-#: E:\Dev\wamp\www\mushraider\mushraider\app/View/Account/personal.ctp:20
+#: E:\Dev\wamp\www\mushraider\mushraider\app/View/Account/personal.ctp:22
 #: E:\Dev\wamp\www\mushraider\mushraider\app/View/Account/settings.ctp:19
 msgid "Save"
 msgstr "Save"
@@ -1496,7 +1490,11 @@ msgstr "Games"
 msgid "Informations and updates on"
 msgstr "Informations and updates on"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/View/Dashboard/index.ctp:44
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/View/Dashboard/index.ctp:42
+msgid "MMORPG server status on"
+msgstr "MMORPG server status on"
+
+#: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/View/Dashboard/index.ctp:45
 msgid "Follow"
 msgstr "Follow"
 
@@ -2416,7 +2414,7 @@ msgid "Username"
 msgstr "Username"
 
 #: E:\Dev\wamp\www\mushraider\mushraider\app/Plugin/Admin/View/Users/index.ctp:11
-#: E:\Dev\wamp\www\mushraider\mushraider\app/View/Account/personal.ctp:16
+#: E:\Dev\wamp\www\mushraider\mushraider\app/View/Account/personal.ctp:17
 msgid "Email"
 msgstr "Email"
 
@@ -2814,7 +2812,7 @@ msgstr "Confirm new password"
 msgid "Letters and numbers only, 3 to 20 chars length."
 msgstr "Letters and numbers only, 3 to 20 chars length."
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/View/Account/personal.ctp:16
+#: E:\Dev\wamp\www\mushraider\mushraider\app/View/Account/personal.ctp:17
 #: E:\Dev\wamp\www\mushraider\mushraider\app/View/Auth/signup.ctp:11
 msgid "Valid Email"
 msgstr "Valid Email"
@@ -2918,7 +2916,7 @@ msgstr "I already have an account."
 msgid "Options"
 msgstr "Options"
 
-#: E:\Dev\wamp\www\mushraider\mushraider\app/View/Elements/account_menu.ctp:10
+#: E:\Dev\wamp\www\mushraider\mushraider\app/View/Elements/account_menu.ctp:9
 msgid "Account"
 msgstr "Account"
 
@@ -3365,6 +3363,13 @@ msgstr "This email has been sent automatically by MushRaider"
 #: E:\Dev\wamp\www\mushraider\mushraider\app/View/Layouts/error.ctp:20
 msgid "MushRaider Error"
 msgstr "MushRaider Error"
+
+#~ msgid ""
+#~ "Bridge system is enabled so you can't change your personal informations "
+#~ "here."
+#~ msgstr ""
+#~ "Bridge system is enabled so you can't change your personal informations "
+#~ "here."
 
 #~ msgid "This class is linked to a game, you can't delete it."
 #~ msgstr "This class is linked to a game, you can't delete it."

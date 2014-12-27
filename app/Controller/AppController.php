@@ -79,8 +79,9 @@ class AppController extends Controller {
                 $params['contain']['Role'] = array();
                 $params['contain']['Character'] = array();
                 $params['conditions']['User.id'] = $userID;
-				$this->user = $this->User->find('first', $params);
-                $this->user['User']['can'] = $this->Role->getPermissions($this->user['User']['role_id']);
+				if($this->user = $this->User->find('first', $params)) {
+                    $this->user['User']['can'] = $this->Role->getPermissions($this->user['User']['role_id']);
+                }
 			}else {
 				$this->Session->delete('User.id');
 			}

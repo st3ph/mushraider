@@ -43,6 +43,10 @@ class PatcherController extends AdminAppController {
                 return $this->redirect('/admin/patcher/apply/'.$patch);
 	        }else {
 	        	// If there is code to execute...
+                Cache::clear(false, '_cake_core_');
+                Cache::clear(false, '_cake_model_');
+                Cache::clear(false);
+                
                 $methodName = str_replace('-', '', $patch);
 	        	$methodName = str_replace('.', '', $methodName);
 	        	if(method_exists($this, $methodName)) {
@@ -52,6 +56,7 @@ class PatcherController extends AdminAppController {
                 // Delete cache for obvious reasons :p
                 Cache::clear(false, '_cake_core_');
                 Cache::clear(false, '_cake_model_');
+                Cache::clear(false);
 
 	        	$this->Session->setFlash(__('MushRaider successfully apply the patch !'), 'flash_success');
 	        }
@@ -69,7 +74,7 @@ class PatcherController extends AdminAppController {
 
     	// Generate new schema
     	$this->Character->schemaBeta3();
-    	Cache::clear();
+    	Cache::clear(false);
 
     	$params = array();
     	$params['recursive'] = -1;
@@ -97,7 +102,7 @@ class PatcherController extends AdminAppController {
 
     public function v14() {
         // Regenerate cache
-        Cache::clear();
+        Cache::clear(false);
 
         /*
         * API
@@ -172,7 +177,7 @@ class PatcherController extends AdminAppController {
 
     public function v15() {
         // Regenerate cache
-        Cache::clear();
+        Cache::clear(false);
 
         // Notifications
         $notifications = array(

@@ -219,11 +219,6 @@ class AccountController extends AppController {
     }
 
     public function personal() {
-        if(!empty($this->bridge) && $this->bridge->enabled) {
-            $this->Session->setFlash(__('Bridge system is enabled so you can\'t change your personal informations here.'), 'flash_warning');
-            $this->redirect('/account');
-        }
-
         $this->pageTitle = __('My MushRaider personal informations').' - '.$this->pageTitle;
         $this->breadcrumb[] = array('title' => __('Personal informations'), 'url' => '');
 
@@ -231,7 +226,9 @@ class AccountController extends AppController {
             $toSave = array();
             $toSave['id'] = $this->user['User']['id'];
             $toSave['username'] = trim($this->request->data['User']['username']);
-            $toSave['email'] = trim($this->request->data['User']['email']);
+            if(empty($this->bridge) || !$this->bridge->enabled) {
+                $toSave['email'] = trim($this->request->data['User']['email']);
+            }
             if($this->User->save($toSave)) {
                 $this->Session->setFlash(__('Your settings were saved successfully'), 'flash_success');
                 $this->redirect('/account/personal');

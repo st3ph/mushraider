@@ -12,9 +12,11 @@
                 <?php $after = '<div class="hint">'.__('Letters and numbers only, 3 to 20 chars length.').'</div>';?>
                 <?php echo $this->Form->input('User.username', array('type' => 'text', 'required' => true, 'label' => __('Username'), 'class' => 'span5', 'placeholder' => __('Username'), 'pattern' => '[a-zA-Z0-9_\-]{3,20}', 'after' => $after));?>
             </div>
-            <div class="row-fluid">
-                <?php echo $this->Form->input('User.email', array('type' => 'email', 'required' => true, 'label' => __('Email'), 'class' => 'span5', 'placeholder' => __('Valid Email')));?>
-            </div>
+            <?php if(empty($bridge) || !$bridge->enabled):?>
+                <div class="row-fluid">
+                    <?php echo $this->Form->input('User.email', array('type' => 'email', 'required' => true, 'label' => __('Email'), 'class' => 'span5', 'placeholder' => __('Valid Email')));?>
+                </div>
+            <?php endif;?>
             <div class="row-fluid">
                 <div class="span2">
                     <?php echo $this->Form->submit(__('Save'), array('class' => 'btn btn-warning'));?>

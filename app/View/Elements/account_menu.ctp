@@ -5,10 +5,10 @@
     <li class="<?php echo $this->action == 'settings'?'active':'';?>">
         <?php echo $this->Html->link('<i class="icon-cogs"></i> '.__('Options').'<i class="icon-chevron-right pull-right"></i>', '/account/settings', array('escape' => false, 'title' => __('Options')));?>
     </li>
+    <li class="<?php echo $this->action == 'personal'?'active':'';?>">
+        <?php echo $this->Html->link('<i class="icon-user"></i> '.__('Account').'<i class="icon-chevron-right pull-right"></i>', '/account/personal', array('escape' => false, 'title' => __('Account')));?>
+    </li>
     <?php if(empty($bridge) || (!empty($bridge) && !$bridge->enabled)):?>
-        <li class="<?php echo $this->action == 'personal'?'active':'';?>">
-            <?php echo $this->Html->link('<i class="icon-user"></i> '.__('Account').'<i class="icon-chevron-right pull-right"></i>', '/account/personal', array('escape' => false, 'title' => __('Account')));?>
-        </li>
         <li class="<?php echo $this->action == 'password'?'active':'';?>">
             <?php echo $this->Html->link('<i class="icon-key"></i> '.__('Password').'<i class="icon-chevron-right pull-right"></i>', '/account/password', array('escape' => false, 'title' => __('Password')));?>
         </li>

@@ -2,15 +2,39 @@
     <header>
         <div class="icons"><i class="icon-list icon-white"></i></div>
         <h5><?php echo __('Users list');?></h5>
+        <div class="toolbar">
+        <ul class="nav">
+            <li>
+                <?php echo $this->Form->create('Search', array('url' => $this->here, 'class' => 'form-inline'));?>                    
+                    <div class="input-append">
+                        <?php echo $this->Form->input('Search.needle', array('type' => 'text', 'required' => false, 'label' => false, 'placeholder' => __('Search...'), 'div' => false, 'class' => 'span10'));?>
+                        <button class="btn btn-primary" type="submit"><span class="icon-search"></span></button>
+                    </div>
+                <?php echo $this->Form->end();?>
+            </li>
+        </ul>
+        </div>
     </header>
     <div class="accordion-body body in collapse">
         <table class="table table-bordered table-striped responsive">
             <thead>
                 <tr>
-                    <th class="span2"><?php echo __('Username');?></th>                    
-                    <th class="span3"><?php echo __('Email');?></th>                    
+                    <th class="span2">
+                        <?php $directionIcon = 'icon-sort-by-alphabet';?>
+                        <?php $directionIcon = ($this->Paginator->sortKey('User') == 'User.username' && $this->Paginator->sortDir('User') == 'desc')?'icon-sort-by-alphabet-alt':$directionIcon;?>
+                        <?php echo $this->Paginator->sort('User.username', __('Username').' <i class="'.$directionIcon.'"></i>', array('escape' => false));?>
+                    </th>
+                    <th class="span3">
+                        <?php $directionIcon = 'icon-sort-by-alphabet';?>
+                        <?php $directionIcon = ($this->Paginator->sortKey('User') == 'User.email' && $this->Paginator->sortDir('User') == 'desc')?'icon-sort-by-alphabet-alt':$directionIcon;?>
+                        <?php echo $this->Paginator->sort('User.email', __('Email').' <i class="'.$directionIcon.'"></i>', array('escape' => false));?>
+                    </th>                    
                     <th class="span1"><?php echo __('Status');?></th>                    
-                    <th class="span3"><?php echo __('Registration date');?></th>                    
+                    <th class="span3">
+                        <?php $directionIcon = 'icon-sort-by-order';?>
+                        <?php $directionIcon = ($this->Paginator->sortKey('User') == 'User.created' && $this->Paginator->sortDir('User') == 'desc')?'icon-sort-by-order-alt':$directionIcon;?>
+                        <?php echo $this->Paginator->sort('User.created', __('Registration date').' <i class="'.$directionIcon.'"></i>', array('escape' => false));?>
+                    </th>                    
                     <th class="span1"><?php echo __('Characters');?></th>
                     <th class="span1"><?php echo __('Role');?></th>
                     <th class="actions span1"><?php echo __('Actions');?></th>

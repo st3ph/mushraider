@@ -1246,6 +1246,8 @@ table.table-striped tbody.ui-sortable tr.sortable-placeholder td {background:#99
 table.table-striped tbody.ui-sortable tr.sortable-placeholder td:first-child {border-left:2px dashed #ddd}
 table.table-striped tbody.ui-sortable tr.sortable-placeholder td:last-child {border-right:2px dashed #ddd}
 
+.box header .toolbar form {margin-top:5px;}
+
 /* Dashboard */
 .quick-btn {min-width:90px;width:auto;padding-left:2px;padding-right:2px;}
 .quick-btn .waiting {position: absolute;right: -5px;bottom: -5px;top:auto;}

@@ -18,6 +18,11 @@ class UsersController extends AdminAppController {
 
     public function index() {
         $conditions = array();
+
+        if(!empty($this->request->data['Search']) && isset($this->request->data['Search']['needle'])) {
+            $conditions['or']['User.username LIKE'] = '%'.trim($this->request->data['Search']['needle']).'%';
+            $conditions['or']['User.email LIKE'] = '%'.trim($this->request->data['Search']['needle']).'%';
+        }            
         $conditions['User.status'] = 1;
         $users = $this->paginate('User', $conditions);        
         $this->set('users', $users);

@@ -32,6 +32,7 @@
                                 <span class="add-on"><span class="icon-calendar"></span></span>
                             </div>
                             <?php echo $this->Form->error('Availability.end');?>
+                        </td>
                         <td class="comment">
                             <?php echo $this->Form->input('Availability.comment', array('type' => 'text', 'required' => true, 'label' => false, 'div' => false, 'class' => 'span4', 'placeholder' => __('Absence reason'), 'error' => false));?>
                             <?php echo $this->Form->error('Availability.comment');?>

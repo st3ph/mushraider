@@ -1283,7 +1283,7 @@ table.table-striped tbody.ui-sortable tr.sortable-placeholder td:last-child {bor
 .loadingAnimation:before{-webkit-animation:loading-animation 1s linear infinite;-moz-animation:loading-animation 1s linear infinite;-ms-animation:loading-animation 1s linear infinite;-o-animation:loading-animation 1s linear infinite;animation:loading-animation 1s linear infinite}
 
 /* Stats */
-.filter select {margin-bottom:0;}
+.statsFilter .btn {margin-top:25px;}
 
 /* Roster */
 #summary {margin-bottom:50px;}

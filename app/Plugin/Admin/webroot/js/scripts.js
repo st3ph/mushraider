@@ -142,6 +142,27 @@ jQuery(function($) {
 
     loadSpectrum('.colorpicker');
 
+    $('.startDate').datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        changeYear: true,
+        numberOfMonths: 1,
+        dateFormat: 'dd/mm/yy',
+        onClose: function( selectedDate ) {
+            $(this).parents('form').find('.endDate').datepicker( "option", "minDate", selectedDate );
+        }
+    });
+    $('.endDate').datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        changeYear: true,
+        numberOfMonths: 1,
+        dateFormat: 'dd/mm/yy',
+        onClose: function( selectedDate ) {
+            $(this).parents('form').find('.startDate').datepicker( "option", "maxDate", selectedDate );
+        }
+    });
+
     $('.sortableTbody').sortable({
         placeholder: "sortable-placeholder",
         cursor: "move",

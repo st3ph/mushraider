@@ -5,11 +5,40 @@
         <h5><?php echo __('Stats');?></h5>
     </header>
     <div class="accordion-body body in collapse">
-        <?php echo $this->Form->create('Stats', array('url' => '/admin/stats'));?>
-            <div class="form-group filter">
-                <?php echo $this->Form->input('Stats.game_id', array('type' => 'select', 'label' => __('Game'), 'options' => $gamesList, 'empty' => '', 'required' => true, 'class' => 'span5', 'div' => false));?>
-                <?php echo $this->Form->submit(__('Filter'), array('class' => 'btn btn-success', 'div' => false));?>
-            </div>
+        <?php echo $this->Form->create('Stats', array('url' => '/admin/stats', 'class' => 'statsFilter'));?>
+            <table class="table">
+                <tr>
+                <td class="span3">
+                    <div class="form-group">
+                        <?php echo $this->Form->input('Stats.game_id', array('type' => 'select', 'label' => __('Game'), 'options' => $gamesList, 'empty' => '', 'required' => true, 'class' => '', 'div' => false));?>
+                    </div>
+                </td>
+                <td class="span3">
+                    <div class="form-group">
+                        <?php echo $this->Form->input('Stats.characters', array('type' => 'select', 'label' => __('Characters'), 'options' => array(0 => __('All'), 1 => __('Main only')), 'default' => '1', 'div' => false));?>
+                    </div>
+                </td>
+                <td class="span2">
+                    <div class="form-group">
+                        <div class="input-append">
+                            <?php echo $this->Form->input('Stats.start', array('type' => 'text', 'label' => __('From'), 'div' => false, 'class' => 'input-small startDate', 'placeholder' => __('From'), 'error' => false));?>
+                            <span class="add-on"><span class="icon-calendar"></span></span>
+                        </div>
+                    </div>
+                </td>
+                <td class="span2">
+                    <div class="form-group">
+                        <div class="input-append">
+                            <?php echo $this->Form->input('Stats.end', array('type' => 'text', 'label' => __('To'), 'div' => false, 'class' => 'input-small endDate', 'placeholder' => __('To'), 'error' => false));?>
+                            <span class="add-on"><span class="icon-calendar"></span></span>
+                        </div>
+                    </div>
+                </td>
+                <td class="span1">
+                    <?php echo $this->Form->submit(__('Filter'), array('class' => 'btn btn-success', 'div' => false));?>
+                </td>
+                </tr>
+            </table>
         <?php echo $this->Form->end();?>
 
 

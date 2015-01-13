@@ -11,7 +11,9 @@
             </div>
         <?php echo $this->Form->end();?>
 
-        <h3><?php echo __('Roster of');?> <?php echo $gamesList[$this->data['Roster']['game_id']];?></h3>
+        <?php if(!empty($this->data['Roster'])):?>
+            <h3><?php echo __('Roster of');?> <?php echo $gamesList[$this->data['Roster']['game_id']];?></h3>
+        <?php endif;?>
 
         <?php if(!empty($characters)):?>
             <div id="summary">

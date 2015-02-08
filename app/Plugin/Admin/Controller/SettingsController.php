@@ -44,6 +44,8 @@ class SettingsController extends AdminAppController {
                 $this->Setting->setOption('email', json_encode($email));
             }
 
+            $this->Setting->setOption('timezone', $this->request->data['Setting']['timezone']);
+
             $this->Session->setFlash(__('Settings have been updated'), 'flash_success');
             return $this->redirect('/admin/settings');
         }
@@ -68,6 +70,9 @@ class SettingsController extends AdminAppController {
         }
         $this->set('appLocales', $appLocales);
         $this->request->data['Setting']['sitelang'] = Configure::read('Settings.language');
+
+        // Timezone
+        $this->request->data['Setting']['timezone'] = $this->Setting->getOption('timezone');
 
         // Emails
         $email = json_decode($this->Setting->getOption('email'));

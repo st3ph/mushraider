@@ -70,6 +70,9 @@ class AppController extends Controller {
         Configure::write('Config.maxPostSize', ini_get('post_max_size'));
         Configure::write('Config.appUrl', rtrim('http://'.$_SERVER['HTTP_HOST'].$this->webroot, '/'));
 
+        // Timezone
+        date_default_timezone_set($this->Setting->getOption('timezone'));
+
         // Log in user
         if($this->Session->check('User.id')) {
 			$userID = $this->Session->read('User.id');			

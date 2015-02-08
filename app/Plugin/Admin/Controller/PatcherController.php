@@ -4,7 +4,7 @@ class PatcherController extends AdminAppController {
     public $uses = array('Character', 'EventsCharacter', 'Event');
 
     var $adminOnly = true;
-    var $availablePatchs = array('beta-2', 'beta-3', 'v-1.1', 'v-1.3', 'v-1.3.5', 'v-1.4', 'v-1.4.1', 'v-1.5');
+    var $availablePatchs = array('beta-2', 'beta-3', 'v-1.1', 'v-1.3', 'v-1.3.5', 'v-1.4', 'v-1.4.1', 'v-1.5', 'v-1.5.2');
     var $dbPrefix = 'mr_';
 
     function beforeFilter() {
@@ -249,5 +249,13 @@ class PatcherController extends AdminAppController {
 
         // Mushstats
         $this->Setting->setOption('Mushstats', time());
+    }
+
+    public function v152() {
+        // Regenerate cache
+        Cache::clear(false);
+
+        // Timezone
+        $this->Setting->setOption('timezone', 'Europe/Paris');
     }
 }

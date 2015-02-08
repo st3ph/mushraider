@@ -23,6 +23,16 @@
                 <div class="form-group">
                     <?php echo $this->Form->input('Setting.sitelang', array('type' => 'select', 'options' => $appLocales, 'required' => true, 'class' => 'span2', 'label' => __('Default language')));?>
                 </div>
+                <div class="form-group">
+                    <div class="input select">
+                        <label for="SettingTimezone"><?php echo __('Timezone');?></label>
+                        <select name="data[Setting][timezone]" required="required" class="span2" id="SettingTimezone">
+                            <?php foreach(DateTimeZone::listIdentifiers() as $timezone):?>
+                                <option value="<?php echo $timezone;?>" <?php echo $this->data['Setting']['timezone'] == $timezone?'selected="selected"':'';?>><?php echo $timezone;?></option>
+                            <?php endforeach;?>
+                        </select>
+                    </div>
+                </div>
             </div>
 
             <h3><?php echo __('Emails');?></h3>

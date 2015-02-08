@@ -89,10 +89,13 @@ class EventsController extends AppController {
 
         // Get user characters for this event
         $params = array();
-        $params['conditions']['user_id'] = $this->user['User']['id'];
-        $params['conditions']['game_id']=  $event['Event']['game_id'];
-        $params['conditions']['level >='] = $event['Event']['character_level'];
-        $this->set('charactersList', $this->Character->find('list', $params));
+        $params['recursive'] = 1;
+        $params['fields'] = array('Character.id', 'Character.title');
+        $params['contain']['Classe']['fields'] = array('Classe.color');
+        $params['conditions']['Character.user_id'] = $this->user['User']['id'];
+        $params['conditions']['Character.game_id']=  $event['Event']['game_id'];
+        $params['conditions']['Character.level >='] = $event['Event']['character_level'];
+        $this->set('charactersList', $this->Character->find('all', $params));
 
         // Get bad guys
         $usersInEvent = array();

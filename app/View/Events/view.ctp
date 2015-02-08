@@ -84,7 +84,18 @@ foreach($event['EventsRole'] as $eventRole) {
 				}
 				?>
 				<span class="message <?php echo $messageClass;?>"><?php echo $messageText;?></span>
-				<?php echo $this->Form->input('Character', array('options' => $charactersList, 'selected' => $registeredCharacterId, 'empty' => __('Choose a character'), 'class' => 'span2', 'data-user' => $user['User']['id'], 'data-event' => $event['Event']['id'], 'data-error' => __('please select a character and a role'), 'data-signin' => __('your are registered to this event as'), 'data-signout' => __('your are not registered to this event'), 'data-validated' => __('your are validated to this event'), 'label' => false, 'div' => false));?>
+				<?php //echo $this->Form->input('Character', array('options' => $charactersList, 'selected' => $registeredCharacterId, 'empty' => __('Choose a character'), 'class' => 'span2', 'data-user' => $user['User']['id'], 'data-event' => $event['Event']['id'], 'data-error' => __('please select a character and a role'), 'data-signin' => __('your are registered to this event as'), 'data-signout' => __('your are not registered to this event'), 'data-validated' => __('your are validated to this event'), 'label' => false, 'div' => false));?>
+
+				<select name="data[Character]" class="span2" data-user="<?php echo $user['User']['id'];?>" data-event="<?php echo $event['Event']['id'];?>" data-error="<?php echo __('please select a character and a role');?>" data-signin="<?php echo __('your are registered to this event as');?>" data-signout="<?php echo __('your are not registered to this event');?>" data-validated="<?php echo __('your are validated to this event');?>" id="Character">
+					<option value=""><?php echo __('Choose a character');?></option>
+					<?php if(!empty($charactersList)):?>
+						<?php foreach($charactersList as $character):?>
+							<option value="<?php echo $character['Character']['id'];?>" <?php echo $registeredCharacterId == $character['Character']['id']?'selected="selected"':'';?> style="color:<?php echo $character['Classe']['color'];?>"><?php echo $character['Character']['title'];?></option>
+						<?php endforeach;?>
+					<?php endif;?>
+				</select>
+
+
 				<?php if(!empty($event['EventsRole'])):?>
 					<select name="data[EventsRole]" id="EventsRole" class="span1">
 						<option value=""><?php echo __('Role');?></option>

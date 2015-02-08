@@ -4,7 +4,7 @@ MushRaider
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/st3ph/mushraider/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 ## What is that ?
-MushRaider is a Simple Raid Planner mainly designed for MMORPG. It's written in PHP 5.x and need a MySQL database.
+MushRaider is a Modern Raid Planner mainly designed for MMORPG. It's written in PHP 5.x and need a MySQL database.
 It supports multi gaming and can be fully customize.
 
 ## How ? What ?

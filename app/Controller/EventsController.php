@@ -147,7 +147,7 @@ class EventsController extends AppController {
             $toSave['character_level'] = $this->request->data['Event']['character_level'];
             $toSave['time_invitation'] = date('Y-m-d H:i:s', mktime($this->request->data['Event']['time_invitation']['hour'], $this->request->data['Event']['time_invitation']['min'], 0, $dates[1], $dates[2], $dates[0]));
             $toSave['time_start'] = date('Y-m-d H:i:s', mktime($this->request->data['Event']['time_start']['hour'], $this->request->data['Event']['time_start']['min'], 0, $dates[1], $dates[2], $dates[0]));            
-            $toSave['open'] = $this->request->data['Event']['open'];            
+            $toSave['open'] = $this->request->data['Event']['open']?1:0;            
 
             if(!empty($this->request->data['Event']['roles'])) {
                 if($this->Event->save($toSave)) {
@@ -273,7 +273,7 @@ class EventsController extends AppController {
             $toSave['character_level'] = $this->request->data['Event']['character_level'];
             $toSave['time_invitation'] = date('Y-m-d H:i:s', mktime($this->request->data['Event']['time_invitation']['hour'], $this->request->data['Event']['time_invitation']['min'], 0, $dates[1], $dates[2], $dates[0]));
             $toSave['time_start'] = date('Y-m-d H:i:s', mktime($this->request->data['Event']['time_start']['hour'], $this->request->data['Event']['time_start']['min'], 0, $dates[1], $dates[2], $dates[0]));            
-            $toSave['open'] = $this->request->data['Event']['open'];
+            $toSave['open'] = $this->request->data['Event']['open']?1:0;
 
             if(!empty($this->request->data['Event']['roles'])) {
                 if($this->Event->save($toSave)) {

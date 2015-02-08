@@ -191,6 +191,13 @@ class StepController extends InstallAppController {
                                             'password' => ''
                                         ));
         $defaultSettings['Mushstats'] = time();
+        $defaultSettings['calendar'] = json_encode(array(
+                                            'weekStartDay' => 0,
+                                            'title' => 'event',
+                                            'timeToDisplay' => 'time_invitation',
+                                            'gameIcon' => 1,
+                                            'dungeonIcon' => 1
+                                        ));
         foreach($defaultSettings as $option => $value) {
             $settingModel->create();
             $settingModel->save(array('option' => $option, 'value' => $value));

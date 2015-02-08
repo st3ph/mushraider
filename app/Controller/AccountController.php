@@ -13,7 +13,7 @@ class AccountController extends AppController {
     }
 
     public function index() {
-       $this->setAction('characters');
+       $this->setAction('personal');
        return;
     }
 

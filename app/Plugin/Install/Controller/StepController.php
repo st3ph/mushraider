@@ -24,7 +24,7 @@ class StepController extends InstallAppController {
         $systemCheckPassed = true;
         $systemCheck = array();
 
-        $systemCheck['php']['passed'] = PHP_VERSION_ID > 50300?true:false;
+        $systemCheck['php']['passed'] = version_compare(PHP_VERSION, '5.3', '>=')?true:false;
         $systemCheck['php']['version'] = phpversion();
         $systemCheckPassed = $systemCheck['php']['passed']?$systemCheckPassed:false;
 
@@ -144,7 +144,7 @@ class StepController extends InstallAppController {
 
                         $this->Session->delete('Settings');
                         $this->Session->setFlash(__('MushRaider successfully install !'), 'flash_success');
-                        $this->redirect('/admin');
+                        $this->redirect('/auth/login');
                     }else {
                         $this->Session->setFlash(__('MushRaider can\'t create admin user, please try again.'), 'flash_error');
                         $flashed = true;
@@ -198,6 +198,7 @@ class StepController extends InstallAppController {
                                             'gameIcon' => 1,
                                             'dungeonIcon' => 1
                                         ));
+        $defaultSettings['timezone'] = 'Europe/Paris';
         foreach($defaultSettings as $option => $value) {
             $settingModel->create();
             $settingModel->save(array('option' => $option, 'value' => $value));

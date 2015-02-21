@@ -69,6 +69,14 @@ jQuery(function($) {
 
 
     /*
+    * Tour Guide
+    */
+    if(typeof tourGuide != 'undefined') {
+        console.log(tourGuide);
+        hopscotch.startTour(tourGuide);
+    }
+
+    /*
     * Account
     */
     $('#CharacterGameId').on('change', function(e) {

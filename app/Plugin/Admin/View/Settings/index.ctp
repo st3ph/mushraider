@@ -63,7 +63,7 @@
                     <?php echo $this->Form->input('Setting.email.username', array('type' => 'text', 'label' => __('SMTP Username'), 'class' => 'span5'));?>
                 </div>
                 <div class="form-group">
-                    <?php echo $this->Form->input('Setting.email.password', array('type' => 'text', 'label' => __('SMTP Password'), 'class' => 'span5'));?>
+                    <?php echo $this->Form->input('Setting.email.password', array('type' => 'password', 'label' => __('SMTP Password'), 'class' => 'span5'));?>
                 </div>
             </div>
 

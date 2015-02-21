@@ -33,6 +33,14 @@ class EmailingComponent extends Component {
         }
     }
 
+    private function send() {
+        try {
+            $this->email->send();
+        }catch(Exception $e) {
+
+        }
+    }
+
     function signup($dest) {
         $this->email->to($dest);
         $this->email->subject(__('Welcome to MushRaider'));
@@ -41,7 +49,7 @@ class EmailingComponent extends Component {
         $this->email->viewVars(array(
             'dest' => $dest
         ));
-        $this->email->send();
+        $this->send();
     }
 
     function signupNotification($dest, $username, $userId) {
@@ -54,7 +62,7 @@ class EmailingComponent extends Component {
             'username' => $username,
             'userId' => $userId
         ));
-        $this->email->send();
+        $this->send();
     }
 
     function userEnabled($dest, $username) {
@@ -66,7 +74,7 @@ class EmailingComponent extends Component {
             'dest' => $dest,
             'username' => $username
         ));
-        $this->email->send();
+        $this->send();
     }
 
     function recovery($dest, $hash) {
@@ -78,7 +86,7 @@ class EmailingComponent extends Component {
             'dest' => $dest,
             'token' => $hash
         ));
-        $this->email->send();
+        $this->send();
     }
 
     function eventCancel($dest, $event) {
@@ -89,7 +97,7 @@ class EmailingComponent extends Component {
         $this->email->viewVars(array(
             'event' => $event
         ));
-        $this->email->send();
+        $this->send();
     }
 
     function eventNew($dest, $event) {
@@ -100,7 +108,7 @@ class EmailingComponent extends Component {
         $this->email->viewVars(array(            
             'event' => $event
         ));
-        $this->email->send();
+        $this->send();
     }
 
     function eventValidate($dest, $event) {
@@ -111,7 +119,7 @@ class EmailingComponent extends Component {
         $this->email->viewVars(array(            
             'event' => $event
         ));
-        $this->email->send();
+        $this->send();
     }
 
     function eventRefuse($dest, $event) {
@@ -122,6 +130,6 @@ class EmailingComponent extends Component {
         $this->email->viewVars(array(            
             'event' => $event
         ));
-        $this->email->send();
+        $this->send();
     }
 }

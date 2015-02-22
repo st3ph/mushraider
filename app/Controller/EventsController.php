@@ -4,10 +4,18 @@ class EventsController extends AppController {
     var $helpers = array('Sociable.Comment');
     var $uses = array('Game', 'Dungeon', 'Event', 'RaidsRole', 'EventsRole', 'EventsCharacter', 'Character', 'EventsTemplate', 'EventsTemplatesRole', 'Report');
 
+    private $recurrences = array();
+    private $recurrencesCount = array(1 => '1', 2 => '2', 3 => '3', 4 => '4', 5 => '5', 6 => '6', 7 => '7', 8 => '8', 9 => '9', 10 => '10');
+
     public function beforeFilter() {
         parent::beforeFilter();
 
         $this->breadcrumb[] = array('title' => __('Events'), 'url' => '/events');
+
+        // Recurrences
+        $this->recurrences['D'] = __('every days');
+        $this->recurrences['W'] = __('every weeks');
+        $this->recurrences['M'] = __('every months');
     }
 
     public function index() {
@@ -139,70 +147,50 @@ class EventsController extends AppController {
         }
 
         if(!empty($this->request->data['Event'])) {
-            $dates = explode('-', $date);
+            if($event = $this->Event->__add($this->request->data, $this->user, $date)) {
+                $dates = explode('-', $date);
 
-            $toSave = array();
-            $toSave['title'] = trim(strip_tags($this->request->data['Event']['title']));
-            $toSave['description'] = nl2br($this->request->data['Event']['description']);
-            $toSave['user_id'] = $this->user['User']['id'];
-            $toSave['game_id'] = $this->request->data['Event']['game_id'];
-            $toSave['dungeon_id'] = $this->request->data['Event']['dungeon_id'];
-            $toSave['character_level'] = $this->request->data['Event']['character_level'];
-            $toSave['time_invitation'] = date('Y-m-d H:i:s', mktime($this->request->data['Event']['time_invitation']['hour'], $this->request->data['Event']['time_invitation']['min'], 0, $dates[1], $dates[2], $dates[0]));
-            $toSave['time_start'] = date('Y-m-d H:i:s', mktime($this->request->data['Event']['time_start']['hour'], $this->request->data['Event']['time_start']['min'], 0, $dates[1], $dates[2], $dates[0]));            
-            $toSave['open'] = $this->request->data['Event']['open']?1:0;            
-
-            if(!empty($this->request->data['Event']['roles'])) {
-                if($this->Event->save($toSave)) {
-                    $eventId = $this->Event->getLastInsertId();
-
-                    $paramsEvent = array();
-                    $paramsEvent['recursive'] = 1;
-                    $paramsEvent['contain']['Game']['fields'] = array('Game.title');
-                    $paramsEvent['contain']['Dungeon']['fields'] = array('Dungeon.title');
-                    $paramsEvent['conditions']['Event.id'] = $eventId;
-                    $event = $this->Event->find('first', $paramsEvent);
-
-                    foreach($this->request->data['Event']['roles'] as $roleId => $roleNumber) {
-                        $toSaveEventsRole = array();
-                        $toSaveEventsRole['event_id'] = $eventId;
-                        $toSaveEventsRole['raids_role_id'] = $roleId;
-                        $toSaveEventsRole['count'] = $roleNumber?$roleNumber:'0';
-                        $this->EventsRole->__add($toSaveEventsRole);
-                    }
-
-                    // If notifications are enable, send email to validate users
-                    if(Configure::read('Config.notifications')->enabled) {
-                        // Get all users who have a character for this event
-                        $params = array();
-                        $params['recursive'] = 1;
-                        $params['fields'] = array('id');
-                        $params['group'] = array('Character.user_id');
-                        $params['contain']['User']['fields'] = array('email', 'notifications_new');
-                        $params['contain']['User']['conditions']['User.status'] = 1;
-                        $params['conditions']['Character.game_id'] = $toSave['game_id'];
-                        $params['conditions']['Character.level >='] = !empty($toSave['character_level'])?$toSave['character_level']:1;
-                        if($users = $this->Character->find('all', $params)) {                            
-                            foreach($users as $user) {
-                                // Check if user have this notification enabled
-                                if($user['User']['notifications_new']) {
-                                    $this->Emailing->eventNew($user['User']['email'], $event);
-                                }
+                // If notifications are enable, send email to validate users
+                if(Configure::read('Config.notifications')->enabled) {
+                    // Get all users who have a character for this event
+                    $params = array();
+                    $params['recursive'] = 1;
+                    $params['fields'] = array('id');
+                    $params['group'] = array('Character.user_id');
+                    $params['contain']['User']['fields'] = array('email', 'notifications_new');
+                    $params['contain']['User']['conditions']['User.status'] = 1;
+                    $params['conditions']['Character.game_id'] = $event['Event']['game_id'];
+                    $params['conditions']['Character.level >='] = !empty($event['Event']['character_level'])?$event['Event']['character_level']:1;
+                    if($users = $this->Character->find('all', $params)) {
+                        foreach($users as $user) {
+                            // Check if user have this notification enabled
+                            if($user['User']['notifications_new']) {
+                                $this->Emailing->eventNew($user['User']['email'], $event);
                             }
                         }
                     }
+                }                
 
-                    // If we have to create a template based on this event
-                    if($this->user['User']['can']['create_templates'] || $this->user['User']['can']['full_permissions']) {
-                        if($this->request->data['Event']['template']) {
-                            $templateName = !empty($this->request->data['Event']['templateName'])?trim($this->request->data['Event']['templateName']):$toSave['title'];
-                            $this->Event->copy($eventId, $templateName);
-                        }
+                // If we have to create a template based on this event
+                if($this->user['User']['can']['create_templates'] || $this->user['User']['can']['full_permissions']) {
+                    if($this->request->data['Event']['template']) {
+                        $templateName = !empty($this->request->data['Event']['templateName'])?trim($this->request->data['Event']['templateName']):$event['Event']['title'];
+                        $this->Event->copy($event['Event']['id'], $templateName);
                     }
-
-                    $this->Session->setFlash(__('The event has been created.'), 'flash_success');
-                    $this->redirect('/events/index/m:'.(int)$dates[1].'/y:'.$dates[0]);
                 }
+
+                // Recurrence
+                if(!empty($this->request->data['Event']['repeat']) && $this->request->data['Event']['repeat']['enabled']) {
+                    $dateTime = new DateTime($date);
+                    $dateInterval = new DateInterval('P1'.$this->request->data['Event']['repeat']['recurrence']);
+                    for($i = 1;$i <= $this->request->data['Event']['repeat']['count'];$i++) {
+                        $dateTime->add($dateInterval);
+                        $this->Event->__add($this->request->data, $this->user, $dateTime->format('Y-m-d'));
+                    }
+                }
+
+                $this->Session->setFlash(__('The event has been created.'), 'flash_success');
+                $this->redirect('/events/index/m:'.(int)$dates[1].'/y:'.$dates[0]);
             }
 
             $this->Session->setFlash(__('Something wrong happen, please fix the errors below'), 'flash_error');
@@ -214,6 +202,8 @@ class EventsController extends AppController {
         $rolesList = $this->RaidsRole->find('list', array('order' => 'title ASC'));
         $this->set('rolesList', $rolesList);
         $this->set('eventDate', $date);
+        $this->set('recurrences', $this->recurrences);
+        $this->set('recurrencesCount', $this->recurrencesCount);
 
         // Get templates
         $tplList = array();

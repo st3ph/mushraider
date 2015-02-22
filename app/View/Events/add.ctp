@@ -62,21 +62,42 @@
         </div>
     </div>
 
-    <hr />
-
+    <h3><?php echo __('Advanced options');?></h3>
     <div class="row">
-        <div class="span3">
+        <div class="span5">
+            <h4><?php echo __('Event access');?></h4>
             <div class="form-group">
-                <?php echo $this->Form->input('Event.open', array('type' => 'checkbox', 'label' => __('open event')));?>
-                <div class="hint"><?php echo __('No validation is required to participate to this event');?></div>
+                <?php $hint = '<div class="hint">'.__('No validation is required to participate to this event').'</div>';?>
+                <?php echo $this->Form->input('Event.open', array('type' => 'checkbox', 'label' => __('open event'), 'after' => $hint));?>
             </div>
         </div>
         <?php if($user['User']['can']['create_templates'] || $user['User']['can']['full_permissions']):?>
-            <div class="span4 eventTemplate">
+            <div class="span6 eventTemplate">
+                <h4><?php echo __('Event template');?></h4>
                 <?php echo $this->Form->input('Event.template', array('type' => 'checkbox', 'label' => __('create a template based on this event')));?>
                 <?php echo $this->Form->input('Event.templateName', array('type' => 'text', 'label' => false, 'div' => false, 'class' => 'tplName', 'placeholder' => __('template name')));?>
             </div>
         <?php endif;?>
+    </div>
+    
+    <div class="row">
+        <div class="span5">
+            <h4><?php echo __('Event recurrence');?></h4>
+            <div class="form-group">
+                <?php echo $this->Form->input('Event.repeat.enabled', array('type' => 'checkbox', 'label' => __('repeat this event')));?>
+            </div>
+            <div class="form-group">
+                <?php echo __('Repeat this event');?>
+                <?php echo $this->Form->input('Event.repeat.recurrence', array('options' => $recurrences, 'div' => false, 'label' => false, 'class' => 'span2'));?>
+                <?php echo $this->Form->input('Event.repeat.count', array('options' => $recurrencesCount, 'div' => false, 'label' => false, 'class' => 'span1'));?>
+                <?php echo __('times');?>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="row">
         <div class="span3 pull-right">
             <div class="form-group">
                 <?php echo $this->Form->submit(__('Create event'), array('class' => 'btn btn-success btn-large pull-right'));?>

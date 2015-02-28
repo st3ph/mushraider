@@ -223,7 +223,7 @@ foreach($event['EventsRole'] as $eventRole) {
 						$displayedRoles = $eventRole['max'] > 0?$displayedRoles + 1:$displayedRoles;
 					}
 				}
-				$colWidth = floor(100 / $displayedRoles);
+				$colWidth = $displayedRoles?floor(100 / $displayedRoles):100;
 				?>
 				<?php foreach($eventRoles as $roleId => $eventRole):?>
 					<?php if($eventRole['max'] > 0):?>

@@ -102,6 +102,17 @@ class Event extends AppModel {
             $toSave['character_level'] = $data['Event']['character_level'];
             $toSave['time_invitation'] = date('Y-m-d H:i:s', mktime($data['Event']['time_invitation']['hour'], $data['Event']['time_invitation']['min'], 0, $dates[1], $dates[2], $dates[0]));
             $toSave['time_start'] = date('Y-m-d H:i:s', mktime($data['Event']['time_start']['hour'], $data['Event']['time_start']['min'], 0, $dates[1], $dates[2], $dates[0]));
+            if(!empty($data['Event']['time_inscription'])) {
+                if(preg_match('/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/', $data['Event']['time_inscription'], $matches)) {
+                    $time_inscription = explode('/', $data['Event']['time_inscription']);
+                    $toSave['time_inscription'] = date('Y-m-d H:i:s', mktime(23, 59, 59, $time_inscription[1], $time_inscription[0], $time_inscription[2]));
+                    if($toSave['time_inscription'] > $toSave['time_start']) {
+                        $toSave['time_inscription'] = $toSave['time_start'];
+                    }
+                }
+            }else {
+                $toSave['time_inscription'] = $toSave['time_start'];
+            }
             $toSave['open'] = $data['Event']['open']?1:0;            
 
             if(!empty($data['Event']['roles'])) {

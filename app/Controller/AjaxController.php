@@ -84,6 +84,12 @@ class AjaxController extends AppController {
                 return json_encode($jsonMessage);
             }
 
+            if($event['Event']['time_inscription'] < date('Y-m-d H:i:s')) {
+                $jsonMessage['type'] = 'important';
+                $jsonMessage['msg'] = __('Too late ! Registrations for this event are closed');
+                return json_encode($jsonMessage);
+            }
+
             $params = array();
             $params['fields'] = array('Character.level', 'Character.title', 'Classe.*');
             $params['recursive'] = 1;

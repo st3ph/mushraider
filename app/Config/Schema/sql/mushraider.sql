@@ -112,6 +112,7 @@ CREATE TABLE IF NOT EXISTS `{prefix}events` (
   `user_id` int(11) NOT NULL,
   `time_invitation` datetime NOT NULL,
   `time_start` datetime NOT NULL,
+  `time_inscription` datetime DEFAULT NULL,
   `character_level` int(3) NOT NULL,
   `nb_comments` int(5) DEFAULT 0,
   `open` TINYINT(1) NOT NULL DEFAULT '0',

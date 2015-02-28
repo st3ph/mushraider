@@ -47,6 +47,13 @@
             <div class="form-group">
                 <?php echo $this->Form->input('Event.time_start', array('type' => 'time', 'timeFormat' => 24, 'interval' => 15, 'required' => true, 'label' => __('Event start'), 'class' => 'span2'));?>
             </div>
+            <div class="form-group">
+                <label><?php echo __('Registration end date (optional)');?></label>
+                <div class="input-append">
+                    <?php echo $this->Form->input('Event.time_inscription', array('type' => 'text', 'label' => false, 'placeholder' => __('dd/mm/yyyy'), 'div' => false, 'class' => 'input-medium datepicker', 'data-date' => $this->Former->date($eventDate, 'jour')));?>
+                    <span class="add-on"><span class="icon-calendar"></span></span>
+                </div>
+            </div>
         </div>
     </div>
 

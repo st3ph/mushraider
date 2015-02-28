@@ -267,6 +267,15 @@ class EventsController extends AppController {
             $toSave['character_level'] = $this->request->data['Event']['character_level'];
             $toSave['time_invitation'] = date('Y-m-d H:i:s', mktime($this->request->data['Event']['time_invitation']['hour'], $this->request->data['Event']['time_invitation']['min'], 0, $dates[1], $dates[2], $dates[0]));
             $toSave['time_start'] = date('Y-m-d H:i:s', mktime($this->request->data['Event']['time_start']['hour'], $this->request->data['Event']['time_start']['min'], 0, $dates[1], $dates[2], $dates[0]));            
+            if(!empty($this->request->data['Event']['time_inscription'])) {
+                if(preg_match('/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/', $this->request->data['Event']['time_inscription'], $matches)) {
+                    $time_inscription = explode('/', $this->request->data['Event']['time_inscription']);
+                    $toSave['time_inscription'] = date('Y-m-d H:i:s', mktime(23, 59, 59, $time_inscription[1], $time_inscription[0], $time_inscription[2]));
+                    if($toSave['time_inscription'] > $toSave['time_invitation']) {
+                        $toSave['time_inscription'] = $toSave['time_invitation'];
+                    }
+                }
+            }
             $toSave['open'] = $this->request->data['Event']['open']?1:0;
 
             if(!empty($this->request->data['Event']['roles'])) {

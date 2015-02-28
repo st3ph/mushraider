@@ -171,6 +171,15 @@ jQuery(function($) {
         minDate: new Date()
     });    
 
+    $('#EventTimeInscription').datepicker({
+        changeMonth: false,
+        changeYear: false,
+        numberOfMonths: 1,
+        dateFormat: 'dd/mm/yy',
+        minDate: new Date(),
+        maxDate: $('#EventTimeInscription').data('date')
+    });
+
     $("#createEvent").on('click', 'button', function(e) {
         e.preventDefault();
 

@@ -257,5 +257,18 @@ class PatcherController extends AdminAppController {
 
         // Timezone
         $this->Setting->setOption('timezone', 'Europe/Paris');
+
+        // Update events registration end date
+        App::uses('Event', 'Model');
+        $EventModel = new Event();
+        $params = array();
+        $params['recursive'] = -1;
+        $params['fields'] = array('id', 'time_start', 'time_inscription');
+        $params['conditions']['time_inscription'] = null;
+        if($events = $EventModel->find('all', $params)) {
+            foreach($events as $event) {
+                $EventModel->query("UPDATE ".$EventModel->tablePrefix."events SET time_inscription='".$event['Event']['time_start']."' WHERE id = ".$event['Event']['id']);
+            }
+        }
     }
 }

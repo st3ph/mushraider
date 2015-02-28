@@ -2,7 +2,7 @@
 <?php $registeredCharacterId = $registeredCharacter?$registeredCharacter['id']:0;?>
 <?php $registeredCharacterComment = $registeredCharacter?$registeredCharacter['comment']:'';?>
 <?php $eventRoles = array();?>
-<?php $dayTimestamp = $this->Tools->get_timestamp($event['Event']['time_start'], true);?>
+<?php $dayTimestamp = $this->Tools->get_timestamp($event['Event']['time_inscription'], true);?>
 <?php $todayTimestamp = mktime(0, 0, 0, date('m'), date('d'), date('Y'));?>
 <?php $cantSignInTimestamp = mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y'));?>
 <header>
@@ -151,6 +151,10 @@ foreach($event['EventsRole'] as $eventRole) {
 		<tr>
 			<td class="title"><?php echo __('Event start');?> :</td>
 			<td><?php echo $this->Former->date($event['Event']['time_start']);?></td>
+		</tr>
+		<tr>
+			<td class="title"><?php echo __('Registration end date');?> :</td>
+			<td><?php echo $this->Former->date($event['Event']['time_inscription']);?></td>
 		</tr>
 		<tr>
 			<td class="title"><?php echo __('Minimum character level');?> :</td>

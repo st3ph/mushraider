@@ -271,10 +271,12 @@ class EventsController extends AppController {
                 if(preg_match('/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/', $this->request->data['Event']['time_inscription'], $matches)) {
                     $time_inscription = explode('/', $this->request->data['Event']['time_inscription']);
                     $toSave['time_inscription'] = date('Y-m-d H:i:s', mktime(23, 59, 59, $time_inscription[1], $time_inscription[0], $time_inscription[2]));
-                    if($toSave['time_inscription'] > $toSave['time_invitation']) {
-                        $toSave['time_inscription'] = $toSave['time_invitation'];
+                    if($toSave['time_inscription'] > $toSave['time_start']) {
+                        $toSave['time_inscription'] = $toSave['time_start'];
                     }
                 }
+            }else {
+                $toSave['time_inscription'] = $toSave['time_start'];
             }
             $toSave['open'] = $this->request->data['Event']['open']?1:0;
 

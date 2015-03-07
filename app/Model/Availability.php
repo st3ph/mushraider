@@ -157,14 +157,25 @@ class Availability extends AppModel {
                 $params['conditions']['time_start <='] = $this->data['Availability']['end'].' 23:59:59';
                 if($events = $Event->find('all', $params)) {
                     foreach($events as $event) {
-                        $toSave = array();
-                        $toSave['event_id'] = $event['Event']['id'];
-                        $toSave['user_id'] = $this->data['Availability']['user_id'];
-                        $toSave['character_id'] = $character['Character']['id'];
-                        $toSave['raids_role_id'] = $character['Character']['default_role_id'];
-                        $toSave['comment'] = $this->data['Availability']['comment'];
-                        $toSave['status'] = 0;
-                        $EventsCharacter->__add($toSave);
+                        // If already registered to this event, update it
+                        $paramsEventsCharacter = array();
+                        $paramsEventsCharacter['recursive'] = -1;
+                        $paramsEventsCharacter['fields'] = array('id');
+                        $paramsEventsCharacter['conditions']['event_id'] = $event['Event']['id'];
+                        $paramsEventsCharacter['conditions']['user_id'] = $this->data['Availability']['user_id'];
+                        if($eventCharacter = $EventsCharacter->find('first', $paramsEventsCharacter)) {
+                            $eventCharacter['EventsCharacter']['status'] = 0;
+                            $EventsCharacter->save($eventCharacter['EventsCharacter']);
+                        }else {
+                            $toSave = array();
+                            $toSave['event_id'] = $event['Event']['id'];
+                            $toSave['user_id'] = $this->data['Availability']['user_id'];
+                            $toSave['character_id'] = $character['Character']['id'];
+                            $toSave['raids_role_id'] = $character['Character']['default_role_id'];
+                            $toSave['comment'] = $this->data['Availability']['comment'];
+                            $toSave['status'] = 0;
+                            $EventsCharacter->__add($toSave);
+                        }
                     }
                 }
             }

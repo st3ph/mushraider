@@ -185,6 +185,9 @@ foreach($event['EventsRole'] as $eventRole) {
 				<i class="icon-info-sign"></i>
 				<?php echo __('Select the command corresponding to your game and copy/paste the generated commands to your chat to quick invit you roster');?>
 			</p>
+			<p class="text-info">
+				<?php echo __('Invitation\'s commands are separated in blocs of 200 characters maximum to avoid game chat limitations');?>
+			</p>
 			<div class="btn-group open">
 				<button class="btn">/i</button>
 				<button class="btn">/inv</button>

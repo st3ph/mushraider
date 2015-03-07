@@ -69,7 +69,7 @@ class AjaxController extends AppController {
         if(!empty($this->request->query['u']) && !empty($this->request->query['e']) && isset($this->request->query['signin']) && !empty($this->request->query['character'])) {
             // Choosed character must be in the event level range
             $params = array();
-            $params['fields'] = array('character_level', 'open', 'time_start');
+            $params['fields'] = array('character_level', 'open', 'time_start', 'time_inscription');
             $params['recursive'] = -1;
             $params['conditions']['id'] = $this->request->query['e'];
             if(!$event = $this->Event->find('first', $params)) {

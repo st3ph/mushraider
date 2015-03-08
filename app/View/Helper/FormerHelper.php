@@ -235,7 +235,7 @@ class FormerHelper extends AppHelper {
 						if(!empty($character['Character']['Classe']['icon'])) {
 							$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= $this->Html->image($character['Character']['Classe']['icon'], array('class' => 'tt', 'title' => $character['Character']['Classe']['title'], 'width' => '16')).'&nbsp;';
 						}
-						$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= ' <span>'.$character['Character']['title'].'</span>';
+						$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '<span class="tt" title="'.__('Signed in').' '.$this->Tools->niceDate($character['created']).'">'.$character['Character']['title'].'</span>';
 						$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= ' ('.(empty($character['Character']['Classe']['icon'])?$character['Character']['Classe']['title'].' ':'').$character['Character']['level'].')';
 					$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '</span>';
 					if(!empty($character['comment'])) {

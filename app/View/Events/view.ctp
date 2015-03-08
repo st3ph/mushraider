@@ -2,7 +2,7 @@
 <?php $registeredCharacterId = $registeredCharacter?$registeredCharacter['id']:0;?>
 <?php $registeredCharacterComment = $registeredCharacter?$registeredCharacter['comment']:'';?>
 <?php $eventRoles = array();?>
-<?php $dayTimestamp = $this->Tools->get_timestamp($event['Event']['time_start'], true);?>
+<?php $dayTimestamp = $this->Tools->get_timestamp($event['Event']['time_inscription'], true);?>
 <?php $todayTimestamp = mktime(0, 0, 0, date('m'), date('d'), date('Y'));?>
 <?php $cantSignInTimestamp = mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y'));?>
 <header>
@@ -84,7 +84,18 @@ foreach($event['EventsRole'] as $eventRole) {
 				}
 				?>
 				<span class="message <?php echo $messageClass;?>"><?php echo $messageText;?></span>
-				<?php echo $this->Form->input('Character', array('options' => $charactersList, 'selected' => $registeredCharacterId, 'empty' => __('Choose a character'), 'class' => 'span2', 'data-user' => $user['User']['id'], 'data-event' => $event['Event']['id'], 'data-error' => __('please select a character and a role'), 'data-signin' => __('your are registered to this event as'), 'data-signout' => __('your are not registered to this event'), 'data-validated' => __('your are validated to this event'), 'label' => false, 'div' => false));?>
+				<?php //echo $this->Form->input('Character', array('options' => $charactersList, 'selected' => $registeredCharacterId, 'empty' => __('Choose a character'), 'class' => 'span2', 'data-user' => $user['User']['id'], 'data-event' => $event['Event']['id'], 'data-error' => __('please select a character and a role'), 'data-signin' => __('your are registered to this event as'), 'data-signout' => __('your are not registered to this event'), 'data-validated' => __('your are validated to this event'), 'label' => false, 'div' => false));?>
+
+				<select name="data[Character]" class="span2" data-user="<?php echo $user['User']['id'];?>" data-event="<?php echo $event['Event']['id'];?>" data-error="<?php echo __('please select a character and a role');?>" data-signin="<?php echo __('your are registered to this event as');?>" data-signout="<?php echo __('your are not registered to this event');?>" data-validated="<?php echo __('your are validated to this event');?>" id="Character">
+					<option value=""><?php echo __('Choose a character');?></option>
+					<?php if(!empty($charactersList)):?>
+						<?php foreach($charactersList as $character):?>
+							<option value="<?php echo $character['Character']['id'];?>" <?php echo $registeredCharacterId == $character['Character']['id']?'selected="selected"':'';?> style="color:<?php echo $character['Classe']['color'];?>"><?php echo $character['Character']['title'];?></option>
+						<?php endforeach;?>
+					<?php endif;?>
+				</select>
+
+
 				<?php if(!empty($event['EventsRole'])):?>
 					<select name="data[EventsRole]" id="EventsRole" class="span1">
 						<option value=""><?php echo __('Role');?></option>
@@ -142,6 +153,10 @@ foreach($event['EventsRole'] as $eventRole) {
 			<td><?php echo $this->Former->date($event['Event']['time_start']);?></td>
 		</tr>
 		<tr>
+			<td class="title"><?php echo __('Registration end date');?> :</td>
+			<td><?php echo $this->Former->date($event['Event']['time_inscription']);?></td>
+		</tr>
+		<tr>
 			<td class="title"><?php echo __('Minimum character level');?> :</td>
 			<td><?php echo $event['Event']['character_level'];?></td>
 		</tr>
@@ -169,6 +184,9 @@ foreach($event['EventsRole'] as $eventRole) {
 			<p class="text-info">
 				<i class="icon-info-sign"></i>
 				<?php echo __('Select the command corresponding to your game and copy/paste the generated commands to your chat to quick invit you roster');?>
+			</p>
+			<p class="text-info">
+				<?php echo __('Invitation\'s commands are separated in blocs of 200 characters maximum to avoid game chat limitations');?>
 			</p>
 			<div class="btn-group open">
 				<button class="btn">/i</button>
@@ -212,7 +230,7 @@ foreach($event['EventsRole'] as $eventRole) {
 						$displayedRoles = $eventRole['max'] > 0?$displayedRoles + 1:$displayedRoles;
 					}
 				}
-				$colWidth = floor(100 / $displayedRoles);
+				$colWidth = $displayedRoles?floor(100 / $displayedRoles):100;
 				?>
 				<?php foreach($eventRoles as $roleId => $eventRole):?>
 					<?php if($eventRole['max'] > 0):?>

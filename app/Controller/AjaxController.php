@@ -69,7 +69,7 @@ class AjaxController extends AppController {
         if(!empty($this->request->query['u']) && !empty($this->request->query['e']) && isset($this->request->query['signin']) && !empty($this->request->query['character'])) {
             // Choosed character must be in the event level range
             $params = array();
-            $params['fields'] = array('character_level', 'open', 'time_start');
+            $params['fields'] = array('character_level', 'open', 'time_start', 'time_inscription');
             $params['recursive'] = -1;
             $params['conditions']['id'] = $this->request->query['e'];
             if(!$event = $this->Event->find('first', $params)) {
@@ -81,6 +81,12 @@ class AjaxController extends AppController {
             if($event['Event']['time_start'] < date('Y-m-d H:i:s')) {
                 $jsonMessage['type'] = 'important';
                 $jsonMessage['msg'] = __('Too late ! This event is already started');
+                return json_encode($jsonMessage);
+            }
+
+            if($event['Event']['time_inscription'] < date('Y-m-d H:i:s')) {
+                $jsonMessage['type'] = 'important';
+                $jsonMessage['msg'] = __('Too late ! Registrations for this event are closed');
                 return json_encode($jsonMessage);
             }
 

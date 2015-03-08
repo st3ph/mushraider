@@ -89,6 +89,11 @@ class ToolsHelper extends AppHelper {
         return mktime($h, $i, $s, $m, $d, $y);
     }
 
+    function validateDate($date, $format = 'Y-m-d H:i:s') {
+    	$d = DateTime::createFromFormat($format, $date);
+    	return $d && $d->format($format) == $date;
+    }
+
 	function pagination($modele, $showCurrent = false) {
 		if(isset($this->Paginator->params['paging'])) {
 			if($this->Paginator->params['paging'][$modele]['pageCount'] > 1) {

@@ -33,7 +33,7 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-    public $components = array('Session', 'Cookie', 'Lang', 'Tools', 'Patcher');
+    public $components = array('Session', 'Cookie', 'Lang', 'Tools', 'Patcher', 'Tour');
     var $uses = array('User', 'Role', 'Setting', 'Character');
 
     var $user = null;
@@ -69,6 +69,9 @@ class AppController extends Controller {
         Configure::write('Config.maxFileSize', ini_get('upload_max_filesize'));
         Configure::write('Config.maxPostSize', ini_get('post_max_size'));
         Configure::write('Config.appUrl', rtrim('http://'.$_SERVER['HTTP_HOST'].$this->webroot, '/'));
+
+        // Timezone
+        date_default_timezone_set($this->Setting->getOption('timezone'));
 
         // Log in user
         if($this->Session->check('User.id')) {

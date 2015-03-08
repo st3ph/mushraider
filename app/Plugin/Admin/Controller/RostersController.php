@@ -7,6 +7,26 @@ class RostersController extends AdminAppController {
     }
 
     public function index() {
+        $characterTypes = array(
+            'all' => __('All'),
+            'main' => __('Main characters'),
+            'reroll' => __('Reroll characters'),
+        );
+        $this->set('characterTypes', $characterTypes);
+
+        $rolesList = $this->RaidsRole->find('list', array('order' => array('order ASC', 'title ASC')));
+        $this->set('rolesList', $rolesList);
+
+        $gamesList = $this->Game->find('list', array('order' => array('title ASC')));
+        $this->set('gamesList', $gamesList);
+
+        // If only 1 game, select it by default
+        if(count($gamesList) == 1) {
+            $this->request->data['Roster']['game_id'] = key($gamesList);
+            $this->request->data['Roster']['type'] = 'all';
+        }
+
+
         if(!empty($this->request->data['Roster']['game_id'])) {
             $params = array();
             $params['recursive'] = 1;
@@ -17,6 +37,14 @@ class RostersController extends AdminAppController {
             $params['contain']['User'] = array();
             $params['contain']['RaidsRole'] = array();
             $params['conditions']['Character.game_id'] = $this->request->data['Roster']['game_id'];
+            switch($this->request->data['Roster']['type']) {
+                case 'main':
+                    $params['conditions']['Character.main'] = 1;
+                    break;
+                case 'reroll':
+                    $params['conditions']['Character.main'] = 0;
+                    break;
+            }
             $characters = $this->Character->find('all', $params);
             $this->set('characters', $characters);
 
@@ -42,11 +70,5 @@ class RostersController extends AdminAppController {
             }
             $this->set('absents', $absents);
         }
-
-        $gamesList = $this->Game->find('list', array('order' => array('title ASC')));
-        $this->set('gamesList', $gamesList);
-
-        $rolesList = $this->RaidsRole->find('list', array('order' => array('order ASC', 'title ASC')));
-        $this->set('rolesList', $rolesList);
     }
 }

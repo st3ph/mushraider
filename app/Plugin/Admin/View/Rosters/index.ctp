@@ -4,14 +4,16 @@
         <h5><?php echo __('Roster');?></h5>
     </header>
     <div class="accordion-body body in collapse">
-        <?php echo $this->Form->create('Roster', array('url' => '/admin/rosters'));?>
-            <div class="form-group filter">
-                <?php echo $this->Form->input('Roster.game_id', array('type' => 'select', 'label' => __('Select a game'), 'options' => $gamesList, 'empty' => '', 'required' => true, 'class' => 'span5', 'div' => false));?>
-                <?php echo $this->Form->submit(__('View roster'), array('class' => 'btn btn-success', 'div' => false));?>
-            </div>
+        <?php echo $this->Form->create('Roster', array('url' => '/admin/rosters', 'class' => 'form-inline'));?>
+            <h4><?php echo __('Select a game');?></h4>
+            <?php echo $this->Form->input('Roster.game_id', array('type' => 'select', 'label' => false, 'options' => $gamesList, 'empty' => '', 'required' => true, 'class' => 'span5', 'div' => false));?>
+            <?php echo $this->Form->input('Roster.type', array('type' => 'select', 'label' => false, 'default' => 'all', 'options' => $characterTypes, 'class' => 'span2', 'div' => false));?>
+            <?php echo $this->Form->submit(__('View roster'), array('class' => 'btn btn-success', 'div' => false));?>
         <?php echo $this->Form->end();?>
 
-        <h3><?php echo __('Roster of');?> <?php echo $gamesList[$this->data['Roster']['game_id']];?></h3>
+        <?php if(!empty($this->data['Roster'])):?>
+            <h3><?php echo __('Roster of');?> <?php echo $gamesList[$this->data['Roster']['game_id']];?></h3>
+        <?php endif;?>
 
         <?php if(!empty($characters)):?>
             <div id="summary">
@@ -44,6 +46,7 @@
                         <th><?php echo __('Default Role');?></th>                    
                         <th><?php echo __('Classe');?></th>                    
                         <th><?php echo __('Race');?></th>                    
+                        <th><?php echo __('Type');?></th>                    
                         <th><?php echo __('User');?></th>
                     </tr>
                 </thead>
@@ -64,6 +67,13 @@
                                 </td>
                                 <td>
                                     <?php echo $character['Race']['title'];?>
+                                </td>
+                                <td>
+                                    <?php if($character['Character']['main']):?>
+                                        <?php echo __('Main');?>
+                                    <?php else:?>
+                                        <?php echo __('Reroll');?>
+                                    <?php endif;?>
                                 </td>
                                 <td>
                                     <?php echo $character['User']['username'];?>

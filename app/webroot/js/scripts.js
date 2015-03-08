@@ -69,6 +69,14 @@ jQuery(function($) {
 
 
     /*
+    * Tour Guide
+    */
+    if(typeof tourGuide != 'undefined') {
+        console.log(tourGuide);
+        hopscotch.startTour(tourGuide);
+    }
+
+    /*
     * Account
     */
     $('#CharacterGameId').on('change', function(e) {
@@ -162,6 +170,15 @@ jQuery(function($) {
         dateFormat: 'dd/mm/yy',
         minDate: new Date()
     });    
+
+    $('#EventTimeInscription').datepicker({
+        changeMonth: false,
+        changeYear: false,
+        numberOfMonths: 1,
+        dateFormat: 'dd/mm/yy',
+        minDate: new Date(),
+        maxDate: $('#EventTimeInscription').data('date')
+    });
 
     $("#createEvent").on('click', 'button', function(e) {
         e.preventDefault();
@@ -631,21 +648,31 @@ jQuery(function($) {
         }
     });
 
-    $('#invitCommands').on('hidden', function(e) {
-        console.log('hfg');
-    });
-
     $('#invitCommands').on('click', '.btn-group .btn', function(e) {
         $(this).parent('div').find('.btn').removeClass('dropdown-toggle');
         $(this).addClass('dropdown-toggle');
+        var $commands = $('#invitCommands .commands');
         var command = $(this).text();
-        var invitsList = '';
+        var invitsList = [];
+        var invitBloc = 0;
+        var invitBlocLengthLimit = 200;
 
+        invitsList[invitBloc] = '';
         $('#eventRoles').find('td .validated .character span').each(function() {
-            invitsList += command+' '+$(this).text()+"\n";
+            if(invitsList[invitBloc].length >= invitBlocLengthLimit || !invitBloc) {
+                invitBloc++;
+                invitsList[invitBloc] = '';
+            }
+
+            invitsList[invitBloc] += command+' '+$(this).text()+"\n";
         });
 
-        $('#invitCommands .commands').html('<pre>'+invitsList+'</pre>');
+        $commands.html('');
+        $(invitsList).each(function(index, content) {
+            if(invitsList[index].length) {
+                $commands.append('<textarea>'+invitsList[index]+'</textarea>');
+            }
+        });
     });
 
     /*

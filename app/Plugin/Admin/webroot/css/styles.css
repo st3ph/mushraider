@@ -1246,6 +1246,8 @@ table.table-striped tbody.ui-sortable tr.sortable-placeholder td {background:#99
 table.table-striped tbody.ui-sortable tr.sortable-placeholder td:first-child {border-left:2px dashed #ddd}
 table.table-striped tbody.ui-sortable tr.sortable-placeholder td:last-child {border-right:2px dashed #ddd}
 
+.box header .toolbar form {margin-top:5px;}
+
 /* Dashboard */
 .quick-btn {min-width:90px;width:auto;padding-left:2px;padding-right:2px;}
 .quick-btn .waiting {position: absolute;right: -5px;bottom: -5px;top:auto;}
@@ -1281,7 +1283,7 @@ table.table-striped tbody.ui-sortable tr.sortable-placeholder td:last-child {bor
 .loadingAnimation:before{-webkit-animation:loading-animation 1s linear infinite;-moz-animation:loading-animation 1s linear infinite;-ms-animation:loading-animation 1s linear infinite;-o-animation:loading-animation 1s linear infinite;animation:loading-animation 1s linear infinite}
 
 /* Stats */
-.filter select {margin-bottom:0;}
+.statsFilter .btn {margin-top:25px;}
 
 /* Roster */
 #summary {margin-bottom:50px;}

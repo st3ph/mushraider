@@ -18,7 +18,9 @@
     $this->Html->css('jquery-ui-1.10.3.custom.min', null, array('inline' => false, 'media' => 'screen'));
     $this->Html->css('font-awesome.min', null, array('inline' => false));
     $this->Html->css('Widget.styles.css'.$staticVersion, null, array('inline' => false));
-    $this->Html->css('Widget.widgets/'.$widget['Widget']['controller'], null, array('inline' => false));
+    if(!empty($widget)) {
+        $this->Html->css('Widget.widgets/'.$widget['Widget']['controller'], null, array('inline' => false));
+    }
 
     $this->Html->script('jquery-2.1.0.min', array('inline' => false));
     $this->Html->script('jquery-ui-1.10.3.custom.min', array('inline' => false));
@@ -31,9 +33,11 @@
 
     <!-- Custom CSS -->
     <style>
-        .widget .widget-header {background-color:<?php echo $widget['Widget']['params']->headerBgColor;?>;color:<?php echo $widget['Widget']['params']->headerTextColor;?>}
-        .widget .widget-content {background-color:<?php echo $widget['Widget']['params']->bgColor;?>;color:<?php echo $widget['Widget']['params']->textColor;?>}
-        .widget .widget-content a {color:<?php echo $widget['Widget']['params']->linkColor;?>}
+        <?php if(!empty($widget)):?>
+            .widget .widget-header {background-color:<?php echo $widget['Widget']['params']->headerBgColor;?>;color:<?php echo $widget['Widget']['params']->headerTextColor;?>}
+            .widget .widget-content {background-color:<?php echo $widget['Widget']['params']->bgColor;?>;color:<?php echo $widget['Widget']['params']->textColor;?>}
+            .widget .widget-content a {color:<?php echo $widget['Widget']['params']->linkColor;?>}
+        <?php endif;?>
     </style>
 </head>
 <body class="widget">
@@ -43,7 +47,9 @@
                 <?php echo $title_for_layout;?>
             </header>
             <div class="widget-content">
-                <div id="iframeDomainRestriction" data-domain="<?php echo $widget['Widget']['params']->domain;?>" data-msg="<?php echo __('Your domain does not have permission to display this widget !');?>"></div>
+                <?php if(!empty($widget)):?>
+                    <div id="iframeDomainRestriction" data-domain="<?php echo $widget['Widget']['params']->domain;?>" data-msg="<?php echo __('Your domain does not have permission to display this widget !');?>"></div>
+                <?php endif;?>
                 <?php echo $this->fetch('content'); ?>
             </div>
             <footer class="widget-footer">

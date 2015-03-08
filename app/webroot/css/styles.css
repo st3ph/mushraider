@@ -218,6 +218,12 @@ form .select .loading {margin:0 0 5px 5px;}
 	margin-top: 10px;
 }
 
+#invitCommands .commands textarea {
+	width:98%;
+	min-height:150px;
+	margin-bottom:10px;
+}
+
 /*
 * Account
 */

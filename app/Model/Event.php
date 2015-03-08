@@ -89,6 +89,63 @@ class Event extends AppModel {
         )
     );
 
+    public function __add($data, $eventUser, $date) {
+        if(!empty($data)) {
+            $dates = explode('-', $date);
+
+            $toSave = array();
+            $toSave['title'] = trim(strip_tags($data['Event']['title']));
+            $toSave['description'] = nl2br($data['Event']['description']);
+            $toSave['user_id'] = $eventUser['User']['id'];
+            $toSave['game_id'] = $data['Event']['game_id'];
+            $toSave['dungeon_id'] = $data['Event']['dungeon_id'];
+            $toSave['character_level'] = $data['Event']['character_level'];
+            $toSave['time_invitation'] = date('Y-m-d H:i:s', mktime($data['Event']['time_invitation']['hour'], $data['Event']['time_invitation']['min'], 0, $dates[1], $dates[2], $dates[0]));
+            $toSave['time_start'] = date('Y-m-d H:i:s', mktime($data['Event']['time_start']['hour'], $data['Event']['time_start']['min'], 0, $dates[1], $dates[2], $dates[0]));
+            if(!empty($data['Event']['time_inscription'])) {
+                if(preg_match('/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/', $data['Event']['time_inscription'], $matches)) {
+                    $time_inscription = explode('/', $data['Event']['time_inscription']);
+                    $toSave['time_inscription'] = date('Y-m-d H:i:s', mktime(23, 59, 59, $time_inscription[1], $time_inscription[0], $time_inscription[2]));
+                    if($toSave['time_inscription'] > $toSave['time_start']) {
+                        $toSave['time_inscription'] = $toSave['time_start'];
+                    }
+                }
+            }else {
+                $toSave['time_inscription'] = $toSave['time_start'];
+            }
+            $toSave['open'] = $data['Event']['open']?1:0;            
+
+            if(!empty($data['Event']['roles'])) {
+                $this->create();
+                if($this->save($toSave)) {
+                    App::uses('EventsRole', 'Model');
+                    $EventsRole = new EventsRole();
+
+                    $eventId = $this->getLastInsertId();
+
+                    $paramsEvent = array();
+                    $paramsEvent['recursive'] = 1;
+                    $paramsEvent['contain']['Game']['fields'] = array('Game.title');
+                    $paramsEvent['contain']['Dungeon']['fields'] = array('Dungeon.title');
+                    $paramsEvent['conditions']['Event.id'] = $eventId;
+                    $event = $this->find('first', $paramsEvent);
+
+                    foreach($data['Event']['roles'] as $roleId => $roleNumber) {
+                        $toSaveEventsRole = array();
+                        $toSaveEventsRole['event_id'] = $eventId;
+                        $toSaveEventsRole['raids_role_id'] = $roleId;
+                        $toSaveEventsRole['count'] = $roleNumber?$roleNumber:'0';
+                        $EventsRole->__add($toSaveEventsRole);
+                    }
+
+                    return $event;
+                }
+            }
+        }
+
+        return false;
+    }
+
     public function copy($eventId, $templateName) {
         if(isset($eventId) && !empty($templateName)) {
             // Get event infos

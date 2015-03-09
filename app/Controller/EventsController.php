@@ -1,6 +1,6 @@
 <?php
 class EventsController extends AppController {
-    public $components = array('Emailing', 'Image');
+    public $components = array('Emailing', 'Image', 'Tour');
     var $helpers = array('Sociable.Comment');
     var $uses = array('Game', 'Dungeon', 'Event', 'RaidsRole', 'EventsRole', 'EventsCharacter', 'Character', 'EventsTemplate', 'EventsTemplatesRole', 'Report');
 

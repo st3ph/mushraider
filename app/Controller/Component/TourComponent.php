@@ -8,6 +8,10 @@ class TourComponent extends Component {
 
     public function initialize(Controller $controller) {
         $this->controller = &$controller;
+    }
+
+    public function startup(Controller $controller) {
+        $this->controller = &$controller;
 
         $this->tourGuides = json_decode($this->controller->Setting->getOption('tourGuides'), true);
 
@@ -58,10 +62,6 @@ class TourComponent extends Component {
                 )
             )
         );
-    }
-
-    public function startup(Controller $controller) {
-        $this->controller = &$controller;
 
         if($this->controller->user && $this->controller->user['User']['can']['full_permissions']) {
             if(!empty($this->tourList[$this->controller->name]) && !empty($this->tourList[$this->controller->name][$this->controller->action])) {

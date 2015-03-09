@@ -38,7 +38,7 @@
 
 
 	Configure::write('debug', 0);
-	Configure::write('mushraider', array('version' => '1.5.2', 'date' => '2015-03-08'));
+	Configure::write('mushraider', array('version' => '1.5.2.1', 'date' => '2015-03-09'));
 
 /**
  * Configure the Error handler used to handle errors for your application. By default

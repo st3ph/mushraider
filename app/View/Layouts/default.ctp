@@ -29,9 +29,9 @@
     $this->Html->css('font-awesome.min', null, array('inline' => false));
     $this->Html->css('jquery.cleditor', null, array('inline' => false));
     if(!empty($tourGuide)) {
-        $this->Html->css('hopscotch.min'.$staticVersion, null, array('inline' => false));
+        $this->Html->css('hopscotch.min', null, array('inline' => false));
     }
-    $this->Html->css('styles'.$staticVersion, null, array('inline' => false));
+    $this->Html->css('styles.css'.$staticVersion, null, array('inline' => false));
     
     $this->Html->script('jquery-2.1.0.min', array('inline' => false));
     $this->Html->script('jquery-ui-1.10.3.custom.min', array('inline' => false));
@@ -41,7 +41,7 @@
     if(!empty($tourGuide)) {
         $this->Html->script('hopscotch.min', array('inline' => false));
     }
-    $this->Html->script('scripts'.$staticVersion, array('inline' => false));
+    $this->Html->script('scripts.js'.$staticVersion, array('inline' => false));
 
     echo $this->fetch('meta');
     echo $this->fetch('css');

@@ -11,7 +11,7 @@ class CalendarHelper extends FormerHelper {
         $__options = array(
             'month' => date('n'),
             'year' => date('Y'),
-            'startDayOfTheWeek' => 0
+            'startDayOfTheWeek' => 3
         );
         $this->options = array_merge($__options, $options);
 
@@ -66,7 +66,7 @@ class CalendarHelper extends FormerHelper {
             $this->output .= '<td align="center">';
                 $this->output .= '<table width="100%" border="0" cellpadding="2" cellspacing="2" class="dates">';
                     $this->output .= '<tr class="days">';
-                        foreach($this->jour_semaine as $jour) {
+                        foreach($this->orderDays($this->jour_semaine) as $jour) {
                             $this->output .= '<td>'.$jour.'</td>';
                         }
                     $this->output .= '</tr>';
@@ -163,5 +163,14 @@ class CalendarHelper extends FormerHelper {
         $tooltip .= '<div>';
 
         return $tooltip;
+    }
+
+    private function orderDays($days) {
+        for($i = 0; $i < $this->options['startDayOfTheWeek'];$i++) {
+            $day = array_shift($days);
+            array_push($days, $day);
+        }
+        
+        return $days;
     }
 }

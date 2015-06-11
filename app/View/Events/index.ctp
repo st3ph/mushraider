@@ -21,4 +21,4 @@
     </h1>
 </header>
 
-<?php echo $this->Former->calendar($calendarOptions, $events);?>
+<?php echo $this->Calendar->show($calendarOptions, $events);?>

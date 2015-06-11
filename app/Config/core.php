@@ -37,8 +37,8 @@
 // TODO : generate config.salt.php
 
 
-	Configure::write('debug', 0);
-	Configure::write('mushraider', array('version' => '1.5.2.2', 'date' => '2015-03-10'));
+	Configure::write('debug', 2);
+	Configure::write('mushraider', array('version' => '1.6.0', 'date' => '2015-07-01'));
 
 /**
  * Configure the Error handler used to handle errors for your application. By default

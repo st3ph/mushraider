@@ -63,7 +63,7 @@ class PatcherComponent extends Component {
             return $this->redirectToPatch('/admin/patcher/apply/v-1.5');
         }
 
-        // v1.5
+        // v1.5.2
         App::uses('Event', 'Model');
         $Event = new Event();
         $sql = "SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE() AND COLUMN_NAME='time_inscription' AND TABLE_NAME='".Configure::read('Database.prefix')."events'";

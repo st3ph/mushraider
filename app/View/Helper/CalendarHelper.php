@@ -54,7 +54,7 @@ class CalendarHelper extends FormerHelper {
     private function getBody($events) {
         $datetime = new DateTime($this->options['year'].'-'.$this->options['month'].'-1');
         $firstDayOfTheWeek = $datetime->format('w');
-        $emptyCells = $firstDayOfTheWeek > $this->options['startDayOfTheWeek']?$firstDayOfTheWeek - $this->options['startDayOfTheWeek']:7 - ($this->options['startDayOfTheWeek'] - $firstDayOfTheWeek);
+        $emptyCells = $firstDayOfTheWeek > $this->options['settings']['weekStartDay']?$firstDayOfTheWeek - $this->options['settings']['weekStartDay']:7 - ($this->options['settings']['weekStartDay'] - $firstDayOfTheWeek);
         $emptyCells = $emptyCells == 7?0:$emptyCells;
 
         $firstDay = clone $datetime;
@@ -166,7 +166,7 @@ class CalendarHelper extends FormerHelper {
     }
 
     private function orderDays($days) {
-        for($i = 0; $i < $this->options['startDayOfTheWeek'];$i++) {
+        for($i = 0; $i < $this->options['settings']['weekStartDay'];$i++) {
             $day = array_shift($days);
             array_push($days, $day);
         }

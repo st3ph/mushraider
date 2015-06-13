@@ -7,11 +7,9 @@
         <?php echo $this->Form->create('Setting', array('url' => '/admin/settings/calendar', 'class' => 'span12', 'enctype' => 'multipart/form-data'));?>
             <h3><?php echo __('Calendar');?></h3>
             <div class="well well-white">
-                <!--
                 <div class="form-group">
-                    <?php //echo $this->Form->input('Setting.weekStartDay', array('options' => $this->Former->jour_semaine, 'label' => __('Week start day'), 'class' => 'span5'));?>
+                    <?php echo $this->Form->input('Setting.weekStartDay', array('options' => $this->Former->jour_semaine, 'label' => __('Week start day')));?>
                 </div>
-                -->
                 <div class="form-group">
                     <?php echo $this->Form->input('Setting.title', array('options' => array('event' => 'Event title', 'dungeon' => 'Dungeon title'), 'label' => __('Title to display')));?>
                 </div>

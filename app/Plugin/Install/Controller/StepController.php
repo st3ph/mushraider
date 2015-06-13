@@ -192,7 +192,7 @@ class StepController extends InstallAppController {
                                         ));
         $defaultSettings['Mushstats'] = time();
         $defaultSettings['calendar'] = json_encode(array(
-                                            'weekStartDay' => 0,
+                                            'weekStartDay' => 1,
                                             'title' => 'event',
                                             'timeToDisplay' => 'time_invitation',
                                             'gameIcon' => 1,

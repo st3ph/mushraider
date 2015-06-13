@@ -89,7 +89,7 @@ class Event extends AppModel {
         )
     );
 
-    public function __add($data, $eventUser, $date) {
+    public function __add($data, $eventUser, $date, $dateInscriptionInterval = null) {
         if(!empty($data)) {
             $dates = explode('-', $date);
 
@@ -105,7 +105,12 @@ class Event extends AppModel {
             if(!empty($data['Event']['time_inscription'])) {
                 if(preg_match('/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/', $data['Event']['time_inscription'], $matches)) {
                     $time_inscription = explode('/', $data['Event']['time_inscription']);
-                    $toSave['time_inscription'] = date('Y-m-d H:i:s', mktime(23, 59, 59, $time_inscription[1], $time_inscription[0], $time_inscription[2]));
+                    $dateTime = new DateTime($time_inscription[2].'-'.$time_inscription[1].'-'.$time_inscription[0].' 23:59:59');
+                    if($dateInscriptionInterval) {  
+                        $dateTime->add($dateInscriptionInterval);
+                    }
+
+                    $toSave['time_inscription'] = $dateTime->format('Y-m-d H:i:s');
                     if($toSave['time_inscription'] > $toSave['time_start']) {
                         $toSave['time_inscription'] = $toSave['time_start'];
                     }

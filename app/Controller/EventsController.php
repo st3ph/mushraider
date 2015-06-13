@@ -185,7 +185,8 @@ class EventsController extends AppController {
                     $dateInterval = new DateInterval('P1'.$this->request->data['Event']['repeat']['recurrence']);
                     for($i = 1;$i <= $this->request->data['Event']['repeat']['count'];$i++) {
                         $dateTime->add($dateInterval);
-                        $this->Event->__add($this->request->data, $this->user, $dateTime->format('Y-m-d'));
+                        $dateInscriptionInterval = new DateInterval('P'.$i.$this->request->data['Event']['repeat']['recurrence']);
+                        $this->Event->__add($this->request->data, $this->user, $dateTime->format('Y-m-d'), $dateInscriptionInterval);
                     }
                 }
 

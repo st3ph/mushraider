@@ -358,4 +358,13 @@ class AccountController extends AppController {
 
         return $this->redirect('/account/availabilities');
     }
+
+    public function calendar() {
+        $this->pageTitle = __('Calendar management').' - '.$this->pageTitle;
+        
+        $this->breadcrumb[] = array('title' => __('Calendar'), 'url' => '');
+
+        $games = $this->Game->find('list', array('order' => 'title asc'));
+        $this->set('games', $games);
+    }
 }

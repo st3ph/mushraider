@@ -322,4 +322,12 @@ class AjaxController extends AppController {
 
         return;
     }
+
+    function export() {
+        $url = Router::url('/', true).'export/events/'.$this->user['User']['calendar_key'];
+        $url .= $this->request->query['game']?'/'.$this->request->query['game']:'';
+        $url .= '.ics';
+
+        return $url;
+    }
 }

@@ -1,3 +1,4 @@
+
 /*
 * General
 */
@@ -230,6 +231,11 @@ form .select .loading {margin:0 0 5px 5px;}
 .manageCharacters {text-align:center;}
 .manageCharacters p {color:#ccc;}
 .manageCharacters a {font-size:28px;}
+
+#export label {display:inline;margin-right:10px;}
+#export select {margin-bottom:0;}
+#export .url {display:none;margin-top:20px;}
+#export p {font-weight:bold;}
 
 /*
 * Lightbox

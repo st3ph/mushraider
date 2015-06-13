@@ -159,6 +159,27 @@ jQuery(function($) {
         });
     });
 
+    $('#export').on('click', 'button', function(e) {
+        e.preventDefault();
+
+        var $export = $('#export'); 
+        var gameId = $export.find('select').val();
+
+        $.ajax({
+            type: 'get',
+            url: site_url+'ajax/export',
+            data: 'game='+gameId,
+            dataType: 'html',
+            success: function(url) {
+                console.log(url);
+                var $a = $export.find('.url').find('a');
+                $a.attr('href', url);
+                $a.text(url);
+                $export.find('.url').fadeIn();
+            }
+        });
+    });
+
     /*
     * Events
     */

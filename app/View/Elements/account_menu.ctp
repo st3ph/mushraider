@@ -6,7 +6,7 @@
         <?php echo $this->Html->link('<i class="icon-shield"></i> '.__('Characters').'<i class="icon-chevron-right pull-right"></i>', '/account/characters', array('escape' => false, 'title' => __('Characters')));?>
     </li>
     <li class="<?php echo $this->action == 'settings'?'active':'';?>">
-        <?php echo $this->Html->link('<i class="icon-cogs"></i> '.__('Options').'<i class="icon-chevron-right pull-right"></i>', '/account/settings', array('escape' => false, 'title' => __('Options')));?>
+        <?php echo $this->Html->link('<i class="icon-bullhorn"></i> '.__('Notifications').'<i class="icon-chevron-right pull-right"></i>', '/account/settings', array('escape' => false, 'title' => __('Options')));?>
     </li>
     <?php if(empty($bridge) || (!empty($bridge) && !$bridge->enabled)):?>
         <li class="<?php echo $this->action == 'password'?'active':'';?>">
@@ -15,5 +15,8 @@
     <?php endif?>
     <li class="<?php echo $this->action == 'availabilities'?'active':'';?>">
         <?php echo $this->Html->link('<i class="icon-time"></i> '.__('Absences').'<i class="icon-chevron-right pull-right"></i>', '/account/availabilities', array('escape' => false, 'title' => __('Absences')));?>
+    </li>
+    <li class="<?php echo $this->action == 'calendar'?'active':'';?>">
+        <?php echo $this->Html->link('<i class="icon-calendar"></i> '.__('Calendar').'<i class="icon-chevron-right pull-right"></i>', '/account/calendar', array('escape' => false, 'title' => __('Calendar')));?>
     </li>
 </ul>

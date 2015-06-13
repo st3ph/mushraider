@@ -4,7 +4,7 @@ class PatcherController extends AdminAppController {
     public $uses = array('Character', 'EventsCharacter', 'Event');
 
     var $adminOnly = true;
-    var $availablePatchs = array('beta-2', 'beta-3', 'v-1.1', 'v-1.3', 'v-1.3.5', 'v-1.4', 'v-1.4.1', 'v-1.5', 'v-1.5.2');
+    var $availablePatchs = array('beta-2', 'beta-3', 'v-1.1', 'v-1.3', 'v-1.3.5', 'v-1.4', 'v-1.4.1', 'v-1.5', 'v-1.5.2', 'v-1.6');
     var $dbPrefix = 'mr_';
 
     function beforeFilter() {
@@ -16,9 +16,9 @@ class PatcherController extends AdminAppController {
 
     public function apply($patch = null) {
         if(!in_array($patch, $this->availablePatchs)) {
-    		$this->Session->setFlash(__('MushRaider can\'t find this patch'), 'flash_error');
-    		return $this->redirect('/admin');
-    	}
+            $this->Session->setFlash(__('MushRaider can\'t find this patch'), 'flash_error');
+            return $this->redirect('/admin');
+        }
 
     	if(!empty($this->request->data['Patcher'])) {
             $db = ConnectionManager::getDataSource('default');
@@ -268,6 +268,26 @@ class PatcherController extends AdminAppController {
         if($events = $EventModel->find('all', $params)) {
             foreach($events as $event) {
                 $EventModel->query("UPDATE ".$EventModel->tablePrefix."events SET time_inscription='".$event['Event']['time_start']."' WHERE id = ".$event['Event']['id']);
+            }
+        }
+    }
+
+    public function v16() {
+        // Regenerate cache
+        Cache::clear(false);
+
+        // Generate calendar's keys
+        App::uses('User', 'Model');
+        $UserModel = new User();
+        $params = array();
+        $params['recursive'] = -1;
+        $params['fields'] = array('id');
+        if($users = $UserModel->find('all', $params)) {
+            foreach($users as $user) {
+                $toUpdate = array();
+                $toUpdate['id'] = $user['User']['id'];
+                $toUpdate['calendar_key'] = uniqid();
+                $UserModel->save($toUpdate);
             }
         }
     }

@@ -70,6 +70,14 @@ class PatcherComponent extends Component {
         if(!$Event->query($sql)) {
             return $this->redirectToPatch('/admin/patcher/apply/v-1.5.2');
         }
+
+        // v1.6
+        App::uses('User', 'Model');
+        $User = new User();
+        $sql = "SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE() AND COLUMN_NAME='calendar_key' AND TABLE_NAME='".Configure::read('Database.prefix')."users'";
+        if(!$User->query($sql)) {
+            return $this->redirectToPatch('/admin/patcher/apply/v-1.6');
+        }
 	}
 
     public function run_sql_file($mysqlLink, $location, $prefix = '') {

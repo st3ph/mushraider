@@ -101,6 +101,10 @@ class User extends AppModel {
             if(!isset($this->data['User']['activation_key']) || empty($this->data['User']['activation_key'])) {
                 $this->data['User']['activation_key'] = md5(uniqid());
             }
+
+            if(!isset($this->data['User']['calendar_key']) || empty($this->data['User']['calendar_key'])) {
+                $this->data['User']['calendar_key'] = uniqid();
+            }
         }
         
         return true;

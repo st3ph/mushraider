@@ -388,5 +388,23 @@ class ToolsHelper extends AppHelper {
         $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
 	    return $protocol;
     }
+
+    /*
+    * @name br2nl
+    * @desc replace <br> with nl
+    * @return string
+    */
+	function br2nl($string){
+	   return eregi_replace('<br[[:space:]]*/?'.'[[:space:]]*>', chr(13).chr(10), $string);
+	}
+
+	/*
+    * @name escapeCalendarString
+    * @desc Escape string for calendar export
+    * @return string
+    */
+	function escapeCalendarString($string) {
+		return preg_replace('/([\,;])/','\\\$1', $string);
+	}
 }
 ?>

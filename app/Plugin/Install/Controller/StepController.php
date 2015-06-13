@@ -133,6 +133,7 @@ class StepController extends InstallAppController {
                     $toSave['email'] = $adminemail;
                     $toSave['status'] = 1;
                     $toSave['activation_key'] = md5(uniqid());
+                    $toSave['calendar_key'] = uniqid();
                     $userModel->create();
                     if($userModel->save($toSave)) {
                         $this->postInstallData($siteTitle);

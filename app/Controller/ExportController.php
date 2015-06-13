@@ -27,7 +27,7 @@ class ExportController extends AppController {
 
         switch($this->request->params['ext']) {
             case 'ics':
-                $this->RequestHandler->respondAs('text/plain');
+                $this->RequestHandler->respondAs('text/calendar');
                 break;
             case 'xml':
                 $this->RequestHandler->respondAs('text/xml');

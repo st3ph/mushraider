@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /account
+Disallow: /events
+Disallow: /admin
+Allow: /auth
+Allow: /export

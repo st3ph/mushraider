@@ -282,6 +282,7 @@ class PatcherController extends AdminAppController {
         $params = array();
         $params['recursive'] = -1;
         $params['fields'] = array('id');
+        $params['conditions']['status'] = array(0, 1);
         if($users = $UserModel->find('all', $params)) {
             foreach($users as $user) {
                 $toUpdate = array();

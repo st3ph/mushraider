@@ -173,4 +173,32 @@ class CalendarHelper extends FormerHelper {
         
         return $days;
     }
+
+    private function extractEvents($events, $date) {
+        $matchingEvents = array();
+        if(!empty($events)) {
+            foreach($events as $event) {
+                $eventDate = explode(' ', $event['Event']['time_invitation']);
+                if($eventDate[0] == $date) {
+                    $matchingEvents[] = $event;
+                }
+            }
+        }
+
+        return $matchingEvents;
+    }
+
+    private function extractUsersWithStatus($eventCharacters, $status) {
+        $chars = array();
+
+        if(!empty($eventCharacters)) {
+            foreach($eventCharacters as $char) {
+                if($char['status'] == $status) {
+                    $chars[] = $char;
+                }
+            }
+        }
+
+        return $chars;
+    }
 }

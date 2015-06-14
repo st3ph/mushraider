@@ -5,8 +5,8 @@
     <li class="<?php echo $this->action == 'characters' || $this->action == 'characters_edit'?'active':'';?>">
         <?php echo $this->Html->link('<i class="icon-shield"></i> '.__('Characters').'<i class="icon-chevron-right pull-right"></i>', '/account/characters', array('escape' => false, 'title' => __('Characters')));?>
     </li>
-    <li class="<?php echo $this->action == 'settings'?'active':'';?>">
-        <?php echo $this->Html->link('<i class="icon-bullhorn"></i> '.__('Notifications').'<i class="icon-chevron-right pull-right"></i>', '/account/settings', array('escape' => false, 'title' => __('Options')));?>
+    <li class="<?php echo $this->action == 'notifications'?'active':'';?>">
+        <?php echo $this->Html->link('<i class="icon-bullhorn"></i> '.__('Notifications').'<i class="icon-chevron-right pull-right"></i>', '/account/notifications', array('escape' => false, 'title' => __('Notifications')));?>
     </li>
     <?php if(empty($bridge) || (!empty($bridge) && !$bridge->enabled)):?>
         <li class="<?php echo $this->action == 'password'?'active':'';?>">

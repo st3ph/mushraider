@@ -13,7 +13,7 @@
     	    					<ul class="dropdown-menu" role="menu" aria-labelledby="userMenu">
     	    						<li><?php echo $this->Html->link('<i class="icon-unlock-alt"></i> '.__('Profile'), '/account', array('escape' => false));?></li>
                                     <li><?php echo $this->Html->link('<i class="icon-shield"></i> '.__('Characters'), '/account/characters', array('escape' => false));?></li>
-    	    						<li><?php echo $this->Html->link('<i class="icon-gears"></i> '.__('Options'), '/account/settings', array('escape' => false));?></li>
+    	    						<li><?php echo $this->Html->link('<i class="icon-bullhorn"></i> '.__('Notifications'), '/account/notifications', array('escape' => false));?></li>
     	    						<li class="divider"></li>
     	    						<li><?php echo $this->Html->link('<i class="icon-signout"></i> '.__('Logout'), '/auth/logout', array('escape' => false));?></li>
     	    					</ul>

@@ -280,9 +280,9 @@ class AccountController extends AppController {
         $this->request->data['User'] = array();        
     }
 
-    public function settings() {
-        $this->pageTitle = __('My MushRaider settings').' - '.$this->pageTitle;
-        $this->breadcrumb[] = array('title' => __('Settings'), 'url' => '');
+    public function notifications() {
+        $this->pageTitle = __('My MushRaider notifications').' - '.$this->pageTitle;
+        $this->breadcrumb[] = array('title' => __('Notifications'), 'url' => '');
 
         if(!empty($this->request->data['User'])) {
             $toSave = array();
@@ -291,8 +291,8 @@ class AccountController extends AppController {
             $toSave['notifications_new'] = $this->request->data['User']['notifications_new']?1:0;
             $toSave['notifications_validate'] = $this->request->data['User']['notifications_validate']?1:0;
             if($this->User->save($toSave)) {
-                $this->Session->setFlash(__('Your settings were saved successfully'), 'flash_success');
-                $this->redirect('/account/settings');
+                $this->Session->setFlash(__('Your notification settings were saved successfully'), 'flash_success');
+                $this->redirect('/account/notifications');
             }else {
                 $this->Session->setFlash(__('Something wrong happen, please fix the errors below'), 'flash_error');
             }

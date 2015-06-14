@@ -1,5 +1,5 @@
 <header>
-    <h1><i class="icon-user"></i> <?php echo __('Personal informations');?></h1>
+    <h1><i class="fa fa-user"></i> <?php echo __('Personal informations');?></h1>
 </header>
 
 <div class="row">

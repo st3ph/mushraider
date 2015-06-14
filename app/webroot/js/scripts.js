@@ -147,7 +147,7 @@ jQuery(function($) {
         $formRow.find('.error-message').remove();
         $formRow.find('td').addClass(bgColorClass);
 
-        $overlayButton = $('<button>').addClass('btn btn-danger').append('<span class="icon-remove"></span>');
+        $overlayButton = $('<button>').addClass('btn btn-danger').append('<span class="fa-times"></span>');
         $overlay = $('<div>').addClass('overlay text-center');
         $row.find('td').css({position: 'relative'}).append($overlay);
         $row.find('td:last-child').find('.overlay').append($overlayButton);
@@ -370,20 +370,51 @@ jQuery(function($) {
     });
 
     if($('.wysiwyg').length) {
-        var editorObject = $('.wysiwyg').cleditor({
-            width: 'auto',
-            height: 150,
-            controls: "bold italic underline strikethrough | font size strikethrough style | color highlight removeformat | bullets numbering | " +
-                      "outdent indent | alignleft center alignright justify | undo redo | link unlink"
-        });
-    }
-
-    if($('.wysiwyg-tall').length) {
-        var editorObject = $('.wysiwyg-tall').cleditor({
-            width: 'auto',
-            height: 500,
-            controls: "bold italic underline strikethrough | font size strikethrough style | color highlight removeformat | bullets numbering | " +
-                      "outdent indent | alignleft center alignright justify | undo redo | link unlink"
+        $('.wysiwyg').each(function() {
+            var wysiwygHeight = $(this).data('height');
+            $(this).editable({
+                inlineMode: false,
+                width: 'auto',
+                height: wysiwygHeight,
+                mediaManager: true,
+                defaultImageWidth: 0,
+                imageUploadURL: site_url+'admin/ajax/uploadimage',
+                imageUploadParam: 'img',
+                imagesLoadURL: site_url+'admin/ajax/getimages',
+                imageDeleteURL: site_url+'admin/ajax/delimage',
+            }).on('editable.imageError', function (e, editor, error) {
+                if(error.code == 0) {
+                    console.log('Custom error message returned from the server.');
+                }else if(error.code == 1) {
+                    console.log('Bad link.');
+                }else if(error.code == 2) {
+                    console.log('No link in upload response.');
+                }else if(error.code == 3) {
+                    console.log('Error during image upload.');
+                }else if(error.code == 4) {
+                    console.log('Parsing response failed.');
+                }else if(error.code == 5) {
+                    console.log('Image too large.');
+                }else if(error.code == 6) {
+                    console.log('Invalid image type.');
+                }else if(error.code == 7) {
+                    console.log('Image can be uploaded only to same domain in IE 8 and IE 9.');
+                }
+            }).on('editable.imagesLoadError', function (e, editor, error) {
+                if(error.code == 0) {
+                    console.log('Custom error message returned from the server');
+                }else if(error.code == 1) {
+                    console.log('Bad link. One of the returned image links cannot be loaded.');
+                }else if(error.code == 2) {
+                    console.log('Error during HTTP request to load images.');
+                }else if(error.code == 3) {
+                    console.log('Missing imagesLoadURL option.');
+                }else if(error.code == 4) {
+                    console.log('Parsing response failed.');
+                }
+            }).on('editable.imagesLoaded', function (e, editor, data) {
+                console.log('Images have been loaded.');
+            });
         });
     }
 
@@ -396,25 +427,25 @@ jQuery(function($) {
         var $waiting = $roleTd.find('.waiting');
         var $validated = $roleTd.find('.validated');
         var $refused = $roleTd.find('.refused');
-        if($editButtonI.hasClass('icon-edit')) { // Go Edit mode
+        if($editButtonI.hasClass('fa-pencil-square-o')) { // Go Edit mode
             $editButton.removeClass('badge-warning').addClass('badge-success');
-            $editButtonI.removeClass('icon-edit').addClass('icon-save');
+            $editButtonI.removeClass('fa-pencil-square-o').addClass('fa-floppy-o');
             // Add 'add button' and 'refused button' to waiting list
             $waiting.find('li').each(function() {
-                $(this).find('.character').prepend('<i class="icon-plus text-success"></i>');
-                $(this).find('.character').prepend('<i class="icon-minus-sign text-error"></i>');
+                $(this).find('.character').prepend('<i class="fa-plus text-success"></i>');
+                $(this).find('.character').prepend('<i class="fa-minus-circle text-error"></i>');
                 $(this).addClass('nosort');
             });
 
             // Add 'add button' to refused list
             $refused.find('li').each(function() {
-                $(this).find('.character').prepend('<i class="icon-plus text-success"></i>');
+                $(this).find('.character').prepend('<i class="fa-plus text-success"></i>');
                 $(this).addClass('nosort');
             });
 
             // Add 'remove button' to validated list
             $validated.find('li').each(function() {
-                $(this).find('.character').prepend('<i class="icon-minus text-error"></i>');
+                $(this).find('.character').prepend('<i class="fa-minus text-error"></i>');
                 $(this).addClass('nosort');
             });
         }else { // Save
@@ -440,7 +471,7 @@ jQuery(function($) {
                     $editButton.next('img').remove();
 
                     $editButton.removeClass('badge-success').addClass('badge-warning');
-                    $editButtonI.removeClass('icon-save').addClass('icon-edit');
+                    $editButtonI.removeClass('fa-floppy-o').addClass('fa-pencil-square-o');
 
                     countRoster();
                 }
@@ -474,13 +505,13 @@ jQuery(function($) {
         var $validated = $roleTd.find('.validated');
         var $refused = $roleTd.find('.refused');
 
-        if($button.hasClass('icon-plus')) { // Add player to roster
+        if($button.hasClass('fa-plus')) { // Add player to roster
             // Check if there is a room left for this role
             if(parseInt($roleTh.find('.max').text()) > $validated.find('li').length) {
                 var $player = $(this).parents('li');
                 var $newPlayer = $player.clone();
                 $newPlayer.find('i').remove();
-                $newPlayer.find('.character').prepend('<i class="icon-minus text-error"></i>');
+                $newPlayer.find('.character').prepend('<i class="fa-minus text-error"></i>');
                 $validated.append($newPlayer);
                 $player.remove();
 
@@ -489,23 +520,23 @@ jQuery(function($) {
             }else {
                 alert($roleTd.data('full'));
             }
-        }else if($button.hasClass('icon-minus')) { // Remove player from roster
+        }else if($button.hasClass('fa-minus')) { // Remove player from roster
             $player = $(this).parents('li');
             var $newPlayer = $player.clone();
             $newPlayer.find('i').remove();
-            $newPlayer.find('.character').prepend('<i class="icon-plus text-success"></i>');
-            $newPlayer.find('.character').prepend('<i class="icon-minus-sign text-error"></i>');
+            $newPlayer.find('.character').prepend('<i class="fa-plus text-success"></i>');
+            $newPlayer.find('.character').prepend('<i class="fa-minus-circle text-error"></i>');
             $waiting.append($newPlayer);
             $player.remove();
 
             var currentPlayers = parseInt($roleTh.find('.current').text());
             currentPlayers = currentPlayers > 0?currentPlayers - 1:0;
             $roleTh.find('.current').text(currentPlayers);
-        }else if($button.hasClass('icon-minus-sign')) { // Refused player from roster
+        }else if($button.hasClass('fa-minus-circle')) { // Refused player from roster
             $player = $(this).parents('li');
             var $newPlayer = $player.clone();
             $newPlayer.find('i').remove();
-            $newPlayer.find('.character').prepend('<i class="icon-plus text-success"></i>');
+            $newPlayer.find('.character').prepend('<i class="fa-plus text-success"></i>');
             $refused.append($newPlayer);
             $player.remove();
         }
@@ -518,7 +549,7 @@ jQuery(function($) {
         placeholder: "sortable-placeholder",
         cursor: "move",
         containment: "#eventRoles",
-        handle: '.icon-move',
+        handle: '.fa-arrows',
         receive: function(event, ui) {            
             var characterId = ui.item.data('id');
             var roleId = ui.item.parents('td').data('id');

@@ -1,6 +1,6 @@
 <div class="box dark">
     <header>
-        <div class="icons"><i class="icon-cog"></i></div>
+        <div class="icons"><i class="fa fa-cog"></i></div>
         <h5><?php echo __('Configure MushRaider');?></h5>
     </header>
     <div class="accordion-body body in collapse">

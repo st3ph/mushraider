@@ -1,7 +1,7 @@
 <?php $gameId = '';?>
 <div class="box dark">
     <header>
-        <div class="icons"><i class="icon-bar-chart icon-white"></i></div>
+        <div class="icons"><i class="fa fa-bar-chart "></i></div>
         <h5><?php echo __('Stats');?></h5>
     </header>
     <div class="accordion-body body in collapse">
@@ -22,7 +22,7 @@
                     <div class="form-group">
                         <div class="input-append">
                             <?php echo $this->Form->input('Stats.start', array('type' => 'text', 'label' => __('From'), 'div' => false, 'class' => 'input-small startDate', 'placeholder' => __('From'), 'error' => false));?>
-                            <span class="add-on"><span class="icon-calendar"></span></span>
+                            <span class="add-on"><span class="fa fa-calendar"></span></span>
                         </div>
                     </div>
                 </td>
@@ -30,7 +30,7 @@
                     <div class="form-group">
                         <div class="input-append">
                             <?php echo $this->Form->input('Stats.end', array('type' => 'text', 'label' => __('To'), 'div' => false, 'class' => 'input-small endDate', 'placeholder' => __('To'), 'error' => false));?>
-                            <span class="add-on"><span class="icon-calendar"></span></span>
+                            <span class="add-on"><span class="fa fa-calendar"></span></span>
                         </div>
                     </div>
                 </td>

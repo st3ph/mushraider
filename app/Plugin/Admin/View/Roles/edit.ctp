@@ -1,6 +1,6 @@
 <div class="box dark">
     <header>
-        <div class="icons"><i class="icon-eye-open"></i></div>
+        <div class="icons"><i class="fa fa-eye"></i></div>
         <h5><?php echo __('Edit user group');?> : <?php echo $this->data['Role']['title'];?></h5>
     </header>
     <div class="accordion-body body in collapse">

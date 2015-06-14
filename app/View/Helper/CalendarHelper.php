@@ -42,9 +42,9 @@ class CalendarHelper extends FormerHelper {
             $this->output .= '<td>';
                 $this->output .= '<table width="100%" border="0" cellspacing="0" cellpadding="0">';
                     $this->output .= '<tr class="links">';
-                        $this->output .= '<td class="prev">'.$this->Html->link('<i class="icon-chevron-left"></i> <span>'.__('Previous').'</span>', '/events/index/m:'.$prev_month.'/y:'.$prev_year, array('escape' => false)).'</td>';
+                        $this->output .= '<td class="prev">'.$this->Html->link('<i class="fa fa-chevron-left"></i> <span>'.__('Previous').'</span>', '/events/index/m:'.$prev_month.'/y:'.$prev_year, array('escape' => false)).'</td>';
                         $this->output .= '<td class="month">'.ucfirst($this->mois[$monthIn2Digits]).' '.$this->options['year'].'</td>';
-                        $this->output .= '<td class="next">'.$this->Html->link('<span>'.__('Next').'</span> <i class="icon-chevron-right"></i>', '/events/index/m:'.$next_month.'/y:'.$next_year, array('escape' => false)).'</td>';
+                        $this->output .= '<td class="next">'.$this->Html->link('<span>'.__('Next').'</span> <i class="fa fa-chevron-right"></i>', '/events/index/m:'.$next_month.'/y:'.$next_year, array('escape' => false)).'</td>';
                     $this->output .= '</tr>';
                 $this->output .= '</table>';
             $this->output .= '</td>';
@@ -104,7 +104,7 @@ class CalendarHelper extends FormerHelper {
             $this->output .= '<div class="clearfix dayNumber">';
                 $this->output .= $datetime->format('d');
                 if($datetime >= $today && ($this->options['user']['User']['can']['manage_own_events'] || $this->options['user']['User']['can']['manage_events'] || $this->options['user']['User']['can']['full_permissions'])) {
-                    $this->output .= $this->Html->link('<i class="icon-plus-sign-alt"></i>', '/events/add/'.$datetime->format('Y-m-d'), array('title' => __('Add event'), 'class' => 'pull-right tt', 'escape' => false));
+                    $this->output .= $this->Html->link('<i class="fa fa-plus-square"></i>', '/events/add/'.$datetime->format('Y-m-d'), array('title' => __('Add event'), 'class' => 'pull-right tt', 'escape' => false));
                 }
             $this->output .= '</div>';
 
@@ -132,7 +132,7 @@ class CalendarHelper extends FormerHelper {
                             $eventTitle = (!empty($matchingEvent['Event']['title']) && $this->options['settings']['title'] == 'event')?$matchingEvent['Event']['title']:$matchingEvent['Dungeon']['title'];
                             $this->output .= $this->Html->link($eventTitle, '/events/view/'.$matchingEvent['Event']['id'], array('escape' => false, 'title' => $tooltip, 'class' => 'tt '.$registeredClass));
                             if(!empty($matchingEvent['Report']['id'])) {
-                                $this->output .= ' <i class="icon-lock"></i>';
+                                $this->output .= ' <i class="fa fa-lock"></i>';
                             }
                         $this->output .= '</li>';
                     }                    

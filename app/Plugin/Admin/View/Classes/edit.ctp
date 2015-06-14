@@ -1,6 +1,6 @@
 <div class="box dark">
     <header>
-        <div class="icons"><i class="icon-home"></i></div>
+        <div class="icons"><i class="fa fa-home"></i></div>
         <h5><?php echo __('Edit Class');?></h5>
     </header>
     <div class="accordion-body body in collapse">
@@ -23,7 +23,7 @@
                         <div id="currentImage">
                             <h6><?php echo __('Current icon');?> :</h6>
                             <?php echo $this->Html->image($this->data['Classe']['icon'], array('class' => ''));?>
-                            <button class="btn btn-mini btn-danger" type="button"><i class="icon-trash"></i> <?php echo __('delete');?></button>
+                            <button class="btn btn-mini btn-danger" type="button"><i class="fa fa-trash"></i> <?php echo __('delete');?></button>
                         </div>
                     <?php endif;?>
                 </div>

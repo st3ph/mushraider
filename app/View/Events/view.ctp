@@ -14,7 +14,7 @@
 			<?php $displayCloseButton = ($dayTimestamp < $todayTimestamp && ($user['User']['can']['create_reports'] || ($user['User']['can']['manage_own_events'] && $user['User']['id'] == $event['User']['id']) || $user['User']['can']['full_permissions']))?true:false?>
 			<?php $displayReportButton = !empty($event['Report']['id'])?true:false?>
 			<div class="span<?php echo ($displayAdminButtons || $displayCloseButton || $displayReportButton || $displayTplButtons)?6:11?>">
-				<i class="icon-calendar-empty"></i> <?php echo __('View event');?>
+				<i class="fa fa-calendar-empty"></i> <?php echo __('View event');?>
 				<?php if(!empty($event['Game']['logo'])):?>
 					&nbsp;<?php echo $this->Html->image($event['Game']['logo'], array('class' => 'logo', 'width' => 32));?>
 				<?php endif;?>
@@ -22,18 +22,18 @@
 			<?php if($displayAdminButtons || $displayCloseButton || $displayReportButton || $displayTplButtons):?>
 				<div class="pull-right text-right span5 eventAdminButtons">
 					<?php if($displayTplButtons):?>
-						<?php echo $this->Html->link('<i class="icon-copy"></i> '.__('Copy'), '/events/view/'.$event['Event']['id'], array('id' => 'createTemplate', 'class' => 'btn btn-mini tt', 'title' => __('Create template'), 'escape' => false));?>
-						<span id="tplName" data-event="<?php echo $event['Event']['id'];?>"><input type="text" class="input-small" value="" placeholder="<?php echo __('template name');?>"/> <span class="text-error"><i class="icon-remove"></i></span> <span class="text-success"><i class="icon-save"></i></span></span>
+						<?php echo $this->Html->link('<i class="fa fa-files-o"></i> '.__('Copy'), '/events/view/'.$event['Event']['id'], array('id' => 'createTemplate', 'class' => 'btn btn-mini tt', 'title' => __('Create template'), 'escape' => false));?>
+						<span id="tplName" data-event="<?php echo $event['Event']['id'];?>"><input type="text" class="input-small" value="" placeholder="<?php echo __('template name');?>"/> <span class="text-error"><i class="fa fa-times"></i></span> <span class="text-success"><i class="fa fa-floppy-o"></i></span></span>
 					<?php endif;?>
 					<?php if($displayAdminButtons):?>
-						<?php echo $this->Html->link('<i class="icon-edit"></i> '.__('Edit'), '/events/edit/'.$event['Event']['id'], array('class' => 'btn btn-warning btn-mini', 'escape' => false));?>
-						<?php echo $this->Html->link('<i class="icon-trash"></i> '.__('Delete'), '/events/delete/'.$event['Event']['id'], array('class' => 'btn btn-danger btn-mini confirm', 'data-confirm' => __("Are you sure you want to delete this event ?\n(this can't be undone)"), 'escape' => false));?>
+						<?php echo $this->Html->link('<i class="fa fa-pencil-square-o"></i> '.__('Edit'), '/events/edit/'.$event['Event']['id'], array('class' => 'btn btn-warning btn-mini', 'escape' => false));?>
+						<?php echo $this->Html->link('<i class="fa fa-trash"></i> '.__('Delete'), '/events/delete/'.$event['Event']['id'], array('class' => 'btn btn-danger btn-mini confirm', 'data-confirm' => __("Are you sure you want to delete this event ?\n(this can't be undone)"), 'escape' => false));?>
 					<?php endif;?>
 					<?php if($displayReportButton):?>
 						<?php echo $this->Html->link(__('View report'), '/events/report/'.$event['Event']['id'], array('class' => 'btn btn-inverse btn-mini', 'escape' => false));?>
 					<?php endif;?>
 					<?php if(!$displayReportButton && $displayCloseButton):?>
-						<?php echo $this->Html->link('<i class="icon-lock"></i> '.__('Close & create a report'), '/events/close/'.$event['Event']['id'], array('class' => 'btn btn-success btn-mini', 'escape' => false));?>
+						<?php echo $this->Html->link('<i class="fa fa-lock"></i> '.__('Close & create a report'), '/events/close/'.$event['Event']['id'], array('class' => 'btn btn-success btn-mini', 'escape' => false));?>
 					<?php endif;?>
 				</div>
 			<?php endif;?>
@@ -107,12 +107,12 @@ foreach($event['EventsRole'] as $eventRole) {
 					</select>
 				<?php endif;?>
 				<?php echo $this->Form->input('Comment', array('type' => 'text', 'value' => $registeredCharacterComment, 'class' => 'span3', 'placeholder' => __('Add a comment'), 'label' => false, 'div' => false, 'maxlength' => 75));?>
-				<span class="btn" data-status="<?php echo $event['Event']['open']?'2':'1';?>"><i class="icon-thumbs-up"></i></span>
-				<span class="btn" data-status="0"><i class="icon-thumbs-down"></i></span>
+				<span class="btn" data-status="<?php echo $event['Event']['open']?'2':'1';?>"><i class="fa fa-thumbs-up"></i></span>
+				<span class="btn" data-status="0"><i class="fa fa-thumbs-down"></i></span>
 			<?php else:?>
 				<p>
 					<span class="text-warning"><?php echo __('You don\'t have any character for this game :(');?></span>
-					<?php echo $this->Html->link('<span class="icon-plus"></span> '.__('Create a character'), '/account/characters', array('class' => 'btn btn-small', 'escape' => false));?>
+					<?php echo $this->Html->link('<span class="fa fa-plus"></span> '.__('Create a character'), '/account/characters', array('class' => 'btn btn-small', 'escape' => false));?>
 				</p>
 			<?php endif;?>
 		</div>
@@ -121,7 +121,7 @@ foreach($event['EventsRole'] as $eventRole) {
 	<?php if($event['Event']['open']):?>
 		<div class="row">
 			<div class="span11 pull-right text-right">
-				<span class="label label-info"><span class="icon-info-sign"></span> <?php echo __('This event is open ! You will be auto validated \o/');?></span>
+				<span class="label label-info"><span class="fa fa-info-circle"></span> <?php echo __('This event is open ! You will be auto validated \o/');?></span>
 			</div>
 		</div>
 	<?php endif;?>
@@ -170,7 +170,7 @@ foreach($event['EventsRole'] as $eventRole) {
 <h3>
 	<?php echo __('Roster');?>
 	<?php if(($user['User']['can']['manage_own_events'] && $user['User']['id'] == $event['User']['id']) || $user['User']['can']['manage_events'] || $user['User']['can']['full_permissions']):?>
-		<button type="button" class="btn btn-default btn-mini margin-left-10" data-toggle="modal" data-target="#invitCommands"><i class="icon-code"></i> <?php echo __('Invitation commands');?></button>
+		<button type="button" class="btn btn-default btn-mini margin-left-10" data-toggle="modal" data-target="#invitCommands"><i class="fa fa-code"></i> <?php echo __('Invitation commands');?></button>
 	<?php endif;?>
 </h3>
 
@@ -182,7 +182,7 @@ foreach($event['EventsRole'] as $eventRole) {
 		</div>
 		<div class="modal-body">
 			<p class="text-info">
-				<i class="icon-info-sign"></i>
+				<i class="fa fa-info-circle"></i>
 				<?php echo __('Select the command corresponding to your game and copy/paste the generated commands to your chat to quick invit you roster');?>
 			</p>
 			<p class="text-info">
@@ -214,7 +214,7 @@ foreach($event['EventsRole'] as $eventRole) {
 							<?php echo $eventRole['title'];?>
 							<span class="current"><?php echo $eventRole['current'];?></span> / <span class="max"><?php echo $eventRole['max'];?></span>
 							<?php if(!$eventIsClosed && (($user['User']['can']['manage_own_events'] && $user['User']['id'] == $event['User']['id']) || $user['User']['can']['manage_events'] || $user['User']['can']['full_permissions'])):?>
-								<span class="badge badge-warning pull-right"><i class="icon-edit"></i></span>
+								<span class="badge badge-warning pull-right"><i class="fa fa-pencil-square-o"></i></span>
 							<?php endif;?>
 						</th>
 					<?php endif;?>

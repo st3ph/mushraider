@@ -1,5 +1,5 @@
 <header>
-    <h2><i class="icon-lock"></i> <?php echo __('Login');?></h2>
+    <h2><i class="fa fa-lock"></i> <?php echo __('Login');?></h2>
 </header>
 
 <?php echo $this->Form->create('User', array('url' => '/auth/login', 'class' => ''));?>

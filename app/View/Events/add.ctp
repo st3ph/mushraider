@@ -2,12 +2,12 @@
 	<h1>
         <div class="row">
             <div class="span8">
-                <i class="icon-calendar"></i> <?php echo __('Add event');?> <?php echo __('the');?> <?php echo $this->Former->date($eventDate, 'jour');?>
+                <i class="fa fa-calendar"></i> <?php echo __('Add event');?> <?php echo __('the');?> <?php echo $this->Former->date($eventDate, 'jour');?>
             </div>
             <div class="pull-right text-right  span3">
                 <?php if(!empty($tplList)):?>
                     <div class="pull-right">
-                        <?php echo $this->Html->link('<i class="icon-download"></i> '.__('Load template'), '/events/add', array('id' => 'loadTemplate', 'class' => 'btn btn-mini', 'escape' => false));?>
+                        <?php echo $this->Html->link('<i class="fa fa-download"></i> '.__('Load template'), '/events/add', array('id' => 'loadTemplate', 'class' => 'btn btn-mini', 'escape' => false));?>
                         <span id="tplList"><?php echo $this->Form->input(false, array('type' => 'select', 'options' => $tplList, 'id' => 'TemplateList', 'label' => false, 'div' => null, 'empty' => __('Choose a template')));?></span>
                     </div>       
                 <?php endif;?> 
@@ -32,7 +32,7 @@
         </div>
         <div class="span6">            
             <div class="form-group">
-                <?php echo $this->Form->input('Event.description', array('type' => 'textarea', 'label' => __('Event description'), 'class' => 'span5 wysiwyg'));?>
+                <?php echo $this->Form->input('Event.description', array('type' => 'textarea', 'label' => __('Event description'), 'class' => 'span5 wysiwyg', 'data-height' => 150));?>
             </div>
         </div>
     </div>
@@ -63,7 +63,7 @@
                 <label><?php echo __('Registration end date (optional)');?></label>
                 <div class="input-append">
                     <?php echo $this->Form->input('Event.time_inscription', array('type' => 'text', 'label' => false, 'placeholder' => __('dd/mm/yyyy'), 'div' => false, 'class' => 'input-medium datepicker', 'data-date' => $this->Former->date($eventDate, 'jour')));?>
-                    <span class="add-on"><span class="icon-calendar"></span></span>
+                    <span class="add-on"><span class="fa fa-calendar"></span></span>
                 </div>
             </div>
         </div>

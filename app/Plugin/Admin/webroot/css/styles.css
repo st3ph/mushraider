@@ -1080,19 +1080,19 @@ body.fixed .pattern-switcher {
 .sortableTable th:hover {
   color: #888;
 }
-.sortableTable th.header i.icon-sort {
+.sortableTable th.header i.fa-sort {
   display: inline-block;
 }
-.sortableTable th.headerSortUp i.icon-sort {
+.sortableTable th.headerSortUp i.fa-sort {
   display: none;
 }
-.sortableTable th.headerSortUp i.icon-sort-up {
+.sortableTable th.headerSortUp i.fa-sort-up {
   display: inline-block;
 }
-.sortableTable th.headerSortDown i.icon-sort {
+.sortableTable th.headerSortDown i.fa-sort {
   display: none;
 }
-.sortableTable th.headerSortDown i.icon-sort-down {
+.sortableTable th.headerSortDown i.fa-sort-down {
   display: inline-block;
 }
 /* END SORTABLETABLE STYLES */
@@ -1240,7 +1240,7 @@ header .toolbar .nav li a {color:#bf4d28;}
 .well-white {background-color:#fdfdfd;}
 form .hint {color:#3a87ad;margin-left:5px;font-size:16px;cursor:help;}
 form .refresh {color:#e9322d;margin-left:5px;font-size:14px;cursor:pointer;}
-table td .icon-move {cursor:move;}
+table td .fa fa-arrows {cursor:move;}
 table.table-striped tbody.ui-sortable>tr:nth-child(even)>td {background:#fff;}
 table.table-striped tbody.ui-sortable tr.sortable-placeholder td {background:#999;border-top:2px dashed #ddd;border-bottom:2px dashed #ddd}
 table.table-striped tbody.ui-sortable tr.sortable-placeholder td:first-child {border-left:2px dashed #ddd}

@@ -1,6 +1,6 @@
 <div class="box dark">
     <header>
-        <div class="icons"><i class="icon-user"></i></div>
+        <div class="icons"><i class="fa fa-user"></i></div>
         <h5><?php echo __('Edit user');?> : <?php echo $this->data['User']['username'];?></h5>
     </header>
     <div class="accordion-body body in collapse">
@@ -18,7 +18,7 @@
                     <?php echo $this->Form->input('User.role_id', array('type' => 'select', 'label' => __('Role & permissions'), 'options' => $rolesList, 'empty' => '', 'class' => 'span5'));?>
                     <?php if(!empty($roles)):?>
                         <div class="muted">
-                            <h4><i class="icon-info-sign"></i> <?php echo __('Roles details');?></h4>
+                            <h4><i class="fa fa-info-circle"></i> <?php echo __('Roles details');?></h4>
                             <ul class="unstyled">
                                 <?php foreach($roles as $role):?>
                                     <li>
@@ -80,9 +80,9 @@
                             <td><?php echo $character['level'];?></td>
                             <td>
                             <?php if(!$character['status']):?>
-                                <?php echo $this->Html->link('<i class="icon-check"></i>', '/admin/users/character_enable/'.$userInfos['User']['id'].'/'.$character['id'], array('class' => 'btn btn-success btn-mini tt', 'title' => __('Enable'), 'escape' => false))?>                        
+                                <?php echo $this->Html->link('<i class="fa fa-check"></i>', '/admin/users/character_enable/'.$userInfos['User']['id'].'/'.$character['id'], array('class' => 'btn btn-success btn-mini tt', 'title' => __('Enable'), 'escape' => false))?>                        
                             <?php else:?>
-                                <?php echo $this->Html->link('<i class="icon-collapse-alt"></i>', '/admin/users/character_disable/'.$userInfos['User']['id'].'/'.$character['id'], array('class' => 'btn btn-warning btn-mini tt delete', 'title' => __('Disable'), 'data-confirm' => __('Are you sure you want to disable the character %s ?', $character['title']), 'escape' => false))?>
+                                <?php echo $this->Html->link('<i class="fa fa-minus-square-o"></i>', '/admin/users/character_disable/'.$userInfos['User']['id'].'/'.$character['id'], array('class' => 'btn btn-warning btn-mini tt delete', 'title' => __('Disable'), 'data-confirm' => __('Are you sure you want to disable the character %s ?', $character['title']), 'escape' => false))?>
                             <?php endif;?>
                             </td>
                         </tr>

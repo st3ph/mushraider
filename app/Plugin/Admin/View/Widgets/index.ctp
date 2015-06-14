@@ -1,17 +1,17 @@
 <div class="box dark">
     <header>
-        <div class="icons"><i class="icon-list icon-white"></i></div>
+        <div class="icons"><i class="fa fa-list "></i></div>
         <h5><?php echo __('Widgets');?></h5>
         <div class="toolbar">
             <ul class="nav">
-                <li><?php echo $this->Html->link('<i class="icon-plus"></i> '.__('Add widget'), '/admin/widgets/add', array('escape' => false));?></li>
+                <li><?php echo $this->Html->link('<i class="fa fa-plus"></i> '.__('Add widget'), '/admin/widgets/add', array('escape' => false));?></li>
             </ul>
         </div>
     </header>
     <div class="accordion-body body in collapse">
         <?php if(!empty($widgets)):?>
             <div class="alert alert-info">
-                <h4><i class="icon-info-sign"></i> <?php echo __('How to display widget to my website ?');?></h4>
+                <h4><i class="fa fa-info-circle"></i> <?php echo __('How to display widget to my website ?');?></h4>
                 <p><?php echo __('Simply copy the "integration code" in any html page and the widget will display in place.');?></p>
                 <p><?php echo __('Be aware if you enable the domain restriction the widget will appears only in pages under the selected domain.');?></p>
             </div>
@@ -37,18 +37,18 @@
                             </td>
                             <td>                                
                                 <?php if($widget['Widget']['status']):?>
-                                    <i class="text-success icon-ok"></i>
+                                    <i class="text-success fa fa-check"></i>
                                 <?php else:?>
-                                    <i class="text-warning icon-warning-sign"></i>
+                                    <i class="text-warning fa fa-exclamation-triangle"></i>
                                 <?php endif;?>
                             </td>
                             <td class="actions">
-                                <?php echo $this->Html->link('<i class="icon-edit"></i>', '/admin/widgets/edit/'.$widget['Widget']['id'], array('class' => 'btn btn-info btn-mini tt', 'title' => __('Edit'), 'escape' => false))?>
+                                <?php echo $this->Html->link('<i class="fa fa-pencil-square-o"></i>', '/admin/widgets/edit/'.$widget['Widget']['id'], array('class' => 'btn btn-info btn-mini tt', 'title' => __('Edit'), 'escape' => false))?>
                                 <?php if($widget['Widget']['status']):?>
-                                    <?php echo $this->Html->link('<i class="icon-collapse-alt"></i>', '/admin/widgets/disable/'.$widget['Widget']['id'], array('class' => 'btn btn-warning btn-mini tt delete', 'title' => __('Disable'), 'data-confirm' => __('Are you sure you want to disable the widget %s ?', $widget['Widget']['title']), 'escape' => false))?>
+                                    <?php echo $this->Html->link('<i class="fa fa-minus-square-o"></i>', '/admin/widgets/disable/'.$widget['Widget']['id'], array('class' => 'btn btn-warning btn-mini tt delete', 'title' => __('Disable'), 'data-confirm' => __('Are you sure you want to disable the widget %s ?', $widget['Widget']['title']), 'escape' => false))?>
                                 <?php else:?>
-                                    <?php echo $this->Html->link('<i class="icon-check"></i>', '/admin/widgets/enable/'.$widget['Widget']['id'], array('class' => 'btn btn-success btn-mini tt', 'title' => __('Enable'), 'escape' => false))?>
-                                    <?php echo $this->Html->link('<i class="icon-trash"></i>', '/admin/widgets/delete/'.$widget['Widget']['id'], array('class' => 'btn btn-danger btn-mini tt delete', 'title' => __('Delete'), 'data-confirm' => __('Are you sure you want to completely delete the widget %s ?', $widget['Widget']['title']), 'escape' => false))?>
+                                    <?php echo $this->Html->link('<i class="fa fa-check"></i>', '/admin/widgets/enable/'.$widget['Widget']['id'], array('class' => 'btn btn-success btn-mini tt', 'title' => __('Enable'), 'escape' => false))?>
+                                    <?php echo $this->Html->link('<i class="fa fa-trash"></i>', '/admin/widgets/delete/'.$widget['Widget']['id'], array('class' => 'btn btn-danger btn-mini tt delete', 'title' => __('Delete'), 'data-confirm' => __('Are you sure you want to completely delete the widget %s ?', $widget['Widget']['title']), 'escape' => false))?>
                                 <?php endif;?>
                             </td>
                         </tr>

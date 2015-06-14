@@ -1,6 +1,6 @@
 <div class="box dark">
     <header>
-        <div class="icons"><i class="icon-home"></i></div>
+        <div class="icons"><i class="fa fa-home"></i></div>
         <h5><?php echo __('Edit Race');?></h5>
     </header>
     <div class="accordion-body body in collapse">

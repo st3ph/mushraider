@@ -77,10 +77,10 @@ class FormerHelper extends AppHelper {
 						$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= ' ('.(empty($character['Character']['Classe']['icon'])?$character['Character']['Classe']['title'].' ':'').$character['Character']['level'].')';
 					$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '</span>';
 					if(!empty($character['comment'])) {
-						$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '<span class="tt" title="'.$character['comment'].'"><span class="icon-comments-alt"></span></span>';
+						$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '<span class="tt" title="'.$character['comment'].'"><span class="fa fa-comments-o"></span></span>';
 					}
 					if($user && (($user['User']['can']['manage_own_events'] && $user['User']['id'] == $event['User']['id']) || $user['User']['can']['manage_events'] || $user['User']['can']['full_permissions'])) {
-						$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '<span class="icon-move muted pull-right"></span>';
+						$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '<span class="fa fa-arrows muted pull-right"></span>';
 					}
 				$eventRoles['role_'.$character['raids_role_id']]['characters'][$status] .= '</li>';				
 			}

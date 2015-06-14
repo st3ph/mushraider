@@ -1,5 +1,5 @@
 <header>
-    <h1><i class="icon-ambulance"></i> <?php echo __('Recovery');?></h1>
+    <h1><i class="fa fa-ambulance"></i> <?php echo __('Recovery');?></h1>
 </header>
 
 <div class="alert alert-info"><?php echo __('Choose your new password');?></div>

@@ -1,6 +1,6 @@
 <div class="box dark">
     <header>
-        <div class="icons"><i class="icon-group"></i></div>
+        <div class="icons"><i class="fa fa-group"></i></div>
         <h5><?php echo __('Edit player role');?> : <?php echo $this->data['RaidsRole']['title'];?></h5>
     </header>
     <div class="accordion-body body in collapse">

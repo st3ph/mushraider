@@ -155,7 +155,7 @@ class AjaxController extends AppController {
                         $rosterHtml .= ' '.$character['Character']['title'].' ('.$character['Character']['level'].')';
                     $rosterHtml .= '</span>';
                     if(!empty($toSave['comment'])) {
-                        $rosterHtml .= '<span class="tt" title="'.$toSave['comment'].'"><span class="icon-comments-alt"></span></span>';
+                        $rosterHtml .= '<span class="tt" title="'.$toSave['comment'].'"><span class="fa fa-comments-o"></span></span>';
                     }
                 $rosterHtml .= '</li>';
                 $jsonMessage['html'] = $rosterHtml;

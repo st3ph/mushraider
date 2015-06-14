@@ -1,12 +1,12 @@
 <div class="box dark">
     <header>
-        <div class="icons"><i class="icon-group"></i></div>
+        <div class="icons"><i class="fa fa-group"></i></div>
         <h5><?php echo __('Delete player role');?></h5>
     </header>
     <div class="accordion-body body in collapse">
         <?php echo $this->Form->create('RaidsRole', array('url' => '/admin/raidroles/delete/'.$this->data['RaidsRole']['id'], 'class' => 'span12'));?>
             <div class="alert alert-danger">
-                <i class="icon-warning-sign"></i>
+                <i class="fa fa-exclamation-triangle"></i>
                 <?php echo __('Before deleting the role "%s" you have to select a replacing one', $this->data['RaidsRole']['title']);?>
             </div>
             <div class="form-group">

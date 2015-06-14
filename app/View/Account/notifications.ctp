@@ -1,5 +1,5 @@
 <header>
-    <h1><i class="icon-bullhorn"></i> <?php echo __('My notifications');?></h1>
+    <h1><i class="fa fa-bullhorn"></i> <?php echo __('My notifications');?></h1>
 </header>
 
 <div class="row">

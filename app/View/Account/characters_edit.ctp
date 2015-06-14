@@ -1,5 +1,5 @@
 <header>
-    <h1><i class="icon-edit"></i> <?php echo __('Edit character');?></h1>
+    <h1><i class="fa fa-pencil-square-o"></i> <?php echo __('Edit character');?></h1>
 </header>
 
 <div class="row">

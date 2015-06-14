@@ -6,15 +6,13 @@
         <div class="navbar-inner">
             <div class="container-fluid">
                 <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                    <span class="fa fa-list"></span>
                 </a>
                 <?php echo $this->Html->link($this->Html->image('/img/logo.png', array('width' => 250)).' Admin', '/admin', array('class' => 'brand', 'escape' => false));?>
                 <div class="btn-toolbar topnav">
                     <div class="btn-group">
-                        <?php echo $this->Html->link('<i class="icon-home icon-white"></i>', '/', array('class' => 'btn btn-inverse', 'escape' => false));?>
-                        <?php echo $this->Html->link('<i class="icon-off icon-white"></i>', '/auth/logout', array('class' => 'btn btn-inverse', 'escape' => false));?>
+                        <?php echo $this->Html->link('<i class="fa fa-home "></i>', '/', array('class' => 'btn btn-inverse', 'escape' => false));?>
+                        <?php echo $this->Html->link('<i class="fa fa-power-off "></i>', '/auth/logout', array('class' => 'btn btn-inverse', 'escape' => false));?>
                     </div>
                 </div>
             </div>

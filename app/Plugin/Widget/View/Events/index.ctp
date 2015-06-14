@@ -29,7 +29,7 @@
                                     <?php if($registeredCharacter = $this->Tools->getRegisteredCharacter($user['User']['id'], $event['EventsCharacter'])):?>
                                         <span class="text-success"><?php echo __('Registered as');?> <?php echo $registeredCharacter['title'];?>
                                     <?php elseif($availibleCharacters = $this->Tools->getAvailableCharacter($user, $event)):?>
-                                        <?php echo $this->Html->link(__('Register').' <i class="icon-external-link"></i>', '/events/view/'.$event['Event']['id'], array('class' => '', 'target' => '_blank', 'escape' => false));?>
+                                        <?php echo $this->Html->link(__('Register').' <i class="fa fa-external-link"></i>', '/events/view/'.$event['Event']['id'], array('class' => '', 'target' => '_blank', 'escape' => false));?>
                                     <?php endif;?>
                                 <?php endif;?>
                             </small>

@@ -1,5 +1,5 @@
 <header>
-    <h1><i class="icon-ambulance"></i> <?php echo __('Recovery');?></h1>
+    <h1><i class="fa fa-ambulance"></i> <?php echo __('Recovery');?></h1>
 </header>
 
 <?php echo $this->Form->create('User', array('url' => '/auth/recovery', 'class' => ''));?>

@@ -9,31 +9,31 @@
         			<?php if($user):?>
         				<li>
         					<div class="dropdown">
-        						<i class="icon-user"></i> <?php echo $this->Html->link($user['User']['username'].' <b class="caret"></b>', '/account', array('class' => 'dropdown-toggle', 'id' => 'userMenu', 'data-toggle' => 'dropdown', ' data-target' => '#', 'escape' => false));?>
+        						<i class="fa fa-user"></i> <?php echo $this->Html->link($user['User']['username'].' <b class="caret"></b>', '/account', array('class' => 'dropdown-toggle', 'id' => 'userMenu', 'data-toggle' => 'dropdown', ' data-target' => '#', 'escape' => false));?>
     	    					<ul class="dropdown-menu" role="menu" aria-labelledby="userMenu">
-    	    						<li><?php echo $this->Html->link('<i class="icon-unlock-alt"></i> '.__('Profile'), '/account', array('escape' => false));?></li>
-                                    <li><?php echo $this->Html->link('<i class="icon-shield"></i> '.__('Characters'), '/account/characters', array('escape' => false));?></li>
-    	    						<li><?php echo $this->Html->link('<i class="icon-bullhorn"></i> '.__('Notifications'), '/account/notifications', array('escape' => false));?></li>
+    	    						<li><?php echo $this->Html->link('<i class="fa fa-unlock-alt"></i> '.__('Profile'), '/account', array('escape' => false));?></li>
+                                    <li><?php echo $this->Html->link('<i class="fa fa-shield"></i> '.__('Characters'), '/account/characters', array('escape' => false));?></li>
+    	    						<li><?php echo $this->Html->link('<i class="fa fa-bullhorn"></i> '.__('Notifications'), '/account/notifications', array('escape' => false));?></li>
     	    						<li class="divider"></li>
-    	    						<li><?php echo $this->Html->link('<i class="icon-signout"></i> '.__('Logout'), '/auth/logout', array('escape' => false));?></li>
+    	    						<li><?php echo $this->Html->link('<i class="fa fa-sign-out"></i> '.__('Logout'), '/auth/logout', array('escape' => false));?></li>
     	    					</ul>
     	    				</div>
         				</li>
 
         				<?php if($user['User']['can']['full_permissions'] || $user['User']['can']['limited_admin']):?>
-        					<li id="tourAdmin"><i class="icon-wrench"></i> <?php echo $this->Html->link(__('Admin'), '/admin');?></li>
+        					<li id="tourAdmin"><i class="fa fa-wrench"></i> <?php echo $this->Html->link(__('Admin'), '/admin');?></li>
         				<?php endif;?>
         			<?php else:?>
-        				<li><i class="icon-signin"></i> <?php echo $this->Html->link(__('LOGIN / REGISTER'), '/auth/login');?></li>
+        				<li><i class="fa fa-sign-in"></i> <?php echo $this->Html->link(__('LOGIN / REGISTER'), '/auth/login');?></li>
         			<?php endif;?>
 
                     <?php if(!empty($appLocales)):?>
                         <li>
                             <div class="dropdown">
-                                <?php echo $this->Html->link('<i class="icon-flag"></i> '.Configure::read('Config.language').' <b class="caret"></b>', '/', array('class' => 'dropdown-toggle', 'id' => 'langMenu', 'data-toggle' => 'dropdown', ' data-target' => '#', 'escape' => false));?>
+                                <?php echo $this->Html->link('<i class="fa fa-flag"></i> '.Configure::read('Config.language').' <b class="caret"></b>', '/', array('class' => 'dropdown-toggle', 'id' => 'langMenu', 'data-toggle' => 'dropdown', ' data-target' => '#', 'escape' => false));?>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="langMenu">
                                     <?php foreach($appLocales as $lang):?>
-                                        <?php $checked = Configure::read('Config.language') == $lang?'<i class="icon-check"></i>':'';?>
+                                        <?php $checked = Configure::read('Config.language') == $lang?'<i class="fa fa-check"></i>':'';?>
                                         <li><?php echo $this->Html->link(ucwords(strtolower($lang)).' '.$checked, '/l/'.$lang, array('escape' => false));?></li>
                                     <?php endforeach;?>
                                 </ul>
@@ -44,7 +44,7 @@
             </div>
             <div class="navbar">
                 <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-reorder"></span> <?php echo __('Menu');?>
+                    <span class="fa fa-bars"></span> <?php echo __('Menu');?>
                 </a>
 
                 <div class="nav-collapse collapse">

@@ -1,10 +1,10 @@
 <div class="box dark">
     <header>
-        <div class="icons"><i class="icon-list icon-white"></i></div>
+        <div class="icons"><i class="fa fa-list "></i></div>
         <h5><?php echo __('Races list');?></h5>
         <div class="toolbar">
             <ul class="nav">
-                <li><?php echo $this->Html->link('<i class="icon-plus"></i> '.__('Add race'), '/admin/races/add', array('escape' => false));?></li>
+                <li><?php echo $this->Html->link('<i class="fa fa-plus"></i> '.__('Add race'), '/admin/races/add', array('escape' => false));?></li>
             </ul>
         </div>
     </header>
@@ -23,8 +23,8 @@
                         <tr>
                             <td><?php echo $race['Race']['title'];?></td>
                             <td class="actions">
-                                <?php echo $this->Html->link('<i class="icon-edit"></i>', '/admin/races/edit/'.$race['Race']['id'], array('class' => 'btn btn-info btn-mini tt', 'title' => __('Edit'), 'escape' => false))?>
-                                <?php echo $this->Html->link('<i class="icon-trash"></i>', '/admin/races/delete/'.$race['Race']['id'], array('class' => 'btn btn-danger btn-mini tt delete', 'title' => __('Delete'), 'data-confirm' => __('Are you sure you want to completely delete the race %s ?', $race['Race']['title']), 'escape' => false))?>
+                                <?php echo $this->Html->link('<i class="fa fa-pencil-square-o"></i>', '/admin/races/edit/'.$race['Race']['id'], array('class' => 'btn btn-info btn-mini tt', 'title' => __('Edit'), 'escape' => false))?>
+                                <?php echo $this->Html->link('<i class="fa fa-trash"></i>', '/admin/races/delete/'.$race['Race']['id'], array('class' => 'btn btn-danger btn-mini tt delete', 'title' => __('Delete'), 'data-confirm' => __('Are you sure you want to completely delete the race %s ?', $race['Race']['title']), 'escape' => false))?>
                             </td>
                         </tr>                 
                     <?php endforeach;?>
@@ -58,7 +58,7 @@
                             <tr>
                                 <td><?php echo $race['Race']['title'];?></td>
                                 <td class="actions">
-                                    <?php echo $this->Html->link('<i class="icon-edit"></i>', '/admin/races/edit/'.$race['Race']['id'], array('class' => 'btn btn-info btn-mini tt', 'title' => __('Edit'), 'escape' => false))?>
+                                    <?php echo $this->Html->link('<i class="fa fa-pencil-square-o"></i>', '/admin/races/edit/'.$race['Race']['id'], array('class' => 'btn btn-info btn-mini tt', 'title' => __('Edit'), 'escape' => false))?>
                                 </td>
                             </tr>               
             <?php endforeach;?>

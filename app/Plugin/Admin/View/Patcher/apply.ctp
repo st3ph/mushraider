@@ -1,6 +1,6 @@
 <div class="box dark">
     <header>
-        <div class="icons"><i class="icon-list icon-white"></i></div>
+        <div class="icons"><i class="fa fa-list "></i></div>
         <h5><?php echo __('Apply patch');?> "<?php echo $patch;?>"</h5>
     </header>
     <div class="accordion-body body in collapse">

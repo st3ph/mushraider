@@ -1,6 +1,6 @@
 <div class="box dark">
     <header>
-        <div class="icons"><i class="icon-calendar"></i></div>
+        <div class="icons"><i class="fa fa-calendar"></i></div>
         <h5><?php echo __('Edit event template');?> : <?php echo $this->data['EventsTemplate']['title'];?></h5>
     </header>
     <div class="accordion-body body in collapse">

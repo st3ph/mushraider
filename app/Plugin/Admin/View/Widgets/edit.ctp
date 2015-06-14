@@ -1,6 +1,6 @@
 <div class="box dark">
     <header>
-        <div class="icons"><i class="icon-puzzle-piece"></i></div>
+        <div class="icons"><i class="fa fa-puzzle-piece"></i></div>
         <h5><?php echo __('Edit widget');?> : <?php echo $this->data['Widget']['title'];?></h5>
     </header>
     <div class="accordion-body body in collapse">

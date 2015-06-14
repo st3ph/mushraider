@@ -27,7 +27,8 @@
     $this->Html->css('bootstrap-responsive.min.2.3.2', null, array('inline' => false));
     $this->Html->css('jquery-ui-1.10.3.custom.min', null, array('inline' => false, 'media' => 'screen'));
     $this->Html->css('font-awesome.min', null, array('inline' => false));
-    $this->Html->css('jquery.cleditor', null, array('inline' => false));
+    $this->Html->css('froala_editor.min', null, array('inline' => false));
+    $this->Html->css('froala_style.min', null, array('inline' => false));
     if(!empty($tourGuide)) {
         $this->Html->css('hopscotch.min', null, array('inline' => false));
     }
@@ -36,7 +37,15 @@
     $this->Html->script('jquery-2.1.0.min', array('inline' => false));
     $this->Html->script('jquery-ui-1.10.3.custom.min', array('inline' => false));
     $this->Html->script('bootstrap.min', array('inline' => false));
-    $this->Html->script('jquery.cleditor.min', array('inline' => false));
+    $this->Html->script('froala/froala_editor.min', array('inline' => false));
+    $this->Html->script('froala/plugins/colors.min', array('inline' => false));
+    $this->Html->script('froala/plugins/font_family.min', array('inline' => false));
+    $this->Html->script('froala/plugins/file_upload.min', array('inline' => false));
+    $this->Html->script('froala/plugins/font_size.min', array('inline' => false));
+    $this->Html->script('froala/plugins/lists.min', array('inline' => false));
+    $this->Html->script('froala/plugins/media_manager.min', array('inline' => false));
+    $this->Html->script('froala/plugins/tables.min', array('inline' => false));
+    $this->Html->script('froala/plugins/video.min', array('inline' => false));
     $this->Html->script('imagelightbox.min', array('inline' => false));
     if(!empty($tourGuide)) {
         $this->Html->script('hopscotch.min', array('inline' => false));

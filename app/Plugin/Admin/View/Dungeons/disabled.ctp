@@ -1,10 +1,10 @@
 <div class="box dark">
     <header>
-        <div class="icons"><i class="icon-list icon-white"></i></div>
+        <div class="icons"><i class="fa fa-list "></i></div>
         <h5><?php echo __('Disabled dungeons list');?></h5>
         <div class="toolbar">
             <ul class="nav">
-                <li><?php echo $this->Html->link('<i class="icon-plus"></i> '.__('Add dungeon'), '/admin/dungeons/add', array('escape' => false));?></li>
+                <li><?php echo $this->Html->link('<i class="fa fa-plus"></i> '.__('Add dungeon'), '/admin/dungeons/add', array('escape' => false));?></li>
             </ul>
         </div>
     </header>
@@ -32,9 +32,9 @@
                             <td><?php echo $dungeon['RaidsSize']['size'];?></td>
                             <td><?php echo $dungeon['Dungeon']['level_required'];?></td>
                             <td class="actions">
-                                <?php echo $this->Html->link('<i class="icon-edit"></i>', '/admin/dungeons/edit/'.$dungeon['Dungeon']['id'], array('class' => 'btn btn-info btn-mini tt', 'title' => __('edit'), 'escape' => false))?>
-                                <?php echo $this->Html->link('<i class="icon-check"></i>', '/admin/dungeons/enable/'.$dungeon['Dungeon']['id'], array('class' => 'btn btn-success btn-mini tt delete', 'title' => __('Enable'), 'data-confirm' => __('Are you sure you want to enable the dungeon %s ?', $dungeon['Dungeon']['title']), 'escape' => false))?>                                    
-                                <?php echo $this->Html->link('<i class="icon-trash"></i>', '/admin/dungeons/delete/'.$dungeon['Dungeon']['id'], array('class' => 'btn btn-danger btn-mini tt delete', 'title' => __('Delete'), 'data-confirm' => __('Are you sure you want to completely delete the dungeon %s ?', $dungeon['Dungeon']['title']), 'escape' => false))?>
+                                <?php echo $this->Html->link('<i class="fa fa-pencil-square-o"></i>', '/admin/dungeons/edit/'.$dungeon['Dungeon']['id'], array('class' => 'btn btn-info btn-mini tt', 'title' => __('edit'), 'escape' => false))?>
+                                <?php echo $this->Html->link('<i class="fa fa-check"></i>', '/admin/dungeons/enable/'.$dungeon['Dungeon']['id'], array('class' => 'btn btn-success btn-mini tt delete', 'title' => __('Enable'), 'data-confirm' => __('Are you sure you want to enable the dungeon %s ?', $dungeon['Dungeon']['title']), 'escape' => false))?>                                    
+                                <?php echo $this->Html->link('<i class="fa fa-trash"></i>', '/admin/dungeons/delete/'.$dungeon['Dungeon']['id'], array('class' => 'btn btn-danger btn-mini tt delete', 'title' => __('Delete'), 'data-confirm' => __('Are you sure you want to completely delete the dungeon %s ?', $dungeon['Dungeon']['title']), 'escape' => false))?>
                             </td>
                         </tr>                
                     <?php endforeach;?>
@@ -80,9 +80,9 @@
                                 <td><?php echo $dungeon['RaidsSize']['size'];?></td>
                                 <td><?php echo $dungeon['Dungeon']['level_required'];?></td>
                                 <td class="actions">
-                                    <?php echo $this->Html->link('<i class="icon-edit"></i>', '/admin/dungeons/edit/'.$dungeon['Dungeon']['id'], array('class' => 'btn btn-info btn-mini tt', 'title' => __('edit'), 'escape' => false))?>
-                                    <?php echo $this->Html->link('<i class="icon-check"></i>', '/admin/dungeons/enable/'.$dungeon['Dungeon']['id'], array('class' => 'btn btn-success btn-mini tt delete', 'title' => __('Enable'), 'data-confirm' => __('Are you sure you want to enable the dungeon %s ?', $dungeon['Dungeon']['title']), 'escape' => false))?>                                    
-                                    <?php echo $this->Html->link('<i class="icon-trash"></i>', '/admin/dungeons/delete/'.$dungeon['Dungeon']['id'], array('class' => 'btn btn-danger btn-mini tt delete', 'title' => __('Delete'), 'data-confirm' => __('Are you sure you want to completely delete the dungeon %s ?', $dungeon['Dungeon']['title']), 'escape' => false))?>
+                                    <?php echo $this->Html->link('<i class="fa fa-pencil-square-o"></i>', '/admin/dungeons/edit/'.$dungeon['Dungeon']['id'], array('class' => 'btn btn-info btn-mini tt', 'title' => __('edit'), 'escape' => false))?>
+                                    <?php echo $this->Html->link('<i class="fa fa-check"></i>', '/admin/dungeons/enable/'.$dungeon['Dungeon']['id'], array('class' => 'btn btn-success btn-mini tt delete', 'title' => __('Enable'), 'data-confirm' => __('Are you sure you want to enable the dungeon %s ?', $dungeon['Dungeon']['title']), 'escape' => false))?>                                    
+                                    <?php echo $this->Html->link('<i class="fa fa-trash"></i>', '/admin/dungeons/delete/'.$dungeon['Dungeon']['id'], array('class' => 'btn btn-danger btn-mini tt delete', 'title' => __('Delete'), 'data-confirm' => __('Are you sure you want to completely delete the dungeon %s ?', $dungeon['Dungeon']['title']), 'escape' => false))?>
                                 </td>
                             </tr>                
             <?php endforeach;?>

@@ -1,5 +1,5 @@
 <header>
-    <h1><i class="icon-calendar"></i> <?php echo __('Manage calendar');?></h1>
+    <h1><i class="fa fa-calendar"></i> <?php echo __('Manage calendar');?></h1>
 </header>
 
 <div class="row">

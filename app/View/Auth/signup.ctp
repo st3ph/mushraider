@@ -1,5 +1,5 @@
 <header>
-    <h1><i class="icon-unlock"></i> <?php echo __('Signup');?></h1>
+    <h1><i class="fa fa-unlock-alt"></i> <?php echo __('Signup');?></h1>
 </header>
 
 <?php echo $this->Form->create('User', array('url' => '/auth/signup', 'class' => ''));?>

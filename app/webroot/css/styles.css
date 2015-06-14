@@ -58,8 +58,8 @@ footer .version {color:#999;}
 .message404 {font-size:300%;color:#ddd;text-align:center;margin-top:20px;}
 .dl-horizontal dt {width:250px;}
 .dl-horizontal dd {margin-left: 270px;}
-.icon-thumbs-up {color:green;}
-.icon-thumbs-down {color:red;}
+.fa-thumbs-up {color:green;}
+.fa-thumbs-down {color:red;}
 .form-error {border:1px solid red;}
 td.title {font-weight:bold;}
 span.hint, div.hint {margin-left:5px;font-size:11px;color:#aaa;}
@@ -201,9 +201,9 @@ form .select .loading {margin:0 0 5px 5px;}
 #eventRoles td ul li i {cursor:pointer;margin-right:5px;}
 #eventRoles ul.validated, #eventRoles ul.waiting {min-height:50px;height:auto!important;height:50px;}
 #eventRoles .sortable-placeholder {background:#eee;border:2px dashed #ddd;height:14px;}
-#eventRoles li .icon-move {cursor:move;display:none;}
-#eventRoles .waiting li:hover .icon-move {display:block;}
-#eventRoles .waiting li.nosort:hover .icon-move {display:none;}
+#eventRoles li .fa-arrows {cursor:move;display:none;}
+#eventRoles .waiting li:hover .fa-arrows {display:block;}
+#eventRoles .waiting li.nosort:hover .fa-arrows {display:none;}
 
 #badKitties span {}
 

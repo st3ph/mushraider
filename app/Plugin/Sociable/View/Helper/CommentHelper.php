@@ -92,7 +92,7 @@ class CommentHelper extends AppHelper {
                             // Edit
                             if($this->options['connected'] && !empty($comment['User']) && $this->options['connected']['User']['id'] == $comment['User']['id']) {
                                 $output .= '<div class="edit_comment">';
-                                    $output .= '<i class="icon-edit edit" title="'.__('Edit').'"></i>';
+                                    $output .= '<i class="fa fa-pencil-square-o edit" title="'.__('Edit').'"></i>';
                                     $output .= '<span>';
                                         $textSignal = __('reported');
                                         $output .= $this->Html->link(__('save'), '', array('title' => __('Save'), 'class' => 'save', 'rel' => $datas[$nomModel]['id'].'|'.$comment['Comment']['id'])).' '.$this->Html->link(__('cancel'), '', array('title' => __('Cancel'), 'class' => 'cancel'));
@@ -102,7 +102,7 @@ class CommentHelper extends AppHelper {
 
                             // Abus
                             $output .= '<div class="signaler_abus">';
-                                $output .= '<i class="icon-warning-sign signaler" title="'.__('Report spam').'"></i>';
+                                $output .= '<i class="fa fa-exclamation-triangle signaler" title="'.__('Report spam').'"></i>';
                                 $output .= '<span>'.__('Are you sure ?').' ';
                                     $textSignal = __('reported as spam');
                                     $output .= $this->Html->link(__('yes'), '', array('title' => __('Report spam'), 'class' => 'signaler_oui', 'rel' => $datas[$nomModel]['id'].'|'.$comment['Comment']['id'].'|commentaire_video|'.$textSignal)).' '.$this->Html->link(__('no'), '', array('title' => __('Don\'t report spam'), 'class' => 'signaler_non'));

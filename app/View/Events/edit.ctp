@@ -1,5 +1,5 @@
 <header>
-    <h1><i class="icon-calendar"></i> <?php echo __('Edit event');?> <?php echo __('the');?> <?php echo $this->Former->date($eventDate, 'jour');?></h1>
+    <h1><i class="fa fa-calendar"></i> <?php echo __('Edit event');?> <?php echo __('the');?> <?php echo $this->Former->date($eventDate, 'jour');?></h1>
 </header>
 
 <?php echo $this->Form->create('Event', array('url' => '/events/edit/'.$this->data['Event']['id']));?>
@@ -18,7 +18,7 @@
         </div>
         <div class="span6">
             <div class="form-group">
-                <?php echo $this->Form->input('Event.description', array('type' => 'textarea', 'label' => __('Event description'), 'class' => 'span5 wysiwyg'));?>
+                <?php echo $this->Form->input('Event.description', array('type' => 'textarea', 'label' => __('Event description'), 'class' => 'span5 wysiwyg', 'data-height' => 150));?>
             </div>
         </div>
     </div>
@@ -51,7 +51,7 @@
                 <label><?php echo __('Registration end date (optional)');?></label>
                 <div class="input-append">
                     <?php echo $this->Form->input('Event.time_inscription', array('type' => 'text', 'label' => false, 'placeholder' => __('dd/mm/yyyy'), 'div' => false, 'class' => 'input-medium datepicker', 'data-date' => $this->Former->date($eventDate, 'jour')));?>
-                    <span class="add-on"><span class="icon-calendar"></span></span>
+                    <span class="add-on"><span class="fa fa-calendar"></span></span>
                 </div>
             </div>
         </div>

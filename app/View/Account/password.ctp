@@ -1,5 +1,5 @@
 <header>
-    <h1><i class="icon-key"></i> <?php echo __('My password');?></h1>
+    <h1><i class="fa fa-key"></i> <?php echo __('My password');?></h1>
 </header>
 
 <div class="row">

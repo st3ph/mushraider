@@ -1,5 +1,5 @@
 <header>
-    <h1><i class="icon-shield"></i> <?php echo __('My characters');?></h1>
+    <h1><i class="fa fa-shield"></i> <?php echo __('My characters');?></h1>
 </header>
 
 <div class="row">
@@ -8,7 +8,7 @@
     </div>
     <div class="span9">
 		<div>
-			<h3 class="blockToggle"><?php echo $this->Html->link('<i class="icon-plus-sign-alt"></i> '.__('add new character'), '', array('escape' => false));?></h3>
+			<h3 class="blockToggle"><?php echo $this->Html->link('<i class="fa fa-plus-square"></i> '.__('add new character'), '', array('escape' => false));?></h3>
 			<?php echo $this->Form->create('Character', array('url' => '/account/characters', 'class' => 'hide'.(isset($showForm)?' show':'')));?>
 			    <div class="form-group">
 			        <?php echo $this->Form->input('Character.title', array('type' => 'text', 'required' => true, 'label' => __('Character Name'), 'class' => 'span5'));?>
@@ -69,13 +69,13 @@
 								<?php endif;?>
 							</td>
 							<td>
-								<?php echo $this->Html->link('<i class="icon-edit"></i>', '/account/characters/edit/c:'.$character['Character']['id'].'-'.$character['Character']['slug'], array('class' => 'btn btn-info btn-mini tt', 'title' => __('Edit'), 'escape' => false));?>
+								<?php echo $this->Html->link('<i class="fa fa-pencil-square-o"></i>', '/account/characters/edit/c:'.$character['Character']['id'].'-'.$character['Character']['slug'], array('class' => 'btn btn-info btn-mini tt', 'title' => __('Edit'), 'escape' => false));?>
 								<?php if($character['Character']['status']):?>
-									<?php echo $this->Html->link('<i class="icon-collapse-alt"></i>', '/account/characters/disable/c:'.$character['Character']['id'].'-'.$character['Character']['slug'], array('class' => 'btn btn-warning btn-mini tt', 'title' => __('Disable'), 'escape' => false));?>
+									<?php echo $this->Html->link('<i class="fa fa-minus-square-o"></i>', '/account/characters/disable/c:'.$character['Character']['id'].'-'.$character['Character']['slug'], array('class' => 'btn btn-warning btn-mini tt', 'title' => __('Disable'), 'escape' => false));?>
 								<?php else:?>
-									<?php echo $this->Html->link('<i class="icon-check"></i>', '/account/characters/enable/c:'.$character['Character']['id'].'-'.$character['Character']['slug'], array('class' => 'btn btn-success btn-mini tt', 'title' => __('Enable'), 'escape' => false));?>
+									<?php echo $this->Html->link('<i class="fa fa-check"></i>', '/account/characters/enable/c:'.$character['Character']['id'].'-'.$character['Character']['slug'], array('class' => 'btn btn-success btn-mini tt', 'title' => __('Enable'), 'escape' => false));?>
 								<?php endif;?>
-								<?php echo $this->Html->link('<i class="icon-trash"></i>', '/account/characters/delete/c:'.$character['Character']['id'].'-'.$character['Character']['slug'], array('class' => 'btn btn-danger btn-mini tt confirm', 'title' => __('Delete'), 'data-confirm' => __('Are you sure you want to completely delete your character %s ? (this can\'t be undone)', $character['Character']['title']), 'escape' => false))?>
+								<?php echo $this->Html->link('<i class="fa fa-trash"></i>', '/account/characters/delete/c:'.$character['Character']['id'].'-'.$character['Character']['slug'], array('class' => 'btn btn-danger btn-mini tt confirm', 'title' => __('Delete'), 'data-confirm' => __('Are you sure you want to completely delete your character %s ? (this can\'t be undone)', $character['Character']['title']), 'escape' => false))?>
 							</td>
 						</tr>
 						<?php $lastGame = $character['Game']['id'];?>
@@ -83,7 +83,7 @@
 				</tbody>
 			</table>
 		<?php else:?>
-			<p class="message404"><i class="icon-arrow-up"></i> <?php echo __('Add your first character');?> <i class="icon-arrow-up"></i></p>
+			<p class="message404"><i class="fa fa-arrow-up"></i> <?php echo __('Add your first character');?> <i class="fa fa-arrow-up"></i></p>
 		<?php endif;?>        
     </div>
 </div>

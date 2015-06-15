@@ -18,10 +18,10 @@ class ImageComponent extends Component {
 		}
 	}
 
-	function __add($image, $path, $prefix = '', $maxWidth = 500, $maxHeight = 500) {
+	function __add($image, $path, $prefix = '', $maxWidth = null, $maxHeight = null) {
 		$return = array();
         if(!$image['error']) {
-            $imageName = $prefix.$image['name'];
+            $imageName = $prefix.strtolower($image['name']);
             $this->resize($image['tmp_name'], $path, $imageName, $maxWidth, $maxHeight);
             $return['name'] = '/'.$path.'/'.$imageName;
         }else {            
@@ -46,7 +46,7 @@ class ImageComponent extends Component {
         return $return;
 	}
 
-	function resize($source, $path, $fileName, $maxWidth = 500, $maxHeight = 500) {
+	function resize($source, $path, $fileName, $maxWidth = null, $maxHeight = null) {
 		$imagine = new Imagine\Gd\Imagine($source);
 		$image = $imagine->open($source);
 		$imageSize  = $image->getSize();
@@ -56,7 +56,18 @@ class ImageComponent extends Component {
 			}elseif(!$maxWidth && $imageSize->getHeight() > $maxHeight) {
 				$image->resize($imageSize->heighten($maxHeight));
 			}elseif($maxWidth && $maxHeight) {
-				$image->resize(new Box($maxWidth, $maxHeight));
+                if($imageSize->getWidth() > $imageSize->getHeight()) {
+                    $image->resize($imageSize->widen($maxWidth));
+                    if($imageSize->getHeight() > $maxHeight) {
+                        $image->resize($imageSize->heighten($maxHeight));
+                    }
+                }else {
+                    $image->resize($imageSize->heighten($maxHeight));
+                    if($imageSize->getWidth() > $maxWidth) {
+                        $image->resize($imageSize->widen($maxWidth));
+                    }
+                }
+				//$image->resize(new Box($maxWidth, $maxHeight));
 			}
 		}
 		$this->makePath($path);

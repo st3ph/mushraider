@@ -16,7 +16,7 @@
     </h1>
 </header>
 
-<?php echo $this->Form->create('Event', array('url' => '/events/add/'.$eventDate));?>
+<?php echo $this->Form->create('Event', array('url' => '/events/add/'.$eventDate, 'enctype' => 'multipart/form-data'));?>
 	<h3><?php echo __('General informations');?></h3>
     <div class="row">
         <div class="span5">

@@ -2,7 +2,7 @@
     <h1><i class="fa fa-calendar"></i> <?php echo __('Edit event');?> <?php echo __('the');?> <?php echo $this->Former->date($eventDate, 'jour');?></h1>
 </header>
 
-<?php echo $this->Form->create('Event', array('url' => '/events/edit/'.$this->data['Event']['id']));?>
+<?php echo $this->Form->create('Event', array('url' => '/events/edit/'.$this->data['Event']['id'], 'enctype' => 'multipart/form-data'));?>
     <h3><?php echo __('General informations');?></h3>
     <div class="row">
         <div class="span5">

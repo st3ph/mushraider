@@ -229,4 +229,37 @@ class ToolsComponent extends Component {
 
         return $ids;
     }
+
+    /*
+    * @name getFileExt
+    * @desc return file extension
+    * @param string $filename
+    * @return string
+    */
+    function getFileExt($filename = null) {
+        if(!$filename) {
+            return false;
+        }
+
+        $ext = substr($filename, strrpos($filename, '.') + 1, strlen($filename));
+        return $ext;
+    }
+
+    /*
+    * @name makePath
+    * @desc create folders to match a path
+    * @param string $path
+    */
+    function makePath($path) {
+        if(!is_dir($path)) {
+            $newPath = '';
+            $dirs = explode('/', $path);
+            foreach($dirs as $dir) {
+                $newPath .= $dir.'/';
+                if(!is_dir($newPath)) {
+                    mkdir($newPath);
+                }
+            }
+        }
+    }
 }

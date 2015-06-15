@@ -378,10 +378,10 @@ jQuery(function($) {
                 height: wysiwygHeight,
                 mediaManager: true,
                 defaultImageWidth: 0,
-                imageUploadURL: site_url+'admin/ajax/uploadimage',
+                imageUploadURL: site_url+'ajax/uploadimage',
                 imageUploadParam: 'img',
-                imagesLoadURL: site_url+'admin/ajax/getimages',
-                imageDeleteURL: site_url+'admin/ajax/delimage',
+                imagesLoadURL: site_url+'ajax/getimages',
+                imageDeleteURL: site_url+'ajax/delimage',
             }).on('editable.imageError', function (e, editor, error) {
                 if(error.code == 0) {
                     console.log('Custom error message returned from the server.');

@@ -1,7 +1,9 @@
 <?php
 class AjaxController extends AppController {
-    public $components = array('Emailing');
+    public $components = array('Emailing', 'Image');
     var $uses = array('Game', 'Dungeon', 'Classe', 'Race', 'EventsCharacter', 'EventsRole', 'Character', 'Event', 'RaidsRole', 'EventsTemplate', 'EventsTemplatesRole');
+
+    var $allowedImageExts = array("gif", "jpeg", "jpg", "png");
 
     function beforeFilter() {
         parent::beforeFilter();
@@ -329,5 +331,43 @@ class AjaxController extends AppController {
         $url .= '.ics';
 
         return $url;
+    }
+
+    function getimages() {
+        $response = array();
+        $dir = new Folder('files/uploads');
+        $images = $dir->find('.*\.('.implode('|', $this->allowedImageExts).')');
+        if(!empty($images)) {
+            foreach($images as $image) {
+                array_push($response, '/files/uploads/'.$image);
+            }
+        }
+
+        return stripslashes(json_encode($response));
+    }
+
+    function uploadimage() {
+        $response = new StdClass;
+
+        if(!empty($this->request->params['form']) && !empty($this->request->params['form']['img'])) {
+            $ext = $this->Tools->getFileExt($this->request->params['form']['img']['name']);
+            if(!in_array($ext, $this->allowedImageExts)) {
+                $response->error = '.'.$ext.' '.__('extension is not allowed');
+            }
+
+            $imageName = $this->Image->__add($this->request->params['form']['img'], 'files/uploads', '');
+            $response->link = $imageName['name'];
+        }
+
+        return stripslashes(json_encode($response));
+    }
+
+    function delimage() {
+        if(!empty($this->request->data['src'])) {
+            $imgPath = ltrim($this->request->data['src'], '/');
+            if(file_exists($imgPath)) {
+                unlink($imgPath);
+            }
+        }
     }
 }

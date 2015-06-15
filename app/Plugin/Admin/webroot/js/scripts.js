@@ -412,49 +412,52 @@ jQuery(function($) {
     * Users
     */
     if($('.wysiwyg').length) {
-        $('.wysiwyg').editable({
-            inlineMode: false,
-            width: 'auto',
-            height: 250,
-            mediaManager: false,
-            defaultImageWidth: 0,
-            imageUploadURL: site_url+'admin/ajax/uploadimage',
-            imageUploadParam: 'img',
-            imagesLoadURL: site_url+'admin/ajax/getimages',
-            imageDeleteURL: site_url+'admin/ajax/delimage',
-        }).on('editable.imageError', function (e, editor, error) {
-            if(error.code == 0) {
-                console.log('Custom error message returned from the server.');
-            }else if(error.code == 1) {
-                console.log('Bad link.');
-            }else if(error.code == 2) {
-                console.log('No link in upload response.');
-            }else if(error.code == 3) {
-                console.log('Error during image upload.');
-            }else if(error.code == 4) {
-                console.log('Parsing response failed.');
-            }else if(error.code == 5) {
-                console.log('Image too large.');
-            }else if(error.code == 6) {
-                console.log('Invalid image type.');
-            }else if(error.code == 7) {
-                console.log('Image can be uploaded only to same domain in IE 8 and IE 9.');
-            }
-        }).on('editable.imagesLoadError', function (e, editor, error) {
-            if(error.code == 0) {
-                console.log('Custom error message returned from the server');
-            }else if(error.code == 1) {
-                console.log('Bad link. One of the returned image links cannot be loaded.');
-            }else if(error.code == 2) {
-                console.log('Error during HTTP request to load images.');
-            }else if(error.code == 3) {
-                console.log('Missing imagesLoadURL option.');
-            }else if(error.code == 4) {
-                console.log('Parsing response failed.');
-            }
-        }).on('editable.imagesLoaded', function (e, editor, data) {
-            console.log('Images have been loaded.');
-        });        
+        $('.wysiwyg').each(function() {
+            var wysiwygHeight = $(this).data('height');
+            $(this).editable({
+                inlineMode: false,
+                width: 'auto',
+                height: wysiwygHeight,
+                mediaManager: true,
+                defaultImageWidth: 0,
+                imageUploadURL: site_url+'ajax/uploadimage',
+                imageUploadParam: 'img',
+                imagesLoadURL: site_url+'ajax/getimages',
+                imageDeleteURL: site_url+'ajax/delimage',
+            }).on('editable.imageError', function (e, editor, error) {
+                if(error.code == 0) {
+                    console.log('Custom error message returned from the server.');
+                }else if(error.code == 1) {
+                    console.log('Bad link.');
+                }else if(error.code == 2) {
+                    console.log('No link in upload response.');
+                }else if(error.code == 3) {
+                    console.log('Error during image upload.');
+                }else if(error.code == 4) {
+                    console.log('Parsing response failed.');
+                }else if(error.code == 5) {
+                    console.log('Image too large.');
+                }else if(error.code == 6) {
+                    console.log('Invalid image type.');
+                }else if(error.code == 7) {
+                    console.log('Image can be uploaded only to same domain in IE 8 and IE 9.');
+                }
+            }).on('editable.imagesLoadError', function (e, editor, error) {
+                if(error.code == 0) {
+                    console.log('Custom error message returned from the server');
+                }else if(error.code == 1) {
+                    console.log('Bad link. One of the returned image links cannot be loaded.');
+                }else if(error.code == 2) {
+                    console.log('Error during HTTP request to load images.');
+                }else if(error.code == 3) {
+                    console.log('Missing imagesLoadURL option.');
+                }else if(error.code == 4) {
+                    console.log('Parsing response failed.');
+                }
+            }).on('editable.imagesLoaded', function (e, editor, data) {
+                console.log('Images have been loaded.');
+            });
+        });
     }
 
     /*

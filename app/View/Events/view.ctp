@@ -142,7 +142,10 @@ foreach($event['EventsRole'] as $eventRole) {
 		</tr>
 		<tr>
 			<td class="title"><?php echo __('Dungeon');?> :</td>
-			<td><?php echo $event['Dungeon']['title'];?></td>
+			<td>
+				<?php echo $event['Dungeon']['title'];?>
+				(<?php echo $event['Dungeon']['RaidsSize']['size'];?> <?php echo __('players');?>)
+			</td>
 		</tr>
 		<tr>
 			<td class="title"><?php echo __('Invitation start');?> :</td>

@@ -2,7 +2,7 @@
 class EventsController extends AppController {
     public $components = array('Emailing', 'Image', 'Tour');
     var $helpers = array('Sociable.Comment');
-    var $uses = array('Game', 'Dungeon', 'Event', 'RaidsRole', 'EventsRole', 'EventsCharacter', 'Character', 'EventsTemplate', 'EventsTemplatesRole', 'Report');
+    var $uses = array('Game', 'Dungeon', 'Event', 'RaidsRole', 'RaidsSize', 'EventsRole', 'EventsCharacter', 'Character', 'EventsTemplate', 'EventsTemplatesRole', 'Report');
 
     private $recurrences = array();
     private $recurrencesCount = array(1 => '1', 2 => '2', 3 => '3', 4 => '4', 5 => '5', 6 => '6', 7 => '7', 8 => '8', 9 => '9', 10 => '10');
@@ -72,7 +72,7 @@ class EventsController extends AppController {
         return 0;
     }
 
-    public function view($eventId) {
+    public function View($eventId) {
         $this->pageTitle = __('View event').' - '.$this->pageTitle;        
 
         $params = array();        
@@ -80,6 +80,7 @@ class EventsController extends AppController {
         $params['conditions']['Event.id'] = $eventId;
         $params['contain']['Game'] = array();
         $params['contain']['Dungeon'] = array();
+        $params['contain']['Dungeon']['RaidsSize'] = array();
         $params['contain']['User'] = array();
         $params['contain']['EventsRole']['RaidsRole'] = array();
         $params['contain']['EventsCharacter']['Character']['Classe'] = array();        

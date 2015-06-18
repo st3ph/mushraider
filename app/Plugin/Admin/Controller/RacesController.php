@@ -107,10 +107,12 @@ class RacesController extends AdminAppController {
             $params['fields'] = array('id');
             $params['recursive'] = -1;
             $params['conditions']['id'] = $id;
-            $params['conditions']['game_id'] = null;            
             if(!$race = $this->Race->find('first', $params)) {
-                $this->Session->setFlash(__('This race is linked to a game, you can\'t delete it.'), 'flash_warning');
+                $this->Session->setFlash(__('MushRaider is unable to find this race oO'), 'flash_error');
             }elseif($this->Race->delete($id)) {
+                $toDelete = array();
+                $toDelete['race_id'] = $id;  
+                $this->Character->deleteAll($toDelete, true);
                 $this->Session->setFlash(__('The race has been deleted'), 'flash_success');
             }else {
                 $this->Session->setFlash(__('Something goes wrong'), 'flash_error');

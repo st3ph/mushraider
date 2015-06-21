@@ -45,6 +45,7 @@
     $this->Html->script('froala/plugins/media_manager.min', array('inline' => false));
     $this->Html->script('froala/plugins/tables.min', array('inline' => false));
     $this->Html->script('froala/plugins/video.min', array('inline' => false));
+    $this->Html->script('froala/plugins/mushraider', array('inline' => false));
     $this->Html->script('Admin.spectrum.min', array('inline' => false));
     $this->Html->script('Admin.jquery.dataTables.min', array('inline' => false));
     $this->Html->script('Admin.scripts.js'.$staticVersion, array('inline' => false));

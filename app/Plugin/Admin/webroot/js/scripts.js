@@ -415,6 +415,15 @@ jQuery(function($) {
         $('.wysiwyg').each(function() {
             var wysiwygHeight = $(this).data('height');
             $(this).editable({
+                buttons: [
+                    "bold", "italic", "underline", "strikeThrough", "fontSize", "fontFamily", "color", 
+                    "sep", 
+                    "formatBlock", "blockStyle", "align", "insertOrderedList", "insertUnorderedList", "outdent", "indent", 
+                    "sep", 
+                    "createLink", "insertImage", "insertVideo", "table", "undo", "redo", "html",
+                    "sep",
+                    "widget"
+                ],
                 inlineMode: false,
                 width: 'auto',
                 height: wysiwygHeight,

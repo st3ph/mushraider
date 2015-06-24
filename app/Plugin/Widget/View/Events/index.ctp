@@ -20,11 +20,11 @@
                         <?php if(!empty($event['Dungeon']['icon'])):?>
                             <?php echo $this->Html->image($event['Dungeon']['icon'], array('width' => 16, 'alt' => $event['Dungeon']['title']));?>
                         <?php endif;?>
-                        <small>(<?php echo count($this->Former->extractUsersWithStatus($event['EventsCharacter'], 2));?> / <?php echo $attendies;?>)</small>
+                        <small>(<?php echo count($this->Calendar->extractUsersWithStatus($event['EventsCharacter'], 2));?> / <?php echo $attendies;?>)</small>
                         <div class="roster">
                             <small>
                                 <?php echo __('Roster');?> :
-                                <?php echo count($this->Former->extractUsersWithStatus($event['EventsCharacter'], 2));?> / <?php echo $attendies;?>
+                                <?php echo count($this->Calendar->extractUsersWithStatus($event['EventsCharacter'], 2));?> / <?php echo $attendies;?>
                                 <?php if($user):?>
                                     <?php if($registeredCharacter = $this->Tools->getRegisteredCharacter($user['User']['id'], $event['EventsCharacter'])):?>
                                         <span class="text-success"><?php echo __('Registered as');?> <?php echo $registeredCharacter['title'];?>

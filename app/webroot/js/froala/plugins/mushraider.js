@@ -1,26 +1,15 @@
 (function ($) {
     // Add an option for your plugin.
     $.Editable.DEFAULTS = $.extend($.Editable.DEFAULTS, {
-        widgets: []
+        widgets: [],
+        widgetsEmpty: false
     }),
 
     $.Editable.prototype.initMushRaider = function () {
-        // The start point for your plugin.
-
-        // You can access any option from documentation or your custom options.
-        //console.log (this.options.myOption)
-        this.options.widgets = ["roster", "events"];
-
-        // You can call any method from documentation.
-        // this.methodName(params)
-
-        // You can register any event from documentation like this.
-        // this.$original_element.on('editable.afterPaste', function (e, editor, params) {});
+        this.getWidgets();
     },
     $.Editable.prototype.refreshWidgets = function() {
-        var a = this.getSelectionElement();
-        console.log('refreshWidgets');
-    }
+    },
 
     // Define a toolbar button. It will be available in the buttons option.
     $.Editable.commands = $.extend($.Editable.commands, {
@@ -29,29 +18,53 @@
             icon: 'fa fa-puzzle-piece',
             refresh: $.Editable.prototype.refreshDefault,
             refreshOnShow: $.Editable.prototype.refreshWidgets,
-            callback: function () {
-                this.addWidget()
+            callback: function(command, widgetId) {
+                this.addWidget(command, widgetId);
             },
-            callbackWithoutSelection: function(b, c, d) {
-                console.log('callbackWithoutSelection');
-            },
-            undo: !0 // Enable only if it might affect the UNDO stack
+            undo: false // Enable only if it might affect the UNDO stack
         }
     }), 
     $.Editable.prototype.command_dispatcher = $.extend($.Editable.prototype.command_dispatcher, {
         widget: function(command) {
-            console.log('dispatcher');
-            console.log(command);
+            var content = '<ul class="fr-dropdown-menu f-widget">';
+            if(this.options.widgetsEmpty !== false) {
+                content += '<li><a href="#">'+this.options.widgetsEmpty+'</a></li>';
+            }else {
+                $.each(this.options.widgets, function(index, value) {
+                    content += '<li data-cmd="widget" data-val="'+index+'"><a href="#">'+value+'</a></li>';
+                });          
+            }
+            content += '</ul>';
 
-            return '<ul class="fr-dropdown-menu f-widget"><li>meh</li></ul>';
+            var dropdown = this.buildDropdownButton(command, content, "fr-widget");
+            return dropdown;
         }
-    })
+    });
 
     // Register your plugin.
     $.Editable.initializers.push($.Editable.prototype.initMushRaider),
 
-    $.Editable.prototype.addWidget = function(b) {
-        console.log('add');
-        console.log(b);
+    $.Editable.prototype.addWidget = function(command, widgetId) {
+        var iframe = '<iframe src="'+site_url+'widget/events/index/'+widgetId+'" width="100%" height="100%" frameborder="0"></iframe>';
+
+        this.insertHTML(iframe, !1);
+    };
+
+    $.Editable.prototype.getWidgets = function() {
+        var $this = this;
+        $.ajax({
+            type: 'get',
+            url: site_url+'widget/ajax/getList',            
+            dataType: 'json',
+            async: false,
+            success: function(widgetsList) {
+                if(typeof widgetsList.msg !== 'undefined') {
+                    $this.options.widgetsEmpty = widgetsList.msg;
+                }else {
+                    $this.options.widgetsEmpty = false;
+                    $this.options.widgets = widgetsList.widgets;
+                }
+            }
+        });
     };
 })(jQuery);

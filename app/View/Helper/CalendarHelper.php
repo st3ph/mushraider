@@ -188,7 +188,7 @@ class CalendarHelper extends FormerHelper {
         return $matchingEvents;
     }
 
-    private function extractUsersWithStatus($eventCharacters, $status) {
+    public function extractUsersWithStatus($eventCharacters, $status) {
         $chars = array();
 
         if(!empty($eventCharacters)) {

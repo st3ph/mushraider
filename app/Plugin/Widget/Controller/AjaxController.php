@@ -15,7 +15,11 @@ class AjaxController extends WidgetAppController {
 
         App::uses('Widget', 'Model');
         $WidgetModel = new Widget();
-        if($widgets = $WidgetModel->find('list', array('order' => 'title asc'))) {
+        $params = array();
+        $params['recursive'] = -1;
+        $params['fields'] = array('id', 'controller', 'action', 'title');
+        $params['order'] = 'title asc';
+        if($widgets = $WidgetModel->find('all', $params)) {
             $json['widgets'] = $widgets;
         }else {
             $json['msg'] = __('Vous n\'avez aucun widget à insérer');

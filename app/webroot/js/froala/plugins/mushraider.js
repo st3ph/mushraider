@@ -30,8 +30,8 @@
             if(this.options.widgetsEmpty !== false) {
                 content += '<li><a href="#">'+this.options.widgetsEmpty+'</a></li>';
             }else {
-                $.each(this.options.widgets, function(index, value) {
-                    content += '<li data-cmd="widget" data-val="'+index+'"><a href="#">'+value+'</a></li>';
+                $.each(this.options.widgets, function(index, obj) {
+                    content += '<li data-cmd="widget" data-val="'+index+'"><a href="#">'+obj.Widget.title+'</a></li>';
                 });          
             }
             content += '</ul>';
@@ -44,8 +44,9 @@
     // Register your plugin.
     $.Editable.initializers.push($.Editable.prototype.initMushRaider),
 
-    $.Editable.prototype.addWidget = function(command, widgetId) {
-        var iframe = '<iframe src="'+site_url+'widget/events/index/'+widgetId+'" width="100%" height="100%" frameborder="0"></iframe>';
+    $.Editable.prototype.addWidget = function(command, widgetIndex) {
+        var widget = this.options.widgets[widgetIndex].Widget;
+        var iframe = '<iframe src="'+site_url+'widget/'+widget.controller+'/'+widget.action+'/'+widget.id+'" width="100%" height="100%" frameborder="0"></iframe>';
 
         this.insertHTML(iframe, !1);
     };

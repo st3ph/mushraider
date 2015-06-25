@@ -28,7 +28,6 @@
  */
     Router::connect('/', array('controller' => 'home', 'action' => 'index'));   
     Router::connect('/l/*', array('controller' => 'home', 'action' => 'index'));
-    Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
 // Admin routes
     Router::connect('/admin', array('plugin' => 'admin', 'controller' => 'dashboard', 'action' => 'index'));

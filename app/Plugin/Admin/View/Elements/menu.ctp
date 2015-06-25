@@ -110,5 +110,17 @@
                 <li><?php echo $this->Html->link('<i class="fa fa-chevron-right"></i> '.__('Add widget'), '/admin/widgets/add', array('escape' => false));?></li>
             </ul>
         </li>
+
+        <?php if($user['User']['can']['full_permissions']):?>
+            <li class="accordion-group <?php echo strtolower($this->name) == 'cms'?'active':'';?>">
+                <a data-parent="#menu" data-toggle="collapse" class="accordion-toggle <?php echo strtolower($this->name) == 'cms'?'':'collapsed';?>" data-target="#cms-nav">
+                    <i class="fa fa-file-text-o"></i> <?php echo __('CMS');?> <i class="fa fa-chevron-down pull-right"></i>
+                </a>
+                <ul class="collapse <?php echo strtolower($this->name) == 'cms'?'in':'';?>" id="cms-nav">
+                    <li><?php echo $this->Html->link('<i class="fa fa-chevron-right"></i> '.__('Manage Pages'), '/admin/cms', array('escape' => false));?></li>
+                    <li><?php echo $this->Html->link('<i class="fa fa-chevron-right"></i> '.__('Add Page'), '/admin/cms/add', array('escape' => false));?></li>
+                </ul>
+            </li>
+        <?php endif;?>
     </ul>
 </div>

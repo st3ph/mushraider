@@ -216,6 +216,25 @@ CREATE TABLE IF NOT EXISTS `{prefix}games` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pages`
+--
+
+CREATE TABLE IF NOT EXISTS `{prefix}pages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(100) COLLATE utf8_unicode_ci NOT NULL, 
+  `slug` varchar(100) COLLATE utf8_unicode_ci NOT NULL, 
+  `content` text COLLATE utf8_unicode_ci NULL,
+  `public` tinyint(1) DEFAULT 0, 
+  `status` tinyint(1) DEFAULT 0, 
+  `onMenu` tinyint(1) DEFAULT 0, 
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `races`
 --
 

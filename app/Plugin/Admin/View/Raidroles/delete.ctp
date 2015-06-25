@@ -14,7 +14,7 @@
             </div>
       
             <div class="form-group">
-                <?php echo $this->Form->submit(__('Delete'), array('class' => 'btn btn-danger pull-right'));?>
+                <?php echo $this->Form->submit(__('Delete'), array('class' => 'btn btn-large btn-danger pull-right'));?>
             </div>
         <?php echo $this->Form->end();?>
     </div>

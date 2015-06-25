@@ -29,6 +29,6 @@
         <?php if(isset($dungeonEdit)):?>
             <?php echo $this->Form->input('Dungeon.id', array('type' => 'hidden'));?>
         <?php endif;?>
-        <?php echo $this->Form->submit(__('Save'), array('class' => 'btn btn-success', 'div' => array('class' => 'submit pull-right')));?>               
+        <?php echo $this->Form->submit(__('Save'), array('class' => 'btn btn-large btn-success', 'div' => array('class' => 'submit pull-right')));?>               
     </div>
 <?php echo $this->Form->end();?>

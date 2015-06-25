@@ -11,7 +11,7 @@
       
             <div class="form-group">
                 <?php echo $this->Form->input('RaidsRole.id', array('type' => 'hidden'));?>
-                <?php echo $this->Form->submit(__('Save'), array('class' => 'btn btn-success pull-right'));?>               
+                <?php echo $this->Form->submit(__('Save'), array('class' => 'btn btn-large btn-large btn-success pull-right'));?>               
             </div>
         <?php echo $this->Form->end();?>
     </div>

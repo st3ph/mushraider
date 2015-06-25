@@ -30,7 +30,7 @@
             </div>
             <div class="form-group">
                 <?php echo $this->Form->input('Classe.id', array('type' => 'hidden'));?>
-                <?php echo $this->Form->submit(__('Save'), array('class' => 'btn btn-success', 'div' => array('class' => 'submit pull-right')));?>               
+                <?php echo $this->Form->submit(__('Save'), array('class' => 'btn btn-large btn-success', 'div' => array('class' => 'submit pull-right')));?>               
             </div>
         <?php echo $this->Form->end();?>
     </div>

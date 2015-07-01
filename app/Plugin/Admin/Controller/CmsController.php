@@ -10,7 +10,7 @@ class CmsController extends AdminAppController {
         $params = array();
         $params['recursive'] = -1;
         $params['order'] = 'created desc';
-        $params['conditions']['status'] = array(0, 1);
+        $params['conditions']['published'] = array(0, 1);
         $pages = $this->Page->find('all', $params);
         $this->set('pages', $pages);
     }
@@ -22,7 +22,7 @@ class CmsController extends AdminAppController {
             $toSave['slug'] = $this->Tools->slugMe($toSave['title']);
             $toSave['content'] = $this->request->data['Page']['content'];
             $toSave['public'] = $this->request->data['Page']['public'];
-            $toSave['status'] = $this->request->data['Page']['status'];
+            $toSave['published'] = $this->request->data['Page']['published'];
             if($this->Page->save($toSave)) {
                 $this->Session->setFlash(__('%s has been added to your pages list', $toSave['title']), 'flash_success');
                 return $this->redirect('/admin/cms');
@@ -38,7 +38,7 @@ class CmsController extends AdminAppController {
             $params['fields'] = array('id');
             $params['recursive'] = -1;
             $params['conditions']['id'] = $id;
-            $params['conditions']['status'] = array('0', '1');
+            $params['conditions']['published'] = array('0', '1');
             if(!$page = $this->Page->find('first', $params)) {
                 $this->Session->setFlash(__('MushRaider can\'t find this page to delete oO'), 'flash_warning');
             }elseif($this->Page->delete($id)) {
@@ -55,7 +55,7 @@ class CmsController extends AdminAppController {
         if($id) {
             $toSave = array();
             $toSave['id'] = $id;
-            $toSave['status'] = 0;
+            $toSave['published'] = 0;
             if($this->Page->save($toSave)) {
                 $this->Session->setFlash(__('The page has been sent to draft'), 'flash_success');
             }else {
@@ -70,7 +70,7 @@ class CmsController extends AdminAppController {
         if($id) {
             $toSave = array();
             $toSave['id'] = $id;
-            $toSave['status'] = 1;
+            $toSave['published'] = 1;
             if($this->Page->save($toSave)) {
                 $this->Session->setFlash(__('The page has been published'), 'flash_success');
             }else {

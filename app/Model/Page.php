@@ -25,4 +25,12 @@ class Page extends AppModel {
             )
         )
     );
+
+    public function beforeFind($params) {
+        if(!isset($params['conditions']['published']) && !isset($params['conditions']['Page.published'])) {
+            $params['conditions']['Page.published'] = 1;
+        }
+
+        return $params;
+    }
 }

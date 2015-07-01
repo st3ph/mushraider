@@ -15,7 +15,7 @@
                 <?php echo $this->Form->input('Page.public', array('options' => array('0' => __('Private'), '1' => __('Public')), 'required' => true, 'label' => __('Visibility'), 'class' => 'span5'));?>
             </div>
             <div class="form-group">
-                <?php echo $this->Form->input('Page.status', array('options' => array('0' => __('Draft'), '1' => __('Published')), 'required' => true, 'label' => __('Status'), 'class' => 'span5'));?>
+                <?php echo $this->Form->input('Page.published', array('options' => array('0' => __('Draft'), '1' => __('Published')), 'required' => true, 'label' => __('Status'), 'class' => 'span5'));?>
             </div>
 
             <div class="form-group">

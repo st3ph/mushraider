@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS `{prefix}pages` (
   `slug` varchar(100) COLLATE utf8_unicode_ci NOT NULL, 
   `content` text COLLATE utf8_unicode_ci NULL,
   `public` tinyint(1) DEFAULT 0, 
-  `status` tinyint(1) DEFAULT 0, 
+  `published` tinyint(1) DEFAULT 0, 
   `onMenu` tinyint(1) DEFAULT 0, 
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,

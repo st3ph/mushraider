@@ -28,10 +28,27 @@ class PagesController extends AppController {
 	public function preview($idPage) {
 		$params = array();
         $params['recursive'] = -1;
-        $params['conditions']['status'] = array(0, 1);
+        $params['conditions']['published'] = array(0, 1);
         $params['conditions']['id'] = $idPage;
         if(!$page = $this->Page->find('first', $params)) {
         	throw new NotFoundException();
+        }
+
+        $this->set('page', $page);
+	}
+
+	public function view($idPage) {
+		$params = array();
+        $params['recursive'] = -1;
+        $params['conditions']['id'] = $idPage;
+        if(!$page = $this->Page->find('first', $params)) {
+        	throw new NotFoundException();
+        }
+
+        if(!$page['Page']['public'] && !$this->user) {
+        	$this->Session->write('redirectFrom', $this->Tools->here());
+            $this->Session->setFlash(__('You have to be logged in to access this page.'), 'flash_warning');
+            $this->redirect('/auth/login');
         }
 
         $this->set('page', $page);

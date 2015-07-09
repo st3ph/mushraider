@@ -16,6 +16,7 @@
                     <th class="span4"><?php echo __('Link');?></th>
                     <th class="span2"><?php echo __('Visibility');?></th>
                     <th class="span2"><?php echo __('Published');?></th>
+                    <th class="span2"><?php echo __('Main Menu');?></th>
                     <th class="span2"><?php echo __('Last update');?></th>
                     <th class="actions span2"><?php echo __('Actions');?></th>
                 </tr>
@@ -29,6 +30,13 @@
                             <td><?php echo $page['Page']['public']?__('Public'):__('Private');?></td>
                             <td>
                                 <?php if($page['Page']['published']):?>
+                                    <i class="text-success fa fa-check"></i>
+                                <?php else:?>
+                                    <i class="text-warning fa fa-exclamation-triangle"></i>
+                                <?php endif;?>
+                            </td>
+                            <td>
+                                <?php if($page['Page']['onMenu']):?>
                                     <i class="text-success fa fa-check"></i>
                                 <?php else:?>
                                     <i class="text-warning fa fa-exclamation-triangle"></i>

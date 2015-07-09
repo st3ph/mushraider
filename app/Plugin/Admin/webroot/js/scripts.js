@@ -166,8 +166,7 @@ jQuery(function($) {
     $('.sortableTbody').sortable({
         placeholder: "sortable-placeholder",
         cursor: "move",
-        containment: ".sortableTbody",
-        handle: '.fa fa-arrows',
+        handle: '.fa-arrows',
         helper: function(e, tr) {
             var $originals = tr.children();
             var $helper = tr.clone();
@@ -201,6 +200,29 @@ jQuery(function($) {
             });
         }
     }).disableSelection();
+
+    $('.mainMenu').sortable({
+        placeholder: "sortable-placeholder",
+        cursor: "move",
+        handle: '.fa-arrows'
+    }).disableSelection();
+
+    $('.mainMenu').on('click', '.fa-plus', function(e) {
+        e.preventDefault();
+
+        var $row = $(this).parents('.dynamic');
+        var $rowClone = $row.clone();
+        $rowClone.find('input').val('');
+        $row.after($rowClone);
+    });
+
+    $('.mainMenu').on('click', '.fa-minus', function(e) {
+        e.preventDefault();
+
+        if($('.mainMenu').find('.dynamic').length > 1) {
+            $(this).parents('.dynamic').remove();
+        }
+    });
 
     /*
     * Games

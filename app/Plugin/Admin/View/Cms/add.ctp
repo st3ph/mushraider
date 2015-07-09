@@ -17,6 +17,9 @@
             <div class="form-group">
                 <?php echo $this->Form->input('Page.published', array('options' => array('0' => __('Draft'), '1' => __('Published')), 'required' => true, 'label' => __('Status'), 'class' => 'span5'));?>
             </div>
+            <div class="form-group">
+                <?php echo $this->Form->input('Page.onMenu', array('type' => 'checkbox', 'label' => __('Add this page to the main menu')));?>
+            </div>
 
             <div class="form-group">
                 <?php echo $this->Form->submit(__('Save'), array('class' => 'btn btn-large btn-success pull-right'));?>

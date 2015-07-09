@@ -33,16 +33,34 @@
             <h3><?php echo __('Custom links');?></h3>
             <div class="well well-white">
                 <blockquote><p class="muted"><?php echo __('Custom links are display in top of the header. They are usefull to add links to your website, forums etc...');?></p></blockquote>
-                <?php for($i = 0;$i <= 3;$i++):?>
-                    <div class="form-group" style="overflow:hidden">
-                        <div class="span3">
-                            <?php echo $this->Form->input('Setting.links.'.$i.'.title', array('type' => 'text', 'label' => __('Link title'), 'class' => 'span5z'));?>
+
+                <ul class="unstyled mainMenu">
+                    <li class="row">
+                        <div class="span3 form-group">
+                            <label><?php echo __('Link title');?></label>
                         </div>
-                        <div class="span9">
-                            <?php echo $this->Form->input('Setting.links.'.$i.'.url', array('type' => 'url', 'label' => __('Url'), 'class' => 'span5'));?>
+                        <div class="span9 form-group">
+                            <label><?php echo __('Url');?></label>
                         </div>
-                    </div>
-                <?php endfor;?>
+                    </li>
+                    <?php if(!empty($this->request->data['Setting']['links'])):?>
+                        <?php foreach($this->request->data['Setting']['links'] as $link):?>
+                            <li class="row dynamic">
+                                <div class="span3 form-group">
+                                    <?php echo $this->Form->input('Setting.links.title[]', array('type' => 'text', 'label' => false, 'class' => 'span12', 'value' => $link['title'], 'name' => 'data[Setting][links][title][]'));?>
+                                </div>
+                                <div class="span6 form-group">
+                                    <?php echo $this->Form->input('Setting.links.url[]', array('type' => 'url', 'label' => false, 'class' => 'span12', 'value' => $link['url'], 'name' => 'data[Setting][links][url][]'));?>
+                                </div>
+                                <div class="span2 form-group actions">
+                                    <span class="fa fa-2x fa-arrows"></span>
+                                    <span class="fa fa-2x fa-plus text-success"></span>
+                                    <span class="fa fa-2x fa-minus text-warning"></span>
+                                </div>
+                            </li>
+                        <?php endforeach;?>
+                    <?php endif;?>
+                </ul>
             </div>
 
             <div class="form-group">

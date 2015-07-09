@@ -3,7 +3,7 @@ App::uses('Folder', 'Utility');
 App::uses('HttpSocket', 'Network/Http');
 class SettingsController extends AdminAppController {
     public $components = array('Image');
-    public $uses = array('Setting');
+    public $uses = array('Setting', 'Page');
 
     var $adminOnly = true;
 
@@ -144,11 +144,16 @@ class SettingsController extends AdminAppController {
 
             $customLinks = array();
             if(!empty($this->request->data['Setting']['links'])) {
-                foreach($this->request->data['Setting']['links'] as $customLink) {
-                    if(!empty($customLink['title']) && !empty($customLink['url'])) {
-                        $customLink['title'] = strip_tags(trim($customLink['title']));
-                        $customLink['url'] = strip_tags(trim($customLink['url']));
-                        $customLinks[] = $customLink;
+                pr($this->request->data['Setting']['links']);
+
+                if(!empty($this->request->data['Setting']['links']['title'])) {
+                    foreach($this->request->data['Setting']['links']['title'] as $key => $title) {
+                        if(!empty($title) && !empty($this->request->data['Setting']['links']['url'][$key])) {
+                            $customLink = array();
+                            $customLink['title'] = strip_tags(trim($title));
+                            $customLink['url'] = strip_tags(trim($this->request->data['Setting']['links']['url'][$key]));
+                            $customLinks[] = $customLink;
+                        }
                     }
                 }
             }
@@ -169,12 +174,12 @@ class SettingsController extends AdminAppController {
         $this->request->data['Setting']['theme']['bgnoimage'] = !$theme->bgimage;
 
         // Custom Links
-        $customLinks = json_decode($this->Setting->getOption('links'));
-        if(!empty($customLinks)) {
-            foreach($customLinks as $customLink) {
-                $link = array('title' => $customLink->title, 'url' => $customLink->url);
-                $this->request->data['Setting']['links'][] = $link;
-            }
+        $this->request->data['Setting']['links'] = json_decode($this->Setting->getOption('links'), true);
+
+        // Still no link ? add empty one
+        if(empty($this->request->data['Setting']['links'])) {
+            $this->request->data['Setting']['links'][0]['title'] = '';
+            $this->request->data['Setting']['links'][0]['url'] = '';
         }
     }
 

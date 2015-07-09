@@ -32,6 +32,41 @@ class CmsController extends AdminAppController {
         }
     }
 
+    public function edit($id = null) {
+        if(!$id) {
+            $this->redirect('/admin/cms');
+        }
+
+        $params = array();
+        $params['recursive'] = 1;
+        $params['conditions']['Page.id'] = $id;
+        $params['conditions']['published'] = array(0, 1);
+        if(!$page = $this->Page->find('first', $params)) {
+            $this->Session->setFlash(__('MushRaider is unable to find this page oO'), 'flash_error');
+            $this->redirect('/admin/cms');
+        }
+
+        if(!empty($this->request->data['Page']) && $this->request->data['Page']['id'] == $id) {
+            $toSave = array();
+            $toSave['id'] = $id;
+            $toSave['title'] = trim($this->request->data['Page']['title']);
+            $toSave['slug'] = $this->Tools->slugMe($toSave['title']);
+            $toSave['content'] = $this->request->data['Page']['content'];
+            $toSave['public'] = $this->request->data['Page']['public'];
+            $toSave['published'] = $this->request->data['Page']['published'];
+            if($this->Page->save($toSave)) {
+                $this->Session->setFlash(__('Page %s has been updated', $toSave['title']), 'flash_success');
+                return $this->redirect('/admin/cms');
+            }
+
+            $this->Session->setFlash(__('Something goes wrong'), 'flash_error');
+
+            $page['Page'] = array_merge($page['Page'], $this->request->data['Page']);
+        }
+
+        $this->request->data['Page'] = $page['Page'];
+    }
+
     public function delete($id = null) {
         if($id) {
             $params = array();

@@ -10,11 +10,11 @@
     </li>
     <?php if(empty($bridge) || (!empty($bridge) && !$bridge->enabled)):?>
         <li class="<?php echo $this->action == 'password'?'active':'';?>">
-            <?php echo $this->Html->link('<i class="fa fa-key"></i> '.__('Password').'<i class="fa-chevron-right pull-right"></i>', '/account/password', array('escape' => false, 'title' => __('Password')));?>
+            <?php echo $this->Html->link('<i class="fa fa-key"></i> '.__('Password').'<i class="fa fa-chevron-right pull-right"></i>', '/account/password', array('escape' => false, 'title' => __('Password')));?>
         </li>
     <?php endif?>
     <li class="<?php echo $this->action == 'availabilities'?'active':'';?>">
-        <?php echo $this->Html->link('<i class="fa-clock-o"></i> '.__('Absences').'<i class="fa fa-chevron-right pull-right"></i>', '/account/availabilities', array('escape' => false, 'title' => __('Absences')));?>
+        <?php echo $this->Html->link('<i class="fa fa-clock-o"></i> '.__('Absences').'<i class="fa fa-chevron-right pull-right"></i>', '/account/availabilities', array('escape' => false, 'title' => __('Absences')));?>
     </li>
     <li class="<?php echo $this->action == 'calendar'?'active':'';?>">
         <?php echo $this->Html->link('<i class="fa fa-calendar"></i> '.__('Calendar').'<i class="fa fa-chevron-right pull-right"></i>', '/account/calendar', array('escape' => false, 'title' => __('Calendar')));?>

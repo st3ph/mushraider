@@ -187,4 +187,55 @@ class Event extends AppModel {
         return false;
     }
 
+    public function afterSave($created, $options) {
+        // If users are absent for this event, add them as "absent" automatically
+        App::uses('Availability', 'Model');
+        $AvailabilityModel = new Availability(); 
+
+        $params = array();       
+        $params['recursive'] = 1;
+        $params['fields'] = array('Availability.id', 'Availability.user_id', 'Availability.comment');
+        $params['contain']['User'] = array();
+        $params['conditions']['start <='] = $this->data['Event']['time_start'];
+        $params['conditions']['end >='] = $this->data['Event']['time_start'];
+        if($availabilities = $AvailabilityModel->find('all', $params)) {
+            App::uses('Character', 'Model');
+            $CharacterModel = new Character(); 
+            foreach($availabilities as $availability) {
+                $params = array();       
+                $params['recursive'] = -1;
+                $params['fields'] = array('Character.id', 'Character.game_id', 'Character.level', 'Character.default_role_id');
+                $params['group'] = 'game_id';
+                $params['conditions']['user_id'] = $availability['Availability']['user_id'];
+                $params['conditions']['game_id'] = $this->data['Event']['game_id'];
+                $params['conditions']['main'] = 1;
+                if($characters = $CharacterModel->find('all', $params)) {
+                    App::uses('EventsCharacter', 'Model');
+                    $EventsCharacterModel = new EventsCharacter();
+                    foreach($characters as $character) {
+                        // If already registered to this event, update it
+                        $paramsEventsCharacter = array();
+                        $paramsEventsCharacter['recursive'] = -1;
+                        $paramsEventsCharacter['fields'] = array('id');
+                        $paramsEventsCharacter['conditions']['event_id'] = $this->data['Event']['id'];
+                        $paramsEventsCharacter['conditions']['user_id'] = $availability['Availability']['user_id'];
+                        if($eventCharacter = $EventsCharacterModel->find('first', $paramsEventsCharacter)) {
+                            $eventCharacter['EventsCharacter']['status'] = 0;
+                            $EventsCharacterModel->save($eventCharacter['EventsCharacter']);
+                        }else {
+                            $toSave = array();
+                            $toSave['event_id'] = $this->data['Event']['id'];
+                            $toSave['user_id'] = $availability['Availability']['user_id'];
+                            $toSave['character_id'] = $character['Character']['id'];
+                            $toSave['raids_role_id'] = $character['Character']['default_role_id'];
+                            $toSave['comment'] = $availability['Availability']['comment'];
+                            $toSave['status'] = 0;
+                            $EventsCharacterModel->__add($toSave);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 }

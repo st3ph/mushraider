@@ -147,7 +147,7 @@ jQuery(function($) {
         $formRow.find('.error-message').remove();
         $formRow.find('td').addClass(bgColorClass);
 
-        $overlayButton = $('<button>').addClass('btn btn-danger').append('<span class="fa-times"></span>');
+        $overlayButton = $('<button>').addClass('btn btn-danger').append('<span class="fa fa-times"></span>');
         $overlay = $('<div>').addClass('overlay text-center');
         $row.find('td').css({position: 'relative'}).append($overlay);
         $row.find('td:last-child').find('.overlay').append($overlayButton);
@@ -432,20 +432,20 @@ jQuery(function($) {
             $editButtonI.removeClass('fa-pencil-square-o').addClass('fa-floppy-o');
             // Add 'add button' and 'refused button' to waiting list
             $waiting.find('li').each(function() {
-                $(this).find('.character').prepend('<i class="fa-plus text-success"></i>');
-                $(this).find('.character').prepend('<i class="fa-minus-circle text-error"></i>');
+                $(this).find('.character').prepend('<i class="fa fa-plus text-success"></i>');
+                $(this).find('.character').prepend('<i class="fa fa-minus-circle text-error"></i>');
                 $(this).addClass('nosort');
             });
 
             // Add 'add button' to refused list
             $refused.find('li').each(function() {
-                $(this).find('.character').prepend('<i class="fa-plus text-success"></i>');
+                $(this).find('.character').prepend('<i class="fa fa-plus text-success"></i>');
                 $(this).addClass('nosort');
             });
 
             // Add 'remove button' to validated list
             $validated.find('li').each(function() {
-                $(this).find('.character').prepend('<i class="fa-minus text-error"></i>');
+                $(this).find('.character').prepend('<i class="fa fa-minus text-error"></i>');
                 $(this).addClass('nosort');
             });
         }else { // Save
@@ -511,7 +511,7 @@ jQuery(function($) {
                 var $player = $(this).parents('li');
                 var $newPlayer = $player.clone();
                 $newPlayer.find('i').remove();
-                $newPlayer.find('.character').prepend('<i class="fa-minus text-error"></i>');
+                $newPlayer.find('.character').prepend('<i class="fa fa-minus text-error"></i>');
                 $validated.append($newPlayer);
                 $player.remove();
 
@@ -524,8 +524,8 @@ jQuery(function($) {
             $player = $(this).parents('li');
             var $newPlayer = $player.clone();
             $newPlayer.find('i').remove();
-            $newPlayer.find('.character').prepend('<i class="fa-plus text-success"></i>');
-            $newPlayer.find('.character').prepend('<i class="fa-minus-circle text-error"></i>');
+            $newPlayer.find('.character').prepend('<i class="fa fa-plus text-success"></i>');
+            $newPlayer.find('.character').prepend('<i class="fa fa-minus-circle text-error"></i>');
             $waiting.append($newPlayer);
             $player.remove();
 
@@ -536,7 +536,7 @@ jQuery(function($) {
             $player = $(this).parents('li');
             var $newPlayer = $player.clone();
             $newPlayer.find('i').remove();
-            $newPlayer.find('.character').prepend('<i class="fa-plus text-success"></i>');
+            $newPlayer.find('.character').prepend('<i class="fa fa-plus text-success"></i>');
             $refused.append($newPlayer);
             $player.remove();
         }
@@ -663,7 +663,6 @@ jQuery(function($) {
                     }else {
                         $('#EventTitle').val(json.msg.EventsTemplate.event_title);
                         $('#EventDescription').val(json.msg.EventsTemplate.event_description);
-                        editorObject[0].updateFrame();
                         $('#EventGameId').val(json.msg.EventsTemplate.game_id);
                         loadDungeons($EventGame, json.msg.EventsTemplate.dungeon_id);
                         if(json.msg.EventsTemplatesRole.length > 0) {

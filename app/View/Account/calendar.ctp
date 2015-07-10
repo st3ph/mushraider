@@ -13,7 +13,7 @@
             <button class="btn btn-success"><?php echo __('Export');?></button>
 
             <div class="url well wellWhite">
-                <p class="text-success"><?php echo __('User the link below to export MushRaider events to your personnal calendar (Google, Outlook...)');?></p>
+                <p class="text-success"><?php echo __('Use the link below to export MushRaider events to your personnal calendar (Google, Outlook...)');?></p>
                 <?php echo $this->Html->link('', '', array('escpae' => false));?>
             </div>
         </div>

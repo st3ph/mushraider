@@ -3,8 +3,10 @@
 * General
 */
 body {background:#444 url("/admin/img/pattern/px_by_Gre3g.png") repeat;border-top:3px solid #bf4d28}
+a {color:#bf4d28;}
+a:hover {color:#953d20;text-decoration:none;}
 #header {
-	padding-left:10px;padding-right:10px;border: 1px solid #d4d4d4;color:#eee;position:relative;min-height:70px;
+	border: 1px solid #d4d4d4;color:#eee;position:relative;min-height:70px;
 	-webkit-box-shadow: 0 1px 10px rgba(0,0,0,0.1);
 	-moz-box-shadow: 0 1px 10px rgba(0,0,0,0.1);
 	box-shadow: 0 1px 10px rgba(0,0,0,0.1);
@@ -18,10 +20,8 @@ body {background:#444 url("/admin/img/pattern/px_by_Gre3g.png") repeat;border-to
 	border-color: #252525;
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff222222',endColorstr='#ff111111',GradientType=0);
 }
-a {color:#bf4d28;}
-a:hover {color:#953d20;text-decoration:none;}
 #header .caret {border-top:4px solid #eee;}
-#header .menubar {position:absolute;right:0;bottom:0;}
+#header h1 {padding-left:10px;}
 #header ul.inline li {border-left:1px solid #ddd;}
 #header ul.inline li:first-child {border-left:none;}
 #header .navbar {margin-bottom:0;}
@@ -310,7 +310,6 @@ form .select .loading {margin:0 0 5px 5px;}
 }
 
 @media (max-width: 1024px) {
-	#header .menubar {position:relative}
 	#createEvent {float:none;text-align:left;}
 	#filterEvents {float:none;text-align:left;}
 }

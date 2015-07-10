@@ -22,7 +22,7 @@ class AjaxController extends WidgetAppController {
         if($widgets = $WidgetModel->find('all', $params)) {
             $json['widgets'] = $widgets;
         }else {
-            $json['msg'] = __('Vous n\'avez aucun widget à insérer');
+            $json['msg'] = __("You don't have any MushRaider's widget to insert");
         }
 
         return json_encode($json);

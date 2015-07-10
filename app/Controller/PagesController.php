@@ -35,6 +35,7 @@ class PagesController extends AppController {
         }
 
         $this->set('page', $page);
+        $this->set('currentCustomPageUrl', '/pages/'.$page['Page']['id'].'/'.$page['Page']['slug']);
 	}
 
 	public function view($idPage) {
@@ -52,5 +53,6 @@ class PagesController extends AppController {
         }
 
         $this->set('page', $page);
+        $this->set('currentCustomPageUrl', '/pages/'.$page['Page']['id'].'/'.$page['Page']['slug']);
 	}
 }

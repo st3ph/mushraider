@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Mushraider\n"
-"POT-Creation-Date: 2015-03-08 15:04+0100\n"
-"PO-Revision-Date: 2015-03-08 15:18+0100\n"
-"Last-Translator: Stéphane \"Mush\" Litou <contact@mushraider.com>\n"
+"POT-Creation-Date: 2015-07-10 09:53+0100\n"
+"PO-Revision-Date: 2015-07-10 10:14+0100\n"
+"Last-Translator: Stéphane \"Mush\" Litou <contact@stephane-litou.com>\n"
 "Language-Team:  <contact@mushraider.com>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -46,9 +46,9 @@ msgstr "%s a été ajouté à la liste de vos personnages"
 #: Z:\www\mushraider\mushraider\app/Controller/AccountController.php:329
 #: Z:\www\mushraider\mushraider\app/Controller/AuthController.php:149
 #: Z:\www\mushraider\mushraider\app/Controller/AuthController.php:197
-#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:196
-#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:298
-#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:353
+#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:198
+#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:300
+#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:355
 msgid "Something wrong happen, please fix the errors below"
 msgstr ""
 "Quelque chose de mal c'est produit, veuillez corriger les erreurs ci-dessous"
@@ -112,7 +112,6 @@ msgid "Personal informations"
 msgstr "Informations personnelles"
 
 #: Z:\www\mushraider\mushraider\app/Controller/AccountController.php:233
-#: Z:\www\mushraider\mushraider\app/Controller/AccountController.php:294
 msgid "Your settings were saved successfully"
 msgstr "Vos paramètres ont bien été sauvegardés"
 
@@ -153,13 +152,18 @@ msgid "Your password has been updated"
 msgstr "Votre mot de passe a été mis à jour"
 
 #: Z:\www\mushraider\mushraider\app/Controller/AccountController.php:284
-msgid "My MushRaider settings"
-msgstr "Mes paramètres MushRaider"
+msgid "My MushRaider notifications"
+msgstr "Mes notifications MushRaider"
 
 #: Z:\www\mushraider\mushraider\app/Controller/AccountController.php:285
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:19
-msgid "Settings"
-msgstr "Paramètres"
+#: Z:\www\mushraider\mushraider\app/View/Elements/account_menu.ctp:9
+#: Z:\www\mushraider\mushraider\app/View/Elements/header.ctp:16
+msgid "Notifications"
+msgstr "Notifications"
+
+#: Z:\www\mushraider\mushraider\app/Controller/AccountController.php:294
+msgid "Your notification settings were saved successfully"
+msgstr "Vos paramètres de notification ont bien été sauvegardés"
 
 #: Z:\www\mushraider\mushraider\app/Controller/AccountController.php:307
 msgid "Absences management"
@@ -186,40 +190,56 @@ msgstr "MushRaider ne peut pas supprimer cette absence oO"
 msgid "The absence has been deleted"
 msgstr "L'absence a bien été supprimée"
 
-#: Z:\www\mushraider\mushraider\app/Controller/AjaxController.php:77
+#: Z:\www\mushraider\mushraider\app/Controller/AccountController.php:363
+msgid "Calendar management"
+msgstr "Mon calendrier"
+
+#: Z:\www\mushraider\mushraider\app/Controller/AccountController.php:365
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:24
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/calendar.ctp:8
+#: Z:\www\mushraider\mushraider\app/View/Elements/account_menu.ctp:20
+msgid "Calendar"
+msgstr "Calendrier"
+
+#: Z:\www\mushraider\mushraider\app/Controller/AjaxController.php:79
 msgid "MushRaider can't find this event"
 msgstr "MushRaider ne trouve pas cet événement oO"
 
-#: Z:\www\mushraider\mushraider\app/Controller/AjaxController.php:83
+#: Z:\www\mushraider\mushraider\app/Controller/AjaxController.php:85
 msgid "Too late ! This event is already started"
 msgstr "Trop tard ! Cet événement est déjà commencé"
 
-#: Z:\www\mushraider\mushraider\app/Controller/AjaxController.php:89
+#: Z:\www\mushraider\mushraider\app/Controller/AjaxController.php:91
 msgid "Too late ! Registrations for this event are closed"
 msgstr "Trop tard ! Les inscriptions pour cet événement sont fermées"
 
-#: Z:\www\mushraider\mushraider\app/Controller/AjaxController.php:102
+#: Z:\www\mushraider\mushraider\app/Controller/AjaxController.php:104
 #, php-format
 msgid "Your character mush be above the level %s"
 msgstr "Votre personnage doit être au dessus du niveau %s"
 
-#: Z:\www\mushraider\mushraider\app/Controller/AjaxController.php:120
+#: Z:\www\mushraider\mushraider\app/Controller/AjaxController.php:122
 msgid "This role is already full"
 msgstr "Ce rôle est déjà plein"
 
-#: Z:\www\mushraider\mushraider\app/Controller/AjaxController.php:164
+#: Z:\www\mushraider\mushraider\app/Controller/AjaxController.php:166
 msgid "Error while adding your character"
 msgstr "Erreur pendant l'ajout de votre personnage"
 
-#: Z:\www\mushraider\mushraider\app/Controller/AjaxController.php:301
+#: Z:\www\mushraider\mushraider\app/Controller/AjaxController.php:303
 msgid "Error while loading the template"
 msgstr "Erreur pendant le chargement du template"
+
+#: Z:\www\mushraider\mushraider\app/Controller/AjaxController.php:355
+msgid "extension is not allowed"
+msgstr "n'est pas autorisée"
 
 #: Z:\www\mushraider\mushraider\app/Controller/AppController.php:58
 msgid "MushRaider is ready for install, what about you ?"
 msgstr "MushRaider est prêt pour l'installation, et vous ?"
 
 #: Z:\www\mushraider\mushraider\app/Controller/AppController.php:108
+#: Z:\www\mushraider\mushraider\app/Controller/PagesController.php:50
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/AdminAppController.php:16
 msgid "You have to be logged in to access this page."
 msgstr "Vous devez être connecté pour accéder à cette page."
@@ -302,7 +322,7 @@ msgstr ""
 "repos ?"
 
 #: Z:\www\mushraider\mushraider\app/Controller/Component/EmailingComponent.php:46
-#: Z:\www\mushraider\mushraider\app/Controller/Component/TourComponent.php:22
+#: Z:\www\mushraider\mushraider\app/Controller/Component/TourComponent.php:26
 msgid "Welcome to MushRaider"
 msgstr "Bienvenue sur le MushRaider"
 
@@ -335,31 +355,31 @@ msgid "[MushRaider] You have been refused to an event :("
 msgstr "[MushRaider] Vous avez été refusé à un événement :("
 
 #: Z:\www\mushraider\mushraider\app/Controller/Component/ImageComponent.php:31
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/SettingsController.php:278
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/SettingsController.php:288
 msgid "Image is too big"
 msgstr "L'image est trop grosse"
 
 #: Z:\www\mushraider\mushraider\app/Controller/Component/ImageComponent.php:34
-#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:464
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/SettingsController.php:281
+#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:466
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/SettingsController.php:291
 msgid "An error occur while uploading"
 msgstr "Une erreur est survenue pendant l'upload"
 
-#: Z:\www\mushraider\mushraider\app/Controller/Component/PatcherComponent.php:123
+#: Z:\www\mushraider\mushraider\app/Controller/Component/PatcherComponent.php:131
 msgid ""
 "MushRaider is down for maintenance (patching up), please come back later !"
 msgstr ""
 "MushRaider est en maintenant (patch en cours), merci de revenir plus tard !"
 
-#: Z:\www\mushraider\mushraider\app/Controller/Component/TourComponent.php:23
+#: Z:\www\mushraider\mushraider\app/Controller/Component/TourComponent.php:27
 msgid "This page let you view and manage events"
 msgstr "Cette page vous permet de consulter et gérer les événements"
 
-#: Z:\www\mushraider\mushraider\app/Controller/Component/TourComponent.php:29
+#: Z:\www\mushraider\mushraider\app/Controller/Component/TourComponent.php:33
 msgid "Customize MushRaider"
 msgstr "Customiser MushRaider"
 
-#: Z:\www\mushraider\mushraider\app/Controller/Component/TourComponent.php:30
+#: Z:\www\mushraider\mushraider\app/Controller/Component/TourComponent.php:34
 msgid ""
 "In the admin panel you can customize MushRaider, like adding your games, "
 "create user groups, widgets, appearance..."
@@ -368,38 +388,38 @@ msgstr ""
 "ajouter vos jeux, modifier l'apparence, créer des groupes utilisateurs, des "
 "widgets..."
 
-#: Z:\www\mushraider\mushraider\app/Controller/Component/TourComponent.php:35
+#: Z:\www\mushraider\mushraider\app/Controller/Component/TourComponent.php:39
 msgid "Manage your account"
 msgstr "Gérer son compte"
 
-#: Z:\www\mushraider\mushraider\app/Controller/Component/TourComponent.php:36
+#: Z:\www\mushraider\mushraider\app/Controller/Component/TourComponent.php:40
 msgid "Here you can manage your account and create your first character"
 msgstr "Ici vous pouvez gérer votre compte et ajouter votre premier personnage"
 
-#: Z:\www\mushraider\mushraider\app/Controller/Component/TourComponent.php:41
+#: Z:\www\mushraider\mushraider\app/Controller/Component/TourComponent.php:45
 #: Z:\www\mushraider\mushraider\app/View/Events/index.ctp:9
 msgid "Quick event creation"
 msgstr "Création rapide d'événement"
 
-#: Z:\www\mushraider\mushraider\app/Controller/Component/TourComponent.php:42
+#: Z:\www\mushraider\mushraider\app/Controller/Component/TourComponent.php:46
 msgid "Use this form to quickly create events, or use the \"+\" buttons below"
 msgstr ""
 "Utilisez ce formulaire pour créer des événements rapidement , ou utilisez "
 "les boutons \"+\" ci-dessous"
 
-#: Z:\www\mushraider\mushraider\app/Controller/Component/TourComponent.php:47
+#: Z:\www\mushraider\mushraider\app/Controller/Component/TourComponent.php:51
 msgid "Filter events"
 msgstr "Filtrer les événements"
 
-#: Z:\www\mushraider\mushraider\app/Controller/Component/TourComponent.php:48
+#: Z:\www\mushraider\mushraider\app/Controller/Component/TourComponent.php:52
 msgid "You can filter the games displayed below"
 msgstr "Vous pouvez filtrer les jeux affichés ci-dessous"
 
-#: Z:\www\mushraider\mushraider\app/Controller/Component/TourComponent.php:53
+#: Z:\www\mushraider\mushraider\app/Controller/Component/TourComponent.php:57
 msgid "Thank you for using MushRaider"
 msgstr "Merci d'utiliser MushRaider"
 
-#: Z:\www\mushraider\mushraider\app/Controller/Component/TourComponent.php:54
+#: Z:\www\mushraider\mushraider\app/Controller/Component/TourComponent.php:58
 msgid ""
 "Hope you will enjoy this raid planner, if you encounter any issue or have "
 "suggestions please visits the official forum <a href=\"http://forum.raidhead."
@@ -440,76 +460,76 @@ msgstr "-- Tous les jeux"
 msgid "View event"
 msgstr "Détails d'un événement"
 
-#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:89
-#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:239
-#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:380
+#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:90
+#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:241
+#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:382
 msgid "MushRaider can't find this event oO"
 msgstr "MushRaider ne peut pas trouver cet événement oO"
 
-#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:137
 #: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:138
-#: Z:\www\mushraider\mushraider\app/View/Helper/FormerHelper.php:121
+#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:139
+#: Z:\www\mushraider\mushraider\app/View/Helper/CalendarHelper.php:107
 #: Z:\www\mushraider\mushraider\app/View/Events/add.ctp:5
 msgid "Add event"
 msgstr "Ajouter un événement"
 
-#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:141
-#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:244
-#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:330
-#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:414
+#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:142
+#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:246
+#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:332
+#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:416
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/AdminAppController.php:22
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/AdminAppController.php:28
 msgid "You don't have permission to access this page."
 msgstr "Vous n'avez pas les permissions pour accéder à cette page."
 
-#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:192
+#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:194
 msgid "The event has been created."
 msgstr "L'événement a bien été créé."
 
-#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:226
+#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:228
 #: Z:\www\mushraider\mushraider\app/View/Events/edit.ctp:2
 msgid "Edit event"
 msgstr "Modifier un événement"
 
-#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:293
+#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:295
 msgid "The event has been updated."
 msgstr "L'événement a bien été mis à jour."
 
-#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:317
+#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:319
 msgid "Close event"
 msgstr "Clôturer l'événement"
 
-#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:350
+#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:352
 msgid "The event has been closed and the report created."
 msgstr "L'événement a été clôturé et le compte rendu créé."
 
-#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:362
+#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:364
 #: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:36
 msgid "Close & create a report"
 msgstr "Fermer et créer un compte rendu"
 
-#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:370
+#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:372
 msgid "View event report"
 msgstr "Voir le compte rendu"
 
-#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:389
+#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:391
 msgid "MushRaider can't find this report oO"
 msgstr "MushRaider ne peut pas trouver ce compte rendu oO"
 
-#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:397
+#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:399
 #: Z:\www\mushraider\mushraider\app/View/Events/report.ctp:7
 msgid "Report"
 msgstr "Compte rendu"
 
-#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:442
+#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:444
 msgid "The event has been deleted."
 msgstr "L'événement a bien été supprimé."
 
-#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:444
+#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:446
 msgid "MushRaider can't delete this event."
 msgstr "MushRaider ne peut pas supprimer cet événement."
 
-#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:461
+#: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:463
 msgid "At least one of the screenshots is too big"
 msgstr "Au moins un des screenshots est trop lourd"
 
@@ -609,6 +629,11 @@ msgstr "La classe %s a bien été mise à jour"
 
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/ClassesController.php:100
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/ClassesController.php:129
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/CmsController.php:43
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/CmsController.php:103
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/CmsController.php:124
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/CmsController.php:140
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/CmsController.php:155
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/DungeonsController.php:128
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/DungeonsController.php:154
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/DungeonsController.php:169
@@ -619,7 +644,7 @@ msgstr "La classe %s a bien été mise à jour"
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/GamesController.php:193
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/GamesController.php:232
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/RacesController.php:93
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/RacesController.php:116
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/RacesController.php:118
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/RaidrolesController.php:52
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/RaidrolesController.php:73
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/RolesController.php:39
@@ -639,6 +664,36 @@ msgstr "Quelque chose de mal s'est produit"
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/ClassesController.php:127
 msgid "The class has been deleted"
 msgstr "La classe a bien été supprimée"
+
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/CmsController.php:39
+#, php-format
+msgid "%s has been added to your pages list"
+msgstr "%s a été ajouté à la liste des pages"
+
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/CmsController.php:57
+msgid "MushRaider is unable to find this page oO"
+msgstr "MushRaider ne trouve pas cette page oO"
+
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/CmsController.php:99
+#, php-format
+msgid "Page %s has been updated"
+msgstr "La page %s a été mise à jour"
+
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/CmsController.php:119
+msgid "MushRaider can't find this page to delete oO"
+msgstr "MushRaider ne peut pas trouver cette page à supprimer oO"
+
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/CmsController.php:122
+msgid "The page has been deleted"
+msgstr "La page a bien été supprimé"
+
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/CmsController.php:138
+msgid "The page has been sent to draft"
+msgstr "La page a bien été ajouté aux brouillons"
+
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/CmsController.php:153
+msgid "The page has been published"
+msgstr "La page a bien été publié"
 
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/DungeonsController.php:68
 #, php-format
@@ -732,24 +787,24 @@ msgstr ""
 "vous allez passer un sale quart d'heure !"
 
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:153
-#: Z:\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:209
+#: Z:\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:211
 msgid "Full permissions"
 msgstr "Tous les droits"
 
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:153
-#: Z:\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:209
+#: Z:\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:211
 msgid "Like Chuck Norris, he can do anything. This overwrite every permissions"
 msgstr ""
 "Comme Check Norris, il peut tout faire. Ceci est prioritaire sur toutes les "
 "autres permissions."
 
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:154
-#: Z:\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:210
+#: Z:\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:212
 msgid "Limited admin access"
 msgstr "Accès limité à l'admin"
 
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:154
-#: Z:\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:210
+#: Z:\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:212
 msgid ""
 "Like Robin, he can do some things but not all (like driving the batmobile or "
 "change user role)"
@@ -758,12 +813,12 @@ msgstr ""
 "la batmobile ou modifier les droits utilisateur)"
 
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:155
-#: Z:\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:211
+#: Z:\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:213
 msgid "Can manage events"
 msgstr "Peut gérer les événements"
 
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:155
-#: Z:\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:211
+#: Z:\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:213
 msgid ""
 "Can create, edit and delete events. Can also manage the roster for each "
 "events"
@@ -772,32 +827,32 @@ msgstr ""
 "roster."
 
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:156
-#: Z:\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:213
+#: Z:\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:215
 msgid "Can create templates"
 msgstr "Peut créer des templates"
 
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:156
-#: Z:\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:213
+#: Z:\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:215
 msgid "Can create events templates"
 msgstr "Peut créer des templates d'événement"
 
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:157
-#: Z:\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:214
+#: Z:\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:216
 msgid "Can create reports"
 msgstr "Peut créer des comptes rendus"
 
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:157
-#: Z:\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:214
+#: Z:\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:216
 msgid "Can create events reports"
 msgstr "Peut créer des comptes rendus d'événement"
 
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:244
-#: Z:\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:212
+#: Z:\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:214
 msgid "Can manage own events only"
 msgstr "Peut gérer ses propres événements uniquement"
 
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/PatcherController.php:244
-#: Z:\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:212
+#: Z:\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:214
 msgid ""
 "Can create, edit and delete own events only. Can also manage the roster for "
 "his events"
@@ -811,6 +866,7 @@ msgid "%s has been added to your races list"
 msgstr "%s a été ajouté à la liste des races"
 
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/RacesController.php:77
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/RacesController.php:111
 msgid "MushRaider is unable to find this race oO"
 msgstr "MushRaider ne trouve pas cette race oO"
 
@@ -819,11 +875,7 @@ msgstr "MushRaider ne trouve pas cette race oO"
 msgid "Race %s has been updated"
 msgstr "La race %s a été mise à jour"
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/RacesController.php:112
-msgid "This race is linked to a game, you can't delete it."
-msgstr "Cette race est liée à un jeu, vous ne pouvez donc pas la supprimer."
-
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/RacesController.php:114
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/RacesController.php:116
 msgid "The race has been deleted"
 msgstr "La race a bien été supprimée"
 
@@ -884,21 +936,21 @@ msgstr "Personnages principaux"
 msgid "Reroll characters"
 msgstr "Personnages secondaires"
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/SettingsController.php:49
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/SettingsController.php:158
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/SettingsController.php:192
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/SettingsController.php:50
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/SettingsController.php:168
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/SettingsController.php:202
 msgid "Settings have been updated"
 msgstr "La configuration a été mise à jour"
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/SettingsController.php:215
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/SettingsController.php:225
 msgid "Private key is mandatory"
 msgstr "La clé privée est obligatoire"
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/SettingsController.php:223
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/SettingsController.php:233
 msgid "Bridge's third party url is mandatory"
 msgstr "L'adresse du site tier (site, forum...) est obligatoire"
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/SettingsController.php:231
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/SettingsController.php:241
 #, php-format
 msgid ""
 "Bridge is disabled because the third party url does not look right (code %s)"
@@ -906,7 +958,7 @@ msgstr ""
 "Le bridge a été désactivé car l'adresse du site tier semble incorrecte (code "
 "%s)"
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/SettingsController.php:233
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/SettingsController.php:243
 #, php-format
 msgid ""
 "Bridge is disabled because it seems that the third party plugin have a "
@@ -915,11 +967,11 @@ msgstr ""
 "Le bridge a été désactivé car l'adresse du site tier semble rencontrer un "
 "problème (code %s)"
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/SettingsController.php:237
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/SettingsController.php:247
 msgid "Bridge is disabled because the third party url does not look right"
 msgstr "Le bridge a été désactivé car l'adresse du site tier semble incorrecte"
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/SettingsController.php:245
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/Controller/SettingsController.php:255
 msgid "API settings have been updated"
 msgstr "La configuration API a été mise à jour"
 
@@ -1028,15 +1080,15 @@ msgstr ""
 "MushRaider ne trouve pas les paramètres de connexion à la base de donnée, "
 "veuillez compléter le formulaire avant de continuer"
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:146
+#: Z:\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:147
 msgid "MushRaider successfully install !"
 msgstr "MushRaider s'est installé avec succès !"
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:149
+#: Z:\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:150
 msgid "MushRaider can't create admin user, please try again."
 msgstr "MushRaider ne peut pas créer l'utilisateur admin, veuillez réessayer."
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:157
+#: Z:\www\mushraider\mushraider\app/Plugin/Install/Controller/StepController.php:158
 msgid ""
 "MushRaider can't verify the settings, please be sure to fill all the fields "
 "to continue."
@@ -1091,6 +1143,7 @@ msgstr "par"
 #: Z:\www\mushraider\mushraider\app/Plugin/Sociable/View/Helper/CommentHelper.php:95
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Classes/index.ctp:31
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Classes/index.ctp:71
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/index.ctp:50
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Dungeons/index.ctp:35
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Dungeons/index.ctp:79
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Events/templates.ctp:52
@@ -1119,6 +1172,8 @@ msgstr "sauvegarder"
 
 #: Z:\www\mushraider\mushraider\app/Plugin/Sociable/View/Helper/CommentHelper.php:98
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Classes/edit.ctp:33
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/add.ctp:25
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/edit.ctp:26
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Dungeons/edit.ctp:38
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Elements/addClasse.ctp:23
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Elements/addDungeon.ctp:32
@@ -1132,16 +1187,16 @@ msgstr "sauvegarder"
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Roles/add.ctp:34
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Roles/edit.ctp:41
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/api.ctp:61
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/calendar.ctp:30
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/display.ctp:49
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:71
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/calendar.ctp:28
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/display.ctp:67
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:74
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Users/edit.ctp:46
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Widgets/add.ctp:49
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Widgets/edit.ctp:48
 #: Z:\www\mushraider\mushraider\app/View/Account/availabilities.ctp:41
+#: Z:\www\mushraider\mushraider\app/View/Account/notifications.ctp:19
 #: Z:\www\mushraider\mushraider\app/View/Account/password.ctp:22
 #: Z:\www\mushraider\mushraider\app/View/Account/personal.ctp:22
-#: Z:\www\mushraider\mushraider\app/View/Account/settings.ctp:19
 msgid "Save"
 msgstr "Sauvegarder"
 
@@ -1177,6 +1232,39 @@ msgstr "non"
 #: Z:\www\mushraider\mushraider\app/Plugin/Sociable/View/Helper/CommentHelper.php:108
 msgid "Don't report spam"
 msgstr "Ne pas signaler"
+
+#: Z:\www\mushraider\mushraider\app/Plugin/Widget/Controller/AjaxController.php:25
+msgid "You don't have any MushRaider's widget to insert"
+msgstr "Vous n'avez aucun widget MushRaider à insérer"
+
+#: Z:\www\mushraider\mushraider\app/View/Helper/CalendarHelper.php:45
+msgid "Previous"
+msgstr "Précédent"
+
+#: Z:\www\mushraider\mushraider\app/View/Helper/CalendarHelper.php:47
+msgid "Next"
+msgstr "Suivant"
+
+#: Z:\www\mushraider\mushraider\app/View/Helper/CalendarHelper.php:158
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Dashboard/index.ctp:18
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:57
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Games/index.ctp:22
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Rosters/index.ctp:4
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Rosters/index.ctp:40
+#: Z:\www\mushraider\mushraider\app/Plugin/Widget/View/Events/index.ctp:26
+#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:174
+msgid "Roster"
+msgstr "Roster"
+
+#: Z:\www\mushraider\mushraider\app/View/Helper/CalendarHelper.php:159
+msgid "Start"
+msgstr "Début"
+
+#: Z:\www\mushraider\mushraider\app/View/Helper/CalendarHelper.php:161
+#: Z:\www\mushraider\mushraider\app/View/Events/add.ctp:78
+#: Z:\www\mushraider\mushraider\app/View/Events/edit.ctp:65
+msgid "open event"
+msgstr "événement ouvert"
 
 #: Z:\www\mushraider\mushraider\app/View/Helper/FormerHelper.php:17
 #: Z:\www\mushraider\mushraider\app/View/Helper/ToolsHelper.php:16
@@ -1368,36 +1456,7 @@ msgstr "novembre"
 msgid "décembre"
 msgstr "décembre"
 
-#: Z:\www\mushraider\mushraider\app/View/Helper/FormerHelper.php:89
-msgid "Previous"
-msgstr "Précédent"
-
-#: Z:\www\mushraider\mushraider\app/View/Helper/FormerHelper.php:91
-msgid "Next"
-msgstr "Suivant"
-
-#: Z:\www\mushraider\mushraider\app/View/Helper/FormerHelper.php:141
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Dashboard/index.ctp:18
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:57
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Games/index.ctp:22
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Rosters/index.ctp:4
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Rosters/index.ctp:40
-#: Z:\www\mushraider\mushraider\app/Plugin/Widget/View/Events/index.ctp:26
-#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:171
-msgid "Roster"
-msgstr "Roster"
-
-#: Z:\www\mushraider\mushraider\app/View/Helper/FormerHelper.php:142
-msgid "Start"
-msgstr "Début"
-
-#: Z:\www\mushraider\mushraider\app/View/Helper/FormerHelper.php:144
-#: Z:\www\mushraider\mushraider\app/View/Events/add.ctp:78
-#: Z:\www\mushraider\mushraider\app/View/Events/edit.ctp:65
-msgid "open event"
-msgstr "événement ouvert"
-
-#: Z:\www\mushraider\mushraider\app/View/Helper/FormerHelper.php:238
+#: Z:\www\mushraider\mushraider\app/View/Helper/FormerHelper.php:76
 msgid "Signed in"
 msgstr "Enregistré"
 
@@ -1419,11 +1478,11 @@ msgstr "dans"
 msgid "Yesterday at"
 msgstr "Hier à"
 
-#: Z:\www\mushraider\mushraider\app/View/Helper/ToolsHelper.php:124
+#: Z:\www\mushraider\mushraider\app/View/Helper/ToolsHelper.php:129
 msgid "Pr&eacute;c&eacute;dente"
 msgstr "Précédente"
 
-#: Z:\www\mushraider\mushraider\app/View/Helper/ToolsHelper.php:126
+#: Z:\www\mushraider\mushraider\app/View/Helper/ToolsHelper.php:131
 msgid "Suivante"
 msgstr "Suivante"
 
@@ -1439,6 +1498,9 @@ msgstr "Modifier une classe"
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Classes/edit.ctp:9
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Classes/index.ctp:17
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Classes/index.ctp:55
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/add.ctp:9
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/edit.ctp:9
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/index.ctp:15
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Dungeons/disabled.ctp:17
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Dungeons/disabled.ctp:63
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Dungeons/edit.ctp:9
@@ -1529,6 +1591,7 @@ msgstr "Classes non liées à un jeu"
 
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Classes/index.ctp:18
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Classes/index.ctp:56
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/index.ctp:21
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Dungeons/disabled.ctp:20
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Dungeons/disabled.ctp:66
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Dungeons/index.ctp:20
@@ -1549,12 +1612,14 @@ msgstr "Actions"
 
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Classes/index.ctp:32
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Classes/index.ctp:72
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/index.ctp:55
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Dungeons/disabled.ctp:37
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Dungeons/disabled.ctp:85
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Dungeons/index.ctp:36
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Events/templates.ctp:53
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Games/index.ctp:78
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Races/index.ctp:27
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Races/index.ctp:62
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Raidroles/delete.ctp:17
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Raidroles/index.ctp:31
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Users/index.ctp:63
@@ -1574,6 +1639,109 @@ msgstr "Êtes-vous sûr de vouloir supprimer la classe %s ?"
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Classes/index.ctp:81
 msgid "You don't have any classe yet"
 msgstr "Vous n'avez pas encore de classe"
+
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/add.ctp:4
+msgid "Create a page"
+msgstr "Créer une page"
+
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/add.ctp:12
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/edit.ctp:12
+msgid "Page content"
+msgstr "Contenu de la page"
+
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/add.ctp:15
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/edit.ctp:15
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/index.ctp:30
+msgid "Private"
+msgstr "Privée"
+
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/add.ctp:15
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/edit.ctp:15
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/index.ctp:30
+msgid "Public"
+msgstr "Publique"
+
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/add.ctp:15
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/edit.ctp:15
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/index.ctp:17
+msgid "Visibility"
+msgstr "Visibilité"
+
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/add.ctp:18
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/edit.ctp:18
+msgid "Draft"
+msgstr "Brouillon"
+
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/add.ctp:18
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/edit.ctp:18
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/index.ctp:18
+msgid "Published"
+msgstr "Publiée"
+
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/add.ctp:18
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/edit.ctp:18
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Users/index.ctp:32
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Widgets/index.ctp:24
+msgid "Status"
+msgstr "Etat"
+
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/add.ctp:21
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/edit.ctp:21
+msgid "Add this page to the main menu"
+msgstr "Ajouter cette page au menu principal"
+
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/edit.ctp:4
+msgid "Edit a page"
+msgstr "Modifier une page"
+
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/index.ctp:4
+msgid "Pages"
+msgstr "Pages"
+
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/index.ctp:7
+msgid "Add page"
+msgstr "Ajouter une page"
+
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/index.ctp:16
+msgid "Link"
+msgstr "Lien"
+
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/index.ctp:19
+msgid "Main Menu"
+msgstr "Menu Principal"
+
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/index.ctp:20
+#: Z:\www\mushraider\mushraider\app/View/Pages/preview.ctp:7
+#: Z:\www\mushraider\mushraider\app/View/Pages/view.ctp:7
+msgid "Last update"
+msgstr "Dernière mise à jour"
+
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/index.ctp:48
+msgid "Preview"
+msgstr "Prévisualiser"
+
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/index.ctp:52
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Dungeons/index.ctp:80
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Users/edit.ctp:85
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Users/index.ctp:65
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Widgets/index.ctp:48
+#: Z:\www\mushraider\mushraider\app/View/Account/characters.ctp:74
+msgid "Disable"
+msgstr "Désactiver"
+
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/index.ctp:52
+#, php-format
+msgid "Are you sure you want to disable the page %s ?"
+msgstr "Êtes-vous sûr de vouloir désactiver la page %s ?"
+
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/index.ctp:54
+msgid "Publish"
+msgstr "Publier"
+
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Cms/index.ctp:55
+#, php-format
+msgid "Are you sure you want to completely delete the page %s ?"
+msgstr "Êtes-vous sûr de vouloir supprimer la page %s ?"
 
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Dashboard/index.ctp:2
 msgid "Welcome to the MushRaider admin panel"
@@ -1710,14 +1878,6 @@ msgid "Dungeons list"
 msgstr "Liste des donjons"
 
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Dungeons/index.ctp:80
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Users/edit.ctp:85
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Users/index.ctp:65
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Widgets/index.ctp:48
-#: Z:\www\mushraider\mushraider\app/View/Account/characters.ctp:74
-msgid "Disable"
-msgstr "Désactiver"
-
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Dungeons/index.ctp:80
 #, php-format
 msgid "Are you sure you want to disable the dungeon %s ?"
 msgstr "Êtes-vous sûr de vouloir désactiver le donjon %s ?"
@@ -1742,6 +1902,10 @@ msgstr "Ajouter une race"
 msgid "Dashboard"
 msgstr "Dashboard"
 
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:19
+msgid "Settings"
+msgstr "Paramètres"
+
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:22
 msgid "General"
 msgstr "Général"
@@ -1749,11 +1913,6 @@ msgstr "Général"
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:23
 msgid "Apparence"
 msgstr "Apparence"
-
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:24
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/calendar.ctp:8
-msgid "Calendar"
-msgstr "Calendrier"
 
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:25
 msgid "API & Bridge"
@@ -1846,6 +2005,18 @@ msgstr "Gérer les widgets"
 msgid "Add widget"
 msgstr "Ajouter un widget"
 
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:117
+msgid "CMS"
+msgstr "CMS"
+
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:120
+msgid "Manage Pages"
+msgstr "Gérer les pages"
+
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Elements/menu.ctp:121
+msgid "Add Page"
+msgstr "Ajouter une page"
+
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Events/template_edit.ctp:4
 msgid "Edit event template"
 msgstr "Editer un template d'événement"
@@ -1890,7 +2061,7 @@ msgstr "Heure des invitations"
 #: Z:\www\mushraider\mushraider\app/View/Emails/html/event_validate.ctp:16
 #: Z:\www\mushraider\mushraider\app/View/Events/add.ctp:60
 #: Z:\www\mushraider\mushraider\app/View/Events/edit.ctp:48
-#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:152
+#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:155
 msgid "Event start"
 msgstr "Heure de début"
 
@@ -2019,7 +2190,7 @@ msgstr "Mise à jour"
 msgid "Are you sure you want to completely delete the game %s ?"
 msgstr "Êtes-vous sûr de vouloir supprimer le jeu %s ?"
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Layouts/default.ctp:54
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Layouts/default.ctp:64
 msgid "VOTRE NAVIGATEUR NE SUPPORTE PAS JAVASCRIPT"
 msgstr "VOTRE NAVIGATEUR NE SUPPORTE PAS JAVASCRIPT"
 
@@ -2053,11 +2224,12 @@ msgid "Races without game"
 msgstr "Races non liées à un jeu"
 
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Races/index.ctp:27
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Races/index.ctp:62
 #, php-format
 msgid "Are you sure you want to completely delete the race %s ?"
 msgstr "Êtes-vous sûr de vouloir supprimer la race %s ?"
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Races/index.ctp:70
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Races/index.ctp:71
 msgid "You don't have any race yet"
 msgstr "Vous n'avez pas encore de race"
 
@@ -2341,19 +2513,23 @@ msgstr "Adresse du site tier"
 msgid "Default user group"
 msgstr "Groupe par défaut"
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/calendar.ctp:16
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/calendar.ctp:11
+msgid "Week start day"
+msgstr "Premier jour de la semaine"
+
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/calendar.ctp:14
 msgid "Title to display"
 msgstr "Titre à afficher"
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/calendar.ctp:19
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/calendar.ctp:17
 msgid "Time to display"
 msgstr "Heure à afficher"
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/calendar.ctp:22
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/calendar.ctp:20
 msgid "Display game icon"
 msgstr "Afficher l'icône du jeu"
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/calendar.ctp:25
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/calendar.ctp:23
 msgid "Display dungeon icon"
 msgstr "Afficher l'icône du donjon"
 
@@ -2397,11 +2573,11 @@ msgstr ""
 "Les liens personnalisés sont affiché dans l'en-tête du site. Ils sont utiles "
 "pour ajouter des liens vers votre site, forums etc..."
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/display.ctp:39
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/display.ctp:40
 msgid "Link title"
 msgstr "Titre du lien"
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/display.ctp:42
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/display.ctp:43
 msgid "Url"
 msgstr "Url"
 
@@ -2415,75 +2591,83 @@ msgid "Site title"
 msgstr "Titre du site"
 
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:14
-#: Z:\www\mushraider\mushraider\app/View/Account/settings.ctp:12
+msgid "Calendar (default)"
+msgstr "Calendrier (par défaut)"
+
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:14
+msgid "Home page"
+msgstr "Page d'accueil"
+
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:17
+#: Z:\www\mushraider\mushraider\app/View/Account/notifications.ctp:12
 msgid "Email notifications"
 msgstr "Notifications email"
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:15
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:18
 msgid "Enable email notifications"
 msgstr "Activer les notifications par email"
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:19
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:22
 msgid "Contact email (will receive internal notifications)"
 msgstr "Email de contact (recevra les notifications internes)"
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:20
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:23
 msgid "Enable new signup notifications to :"
 msgstr "Activer les notifications de nouvel inscrit à :"
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:24
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:27
 msgid "Default language"
 msgstr "Langue par défaut"
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:28
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:31
 msgid "Timezone"
 msgstr "Fuseau Horaire"
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:38
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:41
 msgid "Emails"
 msgstr "Emails"
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:40
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:43
 msgid "Sender"
 msgstr "Expéditeur"
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:42
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:45
 msgid "Your name"
 msgstr "Votre nom"
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:45
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:48
 msgid "Your email address"
 msgstr "Votre adresse email"
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:48
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:51
 msgid "Advanced settings"
 msgstr "Paramètres avancés"
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:50
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:53
 msgid "Encoding"
 msgstr "Jeu de caractères"
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:51
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:54
 msgid "Encode as UTF-8"
 msgstr "Encoder en UTF-8"
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:54
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:57
 msgid "Transport"
 msgstr "Transport"
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:57
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:60
 msgid "SMTP Host"
 msgstr "Hôte SMTP"
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:60
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:63
 msgid "SMTP Port"
 msgstr "Port SMTP"
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:63
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:66
 msgid "SMTP Username"
 msgstr "Nom d'utilisateur SMTP"
 
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:66
+#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Settings/index.ctp:69
 msgid "SMTP Password"
 msgstr "Mot de passe SMTP"
 
@@ -2572,11 +2756,6 @@ msgstr "Pseudo"
 #: Z:\www\mushraider\mushraider\app/View/Account/personal.ctp:17
 msgid "Email"
 msgstr "Email"
-
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Users/index.ctp:32
-#: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Widgets/index.ctp:24
-msgid "Status"
-msgstr "Etat"
 
 #: Z:\www\mushraider\mushraider\app/Plugin/Admin/View/Users/index.ctp:36
 msgid "Registration date"
@@ -2893,6 +3072,34 @@ msgstr "Raison de l'absence"
 msgid "Are you sure you want to delete this absence ?"
 msgstr "Êtes-vous sûr de vouloir supprimer cette absence ?"
 
+#: Z:\www\mushraider\mushraider\app/View/Account/calendar.ctp:2
+msgid "Manage calendar"
+msgstr "Gérer le calendrier"
+
+#: Z:\www\mushraider\mushraider\app/View/Account/calendar.ctp:10
+msgid "Export to ical (Google, Outlook...)"
+msgstr "Exporter au format ical (Google, Outlook...)"
+
+#: Z:\www\mushraider\mushraider\app/View/Account/calendar.ctp:12
+msgid "All games"
+msgstr "Tous les jeux"
+
+#: Z:\www\mushraider\mushraider\app/View/Account/calendar.ctp:12
+msgid "Filter the export"
+msgstr "Filtrer l'export"
+
+#: Z:\www\mushraider\mushraider\app/View/Account/calendar.ctp:13
+msgid "Export"
+msgstr "Exporter"
+
+#: Z:\www\mushraider\mushraider\app/View/Account/calendar.ctp:16
+msgid ""
+"Use the link below to export MushRaider events to your personnal calendar "
+"(Google, Outlook...)"
+msgstr ""
+"Utilisez le lien ci-dessous pour exporter les événements MushRaider dans "
+"votre calendrier personnel (Google, Outlook...)"
+
 #: Z:\www\mushraider\mushraider\app/View/Account/characters.ctp:2
 msgid "My characters"
 msgstr "Mes personnages"
@@ -2938,6 +3145,22 @@ msgstr "Ajouter mon premier personnage"
 msgid "Edit character"
 msgstr "Modifier un personnage"
 
+#: Z:\www\mushraider\mushraider\app/View/Account/notifications.ctp:2
+msgid "My notifications"
+msgstr "Mes notifications"
+
+#: Z:\www\mushraider\mushraider\app/View/Account/notifications.ctp:13
+msgid "Receive email notifications when an event is cancelled"
+msgstr "Recevoir les notifications email quand un événement est annulé"
+
+#: Z:\www\mushraider\mushraider\app/View/Account/notifications.ctp:14
+msgid "Receive email notifications when an event is created"
+msgstr "Recevoir les notifications email quand un événement est créé"
+
+#: Z:\www\mushraider\mushraider\app/View/Account/notifications.ctp:15
+msgid "Receive email notifications when I'm validated to an event"
+msgstr "Recevoir les notifications email quand je suis validé à un événement"
+
 #: Z:\www\mushraider\mushraider\app/View/Account/password.ctp:2
 msgid "My password"
 msgstr "Mon mot de passe"
@@ -2963,22 +3186,6 @@ msgstr "Lettre et chiffres uniquement, 3 à 20 caractères."
 #: Z:\www\mushraider\mushraider\app/View/Auth/signup.ctp:11
 msgid "Valid Email"
 msgstr "Email valide"
-
-#: Z:\www\mushraider\mushraider\app/View/Account/settings.ctp:2
-msgid "My settings"
-msgstr "Mes paramètres"
-
-#: Z:\www\mushraider\mushraider\app/View/Account/settings.ctp:13
-msgid "Receive email notifications when an event is cancelled"
-msgstr "Recevoir les notifications email quand un événement est annulé"
-
-#: Z:\www\mushraider\mushraider\app/View/Account/settings.ctp:14
-msgid "Receive email notifications when an event is created"
-msgstr "Recevoir les notifications email quand un événement est créé"
-
-#: Z:\www\mushraider\mushraider\app/View/Account/settings.ctp:15
-msgid "Receive email notifications when I'm validated to an event"
-msgstr "Recevoir les notifications email quand je suis validé à un événement"
 
 #: Z:\www\mushraider\mushraider\app/View/Auth/login.ctp:2
 #: Z:\www\mushraider\mushraider\app/View/Auth/login.ctp:13
@@ -3061,11 +3268,6 @@ msgstr "J'ai déjà un compte."
 #: Z:\www\mushraider\mushraider\app/View/Elements/account_menu.ctp:3
 msgid "Account"
 msgstr "Mon compte"
-
-#: Z:\www\mushraider\mushraider\app/View/Elements/account_menu.ctp:9
-#: Z:\www\mushraider\mushraider\app/View/Elements/header.ctp:16
-msgid "Options"
-msgstr "Options"
 
 #: Z:\www\mushraider\mushraider\app/View/Elements/flash_error.ctp:3
 msgid "Doh !"
@@ -3401,7 +3603,7 @@ msgid "There is no screenshot attached to this report"
 msgstr "Il n'y a aucun screenshot dans ce compte rendu"
 
 #: Z:\www\mushraider\mushraider\app/View/Events/report.ctp:41
-#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:277
+#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:280
 msgid "Comments"
 msgstr "Commentaires"
 
@@ -3478,31 +3680,35 @@ msgstr "Cet événément est ouvert ! Vous serez validé automatiquement \\o/"
 msgid "Informations"
 msgstr "Informations"
 
-#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:148
+#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:147
+msgid "players"
+msgstr "joueurs"
+
+#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:151
 msgid "Invitation start"
 msgstr "Heure des invitations"
 
-#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:156
+#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:159
 msgid "Registration end date"
 msgstr "Date de fin d'enregistrement"
 
-#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:160
+#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:163
 msgid "Minimum character level"
 msgstr "Niveau minimum de personnage"
 
-#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:164
+#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:167
 msgid "Created by"
 msgstr "Créé par"
 
-#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:173
+#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:176
 msgid "Invitation commands"
 msgstr "Commandes d'invitation"
 
-#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:181
+#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:184
 msgid "Generate invitation's commands"
 msgstr "Générer les commandes d'invitation"
 
-#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:186
+#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:189
 msgid ""
 "Select the command corresponding to your game and copy/paste the generated "
 "commands to your chat to quick invit you roster"
@@ -3510,7 +3716,7 @@ msgstr ""
 "Selectionnez la commande correspondant à votre jeu et copiez/collez le code "
 "généré dans le tchat du jeu pour inviter rapidement votre groupe"
 
-#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:189
+#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:192
 msgid ""
 "Invitation's commands are separated in blocs of 200 characters maximum to "
 "avoid game chat limitations"
@@ -3518,35 +3724,35 @@ msgstr ""
 "Les commandes d'invitation sont séparées en blocs de 200 caractères maximum "
 "pour éviter les limitations des chats en jeu"
 
-#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:237
+#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:240
 msgid "The roster for this role is full"
 msgstr "Le roster pour ce rôle est complet"
 
-#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:238
+#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:241
 msgid "Validated"
 msgstr "Validés"
 
-#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:243
+#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:246
 msgid "Waiting"
 msgstr "En attente"
 
-#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:248
+#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:251
 msgid "Refused"
 msgstr "Refusé"
 
-#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:253
+#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:256
 msgid "Rejected"
 msgstr "Absents"
 
-#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:265
+#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:268
 msgid "Bad Kitties"
 msgstr "Mauvais élèves"
 
-#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:265
+#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:268
 msgid "no answer yet..."
 msgstr "pas encore de réponse..."
 
-#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:274
+#: Z:\www\mushraider\mushraider\app/View/Events/view.ctp:277
 msgid "No bad kitty for this event !"
 msgstr "Tout le monde a répondu !"
 
@@ -3558,6 +3764,15 @@ msgstr "Cet email a été envoyé automatiquement par MushRaider"
 #: Z:\www\mushraider\mushraider\app/View/Layouts/error.ctp:20
 msgid "MushRaider Error"
 msgstr "MushRaider Fail"
+
+#~ msgid "This race is linked to a game, you can't delete it."
+#~ msgstr "Cette race est liée à un jeu, vous ne pouvez donc pas la supprimer."
+
+#~ msgid "My settings"
+#~ msgstr "Mes paramètres"
+
+#~ msgid "Options"
+#~ msgstr "Options"
 
 #~ msgid ""
 #~ "Bridge system is enabled so you can't change your personal informations "

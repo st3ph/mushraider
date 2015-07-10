@@ -26,7 +26,21 @@
  * its action called 'display', and we pass a param to select the view file
  * to use (in this case, /app/View/Pages/home.ctp)...
  */
-    Router::connect('/', array('controller' => 'home', 'action' => 'index'));   
+
+    App::uses('Setting', 'Model');
+    $SettingModel = new Setting();
+    if($customHomePage = $SettingModel->getOption('homePage')) {
+        App::uses('Page', 'Model');
+        $PageModel = new Page();
+        if($page = $PageModel->find('first', array('conditions' => array('id' => $customHomePage)))) {
+            Router::connect('/', array('controller' => 'pages', 'action' => 'view', $page['Page']['id'], $page['Page']['slug']));
+        }else {
+            Router::connect('/', array('controller' => 'events', 'action' => 'index'));    
+        }
+    }else {
+        Router::connect('/', array('controller' => 'events', 'action' => 'index'));
+    }
+
     Router::connect('/l/*', array('controller' => 'home', 'action' => 'index'));
     Router::connect('/pages/preview/*', array('controller' => 'pages', 'action' => 'preview'));
     Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'view'));

@@ -1,4 +1,5 @@
 <?php
+App::uses('IniReader', 'Configure');
 class DATABASE_CONFIG {
 	public $default = array(
 		'datasource' => 'Database/Mysql',

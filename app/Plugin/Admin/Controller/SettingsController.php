@@ -14,6 +14,7 @@ class SettingsController extends AdminAppController {
     public function index() {
         if(!empty($this->request->data['Setting'])) {
             $this->Setting->setOption('title', $this->request->data['Setting']['title']);
+            $this->Setting->setOption('homePage', $this->request->data['Setting']['homePage']);
             if(!empty($this->request->data['Setting']['notifications'])) {
                 $notifications = array();
                 $notifications['enabled'] = $this->request->data['Setting']['notifications']['enabled'];
@@ -52,6 +53,10 @@ class SettingsController extends AdminAppController {
 
         // General
         $this->request->data['Setting']['title'] = $this->Setting->getOption('title');
+        $this->request->data['Setting']['homePage'] = $this->Setting->getOption('homePage');
+        $pagesList = $this->Page->find('list', array('order' => 'title'));
+        $this->set('pagesList', $pagesList);
+
         $notifications = json_decode($this->Setting->getOption('notifications'));
         if(!empty($notifications)) {
             $this->request->data['Setting']['notifications']['enabled'] = $notifications->enabled;

@@ -4,6 +4,7 @@ class Page extends AppModel {
     var $actsAs = array('Containable');
 
     public $name = 'Page';
+    public $displayField = 'title';
 
     public $validate = array(
         'title' => array(

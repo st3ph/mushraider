@@ -41,7 +41,7 @@
         Router::connect('/', array('controller' => 'events', 'action' => 'index'));
     }
 
-    Router::connect('/l/*', array('controller' => 'home', 'action' => 'index'));
+    Router::connect('/l/*', array('controller' => 'events', 'action' => 'lang'));
     Router::connect('/pages/preview/*', array('controller' => 'pages', 'action' => 'preview'));
     Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'view'));
 

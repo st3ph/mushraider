@@ -58,6 +58,10 @@ class EventsController extends AppController {
         $this->set('filterEventsGameId', $filterEventsGameId);
     }
 
+    public function lang() {
+        $this->redirect('/events');
+    }
+
     private function orderRoles($a, $b) {
         if(!empty($a['RaidsRole']) && !empty($b['RaidsRole'])) {
             if($a['RaidsRole']['order'] < $b['RaidsRole']['order']) {

@@ -406,5 +406,19 @@ class ToolsHelper extends AppHelper {
 	function escapeCalendarString($string) {
 		return preg_replace('/([\,;])/','\\\$1', $string);
 	}
+
+	function addBasePath($path) {
+        $path = rtrim($this->controller->request->base, '/').'/'.ltrim($path, '/');
+        $path = ltrim($path, '/');
+
+        return '/'.$path;
+    }
+
+    function removeBasePath($path) {
+        $path = preg_replace('#'.$this->controller->request->base.'#', '', $path, 1);
+        $path = ltrim($path, '/');
+
+        return '/'.$path;
+    }
 }
 ?>

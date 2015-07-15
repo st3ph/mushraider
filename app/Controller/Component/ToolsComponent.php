@@ -1,39 +1,39 @@
 <?php
 class ToolsComponent extends Component {
-	var $model;
-	var $controller;
+    var $model;
+    var $controller;
 
-	public function initialize(Controller $controller) {
-		$this->controller = &$controller;
-	}
+    public function initialize(Controller $controller) {
+        $this->controller = &$controller;
+    }
 
-	/**
-	 * @name noAccent
-	 * @desc Return string without accent
-	 * @param string $string
-	 * @return  string
-	 */
-	public function noAccent($string){
-		return strtr($string,'àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ°',
-							 'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY ');
-	}
+    /**
+     * @name noAccent
+     * @desc Return string without accent
+     * @param string $string
+     * @return  string
+     */
+    public function noAccent($string){
+        return strtr($string,'àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ°',
+                             'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY ');
+    }
 
-	public function slugMe($string, $spacer = '-') {
-		return strtolower(Inflector::slug($string, $spacer));
-	}
+    public function slugMe($string, $spacer = '-') {
+        return strtolower(Inflector::slug($string, $spacer));
+    }
 
-	function reverseDate($date, $sep = '/', $sepResult = '-', $time = false) {
-		if(!empty($date)) {
-			if($time) {
-				$dates = explode(' ', $date);
-				$dateExplode = explode($sep, $dates[0]);
-				return $dateExplode[2].$sepResult.$dateExplode[1].$sepResult.$dateExplode[0].' '.$dates[1];
-			}else {
-				$dateExplode = explode($sep, $date);
-				return $dateExplode[2].$sepResult.$dateExplode[1].$sepResult.$dateExplode[0];
-			}
-		}
-	}
+    function reverseDate($date, $sep = '/', $sepResult = '-', $time = false) {
+        if(!empty($date)) {
+            if($time) {
+                $dates = explode(' ', $date);
+                $dateExplode = explode($sep, $dates[0]);
+                return $dateExplode[2].$sepResult.$dateExplode[1].$sepResult.$dateExplode[0].' '.$dates[1];
+            }else {
+                $dateExplode = explode($sep, $date);
+                return $dateExplode[2].$sepResult.$dateExplode[1].$sepResult.$dateExplode[0];
+            }
+        }
+    }
 
     function buildCleanUrl($data) {
         if (!empty($data)) {
@@ -63,56 +63,56 @@ class ToolsComponent extends Component {
         return $string;
     }
 
-	function diff_date($startDate, $endDate = null, $type = 'mois') {
-		$endDate = ($endDate)?$endDate:date('Y-m-d');
-		// Parse dates for conversion
-		$startArry = date_parse($startDate);
+    function diff_date($startDate, $endDate = null, $type = 'mois') {
+        $endDate = ($endDate)?$endDate:date('Y-m-d');
+        // Parse dates for conversion
+        $startArry = date_parse($startDate);
         $endArry = date_parse($endDate);
-		// Convert dates to Julian Days
+        // Convert dates to Julian Days
         $start_date = gregoriantojd($startArry["month"], $startArry["day"], $startArry["year"]);
         $end_date = gregoriantojd($endArry["month"], $endArry["day"], $endArry["year"]);
 
-		if($type == 'annees') {
-			$annees = ($end_date - $start_date) / 365;
-			if($annees < 1) {
-				$mois = round(round(($end_date - $start_date), 0) / 30);
-				if($mois >= 1) {
-					return $mois.' mois';
-				}else {
-					return 'moins d\'un mois';
-				}
-			}else {
-				$wordingAnnees = $annees > 1?'ans':'an';
-				$retour = floor($annees).' '.$wordingAnnees;
-				$arrondi = floor($annees);
-				if($arrondi < $annees) {
-					$jours = ($annees - $arrondi) * 365;
-					$mois = round(($jours / 30), 0);
-					$retour .=' et '.$mois.' mois';
-				}
-				return $retour;
-			}
-		}elseif($type == 'mois') {
-			$mois = round(round(($end_date - $start_date), 0) / 30);
-			if($mois > 0) {
-				return $mois.' mois';
-			}else {
-				$jours = $end_date - $start_date;
-				$wording = $jours > 1?'jours':'jour';
-				return $jours > 0?$jours.' '.$wording:false;
-			}
-		}elseif($type == 'semaines') {
-			$semaines = floor(($end_date - $start_date) / 7);
-			$wordingSemaine = $semaines > 1?'semaines':'semaine';
-			return $semaines.' '.$wordingSemaine;
-		}elseif($type == 'jours') {
-			$jours = $end_date - $start_date;
-			$wording = $jours > 1?'jours':'jour';
-			return $jours > 0?$jours.' '.$wording:false;
-		}
-	}
+        if($type == 'annees') {
+            $annees = ($end_date - $start_date) / 365;
+            if($annees < 1) {
+                $mois = round(round(($end_date - $start_date), 0) / 30);
+                if($mois >= 1) {
+                    return $mois.' mois';
+                }else {
+                    return 'moins d\'un mois';
+                }
+            }else {
+                $wordingAnnees = $annees > 1?'ans':'an';
+                $retour = floor($annees).' '.$wordingAnnees;
+                $arrondi = floor($annees);
+                if($arrondi < $annees) {
+                    $jours = ($annees - $arrondi) * 365;
+                    $mois = round(($jours / 30), 0);
+                    $retour .=' et '.$mois.' mois';
+                }
+                return $retour;
+            }
+        }elseif($type == 'mois') {
+            $mois = round(round(($end_date - $start_date), 0) / 30);
+            if($mois > 0) {
+                return $mois.' mois';
+            }else {
+                $jours = $end_date - $start_date;
+                $wording = $jours > 1?'jours':'jour';
+                return $jours > 0?$jours.' '.$wording:false;
+            }
+        }elseif($type == 'semaines') {
+            $semaines = floor(($end_date - $start_date) / 7);
+            $wordingSemaine = $semaines > 1?'semaines':'semaine';
+            return $semaines.' '.$wordingSemaine;
+        }elseif($type == 'jours') {
+            $jours = $end_date - $start_date;
+            $wording = $jours > 1?'jours':'jour';
+            return $jours > 0?$jours.' '.$wording:false;
+        }
+    }
 
-	function get_unity_per_year($type= 'month',$date_start, $date_end) {
+    function get_unity_per_year($type= 'month',$date_start, $date_end) {
         list($y1,$m1) = explode('-', $date_start);
         list($y2,$m2) = explode('-', $date_end);
         $years_days = array();
@@ -131,8 +131,8 @@ class ToolsComponent extends Component {
     }
 
     function br2nl($input) {
-		return preg_replace('/<br(\s+)?\/?>/i', "\n", $input);
-	}
+        return preg_replace('/<br(\s+)?\/?>/i', "\n", $input);
+    }
     
     /*
     @name in_arrayi
@@ -145,31 +145,31 @@ class ToolsComponent extends Component {
     }
 
     /*
-	* @name removeUrl
-	* @desc construct url without a parameter
-	* @param array $paramsArray params array to remove
-	* @return string
-	*/
-	function removeUrl($paramsArray) {
-		$url = $this->controller->request->here;
-		$chunks = explode('/', $url);
+    * @name removeUrl
+    * @desc construct url without a parameter
+    * @param array $paramsArray params array to remove
+    * @return string
+    */
+    function removeUrl($paramsArray) {
+        $url = $this->controller->request->here;
+        $chunks = explode('/', $url);
 
-		if(!empty($chunks)) {
-			foreach($chunks as $key => $chunk) {
-				$explode = explode(':', $chunk);
-				foreach($paramsArray as $deleteParam) {
-					if(strtolower($explode[0]) == strtolower($deleteParam) && !empty($explode[1])) {
-						unset($chunks[$key]);
-					}
-				}
-			}
-		}
+        if(!empty($chunks)) {
+            foreach($chunks as $key => $chunk) {
+                $explode = explode(':', $chunk);
+                foreach($paramsArray as $deleteParam) {
+                    if(strtolower($explode[0]) == strtolower($deleteParam) && !empty($explode[1])) {
+                        unset($chunks[$key]);
+                    }
+                }
+            }
+        }
 
-		$newurl = implode('/', $chunks);
-		$newurl = !empty($newurl)?$newurl:'/';
+        $newurl = implode('/', $chunks);
+        $newurl = !empty($newurl)?$newurl:'/';
 
         return $newurl;
-	}
+    }
 
     /*
     * @name removeSubdir
@@ -261,5 +261,19 @@ class ToolsComponent extends Component {
                 }
             }
         }
+    }
+
+    function addBasePath($path) {
+        $path = rtrim($this->controller->request->base, '/').'/'.ltrim($path, '/');
+        $path = ltrim($path, '/');
+
+        return '/'.$path;
+    }
+
+    function removeBasePath($path) {
+        $path = preg_replace('#'.$this->controller->request->base.'#', '', $path, 1);
+        $path = ltrim($path, '/');
+
+        return '/'.$path;
     }
 }

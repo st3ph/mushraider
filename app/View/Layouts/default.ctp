@@ -9,7 +9,7 @@
         <?php echo $title_for_layout; ?>
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" type="image/png" href="<?php echo $this->Tools->addBasePath('favicon.png');?>" />
     <meta name="robots" content="noindex, nofollow" />
 
     <script language="javascript">

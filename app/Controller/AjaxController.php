@@ -339,7 +339,7 @@ class AjaxController extends AppController {
         $images = $dir->find('.*\.('.implode('|', $this->allowedImageExts).')');
         if(!empty($images)) {
             foreach($images as $image) {
-                array_push($response, '/files/uploads/'.$image);
+                array_push($response, $this->Tools->addBasePath('/files/uploads/'.$image));
             }
         }
 
@@ -356,7 +356,7 @@ class AjaxController extends AppController {
             }
 
             $imageName = $this->Image->__add($this->request->params['form']['img'], 'files/uploads', '');
-            $response->link = $imageName['name'];
+            $response->link = $this->Tools->addBasePath($imageName['name']);
         }
 
         return stripslashes(json_encode($response));
@@ -364,7 +364,8 @@ class AjaxController extends AppController {
 
     function delimage() {
         if(!empty($this->request->data['src'])) {
-            $imgPath = ltrim($this->request->data['src'], '/');
+            Configure::write('debug', 2);
+            $imgPath = ltrim($this->Tools->removeBasePath($this->request->data['src']), '/');
             if(file_exists($imgPath)) {
                 unlink($imgPath);
             }

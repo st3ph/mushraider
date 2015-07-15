@@ -66,8 +66,7 @@ class StepController extends InstallAppController {
             $databaseConfig['prefix'] = trim($this->request->data['Config']['prefix']);
 
             if($link = @mysqli_connect($databaseConfig['host'], $databaseConfig['login'], $databaseConfig['password'], $databaseConfig['database'], $databaseConfig['port'])) {
-                Configure::write('Database', $this->Tools->quoteArray($databaseConfig));
-                Configure::dump('config.ini', 'configini', array('Database'));
+                $this->Session->write('database', $databaseConfig);
 
                 $this->Session->setFlash(__('MushRaider successfully connect to your database, one more step to go !'), 'flash_success');
                 $this->redirect('/install/step/3');
@@ -83,7 +82,7 @@ class StepController extends InstallAppController {
 
     private function step3() {
         $missingDatabase = false;
-        if(!$databaseConfig = Configure::read('Database')) {
+        if(!$databaseConfig = $this->Session->read('database')) {
             $missingDatabase = true;
         }
         if($missingDatabase) {
@@ -92,15 +91,17 @@ class StepController extends InstallAppController {
         }
 
         if(!empty($this->request->data['Config'])) {
-            $siteTitle = trim($this->request->data['Config']['sitetitle']);
-            $siteLanguage = trim($this->request->data['Config']['sitelang']);
-            $adminemail = trim($this->request->data['Config']['adminemail']);
-            $adminlogin = trim($this->request->data['Config']['adminlogin']);
-            $adminpassword = md5($this->request->data['Config']['adminpassword']);
+            $siteInfos = array(
+                'siteTitle' => trim($this->request->data['Config']['sitetitle']),
+                'siteLanguage' => trim($this->request->data['Config']['sitelang']),
+                'adminemail' => trim($this->request->data['Config']['adminemail']),
+                'adminlogin' => trim($this->request->data['Config']['adminlogin']),
+                'adminpassword' => md5($this->request->data['Config']['adminpassword']),
+            );
 
-            if(!empty($siteTitle) && !empty($adminlogin) && !empty($adminpassword)) {
+            if(!empty($siteInfos['siteTitle']) && !empty($siteInfos['adminlogin']) && !empty($siteInfos['adminpassword'])) {
                 $settingsConfig = array();
-                $settingsConfig['language'] = $siteLanguage;
+                $settingsConfig['language'] = $siteInfos['siteLanguage'];
                 $settingsConfig['salt'] = Security::generateAuthKey();
                 $settingsConfig['cipherSeed'] = mt_rand() . mt_rand();
 
@@ -123,40 +124,56 @@ class StepController extends InstallAppController {
 
                 // No error, we continue by creating the admin user
                 if(!$error) {
-                    App::uses('User', 'Model');
-                    $userModel = new User();
+                    Configure::write('Database', $this->Tools->quoteArray($databaseConfig));
+                    Configure::dump('config.ini', 'configini', array('Database'));
 
-                    $toSave = array();
-                    $toSave['role_id'] = 1;
-                    $toSave['username'] = $adminlogin;
-                    $toSave['password'] = $adminpassword;
-                    $toSave['email'] = $adminemail;
-                    $toSave['status'] = 1;
-                    $toSave['activation_key'] = md5(uniqid());
-                    $toSave['calendar_key'] = uniqid();
-                    $userModel->create();
-                    if($userModel->save($toSave)) {
-                        $this->postInstallData($siteTitle);
+                    $siteSettings = array(
+                        'settingsConfig' => $settingsConfig,
+                        'siteInfos' => $siteInfos
+                    );
+                    $this->Session->write('siteSettings', $siteSettings);
 
-                    	$settingsConfig['installed'] = true;
-                        Configure::write('Database', $this->Tools->quoteArray($databaseConfig));
-                        Configure::write('Settings', $this->Tools->quoteArray($settingsConfig));
-                        Configure::dump('config.ini', 'configini', array('Database', 'Settings'));
-
-                        $this->Session->delete('Settings');
-                        $this->Session->setFlash(__('MushRaider successfully install !'), 'flash_success');
-                        $this->redirect('/auth/login');
-                    }else {
-                        $this->Session->setFlash(__('MushRaider can\'t create admin user, please try again.'), 'flash_error');
-                        $flashed = true;
-                    }
+                    $this->redirect('/install/step/4');
                 }
             }
 
             // Error
-            if(!isset($flashed)) {
-                $this->Session->setFlash(__('MushRaider can\'t verify the settings, please be sure to fill all the fields to continue.'), 'flash_error');
-            }
+            $this->Session->setFlash(__('MushRaider can\'t verify the settings, please be sure to fill all the fields to continue.'), 'flash_error');
+        }
+    }
+
+    public function step4() {
+        $siteSettings = $this->Session->read('siteSettings');
+
+        App::uses('User', 'Model');
+        $userModel = new User();
+
+        $toSave = array();
+        $toSave['role_id'] = 1;
+        $toSave['username'] = $siteSettings['siteInfos']['adminlogin'];
+        $toSave['password'] = $siteSettings['siteInfos']['adminpassword'];
+        $toSave['email'] = $siteSettings['siteInfos']['adminemail'];
+        $toSave['status'] = 1;
+        $toSave['activation_key'] = md5(uniqid());
+        $toSave['calendar_key'] = uniqid();
+        $userModel->create();
+        if($userModel->save($toSave)) {
+            $this->postInstallData($siteSettings['siteInfos']['siteTitle']);
+
+            $settingsConfig['installed'] = true;
+            $siteSettings['siteInfos']['settingsConfig']['installed'] = true;
+            Configure::write('Database', $this->Tools->quoteArray($this->Session->read('database')));
+            Configure::write('Settings', $this->Tools->quoteArray($siteSettings['siteInfos']['settingsConfig']));
+            Configure::dump('config.ini', 'configini', array('Database', 'Settings'));
+
+            $this->Session->delete('Settings');
+            $this->Session->delete('database');
+            $this->Session->delete('siteSettings');
+            $this->Session->setFlash(__('MushRaider successfully install !'), 'flash_success');
+            $this->redirect('/auth/login');
+        }else {
+            $this->Session->setFlash(__('MushRaider can\'t create admin user, please try again.'), 'flash_error');
+            $flashed = true;
         }
     }
 

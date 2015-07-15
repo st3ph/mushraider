@@ -2,7 +2,7 @@
 App::uses('IniReader', 'Configure');
 class DATABASE_CONFIG {
 	public $default = array(
-		'datasource' => 'Database/Mysql',
+		'datasource' => 'FakeSource',
 		'persistent' => true,
 		'host' => '',
 		'login' => '',

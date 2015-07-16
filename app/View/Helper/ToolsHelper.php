@@ -408,14 +408,14 @@ class ToolsHelper extends AppHelper {
 	}
 
 	function addBasePath($path) {
-        $path = rtrim($this->controller->request->base, '/').'/'.ltrim($path, '/');
+        $path = rtrim($this->request->base, '/').'/'.ltrim($path, '/');
         $path = ltrim($path, '/');
 
         return '/'.$path;
     }
 
     function removeBasePath($path) {
-        $path = preg_replace('#'.$this->controller->request->base.'#', '', $path, 1);
+        $path = preg_replace('#'.$this->request->base.'#', '', $path, 1);
         $path = ltrim($path, '/');
 
         return '/'.$path;

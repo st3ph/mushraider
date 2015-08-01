@@ -93,7 +93,9 @@ class AjaxController extends AdminAppController {
                     $toSaveDungeons['title'] = $dungeon['title'];
                     $toSaveDungeons['slug'] = $dungeonSlug;
                     $toSaveDungeons['raidssize_id'] = $RaidsSizeModel->__add($dungeon['max_players']);
-                    $toSaveDungeons['level_required'] = $dungeon['level_min'];
+                    if(!empty($dungeon['level_min'])) {
+                        $toSaveDungeons['level_required'] = $dungeon['level_min'];
+                    }
                     $DungeonModel->__add($toSaveDungeons, array('game_id' => $gameId));
                 }
             }

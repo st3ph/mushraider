@@ -5,7 +5,7 @@
         <div class="toolbar">
         <ul class="nav">
             <li>
-                <?php echo $this->Form->create('Search', array('url' => $this->here, 'class' => 'form-inline'));?>                    
+                <?php echo $this->Form->create('Search', array('url' => '/admin/users', 'class' => 'form-inline'));?>                    
                     <div class="input-append">
                         <?php echo $this->Form->input('Search.needle', array('type' => 'text', 'required' => false, 'label' => false, 'placeholder' => __('Search...'), 'div' => false, 'class' => 'span10'));?>
                         <button class="btn btn-primary" type="submit"><span class="fa fa-search"></span></button>

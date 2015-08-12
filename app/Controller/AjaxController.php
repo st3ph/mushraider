@@ -364,7 +364,6 @@ class AjaxController extends AppController {
 
     function delimage() {
         if(!empty($this->request->data['src'])) {
-            Configure::write('debug', 2);
             $imgPath = ltrim($this->Tools->removeBasePath($this->request->data['src']), '/');
             if(file_exists($imgPath)) {
                 unlink($imgPath);

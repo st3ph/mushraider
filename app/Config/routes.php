@@ -62,4 +62,4 @@
     require CAKE . 'Config' . DS . 'routes.php';
 
 // Extensions
-    Router::parseExtensions('xml', 'ics');
+    Router::parseExtensions('json', 'xml', 'ics');

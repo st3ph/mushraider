@@ -662,7 +662,7 @@ jQuery(function($) {
                         alert(json.msg);
                     }else {
                         $('#EventTitle').val(json.msg.EventsTemplate.event_title);
-                        $('#EventDescription').val(json.msg.EventsTemplate.event_description);
+                        $('#EventDescription').editable('setHTML', json.msg.EventsTemplate.event_description);
                         $('#EventGameId').val(json.msg.EventsTemplate.game_id);
                         loadDungeons($EventGame, json.msg.EventsTemplate.dungeon_id);
                         if(json.msg.EventsTemplatesRole.length > 0) {

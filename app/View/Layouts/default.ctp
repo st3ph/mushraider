@@ -75,6 +75,8 @@
     </div>
     <?php echo $this->fetch('script');?>
     <?php echo $this->fetch('scriptBottom');?>
+    <?php echo $this->element('twitter');?>
+    <?php echo $this->element('facebook');?>
     <?php echo $this->element('sql_dump'); ?>
 </body>
 </html>

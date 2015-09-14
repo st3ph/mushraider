@@ -22,6 +22,11 @@
 			</div>
 			<?php if($displayAdminButtons || $displayCloseButton || $displayReportButton || $displayTplButtons):?>
 				<div class="pull-right text-right span5 eventAdminButtons">
+
+					<div class="fb-share-button" data-href="<?php echo Router::url('/', true);?>" data-layout="button"></div>
+
+					<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo Router::url('/', true);?>" data-text="<?php echo __('New incoming event: %s', $event['Event']['title']);?>" data-via="mushraider" data-related="mushraider" data-count="none" data-hashtags="mushraider">Tweet</a>
+
 					<?php if($displayTplButtons):?>
 						<?php echo $this->Html->link('<i class="fa fa-files-o"></i> '.__('Copy'), '/events/view/'.$event['Event']['id'], array('id' => 'createTemplate', 'class' => 'btn btn-mini tt', 'title' => __('Create template'), 'escape' => false));?>
 						<span id="tplName" data-event="<?php echo $event['Event']['id'];?>"><input type="text" class="input-small" value="" placeholder="<?php echo __('template name');?>"/> <span class="text-error"><i class="fa fa-times"></i></span> <span class="text-success"><i class="fa fa-floppy-o"></i></span></span>

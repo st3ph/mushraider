@@ -148,6 +148,10 @@ form .select .loading {margin:0 0 5px 5px;}
 	margin-left:10px;
 }
 
+.fb-share-button > span {
+	vertical-align: middle!important;
+}
+
 
 /*
 * Login

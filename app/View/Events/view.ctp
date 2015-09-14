@@ -3,12 +3,13 @@
 <?php $registeredCharacterComment = $registeredCharacter?$registeredCharacter['comment']:'';?>
 <?php $eventRoles = array();?>
 <?php $dayTimestamp = $this->Tools->get_timestamp($event['Event']['time_inscription'], true);?>
+<?php $startTimestamp = $this->Tools->get_timestamp($event['Event']['time_start'], true);?>
 <?php $todayTimestamp = mktime(0, 0, 0, date('m'), date('d'), date('Y'));?>
 <?php $cantSignInTimestamp = mktime(date('H'), date('i'), date('s'), date('m'), date('d'), date('Y'));?>
 <header>
 	<h1>
 		<div class="row">
-			<?php $eventIsClosed = $dayTimestamp <= $todayTimestamp;?>
+			<?php $inscriptionIsClosed = $startTimestamp <= $todayTimestamp;?>
 			<?php $displayAdminButtons = ($dayTimestamp >= $todayTimestamp && (($user['User']['can']['manage_own_events'] && $user['User']['id'] == $event['User']['id']) || $user['User']['can']['manage_events'] || $user['User']['can']['full_permissions']))?true:false?>
 			<?php $displayTplButtons = ($dayTimestamp >= $todayTimestamp && ($user['User']['can']['create_templates'] || $user['User']['can']['full_permissions']))?true:false?>
 			<?php $displayCloseButton = ($dayTimestamp < $todayTimestamp && ($user['User']['can']['create_reports'] || ($user['User']['can']['manage_own_events'] && $user['User']['id'] == $event['User']['id']) || $user['User']['can']['full_permissions']))?true:false?>
@@ -216,7 +217,7 @@ foreach($event['EventsRole'] as $eventRole) {
 						<th data-id="<?php echo $roleId;?>">
 							<?php echo $eventRole['title'];?>
 							<span class="current"><?php echo $eventRole['current'];?></span> / <span class="max"><?php echo $eventRole['max'];?></span>
-							<?php if(!$eventIsClosed && (($user['User']['can']['manage_own_events'] && $user['User']['id'] == $event['User']['id']) || $user['User']['can']['manage_events'] || $user['User']['can']['full_permissions'])):?>
+							<?php if(!$inscriptionIsClosed && (($user['User']['can']['manage_own_events'] && $user['User']['id'] == $event['User']['id']) || $user['User']['can']['manage_events'] || $user['User']['can']['full_permissions'])):?>
 								<span class="badge badge-warning pull-right"><i class="fa fa-pencil-square-o"></i></span>
 							<?php endif;?>
 						</th>

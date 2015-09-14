@@ -267,7 +267,6 @@ class EventsController extends AppController {
             $toSave['id'] = $this->request->data['Event']['id'];
             $toSave['title'] = strip_tags($this->request->data['Event']['title']);
             $toSave['description'] = nl2br($this->request->data['Event']['description']);
-            $toSave['user_id'] = $this->user['User']['id'];
             $toSave['game_id'] = $this->request->data['Event']['game_id'];
             $toSave['dungeon_id'] = $this->request->data['Event']['dungeon_id'];
             $toSave['character_level'] = $this->request->data['Event']['character_level'];

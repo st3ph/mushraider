@@ -251,27 +251,21 @@ class EventsController extends AppController {
             $this->redirect('/events');
         }
 
+
         if(!empty($this->request->data['Event']) && $this->request->data['Event']['id'] == $eventId) {
-            // Get event date
-            $params = array();        
-            $params['recursive'] = -1;
-            $params['fields'] = array('time_invitation');
-            $params['conditions']['Event.id'] = $eventId;            
-            if(!$event = $this->Event->find('first', $params)) {
-                $this->redirect('/events');
-            }            
-            $date = explode(' ', $event['Event']['time_invitation']);
-            $dates = explode('-', $date[0]);
+            // Get event date       
+            $dates = explode('/', $this->request->data['Event']['date']);
 
             $toSave = array();
             $toSave['id'] = $this->request->data['Event']['id'];
+            $toSave['user_id'] = $event['Event']['user_id'];
             $toSave['title'] = strip_tags($this->request->data['Event']['title']);
             $toSave['description'] = nl2br($this->request->data['Event']['description']);
             $toSave['game_id'] = $this->request->data['Event']['game_id'];
             $toSave['dungeon_id'] = $this->request->data['Event']['dungeon_id'];
             $toSave['character_level'] = $this->request->data['Event']['character_level'];
-            $toSave['time_invitation'] = date('Y-m-d H:i:s', mktime($this->request->data['Event']['time_invitation']['hour'], $this->request->data['Event']['time_invitation']['min'], 0, $dates[1], $dates[2], $dates[0]));
-            $toSave['time_start'] = date('Y-m-d H:i:s', mktime($this->request->data['Event']['time_start']['hour'], $this->request->data['Event']['time_start']['min'], 0, $dates[1], $dates[2], $dates[0]));            
+            $toSave['time_invitation'] = date('Y-m-d H:i:s', mktime($this->request->data['Event']['time_invitation']['hour'], $this->request->data['Event']['time_invitation']['min'], 0, $dates[1], $dates[0], $dates[2]));
+            $toSave['time_start'] = date('Y-m-d H:i:s', mktime($this->request->data['Event']['time_start']['hour'], $this->request->data['Event']['time_start']['min'], 0, $dates[1], $dates[0], $dates[2]));            
             if(!empty($this->request->data['Event']['time_inscription'])) {
                 if(preg_match('/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/', $this->request->data['Event']['time_inscription'], $matches)) {
                     $time_inscription = explode('/', $this->request->data['Event']['time_inscription']);

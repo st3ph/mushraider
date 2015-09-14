@@ -190,7 +190,16 @@ jQuery(function($) {
         numberOfMonths: 1,
         dateFormat: 'dd/mm/yy',
         minDate: new Date()
-    });    
+    });
+
+    $("#EventDate").datepicker({
+        defaultDate: "+1d",
+        changeMonth: true,
+        changeYear: true,
+        numberOfMonths: 1,
+        dateFormat: 'dd/mm/yy',
+        minDate: new Date()
+    }); 
 
     $('#EventTimeInscription').datepicker({
         changeMonth: false,

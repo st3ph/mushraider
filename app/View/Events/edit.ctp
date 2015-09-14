@@ -7,6 +7,13 @@
     <div class="row">
         <div class="span5">
             <div class="form-group">
+                <label><?php echo __('Event date');?></label>
+                <div class="input-append">
+                    <?php echo $this->Form->input('Event.date', array('type' => 'text', 'value' => $this->Former->date($eventDate, 'jour'), 'label' => false, 'placeholder' => __('dd/mm/yyyy'), 'div' => false, 'class' => 'input-medium datepicker'));?>
+                    <span class="add-on"><span class="fa fa-calendar"></span></span>
+                </div>
+            </div>
+            <div class="form-group">
                 <?php echo $this->Form->input('Event.title', array('type' => 'text', 'label' => __('Event title'), 'maxlength' => 50, 'class' => 'span4'));?>
             </div>
             <div class="form-group">
@@ -50,7 +57,7 @@
             <div class="form-group">
                 <label><?php echo __('Registration end date (optional)');?></label>
                 <div class="input-append">
-                    <?php echo $this->Form->input('Event.time_inscription', array('type' => 'text', 'label' => false, 'placeholder' => __('dd/mm/yyyy'), 'div' => false, 'class' => 'input-medium datepicker', 'data-date' => $this->Former->date($eventDate, 'jour')));?>
+                    <?php echo $this->Form->input('Event.time_inscription', array('type' => 'text', 'value' => $this->Former->date($this->data['Event']['time_inscription'], 'jour'), 'label' => false, 'placeholder' => __('dd/mm/yyyy'), 'div' => false, 'class' => 'input-medium datepicker', 'data-date' => $this->Former->date($eventDate, 'jour')));?>
                     <span class="add-on"><span class="fa fa-calendar"></span></span>
                 </div>
             </div>

@@ -129,10 +129,14 @@ foreach($event['EventsRole'] as $eventRole) {
 <?php endif;?>
 
 <h3><?php echo __('Title');?></h3>
-<?php echo $event['Event']['title'];?>
+<div class="event_title">
+	<?php echo $event['Event']['title'];?>
+</div>
 
 <h3><?php echo __('Description');?></h3>
-<?php echo $event['Event']['description'];?>
+<div class="event_description">
+	<?php echo $event['Event']['description'];?>
+</div>
 
 <h3><?php echo __('Informations');?></h3>
 <table id="eventInfos" class="table table-striped table-bordered">

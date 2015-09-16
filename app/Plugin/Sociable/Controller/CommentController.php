@@ -4,6 +4,9 @@ class CommentController extends SociableAppController {
 
 	public function beforeRender() {
 		parent::beforeRender();
+
+		Configure::write('debug', 0);
+		$this->autoRender = false;
 	}
 
 	/*
@@ -15,8 +18,6 @@ class CommentController extends SociableAppController {
 	* @return string
 	*/
 	public function index() {
-		Configure::write('debug', 0);
-		$this->autoRender = false;
 		$nomModel = $this->request->data['m'];
 		$commentaire = nl2br(strip_tags($this->request->data['c']));
 		$idModel = $this->request->data['id'];
@@ -38,5 +39,16 @@ class CommentController extends SociableAppController {
 			}
 		}
 		exit;
+    }
+
+    public function delete() {
+    	$id = $this->request->data['id'];
+
+    	App::uses('Comment', 'Model');
+		$Model = new Comment();
+
+		$Model->delete($id);
+
+    	exit;
     }
 }

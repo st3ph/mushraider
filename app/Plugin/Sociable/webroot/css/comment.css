@@ -19,14 +19,21 @@
 #commentaires ul li.nouveau {}
 #commentaires ul.listeCommentaires {padding-left:0;}
 #commentaires ul.listeCommentaires li {position:relative;background:#fff;}
-#commentaires ul li .signaler_abus {display:none;position:absolute;top:0;right:0;padding:5px;margin-right:0}
+#commentaires ul li .signaler_abus {display:none;position:absolute;top:0;right:25px;padding:5px;margin-right:0}
 #commentaires ul li .signaler_abus i {cursor:pointer;}
 #commentaires ul li .signaler_abus a {color:#006699}
 #commentaires ul li .signaler_abus a.signaler {border:none}
 #commentaires ul li .signaler_abus span {display:none}
-#commentaires ul li .signaler_abus span a.signaler_non {text-decoration:none;color:#DF0000}
-#commentaires ul li .signaler_abus span a.signaler_non:hover {text-decoration:underline}
-#commentaires ul li .edit_comment {display:none;position:absolute;top:0;right:25px;padding:5px;margin-right:0}
+#commentaires ul li .delete {display:none;position:absolute;top:0;right:0;padding:5px;margin-right:0}
+#commentaires ul li .delete span a.validate {text-decoration:none;color:#DF0000}
+#commentaires ul li .delete {display:none;position:absolute;top:0;right:0;padding:5px;margin-right:0}
+#commentaires ul li .delete i {cursor:pointer;}
+#commentaires ul li .delete a {color:#006699}
+#commentaires ul li .delete span {display:none}
+#commentaires ul li .delete span a.cancel {text-decoration:none;color:#666}
+#commentaires ul li .delete span a.cancel:hover {text-decoration:underline}
+#commentaires ul li:hover .delete {display:block}
+#commentaires ul li .edit_comment {display:none;position:absolute;top:0;right:50px;padding:5px;margin-right:0}
 #commentaires ul li .edit_comment i {cursor:pointer;}
 #commentaires ul li .edit_comment a {color:#008000}
 #commentaires ul li .edit_comment a.save {border:none}

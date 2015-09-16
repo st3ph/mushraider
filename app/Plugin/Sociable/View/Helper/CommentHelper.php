@@ -108,6 +108,14 @@ class CommentHelper extends AppHelper {
                                     $output .= $this->Html->link(__('yes'), '', array('title' => __('Report spam'), 'class' => 'signaler_oui', 'rel' => $datas[$nomModel]['id'].'|'.$comment['Comment']['id'].'|commentaire_video|'.$textSignal)).' '.$this->Html->link(__('no'), '', array('title' => __('Don\'t report spam'), 'class' => 'signaler_non'));
                                 $output .= '</span>';
                             $output .= '</div>';
+
+                            // Delete
+                            $output .= '<div class="delete">';
+                                $output .= '<i class="fa fa-times" title="'.__('Delete').'"></i>';
+                                $output .= '<span>'.__('Are you sure ?').' ';
+                                    $output .= $this->Html->link(__('yes'), '', array('title' => __('Delete'), 'class' => 'validate', 'data-id' => $comment['Comment']['id'])).' '.$this->Html->link(__('no'), '', array('title' => __('Don\'t delete'), 'class' => 'cancel'));
+                                $output .= '</span>';
+                            $output .= '</div>';
                         $output .= '</li>';
                     }
                 }

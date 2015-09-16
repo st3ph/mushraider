@@ -97,10 +97,50 @@ $.fn.comment = function(options) {
 			}
 		});
 
-		//$('#commentaires textarea').focus(function() {
 		$(this).find('textarea').focus(function() {
 			$(this).animate({
 				height: 100
+			});
+		});
+
+		liste.on('click', '.delete i', function(e) {
+			var $self = $(this);
+			var $container = $self.parent('div');
+
+			$self.fadeOut(function() {
+				$container.find('span').fadeIn();
+			});
+
+			$container.on('click', '.cancel', function(e) {
+				e.preventDefault();
+
+				$container.off('click', '.cancel');
+
+				$container.find('span').fadeOut(function() {
+					$self.fadeIn();
+				});
+			});
+
+			$container.on('click', '.validate', function(e) {
+				e.preventDefault();
+
+				var $self = $(this);
+				var id = $self.data('id');
+
+				$container.parents('li').fadeOut(function() {
+					$(this).remove();
+				});
+
+				$.ajax({
+					type: 'POST',
+					url: url+'/delete',
+					data: 'id='+id,
+					success: function(msg) {
+					},
+					error: function() {
+						alert('Something wrong happened');
+					}
+				});
 			});
 		});
 	});

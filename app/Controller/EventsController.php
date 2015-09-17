@@ -299,7 +299,7 @@ class EventsController extends AppController {
                         $params['conditions']['EventsCharacter.event_id'] = $eventId;
                         if($users = $this->EventsCharacter->find('all', $params)) {
                             foreach($users as $user) {
-                                $this->Emailing->eventEdit($user['User']['email'], $event['Event']);
+                                $this->Emailing->eventEdit($user['User']['email'], $event);
                             }
                         }
                     }  

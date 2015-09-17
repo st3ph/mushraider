@@ -5,7 +5,8 @@ class EmailingComponent extends Component {
 
     var $email;
 
-    public function startup(Controller $controller) {
+    //public function startup(Controller $controller) {
+    public function startup() {
         $emailSettings = Configure::read('Config.email');
 
         $emailConfig = null;
@@ -61,6 +62,18 @@ class EmailingComponent extends Component {
             'dest' => $dest,
             'username' => $username,
             'userId' => $userId
+        ));
+        $this->send();
+    }
+
+    function commentEvent($dest, $comment) {
+        $this->email->to($dest);
+        $this->email->subject(__('[MushRaider] New event comment'));
+        $this->email->template('comment_event', 'default');
+
+        $this->email->viewVars(array(
+            'dest' => $dest,
+            'comment' => $comment,
         ));
         $this->send();
     }

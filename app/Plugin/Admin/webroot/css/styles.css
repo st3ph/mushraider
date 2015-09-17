@@ -1260,6 +1260,7 @@ table.table-striped tbody.ui-sortable tr.sortable-placeholder td:last-child {bor
 
 /* Settings */
 .checkbox label {font-weight:normal;}
+.notificationsList {padding-left:20px;}
 #apiModules {margin:50px 0 0 50px;padding-left:20px;border-left:5px solid #ddd;}
 #apiModules.hide {display:none;}
 .mainMenu {overflow:hidden;}

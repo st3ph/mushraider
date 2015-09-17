@@ -78,6 +78,14 @@ class PatcherComponent extends Component {
         if(!$User->query($sql)) {
             return $this->redirectToPatch('/admin/patcher/apply/v-1.6');
         }
+
+        // v1.6.2
+        App::uses('Setting', 'Model');
+        $SettingModel = new Setting();
+        $notifications = json_decode($SettingModel->getOption('notifications'), true);
+        if(!isset($notifications['comments'])) {
+            return $this->redirectToPatch('/admin/patcher/apply/v-1.6.2');
+        }
 	}
 
     public function run_sql_file($mysqlLink, $location, $prefix = '') {

@@ -238,4 +238,16 @@ class Event extends AppModel {
         }
     }
 
+    public function onComment($comment, $EmailingComponent) {
+        parent::onComment($comment, $EmailingComponent);
+
+        App::uses('Setting', 'Model');
+        $SettingModel = new Setting();
+        $notifications = json_decode($SettingModel->getOption('notifications'));
+        if(!$notifications->enabled || !$notifications->comments || empty($notifications->contact)) {
+            return;
+        }
+
+        $EmailingComponent->commentEvent($notifications->contact, $comment);
+    }
 }

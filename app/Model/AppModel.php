@@ -32,7 +32,7 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class AppModel extends Model {
-    function __add($data = array(), $cond = array()) {
+    public function __add($data = array(), $cond = array()) {
         if(empty($data)) {
             return false;
         }
@@ -65,5 +65,8 @@ class AppModel extends Model {
         }
 
         return false;
+    }
+
+    public function onComment($comment, $EmailingComponent) {
     }
 }

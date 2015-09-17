@@ -4,7 +4,7 @@ class PatcherController extends AdminAppController {
     public $uses = array('Character', 'EventsCharacter', 'Event');
 
     var $adminOnly = true;
-    var $availablePatchs = array('beta-2', 'beta-3', 'v-1.1', 'v-1.3', 'v-1.3.5', 'v-1.4', 'v-1.4.1', 'v-1.5', 'v-1.5.2', 'v-1.6');
+    var $availablePatchs = array('beta-2', 'beta-3', 'v-1.1', 'v-1.3', 'v-1.3.5', 'v-1.4', 'v-1.4.1', 'v-1.5', 'v-1.5.2', 'v-1.6', 'v-1.6.2');
     var $dbPrefix = 'mr_';
 
     function beforeFilter() {
@@ -291,5 +291,15 @@ class PatcherController extends AdminAppController {
                 $UserModel->save($toUpdate);
             }
         }
+    }
+
+    public function v162() {
+        // Regenerate cache
+        Cache::clear(false);
+
+        // Update Notifications
+        $notifications = json_decode($this->Setting->getOption('notifications'), true);
+        $notifications['comments'] = 0;
+        $this->Setting->setOption('notifications', json_encode($notifications));
     }
 }

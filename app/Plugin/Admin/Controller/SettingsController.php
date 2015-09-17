@@ -19,6 +19,7 @@ class SettingsController extends AdminAppController {
                 $notifications = array();
                 $notifications['enabled'] = $this->request->data['Setting']['notifications']['enabled'];
                 $notifications['signup'] = $this->request->data['Setting']['notifications']['signup'];
+                $notifications['comments'] = $this->request->data['Setting']['notifications']['comments'];
                 $notifications['contact'] = $this->request->data['Setting']['notifications']['contact'];
                 $this->Setting->setOption('notifications', json_encode($notifications));
             }
@@ -61,6 +62,7 @@ class SettingsController extends AdminAppController {
         if(!empty($notifications)) {
             $this->request->data['Setting']['notifications']['enabled'] = $notifications->enabled;
             $this->request->data['Setting']['notifications']['signup'] = $notifications->signup;
+            $this->request->data['Setting']['notifications']['comments'] = $notifications->comments;
             $this->request->data['Setting']['notifications']['contact'] = $notifications->contact;
         }
 

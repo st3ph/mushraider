@@ -15,12 +15,15 @@
                 </div>
                 <div class="form-group">
                     <label><?php echo __('Email notifications');?></label>
-                    <?php echo $this->Form->input('Setting.notifications.enabled', array('type' => 'checkbox', 'label' => __('Enable email notifications')));?>
+                    <?php $after = $this->Form->input('Setting.notifications.contact', array('type' => 'email', 'placeholder' => __('Contact email (will receive internal notifications)'), 'class' => 'span3', 'required' => $this->data['Setting']['notifications']['enabled'], 'label' => false, 'div' => false));?>
+                    <?php echo $this->Form->input('Setting.notifications.enabled', array('type' => 'checkbox', 'label' => __('Enable email notifications'), 'after' => $after));?>
                 </div>
                 <div class="notificationsList <?php echo $this->data['Setting']['notifications']['enabled']?'':'hide';?>">
                     <div class="form-group">
-                        <?php $after = $this->Form->input('Setting.notifications.contact', array('type' => 'email', 'placeholder' => __('Contact email (will receive internal notifications)'), 'class' => 'span3', 'required' => $this->data['Setting']['notifications']['signup'], 'label' => false, 'div' => false));?>
-                        <?php echo $this->Form->input('Setting.notifications.signup', array('type' => 'checkbox', 'label' => __('Enable new signup notifications to :'), 'after' => $after));?>
+                        <?php echo $this->Form->input('Setting.notifications.signup', array('type' => 'checkbox', 'label' => __('Enable new signup notifications to :')));?>
+                    </div>
+                    <div class="form-group">
+                        <?php echo $this->Form->input('Setting.notifications.comments', array('type' => 'checkbox', 'label' => __('Enable new comments notifications')));?>
                     </div>
                 </div>
                 <div class="form-group">

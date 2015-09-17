@@ -1,11 +1,12 @@
 <?php
 class CommentController extends SociableAppController {
+	public $components = array('Emailing');
 	var $helpers = array();
 
 	public function beforeRender() {
 		parent::beforeRender();
 
-		Configure::write('debug', 0);
+		Configure::write('debug', 2);
 		$this->autoRender = false;
 	}
 
@@ -35,7 +36,7 @@ class CommentController extends SociableAppController {
 					$idUser = $this->Session->check($otherSessionUserId)?$this->Session->read($otherSessionUserId):null;
 				}
 
-				return $Modele->comment($idModel, $idUser, $commentaire);
+				echo $Modele->comment($idModel, $idUser, $commentaire, $this->Emailing);
 			}
 		}
 		exit;

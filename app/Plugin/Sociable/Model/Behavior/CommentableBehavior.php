@@ -89,7 +89,7 @@ class CommentableBehavior extends ModelBehavior {
 	* @param int $idUtilisateur id de l'utilisateur
 	* @return bool
 	*/
-	public function comment($obj, $idModel, $idUtilisateur, $commentaire) {
+	public function comment($obj, $idModel, $idUtilisateur, $commentaire, $EmailingComponent) {
 		$erreur = '';
 
 		$toSave = array();
@@ -131,6 +131,9 @@ class CommentableBehavior extends ModelBehavior {
 						}
 					}
 				}
+
+				// Callback
+				$this->modelObjet->onComment($com, $EmailingComponent);
 
 				// On vide le cache
 				//$cacheName = str_replace('{id}', $idModel, $this->__settings[$this->modelObjet->alias]['modelCacheName']);                

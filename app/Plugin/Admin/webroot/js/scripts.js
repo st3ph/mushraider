@@ -497,15 +497,9 @@ jQuery(function($) {
     $('#SettingNotificationsEnabled').on('change', function(e) {
         if($(this).is(':checked')) {
             $('.notificationsList').show();
-        }else {
-            $('.notificationsList').hide();
-        }
-    });
-
-    $('#SettingNotificationsSignup').on('change', function(e) {
-        if($(this).is(':checked')) {
             $('#SettingNotificationsContact').attr('required', true);
         }else {
+            $('.notificationsList').hide();
             $('#SettingNotificationsContact').attr('required', false);
         }
     });

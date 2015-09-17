@@ -49,7 +49,7 @@ $.fn.comment = function(options) {
 										output += resultat.commentaire[0].commentaire;
 									output += '</div>';
 								output += '</li>';
-								liste.prepend(output);
+								liste.append(output);
 								// On affiche le nouveau commentaire
 								if(nbComments > settings.maxComments) {
 									liste.find('li.nouveau').show();

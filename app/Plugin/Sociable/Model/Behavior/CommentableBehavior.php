@@ -69,7 +69,7 @@ class CommentableBehavior extends ModelBehavior {
 				// On récupère touts les commentaires pour ce modèle
 				$contraintes = array();
 				$contraintes['recursive'] = 1;
-				$contraintes['order'] = 'Comment.created DESC';
+				$contraintes['order'] = 'Comment.created ASC';
 				$contraintes['conditions']['Comment.'.$this->__settings[$Model->alias]['foreignKey']] = $results[$key][$Model->alias][$Model->primaryKey];
 				$contraintes['conditions']['Comment.'.$this->__settings[$Model->alias]['champNomModel']] = $Model->alias;
 				$contraintes['conditions']['Comment.deleted'] = '0';

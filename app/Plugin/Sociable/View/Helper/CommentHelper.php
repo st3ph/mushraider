@@ -53,32 +53,9 @@ class CommentHelper extends AppHelper {
 
         // On affiche le commentaire
         $output = '<div id="commentaires">';
-            $output .= '<h4>'.__('Add comment').'</h4>';
-            $output .= $this->Form->create('', array('url' => '/commentaire/ajouter', 'id' => 'ajoutCommentaire'));
-			    $output .= '<div class="row-fluid">';
-			        $output .= '<div class="span8">';
-			            $output .= $this->Form->input('Commentaire.commentaire', array('id' => 'commentaire', 'type' => 'textarea', 'label' => false, 'div' => false));
-			            $output .= $this->Form->input('Commentaire.idModel', array('type' => 'hidden', 'value' => $idModel, 'label' => false, 'div' => false));
-			            $output .= $this->Form->input('Commentaire.nomModel', array('type' => 'hidden', 'value' => $nomModel, 'label' => false, 'div' => false));
-			        $output .= '</div>';
-			    $output .= '</div>';
-	            $output .= '<div class="row-fluid">';
-	                $output .= '<div class="span8">';
-	                    $output .= '<div class="span8">';
-	                        $output .= '<div class="compteur"><span>0</span> / 1000 '.__('chars used').'</div>';
-	                    $output .= '</div>';
-	                    $output .= '<div class="span4">';
-	                        $output .= $this->Form->submit(__('Send'), array('class' => 'btn btn-primary pull-right'));
-	                    $output .= '</div>';
-	                $output .= '</div>';
-	            $output .= '</div>';
-            $output .= $this->Form->end();
-
-
-
             $nbComments = !empty($comments)?count($comments):0;
 
-            $output .= '<h4 class="second"><span class="nbComments">'.$nbComments.'</span> '.__('comment').($nbComments > 1?'s':'').'</h4>';
+            $output .= '<h4><span class="nbComments">'.$nbComments.'</span> '.__('comment').($nbComments > 1?'s':'').'</h4>';
             $output .= '<ul class="listeCommentaires unstyled easyPaginate span8">';
                 if(!empty($comments)) {                 
                     foreach($comments as $comment) {                        
@@ -120,6 +97,28 @@ class CommentHelper extends AppHelper {
                     }
                 }
             $output .= '</ul>';
+            $output .= '<div class="clearfix"></div>';
+
+            $output .= '<h4>'.__('Add comment').'</h4>';
+            $output .= $this->Form->create('', array('url' => '/commentaire/ajouter', 'id' => 'ajoutCommentaire'));
+                $output .= '<div class="row-fluid">';
+                    $output .= '<div class="span8">';
+                        $output .= $this->Form->input('Commentaire.commentaire', array('id' => 'commentaire', 'type' => 'textarea', 'label' => false, 'div' => false));
+                        $output .= $this->Form->input('Commentaire.idModel', array('type' => 'hidden', 'value' => $idModel, 'label' => false, 'div' => false));
+                        $output .= $this->Form->input('Commentaire.nomModel', array('type' => 'hidden', 'value' => $nomModel, 'label' => false, 'div' => false));
+                    $output .= '</div>';
+                $output .= '</div>';
+                $output .= '<div class="row-fluid">';
+                    $output .= '<div class="span8">';
+                        $output .= '<div class="span8">';
+                            $output .= '<div class="compteur"><span>0</span> / 1000 '.__('chars used').'</div>';
+                        $output .= '</div>';
+                        $output .= '<div class="span4">';
+                            $output .= $this->Form->submit(__('Send'), array('class' => 'btn btn-primary pull-right'));
+                        $output .= '</div>';
+                    $output .= '</div>';
+                $output .= '</div>';
+            $output .= $this->Form->end();
             $output .= '<div class="clearfix"></div>';
         $output .= '</div>';
         echo $output;

@@ -10,9 +10,9 @@
 	<h1>
 		<div class="row">
 			<?php $inscriptionIsClosed = $startTimestamp <= $todayTimestamp;?>
-			<?php $displayAdminButtons = ($dayTimestamp >= $todayTimestamp && (($user['User']['can']['manage_own_events'] && $user['User']['id'] == $event['User']['id']) || $user['User']['can']['manage_events'] || $user['User']['can']['full_permissions']))?true:false?>
+			<?php $displayAdminButtons = ($startTimestamp >= $todayTimestamp && (($user['User']['can']['manage_own_events'] && $user['User']['id'] == $event['User']['id']) || $user['User']['can']['manage_events'] || $user['User']['can']['full_permissions']))?true:false?>
 			<?php $displayTplButtons = ($dayTimestamp >= $todayTimestamp && ($user['User']['can']['create_templates'] || $user['User']['can']['full_permissions']))?true:false?>
-			<?php $displayCloseButton = ($dayTimestamp < $todayTimestamp && ($user['User']['can']['create_reports'] || ($user['User']['can']['manage_own_events'] && $user['User']['id'] == $event['User']['id']) || $user['User']['can']['full_permissions']))?true:false?>
+			<?php $displayCloseButton = ($startTimestamp < $todayTimestamp && ($user['User']['can']['create_reports'] || ($user['User']['can']['manage_own_events'] && $user['User']['id'] == $event['User']['id']) || $user['User']['can']['full_permissions']))?true:false?>
 			<?php $displayReportButton = !empty($event['Report']['id'])?true:false?>
 			<div class="span<?php echo ($displayAdminButtons || $displayCloseButton || $displayReportButton || $displayTplButtons)?6:11?>">
 				<i class="fa fa-calendar-empty"></i> <?php echo __('View event');?>

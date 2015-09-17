@@ -124,6 +124,17 @@ class EmailingComponent extends Component {
         $this->send();
     }
 
+    function eventEdit($dest, $event) {
+        $this->email->to($dest);
+        $this->email->subject(__('[MushRaider] An Event has been updated'));
+        $this->email->template('event_edit', 'default');
+
+        $this->email->viewVars(array(            
+            'event' => $event
+        ));
+        $this->send();
+    }
+
     function eventValidate($dest, $event) {
         $this->email->to($dest);
         $this->email->subject(__('[MushRaider] You have been validate to an event =)'));

@@ -229,6 +229,16 @@ form .select .loading {margin:0 0 5px 5px;}
 	margin-bottom:10px;
 }
 
+#content .notifyEdition label {
+	font-weight: normal;
+	text-align: right;
+	margin-right:20px;
+}
+.notifyEdition .checkbox input {
+	float:right;
+	margin-left:0;
+}
+
 /*
 * Account
 */

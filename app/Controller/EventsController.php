@@ -289,6 +289,21 @@ class EventsController extends AppController {
                         $this->EventsRole->__add($toSaveEventsRole);
                     }
 
+                    // If notifications are enable, send email to validate users
+                    if(Configure::read('Config.notifications')->enabled && !empty($this->request->data['Event']['notify'])) {
+                        // Get all users validated
+                        $params = array();
+                        $params['recursive'] = 1;
+                        $params['fields'] = array('id');
+                        $params['contain']['User']['fields'] = array('email');
+                        $params['conditions']['EventsCharacter.event_id'] = $eventId;
+                        if($users = $this->EventsCharacter->find('all', $params)) {
+                            foreach($users as $user) {
+                                $this->Emailing->eventEdit($user['User']['email'], $event['Event']);
+                            }
+                        }
+                    }  
+
                     $this->Session->setFlash(__('The event has been updated.'), 'flash_success');
                     $this->redirect('/events/view/'.$eventId);
                 }

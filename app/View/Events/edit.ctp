@@ -73,10 +73,18 @@
                 <div class="hint"><?php echo __('No validation is required to participate to this event');?></div>
             </div>
         </div>
-        <div class="span3 pull-right">
+        <div class="span5 pull-right">
             <div class="form-group">
                 <?php echo $this->Form->input('Event.id', array('type' => 'hidden'));?>
-                <?php echo $this->Form->submit(__('Update event'), array('class' => 'btn btn-warning btn-large pull-right'));?>
+                <div class="text-right">
+                    <?php echo $this->Form->submit(__('Update event'), array('class' => 'btn btn-warning btn-large'));?>
+                </div>
+
+                <?php if(Configure::read('Config.notifications')->enabled):?>
+                    <div class="notifyEdition">
+                        <?php echo $this->Form->input('Event.notify', array('type' => 'checkbox', 'label' => __('Notify registered users about the changes')));?>
+                    </div>
+                <?php endif;?>
             </div>
         </div>
     <div class="clearfix"></div>

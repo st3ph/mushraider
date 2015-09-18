@@ -22,7 +22,7 @@ class InstallAppController extends Controller {
 
         $this->set('title_for_layout', __('MushRaider Installer'));
 
-        $languages = array('eng' => 'English', 'fra' => 'Français', 'ger' => 'Deutsch');
+        $languages = array('eng' => 'English', 'fra' => 'Français', 'deu' => 'Deutsch');
         $this->set('languages', $languages);
 	}
 }

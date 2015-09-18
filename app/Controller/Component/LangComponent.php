@@ -10,19 +10,21 @@ class LangComponent extends Component {
     public function startup(Controller $controller) {
         $this->controller = &$controller;
 
-        $appLocales = array();
+        //$appLocales = array();
         $localesFolder = new Folder(APP.'Locale');
         $locales = $localesFolder->read(true);
         if(!empty($locales) && !empty($locales[0])) {
             foreach($locales[0] as $locale) {
-                $appLocales[$locale] = $locale;
+                if(!array_key_exists($locale, $this->controller->appLocales))  {
+                    $this->controller->appLocales[$locale] = $locale;
+                }
             }
         }
-        $this->controller->set('appLocales', $appLocales); 
+        $this->controller->set('appLocales', $this->controller->appLocales); 
 
         $lang = Configure::read('Config.language');
         if(!empty($this->controller->request->params['pass'][0])) {
-            if(in_array($this->controller->request->params['pass'][0], $appLocales)) {
+            if(array_key_exists($this->controller->request->params['pass'][0], $this->controller->appLocales)) {
                 $lang = $this->controller->request->params['pass'][0];
             }   
         }

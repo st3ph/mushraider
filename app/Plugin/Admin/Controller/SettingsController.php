@@ -67,15 +67,6 @@ class SettingsController extends AdminAppController {
         }
 
         // Langs
-        $appLocales = array();
-        $localesFolder = new Folder(APP.'Locale');
-        $locales = $localesFolder->read(true);
-        if(!empty($locales) && !empty($locales[0])) {
-            foreach($locales[0] as $locale) {
-                $appLocales[$locale] = $locale;
-            }
-        }
-        $this->set('appLocales', $appLocales);
         $this->request->data['Setting']['sitelang'] = Configure::read('Settings.language');
 
         // Timezone

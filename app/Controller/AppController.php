@@ -34,13 +34,14 @@ App::uses('IniReader', 'Configure');
  */
 class AppController extends Controller {
     public $components = array('Session', 'Cookie', 'Lang', 'Tools', 'Patcher');
-    var $uses = array('User', 'Role', 'Setting', 'Character');
+    public $uses = array('User', 'Role', 'Setting', 'Character');
 
-    var $user = null;
-    var $userRequired = true;
-    var $pageTitle = 'MushRaider';
-	var $pageDescription = 'MushRaider raid planner';
-	var $breadcrumb = array();
+    public $user = null;
+    public $userRequired = true;
+    public $pageTitle = 'MushRaider';
+	public $pageDescription = 'MushRaider raid planner';
+    public $breadcrumb = array();
+	public $appLocales = array('eng' => 'English', 'fra' => 'Français', 'deu' => 'Deutsch');
 
 	public function beforeFilter() {
 		parent::beforeFilter();

@@ -29,11 +29,11 @@
                 <?php if(!empty($appLocales)):?>
                     <li>
                         <div class="dropdown">
-                            <?php echo $this->Html->link('<i class="fa fa-flag"></i> '.Configure::read('Config.language').' <b class="caret"></b>', '/', array('class' => 'dropdown-toggle', 'id' => 'langMenu', 'data-toggle' => 'dropdown', ' data-target' => '#', 'escape' => false));?>
+                            <?php echo $this->Html->link('<i class="fa fa-flag"></i> '.$appLocales[Configure::read('Config.language')].' <b class="caret"></b>', '/', array('class' => 'dropdown-toggle', 'id' => 'langMenu', 'data-toggle' => 'dropdown', ' data-target' => '#', 'escape' => false));?>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="langMenu">
-                                <?php foreach($appLocales as $lang):?>
+                                <?php foreach($appLocales as $lang => $langTitle):?>
                                     <?php $checked = Configure::read('Config.language') == $lang?'<i class="fa fa-check"></i>':'';?>
-                                    <li><?php echo $this->Html->link(ucwords(strtolower($lang)).' '.$checked, '/l/'.$lang, array('escape' => false));?></li>
+                                    <li><?php echo $this->Html->link(ucwords(strtolower($langTitle)).' '.$checked, '/l/'.$lang, array('escape' => false));?></li>
                                 <?php endforeach;?>
                             </ul>
                         </div>

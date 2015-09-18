@@ -6,7 +6,7 @@ class CommentController extends SociableAppController {
 	public function beforeRender() {
 		parent::beforeRender();
 
-		Configure::write('debug', 2);
+		Configure::write('debug', 0);
 		$this->autoRender = false;
 	}
 

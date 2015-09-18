@@ -205,7 +205,7 @@ jQuery(function($) {
         placeholder: "sortable-placeholder",
         cursor: "move",
         handle: '.fa-arrows'
-    }).disableSelection();
+    });
 
     $('.mainMenu').on('click', '.fa-plus', function(e) {
         e.preventDefault();

@@ -47,8 +47,17 @@ class CommentController extends SociableAppController {
 
     	App::uses('Comment', 'Model');
 		$Model = new Comment();
+		$params = array();
+		$params['recursive'] = -1;
+		$params['fields'] = array('user_id');
+		$params['conditions']['id'] = $id;
+		if(!$comment = $Model->find('first', $params)) {
+			exit;
+		}
 
-		$Model->delete($id);
+		if($this->user['User']['id'] == $comment['Comment']['user_id'] || $this->user['User']['can']['manage_own_events'] || $this->user['User']['can']['manage_events'] || $this->user['User']['can']['full_permissions']) {
+			$Model->delete($id);
+		}
 
     	exit;
     }

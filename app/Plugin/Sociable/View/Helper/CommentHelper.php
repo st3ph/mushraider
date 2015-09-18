@@ -67,7 +67,7 @@ class CommentHelper extends AppHelper {
                             $output .= '<div class="texte">'.$comment['Comment']['comment'].'</div>';
 
                             // Edit
-                            if($this->options['connected'] && !empty($comment['User']) && $this->options['connected']['User']['id'] == $comment['User']['id']) {
+                            if($this->options['connected']['User']['id'] == $comment['User']['id']) {
                                 $output .= '<div class="edit_comment">';
                                     $output .= '<i class="fa fa-pencil-square-o edit" title="'.__('Edit').'"></i>';
                                     $output .= '<span>';
@@ -87,12 +87,14 @@ class CommentHelper extends AppHelper {
                             $output .= '</div>';
 
                             // Delete
-                            $output .= '<div class="delete">';
-                                $output .= '<i class="fa fa-times" title="'.__('Delete').'"></i>';
-                                $output .= '<span>'.__('Are you sure ?').' ';
-                                    $output .= $this->Html->link(__('yes'), '', array('title' => __('Delete'), 'class' => 'validate', 'data-id' => $comment['Comment']['id'])).' '.$this->Html->link(__('no'), '', array('title' => __('Don\'t delete'), 'class' => 'cancel'));
-                                $output .= '</span>';
-                            $output .= '</div>';
+                            if($this->options['connected']['User']['id'] == $comment['User']['id'] || $this->options['connected']['User']['can']['manage_own_events'] || $this->options['connected']['User']['can']['manage_events'] || $this->options['connected']['User']['can']['full_permissions']) {
+                                $output .= '<div class="delete">';
+                                    $output .= '<i class="fa fa-times" title="'.__('Delete').'"></i>';
+                                    $output .= '<span>'.__('Are you sure ?').' ';
+                                        $output .= $this->Html->link(__('yes'), '', array('title' => __('Delete'), 'class' => 'validate', 'data-id' => $comment['Comment']['id'])).' '.$this->Html->link(__('no'), '', array('title' => __('Don\'t delete'), 'class' => 'cancel'));
+                                    $output .= '</span>';
+                                $output .= '</div>';
+                            }
                         $output .= '</li>';
                     }
                 }

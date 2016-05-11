@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Mushraider\n"
 "POT-Creation-Date: 2015-09-18 10:21+0100\n"
-"PO-Revision-Date: 2015-09-18 10:31+0100\n"
+"PO-Revision-Date: 2015-09-28 08:06+0100\n"
 "Last-Translator: Stéphane \"Mush\" Litou <contact@stephane-litou.com>\n"
 "Language-Team:  <contact@mushraider.com>\n"
 "Language: de_DE\n"
@@ -3218,7 +3218,7 @@ msgstr "Benutzername oder E-mail"
 
 #: Z:/www/mushraider/mushraider/app/View/Auth/login.ctp:16
 msgid "Stay signed in"
-msgstr "Bleiben unterzeichnet"
+msgstr "Angemeldet bleiben"
 
 #: Z:/www/mushraider/mushraider/app/View/Auth/login.ctp:21
 msgid "Password lost :("
@@ -3354,7 +3354,7 @@ msgstr ""
 
 #: Z:/www/mushraider/mushraider/app/View/Emails/html/comment_event.ctp:14
 msgid "Author"
-msgstr ""
+msgstr "Autor"
 
 #: Z:/www/mushraider/mushraider/app/View/Emails/html/comment_event.ctp:19
 msgid "To view it use the following link : "
@@ -3644,7 +3644,7 @@ msgstr "Update event"
 
 #: Z:/www/mushraider/mushraider/app/View/Events/edit.ctp:85
 msgid "Notify registered users about the changes"
-msgstr ""
+msgstr "Benachrichtigen registrierte Benutzer über die Änderungen"
 
 #: Z:/www/mushraider/mushraider/app/View/Events/index.ctp:10
 msgid "create"

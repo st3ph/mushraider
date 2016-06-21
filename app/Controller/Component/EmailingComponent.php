@@ -80,7 +80,7 @@ class EmailingComponent extends Component {
 
     function userEnabled($dest, $username) {
         $this->email->to($dest);
-        $this->email->subject(__('[MushRaider] You account has been activated'));
+        $this->email->subject(__('[MushRaider] Your account has been activated'));
         $this->email->template('user_enabled', 'default');
 
         $this->email->viewVars(array(
@@ -137,7 +137,7 @@ class EmailingComponent extends Component {
 
     function eventValidate($dest, $event) {
         $this->email->to($dest);
-        $this->email->subject(__('[MushRaider] You have been validate to an event =)'));
+        $this->email->subject(__('[MushRaider] You have been validated to an event =)'));
         $this->email->template('event_validate', 'default');
 
         $this->email->viewVars(array(            

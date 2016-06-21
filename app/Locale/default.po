@@ -335,7 +335,7 @@ msgid "[MushRaider] New event comment"
 msgstr "[MushRaider] Nouvel commentaire d'événement"
 
 #: Z:\www\mushraider\mushraider\app/Controller/Component/EmailingComponent.php:83
-msgid "[MushRaider] You account has been activated"
+msgid "[MushRaider] Your account has been activated"
 msgstr "[MushRaider] Votre compte a été activé"
 
 #: Z:\www\mushraider\mushraider\app/Controller/Component/EmailingComponent.php:95
@@ -355,7 +355,7 @@ msgid "[MushRaider] An Event has been updated"
 msgstr "[MushRaider] Un événement a été mis à jour"
 
 #: Z:\www\mushraider\mushraider\app/Controller/Component/EmailingComponent.php:140
-msgid "[MushRaider] You have been validate to an event =)"
+msgid "[MushRaider] You have been validated to an event =)"
 msgstr "[MushRaider] Vous avez été validé à un événement =)"
 
 #: Z:\www\mushraider\mushraider\app/Controller/Component/EmailingComponent.php:151

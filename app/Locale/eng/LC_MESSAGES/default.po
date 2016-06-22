@@ -327,8 +327,8 @@ msgid "[MushRaider] New event comment"
 msgstr "[MushRaider] New event comment"
 
 #: Z:\www\mushraider\mushraider\app/Controller/Component/EmailingComponent.php:83
-msgid "[MushRaider] You account has been activated"
-msgstr "[MushRaider] You account has been activated"
+msgid "[MushRaider] Your account has been activated"
+msgstr "[MushRaider] Your account has been activated"
 
 #: Z:\www\mushraider\mushraider\app/Controller/Component/EmailingComponent.php:95
 msgid "[MushRaider] Recover your password"
@@ -347,8 +347,8 @@ msgid "[MushRaider] An Event has been updated"
 msgstr "[MushRaider] An Event has been updated"
 
 #: Z:\www\mushraider\mushraider\app/Controller/Component/EmailingComponent.php:140
-msgid "[MushRaider] You have been validate to an event =)"
-msgstr "[MushRaider] You have been validate to an event =)"
+msgid "[MushRaider] You have been validated to an event =)"
+msgstr "[MushRaider] You have been validated to an event =)"
 
 #: Z:\www\mushraider\mushraider\app/Controller/Component/EmailingComponent.php:151
 msgid "[MushRaider] You have been refused to an event :("

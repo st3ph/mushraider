@@ -89,7 +89,7 @@ class ViewTask extends BakeTask {
 			$this->_interactive();
 		}
 		if (empty($this->args[0])) {
-			return;
+			return null;
 		}
 		if (!isset($this->connection)) {
 			$this->connection = 'default';
@@ -206,7 +206,7 @@ class ViewTask extends BakeTask {
 		$this->Controller->connection = $this->connection;
 		$this->controllerName = $this->Controller->getName();
 
-		$prompt = __d('cake_console', "Would you like bake to build your views interactively?\nWarning: Choosing no will overwrite %s views if it exist.", $this->controllerName);
+		$prompt = __d('cake_console', "Would you like bake to build your views interactively?\nWarning: Choosing no will overwrite %s views if they exist.", $this->controllerName);
 		$interactive = $this->in($prompt, array('y', 'n'), 'n');
 
 		if (strtolower($interactive) === 'n') {
@@ -248,7 +248,7 @@ class ViewTask extends BakeTask {
  *	'singularHumanName', 'pluralHumanName', 'fields', 'foreignKeys',
  *	'belongsTo', 'hasOne', 'hasMany', 'hasAndBelongsToMany'
  *
- * @return array Returns an variables to be made available to a view template
+ * @return array Returns a variables to be made available to a view template
  */
 	protected function _loadController() {
 		if (!$this->controllerName) {
@@ -342,7 +342,7 @@ class ViewTask extends BakeTask {
  *
  * @param string $action Action to bake
  * @param string $content Content to write
- * @return boolean Success
+ * @return bool Success
  */
 	public function bake($action, $content = '') {
 		if ($content === true) {
@@ -455,7 +455,7 @@ class ViewTask extends BakeTask {
  * Returns associations for controllers models.
  *
  * @param Model $model The Model instance.
- * @return array $associations
+ * @return array associations
  */
 	protected function _associations(Model $model) {
 		$keys = array('belongsTo', 'hasOne', 'hasMany', 'hasAndBelongsToMany');

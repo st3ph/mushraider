@@ -47,49 +47,49 @@ class Event extends AppModel {
     public $validate = array(
         'game_id' => array(
             'isRequired' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'required' => true,
                 'message' => 'Please choose a game for this event.'
             )
         ),
         'dungeon_id' => array(
             'isRequired' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'required' => true,
                 'message' => 'Please choose a dungeon for this event.'
             )
         ),
         'user_id' => array(
             'isRequired' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'required' => true,
                 'message' => 'Please choose a owner for this event.'
             )
         ),
         'time_invitation' => array(
             'isRequired' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'required' => true,
                 'message' => 'Please choose an invitation time for this event.'
             )
         ),
         'time_start' => array(
             'isRequired' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'required' => true,
                 'message' => 'Please choose a start time for this event.'
             )
         ),
         'character_level' => array(
             'isRequired' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'required' => true,
                 'message' => 'Please choose a minimum character level for this event.'
             )
         )
     );
 
-    public function __add($data, $eventUser, $date, $dateInscriptionInterval = null) {
+    public function __add($data = array(), $eventUser = array(), $date = null, $dateInscriptionInterval = null) {
         if(!empty($data)) {
             $dates = explode('-', $date);
 
@@ -187,7 +187,7 @@ class Event extends AppModel {
         return false;
     }
 
-    public function afterSave($created, $options) {
+    public function afterSave($created, $options = array()) {
         // If users are absent for this event, add them as "absent" automatically
         App::uses('Availability', 'Model');
         $AvailabilityModel = new Availability(); 

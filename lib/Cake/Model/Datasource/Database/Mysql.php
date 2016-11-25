@@ -52,7 +52,7 @@ class Mysql extends DboSource {
 /**
  * Reference to the PDO object connection
  *
- * @var PDO $_connection
+ * @var PDO
  */
 	protected $_connection = null;
 
@@ -73,7 +73,7 @@ class Mysql extends DboSource {
 /**
  * use alias for update and delete. Set to true if version >= 4.1
  *
- * @var boolean
+ * @var bool
  */
 	protected $_useAlias = true;
 
@@ -102,7 +102,8 @@ class Mysql extends DboSource {
 	public $tableParameters = array(
 		'charset' => array('value' => 'DEFAULT CHARSET', 'quote' => false, 'join' => '=', 'column' => 'charset'),
 		'collate' => array('value' => 'COLLATE', 'quote' => false, 'join' => '=', 'column' => 'Collation'),
-		'engine' => array('value' => 'ENGINE', 'quote' => false, 'join' => '=', 'column' => 'Engine')
+		'engine' => array('value' => 'ENGINE', 'quote' => false, 'join' => '=', 'column' => 'Engine'),
+		'comment' => array('value' => 'COMMENT', 'quote' => true, 'join' => '=', 'column' => 'Comment'),
 	);
 
 /**
@@ -145,7 +146,7 @@ class Mysql extends DboSource {
  *   combined with `ssl_key`.
  * - `ssl_ca` The certificate authority for SSL connections.
  *
- * @return boolean True if the database could be connected, else false
+ * @return bool True if the database could be connected, else false
  * @throws MissingConnectionException
  */
 	public function connect() {
@@ -203,7 +204,7 @@ class Mysql extends DboSource {
 /**
  * Check whether the MySQL extension is installed/loaded
  *
- * @return boolean
+ * @return bool
  */
 	public function enabled() {
 		return in_array('mysql', PDO::getAvailableDrivers());
@@ -351,6 +352,9 @@ class Mysql extends DboSource {
 			if (in_array($fields[$column->Field]['type'], $this->fieldParameters['unsigned']['types'], true)) {
 				$fields[$column->Field]['unsigned'] = $this->_unsigned($column->Type);
 			}
+			if (in_array($fields[$column->Field]['type'], array('timestamp', 'datetime')) && strtoupper($column->Default) === 'CURRENT_TIMESTAMP') {
+				$fields[$column->Field]['default'] = null;
+			}
 			if (!empty($column->Key) && isset($this->index[$column->Key])) {
 				$fields[$column->Field]['key'] = $this->index[$column->Key];
 			}
@@ -420,7 +424,7 @@ class Mysql extends DboSource {
  *
  * @param Model $model The model to delete from.
  * @param mixed $conditions The conditions to use.
- * @return boolean Success
+ * @return bool Success
  */
 	public function delete(Model $model, $conditions = null) {
 		if (!$this->_useAlias) {
@@ -433,13 +437,7 @@ class Mysql extends DboSource {
 		if (empty($conditions)) {
 			$alias = $joins = false;
 		}
-		$complexConditions = false;
-		foreach ((array)$conditions as $key => $value) {
-			if (strpos($key, $model->alias) === false) {
-				$complexConditions = true;
-				break;
-			}
-		}
+		$complexConditions = $this->_deleteNeedsComplexConditions($model, $conditions);
 		if (!$complexConditions) {
 			$joins = false;
 		}
@@ -456,10 +454,31 @@ class Mysql extends DboSource {
 	}
 
 /**
+ * Checks whether complex conditions are needed for a delete with the given conditions.
+ *
+ * @param Model $model The model to delete from.
+ * @param mixed $conditions The conditions to use.
+ * @return bool Whether or not complex conditions are needed
+ */
+	protected function _deleteNeedsComplexConditions(Model $model, $conditions) {
+		$fields = array_keys($this->describe($model));
+		foreach ((array)$conditions as $key => $value) {
+			if (in_array(strtolower(trim($key)), $this->_sqlBoolOps, true)) {
+				if ($this->_deleteNeedsComplexConditions($model, $value)) {
+					return true;
+				}
+			} elseif (strpos($key, $model->alias) === false && !in_array($key, $fields, true)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+/**
  * Sets the database encoding
  *
  * @param string $enc Database encoding
- * @return boolean
+ * @return bool
  */
 	public function setEncoding($enc) {
 		return $this->_execute('SET NAMES ' . $enc) !== false;
@@ -490,7 +509,7 @@ class Mysql extends DboSource {
 					if ($idx->Index_type === 'FULLTEXT') {
 						$index[$idx->Key_name]['type'] = strtolower($idx->Index_type);
 					} else {
-						$index[$idx->Key_name]['unique'] = intval($idx->Non_unique == 0);
+						$index[$idx->Key_name]['unique'] = (int)($idx->Non_unique == 0);
 					}
 				} else {
 					if (!empty($index[$idx->Key_name]['column']) && !is_array($index[$idx->Key_name]['column'])) {
@@ -560,7 +579,11 @@ class Mysql extends DboSource {
 								if (!isset($col['name'])) {
 									$col['name'] = $field;
 								}
-								$colList[] = 'CHANGE ' . $this->name($field) . ' ' . $this->buildColumn($col);
+								$alter = 'CHANGE ' . $this->name($field) . ' ' . $this->buildColumn($col);
+								if (isset($col['after'])) {
+									$alter .= ' AFTER ' . $this->name($col['after']);
+								}
+								$colList[] = $alter;
 							}
 							break;
 					}
@@ -696,7 +719,7 @@ class Mysql extends DboSource {
 	}
 
 /**
- * Returns an detailed array of sources (tables) in the database.
+ * Returns a detailed array of sources (tables) in the database.
  *
  * @param string $name Table name to get parameters
  * @return array Array of table names in the database
@@ -781,7 +804,21 @@ class Mysql extends DboSource {
 		if (strpos($col, 'enum') !== false) {
 			return "enum($vals)";
 		}
+		if (strpos($col, 'set') !== false) {
+			return "set($vals)";
+		}
 		return 'text';
+	}
+
+/**
+ * {@inheritDoc}
+ */
+	public function value($data, $column = null, $null = true) {
+		$value = parent::value($data, $column, $null);
+		if (is_numeric($value) && substr($column, 0, 3) === 'set') {
+			return $this->_connection->quote($value);
+		}
+		return $value;
 	}
 
 /**
@@ -796,7 +833,7 @@ class Mysql extends DboSource {
 /**
  * Check if the server support nested transactions
  *
- * @return boolean
+ * @return bool
  */
 	public function nestedTransactionSupported() {
 		return $this->useNestedTransactions && version_compare($this->getVersion(), '4.1', '>=');
@@ -812,4 +849,57 @@ class Mysql extends DboSource {
 		return strpos(strtolower($real), 'unsigned') !== false;
 	}
 
+/**
+ * Inserts multiple values into a table. Uses a single query in order to insert
+ * multiple rows.
+ *
+ * @param string $table The table being inserted into.
+ * @param array $fields The array of field/column names being inserted.
+ * @param array $values The array of values to insert. The values should
+ *   be an array of rows. Each row should have values keyed by the column name.
+ *   Each row must have the values in the same order as $fields.
+ * @return bool
+ */
+	public function insertMulti($table, $fields, $values) {
+		$table = $this->fullTableName($table);
+		$holder = implode(', ', array_fill(0, count($fields), '?'));
+		$fields = implode(', ', array_map(array($this, 'name'), $fields));
+		$pdoMap = array(
+			'integer' => PDO::PARAM_INT,
+			'float' => PDO::PARAM_STR,
+			'boolean' => PDO::PARAM_BOOL,
+			'string' => PDO::PARAM_STR,
+			'text' => PDO::PARAM_STR
+		);
+		$columnMap = array();
+		$rowHolder = "({$holder})";
+		$sql = "INSERT INTO {$table} ({$fields}) VALUES ";
+		$countRows = count($values);
+		for ($i = 0; $i < $countRows; $i++) {
+			if ($i !== 0) {
+				$sql .= ',';
+			}
+			$sql .= " $rowHolder";
+		}
+		$statement = $this->_connection->prepare($sql);
+		foreach ($values[key($values)] as $key => $val) {
+			$type = $this->introspectType($val);
+			$columnMap[$key] = $pdoMap[$type];
+		}
+		$valuesList = array();
+		$i = 1;
+		foreach ($values as $value) {
+			foreach ($value as $col => $val) {
+				$valuesList[] = $val;
+				$statement->bindValue($i, $val, $columnMap[$col]);
+				$i++;
+			}
+		}
+		$result = $statement->execute();
+		$statement->closeCursor();
+		if ($this->fullDebug) {
+			$this->logQuery($sql, $valuesList);
+		}
+		return $result;
+	}
 }

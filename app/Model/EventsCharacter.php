@@ -21,31 +21,31 @@ class EventsCharacter extends AppModel {
     public $validate = array(
         'event_id' => array(
             'isRequired' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'message' => 'Please choose an event.'
             )
         ),
         'user_id' => array(
             'isRequired' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'message' => 'Please choose a user.'
             )
         ),
         'character_id' => array(
             'isRequired' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'message' => 'Please choose a character for this event.'
             )
         ),
         'raids_role_id' => array(
             'isRequired' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'message' => 'Please choose a role for this event.'
             )
         )
     );
 
-    function __add($toSave = array()) {        
+    function __add($toSave = array(), $cond = array(), $d = null, $e = null) {        
         if(empty($toSave)) {
             return false;
         }

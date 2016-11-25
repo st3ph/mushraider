@@ -44,7 +44,7 @@ abstract class ObjectCollection {
 /**
  * Default object priority. A non zero integer.
  *
- * @var integer
+ * @var int
  */
 	public $defaultPriority = 10;
 
@@ -56,7 +56,7 @@ abstract class ObjectCollection {
  *
  * @param string $name Name of object to load.
  * @param array $options Array of configuration options for the object to be constructed.
- * @return object the constructed object
+ * @return CakeObject the constructed object
  */
 	abstract public function load($name, $options = array());
 
@@ -129,8 +129,7 @@ abstract class ObjectCollection {
 			if ($options['collectReturn'] === true) {
 				$collected[] = $result;
 			}
-			if (
-				$options['break'] && ($result === $options['breakOn'] ||
+			if ($options['break'] && ($result === $options['breakOn'] ||
 				(is_array($options['breakOn']) && in_array($result, $options['breakOn'], true)))
 			) {
 				return $result;
@@ -161,7 +160,7 @@ abstract class ObjectCollection {
  * Provide isset access to _loaded
  *
  * @param string $name Name of object being checked.
- * @return boolean
+ * @return bool
  */
 	public function __isset($name) {
 		return isset($this->_loaded[$name]);
@@ -171,12 +170,13 @@ abstract class ObjectCollection {
  * Enables callbacks on an object or array of objects
  *
  * @param string|array $name CamelCased name of the object(s) to enable (string or array)
- * @param boolean $prioritize Prioritize enabled list after enabling object(s)
+ * @param bool $prioritize Prioritize enabled list after enabling object(s)
  * @return void
  */
 	public function enable($name, $prioritize = true) {
 		$enabled = false;
 		foreach ((array)$name as $object) {
+			list(, $object) = pluginSplit($object);
 			if (isset($this->_loaded[$object]) && !isset($this->_enabled[$object])) {
 				$priority = $this->defaultPriority;
 				if (isset($this->_loaded[$object]->settings['priority'])) {
@@ -212,7 +212,7 @@ abstract class ObjectCollection {
  * @param string|array $name CamelCased name of the object(s) to enable (string or array)
  * 	If string the second param $priority is used else it should be an associative array
  * 	with keys as object names and values as priorities to set.
- * @param integer|null $priority Integer priority to set or null for default
+ * @param int|null $priority Integer priority to set or null for default
  * @return void
  */
 	public function setPriority($name, $priority = null) {
@@ -220,6 +220,7 @@ abstract class ObjectCollection {
 			$name = array($name => $priority);
 		}
 		foreach ($name as $object => $objectPriority) {
+			list(, $object) = pluginSplit($object);
 			if (isset($this->_loaded[$object])) {
 				if ($objectPriority === null) {
 					$objectPriority = $this->defaultPriority;
@@ -234,7 +235,7 @@ abstract class ObjectCollection {
 	}
 
 /**
- * Disables callbacks on a object or array of objects. Public object methods are still
+ * Disables callbacks on an object or array of objects. Public object methods are still
  * callable as normal.
  *
  * @param string|array $name CamelCased name of the objects(s) to disable (string or array)
@@ -242,6 +243,7 @@ abstract class ObjectCollection {
  */
 	public function disable($name) {
 		foreach ((array)$name as $object) {
+			list(, $object) = pluginSplit($object);
 			unset($this->_enabled[$object]);
 		}
 	}
@@ -256,6 +258,7 @@ abstract class ObjectCollection {
  */
 	public function enabled($name = null) {
 		if (!empty($name)) {
+			list(, $name) = pluginSplit($name);
 			return isset($this->_enabled[$name]);
 		}
 		return array_keys($this->_enabled);
@@ -268,7 +271,7 @@ abstract class ObjectCollection {
  *   returns an array of currently-attached objects
  * @return mixed If $name is specified, returns the boolean status of the corresponding object.
  *    Otherwise, returns an array of all attached objects.
- * @deprecated Will be removed in 3.0. Use loaded instead.
+ * @deprecated 3.0.0 Will be removed in 3.0. Use loaded instead.
  */
 	public function attached($name = null) {
 		return $this->loaded($name);
@@ -284,6 +287,7 @@ abstract class ObjectCollection {
  */
 	public function loaded($name = null) {
 		if (!empty($name)) {
+			list(, $name) = pluginSplit($name);
 			return isset($this->_loaded[$name]);
 		}
 		return array_keys($this->_loaded);
@@ -304,7 +308,7 @@ abstract class ObjectCollection {
  * Adds or overwrites an instantiated object to the collection
  *
  * @param string $name Name of the object
- * @param Object $object The object to use
+ * @param CakeObject $object The object to use
  * @return array Loaded objects
  */
 	public function set($name = null, $object = null) {

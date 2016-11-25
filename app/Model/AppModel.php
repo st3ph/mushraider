@@ -32,7 +32,7 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class AppModel extends Model {
-    public function __add($data = array(), $cond = array()) {
+    public function __add($data = array(), $cond = array(), $d = null, $e = null) {
         if(empty($data)) {
             return false;
         }

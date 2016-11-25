@@ -41,7 +41,8 @@ class AppController extends Controller {
     public $pageTitle = 'MushRaider';
 	public $pageDescription = 'MushRaider raid planner';
     public $breadcrumb = array();
-	public $appLocales = array('eng' => 'English', 'fra' => 'Français', 'deu' => 'Deutsch');
+    public $appLocales = array('eng' => 'English', 'fra' => 'Français', 'deu' => 'Deutsch');
+	public $appLocales_ = array('en-en' => 'English', 'fr-fr' => 'Français', 'de-de' => 'Deutsch');
 
 	public function beforeFilter() {
 		parent::beforeFilter();
@@ -64,6 +65,20 @@ class AppController extends Controller {
         $language = Configure::read('Settings.language');
         $language = $this->Cookie->check('Lang')?$this->Cookie->read('Lang'):$language;
         $language = !empty($language)?$language:'eng';
+
+        switch($language) {
+            case 'fr-fr':
+                $language = 'fra';
+                break;
+            case 'en-en':
+            case 'en-us':
+                $language = 'eng';
+                break;
+            case 'de-de':
+                $language = 'deu';
+                break;
+        }
+
         Configure::write('Config.language', $language);
 
         // Some usefull infos

@@ -50,7 +50,7 @@ class HelperCollection extends ObjectCollection implements CakeEventListener {
  * if any
  *
  * @param string $helper The helper name to be loaded
- * @return boolean whether the helper could be loaded or not
+ * @return bool whether the helper could be loaded or not
  * @throws MissingHelperException When a helper could not be found.
  *    App helpers are searched, and then plugin helpers.
  */
@@ -98,13 +98,13 @@ class HelperCollection extends ObjectCollection implements CakeEventListener {
  * declaring $helpers arrays you can disable callbacks on helpers.
  *
  * You can alias your helper as an existing helper by setting the 'className' key, i.e.,
- * {{{
+ * ```
  * public $helpers = array(
  *   'Html' => array(
  *     'className' => 'AliasedHtml'
  *   );
  * );
- * }}}
+ * ```
  * All calls to the `Html` helper would use `AliasedHtml` instead.
  *
  * @param string $helper Helper name to load

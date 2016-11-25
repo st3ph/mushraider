@@ -29,21 +29,21 @@ class EventsTemplate extends AppModel {
     public $validate = array(
         'game_id' => array(
             'isRequired' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'required' => true,
                 'message' => 'Please choose a game for this event.'
             )
         ),
         'dungeon_id' => array(
             'isRequired' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'required' => true,
                 'message' => 'Please choose a dungeon for this event.'
             )
         ),
         'character_level' => array(
             'isRequired' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'required' => true,
                 'message' => 'Please choose a minimum character level for this event.'
             )

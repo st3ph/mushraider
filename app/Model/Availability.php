@@ -17,14 +17,14 @@ class Availability extends AppModel {
     public $validate = array(
         'comment' => array(
             'isRequired' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'required' => 'create',
                 'message' => 'An absence reason is mandatory.'
             )
         ),
         'start' => array(
             'isRequired' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'required' => 'create',
                 'message' => 'Please choose a starting date.'
             ),
@@ -41,7 +41,7 @@ class Availability extends AppModel {
         ),
         'end' => array(
             'isRequired' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'required' => 'create',
                 'message' => 'Please choose an ending date.'
             ),
@@ -129,7 +129,7 @@ class Availability extends AppModel {
         return true;
     }
 
-    public function afterSave($created, $options) {
+    public function afterSave($created, $options = array()) {
         // Mark the user as absent in all his games
         // Get characters, so we can also have the game list
         App::uses('Character', 'Model');
@@ -137,7 +137,7 @@ class Availability extends AppModel {
         $params = array();       
         $params['recursive'] = -1;
         $params['fields'] = array('Character.id', 'Character.game_id', 'Character.level', 'Character.default_role_id');
-        $params['group'] = 'game_id';
+        $params['group'] = array('Character.game_id', 'Character.id');
         $params['conditions']['user_id'] = $this->data['Availability']['user_id'];
         $params['conditions']['main'] = 1;
         if($characters = $Character->find('all', $params)) {

@@ -14,7 +14,7 @@ class RolePermissionRole extends AppModel {
         )
     );
 
-    function __add($toSave = array()) {        
+    function __add($toSave = array(), $cond = array(), $d = null, $e = null) {        
         if(empty($toSave)) {
             return false;
         }

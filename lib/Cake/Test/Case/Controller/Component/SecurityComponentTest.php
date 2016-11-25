@@ -30,7 +30,7 @@ class TestSecurityComponent extends SecurityComponent {
  * validatePost method
  *
  * @param Controller $controller
- * @return boolean
+ * @return bool
  */
 	public function validatePost(Controller $controller) {
 		return $this->_validatePost($controller);
@@ -55,7 +55,7 @@ class SecurityTestController extends Controller {
 /**
  * failed property
  *
- * @var boolean false
+ * @var bool
  */
 	public $failed = false;
 
@@ -330,19 +330,23 @@ class SecurityComponentTest extends CakeTestCase {
  */
 	public function testRequireAuthSucceed() {
 		$_SERVER['REQUEST_METHOD'] = 'AUTH';
+		$this->Controller->Security->unlockedActions = array('posted');
 		$this->Controller->request['action'] = 'posted';
 		$this->Controller->Security->requireAuth('posted');
 		$this->Controller->Security->startup($this->Controller);
 		$this->assertFalse($this->Controller->failed);
 
 		$this->Controller->Security->Session->write('_Token', array(
-			'allowedControllers' => array('SecurityTest'), 'allowedActions' => array('posted')
+			'allowedControllers' => array('SecurityTest'),
+			'allowedActions' => array('posted')
 		));
 		$this->Controller->request['controller'] = 'SecurityTest';
 		$this->Controller->request['action'] = 'posted';
 
 		$this->Controller->request->data = array(
-			'username' => 'willy', 'password' => 'somePass', '_Token' => ''
+			'username' => 'willy',
+			'password' => 'somePass',
+			'_Token' => ''
 		);
 		$this->Controller->action = 'posted';
 		$this->Controller->Security->requireAuth('posted');
@@ -478,6 +482,29 @@ class SecurityComponentTest extends CakeTestCase {
 		$this->Controller->Security->requireDelete('deleted');
 		$this->Controller->Security->startup($this->Controller);
 		$this->assertFalse($this->Controller->failed);
+	}
+
+/**
+ * Test that validatePost fires on GET with request data.
+ * This could happen when method overriding is used.
+ *
+ * @return void
+ * @triggers Controller.startup $this->Controller
+ */
+	public function testValidatePostOnGetWithData() {
+		$_SERVER['REQUEST_METHOD'] = 'GET';
+		$this->Controller->Security->startup($this->Controller);
+
+		$fields = 'an-invalid-token';
+		$unlocked = '';
+
+		$this->Controller->request->data = array(
+			'Model' => array('username' => 'nate', 'password' => 'foo', 'valid' => '0'),
+			'_Token' => compact('fields', 'unlocked')
+		);
+		$this->assertFalse($this->Controller->failed, 'Should not be failed yet');
+		$this->Controller->Security->startup($this->Controller);
+		$this->assertTrue($this->Controller->failed, 'Should fail because of validatePost.');
 	}
 
 /**
@@ -1137,7 +1164,6 @@ class SecurityComponentTest extends CakeTestCase {
  * the params.
  *
  * @return void
- * @see https://cakephp.lighthouseapp.com/projects/42648/tickets/68
  */
 	public function testSettingTokenForRequestAction() {
 		$this->Controller->Security->startup($this->Controller);
@@ -1154,7 +1180,6 @@ class SecurityComponentTest extends CakeTestCase {
  * test that blackhole doesn't delete the _Token session key so repeat data submissions
  * stay blackholed.
  *
- * @link https://cakephp.lighthouseapp.com/projects/42648/tickets/214
  * @return void
  */
 	public function testBlackHoleNotDeletingSessionInformation() {
@@ -1214,8 +1239,7 @@ class SecurityComponentTest extends CakeTestCase {
 		$token = $this->Security->Session->read('_Token');
 		$this->assertEquals(2, count($token['csrfTokens']), 'Missing the csrf token.');
 		foreach ($token['csrfTokens'] as $expires) {
-			$diff = $csrfExpires - $expires;
-			$this->assertTrue($diff === 0 || $diff === 1, 'Token expiry does not match');
+			$this->assertWithinMargin($expires, $csrfExpires, 2, 'Token expiry does not match');
 		}
 	}
 
@@ -1231,11 +1255,6 @@ class SecurityComponentTest extends CakeTestCase {
 
 		$this->Security->Session->write('_Token.csrfTokens', array('nonce1' => strtotime('+10 minutes')));
 
-		$this->Controller->request = $this->getMock('CakeRequest', array('is'));
-		$this->Controller->request->expects($this->once())->method('is')
-			->with(array('post', 'put'))
-			->will($this->returnValue(true));
-
 		$this->Controller->request->params['action'] = 'index';
 		$this->Controller->request->data = array(
 			'_Token' => array(
@@ -1248,6 +1267,23 @@ class SecurityComponentTest extends CakeTestCase {
 		$this->Security->startup($this->Controller);
 		$token = $this->Security->Session->read('_Token');
 		$this->assertFalse(isset($token['csrfTokens']['nonce1']), 'Token was not consumed');
+	}
+
+/**
+ * tests that reusable CSRF-token expiry is renewed
+ */
+	public function testCsrfReusableTokenRenewal() {
+		$this->Security->validatePost = false;
+		$this->Security->csrfCheck = true;
+		$this->Security->csrfUseOnce = false;
+		$csrfExpires = '+10 minutes';
+		$this->Security->csrfExpires = $csrfExpires;
+
+		$this->Security->Session->write('_Token.csrfTokens', array('token' => strtotime('+1 minutes')));
+
+		$this->Security->startup($this->Controller);
+		$tokens = $this->Security->Session->read('_Token.csrfTokens');
+		$this->assertWithinMargin($tokens['token'], strtotime($csrfExpires), 2, 'Token expiry was not renewed');
 	}
 
 /**
@@ -1283,11 +1319,6 @@ class SecurityComponentTest extends CakeTestCase {
 
 		$this->Security->Session->write('_Token.csrfTokens', array('nonce1' => strtotime('+10 minutes')));
 
-		$this->Controller->request = $this->getMock('CakeRequest', array('is'));
-		$this->Controller->request->expects($this->once())->method('is')
-			->with(array('post', 'put'))
-			->will($this->returnValue(true));
-
 		$this->Controller->request->params['action'] = 'index';
 		$this->Controller->request->data = array(
 			'_Token' => array(
@@ -1312,11 +1343,6 @@ class SecurityComponentTest extends CakeTestCase {
 		$this->Security->csrfExpires = '+10 minutes';
 
 		$this->Security->Session->write('_Token.csrfTokens', array('nonce1' => strtotime('-5 minutes')));
-
-		$this->Controller->request = $this->getMock('CakeRequest', array('is'));
-		$this->Controller->request->expects($this->once())->method('is')
-			->with(array('post', 'put'))
-			->will($this->returnValue(true));
 
 		$this->Controller->request->params['action'] = 'index';
 		$this->Controller->request->data = array(
@@ -1370,10 +1396,6 @@ class SecurityComponentTest extends CakeTestCase {
 		$this->Security->Session->write('_Token.csrfTokens', array('nonce1' => strtotime('+10 minutes')));
 
 		$this->Controller->request = $this->getMock('CakeRequest', array('is'));
-		$this->Controller->request->expects($this->once())->method('is')
-			->with(array('post', 'put'))
-			->will($this->returnValue(true));
-
 		$this->Controller->request->params['action'] = 'index';
 		$this->Controller->request->data = array(
 			'_Token' => array(

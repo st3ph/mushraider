@@ -269,7 +269,7 @@ class AccountController extends AppController {
                     $toSave['password'] = md5($this->request->data['User']['newpassword']);
                     if($this->User->save($toSave)) {
                         $this->Session->setFlash(__('Your password has been updated'), 'flash_success');
-                        $this->redirect('/account');
+                        $this->redirect('/account/password');
                     }
 
                     $this->Session->setFlash(__('Something wrong happen, please fix the errors below'), 'flash_error');

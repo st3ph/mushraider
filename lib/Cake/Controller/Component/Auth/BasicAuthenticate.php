@@ -24,13 +24,13 @@ App::uses('BaseAuthenticate', 'Controller/Component/Auth');
  * ### Using Basic auth
  *
  * In your controller's components array, add auth + the required settings.
- * {{{
+ * ```
  *	public $components = array(
  *		'Auth' => array(
  *			'authenticate' => array('Basic')
  *		)
  *	);
- * }}}
+ * ```
  *
  * You should also set `AuthComponent::$sessionKey = false;` in your AppController's
  * beforeFilter() to prevent CakePHP from sending a session cookie to the client.
@@ -41,9 +41,9 @@ App::uses('BaseAuthenticate', 'Controller/Component/Auth');
  * by this authentication provider which triggers the login dialog in the browser/client.
  *
  * You may also want to use `$this->Auth->unauthorizedRedirect = false;`.
- * By default unauthorized user is redirected to the referrer URL or
- * AuthComponent::$loginAction or '/'. If unauthorizedRedirect is set to false a
- * ForbiddenException exception is thrown instead of redirecting.
+ * By default, unauthorized users are redirected to the referrer URL,
+ * `AuthComponent::$loginAction`, or '/'. If unauthorizedRedirect is set to
+ * false, a ForbiddenException exception is thrown instead of redirecting.
  *
  * @package       Cake.Controller.Component.Auth
  * @since 2.0

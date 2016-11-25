@@ -42,7 +42,7 @@ class FormerHelper extends AppHelper {
 		}
 	}
 	
-	function url($url) {
+	function url($url = NULL, $full = false) {
 	    $intPos = strpos($url, 'http://');
         if($intPos === false || $intPos != 0) {
             $url = 'http://'.$url;

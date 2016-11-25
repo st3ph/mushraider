@@ -26,7 +26,7 @@ class CommentableBehavior extends ModelBehavior {
 	* @param object $Model objet du modèle actAs
 	* @param array $settings tableau d'options pour surcharger $_defaults
 	*/
-	function setup(&$Model, $settings = array()) {
+	function setup(Model $Model, $settings = array()) {
 		// On merge les options définies par l'utilisateur avec celles par défaut
 		if (!isset($this->__settings[$Model->alias])) {
 			$this->__settings[$Model->alias] = $this->_defaults;
@@ -63,7 +63,7 @@ class CommentableBehavior extends ModelBehavior {
 	* @param array $results résultats du find
 	* @param bool $primary
 	*/
-	function afterFind(&$Model, $results, $primary = false) {
+	function afterFind(Model $Model, $results, $primary = false) {
 		if(count($results) >= 1 && isset($results[0][$Model->alias][$Model->primaryKey])) {
 			foreach($results as $key => $resultat) {				
 				// On récupère touts les commentaires pour ce modèle

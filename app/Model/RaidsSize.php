@@ -17,13 +17,13 @@ class RaidsSize extends AppModel {
     public $validate = array(
         'size' => array(
             'notEmpty' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'message' => 'Size cannot be empty.'
             )
         )
     );
 
-    function __add($size = null) {
+    function __add($size = null, $cond = array(), $d = null, $e = null) {
         if(!$size) {
             return false;
         }

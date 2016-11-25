@@ -1,4 +1,5 @@
 <?php
+App::uses('ComponentCollection', 'Controller');
  App::uses('CakeEmail', 'Network/Email');
 
 class EmailingComponent extends Component {
@@ -6,7 +7,7 @@ class EmailingComponent extends Component {
     var $email;
 
     //public function startup(Controller $controller) {
-    public function startup() {
+    public function startup(Controller $controller) {
         $emailSettings = Configure::read('Config.email');
 
         $emailConfig = null;

@@ -196,7 +196,8 @@ class StepController extends InstallAppController {
         $defaultSettings['notifications'] = json_encode(array(
                                                 'enabled' => 1,
                                                 'signup' => 0,
-                                                'contact' => ''
+                                                'contact' => '',
+                                                'comments' => 0,
                                             ));
         $defaultSettings['email'] = json_encode(array(
                                             'name' => 'MushRaider',

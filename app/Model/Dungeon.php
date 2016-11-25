@@ -20,14 +20,14 @@ class Dungeon extends AppModel {
     public $validate = array(
         'title' => array(
             'notEmpty' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'message' => 'This field cannot be left blank.',
                 'last' => true,
             )
         ),
         'raidssize_id' => array(
             'notEmpty' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'message' => 'This field cannot be left blank.',
                 'last' => true,
             )

@@ -24,13 +24,13 @@ class Classe extends AppModel {
     public $validate = array(
         'title' => array(
             'notEmpty' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'message' => 'Title cannot be empty.'
             )
         ),
         'color' => array(
             'notEmpty' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'message' => 'Color cannot be empty.'
             ),
             'length' => array(

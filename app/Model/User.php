@@ -31,7 +31,7 @@ class User extends AppModel {
                 'last' => true,
             ),
             'notEmpty' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'message' => 'This field cannot be left blank.',
                 'last' => true,
             ),

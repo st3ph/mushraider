@@ -182,12 +182,13 @@ class ControllerTask extends BakeTask {
 				$components = $this->doComponents();
 
 				$wannaUseSession = $this->in(
-					__d('cake_console', "Would you like to use Session flash messages?"), array('y', 'n'), 'y'
+					__d('cake_console', "Would you like to use the FlashComponent to display flash messages?"), array('y', 'n'), 'y'
 				);
 
 				if (strtolower($wannaUseSession) === 'y') {
-					array_push($components, 'Session');
+					array_push($components, 'Session', 'Flash');
 				}
+				array_unique($components);
 			}
 		} else {
 			list($wannaBakeCrud, $wannaBakeAdminCrud) = $this->_askAboutMethods();
@@ -247,10 +248,10 @@ class ControllerTask extends BakeTask {
 		);
 
 		foreach ($properties as $var => $title) {
-			if (count($$var)) {
+			if (count(${$var})) {
 				$output = '';
-				$length = count($$var);
-				foreach ($$var as $i => $propElement) {
+				$length = count(${$var});
+				foreach (${$var} as $i => $propElement) {
 					if ($i != $length - 1) {
 						$output .= ucfirst($propElement) . ', ';
 					} else {
@@ -285,7 +286,7 @@ class ControllerTask extends BakeTask {
  *
  * @param string $controllerName Controller name
  * @param string $admin Admin route to use
- * @param boolean $wannaUseSession Set to true to use sessions, false otherwise
+ * @param bool $wannaUseSession Set to true to use sessions, false otherwise
  * @return string Baked actions
  */
 	public function bakeActions($controllerName, $admin = null, $wannaUseSession = true) {
@@ -451,14 +452,14 @@ class ControllerTask extends BakeTask {
 				return $this->_stop();
 			}
 
-			if (!$enteredController || intval($enteredController) > count($controllers)) {
+			if (!$enteredController || (int)$enteredController > count($controllers)) {
 				$this->err(__d('cake_console', "The Controller name you supplied was empty,\nor the number you selected was not an option. Please try again."));
 				$enteredController = '';
 			}
 		}
 
-		if (intval($enteredController) > 0 && intval($enteredController) <= count($controllers)) {
-			$controllerName = $controllers[intval($enteredController) - 1];
+		if ((int)$enteredController > 0 && (int)$enteredController <= count($controllers)) {
+			$controllerName = $controllers[(int)$enteredController - 1];
 		} else {
 			$controllerName = Inflector::camelize($enteredController);
 		}

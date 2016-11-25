@@ -395,7 +395,8 @@ class ToolsHelper extends AppHelper {
     * @return string
     */
 	function br2nl($string){
-	   return eregi_replace('<br[[:space:]]*/?'.'[[:space:]]*>', chr(13).chr(10), $string);
+       $string = preg_replace('<br[[:space:]]*/?'.'[[:space:]]*>', chr(13).chr(10), $string);
+	   return preg_replace('<BR[[:space:]]*/?'.'[[:space:]]*>', chr(13).chr(10), $string);
 	}
 
 	/*

@@ -115,7 +115,7 @@ class Sqlserver extends DboSource {
 /**
  * Connects to the database using options in the given configuration array.
  *
- * @return boolean True if the database could be connected, else false
+ * @return bool True if the database could be connected, else false
  * @throws MissingConnectionException
  */
 	public function connect() {
@@ -157,7 +157,7 @@ class Sqlserver extends DboSource {
 /**
  * Check that PDO SQL Server is installed/loaded
  *
- * @return boolean
+ * @return bool
  */
 	public function enabled() {
 		return in_array('sqlsrv', PDO::getAvailableDrivers());
@@ -272,7 +272,7 @@ class Sqlserver extends DboSource {
  * @param Model $model The model to get fields for.
  * @param string $alias Alias table name
  * @param array $fields The fields so far.
- * @param boolean $quote Whether or not to quote identfiers.
+ * @param bool $quote Whether or not to quote identfiers.
  * @return array
  */
 	public function fields(Model $model, $alias = null, $fields = array(), $quote = true) {
@@ -389,8 +389,8 @@ class Sqlserver extends DboSource {
 /**
  * Returns a limit statement in the correct format for the particular database.
  *
- * @param integer $limit Limit of results returned
- * @param integer $offset Offset from which to start results
+ * @param int $limit Limit of results returned
+ * @param int $offset Offset from which to start results
  * @return string SQL limit/offset statement
  */
 	public function limit($limit, $offset = null) {
@@ -474,6 +474,9 @@ class Sqlserver extends DboSource {
 			if (in_array($length->Type, array('nchar', 'nvarchar'))) {
 				return floor($length->Length / 2);
 			}
+			if ($length->Type === 'text') {
+				return null;
+			}
 			return $length->Length;
 		}
 		return parent::length($length);
@@ -537,11 +540,11 @@ class Sqlserver extends DboSource {
 				if (version_compare($this->getVersion(), '11', '<') && preg_match('/FETCH\sFIRST\s+([0-9]+)/i', $limit, $offset)) {
 					preg_match('/OFFSET\s*(\d+)\s*.*?(\d+)\s*ROWS/', $limit, $limitOffset);
 
-					$limit = 'TOP ' . intval($limitOffset[2]);
-					$page = intval($limitOffset[1] / $limitOffset[2]);
-					$offset = intval($limitOffset[2] * $page);
+					$limit = 'TOP ' . (int)$limitOffset[2];
+					$page = (int)($limitOffset[1] / $limitOffset[2]);
+					$offset = (int)($limitOffset[2] * $page);
 
-					$rowCounter = self::ROW_COUNTER;
+					$rowCounter = static::ROW_COUNTER;
 					$sql = "SELECT {$limit} * FROM (
 							SELECT {$fields}, ROW_NUMBER() OVER ({$order}) AS {$rowCounter}
 							FROM {$table} {$alias} {$joins} {$conditions} {$group}
@@ -581,11 +584,12 @@ class Sqlserver extends DboSource {
  *
  * @param string $data String to be prepared for use in an SQL statement
  * @param string $column The column into which this data will be inserted
+ * @param bool $null Column allows NULL values
  * @return string Quoted and escaped data
  */
-	public function value($data, $column = null) {
+	public function value($data, $column = null, $null = true) {
 		if ($data === null || is_array($data) || is_object($data)) {
-			return parent::value($data, $column);
+			return parent::value($data, $column, $null);
 		}
 		if (in_array($data, array('{$__cakeID__$}', '{$__cakeForeignKey__$}'), true)) {
 			return $data;
@@ -600,7 +604,7 @@ class Sqlserver extends DboSource {
 			case 'text':
 				return 'N' . $this->_connection->quote($data, PDO::PARAM_STR);
 			default:
-				return parent::value($data, $column);
+				return parent::value($data, $column, $null);
 		}
 	}
 
@@ -610,7 +614,7 @@ class Sqlserver extends DboSource {
  *
  * @param Model $model The model to read from
  * @param array $queryData The query data
- * @param integer $recursive How many layers to go.
+ * @param int $recursive How many layers to go.
  * @return array|false Array of resultset rows, or false if no rows matched
  */
 	public function read(Model $model, $queryData = array(), $recursive = null) {
@@ -630,7 +634,7 @@ class Sqlserver extends DboSource {
 			$resultRow = array();
 			foreach ($this->map as $col => $meta) {
 				list($table, $column, $type) = $meta;
-				if ($table === 0 && $column === self::ROW_COUNTER) {
+				if ($table === 0 && $column === static::ROW_COUNTER) {
 					continue;
 				}
 				$resultRow[$table][$column] = $row[$col];
@@ -745,7 +749,7 @@ class Sqlserver extends DboSource {
  * this returns false.
  *
  * @param mixed $source Unused
- * @return integer Number of affected rows
+ * @return int Number of affected rows
  */
 	public function lastAffected($source = null) {
 		$affected = parent::lastAffected();

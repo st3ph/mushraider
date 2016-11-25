@@ -32,7 +32,7 @@ class CakeValidationSet implements ArrayAccess, IteratorAggregate, Countable {
 /**
  * Holds the CakeValidationRule objects
  *
- * @var array
+ * @var CakeValidationRule[]
  */
 	protected $_rules = array();
 
@@ -53,7 +53,7 @@ class CakeValidationSet implements ArrayAccess, IteratorAggregate, Countable {
 /**
  * Whether the validation is stopped
  *
- * @var boolean
+ * @var bool
  */
 	public $isStopped = false;
 
@@ -115,7 +115,7 @@ class CakeValidationSet implements ArrayAccess, IteratorAggregate, Countable {
  * validation errors
  *
  * @param array $data Data array
- * @param boolean $isUpdate Is record being updated or created
+ * @param bool $isUpdate Is record being updated or created
  * @return array list of validation errors for this field
  */
 	public function validate($data, $isUpdate = false) {
@@ -172,7 +172,7 @@ class CakeValidationSet implements ArrayAccess, IteratorAggregate, Countable {
 /**
  * Returns all rules for this validation set
  *
- * @return array
+ * @return CakeValidationRule[]
  */
 	public function getRules() {
 		return $this->_rules;
@@ -183,15 +183,15 @@ class CakeValidationSet implements ArrayAccess, IteratorAggregate, Countable {
  *
  * ## Example:
  *
- * {{{
+ * ```
  *		$set
- *			->setRule('required', array('rule' => 'notEmpty', 'required' => true))
- *			->setRule('inRange', array('rule' => array('between', 4, 10))
- * }}}
+ *			->setRule('required', array('rule' => 'notBlank', 'required' => true))
+ *			->setRule('between', array('rule' => array('lengthBetween', 4, 10))
+ * ```
  *
  * @param string $name The name under which the rule should be set
  * @param CakeValidationRule|array $rule The validation rule to be set
- * @return CakeValidationSet this instance
+ * @return self
  */
 	public function setRule($name, $rule) {
 		if (!($rule instanceof CakeValidationRule)) {
@@ -206,14 +206,14 @@ class CakeValidationSet implements ArrayAccess, IteratorAggregate, Countable {
  *
  * ## Example:
  *
- * {{{
+ * ```
  *		$set
  *			->removeRule('required')
  *			->removeRule('inRange')
- * }}}
+ * ```
  *
  * @param string $name The name under which the rule should be unset
- * @return CakeValidationSet this instance
+ * @return self
  */
 	public function removeRule($name) {
 		unset($this->_rules[$name]);
@@ -225,16 +225,16 @@ class CakeValidationSet implements ArrayAccess, IteratorAggregate, Countable {
  *
  * ## Example:
  *
- * {{{
+ * ```
  *		$set->setRules(array(
- *			'required' => array('rule' => 'notEmpty', 'required' => true),
+ *			'required' => array('rule' => 'notBlank', 'required' => true),
  *			'inRange' => array('rule' => array('between', 4, 10)
  * 		));
- * }}}
+ * ```
  *
  * @param array $rules The rules to be set
- * @param boolean $mergeVars [optional] If true, merges vars instead of replace. Defaults to true.
- * @return ModelField
+ * @param bool $mergeVars [optional] If true, merges vars instead of replace. Defaults to true.
+ * @return self
  */
 	public function setRules($rules = array(), $mergeVars = true) {
 		if ($mergeVars === false) {
@@ -308,7 +308,7 @@ class CakeValidationSet implements ArrayAccess, IteratorAggregate, Countable {
  * Returns whether an index exists in the rule set
  *
  * @param string $index name of the rule
- * @return boolean
+ * @return bool
  */
 	public function offsetExists($index) {
 		return isset($this->_rules[$index]);
@@ -361,7 +361,7 @@ class CakeValidationSet implements ArrayAccess, IteratorAggregate, Countable {
 /**
  * Returns the number of rules in this set
  *
- * @return integer
+ * @return int
  */
 	public function count() {
 		return count($this->_rules);

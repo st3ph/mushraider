@@ -42,7 +42,7 @@ class Game extends AppModel {
     public $validate = array(
         'title' => array(
             'notEmpty' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'message' => 'Title cannot be empty.'
             )
         )

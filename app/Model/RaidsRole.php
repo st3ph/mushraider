@@ -17,7 +17,7 @@ class RaidsRole extends AppModel {
     public $validate = array(
         'title' => array(
             'notEmpty' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'message' => 'Title cannot be empty.'
             ),
             'unique' => array(
@@ -27,7 +27,7 @@ class RaidsRole extends AppModel {
         )
     );
 
-    function __add($title = null, $order = null) {
+    function __add($title = null, $order = null, $d = null, $e = null) {
         if(!$title) {
             return false;
         }

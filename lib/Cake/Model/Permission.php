@@ -1,7 +1,5 @@
 <?php
 /**
- *
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -28,7 +26,7 @@ class Permission extends AppModel {
 /**
  * Explicitly disable in-memory query caching
  *
- * @var boolean
+ * @var bool
  */
 	public $cacheQueries = false;
 
@@ -71,7 +69,7 @@ class Permission extends AppModel {
  * @param string $aro ARO The requesting object identifier.
  * @param string $aco ACO The controlled object identifier.
  * @param string $action Action (defaults to *)
- * @return boolean Success (true if ARO has access to action in ACO, false otherwise)
+ * @return bool Success (true if ARO has access to action in ACO, false otherwise)
  */
 	public function check($aro, $aco, $action = '*') {
 		if (!$aro || !$aco) {
@@ -109,10 +107,10 @@ class Permission extends AppModel {
 			return false;
 		}
 
-		$inherited = array();
 		$acoIDs = Hash::extract($acoPath, '{n}.' . $this->Aco->alias . '.id');
 
 		$count = count($aroPath);
+		$inherited = array();
 		for ($i = 0; $i < $count; $i++) {
 			$permAlias = $this->alias;
 
@@ -131,19 +129,17 @@ class Permission extends AppModel {
 			$perms = Hash::extract($perms, '{n}.' . $this->alias);
 			foreach ($perms as $perm) {
 				if ($action === '*') {
-
-					foreach ($permKeys as $key) {
-						if (!empty($perm)) {
-							if ($perm[$key] == -1) {
-								return false;
-							} elseif ($perm[$key] == 1) {
-								$inherited[$key] = 1;
-							}
-						}
+					if (empty($perm)) {
+						continue;
 					}
-
-					if (count($inherited) === count($permKeys)) {
-						return true;
+					foreach ($permKeys as $key) {
+						if ($perm[$key] == -1 && !(isset($inherited[$key]) && $inherited[$key] == 1)) {
+							// Deny, but only if a child node didnt't explicitly allow
+							return false;
+						} elseif ($perm[$key] == 1) {
+							// Allow & inherit from parent nodes
+							$inherited[$key] = $perm[$key];
+						}
 					}
 				} else {
 					switch ($perm['_' . $action]) {
@@ -156,6 +152,10 @@ class Permission extends AppModel {
 					}
 				}
 			}
+
+			if ($action === '*' && count($inherited) === count($permKeys)) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -166,8 +166,8 @@ class Permission extends AppModel {
  * @param string $aro ARO The requesting object identifier.
  * @param string $aco ACO The controlled object identifier.
  * @param string $actions Action (defaults to *) Invalid permissions will result in an exception
- * @param integer $value Value to indicate access type (1 to give access, -1 to deny, 0 to inherit)
- * @return boolean Success
+ * @param int $value Value to indicate access type (1 to give access, -1 to deny, 0 to inherit)
+ * @return bool Success
  * @throws AclException on Invalid permission key.
  */
 	public function allow($aro, $aco, $actions = '*', $value = 1) {

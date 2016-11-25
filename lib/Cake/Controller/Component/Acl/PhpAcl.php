@@ -22,19 +22,19 @@
  *
  * @package Cake.Controller.Component.Acl
  */
-class PhpAcl extends Object implements AclInterface {
+class PhpAcl extends CakeObject implements AclInterface {
 
 /**
  * Constant for deny
  *
- * @var boolean
+ * @var bool
  */
 	const DENY = false;
 
 /**
  * Constant for allow
  *
- * @var boolean
+ * @var bool
  */
 	const ALLOW = true;
 
@@ -68,7 +68,7 @@ class PhpAcl extends Object implements AclInterface {
  */
 	public function __construct() {
 		$this->options = array(
-			'policy' => self::DENY,
+			'policy' => static::DENY,
 			'config' => APP . 'Config' . DS . 'acl.php',
 		);
 	}
@@ -124,7 +124,7 @@ class PhpAcl extends Object implements AclInterface {
  * @param string $aro ARO The requesting object identifier.
  * @param string $aco ACO The controlled object identifier.
  * @param string $action Action (defaults to *)
- * @return boolean Success
+ * @return bool Success
  */
 	public function allow($aro, $aco, $action = "*") {
 		return $this->Aco->access($this->Aro->resolve($aro), $aco, $action, 'allow');
@@ -136,7 +136,7 @@ class PhpAcl extends Object implements AclInterface {
  * @param string $aro ARO The requesting object identifier.
  * @param string $aco ACO The controlled object identifier.
  * @param string $action Action (defaults to *)
- * @return boolean Success
+ * @return bool Success
  */
 	public function deny($aro, $aco, $action = "*") {
 		return $this->Aco->access($this->Aro->resolve($aro), $aco, $action, 'deny');
@@ -148,7 +148,7 @@ class PhpAcl extends Object implements AclInterface {
  * @param string $aro ARO The requesting object identifier.
  * @param string $aco ACO The controlled object identifier.
  * @param string $action Action (defaults to *)
- * @return boolean Success
+ * @return bool Success
  */
 	public function inherit($aro, $aco, $action = "*") {
 		return false;
@@ -161,7 +161,7 @@ class PhpAcl extends Object implements AclInterface {
  * @param string $aro ARO
  * @param string $aco ACO
  * @param string $action Action
- * @return boolean true if access is granted, false otherwise
+ * @return bool true if access is granted, false otherwise
  */
 	public function check($aro, $aco, $action = "*") {
 		$allow = $this->options['policy'];
@@ -196,7 +196,6 @@ class PhpAcl extends Object implements AclInterface {
 
 /**
  * Access Control Object
- *
  */
 class PhpAco {
 
@@ -252,7 +251,7 @@ class PhpAco {
 			}
 
 			foreach ($root as $node => $elements) {
-				$pattern = '/^' . str_replace(array_keys(self::$modifiers), array_values(self::$modifiers), $node) . '$/';
+				$pattern = '/^' . str_replace(array_keys(static::$modifiers), array_values(static::$modifiers), $node) . '$/';
 
 				if ($node == $aco[$level] || preg_match($pattern, $aco[$level])) {
 					// merge allow/denies with $path of current level
@@ -361,7 +360,6 @@ class PhpAco {
 
 /**
  * Access Request Object
- *
  */
 class PhpAro {
 
@@ -494,7 +492,7 @@ class PhpAro {
 				return $this->aliases[$mapped];
 			}
 		}
-		return self::DEFAULT_ROLE;
+		return static::DEFAULT_ROLE;
 	}
 
 /**

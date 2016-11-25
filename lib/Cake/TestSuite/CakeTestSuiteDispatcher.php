@@ -37,7 +37,7 @@ class CakeTestSuiteDispatcher {
 		'codeCoverage' => false,
 		'case' => null,
 		'core' => false,
-		'app' => true,
+		'app' => false,
 		'plugin' => null,
 		'output' => 'html',
 		'show' => 'groups',
@@ -63,7 +63,7 @@ class CakeTestSuiteDispatcher {
 /**
  * boolean to set auto parsing of params.
  *
- * @var boolean
+ * @var bool
  */
 	protected $_paramsParsed = false;
 
@@ -130,7 +130,7 @@ class CakeTestSuiteDispatcher {
 /**
  * Checks for the existence of the test framework files
  *
- * @return boolean true if found, false otherwise
+ * @return bool true if found, false otherwise
  */
 	public function loadTestFramework() {
 		if (class_exists('PHPUnit_Framework_TestCase')) {
@@ -151,6 +151,12 @@ class CakeTestSuiteDispatcher {
 			} elseif (is_dir($vendor . DS . 'PHPUnit')) {
 				ini_set('include_path', $vendor . PATH_SEPARATOR . ini_get('include_path'));
 				break;
+			} elseif (is_file($vendor . DS . 'phpunit.phar')) {
+				$backup = $GLOBALS['_SERVER']['SCRIPT_NAME'];
+				$GLOBALS['_SERVER']['SCRIPT_NAME'] = '-';
+				$included = include_once $vendor . DS . 'phpunit.phar';
+				$GLOBALS['_SERVER']['SCRIPT_NAME'] = $backup;
+				return $included;
 			}
 		}
 		include 'PHPUnit' . DS . 'Autoload.php';
@@ -248,7 +254,7 @@ class CakeTestSuiteDispatcher {
 		restore_error_handler();
 
 		try {
-			self::time();
+			static::time();
 			$command = new CakeTestSuiteCommand('CakeTestLoader', $commandArgs);
 			$command->run($options);
 		} catch (MissingConnectionException $exception) {
@@ -262,8 +268,8 @@ class CakeTestSuiteDispatcher {
 /**
  * Sets a static timestamp
  *
- * @param boolean $reset to set new static timestamp.
- * @return integer timestamp
+ * @param bool $reset to set new static timestamp.
+ * @return int timestamp
  */
 	public static function time($reset = false) {
 		static $now;
@@ -281,7 +287,7 @@ class CakeTestSuiteDispatcher {
  * @return string formatted date
  */
 	public static function date($format) {
-		return date($format, self::time());
+		return date($format, static::time());
 	}
 
 }

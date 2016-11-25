@@ -18,14 +18,14 @@ App::uses('BaseAuthorize', 'Controller/Component/Auth');
  * An authorization adapter for AuthComponent. Provides the ability to authorize using a controller callback.
  * Your controller's isAuthorized() method should return a boolean to indicate whether or not the user is authorized.
  *
- * {{{
+ * ```
  *	public function isAuthorized($user) {
  *		if (!empty($this->request->params['admin'])) {
  *			return $user['role'] === 'admin';
  *		}
  *		return !empty($user);
  *	}
- * }}}
+ * ```
  *
  * the above is simple implementation that would only authorize users of the 'admin' role to access
  * admin routing.
@@ -57,7 +57,7 @@ class ControllerAuthorize extends BaseAuthorize {
  *
  * @param array $user Active user data
  * @param CakeRequest $request Request instance.
- * @return boolean
+ * @return bool
  */
 	public function authorize($user, CakeRequest $request) {
 		return (bool)$this->_Controller->isAuthorized($user);

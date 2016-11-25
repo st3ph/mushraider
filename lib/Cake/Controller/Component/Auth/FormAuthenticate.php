@@ -18,13 +18,13 @@ App::uses('BaseAuthenticate', 'Controller/Component/Auth');
  * An authentication adapter for AuthComponent. Provides the ability to authenticate using POST
  * data. Can be used by configuring AuthComponent to use it via the AuthComponent::$authenticate setting.
  *
- * {{{
+ * ```
  *	$this->Auth->authenticate = array(
  *		'Form' => array(
  *			'scope' => array('User.active' => 1)
  *		)
  *	)
- * }}}
+ * ```
  *
  * When configuring FormAuthenticate you can pass in settings to which fields, model and additional conditions
  * are used. See FormAuthenticate::$settings for more information.
@@ -41,7 +41,7 @@ class FormAuthenticate extends BaseAuthenticate {
  * @param CakeRequest $request The request that contains login information.
  * @param string $model The model used for login verification.
  * @param array $fields The fields to be checked.
- * @return boolean False if the fields have not been supplied. True if they exist.
+ * @return bool False if the fields have not been supplied. True if they exist.
  */
 	protected function _checkFields(CakeRequest $request, $model, $fields) {
 		if (empty($request->data[$model])) {

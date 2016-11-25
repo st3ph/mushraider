@@ -17,7 +17,7 @@ class Role extends AppModel {
     public $validate = array(
         'title' => array(
             'notEmpty' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'message' => 'Alias cannot be empty.',
                 'last' => true,
             ),
@@ -29,7 +29,7 @@ class Role extends AppModel {
                 'last' => true,
             ),
             'notEmpty' => array(
-                'rule' => 'notEmpty',
+                'rule' => 'notBlank',
                 'message' => 'Alias cannot be empty.',
                 'last' => true,
             ),

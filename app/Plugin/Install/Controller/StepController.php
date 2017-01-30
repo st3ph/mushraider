@@ -174,6 +174,7 @@ class StepController extends InstallAppController {
         }else {
             $this->Session->setFlash(__('MushRaider can\'t create admin user, please try again.'), 'flash_error');
             $flashed = true;
+            $this->redirect('/install/step/3');
         }
     }
 

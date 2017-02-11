@@ -161,7 +161,7 @@ class EventsController extends AppController {
                     $params = array();
                     $params['recursive'] = 1;
                     $params['fields'] = array('id');
-                    $params['group'] = array('Character.user_id', 'Character.id');
+                    $params['group'] = array('Character.user_id');
                     $params['contain']['User']['fields'] = array('email', 'notifications_new');
                     $params['contain']['User']['conditions']['User.status'] = 1;
                     $params['conditions']['Character.game_id'] = $event['Event']['game_id'];

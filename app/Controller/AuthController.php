@@ -50,7 +50,8 @@ class AuthController extends AppController {
                 $auth = $HttpSocket->post($this->bridge->url, array('login' => $this->request->data['User']['login'], 'pwd' => $pwd));
                 $auth = json_decode($auth->body);
                 if(empty($auth) || !$auth->authenticated) {
-                    $this->Session->setFlash(__('The email or password that you entered is incorrect'), 'flash_warning');
+                    $message = empty($auth->error) ? 'The email or password that you entered is incorrect' : $auth->error;
+                    $this->Session->setFlash(__($message), 'flash_warning');
                     unset($this->request->data['User']);
                 }else {
                     $roleId = !empty($auth->role)?$this->Role->getIdByAlias($auth->role):null;

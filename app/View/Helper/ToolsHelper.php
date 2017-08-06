@@ -381,12 +381,11 @@ class ToolsHelper extends AppHelper {
 
     /*
     * @name getProtocol
-    * @desc return current protocol
+    * @desc return // to allow dynamic protocol
     * @return string
     */
     function getProtocol() {
-        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-	    return $protocol;
+        return "//";
     }
 
     /*

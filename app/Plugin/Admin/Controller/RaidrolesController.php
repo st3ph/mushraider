@@ -18,6 +18,9 @@ class RaidrolesController extends AdminAppController {
 
     public function add() {
         if(!empty($this->request->data['RaidsRole'])) {
+            $toSave = array();
+            $toSave['title'] = $this->request->data['RaidsRole']['title'];
+
             if($this->RaidsRole->__add($this->request->data['RaidsRole']['title'])) {
                 $this->Session->setFlash(__('%s has been added to your roles list', $toSave['title']), 'flash_success');
                 return $this->redirect('/admin/raidroles');

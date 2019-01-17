@@ -29,6 +29,35 @@ class RaidheadSource extends DataSource {
 		$this->config['baseUrl'] .= $lang;
 	}
 
+	/**
+	 * query api and return response as array or false
+	 * @param  string $uri api uri
+	 * @return array|false response as array or false if failed
+	 */
+	private function _get($uri)
+	{
+		$client = new HttpSocket([
+			'request' => [
+				'redirect' => 2,
+			],
+		]);
+
+		try {
+			$response = $client->get([
+				'uri' => $this->config['baseUrl'] . $uri,
+				'header' => [
+					'User-Agent' => 'Mushraider',
+				],
+			]);
+
+			$return = json_decode($response, true);
+		} catch (Exception $e) {
+			$return = false;
+		}
+
+		return $return;
+	}
+
 	public function gets($type = 'all') {
 		$list = array();
 		$json = $this->http->get($this->config['baseUrl'].'/games/index.json');

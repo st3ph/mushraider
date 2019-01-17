@@ -32,13 +32,13 @@
  *
  * In production mode, flash messages redirect after a time interval.
  * In development mode, you need to click the flash message to continue.
- */	
+ */
 
 // TODO : generate config.salt.php
 
 
 	Configure::write('debug', 0);
-	Configure::write('mushraider', array('version' => '1.7.0.2', 'date' => '2017-02-19'));
+	Configure::write('mushraider', array('version' => '1.7.0.3', 'date' => '2019-01-17'));
 
 /**
  * Configure the Error handler used to handle errors for your application. By default

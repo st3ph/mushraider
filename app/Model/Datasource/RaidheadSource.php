@@ -18,7 +18,6 @@ class RaidheadSource extends DataSource {
 		'langs' => array('eng', 'fra')
 	);
 
-
 	public function __construct() {
 		$lang = strtolower(Configure::read('Settings.language'));
 		if(!in_array($lang, $this->config['langs'])) {

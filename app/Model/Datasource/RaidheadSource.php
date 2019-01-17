@@ -14,7 +14,7 @@ App::uses('Configure', 'Core');
 class RaidheadSource extends DataSource {
 
 	public $config = array(
-		'baseUrl' => 'http://api.raidhead.com/',
+		'baseUrl' => 'https://api.raidhead.com/',
 		'langs' => array('eng', 'fra')
 	);
 

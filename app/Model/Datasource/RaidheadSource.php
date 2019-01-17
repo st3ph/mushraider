@@ -30,44 +30,43 @@ class RaidheadSource extends DataSource {
 	/**
 	 * query api and return response as array or false
 	 * @param  string $uri api uri
-	 * @return array|false response as array or false if failed
+	 * @return array response as array
+	 * @throws CakeException
 	 */
 	private function _get($uri)
 	{
-		$client = new HttpSocket([
-			'request' => [
+		$client = new HttpSocket(array(
+			'request' => array(
 				'redirect' => 2,
-			],
-		]);
+			),
+		));
 
 		try {
-			$response = $client->get($this->config['baseUrl'] . $uri, [], [
-				'header' => [
+			$response = $client->get($this->config['baseUrl'] . $uri, array(), array(
+				'header' => array(
 					'User-Agent' => 'Mushraider/' . Configure::read('mushraider.version'),
-				],
-			]);
+				),
+			));
 
 			$return = json_decode($response->body(), true);
-		} catch (Exception $e) {
-			$return = false;
-		}
 
-		return $return;
+			if ($return === false) {
+				throw new CakeException(json_last_error());
+			}
+
+			return $return;
+		} catch (Exception $e) {
+			throw $e;
+		}
 	}
 
 	public function gets($type = 'all') {
-		$list = array();
 		$games = $this->_get('/games/index.json');
-		if($games === false) {
-			$error = json_last_error();
-			throw new CakeException($error);
-		}
 
 		if($type == 'list') {
-			if(!empty($games)) {
-				foreach($games as $game) {
-					$list[$game['short']] = $game['title'];
-				}
+			$list = array();
+			foreach($games as $game) {
+				$list[$game['short']] = $game['title'];
 			}
 
 			return $list;
@@ -77,22 +76,10 @@ class RaidheadSource extends DataSource {
 	}
 
 	public function get($slug) {
-		$game = $this->_get('/games/get/' . $slug . '.json');
-		if($game === false) {
-			$error = json_last_error();
-			throw new CakeException($error);
-		}
-
-		return $game;
+		return $this->_get('/games/get/' . $slug . '.json');
 	}
 
 	public function serverStatus($slug) {
-		$serverStatus = $this->_get('/server_status/get/' . $slug . '.json');
-		if($serverStatus === false) {
-			$error = json_last_error();
-			throw new CakeException($error);
-		}
-
-		return $serverStatus;
+		return $this->_get('/server_status/get/' . $slug . '.json');
 	}
 }

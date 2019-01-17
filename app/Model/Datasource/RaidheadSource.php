@@ -6,70 +6,70 @@
  * @desc Used for reading from RaidHead API.
  *
  */
- 
+
 App::uses('DataSource', 'Model/Datasource');
 App::uses('HttpSocket', 'Network/Http');
 
 class RaidheadSource extends DataSource {
 
-    public $config = array(
-        'baseUrl' => 'http://api.raidhead.com/',
-        'langs' => array('eng', 'fra')
-    );
+	public $config = array(
+		'baseUrl' => 'http://api.raidhead.com/',
+		'langs' => array('eng', 'fra')
+	);
 
-    private $http;
+	private $http;
 
-    public function __construct() {
-        $this->http = new HttpSocket();
-        $lang = strtolower(Configure::read('Settings.language'));
-        if(!in_array($lang, $this->config['langs'])) {
-            $lang = $this->config['langs'][0];
-        }
+	public function __construct() {
+		$this->http = new HttpSocket();
+		$lang = strtolower(Configure::read('Settings.language'));
+		if(!in_array($lang, $this->config['langs'])) {
+			$lang = $this->config['langs'][0];
+		}
 
-        $this->config['baseUrl'] .= $lang;
-    }
-    
-    public function gets($type = 'all') {
-        $list = array();
-        $json = $this->http->get($this->config['baseUrl'].'/games/index.json');
-        $games = json_decode($json, true);
-        if(is_null($games)) {
-            $error = json_last_error();
-            throw new CakeException($error);
-        }
+		$this->config['baseUrl'] .= $lang;
+	}
 
-        if($type == 'list') {
-            if(!empty($games)) {
-                foreach($games as $game) {
-                    $list[$game['short']] = $game['title'];
-                }
-            }
+	public function gets($type = 'all') {
+		$list = array();
+		$json = $this->http->get($this->config['baseUrl'].'/games/index.json');
+		$games = json_decode($json, true);
+		if(is_null($games)) {
+			$error = json_last_error();
+			throw new CakeException($error);
+		}
 
-            return $list;
-        }
+		if($type == 'list') {
+			if(!empty($games)) {
+				foreach($games as $game) {
+					$list[$game['short']] = $game['title'];
+				}
+			}
 
-        return $games;
-    }
+			return $list;
+		}
 
-    public function get($slug) {
-        $json = $this->http->get($this->config['baseUrl'].'/games/get/'.$slug.'.json');
-        $game = json_decode($json, true);
-        if(is_null($game)) {
-            $error = json_last_error();
-            throw new CakeException($error);
-        }
+		return $games;
+	}
 
-        return $game;
-    }
+	public function get($slug) {
+		$json = $this->http->get($this->config['baseUrl'].'/games/get/'.$slug.'.json');
+		$game = json_decode($json, true);
+		if(is_null($game)) {
+			$error = json_last_error();
+			throw new CakeException($error);
+		}
 
-    public function serverStatus($slug) {
-        $json = $this->http->get($this->config['baseUrl'].'/server_status/get/'.$slug.'.json');
-        $serverStatus = json_decode($json, true);
-        if(is_null($serverStatus)) {
-            $error = json_last_error();
-            throw new CakeException($error);
-        }
+		return $game;
+	}
 
-        return $serverStatus;
-    }
+	public function serverStatus($slug) {
+		$json = $this->http->get($this->config['baseUrl'].'/server_status/get/'.$slug.'.json');
+		$serverStatus = json_decode($json, true);
+		if(is_null($serverStatus)) {
+			$error = json_last_error();
+			throw new CakeException($error);
+		}
+
+		return $serverStatus;
+	}
 }

@@ -18,10 +18,8 @@ class RaidheadSource extends DataSource {
 		'langs' => array('eng', 'fra')
 	);
 
-	private $http;
 
 	public function __construct() {
-		$this->http = new HttpSocket();
 		$lang = strtolower(Configure::read('Settings.language'));
 		if(!in_array($lang, $this->config['langs'])) {
 			$lang = $this->config['langs'][0];
@@ -60,7 +58,6 @@ class RaidheadSource extends DataSource {
 
 	public function gets($type = 'all') {
 		$list = array();
-		$json = $this->http->get($this->config['baseUrl'].'/games/index.json');
 		$games = $this->_get('/games/index.json');
 		if($games === false) {
 			$error = json_last_error();
@@ -81,9 +78,8 @@ class RaidheadSource extends DataSource {
 	}
 
 	public function get($slug) {
-		$json = $this->http->get($this->config['baseUrl'].'/games/get/'.$slug.'.json');
-		$game = json_decode($json, true);
-		if(is_null($game)) {
+		$game = $this->_get('/games/get/' . $slug . '.json');
+		if($game === false) {
 			$error = json_last_error();
 			throw new CakeException($error);
 		}
@@ -92,9 +88,8 @@ class RaidheadSource extends DataSource {
 	}
 
 	public function serverStatus($slug) {
-		$json = $this->http->get($this->config['baseUrl'].'/server_status/get/'.$slug.'.json');
-		$serverStatus = json_decode($json, true);
-		if(is_null($serverStatus)) {
+		$serverStatus = $this->_get('/server_status/get/' . $slug . '.json');
+		if($serverStatus === false) {
 			$error = json_last_error();
 			throw new CakeException($error);
 		}

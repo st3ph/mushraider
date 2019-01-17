@@ -9,6 +9,7 @@
 
 App::uses('DataSource', 'Model/Datasource');
 App::uses('HttpSocket', 'Network/Http');
+App::uses('Configure', 'Core');
 
 class RaidheadSource extends DataSource {
 
@@ -43,14 +44,13 @@ class RaidheadSource extends DataSource {
 		]);
 
 		try {
-			$response = $client->get([
-				'uri' => $this->config['baseUrl'] . $uri,
+			$response = $client->get($this->config['baseUrl'] . $uri, [], [
 				'header' => [
-					'User-Agent' => 'Mushraider',
+					'User-Agent' => 'Mushraider/' . Configure::read('mushraider.version'),
 				],
 			]);
 
-			$return = json_decode($response, true);
+			$return = json_decode($response->body(), true);
 		} catch (Exception $e) {
 			$return = false;
 		}
@@ -61,8 +61,8 @@ class RaidheadSource extends DataSource {
 	public function gets($type = 'all') {
 		$list = array();
 		$json = $this->http->get($this->config['baseUrl'].'/games/index.json');
-		$games = json_decode($json, true);
-		if(is_null($games)) {
+		$games = $this->_get('/games/index.json');
+		if($games === false) {
 			$error = json_last_error();
 			throw new CakeException($error);
 		}

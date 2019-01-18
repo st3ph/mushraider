@@ -6,70 +6,80 @@
  * @desc Used for reading from RaidHead API.
  *
  */
- 
+
 App::uses('DataSource', 'Model/Datasource');
 App::uses('HttpSocket', 'Network/Http');
+App::uses('Configure', 'Core');
 
 class RaidheadSource extends DataSource {
 
-    public $config = array(
-        'baseUrl' => 'http://api.raidhead.com/',
-        'langs' => array('eng', 'fra')
-    );
+	public $config = array(
+		'baseUrl' => 'https://api.raidhead.com/',
+		'langs' => array('eng', 'fra')
+	);
 
-    private $http;
+	public function __construct() {
+		$lang = strtolower(Configure::read('Settings.language'));
+		if(!in_array($lang, $this->config['langs'])) {
+			$lang = $this->config['langs'][0];
+		}
 
-    public function __construct() {
-        $this->http = new HttpSocket();
-        $lang = strtolower(Configure::read('Settings.language'));
-        if(!in_array($lang, $this->config['langs'])) {
-            $lang = $this->config['langs'][0];
-        }
+		$this->config['baseUrl'] .= $lang;
+	}
 
-        $this->config['baseUrl'] .= $lang;
-    }
-    
-    public function gets($type = 'all') {
-        $list = array();
-        $json = $this->http->get($this->config['baseUrl'].'/games/index.json');
-        $games = json_decode($json, true);
-        if(is_null($games)) {
-            $error = json_last_error();
-            throw new CakeException($error);
-        }
+	/**
+	 * query api and return response as array or false
+	 * @param  string $uri api uri
+	 * @return array response as array
+	 * @throws CakeException
+	 */
+	private function _get($uri)
+	{
+		$client = new HttpSocket(array(
+			'request' => array(
+				'redirect' => 2,
+			),
+		));
 
-        if($type == 'list') {
-            if(!empty($games)) {
-                foreach($games as $game) {
-                    $list[$game['short']] = $game['title'];
-                }
-            }
+		try {
+			$response = $client->get($this->config['baseUrl'] . $uri, array(), array(
+				'header' => array(
+					'User-Agent' => 'Mushraider/' . Configure::read('mushraider.version'),
+				),
+			));
 
-            return $list;
-        }
+			$return = json_decode($response->body(), true);
 
-        return $games;
-    }
+			if ($return === false) {
+				throw new CakeException(json_last_error());
+			}
 
-    public function get($slug) {
-        $json = $this->http->get($this->config['baseUrl'].'/games/get/'.$slug.'.json');
-        $game = json_decode($json, true);
-        if(is_null($game)) {
-            $error = json_last_error();
-            throw new CakeException($error);
-        }
+			return $return;
+		} catch (Exception $e) {
+			throw $e;
+		}
+	}
 
-        return $game;
-    }
+	public function gets($type = 'all') {
+		$games = $this->_get('/games/index.json');
 
-    public function serverStatus($slug) {
-        $json = $this->http->get($this->config['baseUrl'].'/server_status/get/'.$slug.'.json');
-        $serverStatus = json_decode($json, true);
-        if(is_null($serverStatus)) {
-            $error = json_last_error();
-            throw new CakeException($error);
-        }
+		if($type == 'list') {
+			$list = array();
+			foreach($games as $game) {
+				$list[$game['short']] = $game['title'];
+			}
 
-        return $serverStatus;
-    }
+			return $list;
+		}
+
+		return $games;
+	}
+
+	public function get($slug) {
+		return $this->_get('/games/get/' . $slug . '.json');
+	}
+
+	public function serverStatus($slug) {
+		return $this->_get('/server_status/get/' . $slug . '.json');
+	}
 }

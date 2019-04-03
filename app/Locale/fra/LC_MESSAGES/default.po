@@ -51,7 +51,7 @@ msgstr "%s a été ajouté à la liste de vos personnages"
 #: Z:\www\mushraider\mushraider\app/Controller/EventsController.php:367
 msgid "Something wrong happen, please fix the errors below"
 msgstr ""
-"Quelque chose de mal c'est produit, veuillez corriger les erreurs ci-dessous"
+"Quelque chose de mal s'est produit, veuillez corriger les erreurs ci-dessous"
 
 #: Z:\www\mushraider\mushraider\app/Controller/AccountController.php:81
 msgid "Edit a character"

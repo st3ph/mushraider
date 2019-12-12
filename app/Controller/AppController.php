@@ -58,7 +58,7 @@ class AppController extends Controller {
 		// If config isn't set, redirect to install process to create one
 		if(!Configure::read('Settings.installed') && strtolower($this->plugin) != 'install') {
         	$this->Session->setFlash(__('MushRaider is ready for install, what about you ?'), 'flash_info');
-    	    $this->redirect('/install/step/1');	        
+    	    $this->redirect('/install/step/1');
         }
 
         // Language
@@ -91,7 +91,7 @@ class AppController extends Controller {
 
         // Log in user
         if($this->Session->check('User.id')) {
-			$userID = $this->Session->read('User.id');			
+			$userID = $this->Session->read('User.id');
 			if(!empty($userID)) {
                 $params = array();
                 $params['recursive'] = 1;
@@ -136,7 +136,7 @@ class AppController extends Controller {
         // SEO
         $this->pageTitle .= !empty($this->request->params['named']['page'])?' - page '.$this->request->params['named']['page']:'';
         $this->pageDescription .= !empty($this->request->params['named']['page'])?' - page '.$this->request->params['named']['page']:'';
-        
+
         $this->set('title_for_layout', $this->pageTitle);
         $this->set('description_for_layout', $this->pageDescription);
         $this->set('breadcrumb', $this->breadcrumb);

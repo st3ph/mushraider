@@ -11,10 +11,10 @@ App::uses('DataSource', 'Model/Datasource');
 App::uses('HttpSocket', 'Network/Http');
 App::uses('Configure', 'Core');
 
-class RaidheadSource extends DataSource {
+class RaidplannerDbSource extends DataSource {
 
 	public $config = array(
-		'baseUrl' => 'https://api.raidhead.com/',
+		'baseUrl' => 'https://db.raidplanner.org/',
 		'langs' => array('eng', 'fra')
 	);
 
@@ -36,6 +36,7 @@ class RaidheadSource extends DataSource {
 	private function _get($uri)
 	{
 		$client = new HttpSocket(array(
+			'timeout' => 5,
 			'request' => array(
 				'redirect' => 2,
 			),
@@ -61,7 +62,7 @@ class RaidheadSource extends DataSource {
 	}
 
 	public function gets($type = 'all') {
-		$games = $this->_get('/games/index.json');
+		$games = $this->_get('/games.json');
 
 		if($type == 'list') {
 			$list = array();
@@ -76,10 +77,6 @@ class RaidheadSource extends DataSource {
 	}
 
 	public function get($slug) {
-		return $this->_get('/games/get/' . $slug . '.json');
-	}
-
-	public function serverStatus($slug) {
-		return $this->_get('/server_status/get/' . $slug . '.json');
+		return $this->_get('/game/' . $slug . '.json');
 	}
 }

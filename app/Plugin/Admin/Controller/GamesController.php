@@ -75,7 +75,7 @@ class GamesController extends AdminAppController {
                     $this->Session->setFlash(__('Something goes wrong'), 'flash_error');
                 }
             }else {
-                $this->Session->setFlash($imageName['error'], 'flash_error'); 
+                $this->Session->setFlash($imageName['error'], 'flash_error');
             }
         }
 
@@ -99,7 +99,7 @@ class GamesController extends AdminAppController {
         $params['recursive'] = 1;
         $params['contain']['Classe'] = array();
         $params['contain']['Dungeon'] = array();
-        $params['contain']['Race'] = array();        
+        $params['contain']['Race'] = array();
         $params['conditions']['Game.id'] = $id;
         if(!$game = $this->Game->find('first', $params)) {
             $this->Session->setFlash(__('MushRaider is unable to find this game oO'), 'flash_error');
@@ -193,7 +193,7 @@ class GamesController extends AdminAppController {
                     $this->Session->setFlash(__('Something goes wrong'), 'flash_error');
                 }
             }else {
-                $this->Session->setFlash($imageName['error'], 'flash_error'); 
+                $this->Session->setFlash($imageName['error'], 'flash_error');
             }
 
             $game['Game'] = array_merge($game['Game'], $this->request->data['Game']);
@@ -209,13 +209,13 @@ class GamesController extends AdminAppController {
         $this->set('racesList', $racesList);
 
 
-        $this->request->data = array_merge($game, $this->request->data);        
+        $this->request->data = array_merge($game, $this->request->data);
     }
 
     public function import() {
-        App::uses('RaidheadSource', 'Model/Datasource');
-        $RaidHead = new RaidheadSource();
-        $this->set('gamesList', $RaidHead->gets('list'));
+        App::uses('RaidplannerDbSource', 'Model/Datasource');
+        $source = new RaidplannerDbSource();
+        $this->set('gamesList', $source->gets('list'));
     }
 
     public function delete($id = null) {
@@ -232,7 +232,7 @@ class GamesController extends AdminAppController {
                 $this->Session->setFlash(__('Something goes wrong'), 'flash_error');
             }
         }
- 
+
         $this->redirect('/admin/games');
     }
 }

@@ -47,9 +47,9 @@ class AjaxController extends AdminAppController {
             $slug = $this->request->query['slug'];
             $this->Session->write('ajaxProgress', 10);
 
-            App::uses('RaidheadSource', 'Model/Datasource');
-            $RaidHead = new RaidheadSource();
-            $game = $RaidHead->get($slug);
+            App::uses('RaidplannerDbSource', 'Model/Datasource');
+            $source = new RaidplannerDbSource();
+            $game = $source->get($slug);
 
             // Check API error
             if($game['error']) {
@@ -71,7 +71,7 @@ class AjaxController extends AdminAppController {
             $toSave['slug'] = $game['game']['short'];
             $toSave['logo'] = $game['game']['icon_64'];
             $toSave['import_slug'] = $game['game']['short'];
-            $toSave['import_modified'] = $game['lastupdate'];
+            $toSave['import_modified'] = strtotime($game['lastupdate']);
             if(!$gameId = $GameModel->__add($toSave)) {
                 $jsonMessage['type'] = 'important';
                 $jsonMessage['msg'] = __('Save failed : An error occur while saving the game');
@@ -139,7 +139,7 @@ class AjaxController extends AdminAppController {
                     $ClasseModel->__add($toSaveClasses, array('game_id' => $gameId));
                 }
             }
-            
+
             $this->Session->write('ajaxProgress', 100);
 
             $jsonMessage['type'] = 'success';
@@ -155,7 +155,7 @@ class AjaxController extends AdminAppController {
     public function ajaxProgress() {
         $progress = 0;
         if($this->Session->check('ajaxProgress')) {
-            $progress = $this->Session->read('ajaxProgress');            
+            $progress = $this->Session->read('ajaxProgress');
         }
 
         return $progress;
@@ -167,11 +167,11 @@ class AjaxController extends AdminAppController {
         App::uses('Game', 'Model');
         $GameModel = new Game();
 
-        App::uses('RaidheadSource', 'Model/Datasource');
-        $RaidHead = new RaidheadSource();
-        $apiGames = $RaidHead->gets();
+        App::uses('RaidplannerDbSource', 'Model/Datasource');
+        $source = new RaidplannerDbSource();
+        $apiGames = $source->gets();
 
-        $params = array();        
+        $params = array();
         $params['recursive'] = -1;
         $params['fields'] = array('import_slug', 'import_modified');
         $params['conditions']['import_slug !='] = null;

@@ -48,8 +48,8 @@ class AjaxController extends AdminAppController {
             $this->Session->write('ajaxProgress', 10);
 
             App::uses('RaidplannerDbSource', 'Model/Datasource');
-            $RaidHead = new RaidplannerDbSource();
-            $game = $RaidHead->get($slug);
+            $source = new RaidplannerDbSource();
+            $game = $source->get($slug);
 
             // Check API error
             if($game['error']) {
@@ -71,7 +71,7 @@ class AjaxController extends AdminAppController {
             $toSave['slug'] = $game['game']['short'];
             $toSave['logo'] = $game['game']['icon_64'];
             $toSave['import_slug'] = $game['game']['short'];
-            $toSave['import_modified'] = $game['lastupdate'];
+            $toSave['import_modified'] = strtotime($game['lastupdate']);
             if(!$gameId = $GameModel->__add($toSave)) {
                 $jsonMessage['type'] = 'important';
                 $jsonMessage['msg'] = __('Save failed : An error occur while saving the game');
@@ -168,8 +168,8 @@ class AjaxController extends AdminAppController {
         $GameModel = new Game();
 
         App::uses('RaidplannerDbSource', 'Model/Datasource');
-        $RaidHead = new RaidplannerDbSource();
-        $apiGames = $RaidHead->gets();
+        $source = new RaidplannerDbSource();
+        $apiGames = $source->gets();
 
         $params = array();
         $params['recursive'] = -1;

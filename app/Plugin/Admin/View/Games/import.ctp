@@ -6,8 +6,8 @@
     <div class="accordion-body body in collapse">
             <div class="alert alert-info">
                 <h4><i class="fa fa-info-circle"></i> <?php echo __('What is that ?');?></h4>
-                <p><?php echo __('MushRaider can import games data from the RaidHead.com API');?></p>
-                <p><?php echo __('RaidHead.com API supports many games, the import system allows you to add a new game (and keep it up to date) in just one click !');?></p>
+                <p><?php echo __('MushRaider can import games data from the Raidplanner.org DB');?></p>
+                <p><?php echo __('Raidplanner.org DB supports many games, the import system allows you to add a new game (and keep it up to date) in just one click !');?></p>
             </div>
 
             <div class="importForm">

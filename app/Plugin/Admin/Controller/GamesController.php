@@ -214,8 +214,8 @@ class GamesController extends AdminAppController {
 
     public function import() {
         App::uses('RaidplannerDbSource', 'Model/Datasource');
-        $RaidHead = new RaidplannerDbSource();
-        $this->set('gamesList', $RaidHead->gets('list'));
+        $source = new RaidplannerDbSource();
+        $this->set('gamesList', $source->gets('list'));
     }
 
     public function delete($id = null) {

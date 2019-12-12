@@ -11,7 +11,7 @@ App::uses('DataSource', 'Model/Datasource');
 App::uses('HttpSocket', 'Network/Http');
 App::uses('Configure', 'Core');
 
-class RaidheadSource extends DataSource {
+class RaidplannerDbSource extends DataSource {
 
 	public $config = array(
 		'baseUrl' => 'https://api.raidhead.com/',

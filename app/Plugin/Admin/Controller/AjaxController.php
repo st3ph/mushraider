@@ -47,8 +47,8 @@ class AjaxController extends AdminAppController {
             $slug = $this->request->query['slug'];
             $this->Session->write('ajaxProgress', 10);
 
-            App::uses('RaidheadSource', 'Model/Datasource');
-            $RaidHead = new RaidheadSource();
+            App::uses('RaidplannerDbSource', 'Model/Datasource');
+            $RaidHead = new RaidplannerDbSource();
             $game = $RaidHead->get($slug);
 
             // Check API error
@@ -139,7 +139,7 @@ class AjaxController extends AdminAppController {
                     $ClasseModel->__add($toSaveClasses, array('game_id' => $gameId));
                 }
             }
-            
+
             $this->Session->write('ajaxProgress', 100);
 
             $jsonMessage['type'] = 'success';
@@ -155,7 +155,7 @@ class AjaxController extends AdminAppController {
     public function ajaxProgress() {
         $progress = 0;
         if($this->Session->check('ajaxProgress')) {
-            $progress = $this->Session->read('ajaxProgress');            
+            $progress = $this->Session->read('ajaxProgress');
         }
 
         return $progress;
@@ -167,11 +167,11 @@ class AjaxController extends AdminAppController {
         App::uses('Game', 'Model');
         $GameModel = new Game();
 
-        App::uses('RaidheadSource', 'Model/Datasource');
-        $RaidHead = new RaidheadSource();
+        App::uses('RaidplannerDbSource', 'Model/Datasource');
+        $RaidHead = new RaidplannerDbSource();
         $apiGames = $RaidHead->gets();
 
-        $params = array();        
+        $params = array();
         $params['recursive'] = -1;
         $params['fields'] = array('import_slug', 'import_modified');
         $params['conditions']['import_slug !='] = null;

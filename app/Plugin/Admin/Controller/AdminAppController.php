@@ -41,11 +41,14 @@ class AdminAppController extends AppController {
             $mushraider['date'] = '0000-00-00';
         }
         $jsonUrl = 'http://medias.mushraider.com/version.json';
-        $HttpSocket = new HttpSocket();
-        $json = $HttpSocket->get($jsonUrl);
-        $lastVersion = json_decode($json->body);
+        $HttpSocket = new HttpSocket(['timeout' => 1]);
+		$response = $HttpSocket->get($jsonUrl);
+		if (empty($response->body)) {
+			return;
+		}
+        $lastVersion = json_decode($response->body);
         // Check if version is different
-        // Be sure the server is newer than the current app            
+        // Be sure the server is newer than the current app
         if(($mushraider['version'] != $lastVersion->version && $mushraider['date'] < $lastVersion->date) || ($mushraider['version'] == $lastVersion->version && $mushraider['date'] < $lastVersion->date)) {
             $updateMsg = __('<strong>MushRaider %s</strong> is available! <a href="http://mushraider.com/download" target="_blank">Please update now</a>', $lastVersion->version);
             $this->set('updateAvailable', $updateMsg);

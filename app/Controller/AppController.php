@@ -48,8 +48,8 @@ class AppController extends Controller {
 		parent::beforeFilter();
 
         // Check conf file
-        if(!file_exists('../Config/config.ini')) {
-            file_put_contents('../Config/config.ini', '');
+        if(!file_exists(CONFIG . 'config.ini')) {
+            file_put_contents(CONFIG . 'config.ini', '');
         }
 
         Configure::config('configini', new IniReader());

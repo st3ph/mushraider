@@ -23,15 +23,15 @@ class PatcherController extends AdminAppController {
     	if(!empty($this->request->data['Patcher'])) {
             $db = ConnectionManager::getDataSource('default');
             $db->cacheSources = false;
-            
+
     		$error = false;
 	    	$databaseConfig = Configure::read('Database');
             $this->dbPrefix = $databaseConfig['prefix'];
 	        if(!$mysqlLink = mysqli_connect($databaseConfig['host'], $databaseConfig['login'], $databaseConfig['password'], $databaseConfig['database'], $databaseConfig['port'])) {
 	            $error = true;
 	        }
-	    	
-	    	$sqlReport = $this->Patcher->run_sql_file($mysqlLink, '../Config/Schema/sql/mushraider_patch_'.$patch.'.sql', $this->dbPrefix);
+
+	    	$sqlReport = $this->Patcher->run_sql_file($mysqlLink, CONFIG . 'Schema/sql/mushraider_patch_'.$patch.'.sql', $this->dbPrefix);
 	    	$mysqlLink = null;
 
 	        if($sqlReport['success'] != $sqlReport['total']) {
@@ -46,11 +46,11 @@ class PatcherController extends AdminAppController {
                 Cache::clear(false, '_cake_core_');
                 Cache::clear(false, '_cake_model_');
                 Cache::clear(false);
-                
+
                 $methodName = str_replace('-', '', $patch);
 	        	$methodName = str_replace('.', '', $methodName);
 	        	if(method_exists($this, $methodName)) {
-	        		$this->$methodName();	        		
+	        		$this->$methodName();
 	        	}
 
                 // Delete cache for obvious reasons :p
@@ -94,7 +94,7 @@ class PatcherController extends AdminAppController {
 				}else {
 					$toSaveCharacter['created'] = date('Y-m-d H:i:s');
 				}
-												
+
 				$this->Character->save($toSaveCharacter);
     		}
     	}
@@ -198,11 +198,11 @@ class PatcherController extends AdminAppController {
 
         $this->Setting->setOption('calendar', json_encode($calendar));
 
-        // Set main characters        
+        // Set main characters
         $sql = "SELECT t.user_id, t.game_id, t.character_id, MAX(t.used) AS nb_used
                 FROM (
                     SELECT ec.user_id, e.game_id, ec.character_id, COUNT(ec.id) AS used
-                    FROM ".$this->dbPrefix."events_characters ec 
+                    FROM ".$this->dbPrefix."events_characters ec
                     JOIN ".$this->dbPrefix."users u ON ec.user_id=u.id
                     JOIN ".$this->dbPrefix."events e ON e.id=ec.event_id
                     GROUP BY ec.character_id

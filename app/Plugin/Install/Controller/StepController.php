@@ -39,11 +39,11 @@ class StepController extends InstallAppController {
             $systemCheck['rewrite']['warning'] = true;
         }
 
-        $systemCheck['config']['passed'] = is_writable('../Config')?true:false;
+        $systemCheck['config']['passed'] = is_writable(CONFIG);
         $systemCheckPassed = $systemCheck['config']['passed']?$systemCheckPassed:false;
-        $systemCheck['tmp']['passed'] = is_writable('../tmp')?true:false;
+        $systemCheck['tmp']['passed'] = is_writable(APP . 'tmp');
         $systemCheckPassed = $systemCheck['tmp']['passed']?$systemCheckPassed:false;
-        $systemCheck['files']['passed'] = is_writable('../webroot/files')?true:false;
+        $systemCheck['files']['passed'] = is_writable(APP . 'webroot/files');
         $systemCheckPassed = $systemCheck['files']['passed']?$systemCheckPassed:false;
 
         $this->set('systemCheckPassed', $systemCheckPassed);
@@ -52,7 +52,7 @@ class StepController extends InstallAppController {
 
     private function step2() {
         $this->Session->delete('Settings');
-        
+
         if(!empty($this->request->data['Config'])) {
             $dataSource = !empty($this->request->data['Config']['datasource']) && !empty($this->dbDatasources[$this->request->data['Config']['datasource']])?$this->dbDatasources[$this->request->data['Config']['datasource']]:'Mysql';
 
@@ -62,7 +62,7 @@ class StepController extends InstallAppController {
             $databaseConfig['database'] = trim($this->request->data['Config']['database']);
             $databaseConfig['login'] = trim($this->request->data['Config']['login']);
             $databaseConfig['password'] = $this->request->data['Config']['password'];
-            $databaseConfig['port'] = !empty($this->request->data['Config']['port'])?trim($this->request->data['Config']['port']):ini_get("mysqli.default_port");            
+            $databaseConfig['port'] = !empty($this->request->data['Config']['port'])?trim($this->request->data['Config']['port']):ini_get("mysqli.default_port");
             $databaseConfig['prefix'] = trim($this->request->data['Config']['prefix']);
 
             if($link = @mysqli_connect($databaseConfig['host'], $databaseConfig['login'], $databaseConfig['password'], $databaseConfig['database'], $databaseConfig['port'])) {
@@ -110,12 +110,12 @@ class StepController extends InstallAppController {
                     $error = true;
                 }
                 // Create tables
-                $sqlReport = $this->Patcher->run_sql_file($mysqlLink, '../Config/Schema/sql/mushraider.sql', $databaseConfig['prefix']);                
+                $sqlReport = $this->Patcher->run_sql_file($mysqlLink, CONFIG . 'Schema/sql/mushraider.sql', $databaseConfig['prefix']);
                 if($sqlReport['success'] != $sqlReport['total']) {
                     $error = true;
                 }
                 // Add datas
-                $sqlReport = $this->Patcher->run_sql_file($mysqlLink, '../Config/Schema/sql/mushraider_data.sql', $databaseConfig['prefix']);
+                $sqlReport = $this->Patcher->run_sql_file($mysqlLink, CONFIG . 'Schema/sql/mushraider_data.sql', $databaseConfig['prefix']);
                 if($sqlReport['success'] != $sqlReport['total']) {
                     $error = true;
                 }
@@ -180,7 +180,7 @@ class StepController extends InstallAppController {
 
     private function postInstallData($siteTitle) {
         // Add default settings
-        $host = substr_count($_SERVER['HTTP_HOST'], '.') > 1?substr($_SERVER['HTTP_HOST'], strpos($_SERVER['HTTP_HOST'], '.') + 1):$_SERVER['HTTP_HOST'];                        
+        $host = substr_count($_SERVER['HTTP_HOST'], '.') > 1?substr($_SERVER['HTTP_HOST'], strpos($_SERVER['HTTP_HOST'], '.') + 1):$_SERVER['HTTP_HOST'];
         $host = strpos($host, ':') !== false?substr($host, 0, strpos($host, ':')):$host; // Remove port if present on unusual configurations
 
         App::uses('Setting', 'Model');
@@ -219,7 +219,7 @@ class StepController extends InstallAppController {
                                             'dungeonIcon' => 1
                                         ));
         $defaultSettings['timezone'] = 'Europe/Paris';
-        
+
         foreach($defaultSettings as $option => $value) {
             $settingModel->create();
             $settingModel->save(array('option' => $option, 'value' => $value));

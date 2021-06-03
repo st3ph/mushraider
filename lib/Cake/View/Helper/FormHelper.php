@@ -609,8 +609,8 @@ class FormHelper extends AppHelper {
 		ksort($locked, SORT_STRING);
 		$fields += $locked;
 
-		$locked = implode(array_keys($locked), '|');
-		$unlocked = implode($unlockedFields, '|');
+		$locked = implode('|', array_keys($locked));
+		$unlocked = implode('|', $unlockedFields);
 		$hashParts = array(
 			$this->_lastAction,
 			serialize($fields),
@@ -2060,7 +2060,7 @@ class FormHelper extends AppHelper {
 			$tag = $this->Html->useTag('submitimage', $caption, $options);
 		} elseif ($isImage) {
 			unset($options['type']);
-			if ($caption{0} !== '/') {
+			if ($caption[0] !== '/') {
 				$url = $this->webroot(Configure::read('App.imageBaseUrl') . $caption);
 			} else {
 				$url = $this->webroot(trim($caption, '/'));

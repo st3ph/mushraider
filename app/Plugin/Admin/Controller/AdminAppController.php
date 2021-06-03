@@ -40,18 +40,23 @@ class AdminAppController extends AppController {
             $mushraider['version'] = 0;
             $mushraider['date'] = '0000-00-00';
         }
-        $jsonUrl = 'http://medias.mushraider.com/version.json';
+
+        $jsonUrl = 'https://api.github.com/repos/st3ph/mushraider/tags?per_page=1';
         $HttpSocket = new HttpSocket(['timeout' => 1]);
 		$response = $HttpSocket->get($jsonUrl);
-		if (empty($response->body)) {
-			return;
+		if ($response->isOk()) {
+			$tag = json_decode($response->body);
+			if (!$tag) {
+				return;
+			}
+			$lastVersion = str_replace('v', '', $tag[0]->name);
+
+			// Check if version is different
+			// Be sure the server is newer than the current app
+			if(version_compare($mushraider['version'], $lastVersion, '<')) {
+				$updateMsg = __('<strong>MushRaider %s</strong> is available! <a href="https://github.com/st3ph/mushraider/tags" target="_blank">Please update now</a>', $lastVersion);
+				$this->set('updateAvailable', $updateMsg);
+			}
 		}
-        $lastVersion = json_decode($response->body);
-        // Check if version is different
-        // Be sure the server is newer than the current app
-        if(($mushraider['version'] != $lastVersion->version && $mushraider['date'] < $lastVersion->date) || ($mushraider['version'] == $lastVersion->version && $mushraider['date'] < $lastVersion->date)) {
-            $updateMsg = __('<strong>MushRaider %s</strong> is available! <a href="http://mushraider.com/download" target="_blank">Please update now</a>', $lastVersion->version);
-            $this->set('updateAvailable', $updateMsg);
-        }
     }
 }

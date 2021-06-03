@@ -39,11 +39,11 @@ class StepController extends InstallAppController {
             $systemCheck['rewrite']['warning'] = true;
         }
 
-        $systemCheck['config']['passed'] = is_writable(CONFIG . 'Config')?true:false;
+        $systemCheck['config']['passed'] = is_writable(CONFIG);
         $systemCheckPassed = $systemCheck['config']['passed']?$systemCheckPassed:false;
-        $systemCheck['tmp']['passed'] = is_writable(CONFIG . 'tmp')?true:false;
+        $systemCheck['tmp']['passed'] = is_writable(APP . 'tmp');
         $systemCheckPassed = $systemCheck['tmp']['passed']?$systemCheckPassed:false;
-        $systemCheck['files']['passed'] = is_writable(CONFIG . 'webroot/files')?true:false;
+        $systemCheck['files']['passed'] = is_writable(APP . 'webroot/files');
         $systemCheckPassed = $systemCheck['files']['passed']?$systemCheckPassed:false;
 
         $this->set('systemCheckPassed', $systemCheckPassed);

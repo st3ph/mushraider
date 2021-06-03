@@ -1225,7 +1225,7 @@ span.formTip {font-size:11px;font-style:italic;}
   webkit-transition: all 0.4s ease-out 0s;
   -moz-transition: all 0.4s ease-out 0s;
   -o-transition: all 0.4s ease-out 0s;
-  transition: all 0.4s ease-out 0s;  
+  transition: all 0.4s ease-out 0s;
 }
 #menu ul li a:hover {padding-left:15px;}
 .form-group {margin-bottom:10px;}
@@ -1254,7 +1254,7 @@ table.table-striped tbody.ui-sortable tr.sortable-placeholder td:last-child {bor
 .quick-btn .waiting {position: absolute;right: -5px;bottom: -5px;top:auto;}
 #mushInfos {margin-top:100px;}
 #mushInfos .lead {text-shadow:2px 2px #fff;}
-#mushInfos .social {text-align;:center;}
+#mushInfos .social {text-align:center;}
 #mushInfos .social li {vertical-align:top}
 #mushInfos .social li.googleplus {padding-top:2px;}
 

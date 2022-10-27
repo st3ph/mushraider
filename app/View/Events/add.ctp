@@ -48,7 +48,7 @@
             	<?php endforeach;?>
         	<?php endif;?>
             <div class="form-group form-roles">
-            	<?php echo $this->Form->input('Event.character_level', array('type' => 'text', 'required' => true, 'label' => __('Character minimum level'), 'class' => 'span1'));?>
+            	<?php echo $this->Form->input('Event.character_level', array('type' => 'text', 'required' => true, 'label' => __('Character minimum level'), 'class' => 'span1', 'maxlength' => 5));?>
             </div>
         </div>
         <div class="span6">

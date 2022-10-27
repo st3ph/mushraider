@@ -11,5 +11,5 @@
 </div>
 
 <div class="form-group">
-	<?php echo $this->Form->input('Character.level', array('type' => 'text', 'required' => true, 'label' => __('Level'), 'class' => 'span1', 'pattern' => '[0-9]{1,3}'));?>
+	<?php echo $this->Form->input('Character.level', array('type' => 'text', 'required' => true, 'label' => __('Level'), 'class' => 'span1', 'pattern' => '[0-9]{1,5}', 'maxlength' => 5));?>
 </div>

@@ -14,7 +14,7 @@
         <i class="fa fa-plus-sign"></i> <?php echo __('or add custom number');?> <?php echo $this->Form->input('Dungeon.customraidssize', array('type' => 'text', 'label' => false, 'div' => false, 'class' => 'span1', 'pattern' => '[0-9]{1,3}'));?>
     </div>
     <div class="form-group">
-        <?php echo $this->Form->input('Dungeon.level_required', array('type' => 'text', 'required' => false, 'label' => __('Required level'), 'class' => 'span5', 'pattern' => '[0-9]{1,3}'));?>
+        <?php echo $this->Form->input('Dungeon.level_required', array('type' => 'text', 'required' => false, 'label' => __('Required level'), 'class' => 'span5', 'pattern' => '[0-9]{1,5}', 'maxlength' => 5));?>
     </div>
     <?php if(isset($isNotAjax)):?>
         <div class="form-group">

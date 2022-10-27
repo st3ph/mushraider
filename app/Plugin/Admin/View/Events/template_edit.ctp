@@ -18,7 +18,7 @@
                 <?php echo $this->Form->input('EventsTemplate.dungeon_id', array('options' => $dungeonsList, 'required' => true, 'label' => __('Dungeon'), 'class' => 'span5'));?>
             </div>
             <div class="form-group">
-                <?php echo $this->Form->input('EventsTemplate.character_level', array('type' => 'text', 'required' => true, 'label' => __('Character minimum level'), 'class' => 'span5', 'pattern' => '[0-9]{1,3}'));?>
+                <?php echo $this->Form->input('EventsTemplate.character_level', array('type' => 'text', 'required' => true, 'label' => __('Character minimum level'), 'class' => 'span5', 'pattern' => '[0-9]{1,5}', 'maxlength' => 5));?>
             </div>
             <div class="form-group">
                 <?php echo $this->Form->input('EventsTemplate.time_invitation', array('type' => 'time', 'timeFormat' => 24, 'interval' => 15, 'required' => true, 'label' => __('Invitations start'), 'class' => 'span2'));?>
